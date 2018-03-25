@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateCategoriaClienteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,24 +12,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('categoria_cliente', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('email')->unique();
-            $table->integer('estado_id')->unsigned();
-            $table->string('password', 60);
-            $table->rememberToken();
-            $table->softDeletes();
-
-            $table->timestamps();
+            $table->integer('cliente_id')->unsigned();
+            $table->integer('categoria_id')->unsigned();
 
             $table->index('id');
-            $table->index('email');
-            $table->index('estado_id');
-
+            $table->index('cliente_id');
+            $table->index('categoria_id');
         });
     }
 
@@ -41,7 +33,7 @@ class CreateUsersTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Schema::drop('users');
+        Schema::drop('categoria_cliente');
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

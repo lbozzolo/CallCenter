@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateClientesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,24 +12,27 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('email')->unique();
+            $table->string('direccion');
+            $table->string('telefono');
+            $table->string('celular');
+            $table->string('email');
+            $table->string('dni');
+            $table->string('referencia');
+            $table->string('observaciones');
+            $table->integer('puntos');
             $table->integer('estado_id')->unsigned();
-            $table->string('password', 60);
-            $table->rememberToken();
             $table->softDeletes();
 
             $table->timestamps();
 
             $table->index('id');
-            $table->index('email');
             $table->index('estado_id');
-
         });
     }
 
@@ -41,7 +44,7 @@ class CreateUsersTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Schema::drop('users');
+        Schema::drop('clientes');
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }
