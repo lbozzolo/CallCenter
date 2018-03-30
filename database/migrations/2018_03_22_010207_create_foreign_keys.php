@@ -38,7 +38,7 @@ class CreateForeignKeys extends Migration
                 ->onDelete('NO ACTION');
             $table->foreign('estado_id')
                 ->references('id')
-                ->on('estados_users')
+                ->on('estados_ventas')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
             $table->foreign('metodo_pago_id')

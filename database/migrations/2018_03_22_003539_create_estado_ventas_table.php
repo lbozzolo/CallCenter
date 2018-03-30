@@ -12,7 +12,7 @@ class CreateEstadoVentasTable extends Migration
      */
     public function up()
     {
-        Schema::create('estado_venta', function (Blueprint $table) {
+        Schema::create('estados_ventas', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
@@ -29,7 +29,7 @@ class CreateEstadoVentasTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Schema::drop('estado_venta');
+        Schema::drop('estados_ventas');
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace CallCenter\Http\Controllers\Auth;
 
-use App\User;
+use CallCenter\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use CallCenter\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
