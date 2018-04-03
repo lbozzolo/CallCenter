@@ -11,9 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+require(__DIR__ . '/Routes/auth.php');
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/', [
+        'as' => '/',
+        'uses' => 'DashboardController@index'
+    ]);
+
 });
+
 
 Route::get('/test', [
     'as' => 'test',

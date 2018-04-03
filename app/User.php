@@ -41,4 +41,10 @@ class User extends Entity implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function getFullNameAttribute()
+    {
+        return $this->nombre.' '.$this->apellido;
+    }
+
 }

@@ -9,7 +9,7 @@
 
 <body>
 
-    @include('partials.messages')
+    @yield('login')
     @yield('body')
     @include('partials.scripts')
 
