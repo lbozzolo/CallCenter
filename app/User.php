@@ -2,6 +2,7 @@
 
 namespace CallCenter;
 
+use Bican\Roles\Models\Role;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use CallCenter\Entities\Entity;
@@ -26,7 +27,7 @@ class User extends Entity implements AuthenticatableContract,
      * @var string
      */
     protected $table = 'users';
-    protected $fillable = ['nombre', 'apellido', 'email', 'password', 'estado_id'];
+    protected $fillable = ['nombre', 'apellido', 'email', 'telefono', 'dni', 'password', 'estado_id'];
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +47,11 @@ class User extends Entity implements AuthenticatableContract,
     {
         return $this->nombre.' '.$this->apellido;
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
 
 }

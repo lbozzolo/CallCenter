@@ -28,6 +28,8 @@ class FakerUsersSeeder extends Seeder
                 'nombre' => $faker->name,
                 'apellido' => $faker->lastName,
                 'email' => $faker->email,
+                'telefono' => $faker->phoneNumber,
+                'dni' => rand(20000000,60000000),
                 'estado_id' => '1',
                 'password' => bcrypt('1234'),
             ]);

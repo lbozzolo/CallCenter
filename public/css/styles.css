@@ -1,0 +1,23 @@
+body {
+    font-family: 'Open Sans';
+}
+
+h1{
+    color: darkslategray;
+    font-size: 4em;
+    font-family: 'Raleway';
+}
+
+.nonStyledButton{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 5px 10px;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.box{
+    padding: 10px;
+}

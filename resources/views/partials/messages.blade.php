@@ -35,7 +35,7 @@
                     <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
                     <i class="icon fa fa-check"></i>
                     @if (session()->has('ok'))
-                        {!! session('msgOk') !!}
+                        {!! session('ok') !!}
                     @else
                         {!! $ok !!}
                     @endif
@@ -54,7 +54,7 @@
                     <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
                     <i class="icon fa fa-exclamation-triangle"></i>
                     @if (session()->has('info'))
-                        {!! session('msgInfo') !!}
+                        {!! session('info') !!}
                     @else
                         {!! $info !!}
                     @endif

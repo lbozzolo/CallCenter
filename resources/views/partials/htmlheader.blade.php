@@ -12,6 +12,10 @@
 <link href="{{ asset('css/dataTables.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/rowReorder.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
+{{--Fonts--}}
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
 <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
 
 @yield('css')

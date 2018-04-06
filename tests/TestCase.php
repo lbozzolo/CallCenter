@@ -1,5 +1,10 @@
 <?php
 
+use CallCenter\User as User;
+use Faker\Factory as Faker;
+use Bican\Roles\Models\Role;
+
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -21,5 +26,28 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    /**
+     * @return static
+     */
+    public function createUser($role = 'superadmin')
+    {
+        $faker = Faker::create();
+        $user = User::create([
+            'nombre' => $faker->name,
+            'apellido' => $faker->lastName,
+            'email' => $faker->email,
+            'estado_id' => '1',
+            'password' => bcrypt('123456'),
+        ]);
+
+        $roleAttached = Role::where('slug', '=', $role)->first();
+        $user->attachRole($roleAttached);
+        $user->save();
+
+        $this->seeInDatabase('role_user', ['role_id' => $roleAttached->id, 'user_id' => $user->id]);
+
+        return $user;
     }
 }

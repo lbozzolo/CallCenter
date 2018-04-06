@@ -19,6 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('email')->unique();
+            $table->string('telefono');
+            $table->string('dni');
+            $table->integer('imagen_id')->unsigned()->nullable();
             $table->integer('estado_id')->unsigned();
             $table->string('password', 60);
             $table->rememberToken();
@@ -29,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->index('id');
             $table->index('email');
             $table->index('estado_id');
+            $table->index('imagen_id');
 
         });
     }

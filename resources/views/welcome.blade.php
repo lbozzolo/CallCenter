@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('base')
 
 @section('header')
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -37,7 +37,7 @@
             color: darkslategray;
             font-size: 4em;
             font-family: 'Raleway';
-            letter-spacing: 10px;
+            /*letter-spacing: 10px;*/
         }
 
         .item {
@@ -56,9 +56,11 @@
 
 @endsection
 
-@section('body')
+@section('content')
 
+{{--
 @include('partials.navbar')
+--}}
 
 <div class="row">
     <div class="container">
@@ -70,11 +72,6 @@
             <div class="col-lg-3 col-md-4 item"><i class="glyphicon glyphicon-fire"></i></div>
             <div class="col-lg-3 col-md-4 item"><i class="glyphicon glyphicon-knight"></i></div>
         </div>
-        {{--<p style="margin: 10px">
-            <small style="color: gray">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </small>
-        </p>--}}
     </div>
 </div>
 
@@ -94,49 +91,3 @@
 
 @endsection
 
-{{--<!DOCTYPE html>
-<html>
-    <head>
-        <title>Call Center</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Call Center</div>
-                {!! Form::text('prueba') !!}
-            </div>
-        </div>
-    </body>
-</html>--}}

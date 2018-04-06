@@ -21,6 +21,9 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'DashboardController@index'
     ]);
 
+    require(__DIR__ . '/Routes/users.php');
+    require(__DIR__ . '/Routes/roles.php');
+
 });
 
 
