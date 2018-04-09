@@ -12,12 +12,15 @@
                         <li class="list-group-item">Nombre: {!! $user->nombre !!}</li>
                         <li class="list-group-item">Apellido: {!! $user->apellido !!}</li>
                         <li class="list-group-item">Email: {!! $user->email !!}</li>
+                        <li class="list-group-item">Teléfono: {!! $user->telefono !!}</li>
+                        <li class="list-group-item">DNI: {!! $user->dni !!}</li>
                         <li class="list-group-item">Fecha de creación: {!! $user->fecha_creado !!}</li>
                         <li class="list-group-item">
                             <a href="{{ route('users.changePassword', $user->id) }}">Cambiar contraseña</a>
                         </li>
                     </ul>
                     <a href="{{ route('users.edit', Auth::user()->id) }}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('/') }}" class="btn btn-default">Salir</a>
                 </div>
             </div>
         </div>

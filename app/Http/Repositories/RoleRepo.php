@@ -12,26 +12,20 @@ class RoleRepo extends BaseRepo
 
     public function roleHasActiveUsers($id)
     {
-
-        $role = Role::find($id);
-
-        $users = User::with(['roles' => function($query) use ($role){
-
-            $query->where('roles.id', '=', $role->id);
-
-        }])->get()->filter(function($user) use ($role){
-
+        $users = User::with(['roles' => function($query) use ($id){
+            $query->where('roles.id', $id);
+        }])->get()->filter(function($user) use ($id){
             foreach($user->roles as $rol){
-                if($rol->id == $role->id){
+                if($rol->id == $id)
                     return $user;
-                }
             }
-
         });
-
         return ($users->count() > 0)? $users : null;
-
     }
 
+    public function setToSlug($slug, $name)
+    {
+        return ($slug)? str_slug(strtolower($slug), '.') : str_slug(strtolower($name), '.');
+    }
 
 }

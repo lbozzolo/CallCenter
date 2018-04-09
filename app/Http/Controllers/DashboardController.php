@@ -23,7 +23,11 @@ class DashboardController extends Controller
         $role = $roles->except(['1', '4'])->random();
         $user = User::first();
 
-        dd($user);
+        $models = Entity::getModels();
+        $names = ['banco', 'categoría', 'cliente', 'etapa', 'forma de pago', 'imagen', 'institución', 'llamada', 'método de pago', 'producto', 'promoción', 'reclamo', 'usuario', 'venta',];
+        $acciones = array_combine($models, $names);
+
+        dd($acciones);
     }
 
 }

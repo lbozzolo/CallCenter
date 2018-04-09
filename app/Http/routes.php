@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     require(__DIR__ . '/Routes/users.php');
     require(__DIR__ . '/Routes/roles.php');
+    require(__DIR__ . '/Routes/permissions.php');
 
 });
 

@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entity extends Model
 {
+
     public static function getClass()
     {
         return get_class(new static);
@@ -12,6 +13,11 @@ class Entity extends Model
     public function getFechaCreadoAttribute()
     {
         return date_format($this->created_at,"d/m/Y");
+    }
+
+    static function getModels()
+    {
+        return ['banco', 'categoria', 'cliente', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'metodoPago', 'producto', 'promocion', 'reclamo', 'user', 'venta',];
     }
 
 }

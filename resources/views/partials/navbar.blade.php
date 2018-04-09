@@ -16,7 +16,7 @@
                 @if(Auth::check())
 
                 <li><a href="{{ route('users.index') }}">Usuarios</a></li>
-                <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
 
                 @endif
             </ul>
@@ -30,7 +30,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->full_name }}<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('users.profile', Auth::user()->id) }}">Mi perfil</a></li>
-                            <li><a href="{{ route('logout') }}">Salir</a></li>
+                            <li><a href="{{ route('logout') }}">Cerrar sesión</a></li>
                         </ul>
                     </li>
                 @endif
@@ -38,3 +38,4 @@
         </div>
     </div>
 </nav>
+

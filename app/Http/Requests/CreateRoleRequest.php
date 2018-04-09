@@ -2,6 +2,7 @@
 
 namespace CallCenter\Http\Requests;
 
+
 class CreateRoleRequest extends Request
 {
     public function authorize()
@@ -16,7 +17,7 @@ class CreateRoleRequest extends Request
                 'name' => 'required',
                 'description' => 'max:255',
                 'level' => 'numeric|min:1|max:10',
-                'slug' => 'unique:roles,slug,'.$this->slug,
+                'slug' => 'unique:roles,slug,' . $this->id,
             ];
     }
 

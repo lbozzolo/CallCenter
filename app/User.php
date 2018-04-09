@@ -3,10 +3,13 @@
 namespace CallCenter;
 
 use Bican\Roles\Models\Role;
+use Bican\Roles\Models\Permission;
+use CallCenter\Entities\EstadoUser;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use CallCenter\Entities\Entity;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -19,7 +22,7 @@ class User extends Entity implements AuthenticatableContract,
                                     CanResetPasswordContract,
                                     HasRoleAndPermissionContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRoleAndPermission;
+    use Authenticatable, Authorizable, CanResetPassword, HasRoleAndPermission, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -28,6 +31,7 @@ class User extends Entity implements AuthenticatableContract,
      */
     protected $table = 'users';
     protected $fillable = ['nombre', 'apellido', 'email', 'telefono', 'dni', 'password', 'estado_id'];
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +55,16 @@ class User extends Entity implements AuthenticatableContract,
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(EstadoUser::class);
     }
 
 

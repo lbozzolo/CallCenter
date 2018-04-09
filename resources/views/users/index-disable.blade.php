@@ -5,7 +5,7 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>USUARIOS habilitados</h2>
+                <h2>USUARIOS deshabilitados</h2>
                 <hr>
 
                 <div class="col-lg-12">
@@ -16,8 +16,9 @@
                     </div>
 
                     <div>
-                        @include('users.partials.usuarios-habilitados')
+                        @include('users.partials.usuarios-deshabilitados')
                     </div>
+
 
                 </div>
 
@@ -33,25 +34,7 @@
     <script>
 
         $(document).ready(function() {
-            $('#table-enable-users').DataTable({
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "emptyTable": "Sin datos disponibles",
-                    "infoEmpty": "Sin registros",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "<i class='fa fa-search'></i>",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
-            $("#div-table-enable-users").show();
-            $(".overlay").hide();
+
 
             $('#table-disable-users').DataTable({
                 "language": {

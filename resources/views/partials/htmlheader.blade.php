@@ -11,6 +11,8 @@
 <link href="{{ asset('/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/dataTables.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/rowReorder.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
 
 {{--Fonts--}}
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">

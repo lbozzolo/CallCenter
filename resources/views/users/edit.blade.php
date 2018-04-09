@@ -5,26 +5,34 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>Editar perfil</h2>
+                <h2>Editar perfil de {!! $user->full_name !!}</h2>
                 <hr>
                 <div class="col-lg-6 col-md-6">
-                    {!! Form::open(['method' => 'put', 'url' => route('users.update', $user->id), 'class' =>'form']) !!}
+                    {!! Form::model($user, ['method' => 'put', 'url' => route('users.update', ['id' => $user->id, 'route' => $route]), 'class' =>'form']) !!}
 
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
-                        {!! Form::text('nombre', $user->nombre, ['class' => 'form-control']) !!}
+                        {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('apellido', 'Apellido') !!}
-                        {!! Form::text('apellido', $user->apellido, ['class' => 'form-control']) !!}
+                        {!! Form::text('apellido', null, ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('email', 'Email') !!}
-                        {!! Form::email('email', $user->email, ['class' => 'form-control']) !!}
+                        {!! Form::email('email', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('telefono', 'Teléfono') !!}
+                        {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('dni', 'DNI') !!}
+                        {!! Form::text('dni', null, ['class' => 'form-control']) !!}
                     </div>
 
                     {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-                    <a href="{{ route('users.profile', $user->id) }}" class="btn btn-default">Cancelar</a>
+                    <a href="{{ URL::previous() }}" class="btn btn-default">Cerrar</a>
 
                     {!! Form::close() !!}
                 </div>

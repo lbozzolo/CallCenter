@@ -28,7 +28,7 @@
 
     {{-- Success --}}
     @if (session()->has('ok') || isset($ok))
-        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 message">
 
             <div class="panel-body">
                 <div class="alert alert-success alert-dismissible">
@@ -65,3 +65,17 @@
     @endif
 
 </div>
+
+@section('js')
+
+    <script>
+
+        if($('.message').is(':visible')){
+            setTimeout(function(){
+                $('.message').fadeOut("fast");
+            }, 3000);
+        }
+
+    </script>
+
+@endsection

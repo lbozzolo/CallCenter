@@ -15,7 +15,9 @@ class UpdateUserProfileRequest extends Request
             [
                 'nombre' => 'required|max:45',
                 'apellido' => 'required|max:45',
-                'email' => 'email|required|unique:users,email,'.$this->id
+                'email' => 'email|required|unique:users,email,'.$this->id,
+                'telefono' => 'numeric',
+                'dni' => 'numeric'
             ];
     }
 
@@ -30,6 +32,8 @@ class UpdateUserProfileRequest extends Request
                 'email.email' => 'El email no tiene un formato válido',
                 'email.required' => 'El email es obligatorio',
                 'email.unique' => 'Ya existe un usuario con ese email',
+                'telefono.numeric' => 'El teléfono debe ser un número',
+                'dni.numeric' => 'El dni debe ser un número',
             ];
     }
 }
