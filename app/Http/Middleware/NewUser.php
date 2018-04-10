@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class NewUser
 {
     /**
      * The Guard implementation.
@@ -16,7 +16,7 @@ class RedirectIfAuthenticated
     protected $auth;
 
     /**
-     * Create a new filter instance.
+     * Create a new middleware instance.
      *
      * @param  Guard  $auth
      * @return void
@@ -35,8 +35,8 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->check()) {
-            return redirect('/');
+        if(Auth::user()->estado->slug == 'nuevo') {
+            return view('nuevo');
         }
 
         return $next($request);

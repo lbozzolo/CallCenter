@@ -49,3 +49,8 @@ Route::post('password/reset', [
     'uses' => 'Auth\PasswordController@postReset',
     'as'   => 'reset'
 ]);
+
+Route::get('auth/bienvenido', [
+    'uses' => 'Auth\AuthController@firstTime',
+    'as' => 'auth.firsttime'
+]);

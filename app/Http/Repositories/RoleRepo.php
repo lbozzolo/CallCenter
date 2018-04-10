@@ -28,4 +28,9 @@ class RoleRepo extends BaseRepo
         return ($slug)? str_slug(strtolower($slug), '.') : str_slug(strtolower($name), '.');
     }
 
+    public function listWithoutLastComma($user)
+    {
+        return implode(', ', array_map(function($a){return $a['name'];}, $user->roles->toArray()));
+    }
+
 }

@@ -5,15 +5,14 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>Editar perfil de {!! $user->full_name !!}</h2>
+                <h2>Crear nuevo usuario</h2>
                 <hr>
                 <div class="col-lg-6 col-md-6">
-                    {!! Form::model($user, ['method' => 'put', 'url' => route('users.update', ['id' => $user->id, 'route' => $route]), 'class' =>'form']) !!}
+                    {!! Form::open(['method' => 'post', 'url' => route('users.store'), 'class' =>'form']) !!}
 
                     <div class="form-group">
                         {!! Form::label('roles', 'Roles:') !!}
-                        ({!! $rolesActuales !!})
-                        {!! Form::select('roles[]', $roles, $user->roles->first()->id, ['class' => 'form-control select2 multiple']) !!}
+                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control select2 multiple']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
@@ -36,8 +35,8 @@
                         {!! Form::text('dni', null, ['class' => 'form-control']) !!}
                     </div>
 
-                    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-                    <a href="{{ URL::previous() }}" class="btn btn-default">Cerrar</a>
+                    {!! Form::submit('Crear usuario', ['class' => 'btn btn-primary']) !!}
+                    <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
 
                     {!! Form::close() !!}
                 </div>

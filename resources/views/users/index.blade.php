@@ -10,10 +10,7 @@
 
                 <div class="col-lg-12">
 
-                    <div class="panel-body">
-                        <a href="{{ route('users.index') }}" class="btn btn-default">Habilitados</a>
-                        <a href="{{ route('users.index.disable') }}" class="btn btn-default">Deshabilitados</a>
-                    </div>
+                    @include('users.partials.navbar')
 
                     <div>
                         @include('users.partials.usuarios-habilitados')
@@ -41,7 +38,7 @@
                     "emptyTable": "Sin datos disponibles",
                     "infoEmpty": "Sin registros",
                     "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "<i class='fa fa-search'></i>",
+                    "search": "<i class='fa fa-search'></i> buscar",
                     "paginate": {
                         "first": "Primero",
                         "last": "Ultimo",
@@ -53,25 +50,7 @@
             $("#div-table-enable-users").show();
             $(".overlay").hide();
 
-            $('#table-disable-users').DataTable({
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "emptyTable": "Sin datos disponibles",
-                    "infoEmpty": "Sin registros",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "<i class='fa fa-search'></i>",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
-            $("#div-table-disable-users").show();
-            $(".overlay").hide();
+
 
         });
 

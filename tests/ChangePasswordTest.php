@@ -26,7 +26,7 @@ class ChangePasswordTest extends TestCase
             'No se pudo cambiar la contraseña'
         );
 
-        $user->delete();
+        $user->forceDelete();
     }
 
 }

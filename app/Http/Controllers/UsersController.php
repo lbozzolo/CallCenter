@@ -4,24 +4,87 @@ use CallCenter\Entities\EstadoUser;
 use CallCenter\Http\Requests\ChangePasswordRequest;
 use CallCenter\Http\Requests\UpdateUserProfileRequest;
 use CallCenter\User;
+use Bican\Roles\Models\Permission;
+use Bican\Roles\Models\Role;
+use CallCenter\Http\Repositories\RoleRepo;
+use CallCenter\Http\Repositories\UserRepo;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
+    protected $roleRepo;
+    protected $userRepo;
+
+    public function __construct(RoleRepo $roleRepo, UserRepo $userRepo)
+    {
+        $this->roleRepo = $roleRepo;
+        $this->userRepo = $userRepo;
+    }
 
     public function index()
     {
         $users = User::all();
-        $disableUsers = User::onlyTrashed()->get();
-        return view('users.index', compact('users', 'disableUsers'));
+
+        return view('users.index', compact('users'));
+    }
+
+    public function create()
+    {
+        $roles = Role::all()->reject(function ($value) {
+            return $value->slug == 'superadmin';
+        })->lists('name', 'id');
+
+        return view('users.create', compact('roles'));
+    }
+
+    public function store(Request $request)
+    {
+        $disableStatus = EstadoUser::where('slug', 'nuevo')->first();
+        $password = str_random(6);
+        $email = $request->email;
+
+        $user = User::create([
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'email' => $email,
+            'telefono' => $request->telefono,
+            'dni' => $request->dni,
+            'password' => bcrypt($password),
+            'estado_id' => $disableStatus->id
+        ]);
+
+        foreach($request->roles as $id){
+            $user->attachRole(Role::find($id));
+        }
+
+        Mail::send('emails.new-user', ['password' => $password], function ($message) use ($email){
+
+            $message->from('callcenter@gmail.com', 'CallCenter');
+            $message->to($email)->subject('Alta al sistema CallCenter');
+
+        });
+
+        if($user){
+            return redirect()->route('users.index')->with('ok', 'Usuario creado con éxito');
+        }else{ abort(400);}
     }
 
     public function indexDisable()
     {
         $disableUsers = User::onlyTrashed()->get();
         return view('users.index-disable', compact( 'disableUsers'));
+    }
+
+    public function indexNuevos()
+    {
+        $estadoNuevo = EstadoUser::where('slug', 'nuevo')->first();
+        $newUsers = User::where('estado_id', $estadoNuevo->id)->get();
+
+        return view('users.index-nuevos', compact( 'newUsers'));
     }
 
     public function profile($id)
@@ -33,7 +96,10 @@ class UsersController extends Controller
     public function edit($id, $route = null)
     {
         $user = User::find($id);
-        return view('users.edit', compact('user', 'route'));
+        $roles = Role::lists('name', 'id');
+        $rolesActuales = $this->roleRepo->listWithoutLastComma($user);
+
+        return view('users.edit', compact('user', 'route', 'roles', 'rolesActuales'));
     }
 
     public function update(UpdateUserProfileRequest $request, $id, $route = null)
@@ -75,22 +141,13 @@ class UsersController extends Controller
     public function changeState($id)
     {
         $user = User::withTrashed()->where('id', $id)->first();
-        $habilitado = EstadoUser::where('slug', 'habilitado')->first();
-        $deshabilitado = EstadoUser::where('slug', 'deshabilitado')->first();
+        $message = $this->userRepo->changeState($user);
 
-        if($user->trashed()){
-            $message = 'habilitado';
-            $user->restore();
-            $user->estado_id = $habilitado->id;
-            $user->save();
+        if($message == 'habilitado'){
+            return redirect()->route('users.index.disable')->with('ok', 'El usuario ha sido '.$message.' con éxito');
         }else{
-            $message = 'deshabilitado';
-            $user->estado_id = $deshabilitado->id;
-            $user->save();
-            $user->delete();
+            return redirect()->route('users.index')->with('ok', 'El usuario ha sido '.$message.' con éxito');
         }
-
-        return redirect()->route('users.index')->with('ok', 'El usuario ha sido '.$message.' con éxito');
     }
 
     public function permissions($id)
@@ -102,7 +159,7 @@ class UsersController extends Controller
 
     public function assignPermissions(Request $request, $id)
     {
-        $user = Role::find($id);
+        $user = User::find($id);
         $permisos = $request->permissions;
 
         $user->detachAllPermissions();

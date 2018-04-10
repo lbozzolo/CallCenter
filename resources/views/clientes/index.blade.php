@@ -5,17 +5,18 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>USUARIOS deshabilitados</h2>
+                <h2>CLIENTES</h2>
                 <hr>
 
                 <div class="col-lg-12">
 
-                    @include('users.partials.navbar')
-
-                    <div>
-                        @include('users.partials.usuarios-deshabilitados')
+                    <div class="panel-body">
+                        <a href="{{ route('clientes.create') }}" class="btn btn-default"><i class="fa fa-plus"></i> Nuevo cliente</a>
                     </div>
 
+                    <div>
+                        @include('clientes.partials.listado-clientes')
+                    </div>
 
                 </div>
 
@@ -31,9 +32,7 @@
     <script>
 
         $(document).ready(function() {
-
-
-            $('#table-disable-users').DataTable({
+            $('#table-clientes').DataTable({
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No se encontraron resultados",
@@ -50,8 +49,10 @@
                     }
                 }
             });
-            $("#div-table-disable-users").show();
+            $("#div-table-clientes").show();
             $(".overlay").hide();
+
+
 
         });
 

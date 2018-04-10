@@ -5,9 +5,24 @@ Route::get('usuarios', [
     'uses' => 'UsersController@index'
 ]);
 
+Route::get('usuarios/crear', [
+    'as' => 'users.create',
+    'uses' => 'UsersController@create'
+]);
+
+Route::post('usuarios/crear', [
+    'as' => 'users.store',
+    'uses' => 'UsersController@store'
+]);
+
 Route::get('usuarios/deshabilitados', [
     'as' => 'users.index.disable',
     'uses' => 'UsersController@indexDisable'
+]);
+
+Route::get('usuarios/nuevos', [
+    'as' => 'users.index.nuevos',
+    'uses' => 'UsersController@indexNuevos'
 ]);
 
 Route::get('perfil/{id}', [

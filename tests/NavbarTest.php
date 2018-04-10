@@ -21,10 +21,24 @@ class NavbarTest extends TestCase
 
         $this->click('Usuarios')
             ->seePageIs('usuarios')
-            ->see('Usuarios');
+            ->see('USUARIOS habilitados')
+            ->see($user->email)
+            ->see('buscar')
+            ->see('Habilitados')
+            ->see('Deshabilitados');
+
+        $this->click('Habilitados')
+            ->seePageIs('usuarios');
+
+        $user->delete();
+
+        $this->click('Deshabilitados')
+            ->seePageIs('usuarios/deshabilitados')
+            ->see($user->email);
 
         //Elimino el usuario
-        $user->delete();
+        $user->restore();
+        $user->forceDelete();
 
     }
 
@@ -45,7 +59,7 @@ class NavbarTest extends TestCase
             ->see('Mi perfil');
 
         //Elimino el usuario
-        $user->delete();
+        $user->forceDelete();
 
     }
 

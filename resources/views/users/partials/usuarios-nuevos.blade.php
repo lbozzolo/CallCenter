@@ -19,7 +19,7 @@
         </thead>
         <tbody>
 
-        @foreach($disableUsers as $user)
+        @foreach($newUsers as $user)
 
             <tr>
                 <td>{!! $user->id !!}</td>

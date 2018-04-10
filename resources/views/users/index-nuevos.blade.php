@@ -5,7 +5,7 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>USUARIOS deshabilitados</h2>
+                <h2>USUARIOS nuevos</h2>
                 <hr>
 
                 <div class="col-lg-12">
@@ -13,7 +13,7 @@
                     @include('users.partials.navbar')
 
                     <div>
-                        @include('users.partials.usuarios-deshabilitados')
+                        @include('users.partials.usuarios-nuevos')
                     </div>
 
 

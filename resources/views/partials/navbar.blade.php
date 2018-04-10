@@ -13,10 +13,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {{--<li><a href="/">Home</a></li>--}}
-                @if(Auth::check())
+                @if(Auth::check() && Auth::user()->estado->slug == 'habilitado')
 
                 <li><a href="{{ route('users.index') }}">Usuarios</a></li>
                 <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
+                <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
 
                 @endif
             </ul>
@@ -29,7 +30,9 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->full_name }}<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            @if(Auth::check() && Auth::user()->estado->slug == 'habilitado')
                             <li><a href="{{ route('users.profile', Auth::user()->id) }}">Mi perfil</a></li>
+                            @endif
                             <li><a href="{{ route('logout') }}">Cerrar sesión</a></li>
                         </ul>
                     </li>

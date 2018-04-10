@@ -8,6 +8,7 @@ use CallCenter\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -89,7 +90,11 @@ class AuthController extends Controller
         return [
             'email' => $request->get('email'),
             'password' => $request->get('password'),
-            'estado_id' => 1 //Usuario habilitado
+            //'estado_id' => '1' //Usuario habilitado
         ];
     }
+
+
+
+
 }

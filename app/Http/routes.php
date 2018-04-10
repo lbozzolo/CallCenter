@@ -14,7 +14,7 @@
 require(__DIR__ . '/Routes/auth.php');
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'new.user']], function () {
 
     Route::get('/', [
         'as' => '/',
@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     require(__DIR__ . '/Routes/users.php');
     require(__DIR__ . '/Routes/roles.php');
     require(__DIR__ . '/Routes/permissions.php');
+    require(__DIR__ . '/Routes/clientes.php');
 
 });
 

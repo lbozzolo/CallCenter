@@ -274,14 +274,7 @@
     </li>
 </ul>
 
-<ul class="list-inline" id="accordion">
-
-
-
-
-
-</ul>
-
+    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
 
 
 {!! Form::close() !!}

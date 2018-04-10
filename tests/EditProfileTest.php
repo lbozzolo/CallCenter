@@ -7,11 +7,15 @@ class EditProfileTest extends TestCase
 
     public function testEditProfile()
     {
+
         $user = $this->createUser();
         $faker = Faker::create();
         $name = $faker->name;
         $lastname = $faker->lastName;
         $email = $faker->email;
+
+        $this->visit('perfil/'.$user->id)
+            ->dontSee('Editar');
 
         $this->actingAs($user)
             ->visit('perfil/'.$user->id)
@@ -31,7 +35,7 @@ class EditProfileTest extends TestCase
         $this->seeInDatabase('users', ['apellido' => $lastname]);
         $this->seeInDatabase('users', ['email' => $email]);
 
-        $user->delete();
+        $user->forceDelete();
     }
 
 }
