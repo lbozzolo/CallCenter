@@ -7,7 +7,7 @@
             <div class="content">
 
                 <h2>
-                    Roles y permisos
+                    ROLES Y PERMISOS
                     <a href="{{ route('permissions.index') }}" class="btn btn-default pull-right">ver permisos</a>
                 </h2>
                 <hr>
@@ -19,16 +19,16 @@
                 <div class="col-lg-5 col-lg-offset-1">
 
                     <h3>Editar rol: {!! $role->name !!}</h3>
-                    {!! Form::open(['method' => 'put', 'url' => route('roles.update', $role->id), 'class' => 'form']) !!}
+                    {!! Form::model($role, ['method' => 'put', 'url' => route('roles.update', $role->id), 'class' => 'form']) !!}
 
                     <div class="form-group">
                         {!! Form::label('name', 'Nombre') !!}
-                        {!! Form::text('name', $role->name, ['class' => 'form-control']) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group">
                         {!! Form::label('description', 'Descripción') !!}
-                        {!! Form::text('description', $role->description, ['class' => 'form-control']) !!}
+                        {!! Form::text('description', null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group">

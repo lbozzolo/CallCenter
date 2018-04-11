@@ -14,22 +14,22 @@
 require(__DIR__ . '/Routes/auth.php');
 
 
-Route::group(['middleware' => ['auth', 'new.user']], function () {
+Route::group(['middleware' => ['auth', 'new.user', 'XSS']], function () {
 
-    Route::get('/', [
-        'as' => '/',
-        'uses' => 'DashboardController@index'
-    ]);
+
+    Route::get('/', ['as' => '/', 'uses' => 'DashboardController@index']);
 
     require(__DIR__ . '/Routes/users.php');
     require(__DIR__ . '/Routes/roles.php');
     require(__DIR__ . '/Routes/permissions.php');
     require(__DIR__ . '/Routes/clientes.php');
+    require(__DIR__ . '/Routes/productos.php');
+    require(__DIR__ . '/Routes/categorias.php');
+
+    //Ruta para ejecutar pruebas
+    Route::get('/test', ['as' => 'test', 'uses' => 'DashboardController@test']);
+
 
 });
 
 
-Route::get('/test', [
-    'as' => 'test',
-    'uses' => 'DashboardController@test'
-]);

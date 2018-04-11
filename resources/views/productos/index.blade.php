@@ -5,17 +5,17 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>CLIENTES</h2>
+                <h2>PRODUCTOS</h2>
                 <hr>
 
                 <div class="col-lg-12">
 
                     <div class="panel-body">
-                        <a href="{{ route('clientes.create') }}" class="btn btn-default"><i class="fa fa-plus"></i> Agregar cliente</a>
+                        <a href="{{ route('productos.create') }}" class="btn btn-default"><i class="fa fa-plus"></i> Agregar producto</a>
                     </div>
 
                     <div>
-                        @include('clientes.partials.listado-clientes')
+                        {{--@include('productos.partials.listado-productos')--}}
                     </div>
 
                 </div>
@@ -32,7 +32,7 @@
     <script>
 
         $(document).ready(function() {
-            $('#table-clientes').DataTable({
+            $('#table-productos').DataTable({
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No se encontraron resultados",
@@ -49,7 +49,7 @@
                     }
                 }
             });
-            $("#div-table-clientes").show();
+            $("#div-table-productos").show();
             $(".overlay").hide();
 
 

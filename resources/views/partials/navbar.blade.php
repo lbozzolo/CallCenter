@@ -18,6 +18,8 @@
                 <li><a href="{{ route('users.index') }}">Usuarios</a></li>
                 <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
                 <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
+                <li><a href="{{ route('productos.index') }}">Productos</a></li>
+                <li><a href="{{ route('categorias.index') }}">Categorías</a></li>
 
                 @endif
             </ul>

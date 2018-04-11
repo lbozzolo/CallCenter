@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'noreply@callcenter.com', 'name' => 'smtp.mailtrap.io'],
+    'from' => ['address' => 'Info@smartline.com.ar', 'name' => 'smtp.mailtrap.io'],
 
     /*
     |--------------------------------------------------------------------------

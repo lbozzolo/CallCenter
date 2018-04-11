@@ -33,5 +33,6 @@ class Kernel extends HttpKernel
         'permission' => \Bican\Roles\Middleware\VerifyPermission::class,
         'level' => \Bican\Roles\Middleware\VerifyLevel::class,
         'new.user' => \CallCenter\Http\Middleware\NewUser::class,
+        'XSS' => \CallCenter\Http\Middleware\XSS::class,
     ];
 }

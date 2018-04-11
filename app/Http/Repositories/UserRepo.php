@@ -52,7 +52,7 @@ class UserRepo extends BaseRepo
     {
         Mail::send($data['vista'], $data, function ($message) use ($data){
 
-            $message->from('callcenter@gmail.com', 'CallCenter');
+            $message->from(config('mail.from.address'), 'CallCenter');
             $message->to($data['email'])->subject($data['subject']);
 
         });

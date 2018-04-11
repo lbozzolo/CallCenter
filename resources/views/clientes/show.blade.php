@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="col-lg-6 col-md-6">
-                    <h3>Interacciones</h3>
+                    <h3>Historial</h3>
                     <ul>
                         <li><a href="">ventas</a></li>
                         <li><a href="">llamadas</a></li>

@@ -18,7 +18,7 @@ class CreateCategoriasTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('slug')->unique();
-            $table->integer('parent_id')->unsigned();
+            $table->integer('parent_id')->unsigned()->nullable();
 
             $table->timestamps();
 
