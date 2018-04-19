@@ -1,9 +1,9 @@
-<?php namespace CallCenter\Http\Controllers;
+<?php namespace SmartLine\Http\Controllers;
 
 
-use CallCenter\Entities\Cliente;
-use CallCenter\Entities\EstadoCliente;
-use CallCenter\Http\Requests\CreateClienteRequest;
+use SmartLine\Entities\Cliente;
+use SmartLine\Entities\EstadoCliente;
+use SmartLine\Http\Requests\CreateClienteRequest;
 use Illuminate\Http\Request;
 
 class ClientesController extends Controller
@@ -11,7 +11,7 @@ class ClientesController extends Controller
 
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::with('estado')->get();
         return view('clientes.index', compact('clientes'));
     }
 

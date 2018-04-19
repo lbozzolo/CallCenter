@@ -6,11 +6,10 @@
         <div class="container">
             <div class="content">
 
-                <h2>
-                    SUBCATEGORÍAS
-                    <a href="{{ route('categorias.index') }}" class="btn btn-default pull-right">categorías</a>
-                </h2>
-                <hr>
+                <h2>SUBCATEGORÍAS</h2>
+
+                @include('productos.partials.navbar')
+
                 <div class="col-lg-5">
 
                     @include('categorias.partials.subcategorias-listado')

@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Http\Requests;
+namespace SmartLine\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

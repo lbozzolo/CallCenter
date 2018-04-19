@@ -1,7 +1,7 @@
-<?php namespace CallCenter\Http\Repositories;
+<?php namespace SmartLine\Http\Repositories;
 
 use Bican\Roles\Models\Permission;
-use CallCenter\User;
+use SmartLine\User;
 
 class PermissionsRepo extends BaseRepo
 {

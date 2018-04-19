@@ -26,7 +26,7 @@
                         <li class="list-group-item">Fecha de última acción: {!! $cliente->fecha_editado !!}</li>
                     </ul>
                     <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary">Editar</a>
-                    <a href="{{ URL::previous() }}" class="btn btn-default">Salir</a>
+                    <a href="{{ URL::previous() }}" class="btn btn-default">Volver</a>
                 </div>
 
                 <div class="col-lg-6 col-md-6">

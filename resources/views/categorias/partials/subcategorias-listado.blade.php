@@ -8,7 +8,7 @@
         </li>
     @endif
 
-    @foreach($subcategorias as $categoria)
+    @forelse($subcategorias as $categoria)
         <li class="list-group-item">
             <button type="button" title="Eliminar" class="pull-right nonStyledButton" data-toggle="modal" data-target="#eliminarCategoria{!! $categoria->id !!}" style="border: none">
                 <i class="glyphicon glyphicon-trash small text-danger"></i>
@@ -45,6 +45,10 @@
             </div>
         </div>
 
-    @endforeach
+    @empty
+
+        <p>Todavía no hay ninguna subcategoría</p>
+
+    @endforelse
 
 </ul>

@@ -29,3 +29,8 @@ Route::delete('categorias/{id}/eliminar', [
     'as' => 'categorias.destroy',
     'uses' => 'CategoriasController@destroy'
 ]);
+
+Route::get('categoria/subcategoria', [
+    'as' => 'categoria.asesoramiento',
+    'uses' => 'CategoriasController@categoriaSubcategoria'
+]);

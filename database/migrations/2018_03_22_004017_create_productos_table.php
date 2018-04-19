@@ -18,14 +18,14 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->integer('fecha_inicio');
-            $table->integer('fecha_finalizacion');
+            $table->dateTime('fecha_inicio')->nullable();
+            $table->dateTime('fecha_finalizacion')->nullable();
             $table->integer('estado_id')->unsigned();
             $table->integer('unidad_medida_id')->unsigned()->nullable();
             $table->integer('cantidad_medida');
             $table->integer('stock');
             $table->integer('alerta_stock');
-            $table->integer('categoria_id')->unsigned();
+            $table->integer('marca_id')->unsigned()->nullable();
             $table->integer('precio');
             $table->integer('institucion_id')->unsigned()->nullable();
             $table->softDeletes();
@@ -35,7 +35,7 @@ class CreateProductosTable extends Migration
             $table->index('id');
             $table->index('estado_id');
             $table->index('unidad_medida_id');
-            $table->index('categoria_id');
+            $table->index('marca_id');
             $table->index('institucion_id');
         });
     }

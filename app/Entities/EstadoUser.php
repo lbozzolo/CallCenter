@@ -1,8 +1,8 @@
 <?php
 
-namespace CallCenter\Entities;
+namespace SmartLine\Entities;
 
-use CallCenter\User;
+use SmartLine\User;
 
 class EstadoUser extends Entity
 {

@@ -12,14 +12,8 @@ class EstadosReclamosTableSeeder extends Seeder
     public function run()
     {
         DB::table('estados_reclamos')->insert([
-            [
-                'nombre' => 'Abierto',
-                'slug' => 'abierto',
-            ],
-            [
-                'nombre' => 'Cerrado',
-                'slug' => 'cerrado',
-            ],
+            ['nombre' => 'Abierto', 'slug' => 'abierto'],
+            ['nombre' => 'Cerrado', 'slug' => 'cerrado'],
         ]);
     }
 }

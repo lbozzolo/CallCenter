@@ -6,15 +6,12 @@
         <div class="container">
             <div class="content">
 
-                <div class="col-lg-9">
-                    <h3>
-                        Asignar permisos a {!! strtoupper($role->name)!!}
-                    </h3>
-                </div>
-                <div class="form-group col-lg-3">
-                    <a href="{{ route('roles.index') }}" class="btn btn-default"> << volver</a>
-                </div>
-                <hr>
+                <h2>ROLES</h2>
+
+                @include('roles.partials.navbar')
+
+                <h3>Asignar permisos a {!! strtoupper($role->name)!!}</h3>
+
                 <div class="col-lg-12">
 
                     @include('permissions.partials.assign-permissions')

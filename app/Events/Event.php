@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Events;
+namespace SmartLine\Events;
 
 abstract class Event
 {

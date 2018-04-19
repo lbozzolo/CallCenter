@@ -12,14 +12,8 @@ class EstadosInstitucionesTableSeeder extends Seeder
     public function run()
     {
         DB::table('estados_instituciones')->insert([
-            [
-                'nombre' => 'Activa',
-                'slug' => 'activa',
-            ],
-            [
-                'nombre' => 'Inactiva',
-                'slug' => 'inactiva',
-            ],
+            ['nombre' => 'Activa', 'slug' => 'activa'],
+            ['nombre' => 'Inactiva', 'slug' => 'inactiva']
         ]);
     }
 }

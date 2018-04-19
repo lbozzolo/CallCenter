@@ -1,6 +1,6 @@
 <base href="{{ asset('') }}">
 <meta charset="UTF-8">
-<title>CallCenter</title>
+<title>SmartLine</title>
 
 @yield('header')
 

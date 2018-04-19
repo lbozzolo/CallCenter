@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use Faker\Factory as Faker;
-use CallCenter\Entities\Cliente;
+use SmartLine\Entities\Cliente;
 
 class FakerClientesSeeder extends Seeder
 {

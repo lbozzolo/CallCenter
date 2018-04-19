@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Http\Middleware;
+namespace SmartLine\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

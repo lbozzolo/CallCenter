@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => CallCenter\User::class,
+        'model'  => SmartLine\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

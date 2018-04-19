@@ -17,6 +17,7 @@ class CreateResultadosLlamadasTable extends Migration
 
             $table->increments('id');
             $table->string('nombre');
+            $table->string('slug')->unique();
         });
     }
 

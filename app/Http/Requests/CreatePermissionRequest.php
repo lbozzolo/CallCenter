@@ -1,9 +1,9 @@
 <?php
 
-namespace CallCenter\Http\Requests;
+namespace SmartLine\Http\Requests;
 
 
-use CallCenter\Entities\Entity;
+use SmartLine\Entities\Entity;
 
 class CreatePermissionRequest extends Request
 {

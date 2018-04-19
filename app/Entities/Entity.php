@@ -1,4 +1,4 @@
-<?php namespace CallCenter\Entities;
+<?php namespace SmartLine\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

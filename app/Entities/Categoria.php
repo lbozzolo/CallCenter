@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Entities;
+namespace SmartLine\Entities;
 
 class Categoria extends Entity
 {
@@ -15,6 +15,11 @@ class Categoria extends Entity
     public function subcategorias()
     {
         return $this->hasMany(Categoria::class, 'parent_id', 'id');
+    }
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class);
     }
 
 }

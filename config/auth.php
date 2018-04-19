@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => CallCenter\User::class,
+    'model' => SmartLine\User::class,
 
     /*
     |--------------------------------------------------------------------------

@@ -1,17 +1,15 @@
-<?php namespace CallCenter\Http\Controllers;
+<?php namespace SmartLine\Http\Controllers;
 
-use CallCenter\Entities\EstadoUser;
-use CallCenter\Http\Requests\ChangePasswordRequest;
-use CallCenter\Http\Requests\UpdateUserProfileRequest;
-use CallCenter\User;
+use SmartLine\Entities\EstadoUser;
+use SmartLine\Http\Requests\ChangePasswordRequest;
+use SmartLine\Http\Requests\UpdateUserProfileRequest;
+use SmartLine\User;
 use Bican\Roles\Models\Permission;
 use Bican\Roles\Models\Role;
-use CallCenter\Http\Repositories\RoleRepo;
-use CallCenter\Http\Repositories\UserRepo;
+use SmartLine\Http\Repositories\RoleRepo;
+use SmartLine\Http\Repositories\UserRepo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
@@ -27,7 +25,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::with('estado')->get();
 
         return view('users.index', compact('users'));
     }
@@ -105,11 +103,14 @@ class UsersController extends Controller
     public function update(UpdateUserProfileRequest $request, $id, $route = null)
     {
         $user = User::find($id);
+
         $user->nombre = $request->nombre;
         $user->apellido = $request->apellido;
         $user->email = $request->email;
         $user->telefono = $request->telefono;
         $user->dni = $request->dni;
+        $user->roles()->sync($request->roles);
+
         $user->save();
 
         if($route){

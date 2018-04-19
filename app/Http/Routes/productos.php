@@ -5,6 +5,11 @@ Route::get('productos', [
     'uses' => 'ProductosController@index'
 ]);
 
+Route::get('productos/inactivos', [
+    'as' => 'productos.index.inactivos',
+    'uses' => 'ProductosController@indexInactivos'
+]);
+
 Route::get('productos/crear', [
     'as' => 'productos.create',
     'uses' => 'ProductosController@create'
@@ -33,4 +38,9 @@ Route::put('productos/{id}/actualizar', [
 Route::delete('productos/{id}/eliminar', [
     'as' => 'productos.destroy',
     'uses' => 'ProductosController@destroy'
+]);
+
+Route::get('productos/{id}/cambiar-estado', [
+    'as' => 'productos.change.state',
+    'uses' => 'ProductosController@changeState'
 ]);

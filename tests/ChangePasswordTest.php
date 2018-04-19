@@ -19,7 +19,7 @@ class ChangePasswordTest extends TestCase
             ->seePageIs('perfil/'.$user->id)
             ->see('Tu contraseña ha sido cambiada exitosamente');
 
-        $user = CallCenter\User::find($user->id);
+        $user = SmartLine\User::find($user->id);
 
         $this->assertTrue(
             Hash::check('newpassword', $user->password),

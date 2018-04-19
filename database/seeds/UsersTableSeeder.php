@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use CallCenter\User;
+use SmartLine\User;
 use Bican\Roles\Models\Role;
 
 class UsersTableSeeder extends Seeder

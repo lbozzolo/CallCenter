@@ -1,13 +1,12 @@
 <?php
 
-namespace CallCenter;
+namespace SmartLine;
 
 use Bican\Roles\Models\Role;
 use Bican\Roles\Models\Permission;
-use CallCenter\Entities\EstadoUser;
+use SmartLine\Entities\EstadoUser;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use CallCenter\Entities\Entity;
+use SmartLine\Entities\Entity;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -16,6 +15,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+use SmartLine\Entities\Imagen;
+use SmartLine\Entities\Llamada;
 
 class User extends Entity implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -34,13 +35,6 @@ class User extends Entity implements AuthenticatableContract,
     protected $dates = ['deleted_at'];
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    //protected $fillable = ['name', 'email', 'password'];
-
-    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
@@ -51,6 +45,9 @@ class User extends Entity implements AuthenticatableContract,
     {
         return $this->nombre.' '.$this->apellido;
     }
+
+
+    //RelationShips
 
     public function roles()
     {
@@ -65,6 +62,16 @@ class User extends Entity implements AuthenticatableContract,
     public function estado()
     {
         return $this->belongsTo(EstadoUser::class);
+    }
+
+    public function llamadas()
+    {
+        return $this->hasMany(Llamada::class);
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Imagen::class, 'imageable');
     }
 
 

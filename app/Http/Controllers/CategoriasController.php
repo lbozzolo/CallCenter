@@ -1,8 +1,9 @@
-<?php namespace CallCenter\Http\Controllers;
+<?php namespace SmartLine\Http\Controllers;
 
-use CallCenter\Http\Requests\CreateCategoriaRequest;
-use CallCenter\Entities\Categoria;
-use CallCenter\Http\Repositories\CategoriaRepo;
+use SmartLine\Http\Requests\CreateCategoriaRequest;
+use SmartLine\Entities\Categoria;
+use SmartLine\Http\Repositories\CategoriaRepo;
+use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
 {
@@ -21,7 +22,8 @@ class CategoriasController extends Controller
 
     public function indexSubcategorias()
     {
-        $subcategorias = Categoria::whereNotNull('parent_id')->get()->sortBy('nombre');
+        //$subcategorias = Categoria::whereNotNull('parent_id')->get()->sortBy('nombre');
+        $subcategorias = Categoria::has('parent')->get()->sortBy('nombre');
         $parents = Categoria::whereNull('parent_id')->get()->lists('nombre', 'id');
         return view('categorias.subcategorias', compact('subcategorias', 'parents'));
     }
@@ -41,7 +43,7 @@ class CategoriasController extends Controller
         if($categoria){
 
             if($subcategoria){
-                $subcategorias = Categoria::whereNotNull('parent_id')->get()->sortBy('nombre');
+                $subcategorias = Categoria::has('parent')->get()->sortBy('nombre');
                 return view('categorias.subcategorias', compact('subcategorias', 'parents'))
                     ->with('ok', 'La subcategoría '.$categoria->nombre.' ha sido creada con éxito');
             }else{
@@ -63,7 +65,7 @@ class CategoriasController extends Controller
             $categorias = Categoria::whereNull('parent_id')->get()->sortBy('nombre');
             return view('categorias.edit', compact('categoria', 'categorias', 'parents'));
         }else{
-            $subcategorias = Categoria::whereNotNull('parent_id')->get()->sortBy('nombre');
+            $subcategorias = Categoria::has('parent')->get()->sortBy('nombre');
             $parents = Categoria::whereNull('parent_id')->get()->lists('nombre', 'id');
             return view('categorias.subcategorias-edit', compact('categoria', 'subcategorias', 'parents'));
         }
@@ -111,6 +113,13 @@ class CategoriasController extends Controller
 
         }
 
+    }
+
+    public function categoriaSubcategoria(Request $request)
+    {
+        $data = Categoria::has('parent')->whereIn('parent_id', $request->categoria_id)->get()->lists('nombre', 'id');
+
+        return response()->json($data);
     }
 
 }

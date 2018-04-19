@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Providers;
+namespace SmartLine\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'CallCenter\Events\SomeEvent' => [
-            'CallCenter\Listeners\EventListener',
+        'SmartLine\Events\SomeEvent' => [
+            'SmartLine\Listeners\EventListener',
         ],
     ];
 

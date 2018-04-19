@@ -3,19 +3,17 @@
 @section('content')
 
     <div class="row">
+
         <div class="container">
+
             <div class="content">
-                <h2>PRODUCTOS</h2>
-                <hr>
+                <h2>PRODUCTOS {{ (Request::is('productos/inactivos'.'*') ? 'INACTIVOS' : 'ACTIVOS') }}</h2>
+
+                @include('productos.partials.navbar')
 
                 <div class="col-lg-12">
-
-                    <div class="panel-body">
-                        <a href="{{ route('productos.create') }}" class="btn btn-default"><i class="fa fa-plus"></i> Agregar producto</a>
-                    </div>
-
                     <div>
-                        {{--@include('productos.partials.listado-productos')--}}
+                        @include('productos.partials.listado-productos')
                     </div>
 
                 </div>
@@ -49,6 +47,7 @@
                     }
                 }
             });
+
             $("#div-table-productos").show();
             $(".overlay").hide();
 

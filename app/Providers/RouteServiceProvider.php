@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Providers;
+namespace SmartLine\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'CallCenter\Http\Controllers';
+    protected $namespace = 'SmartLine\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

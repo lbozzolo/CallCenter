@@ -1,9 +1,9 @@
-<?php namespace CallCenter\Http\Controllers;
+<?php namespace SmartLine\Http\Controllers;
 
-use CallCenter\Http\Requests\CreateRoleRequest;
+use SmartLine\Http\Requests\CreateRoleRequest;
 use Bican\Roles\Models\Role;
 use Bican\Roles\Models\Permission;
-use CallCenter\Http\Repositories\RoleRepo;
+use SmartLine\Http\Repositories\RoleRepo;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller

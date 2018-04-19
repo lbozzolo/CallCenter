@@ -1,8 +1,8 @@
 <?php
 
-namespace CallCenter\Http\Requests;
+namespace SmartLine\Http\Requests;
 
-use CallCenter\Entities\EstadoCliente;
+use SmartLine\Entities\EstadoCliente;
 
 class CreateClienteRequest extends Request
 {

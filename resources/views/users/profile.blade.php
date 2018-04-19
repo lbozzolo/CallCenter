@@ -5,7 +5,7 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>Mi perfil</h2>
+                <h2>PERFIL {!! $user->full_name !!}</h2>
                 <hr>
                 <div class="col-lg-6 col-md-6">
                     <ul class="list-unstyled">
@@ -20,7 +20,7 @@
                         </li>
                     </ul>
                     <a href="{{ route('users.edit', Auth::user()->id) }}" class="btn btn-primary">Editar</a>
-                    <a href="{{ route('/') }}" class="btn btn-default">Salir</a>
+                    <a href="{{ URL::previous() }}" class="btn btn-default">Volver</a>
                 </div>
             </div>
         </div>

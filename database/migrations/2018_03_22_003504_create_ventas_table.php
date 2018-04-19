@@ -22,6 +22,7 @@ class CreateVentasTable extends Migration
             $table->integer('estado_id')->unsigned();
             $table->integer('metodo_pago_id')->unsigned();
             $table->integer('forma_pago_id')->unsigned();
+            $table->integer('etapa_id')->unsigned()->nullable();
             $table->integer('promocion_id')->unsigned()->nullable();
             $table->softDeletes();
 
@@ -34,6 +35,7 @@ class CreateVentasTable extends Migration
             $table->index('estado_id');
             $table->index('metodo_pago_id');
             $table->index('forma_pago_id');
+            $table->index('etapa_id');
             $table->index('promocion_id');
         });
     }

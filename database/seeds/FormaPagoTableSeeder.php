@@ -11,6 +11,13 @@ class FormaPagoTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+       /* DB::table('forma_pago')->insert([
+            [
+                'cuota_cantidad' => '',
+                'cuota_valor' => '',
+                'interes' => '',
+                'descuento' => ''
+            ],
+        ]);*/
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Http\Requests;
+namespace SmartLine\Http\Requests;
 
 class CreateCategoriaRequest extends Request
 {

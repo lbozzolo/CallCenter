@@ -1,6 +1,6 @@
 <?php
 
-namespace CallCenter\Entities;
+namespace SmartLine\Entities;
 
 
 class Etapa extends Entity

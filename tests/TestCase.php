@@ -1,6 +1,6 @@
 <?php
 
-use CallCenter\User as User;
+use SmartLine\User as User;
 use Faker\Factory as Faker;
 use Bican\Roles\Models\Role;
 

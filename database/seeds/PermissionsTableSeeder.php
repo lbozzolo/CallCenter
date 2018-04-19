@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use CallCenter\Entities\Entity;
+use SmartLine\Entities\Entity;
 
 class PermissionsTableSeeder extends Seeder
 {

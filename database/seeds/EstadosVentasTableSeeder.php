@@ -12,26 +12,16 @@ class EstadosVentasTableSeeder extends Seeder
     public function run()
     {
         DB::table('estados_ventas')->insert([
-            [
-                'nombre' => 'Iniciada',
-                'slug' => 'iniciada',
-            ],
-            [
-                'nombre' => 'Auditada',
-                'slug' => 'auditada',
-            ],
-            [
-                'nombre' => 'Confirmada',
-                'slug' => 'confirmada',
-            ],
-            [
-                'nombre' => 'Rechazada',
-                'slug' => 'rechazada',
-            ],
-            [
-                'nombre' => 'Cobrada',
-                'slug' => 'cobrada',
-            ],
+            ['nombre' => 'Iniciada', 'slug' => 'iniciada',],
+            ['nombre' => 'Auditada', 'slug' => 'auditada',],
+            ['nombre' => 'Confirmada', 'slug' => 'confirmada',],
+            ['nombre' => 'Rechazada', 'slug' => 'rechazada',],
+            ['nombre' => 'Cobrada', 'slug' => 'cobrada',],
+            ['nombre' => 'Facturada', 'slug' => 'facturada',],
+            ['nombre' => 'Enviada', 'slug' => 'enviada',],
+            ['nombre' => 'Entregado', 'slug' => 'entregado',],
+            ['nombre' => 'No entregado', 'slug' => 'no.entragado',],
+            ['nombre' => 'Devuelto', 'slug' => 'devuelto',]
         ]);
     }
 }

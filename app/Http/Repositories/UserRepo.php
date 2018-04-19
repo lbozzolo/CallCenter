@@ -1,7 +1,7 @@
-<?php namespace CallCenter\Http\Repositories;
+<?php namespace SmartLine\Http\Repositories;
 
-use CallCenter\User;
-use CallCenter\Entities\EstadoUser;
+use SmartLine\User;
+use SmartLine\Entities\EstadoUser;
 use Illuminate\Support\Facades\Mail;
 
 class UserRepo extends BaseRepo

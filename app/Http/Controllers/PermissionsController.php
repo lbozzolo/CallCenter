@@ -1,10 +1,10 @@
-<?php namespace CallCenter\Http\Controllers;
+<?php namespace SmartLine\Http\Controllers;
 
-use CallCenter\Entities\Entity;
-use CallCenter\Http\Requests\CreatePermissionRequest;
+use SmartLine\Entities\Entity;
+use SmartLine\Http\Requests\CreatePermissionRequest;
 use Bican\Roles\Models\Permission;
-use CallCenter\Http\Repositories\RoleRepo;
-use CallCenter\Http\Repositories\PermissionsRepo;
+use SmartLine\Http\Repositories\RoleRepo;
+use SmartLine\Http\Repositories\PermissionsRepo;
 
 class PermissionsController extends Controller
 {

@@ -6,11 +6,10 @@
         <div class="container">
             <div class="content">
 
-                <h2>
-                    Roles y permisos
-                    <a href="{{ route('roles.index') }}"  class="btn btn-default pull-right">ver roles</a>
-                </h2>
-                <hr>
+                <h2>PERMISOS</h2>
+
+                @include('roles.partials.navbar')
+
                 <div class="col-lg-5">
 
                     @include('permissions.partials.permissions-list')

@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(CallCenter\User::class, function (Faker\Generator $faker) {
+$factory->define(SmartLine\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,

@@ -1,4 +1,4 @@
-<?php namespace CallCenter\Http\Repositories;
+<?php namespace SmartLine\Http\Repositories;
 
 abstract class BaseRepo
 {

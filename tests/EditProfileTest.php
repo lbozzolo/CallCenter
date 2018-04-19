@@ -29,7 +29,7 @@ class EditProfileTest extends TestCase
             ->seePageIs('perfil/'.$user->id)
             ->see('Se han guardado los cambios con éxito');
 
-        $user = CallCenter\User::find($user->id);
+        $user = SmartLine\User::find($user->id);
 
         $this->seeInDatabase('users', ['nombre' => $name]);
         $this->seeInDatabase('users', ['apellido' => $lastname]);

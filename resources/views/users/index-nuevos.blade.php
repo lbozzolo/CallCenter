@@ -6,16 +6,14 @@
         <div class="container">
             <div class="content">
                 <h2>USUARIOS nuevos</h2>
-                <hr>
+
+                @include('users.partials.navbar')
 
                 <div class="col-lg-12">
-
-                    @include('users.partials.navbar')
 
                     <div>
                         @include('users.partials.usuarios-nuevos')
                     </div>
-
 
                 </div>
 

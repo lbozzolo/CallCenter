@@ -1,13 +1,16 @@
-<?php namespace CallCenter\Http\Controllers;
+<?php namespace SmartLine\Http\Controllers;
 
-use CallCenter\Entities\Banco;
-use CallCenter\Entities\Entity;
-use CallCenter\User;
+use SmartLine\Entities\Banco;
+use SmartLine\Entities\Cliente;
+use SmartLine\Entities\Entity;
+use SmartLine\User;
 use Bican\Roles\Models\Role;
+use SmartLine\Entities\Categoria;
+use SmartLine\Entities\Producto;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use CallCenter\Http\Controllers\Controller;
+use SmartLine\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -19,12 +22,9 @@ class DashboardController extends Controller
 
     public function test()
     {
-        $roles = Role::all();
-        $role = $roles->except(['1', '4'])->random();
-        $user = User::first();
+        $clientes = Cliente::all();
 
-        $email = config('mail.from.address');
-        dd($email);
+        dd($clientes);
     }
 
 }

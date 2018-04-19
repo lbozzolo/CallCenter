@@ -12,14 +12,9 @@ class EstadosUsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('estados_users')->insert([
-            [
-                'nombre' => 'Habilitado',
-                'slug' => 'habilitado'
-            ],
-            [
-                'nombre' => 'Deshabilitado',
-                'slug' => 'deshabilitado'
-            ],
+            ['nombre' => 'Habilitado', 'slug' => 'habilitado'],
+            ['nombre' => 'Deshabilitado', 'slug' => 'deshabilitado'],
+            ['nombre' => 'Nuevo', 'slug' => 'nuevo'],
         ]);
     }
 }

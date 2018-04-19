@@ -1,6 +1,6 @@
-<?php namespace CallCenter\Http\Repositories;
+<?php namespace SmartLine\Http\Repositories;
 
-use CallCenter\Entities\Categoria;
+use SmartLine\Entities\Categoria;
 
 class CategoriaRepo extends BaseRepo
 {

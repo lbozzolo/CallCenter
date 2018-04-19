@@ -1,8 +1,8 @@
 <?php
 
-namespace CallCenter\Http\Controllers\Auth;
+namespace SmartLine\Http\Controllers\Auth;
 
-use CallCenter\Http\Controllers\Controller;
+use SmartLine\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

@@ -13,19 +13,19 @@ class CreateImagenesTable extends Migration
     public function up()
     {
         Schema::create('imagenes', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('mime');
-            $table->string('extension', 4);
+            $table->string('path');
             $table->string('title');
-            $table->softDeletes();
+            $table->integer('imageable_id');
+            $table->string('imageable_type');
+            $table->tinyInteger('principal')->default(0);
 
+            $table->softDeletes();
             $table->timestamps();
 
             $table->index('id');
         });
+
     }
 
     /**

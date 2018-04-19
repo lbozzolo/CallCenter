@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CallCenter</a>
+            <a class="navbar-brand" href="#">SMARTLINE</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -16,10 +16,12 @@
                 @if(Auth::check() && Auth::user()->estado->slug == 'habilitado')
 
                 <li><a href="{{ route('users.index') }}">Usuarios</a></li>
-                <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
+                <li><a href="{{ route('roles.index') }}">Roles</a></li>
                 <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
                 <li><a href="{{ route('productos.index') }}">Productos</a></li>
-                <li><a href="{{ route('categorias.index') }}">Categorías</a></li>
+                <li><a href="{{ route('instituciones.index') }}">Instituciones</a></li>
+                <li><a href="{{ route('llamadas.index') }}">Llamadas</a></li>
+                <li><a href="{{ route('imagenes.index') }}">Imágenes</a></li>
 
                 @endif
             </ul>

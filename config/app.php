@@ -140,10 +140,10 @@ return [
         /*
          * Application Service Providers...
          */
-        CallCenter\Providers\AppServiceProvider::class,
-        CallCenter\Providers\AuthServiceProvider::class,
-        CallCenter\Providers\EventServiceProvider::class,
-        CallCenter\Providers\RouteServiceProvider::class,
+        SmartLine\Providers\AppServiceProvider::class,
+        SmartLine\Providers\AuthServiceProvider::class,
+        SmartLine\Providers\EventServiceProvider::class,
+        SmartLine\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
 

@@ -6,7 +6,9 @@
         <div class="container">
             <div class="content">
                 <h2>Crear nuevo usuario</h2>
-                <hr>
+
+                @include('users.partials.navbar')
+
                 <div class="col-lg-6 col-md-6">
                     {!! Form::open(['method' => 'post', 'url' => route('users.store'), 'class' =>'form']) !!}
 
