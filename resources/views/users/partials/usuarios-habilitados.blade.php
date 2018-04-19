@@ -24,7 +24,9 @@
 
             <tr>
                 <td>{!! $user->id !!}</td>
-                <td>{!! $user->full_name !!}</td>
+                <td>
+                    <a href="{{ route('users.profile', $user->id) }}">{!! $user->full_name !!}</a>
+                </td>
                 <td class="text-center">@include('users.partials.labels-roles')</td>
                 <td>{!! $user->email !!}</td>
                 <td>{!! $user->telefono !!}</td>

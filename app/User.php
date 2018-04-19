@@ -46,6 +46,15 @@ class User extends Entity implements AuthenticatableContract,
         return $this->nombre.' '.$this->apellido;
     }
 
+    public function getProfileImageAttribute()
+    {
+        foreach($this->images as $imagen){
+            if($imagen->principal == 1){
+                return $imagen->path;
+            }
+        }
+    }
+
 
     //RelationShips
 

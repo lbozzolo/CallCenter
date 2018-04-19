@@ -122,7 +122,8 @@ class UsersController extends Controller
 
     public function changePassword($id)
     {
-        return view('users.change-password')->with(['userId' => $id]);
+        $user = User::find($id);
+        return view('users.change-password', compact('user'));
     }
 
     public function storeNewPassword(ChangePasswordRequest $request)

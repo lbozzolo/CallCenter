@@ -45,7 +45,6 @@ class ProductosController extends Controller
 
     public function store(CreateProductoRequest $request)
     {
-        //dd($request->input());
         if(count($request->categoria_id) == 1 && $request->categoria_id == ''){
             return redirect()->back()->withErrors('La categoría es obligatoria');
         }
