@@ -17,4 +17,9 @@ class Cliente extends Entity
         return $this->belongsTo(EstadoCliente::class);
     }
 
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class);
+    }
+
 }

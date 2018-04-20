@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth', 'new.user', 'XSS']], function () {
     require(__DIR__ . '/Routes/marcas.php');
     require(__DIR__ . '/Routes/instituciones.php');
     require(__DIR__ . '/Routes/llamadas.php');
+    require(__DIR__ . '/Routes/ventas.php');
     require(__DIR__ . '/Routes/imagenes.php');
 
     //Ruta para ejecutar pruebas

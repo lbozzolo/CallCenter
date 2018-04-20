@@ -2,10 +2,9 @@
 
 namespace SmartLine\Entities;
 
-
-class Promocion extends Entity
+class EstadoVenta extends Entity
 {
-    protected $table = 'promociones';
+    protected $table = 'estados_ventas';
 
 
     public function ventas()

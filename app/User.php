@@ -6,6 +6,7 @@ use Bican\Roles\Models\Role;
 use Bican\Roles\Models\Permission;
 use SmartLine\Entities\EstadoUser;
 use Illuminate\Auth\Authenticatable;
+use SmartLine\Entities\Venta;
 use SmartLine\Entities\Entity;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -81,6 +82,11 @@ class User extends Entity implements AuthenticatableContract,
     public function images()
     {
         return $this->morphMany(Imagen::class, 'imageable');
+    }
+
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class);
     }
 
 

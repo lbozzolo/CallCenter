@@ -21,6 +21,7 @@
                 <li><a href="{{ route('productos.index') }}">Productos</a></li>
                 <li><a href="{{ route('instituciones.index') }}">Instituciones</a></li>
                 <li><a href="{{ route('llamadas.index') }}">Llamadas</a></li>
+                <li><a href="{{ route('ventas.index') }}">Ventas</a></li>
                 <li><a href="{{ route('imagenes.index') }}">Imágenes</a></li>
 
                 @endif
