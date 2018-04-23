@@ -19,11 +19,16 @@ use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use SmartLine\Entities\Imagen;
 use SmartLine\Entities\Llamada;
 
-class User extends Entity implements AuthenticatableContract,
+
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract{
+    use Authenticatable, CanResetPassword, HasRoleAndPermission {
+        HasRoleAndPermission ::can insteadof Authorizable;
+    }
+/*class User extends Entity implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract,
                                     HasRoleAndPermissionContract
-{
+{*/
     use Authenticatable, Authorizable, CanResetPassword, HasRoleAndPermission, SoftDeletes;
 
     /**
