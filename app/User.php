@@ -22,7 +22,7 @@ use SmartLine\Entities\Llamada;
 
 class User extends Entity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract{
     use Authenticatable, CanResetPassword, HasRoleAndPermission {
-        HasRoleAndPermission ::can insteadof Authorizable;
+        HasRoleAndPermission ::may insteadof Authorizable;
     }
 /*class User extends Entity implements AuthenticatableContract,
                                     AuthorizableContract,
