@@ -20,15 +20,15 @@ use SmartLine\Entities\Imagen;
 use SmartLine\Entities\Llamada;
 
 
-class User extends Entity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract{
+/*class User extends Entity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract{
     use Authenticatable, CanResetPassword, HasRoleAndPermission {
         HasRoleAndPermission ::may insteadof Authorizable;
-    }
-/*class User extends Entity implements AuthenticatableContract,
+    }*/
+class User extends Entity implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract,
                                     HasRoleAndPermissionContract
-{*/
+{
     use Authenticatable, Authorizable, CanResetPassword, HasRoleAndPermission, SoftDeletes;
 
     /**
