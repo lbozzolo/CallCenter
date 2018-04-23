@@ -20,7 +20,7 @@ use SmartLine\Entities\Imagen;
 use SmartLine\Entities\Llamada;
 
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract{
+class User extends Entity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract{
     use Authenticatable, CanResetPassword, HasRoleAndPermission {
         HasRoleAndPermission ::can insteadof Authorizable;
     }
