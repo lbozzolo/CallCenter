@@ -18,6 +18,7 @@ use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use SmartLine\Entities\Imagen;
 use SmartLine\Entities\Llamada;
+use Illuminate\Database\Eloquent\Model;
 
 
 class User extends Entity implements AuthenticatableContract,
