@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="243b5206-411e-4ce4-90f1-8f9603771e18" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php" afterPath="$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,7 +44,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UsersTableSeeder.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UsersTableSeeder.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="498">
@@ -58,11 +59,21 @@
       <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-233">
-              <caret line="20" column="39" lean-forward="false" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+            <state relative-caret-position="459">
+              <caret line="27" column="59" lean-forward="true" selection-start-line="27" selection-start-column="59" selection-end-line="27" selection-end-column="59" />
               <folding>
                 <element signature="e#29#57#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HasRoleAndPermission.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="200" column="5" lean-forward="true" selection-start-line="200" selection-start-column="5" selection-end-line="200" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,6 +100,7 @@
       <find>lime</find>
       <find>doctrine</find>
       <find>can</find>
+      <find>may</find>
     </findStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\callcenter\database\migrations</dir>
@@ -149,9 +161,9 @@
         <option value="$PROJECT_DIR$/app/Entities/Etapa.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ProductosController.php" />
-        <option value="$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php" />
         <option value="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php" />
       </list>
     </option>
   </component>
@@ -561,12 +573,12 @@
       <workItem from="1523036252261" duration="50209000" />
       <workItem from="1523273795157" duration="111534000" />
       <workItem from="1523619317898" duration="134212000" />
-      <workItem from="1524399626943" duration="34751000" />
+      <workItem from="1524399626943" duration="35127000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="462587000" />
+    <option name="totallyTimeSpent" value="462963000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1008,29 +1020,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database/Eloquent/SoftDeletes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-233">
-          <caret line="20" column="39" lean-forward="false" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-          <folding>
-            <element signature="e#29#57#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1041,6 +1035,24 @@
           <folding>
             <element signature="e#7#38#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="59" lean-forward="true" selection-start-line="27" selection-start-column="59" selection-end-line="27" selection-end-column="59" />
+          <folding>
+            <element signature="e#29#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="200" column="5" lean-forward="true" selection-start-line="200" selection-start-column="5" selection-end-line="200" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
