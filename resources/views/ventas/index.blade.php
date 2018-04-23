@@ -5,8 +5,12 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>VENTAS</h2>
-                <hr>
+                <h2>
+                    VENTAS
+                    <small class="text-muted"> / {!! $ventas->title !!}</small>
+                </h2>
+
+                @include('ventas.partials.navbar')
 
                 <div class="col-lg-12">
 

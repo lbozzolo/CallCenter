@@ -3,21 +3,34 @@
 namespace SmartLine\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SmartLine\Entities\EstadoVenta;
+use SmartLine\Entities\Etapa;
+use SmartLine\Entities\FormaPago;
+use SmartLine\Entities\MetodoPago;
+use SmartLine\Entities\Promocion;
 use SmartLine\Entities\Venta;
+use SmartLine\Http\Repositories\VentaRepo;
 
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
 
 class VentasController extends Controller
 {
+    protected $ventaRepo;
+
+    public function __construct(VentaRepo $ventaRepo)
+    {
+        $this->ventaRepo = $ventaRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($estado = null)
     {
-        $ventas = Venta::all();
+        $ventas = $this->ventaRepo->getVentasByEstado($estado);
         return view('ventas.index', compact('ventas'));
     }
 
@@ -50,8 +63,14 @@ class VentasController extends Controller
      */
     public function show($id)
     {
-        $venta = Venta::find($id);
-        return view('ventas.show', compact('venta'));
+        $data['venta'] = Venta::find($id);
+        $producto = $data['venta']->producto;
+        $data['etapas'] = $producto->etapas->lists('nombre', 'id');
+        $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
+        $data['promociones'] = Promocion::lists('nombre', 'id');
+        $data['estados'] = EstadoVenta::lists('nombre', 'id');
+
+        return view('ventas.show')->with($data);
     }
 
     /**
@@ -63,7 +82,11 @@ class VentasController extends Controller
     public function edit($id)
     {
         $venta = Venta::find($id);
-        return view('ventas.edit', compact('venta'));
+        $producto = $venta->producto;
+        $etapas = $producto->etapas->lists('nombre', 'id');
+        $metodosPago = MetodoPago::lists('nombre', 'id');
+        $promociones = Promocion::lists('nombre', 'id');
+        return view('ventas.edit', compact('venta', 'metodosPago', 'etapas', 'promociones'));
     }
 
     /**
@@ -75,7 +98,22 @@ class VentasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $venta = Venta::find($id);
+        $venta->metodo_pago_id = $request->metodo_pago_id;
+        $venta->etapa_id = $request->etapa_id;
+        $venta->promocion_id = $request->promocion_id;
+        $venta->save();
+
+        return redirect()->back()->with('ok', 'Venta editada con éxito');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $venta = Venta::find($id);
+        $venta->estado_id = $request->estado_id;
+        $venta->save();
+
+        return redirect()->back();
     }
 
     /**

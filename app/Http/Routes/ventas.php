@@ -1,6 +1,6 @@
 <?php
 
-Route::get('ventas', [
+Route::get('ventas/{estado?}', [
     'as' => 'ventas.index',
     'uses' => 'VentasController@index'
 ]);
@@ -28,6 +28,11 @@ Route::get('ventas/{id}/editar', [
 Route::put('ventas/{id}/actualizar', [
     'as' => 'ventas.update',
     'uses' => 'VentasController@update'
+]);
+
+Route::put('ventas/{id}/cambiar-estado', [
+    'as' => 'ventas.update.status',
+    'uses' => 'VentasController@updateStatus'
 ]);
 
 Route::delete('ventas/{id}/eliminar', [

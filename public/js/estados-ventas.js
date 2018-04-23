@@ -22,13 +22,13 @@ $(".estadoVentas").each(function (index){
             $(this).css("background-color",hexArray['confirmada']);
             break;
         case 'rechazada':
-            $(this).css("background-color",hexArray['rechazada']);
+            $(this).css("background-color",'orangered');
             break;
         case 'cobrada':
             $(this).css("background-color",hexArray['cobrada']);
             break;
         case 'facturada':
-            $(this).css("background-color",hexArray['facturada']);
+            $(this).css("background-color",hexArray['rechazada']);
             break;
         case 'enviada':
             $(this).css("background-color",hexArray['enviada']);

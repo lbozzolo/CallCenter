@@ -29,6 +29,12 @@
                             @endforeach
                         </li>
                         <li class="list-group-item">Precio: {!! ($producto->precio)? "$".$producto->precio : '' !!}</li>
+                        <li class="list-group-item">
+                            Etapas:
+                            @foreach($producto->etapas as $etapa)
+                                <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $etapa->nombre !!}</label>
+                            @endforeach
+                        </li>
                         <li class="list-group-item">Institución: {!! ($producto->institucion_id)? $producto->institucion->nombre : '<em class="text-muted">(sin datos)</em>' !!}</li>
                         <li class="list-group-item">Fecha de creación: {!! ($producto->fecha_creado)? $producto->fecha_creado : '' !!}</li>
                         <li class="list-group-item">Fecha de última edición: {!! ($producto->fecha_editado)? $producto->fecha_editado : '' !!}</li>

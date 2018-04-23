@@ -27,6 +27,7 @@ class CreateProductosTable extends Migration
             $table->integer('alerta_stock');
             $table->integer('marca_id')->unsigned()->nullable();
             $table->integer('precio');
+            $table->integer('etapa_id')->unsigned()->nullable();
             $table->integer('institucion_id')->unsigned()->nullable();
             $table->softDeletes();
 
@@ -36,6 +37,7 @@ class CreateProductosTable extends Migration
             $table->index('estado_id');
             $table->index('unidad_medida_id');
             $table->index('marca_id');
+            $table->index('etapa_id');
             $table->index('institucion_id');
         });
     }

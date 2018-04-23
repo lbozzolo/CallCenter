@@ -17,13 +17,15 @@ class CreateEtapasTable extends Migration
 
             $table->increments('id');
             $table->string('nombre');
-            $table->integer('dias_pendiente');
+            $table->integer('dias_pendiente')->nullable();
             $table->integer('etapa_anterior_id')->unsigned()->nullable();
             $table->integer('etapa_proxima_id')->unsigned()->nullable();
+            $table->integer('producto_id')->unsigned()->nullable();
 
             $table->index('id');
             $table->index('etapa_anterior_id');
             $table->index('etapa_proxima_id');
+            $table->index('producto_id');
         });
     }
 

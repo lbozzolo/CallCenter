@@ -11,7 +11,7 @@ class Producto extends Entity
     use SoftDeletes;
 
     protected $table = 'productos';
-    protected $fillable = ['nombre', 'descripcion', 'fecha_inicio', 'fecha_finalizacion', 'estado_id', 'unidad_medida_id', 'cantidad_medida', 'stock', 'alerta_stock', 'categoria_id', 'precio', 'marca_id', 'referencia', 'institucion_id', 'created_at', 'updated_at'];
+    protected $fillable = ['nombre', 'descripcion', 'fecha_inicio', 'fecha_finalizacion', 'estado_id', 'unidad_medida_id', 'cantidad_medida', 'stock', 'alerta_stock', 'categoria_id', 'precio', 'marca_id', 'referencia', 'institucion_id', 'etapa_id', 'created_at', 'updated_at'];
     protected $dates = ['deleted_at'];
 
 
@@ -45,6 +45,11 @@ class Producto extends Entity
     public function ventas()
     {
         return $this->hasMany(Venta::class);
+    }
+
+    public function etapas()
+    {
+        return $this->hasMany(Etapa::class);
     }
 
     public function images()

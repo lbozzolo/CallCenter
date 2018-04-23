@@ -10,6 +10,12 @@ class Venta extends Entity
     protected $fillable = ['user_id', 'cliente_id', 'producto_id', 'estado_id', 'metodo_pago_id', 'forma_pago_id', 'etapa_id', 'promocion_id', 'created_at', 'updated_at'];
 
 
+    public function getEstadoPluralAttribute()
+    {
+        return config('sistema.ventas.estados.'.$this->estado->slug);
+    }
+
+    // Relationships
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -48,6 +54,11 @@ class Venta extends Entity
     public function promocion()
     {
         return $this->belongsTo(Promocion::class);
+    }
+
+    public function etapa()
+    {
+        return $this->belongsTo(Etapa::class);
     }
 
 }

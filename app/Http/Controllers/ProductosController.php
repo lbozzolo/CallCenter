@@ -2,13 +2,16 @@
 
 
 use SmartLine\Entities\EstadoProducto;
+use SmartLine\Entities\Etapa;
 use SmartLine\Entities\Institucion;
+use SmartLine\Entities\Promocion;
 use SmartLine\Entities\UnidadMedida;
 use SmartLine\Http\Requests\CreateProductoRequest;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\Marca;
 use SmartLine\Entities\Categoria;
 use SmartLine\Http\Repositories\ProductoRepo;
+use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
@@ -122,6 +125,31 @@ class ProductosController extends Controller
         $producto->save();
 
         return redirect()->route('productos.index')->with('ok', 'Producto editado con éxito');
+    }
+
+    public function etapas($id)
+    {
+        $producto = Producto::find($id);
+        return view('productos.etapas', compact('producto'));
+    }
+
+    public function etapasStore(Request $request, $id)
+    {
+        $producto = Producto::find($id);
+        $ultimaEtapa = $producto->etapas->last();
+        $etapa = Etapa::create([
+            'nombre' => $request->nombre,
+            'dias_pendiente' => ($request->dias_pendiente)? $request->dias_pendiente : null,
+            'etapa_anterior_id' => ($ultimaEtapa)? $ultimaEtapa->id : null,
+            'producto_id' => $id
+        ]);
+
+        if($ultimaEtapa) {
+            $ultimaEtapa->etapa_proxima_id = $etapa->id;
+            $ultimaEtapa->save();
+        }
+
+        return redirect()->back()->with('ok', 'Etapa creada con éxito');
     }
 
     public function destroy($id)

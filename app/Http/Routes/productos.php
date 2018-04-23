@@ -30,6 +30,16 @@ Route::get('productos/{id}/editar', [
     'uses' => 'ProductosController@edit'
 ]);
 
+Route::get('productos/{id}/etapas', [
+    'as' => 'productos.etapas',
+    'uses' => 'ProductosController@etapas'
+]);
+
+Route::post('productos/{id}/etapas', [
+    'as' => 'productos.etapas.store',
+    'uses' => 'ProductosController@etapasStore'
+]);
+
 Route::put('productos/{id}/actualizar', [
     'as' => 'productos.update',
     'uses' => 'ProductosController@update'

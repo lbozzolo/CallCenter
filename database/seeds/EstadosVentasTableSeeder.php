@@ -20,7 +20,7 @@ class EstadosVentasTableSeeder extends Seeder
             ['nombre' => 'Facturada', 'slug' => 'facturada',],
             ['nombre' => 'Enviada', 'slug' => 'enviada',],
             ['nombre' => 'Entregado', 'slug' => 'entregado',],
-            ['nombre' => 'No entregado', 'slug' => 'no.entragado',],
+            ['nombre' => 'No entregado', 'slug' => 'noentregado',],
             ['nombre' => 'Devuelto', 'slug' => 'devuelto',]
         ]);
     }

@@ -66,16 +66,3 @@
 
 </div>
 
-@section('js')
-
-    <script>
-
-        if($('.message').is(':visible')){
-            setTimeout(function(){
-                $('.message').fadeOut("fast");
-            }, 3000);
-        }
-
-    </script>
-
-@endsection

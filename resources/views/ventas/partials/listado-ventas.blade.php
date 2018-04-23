@@ -9,14 +9,11 @@
         <thead>
         <tr>
             <th>Id</th>
+            <th>Estado</th>
             <th>Operador</th>
             <th>Cliente</th>
             <th>Producto</th>
-            <th>Estado</th>
-            <th>Método de pago</th>
-            <th>Forma de pago</th>
             <th>Etapa</th>
-            <th>Promoción</th>
             <th>Fecha</th>
             <th>Opciones</th>
         </tr>
@@ -27,19 +24,16 @@
 
             <tr>
                 <td>{!! $venta->id !!}</td>
-                <td>{!! $venta->user->full_name !!}</td>
-                <td>{!! $venta->cliente->full_name !!}</td>
-                <td>{!! $venta->producto->nombre !!}</td>
                 <td>
                     <label class="label label-default estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! $venta->estado->nombre !!}</label>
                 </td>
-                <td class="text-center">{!! ($venta->metodoPago)? $venta->metodoPago->nombre : '//' !!}</td>
-                <td class="text-center">{!! ($venta->formaPago)? $venta->formaPago->nombre : '//' !!}</td>
+                <td>{!! $venta->user->full_name !!}</td>
+                <td>{!! $venta->cliente->full_name !!}</td>
+                <td>{!! $venta->producto->nombre !!}</td>
                 <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '//' !!}</td>
-                <td class="text-center">{!! ($venta->promocion)? $venta->promocion->nombre : '//' !!}</td>
                 <td>{!! $venta->fecha_creado !!}</td>
                 <td class="text-center">
-                    <a href="{{ route('ventas.show', $venta->id) }}"><i class="fa fa-info-circle"></i> </a>
+                    <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-default btn-sm">detalles</a>
                 </td>
             </tr>
 

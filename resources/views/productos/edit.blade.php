@@ -13,7 +13,10 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>Editar producto</h2>
+                <h2>
+                    Editar producto
+                    <small class="text-muted"> / producto: {!! $producto->nombre !!}</small>
+                </h2>
                 <hr>
                 <div class="col-lg-6 col-md-6">
                     {!! Form::model($producto, ['method' => 'put', 'url' => route('productos.update', $producto->id), 'class' =>'form']) !!}
@@ -93,6 +96,9 @@
                                 <small class="help-block">Ingrese el número mínimo de productos en stock para lanzar una alerta.</small>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <a href="{{ route('productos.etapas', $producto->id) }}">Configurar etapas</a>
                     </div>
                     <div class="form-group">
                         {!! Form::label('marca_id', 'Marca') !!}
