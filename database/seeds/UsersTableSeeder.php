@@ -54,9 +54,10 @@ class UsersTableSeeder extends Seeder
         $pelado = User::where('email', '=', 'fernando@bamdig.com')->first();
 
         $superAdmin = Role::where('slug', '=', 'superadmin')->first();
-        $lucas->attachRole($superAdmin);
-        $tomy->attachRole($superAdmin);
-        $pelado->attachRole($superAdmin);
+        $lucas->roles()->attach($superAdmin);
+        $tomy->roles()->attach($superAdmin);
+        $pelado->roles()->attach($superAdmin);
+        
 
     }
 
