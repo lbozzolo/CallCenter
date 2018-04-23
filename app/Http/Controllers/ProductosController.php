@@ -121,7 +121,7 @@ class ProductosController extends Controller
         $producto->marca_id = ($request->marca_id)? $request->marca_id : null;
         $producto->precio = $request->precio;
         $producto->institucion_id = $request->institucion_id;
-
+->can
         $producto->save();
 
         return redirect()->route('productos.index')->with('ok', 'Producto editado con éxito');
