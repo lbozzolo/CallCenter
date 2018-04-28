@@ -5,7 +5,10 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>{!! $institucion->nombre !!}</h2>
+                <h2>
+                    Instituciones
+                    <span class="text-muted"> / {!! $institucion->nombre !!}</span>
+                </h2>
                 <hr>
                 <div class="col-lg-6 col-md-6">
                     <ul class="list-unstyled">

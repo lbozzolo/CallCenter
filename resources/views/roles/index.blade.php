@@ -6,7 +6,7 @@
         <div class="container">
             <div class="content">
 
-            <h2>ROLES</h2>
+            <h2>Roles</h2>
 
             @include('roles.partials.navbar')
 

@@ -13,6 +13,8 @@
             <th>Email</th>
             <th>DNI</th>
             <th>Estado</th>
+            <th>Compras</th>
+            <th>Llamadas</th>
             <th>Fecha de alta</th>
             <th>Última acción</th>
             <th>Opciones</th>
@@ -34,6 +36,12 @@
                         <label class="label label-default">{!! $cliente->estado->nombre !!}</label>
                     @endif
                 </td>
+                <td class="text-center">
+                    <a href="{{ route('clientes.compras', $cliente->id) }}">
+                        {!! $cliente->ventas->count() !!}
+                    </a>
+                </td>
+                <td>//</td>
                 <td>{!! $cliente->fecha_creado !!}</td>
                 <td>{!! $cliente->fecha_editado !!}</td>
                 <td class="text-center">

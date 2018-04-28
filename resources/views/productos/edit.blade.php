@@ -22,20 +22,18 @@
                     {!! Form::model($producto, ['method' => 'put', 'url' => route('productos.update', $producto->id), 'class' =>'form']) !!}
 
                     <div class="form-group">
-                        {!! Form::label('categoria_id[]', 'Categoría') !!}
-{{--
-                        {!! Form::select('categoria_id[]', $categorias, $producto->categorias->lists('id'),['id' => 'categorias', 'class' => 'select2 form-control']) !!}
---}}
-                        <select name="categoria_id[]" class="form-control select2" id="categorias">
+                        {!! Form::label('categorias_id[]', 'Categoría') !!}
+                        {!! Form::select('categorias_id[]', $categorias, $producto->categorias->lists('pivot.categoria_id')->toArray(),['multiple', 'id' => 'categorias', 'class' => 'select2 form-control']) !!}
+                       {{-- <select name="categoria_id[]" class="form-control select2" multiple id="categorias">
                             <option value=""></option>
                             @foreach($categorias as $key => $value)
                                 @if(in_array($key, $producto->categorias->lists('pivot.categoria_id')->toArray()))
-                                    <option selected="selected" value="{!! $key !!}">{!! $value !!}</option>
+                                    <option selected value="{!! $key !!}">{!! $value !!}</option>
                                 @else
                                     <option value="{!! $key !!}">{!! $value !!}</option>
                                 @endif
-                            @endforeach
-                        </select>
+                            @endforeac
+                        </select>--}}
                     </div>
                     <div class="form-group" id="subcategorias" style="display: none"></div>
                     <div class="form-group">

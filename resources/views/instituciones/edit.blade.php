@@ -6,7 +6,10 @@
         <div class="container">
             <div class="content">
 
-                <h2>INSTITUCIONES</h2>
+                <h2>
+                    Instituciones
+                    <span class="text-muted"> / Editar</span>
+                </h2>
 
                 <div class="col-lg-5">
 

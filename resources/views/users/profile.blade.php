@@ -11,8 +11,8 @@
                 @endif
 
                 <h2>
-                    PERFIL DE USUARIO
-                    <small class="text-muted"> / {!! $user->full_name !!}</small>
+                    {!! $user->full_name !!}
+                    <span class="text-muted"> / Perfil de usuario</span>
                 </h2>
                 <hr>
                 <div class="col-lg-6 col-md-6">

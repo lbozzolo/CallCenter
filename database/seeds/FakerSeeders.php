@@ -17,6 +17,7 @@ class FakerSeeders extends Seeder
         $this->call(FakerProductosSeeder::class);
         $this->call(FakerVentasSeeder::class);
         $this->call(FakerLlamadasSeeder::class);
+        $this->call(FakerReclamosSeeder::class);
 
     }
 }

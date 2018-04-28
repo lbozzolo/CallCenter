@@ -29,3 +29,20 @@ Route::put('clientes/{id}/actualizar', [
     'as' => 'clientes.update',
     'uses' => 'ClientesController@update'
 ]);
+
+//Rutas de relaciones
+
+Route::get('clientes/{id}/compras', [
+    'as' => 'clientes.compras',
+    'uses' => 'ClientesController@compras'
+]);
+
+Route::get('clientes/{id}/compras/estado', [
+    'as' => 'clientes.compras.filtrar',
+    'uses' => 'ClientesController@comprasFiltrar'
+]);
+
+Route::get('clientes/{id}/llamadas', [
+    'as' => 'clientes.llamadas',
+    'uses' => 'ClientesController@llamadas'
+]);

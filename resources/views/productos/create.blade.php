@@ -16,7 +16,10 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>AGREGAR NUEVO PRODUCTO</h2>
+                <h2>
+                    Productos
+                    <span class="text-muted"> / Agregar nuevo producto</span>
+                </h2>
 
                 @include('productos.partials.navbar')
 

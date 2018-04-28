@@ -5,12 +5,19 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>{!! $cliente->full_name !!}</h2>
-                <hr>
+                <h2>
+                    {!! $cliente->full_name !!}
+                    <span class="text-muted"> / Datos personales</span>
+                </h2>
+
+                @include('clientes.partials.navbar')
 
                 <div class="col-lg-6 col-md-6">
-                    <h3>Datos personales</h3>
+
                     <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ route('clientes.edit', $cliente->id) }}"><i class="fa fa-edit"></i> editar</a>
+                        </li>
                         <li class="list-group-item">Nombre: {!! $cliente->nombre !!}</li>
                         <li class="list-group-item">Apellido: {!! $cliente->apellido !!}</li>
                         <li class="list-group-item">Dirección: {!! $cliente->direccion !!}</li>
@@ -25,18 +32,19 @@
                         <li class="list-group-item">Fecha de alta: {!! $cliente->fecha_creado !!}</li>
                         <li class="list-group-item">Fecha de última acción: {!! $cliente->fecha_editado !!}</li>
                     </ul>
-                    <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary">Editar</a>
-                    <a href="{{ URL::previous() }}" class="btn btn-default">Volver</a>
+                    {{--<a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary">Editar</a>
+                    <a href="{{ URL::previous() }}" class="btn btn-default">Volver</a>--}}
                 </div>
 
                 <div class="col-lg-6 col-md-6">
-                    <h3>Historial</h3>
-                    <ul>
-                        <li><a href="">ventas</a></li>
-                        <li><a href="">llamadas</a></li>
-                        <li><a href="">reclamos</a></li>
-                        <li><a href="">intereses</a></li>
-                    </ul>
+
+                    @if($cliente->editar)
+
+                        <h3>Editar datos</h3>
+                        @include('clientes.partials.formulario-editar')
+
+                    @endif
+
                 </div>
 
             </div>

@@ -2,14 +2,18 @@
 
 namespace SmartLine\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Etapa;
 use SmartLine\Entities\FormaPago;
+use SmartLine\Entities\MarcaTarjeta;
 use SmartLine\Entities\MetodoPago;
 use SmartLine\Entities\Promocion;
 use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\VentaRepo;
+use SmartLine\Entities\Banco;
 
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
@@ -66,6 +70,8 @@ class VentasController extends Controller
         $data['venta'] = Venta::find($id);
         $producto = $data['venta']->producto;
         $data['etapas'] = $producto->etapas->lists('nombre', 'id');
+        $data['marcas'] = MarcaTarjeta::all();
+        $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
@@ -99,10 +105,29 @@ class VentasController extends Controller
     public function update(Request $request, $id)
     {
         $venta = Venta::find($id);
+
+        $venta->etapa_id = ($request->etapa_id)? $request->etapa_id : null;
+        $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
         $venta->metodo_pago_id = $request->metodo_pago_id;
-        $venta->etapa_id = $request->etapa_id;
-        $venta->promocion_id = $request->promocion_id;
+
+        // Datos de tarjeta
+        $datosTarjeta = $venta->datosTarjeta;
+        $metodoPago = MetodoPago::find($request->metodo_pago_id);
+        $marcaTarjeta = ($metodoPago->slug == 'credito')? $request->marca_id_credito : $request->marca_id_debito;
+        $fechaExpiracion = Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString();
+
+        $datosTarjeta->marca_id = ($marcaTarjeta)? $marcaTarjeta : null;
+        $datosTarjeta->tipo_tarjeta = 0;
+        $datosTarjeta->banco_id = ($request->banco_id)? $request->banco_id : null;
+        $datosTarjeta->numero_tarjeta = ($request->numero_tarjeta)? $request->numero_tarjeta : null;
+        $datosTarjeta->fecha_expiracion = ($fechaExpiracion)? $fechaExpiracion : null;
+        $datosTarjeta->titular = ($request->titular)? $request->titular : null;
+        $datosTarjeta->codigo_seguridad = ($request->codigo_seguridad)? $request->codigo_seguridad : null;
+
         $venta->save();
+
+        $datosTarjeta->venta()->associate($venta);
+        $datosTarjeta->save();
 
         return redirect()->back()->with('ok', 'Venta editada con éxito');
     }

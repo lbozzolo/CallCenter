@@ -1,10 +1,5 @@
 <?php
 
-Route::get('imagenes', [
-    'as' => 'imagenes.index',
-    'uses' => 'ImagenesController@index'
-]);
-
 Route::post('imagenes/store/{id}/{model}', [
     'as' => 'imagenes.store',
     'uses' => 'ImagenesController@storeImage'

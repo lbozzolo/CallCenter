@@ -9,3 +9,8 @@ Route::get('llamadas/entrantes', [
     'as' => 'llamadas.index.entrantes',
     'uses' => 'LlamadasController@indexEntrantes'
 ]);
+
+Route::get('llamadas/reclamos', [
+    'as' => 'llamadas.index.reclamos',
+    'uses' => 'LlamadasController@indexReclamos'
+]);

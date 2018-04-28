@@ -75,8 +75,11 @@
                 </div>
 
                 <div class="col-lg-6 col-md-6">
-                    <h3>Agregar imagen</h3>
 
+                    <h3>Modificar stock</h3>
+                    
+
+                    <h3>Agregar imagen</h3>
                     <div class="formularioFoto">
 
 

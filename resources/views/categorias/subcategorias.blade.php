@@ -6,7 +6,10 @@
         <div class="container">
             <div class="content">
 
-                <h2>SUBCATEGORÍAS</h2>
+                <h2>
+                    Productos
+                    <span class="text-muted"> / Subcategorías</span>
+                </h2>
 
                 @include('productos.partials.navbar')
 

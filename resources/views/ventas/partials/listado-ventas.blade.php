@@ -27,9 +27,9 @@
                 <td>
                     <label class="label label-default estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! $venta->estado->nombre !!}</label>
                 </td>
-                <td>{!! $venta->user->full_name !!}</td>
-                <td>{!! $venta->cliente->full_name !!}</td>
-                <td>{!! $venta->producto->nombre !!}</td>
+                <td>{!! ($venta->user)? $venta->user->full_name : '' !!}</td>
+                <td>{!! ($venta->cliente)? $venta->cliente->full_name : '' !!}</td>
+                <td>{!!  ($venta->producto)?$venta->producto->nombre : '' !!}</td>
                 <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '//' !!}</td>
                 <td>{!! $venta->fecha_creado !!}</td>
                 <td class="text-center">

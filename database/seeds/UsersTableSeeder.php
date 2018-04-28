@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'nombre' => 'Tomás',
-                'apellido' => 'Milgrond',
+                'apellido' => 'Milgron',
                 'email' => 'tomas@bamdig.com',
                 'telefono' => '',
                 'dni' => '',

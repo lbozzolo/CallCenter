@@ -5,7 +5,10 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>LLAMADAS {{ (Request::is('llamadas/entrantes'.'*') ? 'ENTRANTES' : 'SALIENTES') }}</h2>
+                <h2>
+                    Llamadas
+                    <span class="text-muted"> / {!! $llamadas->title !!}</span>
+                </h2>
 
                 @include('llamadas.partials.navbar')
 

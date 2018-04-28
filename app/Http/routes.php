@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'new.user', 'XSS']], function () {
     require(__DIR__ . '/Routes/ventas.php');
     require(__DIR__ . '/Routes/imagenes.php');
     require(__DIR__ . '/Routes/etapas.php');
+    require(__DIR__ . '/Routes/reclamos.php');
 
     //Ruta para ejecutar pruebas
     Route::get('/test', ['as' => 'test', 'uses' => 'DashboardController@test']);

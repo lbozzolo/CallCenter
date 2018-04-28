@@ -5,7 +5,7 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>CLIENTES</h2>
+                <h2>Clientes</h2>
                 <hr>
 
                 <div class="col-lg-12">

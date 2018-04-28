@@ -22,4 +22,9 @@ class Cliente extends Entity
         return $this->hasMany(Venta::class);
     }
 
+    public function llamadas()
+    {
+        return $this->hasMany(Llamada::class);
+    }
+
 }

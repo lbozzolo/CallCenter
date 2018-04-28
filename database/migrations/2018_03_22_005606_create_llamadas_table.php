@@ -21,6 +21,7 @@ class CreateLlamadasTable extends Migration
             $table->integer('resultado_id')->unsigned();
             $table->integer('venta_id')->unsigned()->nullable();
             $table->tinyInteger('tipo_llamada');
+            $table->tinyInteger('clase_llamada');
             $table->string('url');
             $table->string('observaciones');
             $table->softDeletes();

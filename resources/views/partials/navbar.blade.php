@@ -15,14 +15,14 @@
                 {{--<li><a href="/">Home</a></li>--}}
                 @if(Auth::check() && Auth::user()->estado->slug == 'habilitado')
 
-                <li><a href="{{ route('users.index') }}">Usuarios</a></li>
-                <li><a href="{{ route('roles.index') }}">Roles</a></li>
-                <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
-                <li><a href="{{ route('productos.index') }}">Productos</a></li>
-                <li><a href="{{ route('instituciones.index') }}">Instituciones</a></li>
-                <li><a href="{{ route('llamadas.index') }}">Llamadas</a></li>
-                <li><a href="{{ route('ventas.index') }}">Ventas</a></li>
-                <li><a href="{{ route('imagenes.index') }}">Imágenes</a></li>
+                <li><a href="{{ route('users.index') }}" style="{{ (Request::is('usuarios'.'*') ? 'color: white' : '') }}">Usuarios</a></li>
+                <li><a href="{{ route('roles.index') }}" style="{{ (Request::is('roles'.'*') ? 'color: white' : '') }}">Roles</a></li>
+                <li><a href="{{ route('clientes.index') }}" style="{{ (Request::is('clientes'.'*') ? 'color: white' : '') }}">Clientes</a></li>
+                <li><a href="{{ route('productos.index') }}" style="{{ (Request::is('productos'.'*') ? 'color: white' : '') }}">Productos</a></li>
+                <li><a href="{{ route('instituciones.index') }}" style="{{ (Request::is('instituciones'.'*') ? 'color: white' : '') }}">Instituciones</a></li>
+                <li><a href="{{ route('llamadas.index') }}" style="{{ (Request::is('llamadas'.'*') ? 'color: white' : '') }}">Llamadas</a></li>
+                <li><a href="{{ route('ventas.index') }}" style="{{ (Request::is('ventas'.'*') ? 'color: white' : '') }}">Ventas</a></li>
+                <li><a href="{{ route('reclamos.index') }}" style="{{ (Request::is('reclamos'.'*') ? 'color: white' : '') }}">Reclamos</a></li>
 
                 @endif
             </ul>

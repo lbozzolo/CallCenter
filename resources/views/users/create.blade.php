@@ -5,7 +5,10 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>Crear nuevo usuario</h2>
+                <h2>
+                    Usuarios
+                    <span class="text-muted"> / Crear nuevo usuario</span>
+                </h2>
 
                 @include('users.partials.navbar')
 

@@ -122,6 +122,8 @@ class ProductosController extends Controller
         $producto->precio = $request->precio;
         $producto->institucion_id = $request->institucion_id;
 
+        $producto->categorias()->sync($request->categorias_id);
+
         $producto->save();
 
         return redirect()->route('productos.index')->with('ok', 'Producto editado con éxito');

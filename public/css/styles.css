@@ -18,6 +18,21 @@ h1{
     outline: inherit;
 }
 
+.nonStyledLabel{
+    background-color: white;
+    color: dimgray;
+    border: 1px solid dimgray;
+}
+
+.navbar-item-selected{
+    background-color: #e5e5e5;
+}
+
+.navbar-item-selected:hover{
+    background-color: orangered;
+}
+
 .box{
     padding: 10px;
 }
+

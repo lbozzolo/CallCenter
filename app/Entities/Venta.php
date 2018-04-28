@@ -51,6 +51,11 @@ class Venta extends Entity
         return $this->belongsTo(FormaPago::class);
     }
 
+    public function datosTarjeta()
+    {
+        return $this->hasOne(DatoTarjeta::class);
+    }
+
     public function promocion()
     {
         return $this->belongsTo(Promocion::class);
@@ -59,6 +64,11 @@ class Venta extends Entity
     public function etapa()
     {
         return $this->belongsTo(Etapa::class);
+    }
+
+    public function reclamos()
+    {
+        return $this->hasMany(Reclamo::class);
     }
 
 }

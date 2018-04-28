@@ -6,7 +6,7 @@
         <div class="container">
             <div class="content">
 
-                <h2>INSTITUCIONES</h2>
+                <h2>Instituciones</h2>
 
 {{--
                 @include('productos.partials.navbar')

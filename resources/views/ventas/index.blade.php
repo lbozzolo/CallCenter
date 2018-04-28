@@ -6,8 +6,8 @@
         <div class="container">
             <div class="content">
                 <h2>
-                    VENTAS
-                    <small class="text-muted"> / {!! $ventas->title !!}</small>
+                    Ventas
+                    <span class="text-muted">/ {!! $ventas->title !!}</span>
                 </h2>
 
                 @include('ventas.partials.navbar')

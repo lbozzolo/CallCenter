@@ -37,7 +37,7 @@
                         <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
                         <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>
                         <li class="list-group-item">Forma de pago: {!! ($venta->formaPago)? $venta->formaPago->nombre : '' !!}</li>
-                        <li class="list-group-item">Etapa: {!! ($venta->etapa)? $venta->etapa->nombre : '' !!}</li>
+                        <li class="list-group-item">Etapa: {!! ($venta->etapa)? $venta->etapa->nombre : '<small class="text-muted">Este producto no se vende en etapas</small>' !!}</li>
                         <li class="list-group-item">Promoción: {!! ($venta->promocion)? $venta->promocion->nombre : '' !!}</li>
                         <li class="list-group-item">Fecha de alta: {!! $venta->fecha_creado !!}</li>
                         <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
@@ -57,16 +57,22 @@
                             <div class="input-group input-group">
                                 {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control']) !!}
                                 <span class="input-group-btn">
-                                    {!! Form::submit('Aplicar', ['class' => 'btn btn-primary btn-flag']) !!}
+                                    {!! Form::submit('Aplicar', ['class' => 'btn btn-info btn-flag']) !!}
                                 </span>
                             </div>
                         </div>
 
                     {!! Form::close() !!}
 
-                    <p>Editar métodos y formas de pago</p>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Editar métodos y formas de pago
+                        </div>
+                        <div class="panel-body">
+                            @include('ventas.partials.formulario-editar')
+                        </div>
+                    </div>
 
-                    @include('ventas.partials.formulario-editar')
 
                 </div>
 
@@ -79,6 +85,59 @@
 @section('js')
 
     <script src="{{ asset('js/estados-ventas.js') }}"></script>
+
+    <script>
+
+        $('.select2').select2();
+        $('.datepicker').datepicker({
+            format: 'd/mm/yyyy'
+        });
+
+        if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){
+            $('#conTarjeta').show();
+            $('#conCredito').show();
+            $('.select2').select2();
+        }
+
+        if($('#metodoPago option:selected').html() === 'Tarjeta de débito'){
+            $('#conTarjeta').show();
+            $('#conDebito').show();
+            $('.select2').select2();
+        }
+
+        $('#metodoPago').change(function () {
+
+            if($('#metodoPago option:selected').html() === 'Tarjeta de crédito' || $('#metodoPago option:selected').html() === 'Tarjeta de débito'){
+
+                $('#conTarjeta').show();
+                $('.select2').select2();
+
+                if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){
+                    $('#marcaDebito').val('');
+                    $('#conDebito').hide();
+                    $('#conCredito').show();
+                }
+                if($('#metodoPago option:selected').html() === 'Tarjeta de débito'){
+                    $('#marcaCredito').val('');
+                    $('#conCredito').hide();
+                    $('#conDebito').show();
+                }
+
+            }else{
+
+                $('#conTarjeta').hide();
+                $('.inputConTarjeta').val('');
+                $('#marcaCredito').val('');
+                $('#conCredito').hide();
+                $('#marcaDebito').val('');
+                $('#conDebito').hide();
+
+            }
+
+        });
+
+
+    </script>
 
 @endsection
 

@@ -3,6 +3,7 @@
 
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\EstadoCliente;
+use SmartLine\Entities\EstadoVenta;
 use SmartLine\Http\Requests\CreateClienteRequest;
 use Illuminate\Http\Request;
 
@@ -51,8 +52,9 @@ class ClientesController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::find($id);
+        $cliente->editar = true;
         $estados = EstadoCliente::lists('nombre', 'id');
-        return view('clientes.edit', compact('cliente', 'estados'));
+        return view('clientes.show', compact('cliente', 'estados'));
     }
 
     public function update(Request $request, $id)
@@ -74,6 +76,39 @@ class ClientesController extends Controller
         $cliente->save();
 
         return redirect()->back()->with('ok', 'Cliente editado con éxito');
+    }
+
+    public function compras($id)
+    {
+        $cliente = Cliente::find($id);
+        $estadosVentas = EstadoVenta::lists('nombre', 'id');
+
+        return view('clientes.compras', compact('cliente', 'estadosVentas'));
+    }
+
+    public function comprasFiltrar(Request $request, $id)
+    {
+        $cliente = Cliente::find($id);
+        $estadosVentas = EstadoVenta::lists('nombre', 'id');
+
+        if($request->estado != 'todas'){
+            $estado = EstadoVenta::find($request->estado);
+            $compras = $cliente->ventas->where('estado_id', $estado->id);
+            $compras->title = $estado->estado_plural;
+        }else{
+            $compras = $cliente->ventas;
+            $compras->title = 'todas';
+        }
+
+        return view('clientes.compras', compact('cliente', 'compras', 'estadosVentas'));
+    }
+
+    public function llamadas($id)
+    {
+        $cliente = Cliente::find($id);
+        $llamadas = $cliente->llamadas;
+
+        return view('clientes.llamadas', compact('cliente', 'llamadas'));
     }
 
 

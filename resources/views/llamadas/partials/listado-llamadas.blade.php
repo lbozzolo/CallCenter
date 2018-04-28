@@ -15,6 +15,7 @@
             <th class="text-center">Venta</th>
             <th>Archivo</th>
             <th>Observaciones</th>
+            <th>Fecha</th>
             <th>Opciones</th>
         </tr>
         </thead>
@@ -51,9 +52,16 @@
                     @endif
                 @endif
                 </td>
-                <td class="text-center">{!! ($llamada->venta)? $llamada->venta->id : '<small class="text-muted">//</small>' !!}</td>
+                <td class="text-center">
+                    @if($llamada->venta)
+                        #{!! $llamada->venta->id !!}
+                        <a href="{{ route('ventas.show', $llamada->venta->id) }}"><i class="fa fa-info-circle"></i> </a>
+                    @endif
+                    {{--{!! ($llamada->venta)? $llamada->venta->id : '<small class="text-muted">//</small>' !!}--}}
+                </td>
                 <td><a href="">{!! $llamada->url !!}</a></td>
                 <td>{!! $llamada->observaciones !!}</td>
+                <td>{!! $llamada->fecha_creado !!}</td>
                 <td class="text-center">
 
                 </td>

@@ -7,7 +7,10 @@
         <div class="container">
 
             <div class="content">
-                <h2>PRODUCTOS {{ (Request::is('productos/inactivos'.'*') ? 'INACTIVOS' : 'ACTIVOS') }}</h2>
+                <h2>
+                    Productos
+                    <span class="text-muted"> / {{ (Request::is('productos/inactivos'.'*') ? 'Inactivos' : 'Activos') }}</span>
+                </h2>
 
                 @include('productos.partials.navbar')
 

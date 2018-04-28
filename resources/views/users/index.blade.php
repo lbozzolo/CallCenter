@@ -5,7 +5,10 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>USUARIOS habilitados</h2>
+                <h2>
+                    Usuarios
+                    <span class="text-muted"> / Habilitados</span>
+                </h2>
 
                 @include('users.partials.navbar')
 
