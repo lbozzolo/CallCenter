@@ -5,21 +5,24 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>
-                    Usuarios
-                    <span class="text-muted"> / Deshabilitados</span>
-                </h2>
 
-                @include('users.partials.navbar')
-
-                <div class="col-lg-12">
-
-                    <div>
-                        @include('users.partials.usuarios-deshabilitados')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Usuarios<span class="text-muted"> / Deshabilitados</span></h2>
+                        @include('users.partials.navbar')
                     </div>
-
-
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @include('users.partials.usuarios-deshabilitados')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>

@@ -5,19 +5,22 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>
-                    Usuarios
-                    <span class="text-muted"> / Nuevos</span>
-                </h2>
 
-                @include('users.partials.navbar')
-
-                <div class="col-lg-12">
-
-                    <div>
-                        @include('users.partials.usuarios-nuevos')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Usuarios<span class="text-muted"> / Nuevos</span></h2>
+                        @include('users.partials.navbar')
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @include('users.partials.usuarios-nuevos')
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

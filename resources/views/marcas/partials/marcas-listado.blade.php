@@ -1,5 +1,4 @@
 
-
 <ul class="list-group">
     @if(isset($marca))
         <li class="list-group-item text-center">

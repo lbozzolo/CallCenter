@@ -7,9 +7,4 @@ return [
         1 => 'saliente'
     ],
 
-    'CLASE_LLAMADA' => [
-        0 => 'venta',
-        1 => 'reclamo'
-    ],
-
 ];

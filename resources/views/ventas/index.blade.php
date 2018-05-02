@@ -5,19 +5,22 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>
-                    Ventas
-                    <span class="text-muted">/ {!! $ventas->title !!}</span>
-                </h2>
 
-                @include('ventas.partials.navbar')
-
-                <div class="col-lg-12">
-
-                    <div>
-                        @include('ventas.partials.listado-ventas')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Ventas<span class="text-muted">/ {!! $ventas->title !!}</span></h2>
+                        @include('ventas.partials.navbar')
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @include('ventas.partials.listado-ventas')
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

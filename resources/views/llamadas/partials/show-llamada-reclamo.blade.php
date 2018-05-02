@@ -12,10 +12,7 @@
         <small class="text-muted">Resultado</small><br>
         {!! $llamada->resultado->nombre !!}
     </li>
-    <li class="list-group-item">
-        <small class="text-muted">Número de reclamo</small><br>
-        {!! $llamada->reclamo->id !!}
-    </li>
+
     <li class="list-group-item">
         <small class="text-muted">Tipo de llamada</small><br>
         {!! config('sistema.llamadas.TIPO_LLAMADA.'.$llamada->tipo_llamada) !!}

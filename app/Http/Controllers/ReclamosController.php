@@ -28,7 +28,6 @@ class ReclamosController extends Controller
     public function index()
     {
         $reclamos = Reclamo::with('estado', 'venta', 'venta.cliente')->get();
-
          return view('reclamos.index', compact('reclamos'));
     }
 
@@ -143,10 +142,11 @@ class ReclamosController extends Controller
 
     public function descriptionUpdate(Request $request, $id)
     {
-        $this->validate($request, ['descripcion' => 'max:1000',]);
+        $this->validate($request, ['descripcion' => 'max:1000', 'titulo' => 'max:255']);
 
         $reclamo = Reclamo::find($id);
         $reclamo->descripcion = $request->descripcion;
+        $reclamo->titulo = $request->titulo;
         $reclamo->save();
 
         return redirect()->back()->with('ok', 'Descripción editada con éxito');

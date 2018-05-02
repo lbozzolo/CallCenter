@@ -7,19 +7,29 @@
         <div class="container">
 
             <div class="content">
-                <h2>
-                    Reclamos
-                    <span class="text-muted"> / Todos</span>
-                </h2>
+                <div class="row">
+                    <div class="col-lg-12">
 
-                @include('reclamos.partials.navbar')
+                    <h2>
+                        Reclamos
+                        <span class="text-muted"> / Todos</span>
+                    </h2>
 
-                <div class="col-lg-12">
-                    <div>
-                        @include('reclamos.partials.listado-reclamos')
+                    @include('reclamos.partials.navbar')
+
                     </div>
-
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @include('reclamos.partials.listado-reclamos')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>

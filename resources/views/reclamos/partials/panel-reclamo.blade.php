@@ -4,7 +4,7 @@
         <span>RECLAMO N° {!! $reclamoFecha->id !!}</span>
         <label class="{!! ($reclamoFecha->estado->slug == 'abierto')? 'label label-success' : 'label label-danger' !!}">{!! $reclamoFecha->estado->nombre !!}</label>
         <span>{!! $reclamoFecha->fecha_creado !!}</span>
-        <span class="pull-right">
+        <span>
             @if($reclamoFecha->tipo == 'cliente')
                 acerca del producto {!! ucfirst($reclamoFecha->venta->producto->nombre) !!} ({!! $reclamoFecha->venta->producto->marca->nombre !!})
                 <a href="{{ route('productos.show', $reclamoFecha->venta->producto->id) }}" title="Ver Producto"><i class="fa fa-user"></i></a>
@@ -17,15 +17,11 @@
     <div class="panel-body">
         <div>
             <span class="pull-right">
-
                 {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.solucionado', $reclamoFecha->id), 'class' => 'form', 'style' => 'display: inline-block']) !!}
                     @if($reclamoFecha->solucionado == config('sistema.reclamos.SOLUCIONADO.sinsolucion'))
                     <button type="submit" title="Marcar como solucionado" class="btn btn-default btn-sm"><i class="fa fa-check-circle-o"></i></button>
-                    {{--{!! Form::submit('Cerrar reclamo', ['title' => 'Cerrar reclamo', 'class' => 'btn btn-danger']) !!}
-                        <a href="" title="Marcar como solucionado" class="btn btn-default btn-sm"><i class="fa fa-check-circle-o"></i></a>--}}
                     @else
                     <button type="submit" title="Marcar como sin solución" class="btn btn-default btn-sm"><i class="fa fa-exclamation-triangle"></i></button>
-                        {{--<a href="" title="Marcar como sin solución" class="btn btn-default btn-sm"><i class="fa fa-exclamation-triangle"></i></a>--}}
                     @endif
                 {!! Form::close() !!}
 
@@ -66,10 +62,8 @@
                             {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.status', $reclamoFecha->id), 'class' => 'form']) !!}
                             @if($reclamoFecha->estado->slug == 'abierto')
                                 {!! Form::submit('Cerrar reclamo', ['title' => 'Cerrar reclamo', 'class' => 'btn btn-danger']) !!}
-                                {{--<a href="{{ route('reclamos.change.status', $reclamoFecha->id) }}" class="btn btn-danger" title="Cerrar reclamo">Cerrar reclamo</a>--}}
                             @else
                                 {!! Form::submit('Abrir reclamo', ['title' => 'Abrir reclamo', 'class' => 'btn btn-success']) !!}
-                                {{--<a href="{{ route('reclamos.change.status', $reclamoFecha->id) }}" class="btn btn-success" title="Abrir reclamo">Abrir reclamo</a>--}}
                             @endif
                             {!! Form::close() !!}
                         </div>
@@ -77,12 +71,16 @@
                 </div>
             </div>
 
-            <p class="lead">{!! $reclamoFecha->titulo !!}</p>
+            <p class="lead" id="titulo">{!! $reclamoFecha->titulo !!}</p>
             <p id="descripcion">{!! $reclamoFecha->descripcion !!}</p>
             {!! Form::open(['method' => 'put', 'url' => route('reclamos.description.update', $reclamoFecha->id), 'id' => 'formDescripcion','class' => 'form', 'style' => 'display: none']) !!}
 
             <div class="form-group">
-                <small class="text-muted">Editando descripción...</small>
+                {!! Form::label('titulo', 'Título') !!}
+                {!! Form::text('titulo', $reclamoFecha->titulo, ['class' => 'form-control', 'id' => 'inputTitulo']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('descripcion', 'Descripción') !!}
                 {!! Form::textarea('descripcion', $reclamoFecha->descripcion, ['class' => 'form-control', 'rows' => '6']) !!}
                 <small class="text-warning"><i class="fa fa-exclamation-circle"></i> Máximo 1000 caracteres</small>
             </div>

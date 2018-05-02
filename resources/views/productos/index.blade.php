@@ -7,19 +7,28 @@
         <div class="container">
 
             <div class="content">
-                <h2>
-                    Productos
-                    <span class="text-muted"> / {{ (Request::is('productos/inactivos'.'*') ? 'Inactivos' : 'Activos') }}</span>
-                </h2>
 
-                @include('productos.partials.navbar')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>
+                            Productos
+                            <span class="text-muted"> / {{ (Request::is('productos/inactivos'.'*') ? 'Inactivos' : 'Activos') }}</span>
+                        </h2>
 
-                <div class="col-lg-12">
-                    <div>
-                        @include('productos.partials.listado-productos')
+                        @include('productos.partials.navbar')
                     </div>
-
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @include('productos.partials.listado-productos')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>

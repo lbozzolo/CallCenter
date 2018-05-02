@@ -5,19 +5,26 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>Clientes</h2>
-                <hr>
 
-                <div class="col-lg-12">
-
-                    <div class="panel-body">
-                        <a href="{{ route('clientes.create') }}" class="btn btn-default"><i class="fa fa-plus"></i> Agregar cliente</a>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Clientes</h2>
                     </div>
+                </div>
 
-                    <div>
-                        @include('clientes.partials.listado-clientes')
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a href="{{ route('clientes.create') }}" class="btn btn-default"><i class="fa fa-plus"></i> Agregar cliente</a>
+                            </div>
+                            <div class="panel-body">
+                                @include('clientes.partials.listado-clientes')
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
 
             </div>

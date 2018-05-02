@@ -5,19 +5,22 @@
     <div class="row">
         <div class="container">
             <div class="content">
-                <h2>
-                    Llamadas
-                    <span class="text-muted"> / {!! $llamadas->title !!}</span>
-                </h2>
 
-                @include('llamadas.partials.navbar')
-
-                <div class="col-lg-12">
-
-                    <div>
-                        @include('llamadas.partials.listado-llamadas')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Llamadas<span class="text-muted"> / {!! $llamadas->title !!}</span></h2>
+                        @include('llamadas.partials.navbar')
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @include('llamadas.partials.listado-llamadas')
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

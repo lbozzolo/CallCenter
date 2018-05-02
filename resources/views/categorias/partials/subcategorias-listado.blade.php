@@ -1,6 +1,4 @@
 
-
-
 <ul class="list-group">
     @if(isset($categoria))
         <li class="list-group-item text-center">

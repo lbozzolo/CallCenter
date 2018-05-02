@@ -32,7 +32,7 @@ class Llamada extends Entity
 
     public function reclamo()
     {
-        return $this->belongsTo(Reclamo::class, 'id');
+        return $this->belongsTo(Reclamo::class, 'reclamo_id');
     }
 
 }

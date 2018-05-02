@@ -1,6 +1,4 @@
 
-<h3>Roles actuales</h3>
-
 <ul class="list-group">
     @if(isset($role))
         <li class="list-group-item text-center">

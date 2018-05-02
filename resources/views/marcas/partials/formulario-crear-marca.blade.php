@@ -1,4 +1,4 @@
-<h3>Agregar nueva marca</h3>
+
 {!! Form::open(['method' => 'post', 'url' => route('marcas.store'), 'class' => 'form']) !!}
 
 <div class="form-group">

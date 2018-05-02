@@ -1,4 +1,4 @@
-<h3>Agregar nueva categoria</h3>
+
 {!! Form::open(['method' => 'post', 'url' => route('categorias.store'), 'class' => 'form']) !!}
 
 {!! Form::hidden('subcategoria', false) !!}

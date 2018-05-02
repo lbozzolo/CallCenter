@@ -1,4 +1,4 @@
-<h3>Agregar nueva institución</h3>
+
 {!! Form::open(['method' => 'post', 'url' => route('instituciones.store'), 'class' => 'form']) !!}
 
 <div class="form-group">
