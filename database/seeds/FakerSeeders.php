@@ -12,12 +12,13 @@ class FakerSeeders extends Seeder
     public function run()
     {
 
+        $this->call(FakerMarcasSeeder::class);
         $this->call(FakerUsersSeeder::class);
         $this->call(FakerClientesSeeder::class);
         $this->call(FakerProductosSeeder::class);
         $this->call(FakerVentasSeeder::class);
-        $this->call(FakerLlamadasSeeder::class);
         $this->call(FakerReclamosSeeder::class);
+        $this->call(FakerLlamadasSeeder::class);
 
     }
 }

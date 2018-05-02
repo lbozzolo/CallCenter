@@ -49,12 +49,6 @@
                         {!! Form::radio('estado_id', $estados[0], true) !!}
                         {!! Form::label('estado_id', 'Inactivo') !!}
                         {!! Form::radio('estado_id', $estados[1], false) !!}
-                        {{--@foreach($estados as $key => $value)
-                            <label class="radio-inline">
-                                <input type="radio" selected="selected" name="estado_id" value="{!! $key !!}" >
-                                {!! $value !!}
-                            </label>
-                        @endforeach--}}
                     </div>
                     <div class="form-group" id="fechasInicioFinalizacion" >
                         <div class="row">
@@ -103,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('marca_id', 'Marca') !!}
-                        {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                        {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select22', 'placeholder' => '']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('referencia', 'Referencia') !!}
@@ -135,6 +129,7 @@
         });
 
         $('.select2').select2({multiple: true});
+        $('.select22').select2();
 
        /* $('#divEstado input').click(function(){
 

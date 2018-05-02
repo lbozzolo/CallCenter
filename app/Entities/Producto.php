@@ -4,6 +4,8 @@ namespace SmartLine\Entities;
 
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class Producto extends Entity
 {
@@ -14,6 +16,26 @@ class Producto extends Entity
     protected $fillable = ['nombre', 'descripcion', 'fecha_inicio', 'fecha_finalizacion', 'estado_id', 'unidad_medida_id', 'cantidad_medida', 'stock', 'alerta_stock', 'categoria_id', 'precio', 'marca_id', 'referencia', 'institucion_id', 'etapa_id', 'created_at', 'updated_at'];
     protected $dates = ['deleted_at'];
 
+
+    public function getReclamosAttribute()
+    {
+        return DB::table('productos')
+            ->join('ventas', 'productos.id', '=', 'ventas.producto_id')
+            ->join('reclamos', 'ventas.id', '=', 'reclamos.venta_id')
+            ->where('productos.id', '=', $this->id)
+            ->select('productos.nombre', 'productos.id as productoId', 'reclamos.*')
+            ->get();
+    }
+
+    public function getFechaInicioFormattedAttribute()
+    {
+        return Carbon::parse($this->fecha_inicio)->format('m/d/Y');
+    }
+
+    public function getFechaFinalizacionFormattedAttribute()
+    {
+        return Carbon::parse($this->fecha_finalizacion)->format('m/d/Y');
+    }
 
     //Relationships
 

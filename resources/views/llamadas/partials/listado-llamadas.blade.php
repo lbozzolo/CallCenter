@@ -12,7 +12,11 @@
             <th>Operador</th>
             <th>Cliente</th>
             <th>Resultado</th>
-            <th class="text-center">Venta</th>
+            @if($llamadas->title != 'Reclamos')
+                <th class="text-center">Venta</th>
+            @else
+                <th class="text-center">Reclamo</th>
+            @endif
             <th>Archivo</th>
             <th>Observaciones</th>
             <th>Fecha</th>
@@ -53,11 +57,20 @@
                 @endif
                 </td>
                 <td class="text-center">
-                    @if($llamada->venta)
-                        #{!! $llamada->venta->id !!}
-                        <a href="{{ route('ventas.show', $llamada->venta->id) }}"><i class="fa fa-info-circle"></i> </a>
+
+
+                    @if($llamada->venta_id)
+                        #{!! $llamada->venta_id !!}
+                        <a href="{{ route('ventas.show', $llamada->venta_id) }}"><i class="fa fa-info-circle"></i> </a>
                     @endif
-                    {{--{!! ($llamada->venta)? $llamada->venta->id : '<small class="text-muted">//</small>' !!}--}}
+
+
+                    @if($llamada->reclamo_id)
+                        #{!! $llamada->reclamo_id !!}
+                        <a href="{{ route('reclamos.show', $llamada->reclamo_id) }}"><i class="fa fa-info-circle"></i> </a>
+                    @endif
+
+
                 </td>
                 <td><a href="">{!! $llamada->url !!}</a></td>
                 <td>{!! $llamada->observaciones !!}</td>

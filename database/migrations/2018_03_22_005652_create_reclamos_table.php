@@ -17,7 +17,8 @@ class CreateReclamosTable extends Migration
 
             $table->increments('id');
             $table->integer('venta_id')->unsigned();
-            $table->string('descripcion');
+            $table->string('titulo');
+            $table->string('descripcion', 1000);
             $table->integer('estado_id')->unsigned();
             $table->tinyInteger('solucionado');
             $table->integer('owner_id')->unsigned();

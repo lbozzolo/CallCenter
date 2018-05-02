@@ -10,6 +10,7 @@
         <tr>
             <th>Id</th>
             <th>Nombre</th>
+            <th>Marca</th>
             <th>Descripcion</th>
             <th>Categorías</th>
             <th>Estado</th>
@@ -26,6 +27,7 @@
             <tr>
                 <td>{!! $producto->id !!}</td>
                 <td>{!! $producto->nombre !!}</td>
+                <td>{!! $producto->marca->nombre !!}</td>
                 <td>{!! $producto->descripcion !!}</td>
                 <td>
                 @foreach($producto->categorias as $categoria)

@@ -35,7 +35,10 @@
                 <td>
                     #<a href="{{ route('ventas.show', $reclamo->venta->id) }}">{!! $reclamo->venta->id !!} <i class="fa fa-info-circle"></i> </a>
                 </td>
-                <td>{!! $reclamo->venta->producto->nombre !!}</td>
+                <td>
+                    {!! $reclamo->venta->producto->nombre !!}<br>
+                    <small class="text-muted">({!! $reclamo->venta->producto->marca->nombre !!})</small>
+                </td>
                 <td>
                     <a href="{{ route('clientes.show', $reclamo->venta->cliente->id) }}">
                         {!! $reclamo->venta->cliente->full_name !!}

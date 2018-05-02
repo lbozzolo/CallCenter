@@ -77,7 +77,22 @@
                 <div class="col-lg-6 col-md-6">
 
                     <h3>Modificar stock</h3>
-                    
+                    {!! Form::open(['url' => route('productos.update.stock', $producto->id), 'method' => 'put', 'class' => 'form']) !!}
+
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            {!! Form::number('stock', $producto->stock,['class' => 'form-control']) !!}
+                            <span class="input-group-btn">
+                                {!! Form::submit('Guardar', ['class' => 'btn btn-info btn-flag']) !!}
+                            </span>
+                        </div>
+                    </div>
+                    {{--<div class="form-group">
+                        {!! Form::label('stock', 'Stock') !!}
+                        {!! Form::number('stock', $producto->stock, ['class' => 'form-control']) !!}
+                    </div>
+                    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}--}}
+                    {!! Form::close() !!}
 
                     <h3>Agregar imagen</h3>
                     <div class="formularioFoto">
@@ -90,7 +105,7 @@
                                 {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputImagen']) !!}
                                 <span class="input-group-btn">
                                 {!! Form::submit('Subir', ['class' => 'btn btn-info btn-flag']) !!}
-                            </span>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group" id="titleDescription" style="display:none">

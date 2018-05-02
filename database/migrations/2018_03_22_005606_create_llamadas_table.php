@@ -20,6 +20,7 @@ class CreateLlamadasTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('resultado_id')->unsigned();
             $table->integer('venta_id')->unsigned()->nullable();
+            $table->integer('reclamo_id')->unsigned()->nullable();
             $table->tinyInteger('tipo_llamada');
             $table->tinyInteger('clase_llamada');
             $table->string('url');
@@ -33,6 +34,7 @@ class CreateLlamadasTable extends Migration
             $table->index('user_id');
             $table->index('resultado_id');
             $table->index('venta_id');
+            $table->index('reclamo_id');
         });
     }
 

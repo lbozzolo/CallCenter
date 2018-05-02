@@ -3,6 +3,8 @@
 use Illuminate\Database\Eloquent\SoftDeletes;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\EstadoProducto;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProductoRepo extends BaseRepo
 {
@@ -51,6 +53,26 @@ class ProductoRepo extends BaseRepo
         }
 
         return $message;
+    }
+
+    public function getProductoWithReclamos($id)
+    {
+
+        $productos = DB::table('productos')
+            ->join('ventas', 'productos.id', '=', 'ventas.producto_id')
+            ->join('reclamos', 'ventas.id', '=', 'reclamos.venta_id')
+            ->where('productos.id', '=', $id)
+            ->select('productos.nombre', 'productos.id as productoId', 'reclamos.*')
+            ->orderBy('created_at')
+            ->get();
+
+        foreach($productos as $producto){
+            $producto->created_at = Carbon::parse($producto->created_at)->format('d/m/Y');
+            $producto->updated_at = Carbon::parse($producto->updated_at)->format('d/m/Y');
+        }
+
+        return $productos;
+
     }
 
 

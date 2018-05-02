@@ -54,11 +54,11 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 {!! Form::label('fecha_inicio', 'Fecha de inicio') !!}
-                                {!! Form::text('fecha_inicio', null, ['class' => 'form-control datepicker', 'id' => 'fechaInicio']) !!}
+                                {!! Form::text('fecha_inicio', $producto->fecha_inicio_formatted, ['class' => 'form-control datepicker', 'id' => 'fechaInicio']) !!}
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 {!! Form::label('fecha_finalizacion', 'Fecha de finalización') !!}
-                                {!! Form::text('fecha_finalizacion', null, ['class' => 'form-control datepicker', 'id' => 'fechaFinalizacion']) !!}
+                                {!! Form::text('fecha_finalizacion', $producto->fecha_finalizacion_formatted, ['class' => 'form-control datepicker', 'id' => 'fechaFinalizacion']) !!}
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('marca_id', 'Marca') !!}
-                        {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                        {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select22', 'placeholder' => '']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('referencia', 'Referencia') !!}
@@ -131,6 +131,8 @@
         });
 
         $('.select2').select2({multiple: true});
+        $('.select22').select2();
+
 
         $( '#categorias' ).change(function( event ) {
             event.preventDefault();

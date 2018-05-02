@@ -5,6 +5,7 @@ use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\Etapa;
 use SmartLine\Entities\Institucion;
 use SmartLine\Entities\Promocion;
+use SmartLine\Entities\Reclamo;
 use SmartLine\Entities\UnidadMedida;
 use SmartLine\Http\Requests\CreateProductoRequest;
 use SmartLine\Entities\Producto;
@@ -52,14 +53,14 @@ class ProductosController extends Controller
             return redirect()->back()->withErrors('La categoría es obligatoria');
         }
 
-        /*$fechaInicio = date('d/m/Y', strtotime($request->fecha_inicio));
-        $fechaFinalizacion = date('d/m/Y', strtotime($request->fecha_finalizacion));*/
+        $fechaInicio = date('Y/m/d', strtotime($request->fecha_inicio));
+        $fechaFinalizacion = date('Y/m/d', strtotime($request->fecha_finalizacion));
 
         $producto = Producto::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
-            'fecha_inicio' => ($request->fecha_inicio)? $request->fecha_inicio : null,
-            'fecha_finalizacion' => ($request->fecha_finalizacion)? $request->fecha_finalizacion : null,
+            'fecha_inicio' => ($request->fecha_inicio)? $fechaInicio : null,
+            'fecha_finalizacion' => ($request->fecha_finalizacion)? $fechaFinalizacion : null,
             'unidad_medida_id' => ($request->unidad_medida_id)? $request->unidad_medida_id : null,
             'cantidad_medida' => $request->cantidad_medida,
             'stock' => $request->stock,
@@ -109,10 +110,13 @@ class ProductosController extends Controller
     {
         $producto = Producto::find($id);
 
+        $fechaInicio = date('Y/m/d', strtotime($request->fecha_inicio));
+        $fechaFinalizacion = date('Y/m/d', strtotime($request->fecha_finalizacion));
+
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
-        $producto->fecha_inicio = ($request->fecha_inicio)? $request->fecha_inicio : null;
-        $producto->fecha_finalizacion = ($request->fecha_finalizacion)? $request->fecha_finalizacion : null;
+        $producto->fecha_inicio = ($request->fecha_inicio)? $fechaInicio : null;
+        $producto->fecha_finalizacion = ($request->fecha_finalizacion)? $fechaFinalizacion : null;
         $producto->estado_id = $request->estado_id;
         $producto->unidad_medida_id = $request->unidad_medida_id;
         $producto->cantidad_medida = $request->cantidad_medida;
@@ -127,6 +131,15 @@ class ProductosController extends Controller
         $producto->save();
 
         return redirect()->route('productos.index')->with('ok', 'Producto editado con éxito');
+    }
+
+    public function updateStock(Request $request, $id)
+    {
+        $producto = Producto::find($id);
+        $producto->stock = $request->stock;
+        $producto->save();
+
+        return redirect()->back()->with('ok', 'Stock modificado con éxito');
     }
 
     public function etapas($id)

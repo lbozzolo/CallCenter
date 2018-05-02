@@ -14,3 +14,8 @@ Route::get('llamadas/reclamos', [
     'as' => 'llamadas.index.reclamos',
     'uses' => 'LlamadasController@indexReclamos'
 ]);
+
+Route::get('llamadas/{id}', [
+    'as' => 'llamadas.show',
+    'uses' => 'LlamadasController@show'
+]);

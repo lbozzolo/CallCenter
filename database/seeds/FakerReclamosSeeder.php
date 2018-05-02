@@ -33,6 +33,7 @@ class FakerReclamosSeeder extends Seeder
             $fecha = $faker->dateTime;
             Reclamo::create([
                 'venta_id' => ($ventas->count() > 0)? $ventas->random()->id : null,
+                'titulo' => $faker->text(30),
                 'descripcion' => $faker->text,
                 'producto_id' => ($productos->count() > 0)? $productos->random()->id : null,
                 'estado_id' => ($estadosReclamos->count() > 0)? $estadosReclamos->random()->id : null,

@@ -45,6 +45,11 @@ Route::put('productos/{id}/actualizar', [
     'uses' => 'ProductosController@update'
 ]);
 
+Route::put('productos/{id}/actualizar-stock', [
+    'as' => 'productos.update.stock',
+    'uses' => 'ProductosController@updateStock'
+]);
+
 Route::delete('productos/{id}/eliminar', [
     'as' => 'productos.destroy',
     'uses' => 'ProductosController@destroy'

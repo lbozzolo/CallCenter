@@ -19,8 +19,10 @@ class LlamadasController extends Controller
      */
     public function index()
     {
-        $llamadas = Llamada::where('tipo_llamada', 1)->get();
+        //$llamadas = Llamada::where('tipo_llamada', 1)->get();
+        $llamadas = Llamada::whereNull('reclamo_id')->where('tipo_llamada', 1)->get();
         $llamadas->title = 'Salientes';
+
         return view('llamadas.index', compact('llamadas'));
     }
 
@@ -31,7 +33,8 @@ class LlamadasController extends Controller
      */
     public function indexEntrantes()
     {
-        $llamadas = Llamada::where('tipo_llamada', 0)->where('clase_llamada', 0)->get();
+        //$llamadas = Llamada::where('tipo_llamada', 0)->where('clase_llamada', 0)->get();
+        $llamadas = Llamada::whereNull('reclamo_id')->where('tipo_llamada', 0)->get();
         $llamadas->title = 'Entrantes';
         return view('llamadas.index', compact('llamadas'));
     }
@@ -43,8 +46,10 @@ class LlamadasController extends Controller
      */
     public function indexReclamos()
     {
-        $llamadas = Llamada::where('clase_llamada', 1)->get();
+        //$llamadas = Llamada::where('clase_llamada', 1)->get();
+        $llamadas = Llamada::whereNotNull('reclamo_id')->get();
         $llamadas->title = 'Reclamos';
+
         return view('llamadas.index', compact('llamadas'));
     }
 
@@ -77,7 +82,9 @@ class LlamadasController extends Controller
      */
     public function show($id)
     {
-        //
+        $llamada = Llamada::find($id);
+
+        return view('llamadas.show', compact('llamada'));
     }
 
     /**

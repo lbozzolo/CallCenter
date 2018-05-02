@@ -8,7 +8,7 @@ use SmartLine\User;
 class Reclamo extends Entity
 {
     protected $table = 'reclamos';
-    protected $fillable = ['venta_id', 'descripcion', 'estado_id', 'solucionado', 'owner_id', 'derivador_id', 'responsable_id', 'created_at', 'updated_at'];
+    protected $fillable = ['venta_id', 'titulo', 'descripcion', 'estado_id', 'solucionado', 'owner_id', 'derivador_id', 'responsable_id', 'created_at', 'updated_at'];
 
     // Relationships
     public function venta()
@@ -34,6 +34,11 @@ class Reclamo extends Entity
     public function responsable()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function llamadas()
+    {
+        return $this->hasMany(Llamada::class);
     }
 
 }
