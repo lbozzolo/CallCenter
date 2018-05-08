@@ -20,6 +20,11 @@ Route::get('ventas/{id}/ver', [
     'uses' => 'VentasController@show'
 ]);
 
+Route::get('ventas-cliente/{id}/ver', [
+    'as' => 'ventas.show.cliente.ventas',
+    'uses' => 'VentasController@showClienteVentas'
+]);
+
 Route::get('ventas/{id}/editar', [
     'as' => 'ventas.edit',
     'uses' => 'VentasController@edit'

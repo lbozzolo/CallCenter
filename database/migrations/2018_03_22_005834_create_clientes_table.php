@@ -18,7 +18,6 @@ class CreateClientesTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('direccion');
             $table->string('telefono');
             $table->string('celular');
             $table->string('email');

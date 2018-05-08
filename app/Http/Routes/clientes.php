@@ -31,7 +31,6 @@ Route::put('clientes/{id}/actualizar', [
 ]);
 
 //Rutas de relaciones
-
 Route::get('clientes/{id}/compras', [
     'as' => 'clientes.compras',
     'uses' => 'ClientesController@compras'

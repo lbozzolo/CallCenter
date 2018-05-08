@@ -220,6 +220,29 @@ class CreateForeignKeys extends Migration
                 ->onDelete('NO ACTION');
         });
 
+        Schema::table('domicilios', function(Blueprint $table){
+            $table->foreign('localidad_id')
+                ->references('id')
+                ->on('tbl_localidades')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+            $table->foreign('partido_id')
+                ->references('id')
+                ->on('tbl_partidos')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+            $table->foreign('provincia_id')
+                ->references('id')
+                ->on('tbl_provincias')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+        });
+
         Schema::table('clientes', function(Blueprint $table){
             $table->foreign('estado_id')
                 ->references('id')

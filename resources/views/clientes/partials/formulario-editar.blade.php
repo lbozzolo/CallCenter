@@ -9,10 +9,6 @@
     {!! Form::text('apellido', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('direccion', 'Dirección') !!}
-    {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
-</div>
-<div class="form-group">
     {!! Form::label('telefono', 'Teléfono') !!}
     {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
 </div>
@@ -46,6 +42,71 @@
         {!! Form::select('estado_id', $estados, null, ['class' => 'form-control']) !!}
     </div>
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="panel-title">Domicilio</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    {!! Form::label('calle', 'Calle') !!}
+                    {!! Form::text('calle', ($cliente->domicilio)? $cliente->domicilio->calle : null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    {!! Form::label('numero', 'Número') !!}
+                    {!! Form::number('numero', ($cliente->domicilio)? $cliente->domicilio->numero : null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    {!! Form::label('piso', 'Piso') !!}
+                    {!! Form::number('piso', ($cliente->domicilio)? $cliente->domicilio->piso : null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    {!! Form::label('departamento', 'Departamento') !!}
+                    {!! Form::text('departamento', ($cliente->domicilio)? $cliente->domicilio->departamento : null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    {!! Form::label('codigo_postal', 'Código Postal') !!}
+                    {!! Form::number('codigo_postal', ($cliente->domicilio)? $cliente->domicilio->codigo_postal : null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('entre_calles', 'Entre Calles') !!}
+            {!! Form::text('entre_calles', ($cliente->domicilio)? $cliente->domicilio->entre_calles : null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('provincia', 'Provincia') !!}
+            {!! Form::select('provincia', $provincias, ($cliente->domicilio)? $cliente->domicilio->provincia->id : null, ['class' => 'form-control select2', 'id' => 'provincia']) !!}
+        </div>
+
+
+        <div class="form-group" id="partidoDiv">
+            @if(isset($partidos))
+            {!! Form::label('partido', 'Partido', ['id' => 'partidoLabel']) !!}
+            {!! Form::select('partido', $partidos, $cliente->domicilio->partido->id, ['class' => 'form-control']) !!}
+            @endif
+        </div>
+
+        <div class="form-group" id="localidadDiv">
+            @if(isset($localidades))
+            {!! Form::label('localidad', 'Localidad', ['id' => 'localidadLabel']) !!}
+            {!! Form::select('localidad', $localidades, $cliente->domicilio->localidad->id, ['class' => 'form-control']) !!}
+            @endif
+        </div>
+
+    </div>
+</div>
+
 
 
 

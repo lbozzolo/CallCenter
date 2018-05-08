@@ -24,7 +24,8 @@ class DashboardController extends Controller
     {
         $clientes = Cliente::all();
 
-        dd($clientes);
+
+        dd(storage_path('app\database\localidades_partidos_provincias_seeder.sql'));
     }
 
 }

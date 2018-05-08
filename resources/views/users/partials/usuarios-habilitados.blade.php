@@ -29,8 +29,8 @@
                 </td>
                 <td class="text-center">@include('users.partials.labels-roles')</td>
                 <td>{!! $user->email !!}</td>
-                <td>{!! $user->telefono !!}</td>
-                <td>{!! $user->dni !!}</td>
+                <td>{!! ($user->telefono)? $user->telefono : '---' !!}</td>
+                <td>{!! ($user->dni)? $user->dni : '---' !!}</td>
                 <td>{!! $user->estado->nombre !!}</td>
                 <td class="text-center">
 

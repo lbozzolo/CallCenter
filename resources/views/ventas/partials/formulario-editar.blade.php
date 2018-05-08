@@ -63,6 +63,6 @@
 @endif
 
 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-<a href="{{ route('ventas.index') }}" class="btn btn-default">Cancelar</a>
+<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
 
 {!! Form::close() !!}

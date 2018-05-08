@@ -79,6 +79,21 @@ class VentasController extends Controller
         return view('ventas.show')->with($data);
     }
 
+    public function showClienteVentas($id)
+    {
+        $data['venta'] = Venta::find($id);
+        $data['cliente'] = $data['venta']->cliente;
+        $producto = $data['venta']->producto;
+        $data['etapas'] = $producto->etapas->lists('nombre', 'id');
+        $data['marcas'] = MarcaTarjeta::all();
+        $data['bancos'] = Banco::lists('nombre', 'id');
+        $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
+        $data['promociones'] = Promocion::lists('nombre', 'id');
+        $data['estados'] = EstadoVenta::lists('nombre', 'id');
+
+        return view('clientes.show-ventas')->with($data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

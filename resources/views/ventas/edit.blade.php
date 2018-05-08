@@ -28,7 +28,7 @@
                                     {!! Form::select('promocion_id', $promociones, null, ['class' => 'form-control']) !!}
                                 </div>
                                 {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-                                <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-default">Cerrar</a>
+                                <a href="{{ URL::previous() }}" class="btn btn-default">Cerrar</a>
 
                                 {!! Form::close() !!}
                             </div>

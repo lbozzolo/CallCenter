@@ -26,7 +26,6 @@ class FakerClientesSeeder extends Seeder
             Cliente::create([
                 'nombre' => $faker->name,
                 'apellido' => $faker->lastName,
-                'direccion' => $faker->address,
                 'telefono' => $faker->phoneNumber,
                 'celular' => $faker->phoneNumber,
                 'email' => $faker->email,

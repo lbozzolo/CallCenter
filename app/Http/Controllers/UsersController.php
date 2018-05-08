@@ -11,6 +11,7 @@ use SmartLine\Http\Repositories\UserRepo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Mockery\Exception;
 
 class UsersController extends Controller
 {

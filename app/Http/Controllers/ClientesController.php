@@ -2,13 +2,25 @@
 
 
 use SmartLine\Entities\Cliente;
+use SmartLine\Entities\Domicilio;
 use SmartLine\Entities\EstadoCliente;
 use SmartLine\Entities\EstadoVenta;
+use SmartLine\Entities\Partido;
+use SmartLine\Entities\Provincia;
+use SmartLine\Entities\Localidad;
 use SmartLine\Http\Requests\CreateClienteRequest;
 use Illuminate\Http\Request;
+use SmartLine\Http\Repositories\ClienteRepo;
 
 class ClientesController extends Controller
 {
+
+    protected $clienteRepo;
+
+    public function __construct(ClienteRepo $clienteRepo)
+    {
+        $this->clienteRepo = $clienteRepo;
+    }
 
     public function index()
     {
@@ -46,6 +58,7 @@ class ClientesController extends Controller
     public function show($id)
     {
         $cliente = Cliente::find($id);
+
         return view('clientes.show', compact('cliente'));
     }
 
@@ -54,16 +67,35 @@ class ClientesController extends Controller
         $cliente = Cliente::find($id);
         $cliente->editar = true;
         $estados = EstadoCliente::lists('nombre', 'id');
-        return view('clientes.show', compact('cliente', 'estados'));
+        $provincias = Provincia::lists('provincia', 'id');
+
+        if($cliente->domicilio){
+            $provinciaCliente = Provincia::find($cliente->domicilio->provincia->id);
+            $partidoCliente = Partido::find($cliente->domicilio->partido->id);
+
+            $partidos = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
+            $localidades = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
+        }
+
+        //return view('clientes.show', compact('cliente', 'estados', 'provincias', 'partidos', 'localidades'));
+        return view('clientes.edit', compact('cliente', 'estados', 'provincias', 'partidos', 'localidades'));
+    }
+
+    public function selectAddress(Request $request)
+    {
+        $data = $request->all();
+        return response()->json($data);
+
     }
 
     public function update(Request $request, $id)
     {
         $cliente = Cliente::find($id);
 
+        $this->clienteRepo->updateOrCreateDomicilio($id, $request->all());
+
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;
-        $cliente->direccion = $request->direccion;
         $cliente->telefono = $request->telefono;
         $cliente->celular = $request->celular;
         $cliente->email = $request->email;
