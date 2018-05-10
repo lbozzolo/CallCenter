@@ -59,3 +59,8 @@ Route::get('productos/{id}/cambiar-estado', [
     'as' => 'productos.change.state',
     'uses' => 'ProductosController@changeState'
 ]);
+
+Route::get('productos/{id}/imagenes', [
+    'as' => 'productos.imagenes',
+    'uses' => 'ProductosController@adminImagenes'
+]);

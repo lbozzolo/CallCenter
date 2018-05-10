@@ -19,7 +19,7 @@ class CreateDatosTarjetaTable extends Migration
             $table->integer('venta_id')->unsigned();
             $table->integer('marca_id')->unsigned()->nullable();
             $table->integer('banco_id')->unsigned()->nullable();
-            $table->integer('numero_tarjeta');
+            $table->string('numero_tarjeta', 16);
             $table->dateTime('fecha_expiracion');
             $table->string('titular', 100);
             $table->integer('codigo_seguridad');

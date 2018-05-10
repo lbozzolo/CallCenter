@@ -167,6 +167,12 @@ class ProductosController extends Controller
         return redirect()->back()->with('ok', 'Etapa creada con éxito');
     }
 
+    public function adminImagenes($id)
+    {
+        $producto = Producto::find($id);
+        return view('productos.imagenes', compact('producto'));
+    }
+
     public function destroy($id)
     {
         $producto = Producto::find($id);

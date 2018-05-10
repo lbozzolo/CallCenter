@@ -88,6 +88,12 @@
 
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
+                                            <div class="pull-right">
+                                                <a href="{{ route('productos.etapas', 1) }}">Configurar etapas</a> |
+                                                <a href="{{ route('productos.imagenes', 1) }}">Administrar imágenes</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             {!! Form::label('precio', 'Precio') !!}
                                             {!! Form::number('precio', null, ['class' => 'form-control']) !!}
                                         </div>

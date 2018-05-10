@@ -14,6 +14,7 @@ use SmartLine\Entities\Promocion;
 use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\VentaRepo;
 use SmartLine\Entities\Banco;
+use SmartLine\Entities\ValidateCreditCard;
 
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
@@ -120,29 +121,36 @@ class VentasController extends Controller
     public function update(Request $request, $id)
     {
         $venta = Venta::find($id);
-
         $venta->etapa_id = ($request->etapa_id)? $request->etapa_id : null;
         $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
         $venta->metodo_pago_id = $request->metodo_pago_id;
-
-        // Datos de tarjeta
-        $datosTarjeta = $venta->datosTarjeta;
         $metodoPago = MetodoPago::find($request->metodo_pago_id);
-        $marcaTarjeta = ($metodoPago->slug == 'credito')? $request->marca_id_credito : $request->marca_id_debito;
-        $fechaExpiracion = Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString();
 
-        $datosTarjeta->marca_id = ($marcaTarjeta)? $marcaTarjeta : null;
-        $datosTarjeta->tipo_tarjeta = 0;
-        $datosTarjeta->banco_id = ($request->banco_id)? $request->banco_id : null;
-        $datosTarjeta->numero_tarjeta = ($request->numero_tarjeta)? $request->numero_tarjeta : null;
-        $datosTarjeta->fecha_expiracion = ($fechaExpiracion)? $fechaExpiracion : null;
-        $datosTarjeta->titular = ($request->titular)? $request->titular : null;
-        $datosTarjeta->codigo_seguridad = ($request->codigo_seguridad)? $request->codigo_seguridad : null;
+        if($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito'){
+
+            // Datos de tarjeta
+            $datosTarjeta = ($venta->datosTarjeta)? $venta->datosTarjeta : new DatoTarjeta();
+            $marcaTarjeta = ($metodoPago->slug == 'credito')? $request->marca_id_credito : $request->marca_id_debito;
+            $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+            $credit_card_user = $request->numero_tarjeta;
+            $validacion = ValidateCreditCard::validateFormatCreditCard($credit_card_user);
+            $luhn = ValidateCreditCard::calculateLuhn($credit_card_user);
+
+            if(!$validacion || !$luhn)
+                return redirect()->back()->withErrors('Tarjeta inválida. Revise los datos ingresados');
+
+            $datosTarjeta->marca_id = ($marcaTarjeta)? $marcaTarjeta : null;
+            $datosTarjeta->banco_id = ($request->banco_id)? $request->banco_id : null;
+            $datosTarjeta->numero_tarjeta = ($request->numero_tarjeta)? $request->numero_tarjeta : null;
+            $datosTarjeta->fecha_expiracion = ($fechaExpiracion)? $fechaExpiracion : null;
+            $datosTarjeta->titular = ($request->titular)? $request->titular : null;
+            $datosTarjeta->codigo_seguridad = ($request->codigo_seguridad)? $request->codigo_seguridad : null;
+
+            $datosTarjeta->venta()->associate($venta);
+            $datosTarjeta->save();
+        }
 
         $venta->save();
-
-        $datosTarjeta->venta()->associate($venta);
-        $datosTarjeta->save();
 
         return redirect()->back()->with('ok', 'Venta editada con éxito');
     }
