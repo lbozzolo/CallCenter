@@ -7,10 +7,26 @@
         <div class="container">
             <div class="content">
 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>
+                            Productos
+                            <span class="text-muted">
+                                / {!! $producto->nombre !!}
+                                @if($producto->marca)
+                                    ({!! $producto->marca->nombre !!})
+                                @endif
+                            </span>
+                        </h2>
+
+                        @include('productos.partials.navbar')
+                    </div>
+                </div>
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <small class="text-muted">Editar producto</small>
-                        <h2 class="panel-title">{!! $producto->nombre !!}</h2>
+                        <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-times"></i> Cerrar</a>
+                        <h2 class="panel-title">Editar producto - {!! $producto->nombre !!}</h2>
                     </div>
                     <div class="panel-body">
                         <div class="col-lg-6 col-md-6">

@@ -27,7 +27,7 @@
             <tr>
                 <td>{!! $producto->id !!}</td>
                 <td>{!! $producto->nombre !!}</td>
-                <td>{!! $producto->marca->nombre !!}</td>
+                <td>{!! ($producto->marca)? $producto->marca->nombre : '' !!}</td>
                 <td>{!! $producto->descripcion !!}</td>
                 <td>
                 @foreach($producto->categorias as $categoria)

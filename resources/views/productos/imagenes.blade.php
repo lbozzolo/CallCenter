@@ -78,8 +78,13 @@
                                             </div>
                                         </div>
                                     </li>
+
                                     @endforeach
                                 </ul>
+                            @else
+
+                                <span class="text-muted">Este producto todavía no tiene imágenes.</span>
+
                             @endif
 
                         </div>

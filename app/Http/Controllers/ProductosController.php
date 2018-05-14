@@ -1,12 +1,14 @@
 <?php namespace SmartLine\Http\Controllers;
 
 
+use Carbon\Carbon;
 use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\Etapa;
 use SmartLine\Entities\Institucion;
 use SmartLine\Entities\Promocion;
 use SmartLine\Entities\Reclamo;
 use SmartLine\Entities\UnidadMedida;
+use SmartLine\Http\Requests\CreateEtapaRequest;
 use SmartLine\Http\Requests\CreateProductoRequest;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\Marca;
@@ -53,8 +55,8 @@ class ProductosController extends Controller
             return redirect()->back()->withErrors('La categoría es obligatoria');
         }
 
-        $fechaInicio = date('Y/m/d', strtotime($request->fecha_inicio));
-        $fechaFinalizacion = date('Y/m/d', strtotime($request->fecha_finalizacion));
+        $fechaInicio = Carbon::createFromFormat('d/m/Y', $request->fecha_inicio)->toDateTimeString();
+        $fechaFinalizacion = Carbon::createFromFormat('d/m/Y', $request->fecha_finalizacion)->toDateTimeString();
 
         $producto = Producto::create([
             'nombre' => $request->nombre,
@@ -71,6 +73,7 @@ class ProductosController extends Controller
             'institucion_id' => $request->institucion_id,
         ]);
 
+
         if($request->categoria_id){
             foreach(array_filter($request->categoria_id) as $categoria){
                 $producto->categorias()->attach($categoria);
@@ -83,7 +86,8 @@ class ProductosController extends Controller
             }
         }
 
-        return redirect()->route('productos.index')->with('ok', 'Producto creado con éxito');
+        //return redirect()->route('productos.index')->with('ok', 'Producto creado con éxito');
+        return view('productos.pos-create', compact('producto'))->with('ok', 'Producto creado con éxito');
     }
 
     public function show($id)
@@ -110,8 +114,8 @@ class ProductosController extends Controller
     {
         $producto = Producto::find($id);
 
-        $fechaInicio = date('Y/m/d', strtotime($request->fecha_inicio));
-        $fechaFinalizacion = date('Y/m/d', strtotime($request->fecha_finalizacion));
+        $fechaInicio = Carbon::createFromFormat('d/m/Y', $request->fecha_inicio)->toDateTimeString();
+        $fechaFinalizacion = Carbon::createFromFormat('d/m/Y', $request->fecha_finalizacion)->toDateTimeString();
 
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
@@ -148,7 +152,7 @@ class ProductosController extends Controller
         return view('productos.etapas', compact('producto'));
     }
 
-    public function etapasStore(Request $request, $id)
+    public function etapasStore(CreateEtapaRequest $request, $id)
     {
         $producto = Producto::find($id);
         $ultimaEtapa = $producto->etapas->last();

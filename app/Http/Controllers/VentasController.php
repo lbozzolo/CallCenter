@@ -133,12 +133,15 @@ class VentasController extends Controller
             $marcaTarjeta = ($metodoPago->slug == 'credito')? $request->marca_id_credito : $request->marca_id_debito;
             $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
             $credit_card_user = $request->numero_tarjeta;
+
+            //Validación
             $validacion = ValidateCreditCard::validateFormatCreditCard($credit_card_user);
             $luhn = ValidateCreditCard::calculateLuhn($credit_card_user);
 
             if(!$validacion || !$luhn)
                 return redirect()->back()->withErrors('Tarjeta inválida. Revise los datos ingresados');
 
+            //Actualización datos de tarjeta
             $datosTarjeta->marca_id = ($marcaTarjeta)? $marcaTarjeta : null;
             $datosTarjeta->banco_id = ($request->banco_id)? $request->banco_id : null;
             $datosTarjeta->numero_tarjeta = ($request->numero_tarjeta)? $request->numero_tarjeta : null;
@@ -146,6 +149,7 @@ class VentasController extends Controller
             $datosTarjeta->titular = ($request->titular)? $request->titular : null;
             $datosTarjeta->codigo_seguridad = ($request->codigo_seguridad)? $request->codigo_seguridad : null;
 
+            //Asociación de datos de tarjeta a venta
             $datosTarjeta->venta()->associate($venta);
             $datosTarjeta->save();
         }

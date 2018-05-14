@@ -35,25 +35,37 @@
                                                 <ul class="list-unstyled">
                                                     <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
                                                     <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
-                                                    <li class="list-group-item">
-                                                        Producto: {!! $venta->producto->nombre !!}<br>
-                                                        <small class="text-muted">{!! $venta->producto->descripcion !!}</small>
-                                                    </li>
                                                     <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
-                                                    <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>
-                                                    <li class="list-group-item">Forma de pago: {!! ($venta->formaPago)? $venta->formaPago->nombre : '' !!}</li>
-                                                    <li class="list-group-item">Etapa: {!! ($venta->etapa)? $venta->etapa->nombre : '<small class="text-muted">Este producto no se vende en etapas</small>' !!}</li>
-                                                    <li class="list-group-item">Promoción: {!! ($venta->promocion)? $venta->promocion->nombre : '' !!}</li>
-                                                    <li class="list-group-item">Fecha de alta: {!! $venta->fecha_creado !!}</li>
+                                                    <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
                                                     <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
                                                 </ul>
                                             </div>
                                         </div>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Producto</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <ul class="list-unstyled">
+                                                    <li class="list-group-item">
+                                                        Producto: {!! $venta->producto->nombre !!}<br>
+                                                        <small class="text-muted">{!! $venta->producto->descripcion !!}</small>
+                                                    </li>
+                                                    <li class="list-group-item">Precio: ${!! $venta->producto->precio !!}</li>
+                                                    <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>
+                                                    <li class="list-group-item">Forma de pago: {!! ($venta->formaPago)? $venta->formaPago->nombre : '' !!}</li>
+                                                    <li class="list-group-item">Etapa: {!! ($venta->etapa)? $venta->etapa->nombre : '<small class="text-muted">No se ha seleccionado la etapa</small>' !!}</li>
+                                                    <li class="list-group-item">Promoción: {!! ($venta->promocion)? $venta->promocion->nombre : '' !!}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">Editar información</h3>
+                                                <h3 class="panel-title">Editar venta</h3>
                                             </div>
                                             <div class="panel-body">
                                                 <p>Marcar esta venta como...</p>

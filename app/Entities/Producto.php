@@ -29,12 +29,12 @@ class Producto extends Entity
 
     public function getFechaInicioFormattedAttribute()
     {
-        return Carbon::parse($this->fecha_inicio)->format('m/d/Y');
+        return Carbon::parse($this->fecha_inicio)->format('d/m/Y');
     }
 
     public function getFechaFinalizacionFormattedAttribute()
     {
-        return Carbon::parse($this->fecha_finalizacion)->format('m/d/Y');
+        return Carbon::parse($this->fecha_finalizacion)->format('d/m/Y');
     }
 
     //Relationships

@@ -67,7 +67,7 @@
                                 </td>
                                 <td>{!! $venta->user->full_name !!}</td>
                                 <td>{!! $venta->fecha_creado !!}</td>
-                                <td class="text-center"><a href="{{ route('ventas.show.cliente.ventas', $venta->id) }}"><i class="fa fa-info-circle"></i> </a></td>
+                                <td class="text-center"><a href="{{ route('ventas.show.cliente.ventas', $venta->id) }}" class="btn btn-default btn-xs">detalles </a></td>
                             </tr>
 
                         @empty

@@ -15,7 +15,7 @@ class Cliente extends Entity
         return $this->nombre.' '.$this->apellido;
     }
 
-    public function getReclamosAttribute()
+    /*public function getReclamosAttribute()
     {
         return DB::table('clientes')
             ->join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
@@ -23,6 +23,13 @@ class Cliente extends Entity
             ->where('clientes.id', '=', $this->id)
             ->select('clientes.nombre', 'clientes.id as clienteId', 'reclamos.*')
             ->get();
+    }*/
+
+    public function getReclamosAttribute()
+    {
+        return Reclamo::whereHas('venta', function($query){
+            $query->where('cliente_id', '=', $this->id);
+        })->get();
     }
 
     //Relationships

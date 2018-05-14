@@ -2,26 +2,42 @@
 
 use SmartLine\Entities\Etapa;
 use Illuminate\Http\Request;
+use SmartLine\Entities\Producto;
+use SmartLine\Http\Requests\CreateEtapaRequest;
 
 class EtapasController extends Controller
 {
 
-    public function edit($id)
+    public function edit($etapaId, $productoId)
     {
-        $etapa = Etapa::find($id);
-        dd($etapa);
+        $etapaEdit = Etapa::find($etapaId);
+        $producto = Producto::find($productoId);
+
+        return view('productos.etapas-edit', compact('etapaEdit', 'producto'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CreateEtapaRequest $request, $id)
     {
         $etapa = Etapa::find($id);
-        dd($request->all());
+
+        $etapa->nombre = $request->nombre;
+        $etapa->dias_pendiente = ($request->dias_pendiente)? $request->dias_pendiente : '';
+        $etapa->save();
+
+        return redirect()->back()->with('ok', 'Etapa editada con éxito');
     }
 
     public function destroy($id)
     {
         $etapa = Etapa::find($id);
-        dd($etapa);
+
+        $etapaAnterior = Etapa::where('etapa_proxima_id', $id)->first();
+        $etapaAnterior->etapa_proxima_id = null;
+        $etapaAnterior->save();
+
+        $etapa->delete();
+
+        return redirect()->back()->with('ok', 'Etapa eliminada con éxito');
     }
 
 

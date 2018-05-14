@@ -83,7 +83,6 @@ class LlamadasController extends Controller
     public function show($id)
     {
         $llamada = Llamada::find($id);
-
         return view('llamadas.show', compact('llamada'));
     }
 

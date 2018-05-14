@@ -3,7 +3,6 @@
 use Illuminate\Database\Eloquent\SoftDeletes;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Domicilio;
-use SmartLine\Entities\EstadoProducto;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 

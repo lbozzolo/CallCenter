@@ -1,9 +1,12 @@
 <?php namespace SmartLine\Http\Controllers;
 
 
+use SmartLine\Entities\Categoria;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Domicilio;
 use SmartLine\Entities\EstadoCliente;
+use SmartLine\Entities\Llamada;
+use SmartLine\Entities\Reclamo;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Partido;
 use SmartLine\Entities\Provincia;
@@ -31,7 +34,8 @@ class ClientesController extends Controller
     public function create()
     {
         $estados = EstadoCliente::lists('nombre', 'id');
-        return view('clientes.create', compact('estados'));
+        $provincias = Provincia::lists('provincia', 'id');
+        return view('clientes.create', compact('estados', 'provincias'));
     }
 
     public function store(CreateClienteRequest $request)
@@ -39,7 +43,6 @@ class ClientesController extends Controller
         $cliente = Cliente::create([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
-            'direccion' => $request->direccion,
             'telefono' => $request->telefono,
             'celular' => $request->celular,
             'email' => $request->email,
@@ -49,6 +52,9 @@ class ClientesController extends Controller
             'puntos' => $request->puntos,
             'estado_id' => $request->estado_id
         ]);
+
+        $this->clienteRepo->updateOrCreateDomicilio($cliente->id, $request->all());
+
         if($cliente){
             return redirect()->route('clientes.index')->with('ok', 'Cliente creado con éxito');
         }else{ abort(400);}
@@ -141,6 +147,42 @@ class ClientesController extends Controller
         $llamadas = $cliente->llamadas;
 
         return view('clientes.llamadas', compact('cliente', 'llamadas'));
+    }
+
+    public function reclamos($id)
+    {
+        $cliente = Cliente::find($id);
+        $reclamos = $cliente->reclamos;
+
+        return view('clientes.reclamos', compact('cliente', 'reclamos'));
+    }
+
+    public function showReclamo($id, $idReclamo)
+    {
+        $cliente = Cliente::find($id);
+        $reclamo = Reclamo::find($idReclamo);
+        $reclamos = $cliente->reclamos;
+
+        return view('clientes.show-reclamo', compact('cliente', 'reclamo', 'reclamos'));
+    }
+
+    public function showLlamada($id, $idReclamo, $idLlamada)
+    {
+        $cliente = Cliente::find($id);
+        $reclamo = Reclamo::find($idReclamo);
+        $reclamos = $cliente->reclamos;
+        $llamada = Llamada::find($idLlamada);
+
+        return view('clientes.show-llamada', compact('cliente', 'reclamo', 'reclamos', 'llamada'));
+    }
+
+    public function intereses($id)
+    {
+        $cliente = Cliente::find($id);
+        $intereses = $cliente->intereses;
+        $categorias = Categoria::lists('nombre', 'id');
+
+        return view('clientes.intereses', compact('cliente', 'intereses', 'categorias'));
     }
 
 

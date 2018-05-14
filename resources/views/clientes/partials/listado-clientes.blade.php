@@ -45,7 +45,7 @@
                 <td>{!! $cliente->fecha_creado !!}</td>
                 <td>{!! $cliente->fecha_editado !!}</td>
                 <td class="text-center">
-                    <a href="{{ route('clientes.show', $cliente->id) }}"><i class="fa fa-info-circle"></i> </a>
+                    <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default btn-xs">detalles</a>
                 </td>
             </tr>
 

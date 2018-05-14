@@ -59,7 +59,7 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
                                                             {!! Form::open(['route'  => ['etapas.destroy', $etapa->id], 'method' => 'delete']) !!}
-                                                            <button type="submit" class="btn btn-danger pull-right">Eliminar</button>
+                                                            <button type="submit" class="btn btn-danger pull-right">Eliminar de todos modos</button>
                                                             {!! Form::close() !!}
                                                         </div>
                                                     </div>
@@ -84,26 +84,16 @@
 
                 <div class="col-lg-6 col-md-6">
 
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            @if($producto->etapas->count())
-
-                                <h3 class="panel-title">Ingresar más etapas</h3>
-
-                            @else
-
-                                <h3 class="panel-title">Ingresar etapa</h3>
-
-                            @endif
-
+                            <h3 class="panel-title">Editar etapa</h3>
                         </div>
                         <div class="panel-body">
 
-                            {!! Form::open(['method' => 'post', 'url' => route('productos.etapas.store', $producto->id), 'class' => 'form']) !!}
+                            {!! Form::model($etapaEdit,['method' => 'put', 'url' => route('etapas.update', $etapaEdit->id), 'class' => 'form']) !!}
                             <div class="form-group">
                                 {!! Form::label('nombre', 'Nombre') !!}
-                                <input type="text" class="form-control" name="nombre" placeholder="ej: Etapa {!! $producto->etapas->count() + 1 !!}">
-                                {{--{!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => "ej: Etapa 1"]) !!}--}}
+                                {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
                             </div>
 
                             @if($producto->etapas->count() > 0)
@@ -117,8 +107,8 @@
                             @endif
 
 
-                            {!! Form::submit('+ Agregar etapa', ['class' => 'btn btn-info']) !!}
-                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-default">Cancelar</a>
+                            {!! Form::submit('Guardar cambios', ['class' => 'btn btn-info']) !!}
+                            <a href="{{ route('productos.etapas', $producto->id) }}" class="btn btn-default">Cancelar</a>
 
                             {!! Form::close() !!}
 
