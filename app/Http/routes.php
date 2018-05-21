@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth', 'new.user', 'XSS']], function () {
     require(__DIR__ . '/Routes/etapas.php');
     require(__DIR__ . '/Routes/reclamos.php');
     require(__DIR__ . '/Routes/address.php');
+    require(__DIR__ . '/Routes/enviopack.php');
 
     //Ruta para ejecutar pruebas
     Route::get('/test', ['as' => 'test', 'uses' => 'DashboardController@test']);

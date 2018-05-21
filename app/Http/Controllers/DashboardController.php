@@ -1,8 +1,10 @@
 <?php namespace SmartLine\Http\Controllers;
 
+use Illuminate\Http\Request;
 use SmartLine\Entities\Banco;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Entity;
+use SmartLine\Entities\Provincia;
 use SmartLine\User;
 use SmartLine\Entities\Venta;
 use SmartLine\Entities\Reclamo;
@@ -36,8 +38,16 @@ class DashboardController extends Controller
             $query->where('cliente_id', '=', '26');
         })->get();
 
+        $data = ['provincia' => 'C', 'codigoPostal' => '1405', 'peso' => '1.5', 'paquetes' => '20x3x5', 'direccionEnvio' => ''];
 
-        dd($reclamosa);
+        return redirect('../ws/cotizaciones/correos');
+
+    }
+
+    public function enviopack()
+    {
+        $provincias = Provincia::lists('provincia', 'codProvincia');
+        return view('enviopack.cotizaciones', compact('provincias'));
     }
 
 }

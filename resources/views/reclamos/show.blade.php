@@ -38,9 +38,8 @@
                                                 <small class="text-muted">Reclamos</small><br>
                                                 <ul class="list-unstyled">
                                                     @foreach($reclamo->venta->reclamos as $complain)
-                                                        <li>
+                                                        <li class="list-group-item">
                                                             <a class="{!! ($reclamoFecha && $reclamoFecha->id == $complain->id)? 'bg-info' : '' !!}" href="{{ route('reclamos.show',  ['id' => $reclamo->id, 'reclamoFecha' => $complain->id]) }}">
-                                                                <i class="fa fa-thumbs-o-down"></i>
                                                                 {!! $complain->titulo !!}
                                                             </a>
                                                             <small>({!! $complain->fecha_creado !!})</small>
@@ -55,6 +54,13 @@
                                         @if($reclamoFecha)
 
                                             @include('reclamos.partials.panel-reclamo')
+
+                                        @else
+
+                                            <div>
+                                                <i class="fa fa-arrow-left"></i>
+                                                <small class="text-muted">Seleccione un reclamo de la lista</small>
+                                            </div>
 
                                         @endif
                                     </div>
