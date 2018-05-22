@@ -40,7 +40,7 @@ class UsersController extends Controller
         return view('users.create', compact('roles'));
     }
 
-    public function store(Request $request)
+    public function store(UpdateUserProfileRequest $request)
     {
         $disableStatus = EstadoUser::where('slug', 'nuevo')->first();
         $password = str_random(6);

@@ -39,7 +39,7 @@ class ImagenesController extends Controller
 
             $imagen = Imagen::create(['path' => $nombre, 'principal' => 0]);
             $imagen->title = $request->title;
-            $file->move(storage_path('app\imagenes'), $nombre);
+            $file->move(storage_path('imagenes'), $nombre);
             $imageable->images()->save($imagen);
 
         }
@@ -48,7 +48,7 @@ class ImagenesController extends Controller
 
     public function verImage($file)
     {
-        return response()->make(File::get(storage_path("app/imagenes/".$file)),200)->header('Content-Type', 'image/jpg');
+        return response()->make(File::get(storage_path("imagenes/".$file)),200)->header('Content-Type', 'image/jpg');
     }
 
     public function principalImage($id)
@@ -72,7 +72,7 @@ class ImagenesController extends Controller
         $imagen = Imagen::find($id);
         $imagen->delete();
 
-        File::delete(storage_path("app/imagenes/".$imagen->path));
+        File::delete(storage_path("imagenes/".$imagen->path));
 
         return redirect()->back()->with('ok', 'Imagen eliminada con éxito');
     }
@@ -82,7 +82,7 @@ class ImagenesController extends Controller
         $nombre = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
 
-        if (file_exists( storage_path("app/imagenes/".$nombre)))
+        if (file_exists( storage_path("imagenes/".$nombre)))
             $nombre = preg_replace('/\\.[^.\\s]{3,4}$/', '', $nombre) . '-' . str_random(4) . '.' . $extension;
 
         return $nombre;

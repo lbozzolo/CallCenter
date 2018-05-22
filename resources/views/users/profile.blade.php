@@ -9,18 +9,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         @if($user->profile_image)
-                            <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle pull-right" style="object-fit: cover; width: 120px; height: 120px">
+                            <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle pull-right" style="object-fit: cover; width: 80px; height: 80px; margin-bottom: 10px">
                         @endif
                         <h2>
                             {!! $user->full_name !!}
                             <span class="text-muted"> / Perfil de usuario</span>
                         </h2>
-                        <hr>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <ul class="list-unstyled">
                             <li class="list-group-item">Nombre: {!! $user->nombre !!}</li>
                             <li class="list-group-item">Apellido: {!! $user->apellido !!}</li>
@@ -32,11 +31,13 @@
                             <li class="list-group-item">Teléfono: {!! $user->telefono !!}</li>
                             <li class="list-group-item">DNI: {!! $user->dni !!}</li>
                             <li class="list-group-item">Fecha de alta: {!! $user->fecha_creado !!}</li>
+                            @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin|admin'))
                             <li class="list-group-item">
                                 <a href="{{ route('users.changePassword', $user->id) }}">Cambiar contraseña</a>
                             </li>
+                            @endif
                         </ul>
-                        <a href="{{ route('users.edit', Auth::user()->id) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a>
                         <a href="{{ route('users.index') }}" class="btn btn-default">Volver</a>
                     </div>
 

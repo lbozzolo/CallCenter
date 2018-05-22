@@ -32,6 +32,7 @@
 
 @section('js')
 
+    <script src="{{ asset('js/sin_foto.js') }}"></script>
     <script>
 
         $(document).ready(function() {

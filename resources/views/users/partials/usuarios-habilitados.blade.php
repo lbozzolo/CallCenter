@@ -1,3 +1,21 @@
+@section('css')
+
+    <style type="text/css">
+        .sinfoto{
+            background-color: #1b6d85;
+            color: whitesmoke;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding: 5px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            border-radius: 15px;
+        }
+    </style>
+
+@endsection
+
 <div class="overlay col-lg-12 text-center" style="padding: 100px; border: 1px solid lightgrey; border-radius: 5px">
     Aguarde un momento por favor...<br>
     <i class="fa fa-refresh fa-spin" style="font-size: 2em"></i>
@@ -8,6 +26,7 @@
 
         <thead>
             <tr>
+                <th></th>
                 <th>Id</th>
                 <th>Nombre</th>
                 <th class="text-center">Roles</th>
@@ -23,6 +42,15 @@
         @foreach($users as $user)
 
             <tr>
+                <td>
+                    @if($user->profile_image)
+                        <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle pull-right" style="object-fit: cover; width: 30px; height: 30px">
+                    @else
+                        <span class="sinfoto text-center">
+                            <small>{{ strtoupper(substr($user->nombre,0,2)) }}</small>
+                        </span>
+                    @endif
+                </td>
                 <td>{!! $user->id !!}</td>
                 <td>
                     <a href="{{ route('users.profile', $user->id) }}">{!! $user->full_name !!}</a>
