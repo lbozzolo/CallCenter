@@ -27,6 +27,9 @@ class DashboardController extends Controller
 
     public function test()
     {
+        if (env('APP_ENV') != 'local')
+            abort(404);
+
         $reclamos = DB::table('reclamos')
             ->join('ventas', 'ventas.id', '=', 'reclamos.venta_id')
             ->join('clientes', 'clientes.id', '=', 'ventas.cliente_id')

@@ -41,16 +41,16 @@ class ClientesController extends Controller
     public function store(CreateClienteRequest $request)
     {
         $cliente = Cliente::create([
-            'nombre' => $request->nombre,
-            'apellido' => $request->apellido,
-            'telefono' => $request->telefono,
-            'celular' => $request->celular,
-            'email' => $request->email,
-            'dni' => $request->dni,
-            'referencia' => $request->referencia,
-            'observaciones' => $request->observaciones,
-            'puntos' => $request->puntos,
-            'estado_id' => $request->estado_id
+            'nombre' => ($request->nombre)? $request->nombre : '',
+            'apellido' => ($request->apellido)? $request->apellido : '',
+            'telefono' => ($request->telefono)? $request->telefono : '',
+            'celular' => ($request->celular)? $request->celular : '',
+            'email' => ($request->email)? $request->email : '',
+            'dni' => ($request->dni)? $request->dni : '',
+            'referencia' => ($request->referencia)? $request->referencia : '',
+            'observaciones' => ($request->observaciones)? $request->observaciones : '',
+            'puntos' => ($request->puntos)? $request->puntos : '',
+            'estado_id' => ($request->estado_id)? $request->estado_id : '',
         ]);
 
         $this->clienteRepo->updateOrCreateDomicilio($cliente->id, $request->all());
@@ -63,8 +63,7 @@ class ClientesController extends Controller
 
     public function show($id)
     {
-        $cliente = Cliente::find($id);
-
+        $cliente = Cliente::with('domicilio.localidad', 'domicilio.provincia')->where('id', $id)->first();
         return view('clientes.show', compact('cliente'));
     }
 
@@ -74,16 +73,21 @@ class ClientesController extends Controller
         $cliente->editar = true;
         $estados = EstadoCliente::lists('nombre', 'id');
         $provincias = Provincia::lists('provincia', 'id');
+        $partidos = Partido::lists('partido', 'id', 'codProvincia');
+        $localidades = Localidad::lists('localidad', 'id', 'codProvincia');
 
         if($cliente->domicilio){
-            $provinciaCliente = Provincia::find($cliente->domicilio->provincia->id);
-            $partidoCliente = Partido::find($cliente->domicilio->partido->id);
+            if($cliente->domicilio->provincia){
+                $provinciaCliente = Provincia::find($cliente->domicilio->provincia->id);
+                $partidos = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
+            }
+            if($cliente->domicilio->partido){
+                $partidoCliente = Partido::find($cliente->domicilio->partido->id);
+                $localidades = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
+            }
 
-            $partidos = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
-            $localidades = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
         }
 
-        //return view('clientes.show', compact('cliente', 'estados', 'provincias', 'partidos', 'localidades'));
         return view('clientes.edit', compact('cliente', 'estados', 'provincias', 'partidos', 'localidades'));
     }
 

@@ -27,6 +27,10 @@ class CreateClienteRequest extends Request
                 'observaciones' => 'max:255',
                 'puntos' => 'numeric',
                 'estado_id' => 'between:1,'.$estados,
+
+                'numero' => 'numeric',
+                'piso' => 'numeric',
+                'codigo_postal' => 'numeric|max:4',
             ];
     }
 
@@ -60,6 +64,13 @@ class CreateClienteRequest extends Request
                 'puntos.numeric' => 'Los puntos ingresados deben ser un número',
 
                 'estado_id.between' => 'El estado ingresado es inválido',
+
+                'numero.numeric' => 'El número tiene un formato incorrecto. Debe ser un número',
+
+                'piso.numeric' => 'El piso debe ser un número',
+
+                'codigo_postal.numeric' => 'El código postal debe ser un número',
+                'codigo_postal.max' => 'El código postal no puede tener más de 4 caracteres',
 
             ];
     }

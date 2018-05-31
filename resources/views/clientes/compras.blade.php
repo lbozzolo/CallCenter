@@ -73,7 +73,7 @@
                         @empty
 
                             <tr>
-                                <td colspan="5">Este cliente no tiene ninguna compra registrada con ese estado</td>
+                                <td colspan="5">Su búsqueda no produjo ningún resultado</td>
                             </tr>
 
                         @endforelse

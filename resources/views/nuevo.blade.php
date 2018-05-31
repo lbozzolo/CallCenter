@@ -58,16 +58,13 @@
 
 @section('content')
 
-    {{--
-    @include('partials.navbar')
-    --}}
-
     <div class="row">
         <div class="container">
             <div class="content">
-                <h1>Bienvenido a Call Center</h1>
+                <h1>Bienvenido a SmartLine</h1>
                 <hr>
-                <p class="lead">Para poder operar en el sistema primero debe ser habilitado por un superior</p>
+                <p class="lead">Para poder operar en el sistema primero debe ser habilitado por un administrador.</p>
+                <p>Comuníquese con el email <span class="text-info">Info@smartline.com.ar</span></p>
             </div>
         </div>
     </div>

@@ -18,14 +18,14 @@ class CreateDomiciliosTable extends Migration
             $table->increments('id');
             $table->integer('cliente_id')->unsigned();
             $table->string('calle');
-            $table->integer('numero');
-            $table->tinyInteger('piso');
+            $table->integer('numero')->nullable();
+            $table->tinyInteger('piso')->nullable();
             $table->string('departamento', 20);
-            $table->integer('codigo_postal');
+            $table->integer('codigo_postal')->nullable();
             $table->string('entre_calles');
-            $table->integer('localidad_id')->unsigned();
-            $table->integer('partido_id')->unsigned();
-            $table->integer('provincia_id')->unsigned();
+            $table->integer('localidad_id')->unsigned()->nullable();
+            $table->integer('partido_id')->unsigned()->nullable();
+            $table->integer('provincia_id')->unsigned()->nullable();
 
             $table->index('id');
             $table->index('cliente_id');

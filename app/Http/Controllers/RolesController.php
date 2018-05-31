@@ -91,9 +91,12 @@ class RolesController extends Controller
 
         $role->detachAllPermissions();
 
-        foreach($permisos as $key => $permiso){
-            $role->attachPermission($permiso);
+        if($permisos){
+            foreach($permisos as $key => $permiso){
+                $role->attachPermission($permiso);
+            }
         }
+
 
         return redirect()->route('roles.index')->with('ok', 'Se han asignado los permisos correctamente');
     }

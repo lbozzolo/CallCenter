@@ -26,4 +26,19 @@ class VentaRepo extends BaseRepo
         return $ventas;
     }
 
+    public function totalesVentasByEstado()
+    {
+        $estadosVentas = EstadoVenta::all();
+        $total = [];
+        foreach($estadosVentas as $estado){
+            $ventas = Venta::with('estado')->get()->filter(function ($value) use ($estado) {
+                return $value->estado->slug == $estado->slug;
+            });
+
+            $total[$estado->slug] = count($ventas);
+        }
+        return $total;
+
+    }
+
 }

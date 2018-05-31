@@ -57,6 +57,10 @@ class User extends Entity implements AuthenticatableContract,
         }
     }
 
+    public function getRolesIdsAttribute()
+    {
+        return $this->roles()->get()->lists('id')->toArray();
+    }
 
     //RelationShips
 

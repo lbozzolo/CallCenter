@@ -7,7 +7,7 @@ use SmartLine\User;
 class Venta extends Entity
 {
     protected $table = 'ventas';
-    protected $fillable = ['user_id', 'cliente_id', 'producto_id', 'estado_id', 'metodo_pago_id', 'forma_pago_id', 'etapa_id', 'promocion_id', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'cliente_id', 'producto_id', 'estado_id', 'metodo_pago_id', 'forma_pago_id', 'observaciones', 'etapa_id', 'promocion_id', 'created_at', 'updated_at'];
 
 
     public function getEstadoPluralAttribute()

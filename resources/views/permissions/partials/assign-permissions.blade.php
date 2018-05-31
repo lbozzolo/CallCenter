@@ -1,9 +1,305 @@
 <div class="row">
 
-{!! Form::model($role, ['method' => 'put', 'url' => route('roles.assign.permissions', $role->id), 'class' => 'form']) !!}
 
 
-<ul class="list-unstyled col-lg-6 col-md-6 col-sm-6 col-xs-12" id="accordion">
+<div class="col-lg-4 col-md-4 col-sm-6">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Bancos</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+            @foreach($permisos as $permiso)
+                @if($permiso->model == 'banco')
+                        <li>
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Categorías</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'categoria')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Clientes</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'cliente')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Etapas</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'etapa')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Formas de Pago</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'formaPago')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<div class="col-lg-4 col-md-4 col-sm-6">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Imágenes</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'imagen')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Instituciones</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'institucion')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Llamadas</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'llamada')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Métodos de Pago</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'metodoPago')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Productos</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'producto')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-6">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Promociones</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'promocion')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Reclamos</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'reclamo')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Usuarios</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'user')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Ventas</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'venta')
+                        <li >
+                            <div class="form-check">
+                                {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+{{--<ul class="list-unstyled col-lg-6 col-md-6 col-sm-6 col-xs-12" id="accordion">
     <li class="list-group-item" style="background-color: beige">
             <span style="cursor: pointer"  data-toggle="collapse" data-target="#collapseBanco" aria-expanded="false" aria-controls="collapseBanco">
                 <h4>Bancos</h4>
@@ -272,11 +568,11 @@
             @endforeach
         </ul>
     </li>
-</ul>
-
-    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
+</ul>--}}
 
 
-{!! Form::close() !!}
+
+
+
 
 </div>

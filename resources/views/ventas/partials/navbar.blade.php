@@ -11,16 +11,16 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav">
-            <li><a href="{{ route('ventas.index') }}">Todas</a></li>
-            <li><a href="{{ route('ventas.index', 'auditada') }}">Auditadas</a></li>
-            <li><a href="{{ route('ventas.index', 'confirmada') }}">Confirmadas</a></li>
-            <li><a href="{{ route('ventas.index', 'rechazada') }}">Rechazadas</a></li>
-            <li><a href="{{ route('ventas.index', 'cobrada') }}">Cobradas</a></li>
-            <li><a href="{{ route('ventas.index', 'facturada') }}">Facturadas</a></li>
-            <li><a href="{{ route('ventas.index', 'enviada') }}">Enviadas</a></li>
-            <li><a href="{{ route('ventas.index', 'entregado') }}">Entregadas</a></li>
-            <li><a href="{{ route('ventas.index', 'noentregado') }}">No entregadas</a></li>
-            <li><a href="{{ route('ventas.index', 'devuelto') }}">Devueltas</a></li>
+            <li><a href="{{ route('ventas.index') }}"><small>Todas</small></a></li>
+            <li><a href="{{ route('ventas.index', 'auditada') }}"><small>Auditadas ({!! $total['auditada'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'confirmada') }}"><small>Confirmadas ({!! $total['confirmada'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'rechazada') }}"><small>Rechazadas ({!! $total['rechazada'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'cobrada') }}"><small>Cobradas ({!! $total['cobrada'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'facturada') }}"><small>Facturadas ({!! $total['facturada'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'enviada') }}"><small>Enviadas ({!! $total['enviada'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'entregado') }}"><small>Entregadas ({!! $total['entregado'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'noentregado') }}"><small>No entregadas ({!! $total['noentregado'] !!})</small></a></li>
+            <li><a href="{{ route('ventas.index', 'devuelto') }}"><small>Devueltas ({!! $total['devuelto'] !!})</small></a></li>
         </ul>
     </div>
 </nav>

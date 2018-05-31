@@ -12,6 +12,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav">
             <li>
+                <a href="{{ route('clientes.index') }}"><i class="fa fa-home"></i> </a>
+            </li>
+            <li>
                 <a href="{{ route('clientes.show', $cliente->id) }}" class="{{ (Request::is('clientes/'.'*'.'/datos') ? 'navbar-item-selected' : '') }}">
                     Datos
                 </a>

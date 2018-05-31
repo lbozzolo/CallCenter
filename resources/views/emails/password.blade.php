@@ -13,7 +13,7 @@
 </style>
 
 <div>
-    <h1>CallCenter</h1>
-    <p>Haz click en el siguiente link para resetear tu contraseña:</p>
+    <h1>SmartLine</h1>
+    <p>Haga click en el siguiente link para resetear su contraseña:</p>
     <a href="{{ route('reset.link', $token) }}">{{ route('reset.link', $token) }}</a>
 </div>

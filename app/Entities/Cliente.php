@@ -32,6 +32,16 @@ class Cliente extends Entity
         })->get();
     }
 
+    public function getAddressAttribute()
+    {
+        $calle = ($this->domicilio && $this->domicilio->calle)? $this->domicilio->calle.' ' : '';
+        $numero = ($this->domicilio && $this->domicilio->numero)? $this->domicilio->numero.' ' : '';
+        $piso = ($this->domicilio && $this->domicilio->piso)? $this->domicilio->piso.'° ' : '';
+        $departamento = ($this->domicilio && $this->domicilio->departamento)? $this->domicilio->departamento : '';
+        $domicilio = $calle.$numero.$piso.$departamento;
+        return $domicilio;
+    }
+
     //Relationships
     public function estado()
     {

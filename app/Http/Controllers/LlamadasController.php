@@ -4,8 +4,10 @@ namespace SmartLine\Http\Controllers;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
-
+use SmartLine\Entities\EstadoProducto;
+use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Llamada;
+use SmartLine\Entities\Producto;
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
 
@@ -61,6 +63,27 @@ class LlamadasController extends Controller
     public function create()
     {
         //
+    }
+
+    public function seleccionCliente()
+    {
+        $clientes = Cliente::with('estado')->get();
+        return view('llamadas.seleccion-cliente', compact('clientes'));
+    }
+
+    public function seleccionProducto($idCliente)
+    {
+        $cliente = Cliente::find($idCliente);
+        $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
+        return view('llamadas.seleccion-producto', compact('productos', 'cliente'));
+    }
+
+    public function panel($idCliente, $idProducto)
+    {
+        $cliente = Cliente::find($idCliente);
+        $producto = Producto::find($idProducto);
+
+        return view('llamadas.panel', compact('cliente', 'producto'));
     }
 
     /**

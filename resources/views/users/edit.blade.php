@@ -8,13 +8,16 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        @if($user->profile_image)
-                            <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle pull-right" style="object-fit: cover; width: 80px; height: 80px; margin-bottom: 10px">
-                        @endif
+
                         <h2>
+                            @if($user->profile_image)
+                                <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle" style="object-fit: cover; width: 50px; height: 50px; margin-bottom: 10px">
+                            @endif
                             {!! $user->full_name !!}
                             <span class="text-muted"> / Editar perfil</span>
                         </h2>
+                        @include('users.partials.navbar')
+
                     </div>
                 </div>
 
@@ -28,8 +31,8 @@
 
                             <div class="form-group">
                                 {!! Form::label('roles', 'Roles:') !!}
-                                ({!! $rolesActuales !!})
-                                {!! Form::select('roles[]', $roles, $user->roles->first()->id, ['class' => 'form-control select2 multiple']) !!}
+
+                                {!! Form::select('roles[]', $roles, null, ['class' => 'form-control select2 multiple']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('nombre', 'Nombre') !!}
@@ -46,6 +49,7 @@
                             <div class="form-group">
                                 {!! Form::label('telefono', 'Teléfono') !!}
                                 {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+                                <small class="text-warning">El teléfono debe ser un número, sin guiones ni paréntesis, etc</small>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('dni', 'DNI') !!}
@@ -53,7 +57,7 @@
                             </div>
 
                             {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-                            <a href="{{ route('users.profile', $user->id) }}" class="btn btn-default">Cerrar</a>
+                            {{--<a href="{{ route('users.profile', $user->id) }}" class="btn btn-default">Cerrar</a>--}}
 
                             {!! Form::close() !!}
                         </div>
@@ -158,12 +162,13 @@
 
 @section('js')
 
-    <script>
+    <script type="text/javascript">
 
+        var rolesActuales =  [<?php echo '"'.implode('","', $user->roles_ids).'"' ?>];
 
         $('.select2').select2({
-            multiple: true,
-        });
+            multiple: true
+        }).select2('val', rolesActuales);
 
     </script>
 

@@ -39,33 +39,44 @@ class ClienteRepo extends BaseRepo
     {
         $cliente = Cliente::find($id);
         $domicilio = $cliente->domicilio()->first();
+        //dd($request);
 
         if($domicilio){
 
-            $domicilio->calle = $request['calle'];
-            $domicilio->numero = $request['numero'];
-            $domicilio->piso = $request['piso'];
-            $domicilio->departamento = $request['departamento'];
-            $domicilio->codigo_postal = $request['codigo_postal'];
-            $domicilio->entre_calles = $request['entre_calles'];
-            $domicilio->localidad_id = $request['localidad'];
-            $domicilio->partido_id = $request['partido'];
-            $domicilio->provincia_id = $request['provincia'];
+            $domicilio->calle = ($request['calle'])? $request['calle'] : '';
+            $domicilio->numero = ($request['numero'])? $request['numero'] : null;
+            $domicilio->piso = ($request['piso'])? $request['piso'] : null;
+            $domicilio->departamento = ($request['departamento'])? $request['departamento'] : '';
+            $domicilio->codigo_postal = ($request['codigo_postal'])? $request['codigo_postal'] : null;
+            $domicilio->entre_calles = ($request['entre_calles'])? $request['entre_calles'] : '';
+            $domicilio->localidad_id = (array_key_exists('localidad', $request) && $request['localidad'] != '')? $request['localidad'] : null;
+            $domicilio->partido_id = (array_key_exists('partido', $request) && $request['partido'] != '')? $request['partido'] : null;
+            $domicilio->provincia_id = (array_key_exists('provincia', $request) && $request['provincia'] != '')? $request['provincia'] : null;
+
+            /*if(array_key_exists('localidad', $request))
+                $domicilio->localidad_id = ($request['localidad'] != '')? $request['localidad'] : null;
+
+            if(array_key_exists('partido', $request))
+                $domicilio->partido_id = ($request['partido'] != '')? $request['partido'] : null;
+
+            if(array_key_exists('provincia', $request))
+                $domicilio->provincia_id = ($request['provincia'] != '')? $request['provincia'] : null;*/
+
             $domicilio->save();
 
         }else{
 
             Domicilio::create([
                 'cliente_id' => $cliente->id,
-                'calle' => $request['calle'],
-                'numero' => $request['numero'],
-                'piso' => $request['piso'],
-                'departamento' => $request['departamento'],
-                'codigo_postal' => $request['codigo_postal'],
-                'entre_calles' => $request['entre_calles'],
-                'localidad_id' => $request['localidad'],
-                'partido_id' => $request['partido'],
-                'provincia_id' => $request['provincia'],
+                'calle' => ($request['calle'])? $request['calle'] : '',
+                'numero' => ($request['numero'])? $request['numero'] : null,
+                'piso' => ($request['piso'])? $request['piso'] : null,
+                'departamento' => ($request['departamento'])? $request['departamento'] : '',
+                'codigo_postal' => ($request['codigo_postal'])? $request['codigo_postal'] : null,
+                'entre_calles' => ($request['entre_calles'])? $request['entre_calles'] : '',
+                'localidad_id' => (array_key_exists('localidad', $request) && $request['localidad'] != '')? $request['localidad'] : null,
+                'partido_id' => (array_key_exists('partido', $request) && $request['partido'] != '')? $request['partido'] : null,
+                'provincia_id' => (array_key_exists('provincia', $request) && $request['provincia'] != '')? $request['provincia'] : null,
             ]);
 
         }

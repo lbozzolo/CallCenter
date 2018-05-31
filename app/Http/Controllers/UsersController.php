@@ -4,6 +4,7 @@ use SmartLine\Entities\EstadoUser;
 use SmartLine\Http\Requests\ChangePasswordRequest;
 use SmartLine\Http\Requests\UpdateUserProfileRequest;
 use SmartLine\User;
+use Illuminate\Support\Facades\Auth;
 use Bican\Roles\Models\Permission;
 use Bican\Roles\Models\Role;
 use SmartLine\Http\Repositories\RoleRepo;
@@ -33,9 +34,14 @@ class UsersController extends Controller
 
     public function create()
     {
-        $roles = Role::all()->reject(function ($value) {
-            return $value->slug == 'superadmin';
-        })->lists('name', 'id');
+        $roles = Role::all();
+
+        if(!Auth::user()->is('superadmin')){
+            $roles = $roles->reject(function($value){
+                return $value->slug == 'superadmin';
+            });
+        }
+        $roles = $roles->lists('name', 'id');
 
         return view('users.create', compact('roles'));
     }
@@ -57,7 +63,15 @@ class UsersController extends Controller
         ]);
 
         foreach($request->roles as $id){
-            $user->attachRole(Role::find($id));
+
+            $role = Role::find($id);
+            if(count($request->roles) == 1 && $role->slug == 'superadmin' && !Auth::user()->is('superadmin')){
+                $user->forceDelete();
+                return abort('403');
+            }
+            if(!$role->slug == 'superadmin' && !Auth::user()->is('superadmin'))
+                $user->attachRole($role);
+
         }
 
         Mail::send('emails.new-user', ['password' => $password], function ($message) use ($email){
@@ -95,10 +109,16 @@ class UsersController extends Controller
     public function edit($id, $route = null)
     {
         $user = User::find($id);
-        $roles = Role::lists('name', 'id');
-        $rolesActuales = $this->roleRepo->listWithoutLastComma($user);
+        $roles = Role::all();
 
-        return view('users.edit', compact('user', 'route', 'roles', 'rolesActuales'));
+        if(!Auth::user()->is('superadmin')){
+            $roles = $roles->reject(function($value){
+                return $value->slug == 'superadmin';
+            });
+        }
+        $roles = $roles->lists('name', 'id');
+
+        return view('users.edit', compact('user', 'route', 'roles'));
     }
 
     public function update(UpdateUserProfileRequest $request, $id, $route = null)
@@ -145,12 +165,13 @@ class UsersController extends Controller
     {
         $user = User::withTrashed()->where('id', $id)->first();
         $message = $this->userRepo->changeState($user);
-
-        if($message == 'habilitado'){
-            return redirect()->route('users.index.disable')->with('ok', 'El usuario ha sido '.$message.' con éxito');
+        return redirect()->back()->with('ok', 'El usuario ha sido '.$message.' con éxito');
+        /*if($message == 'habilitado'){
+            //return redirect()->route('users.index.disable')->with('ok', 'El usuario ha sido '.$message.' con éxito');
+            return redirect()->back()->with('ok', 'El usuario ha sido '.$message.' con éxito');
         }else{
             return redirect()->route('users.index')->with('ok', 'El usuario ha sido '.$message.' con éxito');
-        }
+        }*/
     }
 
     public function permissions($id)
@@ -167,8 +188,10 @@ class UsersController extends Controller
 
         $user->detachAllPermissions();
 
-        foreach($permisos as $key => $permiso){
-            $user->attachPermission($permiso);
+        if($permisos){
+            foreach($permisos as $key => $permiso){
+                $user->attachPermission($permiso);
+            }
         }
 
         return redirect()->route('users.index')->with('ok', 'Se han asignado los permisos correctamente');

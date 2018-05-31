@@ -54,9 +54,9 @@
 
                     <button type="button" {{ ($producto->estado && $producto->estado->slug == 'activo')? 'title=DESACTIVAR' : 'title=ACTIVAR' }} class="nonStyledButton" data-toggle="modal" data-target="#disableProducto{!! $producto->id !!}" >
                         @if($producto->estado && $producto->estado->slug == 'activo')
-                            <i class="fa fa-toggle-on text-primary"></i>
+                            <i class="fa fa-lock text-primary"></i>
                         @else
-                            <i class="fa fa-toggle-off text-primary"></i>
+                            <i class="fa fa-unlock text-primary"></i>
                         @endif
                     </button>
                     <div class="modal fade" id="disableProducto{!! $producto->id !!}">

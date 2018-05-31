@@ -17,7 +17,7 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <a href="{{ route('clientes.create') }}" class="btn btn-default"><i class="fa fa-plus"></i> Agregar cliente</a>
+                                <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fa fa-user-plus"></i> Agregar</a>
                             </div>
                             <div class="panel-body">
                                 @include('clientes.partials.listado-clientes')

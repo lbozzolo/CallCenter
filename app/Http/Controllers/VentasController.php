@@ -36,7 +36,9 @@ class VentasController extends Controller
     public function index($estado = null)
     {
         $ventas = $this->ventaRepo->getVentasByEstado($estado);
-        return view('ventas.index', compact('ventas'));
+        $total = $this->ventaRepo->totalesVentasByEstado();
+
+        return view('ventas.index', compact('ventas', 'total'));
     }
 
     /**

@@ -71,6 +71,7 @@ class ProductosController extends Controller
             'marca_id' => ($request->marca_id)? $request->marca_id : null,
             'precio' => $request->precio,
             'institucion_id' => $request->institucion_id,
+            'prospecto' => ($request->prospecto)? $request->prospecto : null,
         ]);
 
 
@@ -86,7 +87,6 @@ class ProductosController extends Controller
             }
         }
 
-        //return redirect()->route('productos.index')->with('ok', 'Producto creado con éxito');
         return view('productos.pos-create', compact('producto'))->with('ok', 'Producto creado con éxito');
     }
 
@@ -129,6 +129,7 @@ class ProductosController extends Controller
         $producto->marca_id = ($request->marca_id)? $request->marca_id : null;
         $producto->precio = $request->precio;
         $producto->institucion_id = $request->institucion_id;
+        $producto->prospecto = ($request->prospecto)? $request->prospecto : null;
 
         $producto->categorias()->sync($request->categorias_id);
 

@@ -53,7 +53,9 @@
 
                                         @else
 
+                                            @if(count($reclamos) > 0)
                                             <p><i class="fa fa-arrow-circle-left"></i> Seleccione un reclamo del 'Listado de reclamos'</p>
+                                            @endif
 
                                         @endif
                                     </div>

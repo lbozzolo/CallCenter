@@ -1,5 +1,15 @@
 @extends('base')
 
+@section('css')
+
+    <style>
+        .ck-editor__editable {
+            min-height: 400px;
+        }
+    </style>
+
+@endsection
+
 @section('content')
 
 
@@ -52,6 +62,10 @@
                                 {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group">
+                                {!! Form::label('marca_id', 'Marca') !!}
+                                {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select22', 'placeholder' => '']) !!}
+                            </div>
+                            <div class="form-group">
                                 {!! Form::label('descripcion', 'Descripción') !!}
                                 {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
                             </div>
@@ -85,14 +99,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="form-group">
-                                <div class="pull-right">
-                                    <a href="{{ route('productos.etapas', $producto->id) }}">Configurar etapas</a> |
-                                    <a href="{{ route('productos.imagenes', $producto->id) }}">Administrar imágenes</a>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 {!! Form::label('precio', 'Precio') !!}
                                 {!! Form::number('precio', null, ['class' => 'form-control']) !!}
@@ -112,9 +118,15 @@
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
                             <div class="form-group">
-                                {!! Form::label('marca_id', 'Marca') !!}
-                                {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select22', 'placeholder' => '']) !!}
+                                <div class="pull-right">
+                                    <a href="{{ route('productos.etapas', $producto->id) }}">Configurar etapas</a> |
+                                    <a href="{{ route('productos.imagenes', $producto->id) }}">Administrar imágenes</a>
+                                </div>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('referencia', 'Referencia') !!}
@@ -124,6 +136,10 @@
                                 {!! Form::label('institucion_id', 'Institución') !!}
                                 {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control']) !!}
                                 <small class="help-block">Solamente en el caso de que corresponda.</small>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('prospecto', 'Prospecto (componentes)') !!}
+                                {!! Form::textarea('prospecto', null, ['id'=>'ckeditor', 'class'=>'form-control', 'rows'=>'30', 'cols'=>'80']) !!}
                             </div>
                             {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
                             <a href="{{ route('productos.index') }}" class="btn btn-default">Cerrar</a>
@@ -195,6 +211,16 @@
             });
 
         });
+
+    </script>
+
+
+    <script src="{{ asset('plugins/ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+
+        ClassicEditor.create( document.querySelector( '#ckeditor' ) );
+
+
 
     </script>
 

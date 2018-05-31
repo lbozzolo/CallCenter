@@ -28,6 +28,7 @@ class CreateProductosTable extends Migration
             $table->integer('marca_id')->unsigned()->nullable();
             $table->integer('precio');
             $table->integer('etapa_id')->unsigned()->nullable();
+            $table->text('prospecto')->nullable();
             $table->integer('institucion_id')->unsigned()->nullable();
             $table->softDeletes();
 

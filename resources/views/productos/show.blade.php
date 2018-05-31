@@ -196,6 +196,15 @@
                                 </div>
                             </div>
 
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Prospecto (componentes)</h3>
+                                </div>
+                                <div class="panel-body">
+                                    {!! $producto->prospecto !!}
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

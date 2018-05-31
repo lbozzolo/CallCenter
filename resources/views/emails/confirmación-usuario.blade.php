@@ -13,9 +13,9 @@
 </style>
 
 <div>
-    <h1>CallCenter</h1>
-    <p>Su usuario ha sido confirmado por un superior</p>
+    <h1>SmartLine</h1>
+    <p>Su usuario ha sido confirmado por un administrador</p>
     <p>A partir de ahora puede ingresar al sistema y operar con normalidad</p>
-    <p>Haz click en el siguiente link para iniciar sesión</p>
+    <p>Haga click en el siguiente link para iniciar sesión</p>
     <a href="{{ route('login') }}">{{ route('login') }}</a>
 </div>

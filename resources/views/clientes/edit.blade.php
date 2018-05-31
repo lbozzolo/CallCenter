@@ -120,21 +120,21 @@
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('provincia', 'Provincia') !!}
-                                    {!! Form::select('provincia', $provincias, ($cliente->domicilio)? $cliente->domicilio->provincia->id : null, ['class' => 'form-control select2', 'id' => 'provincia']) !!}
+                                    {!! Form::select('provincia', $provincias, ($cliente->domicilio && $cliente->domicilio->provincia)? $cliente->domicilio->provincia->id : null, ['class' => 'form-control select2', 'id' => 'provincia', 'placeholder' => '']) !!}
                                 </div>
 
 
                                 <div class="form-group" id="partidoDiv">
                                     @if(isset($partidos))
                                         {!! Form::label('partido', 'Partido', ['id' => 'partidoLabel']) !!}
-                                        {!! Form::select('partido', $partidos, $cliente->domicilio->partido->id, ['class' => 'form-control']) !!}
+                                        {!! Form::select('partido', $partidos, ($cliente->domicilio && $cliente->domicilio->partido)? $cliente->domicilio->partido->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
                                     @endif
                                 </div>
 
                                 <div class="form-group" id="localidadDiv">
                                     @if(isset($localidades))
                                         {!! Form::label('localidad', 'Localidad', ['id' => 'localidadLabel']) !!}
-                                        {!! Form::select('localidad', $localidades, $cliente->domicilio->localidad->id, ['class' => 'form-control']) !!}
+                                        {!! Form::select('localidad', $localidades, ($cliente->domicilio && $cliente->domicilio->localidad)? $cliente->domicilio->localidad->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
                                     @endif
                                 </div>
 
@@ -143,7 +143,7 @@
                         </div>
 
                         {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-                        <a href="{{ route('clientes.index') }}" class="btn btn-default">Cerrar</a>
+                        <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default">Cerrar</a>
 
 
                     </div>

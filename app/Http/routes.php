@@ -14,7 +14,7 @@
 require(__DIR__ . '/Routes/auth.php');
 
 
-Route::group(['middleware' => ['auth', 'new.user', 'XSS']], function () {
+Route::group(['middleware' => ['auth', 'new.user']], function () {
 
 
     Route::get('/', ['as' => '/', 'uses' => 'DashboardController@index']);

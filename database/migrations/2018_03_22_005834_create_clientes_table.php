@@ -24,7 +24,7 @@ class CreateClientesTable extends Migration
             $table->string('dni');
             $table->string('referencia');
             $table->string('observaciones');
-            $table->integer('puntos');
+            $table->integer('puntos')->nullable();
             $table->integer('estado_id')->unsigned();
             $table->softDeletes();
 
