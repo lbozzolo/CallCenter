@@ -2,61 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="243b5206-411e-4ce4-90f1-8f9603771e18" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/errors/403.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/panel.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/partials/listado-clientes.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/partials/listado-productos.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/partials/panel-cierre-venta.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/partials/panel-cliente.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/seleccion-cliente.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/llamadas/seleccion-producto.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/users/partials/labels-roles-inline.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Cliente.php" afterPath="$PROJECT_DIR$/app/Entities/Cliente.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Producto.php" afterPath="$PROJECT_DIR$/app/Entities/Producto.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Venta.php" afterPath="$PROJECT_DIR$/app/Entities/Venta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/LlamadasController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/LlamadasController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductosController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/RolesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/RolesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/VentasController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/VentasController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Repositories/ClienteRepo.php" afterPath="$PROJECT_DIR$/app/Http/Repositories/ClienteRepo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php" afterPath="$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateClienteRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateClienteRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Routes/llamadas.php" afterPath="$PROJECT_DIR$/app/Http/Routes/llamadas.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_03_22_003504_create_ventas_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_03_22_003504_create_ventas_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_03_22_004017_create_productos_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_03_22_004017_create_productos_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_05_07_120244_create_domicilios_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_05_07_120244_create_domicilios_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/compras.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/compras.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/partials/formulario-editar.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/partials/formulario-editar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/partials/navbar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/reclamos.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/reclamos.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/emails/confirmación-usuario.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/confirmación-usuario.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/emails/new-user.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/new-user.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/emails/password.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/password.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/llamadas/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/llamadas/partials/navbar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/nuevo.blade.php" afterPath="$PROJECT_DIR$/resources/views/nuevo.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/permissions/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/permissions/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/permissions/partials/assign-permissions.blade.php" afterPath="$PROJECT_DIR$/resources/views/permissions/partials/assign-permissions.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/productos/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/productos/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/productos/partials/listado-productos.blade.php" afterPath="$PROJECT_DIR$/resources/views/productos/partials/listado-productos.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/productos/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/productos/partials/navbar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/productos/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/productos/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/roles/permissions.blade.php" afterPath="$PROJECT_DIR$/resources/views/roles/permissions.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/partials/navbar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/permissions.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/permissions.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/profile.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/profile.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php" afterPath="$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -78,7 +24,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UsersController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UsersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -93,7 +39,7 @@
       <file leaf-file-name="panel.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/llamadas/panel.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="765">
               <caret line="45" column="88" lean-forward="false" selection-start-line="45" selection-start-column="88" selection-end-line="45" selection-end-column="88" />
               <folding />
             </state>
@@ -110,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="panel-producto.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="panel-producto.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="42" column="70" lean-forward="false" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
+            <state relative-caret-position="221">
+              <caret line="13" column="102" lean-forward="false" selection-start-line="13" selection-start-column="102" selection-end-line="13" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -133,18 +79,8 @@
       <file leaf-file-name="VentasController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VentasController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="40" column="60" lean-forward="false" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VentaRepo.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="476">
+              <caret line="43" column="7" lean-forward="true" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -244,10 +180,10 @@
         <option value="$PROJECT_DIR$/database/migrations/2018_03_22_003504_create_ventas_table.php" />
         <option value="$PROJECT_DIR$/app/Entities/Venta.php" />
         <option value="$PROJECT_DIR$/resources/views/llamadas/panel.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/VentasController.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php" />
       </list>
     </option>
   </component>
@@ -263,7 +199,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-6" />
     <option name="y" value="1" />
     <option name="width" value="1386" />
@@ -296,12 +232,6 @@
               <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
               <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entities" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
@@ -344,6 +274,17 @@
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Routes" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="database" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="database" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="seeds" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
@@ -464,8 +405,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -541,18 +482,19 @@
       <workItem from="1527541075917" duration="19403000" />
       <workItem from="1527604626234" duration="15405000" />
       <workItem from="1527692168081" duration="695000" />
+      <workItem from="1527766967001" duration="980000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="932676000" />
+    <option name="totallyTimeSpent" value="933656000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27013177" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27086383" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -616,7 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28">
           <caret line="64" column="19" lean-forward="true" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -781,7 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="16" column="49" lean-forward="false" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -825,7 +765,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -884,7 +823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="196" lean-forward="false" selection-start-line="18" selection-start-column="196" selection-end-line="18" selection-end-column="196" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -906,7 +844,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="129" lean-forward="false" selection-start-line="9" selection-start-column="129" selection-end-line="9" selection-end-column="129" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -922,24 +859,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/llamadas/panel.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="765">
           <caret line="45" column="88" lean-forward="false" selection-start-line="45" selection-start-column="88" selection-end-line="45" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" column="70" lean-forward="false" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VentasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="40" column="60" lean-forward="false" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -956,7 +877,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -964,15 +884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -983,6 +894,30 @@
           <folding>
             <element signature="e#5167#5551#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VentasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="43" column="7" lean-forward="true" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/llamadas/partials/panel-producto.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="102" lean-forward="false" selection-start-line="13" selection-start-column="102" selection-end-line="13" selection-end-column="102" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -11,7 +11,7 @@
                     <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
                 @endforeach
                 <br>
-                <span class="text-info pull-right" style="font-size: 2em">{!! ($producto->precio)? "$".$producto->precio : '' !!}</span>
+                <span class="text-info pull-right" style="font-size: 2em">{!! ($producto->precio)? "$ ".$producto->precio : '' !!}</span>
                 <h4>{!! $producto->nombre !!}|{!! ($producto->marca)? $producto->marca->nombre : '' !!}</h4>
             </li>
             <li class="list-group-item">
