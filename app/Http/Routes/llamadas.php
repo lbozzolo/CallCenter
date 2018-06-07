@@ -25,8 +25,18 @@ Route::get('llamadas/llamar/seleccion-producto/{idCliente}', [
     'uses' => 'LlamadasController@seleccionProducto'
 ]);
 
+Route::get('llamadas/agregar-producto', [
+    'as' => 'llamadas.agregar.producto',
+    'uses' => 'LlamadasController@agregarProducto'
+]);
+
 Route::get('llamadas/llamar/panel/{idCliente}/{idProducto}', [
     'as' => 'llamadas.panel',
     'uses' => 'LlamadasController@panel'
+]);
+
+Route::get('llamadas/{id}/show', [
+    'as' => 'llamadas.show',
+    'uses' => 'LlamadasController@show'
 ]);
 

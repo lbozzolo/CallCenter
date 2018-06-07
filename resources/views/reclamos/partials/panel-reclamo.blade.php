@@ -7,7 +7,7 @@
         <span>
             @if($reclamoFecha->tipo == 'cliente')
                 acerca del producto {!! ucfirst($reclamoFecha->venta->producto->nombre) !!} ({!! $reclamoFecha->venta->producto->marca->nombre !!})
-                <a href="{{ route('productos.show', $reclamoFecha->venta->producto->id) }}" title="Ver Producto"><i class="fa fa-user"></i></a>
+                <a href="{{ route('productos.show', $reclamoFecha->venta->producto->id) }}" title="Ver Producto"> <i class="fa fa-briefcase"></i></a>
             @else
                 realizado por {!! $reclamoFecha->venta->cliente->full_name !!}
                 <a href="{{ route('clientes.show', $reclamoFecha->venta->cliente->id) }}" title="Ver Cliente"><i class="fa fa-user"></i></a>

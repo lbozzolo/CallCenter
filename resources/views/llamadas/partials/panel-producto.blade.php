@@ -1,63 +1,61 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProducto" aria-expanded="false" aria-controls="collapseCategoria">
         <small class="pull-right label label-default">stock: {!! ($producto->stock)? $producto->stock : '' !!}</small>
-        <h3 class="panel-title">Producto</h3>
-    </div>
-    <div class="panel-body">
+        <h3 class="panel-title">
+            Producto: {!! ucfirst($producto->nombre) !!} ({!! ($producto->marca)? $producto->marca->nombre : '' !!})
+            <i class="fa fa-caret-down"></i>
+        </h3>
 
-        <ul class="list-unstyled">
-            <li class="list-group-item">
+    </div>
+    <div class="panel-body " id="collapseProducto" aria-labelledby="headingOne" data-parent="#accordion">
+
+            <div>
                 @foreach($producto->categorias as $categoria)
                     <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
                 @endforeach
                 <br>
                 <span class="text-info pull-right" style="font-size: 2em">{!! ($producto->precio)? "$ ".$producto->precio : '' !!}</span>
-                <h4>{!! $producto->nombre !!}|{!! ($producto->marca)? $producto->marca->nombre : '' !!}</h4>
-            </li>
-            <li class="list-group-item">
+                <h4>{!! ucfirst($producto->nombre) !!}, {!! ($producto->marca)? $producto->marca->nombre : '' !!}</h4>
+            </div>
+            <div>
                 <strong>Descripción</strong><br>
                 {!! ($producto->descripcion)? $producto->descripcion : '' !!}
-            </li>
-            <li class="list-group-item">
-                <div>Fecha de inicio: {!! ($producto->fecha_inicio)? $producto->fecha_inicio_formatted : '' !!}</div>
-                <div>Fecha de finalización: {!! ($producto->fecha_finalizacion)? $producto->fecha_finalizacion_formatted : '' !!}</div>
-            </li>
-            <li class="list-group-item">
+            </div>
+            <hr>
+            <div>
                 <strong>Medida</strong>
                 {!! ($producto->cantidad_medida)? $producto->cantidad_medida : '' !!}
                 {!! ($producto->unidadMedida)? $producto->unidadMedida->nombre : '' !!}
-            </li>
+            </div>
             @if($producto->prospecto)
-                <li class="list-group-item">
-                <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseComponentes" aria-expanded="false" aria-controls="collapseCategoria">
-                    <span class="text-primary">Prospecto (componentes)</span>
-                    {{--<i class="fa fa-caret-down "></i>--}}
-                </span>
+                <div>
+                    <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseComponentes" aria-expanded="false" aria-controls="collapseComponentes">
+                        <span class="text-primary">Prospecto (componentes)</span>
+                        {{--<i class="fa fa-caret-down "></i>--}}
+                    </span>
                     <div class="list-unstyled collapse"  id="collapseComponentes" aria-labelledby="headingOne" data-parent="#accordion">
                         {!! $producto->prospecto !!}
                     </div>
-                </li>
+                </div>
             @endif
-            <li class="list-group-item">
-
-                    {!! Form::label('observaciones', 'Observaciones / formas de uso') !!}
-                    {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '6']) !!}
-
-            </li>
+            <div>
+                {!! Form::label('observaciones', 'Observaciones / formas de uso') !!}
+                {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '6']) !!}
+            </div>
             @if(count($producto->etapas) > 0)
-                <li class="list-group-item">
+                <div>
                     Etapas:
                     @foreach($producto->etapas as $etapa)
                         <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $etapa->nombre !!}</label>
                     @endforeach
-                </li>
+                </div>
             @endif
             @if($producto->institucion_id)
-                <li class="list-group-item">
+                <div>
                     Institución: {!! ($producto->institucion_id)? $producto->institucion->nombre : '<em class="text-muted">(sin datos)</em>' !!}
-                </li>
+                </div>
             @endif
-        </ul>
+
 
     </div>
 </div>

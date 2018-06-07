@@ -196,4 +196,30 @@ class ProductosController extends Controller
         return redirect()->route('productos.index')->with('ok', 'El producto ha sido '.$message.' con éxito');
     }
 
+    public function buscar(Request $request)
+    {
+        $valor = $request->get('valor');
+
+        if(empty($valor)){
+            return response()->json([]);
+        }
+
+        //$productos = Producto::where('nombre','like', '%'.$valor.'%')
+        $productos = Producto::with('marca', 'categorias')
+            ->where('nombre','like', '%'.$valor.'%')
+            //->orWhere('descripcion', 'like','%'.$valor.'%')
+            ->get();
+
+        return response()->json($productos);
+
+    }
+
+    public function prospecto(Request $request)
+    {
+        $producto = Producto::find($request->producto_id);
+        $prospecto = $producto->prospecto;
+
+        return response()->json($prospecto);
+    }
+
 }

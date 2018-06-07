@@ -111,6 +111,8 @@
 
 
 {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
+{{--
 <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default">Cerrar</a>
+--}}
 
 {!! Form::close() !!}

@@ -24,7 +24,7 @@ class ImagenesController extends Controller
 
         // Redirección si supera el máximo de fotos permitido
         if($imageable->images->count() >= config('sistema.imagenes.MAX_NUMBER_IMAGES'))
-            return redirect()->back()->withErrors('El número máximo de fotos permitido es 7. Elimine una foto y vuelva a intentarlo');
+            return redirect()->back()->withErrors('El número máximo de fotos permitido es '.config('sistema.imagenes.MAX_NUMBER_IMAGES').'. Elimine una foto y vuelva a intentarlo');
 
         if($request->file('img')){
 

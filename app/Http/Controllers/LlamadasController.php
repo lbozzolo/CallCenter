@@ -4,10 +4,14 @@ namespace SmartLine\Http\Controllers;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use SmartLine\Entities\EstadoCliente;
 use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Llamada;
 use SmartLine\Entities\Producto;
+use SmartLine\Entities\Provincia;
+use SmartLine\Entities\Partido;
+use SmartLine\Entities\Localidad;
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
 
@@ -68,22 +72,62 @@ class LlamadasController extends Controller
     public function seleccionCliente()
     {
         $clientes = Cliente::with('estado')->get();
-        return view('llamadas.seleccion-cliente', compact('clientes'));
+        $estados = EstadoCliente::lists('nombre', 'id');
+        return view('llamadas.seleccion-cliente', compact('clientes', 'estados'));
     }
 
     public function seleccionProducto($idCliente)
     {
         $cliente = Cliente::find($idCliente);
         $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
-        return view('llamadas.seleccion-producto', compact('productos', 'cliente'));
+
+        $estados = EstadoCliente::lists('nombre', 'id');
+        $provincias = Provincia::lists('provincia', 'id');
+        $partidos = Partido::lists('partido', 'id', 'codProvincia');
+        $localidades = Localidad::lists('localidad', 'id', 'codProvincia');
+
+        if($cliente->domicilio){
+            if($cliente->domicilio->provincia){
+                $provinciaCliente = Provincia::find($cliente->domicilio->provincia->id);
+                $partidos = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
+            }
+            if($cliente->domicilio->partido){
+                $partidoCliente = Partido::find($cliente->domicilio->partido->id);
+                $localidades = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
+            }
+
+        }
+
+        return view('llamadas.seleccion-producto', compact('productos', 'cliente', 'estados', 'provincias', 'partidos', 'localidades'));
+    }
+
+    public function agregarProducto()
+    {
+        dd('agregar producto');
     }
 
     public function panel($idCliente, $idProducto)
     {
         $cliente = Cliente::find($idCliente);
         $producto = Producto::find($idProducto);
+        $estados = EstadoCliente::lists('nombre', 'id');
+        $provincias = Provincia::lists('provincia', 'id');
+        $partidos = Partido::lists('partido', 'id', 'codProvincia');
+        $localidades = Localidad::lists('localidad', 'id', 'codProvincia');
 
-        return view('llamadas.panel', compact('cliente', 'producto'));
+        if($cliente->domicilio){
+            if($cliente->domicilio->provincia){
+                $provinciaCliente = Provincia::find($cliente->domicilio->provincia->id);
+                $partidos = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
+            }
+            if($cliente->domicilio->partido){
+                $partidoCliente = Partido::find($cliente->domicilio->partido->id);
+                $localidades = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
+            }
+
+        }
+
+        return view('llamadas.panel', compact('cliente', 'producto', 'estados', 'provincias', 'partidos', 'localidades'));
     }
 
     /**

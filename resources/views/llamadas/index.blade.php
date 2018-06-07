@@ -1,29 +1,17 @@
-@extends('base')
+@extends('llamadas.base')
 
-@section('content')
+@section('titulo')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
+    <h2>Llamadas<span class="text-muted"> / {!! $llamadas->title !!}</span></h2>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>Llamadas<span class="text-muted"> / {!! $llamadas->title !!}</span></h2>
-                        @include('llamadas.partials.navbar')
-                    </div>
-                </div>
+@endsection
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                @include('llamadas.partials.listado-llamadas')
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
+@section('contenido')
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @include('llamadas.partials.listado-llamadas')
         </div>
     </div>
 
@@ -58,8 +46,6 @@
 
 
         });
-
-
 
     </script>
 

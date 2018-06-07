@@ -64,3 +64,13 @@ Route::get('productos/{id}/imagenes', [
     'as' => 'productos.imagenes',
     'uses' => 'ProductosController@adminImagenes'
 ]);
+
+Route::get('productos/buscar', [
+    'as' => 'productos.buscar',
+    'uses' => 'ProductosController@buscar'
+]);
+
+Route::get('productos/prospecto', [
+    'as' => 'productos.prospecto',
+    'uses' => 'ProductosController@prospecto'
+]);

@@ -1,57 +1,49 @@
-@extends('base')
+@extends('llamadas.base')
 
-@section('content')
+@section('titulo')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
+    <h2>Llamadas<span class="text-muted"> / realizar llamada</span></h2>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>Llamadas<span class="text-muted"> / realizar llamada</span></h2>
-                        @include('llamadas.partials.navbar')
+@endsection
+
+
+@section('contenido')
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <nav class="navbar navbar-default">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <div class="row">
+                        <ul class="nav navbar-nav col-lg-12">
+                            <li class="col-lg-4 text-center active"><a href="{{ route('llamadas.seleccion.cliente') }}">1. Seleccionar cliente</a></li>
+                            <li class="col-lg-4 text-center disabled"><a href="">2. Seleccionar producto</a></li>
+                            <li class="col-lg-4 text-center disabled"><a href="">3. Panel de llamada</a></li>
+                        </ul>
                     </div>
                 </div>
+            </nav>
 
-                <div class="panel panel-default">
-                    <div class="panel-body">
-
-                        <nav class="navbar navbar-default">
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                                <div class="row">
-                                    <ul class="nav navbar-nav col-lg-12">
-                                        <li class="col-lg-4 text-center active"><a href="{{ route('llamadas.seleccion.cliente') }}">1. Seleccionar cliente</a></li>
-                                        <li class="col-lg-4 text-center disabled"><a href="">2. Seleccionar producto</a></li>
-                                        <li class="col-lg-4 text-center disabled"><a href="">3. Panel de llamada</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Seleccione un cliente</h3>
-                                    </div>
-                                    <div class="panel-body">
-
-                                        @include('llamadas.partials.listado-clientes')
-
-                                    </div>
-                                </div>
-                            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Seleccione un cliente</h3>
                         </div>
+                        <div class="panel-body">
 
+                            @include('llamadas.partials.listado-clientes')
+
+                        </div>
                     </div>
                 </div>
-
-
             </div>
+
         </div>
     </div>
 
 @endsection
+
 
 @section('js')
 
@@ -81,8 +73,6 @@
 
 
         });
-
-
 
     </script>
 

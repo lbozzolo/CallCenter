@@ -22,9 +22,9 @@
                 <hr>
                 <div class="col-lg-6 col-md-6">
 
-                    <div class="panel panel-default">
+                    <div class="panel" style="border: 1px dashed lightgrey">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Imágenes</h3>
+                            <h3 class="-title">Imágenes</h3>
                         </div>
                         <div class="panel-body">
 
@@ -34,14 +34,14 @@
                                     <li>
                                         <span style="display: inline-block">
                                             <a href="" data-toggle="modal" data-target="#modalVerImage{!! $imagen->id !!}">
-                                            <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="{!! ($imagen->principal == 0)? 'opacity: 0.5;' : '' !!} height: 80px">
+                                            <img src="{{ route('imagenes.ver', $imagen->path) }}" alt="{!! $imagen->title !!}" class="img-responsive" style="{!! ($imagen->principal == 0)? 'opacity: 0.5;' : '' !!} height: 80px">
                                             </a>
                                         </span>
                                         <div class="modal fade" id="modalVerImage{!! $imagen->id !!}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="margin: 0px auto">
+                                                        <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" alt="{!! $imagen->title !!}" style="margin: 0px auto">
                                                     </div>
                                                     <div class="modal-footer">
 
@@ -83,7 +83,7 @@
                                 </ul>
                             @else
 
-                                <span class="text-muted">Este producto todavía no tiene imágenes.</span>
+                                <small class="text-muted">Este producto todavía no tiene imágenes.</small>
 
                             @endif
 
