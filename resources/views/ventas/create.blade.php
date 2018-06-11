@@ -2,18 +2,29 @@
 
 @section('titulo')
 
-    <h2>Ventas<span class="text-muted">/ {!! $ventas->title !!}</span></h2>
+    <h2>Ventas<span class="text-muted">/ Seleccionar-cliente</span></h2>
 
 @endsection
 
 @section('contenido')
 
     <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    @include('ventas.partials.listado-ventas')
+        <div class="container">
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Seleccione un cliente</h3>
+                            </div>
+                            <div class="panel-body">
+                                @include('ventas.partials.listado-clientes')
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -23,11 +34,10 @@
 
 @section('js')
 
-    <script src="{{ asset('js/estados-ventas.js') }}"></script>
     <script>
 
         $(document).ready(function() {
-            $('#table-ventas').DataTable({
+            $('#table-clientes').DataTable({
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No se encontraron resultados",
@@ -44,12 +54,14 @@
                     }
                 }
             });
-            $("#div-table-ventas").show();
+            $("#div-table-clientes").show();
             $(".overlay").hide();
 
 
 
         });
+
+
 
     </script>
 

@@ -1,17 +1,17 @@
 
 {!! Form::model($venta, ['method' => 'put', 'url' => route('ventas.update', $venta->id), 'class' =>'form']) !!}
 
-@if($etapas->count())
+{{--@if($etapas->count())
     <div class="form-group">
         {!! Form::label('etapa_id', 'Etapa') !!}
         {!! Form::select('etapa_id', $etapas, null, ['class' => 'form-control', 'placeholder' => '']) !!}
     </div>
-@endif
+@endif--}}
 
-<div class="form-group">
-    {!! Form::label('metodo_pago_id', 'Método de pago') !!}
-    {!! Form::select('metodo_pago_id', $metodosPago,  null, ['class' => 'form-control', 'id' => 'metodoPago']) !!}
-</div>
+    <div class="form-group">
+        {!! Form::label('metodo_pago_id', 'Método de pago') !!}
+        {!! Form::select('metodo_pago_id', $metodosPago,  null, ['class' => 'form-control', 'id' => 'metodoPago']) !!}
+    </div>
 
 
     <div id="conTarjeta" style="display:none">

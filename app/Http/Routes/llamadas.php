@@ -15,6 +15,13 @@ Route::get('llamadas/reclamos', [
     'uses' => 'LlamadasController@indexReclamos'
 ]);
 
+Route::get('llamadas/{id}/show', [
+    'as' => 'llamadas.show',
+    'uses' => 'LlamadasController@show'
+]);
+
+
+//Realizar venta
 Route::get('llamadas/llamar/seleccion-cliente', [
     'as' => 'llamadas.seleccion.cliente',
     'uses' => 'LlamadasController@seleccionCliente'
@@ -35,8 +42,5 @@ Route::get('llamadas/llamar/panel/{idCliente}/{idProducto}', [
     'uses' => 'LlamadasController@panel'
 ]);
 
-Route::get('llamadas/{id}/show', [
-    'as' => 'llamadas.show',
-    'uses' => 'LlamadasController@show'
-]);
+
 

@@ -13,7 +13,8 @@ class EstadosVentasTableSeeder extends Seeder
     {
         DB::table('estados_ventas')->insert([
             ['nombre' => 'Iniciada', 'slug' => 'iniciada',],
-            ['nombre' => 'Auditada', 'slug' => 'auditada',],
+            ['nombre' => 'Cancelada', 'slug' => 'cancelada',],
+            ['nombre' => 'Auditable', 'slug' => 'auditable',],
             ['nombre' => 'Confirmada', 'slug' => 'confirmada',],
             ['nombre' => 'Rechazada', 'slug' => 'rechazada',],
             ['nombre' => 'Cobrada', 'slug' => 'cobrada',],

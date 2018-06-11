@@ -15,6 +15,17 @@ class Venta extends Entity
         return config('sistema.ventas.estados.'.$this->estado->slug);
     }
 
+    public function getImporteTotalAttribute()
+    {
+        $total = 0;
+        $productos = $this->productos;
+        foreach($productos as $producto){
+            $total = $total + $producto->precio;
+        }
+
+        return $total;
+    }
+
     // Relationships
     public function user()
     {
@@ -26,9 +37,9 @@ class Venta extends Entity
         return $this->belongsTo(EstadoVenta::class);
     }
 
-    public function producto()
+    public function productos()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsToMany(Producto::class);
     }
 
     public function llamada()

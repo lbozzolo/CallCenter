@@ -43,7 +43,13 @@ class DashboardController extends Controller
 
         $data = ['provincia' => 'C', 'codigoPostal' => '1405', 'peso' => '1.5', 'paquetes' => '20x3x5', 'direccionEnvio' => ''];
 
-        return redirect('../ws/cotizaciones/correos');
+        $total = 0;
+        $productos = Venta::find(2)->productos;
+        foreach($productos as $producto){
+            $total = $total + $producto->precio;
+        }
+
+        dd( $total );
 
     }
 

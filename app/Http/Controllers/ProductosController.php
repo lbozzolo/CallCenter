@@ -55,14 +55,17 @@ class ProductosController extends Controller
             return redirect()->back()->withErrors('La categoría es obligatoria');
         }
 
-        $fechaInicio = Carbon::createFromFormat('d/m/Y', $request->fecha_inicio)->toDateTimeString();
-        $fechaFinalizacion = Carbon::createFromFormat('d/m/Y', $request->fecha_finalizacion)->toDateTimeString();
+        if($request->fecha_inicio)
+            $fechaInicio = Carbon::createFromFormat('d/m/Y', $request->fecha_inicio)->toDateTimeString();
+
+        if($request->fecha_finalizacion)
+            $fechaFinalizacion = Carbon::createFromFormat('d/m/Y', $request->fecha_finalizacion)->toDateTimeString();
 
         $producto = Producto::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
-            'fecha_inicio' => ($request->fecha_inicio)? $fechaInicio : null,
-            'fecha_finalizacion' => ($request->fecha_finalizacion)? $fechaFinalizacion : null,
+            'fecha_inicio' => (isset($fechaInicio))? $fechaInicio : null,
+            'fecha_finalizacion' => (isset($fechaFinalizacion))? $fechaFinalizacion : null,
             'unidad_medida_id' => ($request->unidad_medida_id)? $request->unidad_medida_id : null,
             'cantidad_medida' => $request->cantidad_medida,
             'stock' => $request->stock,

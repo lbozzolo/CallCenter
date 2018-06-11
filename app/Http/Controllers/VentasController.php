@@ -4,10 +4,18 @@ namespace SmartLine\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use SmartLine\Entities\Cliente;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Etapa;
 use SmartLine\Entities\FormaPago;
+use SmartLine\Entities\Producto;
+use SmartLine\Entities\EstadoProducto;
+use SmartLine\Entities\EstadoCliente;
+use SmartLine\Entities\Provincia;
+use SmartLine\Entities\Partido;
+use SmartLine\Entities\Localidad;
+use Illuminate\Support\Facades\Auth;
 use SmartLine\Entities\MarcaTarjeta;
 use SmartLine\Entities\MetodoPago;
 use SmartLine\Entities\Promocion;
@@ -41,14 +49,63 @@ class VentasController extends Controller
         return view('ventas.index', compact('ventas', 'total'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function seleccionCliente()
     {
-        //
+        $clientes = Cliente::with('estado')->get();
+        $ventas = $this->ventaRepo->getVentasByEstado(null);
+        $total = $this->ventaRepo->totalesVentasByEstado();
+        return view('ventas.create', compact('clientes', 'ventas', 'total'));
+    }
+
+
+    public function seleccionProducto($idCliente)
+    {
+        $cliente = Cliente::find($idCliente);
+        $total = $this->ventaRepo->totalesVentasByEstado();
+        $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
+
+        /*$estados = EstadoCliente::lists('nombre', 'id');
+        $provincias = Provincia::lists('provincia', 'id');
+        $partidos = Partido::lists('partido', 'id', 'codProvincia');
+        $localidades = Localidad::lists('localidad', 'id', 'codProvincia');
+
+        if($cliente->domicilio){
+            if($cliente->domicilio->provincia){
+                $provinciaCliente = Provincia::find($cliente->domicilio->provincia->id);
+                $partidos = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
+            }
+            if($cliente->domicilio->partido){
+                $partidoCliente = Partido::find($cliente->domicilio->partido->id);
+                $localidades = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
+            }
+
+        }*/
+
+        return view('ventas.seleccion-producto', compact('productos', 'total', 'cliente'));
+    }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function create($idCliente, $idProducto)
+    {
+        $iniciada = EstadoVenta::where('slug', 'iniciada')->first();
+        $producto = Producto::find($idProducto);
+        $cliente = Cliente::find($idCliente);
+        $total = $this->ventaRepo->totalesVentasByEstado();
+
+        $venta = Venta::create([
+            'user_id' => Auth::user()->id,
+            'cliente_id' => $cliente->id,
+            'estado_id' => $iniciada->id
+        ]);
+
+        $venta->productos()->save($producto);
+
+        return view('ventas.panel', compact('cliente', 'producto', 'total'));
     }
 
     /**
@@ -72,12 +129,14 @@ class VentasController extends Controller
     {
         $data['venta'] = Venta::find($id);
         $producto = $data['venta']->producto;
-        $data['etapas'] = $producto->etapas->lists('nombre', 'id');
+        //$data['etapas'] = $producto->etapas->lists('nombre', 'id');
         $data['marcas'] = MarcaTarjeta::all();
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
+
+        $data['total'] = $this->ventaRepo->totalesVentasByEstado();
 
         return view('ventas.show')->with($data);
     }
@@ -86,8 +145,8 @@ class VentasController extends Controller
     {
         $data['venta'] = Venta::find($id);
         $data['cliente'] = $data['venta']->cliente;
-        $producto = $data['venta']->producto;
-        $data['etapas'] = $producto->etapas->lists('nombre', 'id');
+        /*$producto = $data['venta']->producto;
+        $data['etapas'] = $producto->etapas->lists('nombre', 'id');*/
         $data['marcas'] = MarcaTarjeta::all();
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');

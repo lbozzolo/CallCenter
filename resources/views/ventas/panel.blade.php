@@ -1,44 +1,29 @@
-@extends('base')
+@extends('ventas.base')
 
-@section('content')
+@section('titulo')
+
+    <h2>Ventas<span class="text-muted">/ Panel</span></h2>
+
+@endsection
+
+@section('contenido')
 
     <div class="row">
-        <div class="col-lg-12">
-            @include('productos.partials.navbar')
-
-
-        </div>
-    </div>
-    <div class="row">
-
         <div class="container">
-
             <div class="content">
-                <h2>
-                    Productos
-                    <span class="text-muted"> / {{ (Request::is('productos/inactivos'.'*') ? 'Inactivos' : 'Activos') }}</span>
-                </h2>
-                {{--<div class="row">
-                    <div class="col-lg-12">
-                        <h2>
-                            Productos
-                            <span class="text-muted"> / {{ (Request::is('productos/inactivos'.'*') ? 'Inactivos' : 'Activos') }}</span>
-                        </h2>
-
-                        @include('productos.partials.navbar')
-                    </div>
-                </div>--}}
 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Cliente: {!! $cliente->full_name !!} - Panel de venta</h3>
+                            </div>
                             <div class="panel-body">
-                                @include('productos.partials.listado-productos')
+                                Producto: {!! $producto->nombre !!}, {!! $producto->marca->nombre !!}
                             </div>
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -69,7 +54,6 @@
                     }
                 }
             });
-
             $("#div-table-productos").show();
             $(".overlay").hide();
 

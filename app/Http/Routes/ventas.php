@@ -5,8 +5,19 @@ Route::get('ventas/{estado?}', [
     'uses' => 'VentasController@index'
 ]);
 
-Route::get('ventas/crear', [
-    'as' => 'ventas.create',
+//Creación de venta
+Route::get('ventas/crear/seleccionar-cliente', [
+    'as' => 'ventas.seleccion.cliente',
+    'uses' => 'VentasController@seleccionCliente'
+]);
+
+Route::get('ventas/crear/seleccionar-producto/{idCliente}', [
+    'as' => 'ventas.seleccion.producto',
+    'uses' => 'VentasController@seleccionProducto'
+]);
+
+Route::get('ventas/crear/{idCliente}/{idProducto}', [
+    'as' => 'ventas.crear',
     'uses' => 'VentasController@create'
 ]);
 
@@ -14,6 +25,7 @@ Route::post('ventas/crear', [
     'as' => 'ventas.store',
     'uses' => 'VentasController@store'
 ]);
+
 
 Route::get('ventas/{id}/ver', [
     'as' => 'ventas.show',
