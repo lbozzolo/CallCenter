@@ -1,5 +1,10 @@
 <?php
 
+Route::get('ventas/choose-tag', [
+    'as' => 'ventas.choose.tag',
+    'uses' => 'VentasController@chooseTag'
+]);
+
 Route::get('ventas/{estado?}', [
     'as' => 'ventas.index',
     'uses' => 'VentasController@index'

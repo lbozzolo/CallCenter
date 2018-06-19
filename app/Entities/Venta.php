@@ -15,30 +15,30 @@ class Venta extends Entity
         return config('sistema.ventas.estados.'.$this->estado->slug);
     }
 
-    public function getImporteTotalAttribute($total = null)
+    public function getImporteTotalAttribute()
     {
+        $total = $this->total();
+
         if($this->interes())
-            $total = $this->total() + $this->interes();
+            $total += $this->interes();
 
         if($this->descuento())
-            $total = $this->total() - $this->descuento();
+            $total -= $this->descuento();
 
-        //return $total;
         return number_format($total, 2, ',', '.');
     }
 
     protected function total($total = 0)
     {
         foreach($this->productos as $producto){
-            $total = $total + $producto->precio;
+            $total += $producto->precio;
         }
         return $total;
     }
 
     protected function cuotas()
     {
-        //return ($this->datosTarjeta->formaPago)? $this->datosTarjeta->formaPago : null;
-        return $this->datosTarjeta->formaPago;
+        return ($this->datosTarjeta && $this->datosTarjeta->formaPago)? $this->datosTarjeta->formaPago : null;
     }
 
     protected function interes()

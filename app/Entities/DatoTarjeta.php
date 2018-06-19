@@ -20,7 +20,7 @@ class DatoTarjeta extends Entity
 
     public function formaPago()
     {
-        return $this->belongsTo(FormaPago::class);
+        return $this->belongsTo(FormaPago::class, 'forma_pago_id');
     }
 
 }

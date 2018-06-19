@@ -51,8 +51,14 @@ class VentasController extends Controller
     {
         $ventas = $this->ventaRepo->getVentasByEstado($estado);
         $total = $this->ventaRepo->totalesVentasByEstado();
+        $tags = EstadoVenta::lists('nombre', 'slug');
 
-        return view('ventas.index', compact('ventas', 'total'));
+        return view('ventas.index', compact('ventas', 'total', 'tags'));
+    }
+
+    public function chooseTag(Request $request)
+    {
+        return redirect()->route('ventas.index', $request->tag);
     }
 
 

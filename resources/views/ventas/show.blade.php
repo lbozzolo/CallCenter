@@ -58,7 +58,19 @@
                                 @endforeach
 
                                     <li class="list-group-item">
-                                        Total: <strong class="pull-right">${!! $venta->importe_total !!}</strong>
+                                        <div >Subtotal<strong class="pull-right">${!! $venta->total_venta !!}</strong></div>
+                                        @if($venta->interes_venta)
+                                            <div>Intereses <strong class="pull-right">${!! $venta->interes_venta !!}</strong></div>
+                                        @endif
+                                        @if($venta->descuento_venta)
+                                            <div>Descuentos <strong class="pull-right">${!! $venta->descuento_venta !!}</strong></div>
+                                        @endif
+                                        {{--<div >
+                                            Total: <span class="pull-right text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span>
+                                        </div>--}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        Total: <span class="pull-right text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span>
                                     </li>
 
                                 </ul>

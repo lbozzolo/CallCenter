@@ -8,6 +8,7 @@
     </div>
 @endif--}}
 
+
     <div class="form-group">
         {!! Form::label('metodo_pago_id', 'Método de pago') !!}
         {!! Form::select('metodo_pago_id', $metodosPago,  null, ['class' => 'form-control', 'id' => 'metodoPago']) !!}
@@ -30,10 +31,17 @@
         {!! Form::select('banco_id', $bancos, ($venta->datosTarjeta)? $venta->datosTarjeta->banco_id : null, ['id' => 'banco', 'class' => 'form-control select2 inputConTarjeta', 'placeholder' => '']) !!}
     </div>
 
+    @if($venta->datosTarjeta)
     <div class="form-group">
         {!! Form::label('cuotas', 'Cuotas') !!}
-        {!! Form::select('cuotas', $cuotas, ($venta->datosTarjeta->formaPago->cuota_cantidad), ['class' => 'form-control', 'placeholder' => '']) !!}
+        {!! Form::select('cuotas', $cuotas, ($venta->datosTarjeta->formaPago)? $venta->datosTarjeta->formaPago->cuota_cantidad : null, ['class' => 'form-control', 'placeholder' => '']) !!}
     </div>
+    @else
+    <div class="form-group">
+        {!! Form::label('cuotas', 'Cuotas') !!}
+        {!! Form::select('cuotas', $cuotas, '', ['class' => 'form-control', 'placeholder' => '']) !!}
+    </div>
+    @endif
 
     <div class="form-group">
         {!! Form::label('numero_tarjeta', 'Número de tarjeta') !!}

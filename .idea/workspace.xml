@@ -2,46 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="243b5206-411e-4ce4-90f1-8f9603771e18" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/FormasPagoController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Repositories/MarcaTarjetaRepo.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateDatosTarjetaRequest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Routes/formas-pago.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/buscador-productos.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/provincias-partidos-localidades.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tarjetas-de-credito.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/pagos/base.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/pagos/index.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/formulario-datos-tarjeta.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/navbar-panel.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/panel-cliente.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/panel-productos.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/DatoTarjeta.php" afterPath="$PROJECT_DIR$/app/Entities/DatoTarjeta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/FormaPago.php" afterPath="$PROJECT_DIR$/app/Entities/FormaPago.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/MarcaTarjeta.php" afterPath="$PROJECT_DIR$/app/Entities/MarcaTarjeta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Updateable.php" afterPath="$PROJECT_DIR$/app/Entities/Updateable.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Venta.php" afterPath="$PROJECT_DIR$/app/Entities/Venta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/VentasController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/VentasController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateClienteRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateClienteRequest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Routes/ventas.php" afterPath="$PROJECT_DIR$/app/Http/Routes/ventas.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/sistema/ventas.php" afterPath="$PROJECT_DIR$/config/sistema/ventas.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_03_22_003704_create_forma_pago_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_03_22_003704_create_forma_pago_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_03_22_003715_create_datos_tarjeta_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_03_22_003715_create_datos_tarjeta_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_03_22_004106_create_updateables_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_03_22_004106_create_updateables_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_05_07_120250_create_foreign_keys.php" afterPath="$PROJECT_DIR$/database/migrations/2018_05_07_120250_create_foreign_keys.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/estados-ventas.js" afterPath="$PROJECT_DIR$/public/js/estados-ventas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/partials/formulario-editar.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/partials/formulario-editar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/navbar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/productos/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/productos/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/productos/imagenes.blade.php" afterPath="$PROJECT_DIR$/resources/views/productos/imagenes.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/productos/partials/listado-productos.blade.php" afterPath="$PROJECT_DIR$/resources/views/productos/partials/listado-productos.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/panel.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/panel.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/partials/formulario-datos-tarjeta.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/formulario-datos-tarjeta.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/partials/formulario-editar.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/formulario-editar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/partials/listado-productos.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/listado-productos.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ventas/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/ventas/show.blade.php" />
     </list>
@@ -65,66 +32,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/ventas/show.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+              <folding>
+                <element signature="e#4021#4045#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="navbar.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" column="97" lean-forward="false" selection-start-line="29" selection-start-column="97" selection-end-line="29" selection-end-column="97" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#nav#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ventas.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Routes/ventas.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+            <state relative-caret-position="34">
+              <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="panel.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/ventas/panel.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2091">
-              <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="navbar-panel.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/navbar-panel.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="panel-productos.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="panel-productos.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/panel-productos.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="243" column="10" lean-forward="false" selection-start-line="243" selection-start-column="10" selection-end-line="243" selection-end-column="10" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="formulario-datos-tarjeta.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/formulario-datos-tarjeta.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="35" column="28" lean-forward="false" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
-              <folding>
-                <marker date="1529354186329" expanded="true" signature="584:792" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="598:790" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="975:1201" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="989:1199" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="1338:1527" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="2323:2618" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="2337:2616" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="2777:2985" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="2791:2983" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="3123:3318" ph="..." />
-                <marker date="1529354186329" expanded="true" signature="3477:3662" ph="..." />
-              </folding>
+            <state relative-caret-position="289">
+              <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,23 +79,11 @@
       <file leaf-file-name="Venta.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Entities/Venta.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="59" column="46" lean-forward="true" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
+            <state relative-caret-position="-216">
+              <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
               <folding>
-                <element signature="e#1137#1332#0#PHP" expanded="false" />
-                <element signature="e#1338#1539#0#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ventas.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/sistema/ventas.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="146" lean-forward="false" selection-start-line="18" selection-start-column="146" selection-end-line="18" selection-end-column="146" />
-              <folding>
-                <marker date="1529366753077" expanded="true" signature="611:1124" ph="..." />
+                <element signature="e#1067#1262#0#PHP" expanded="false" />
+                <element signature="e#1268#1469#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -157,12 +92,22 @@
       <file leaf-file-name="VentasController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VentasController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="330" column="0" lean-forward="false" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
+            <state relative-caret-position="459">
+              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding>
                 <element signature="e#46#64#0#PHP" expanded="true" />
-                <element signature="e#2255#3115#0#PHP" expanded="false" />
+                <element signature="e#2443#3303#0#PHP" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VentaRepo.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -230,11 +175,8 @@
         <option value="$PROJECT_DIR$/app/Entities/Entity.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PermissionsController.php" />
         <option value="$PROJECT_DIR$/resources/views/productos/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Routes/ventas.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_03_22_004106_create_updateables_table.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/ventas/show.blade.php" />
         <option value="$PROJECT_DIR$/public/js/buscador-productos.js" />
         <option value="$PROJECT_DIR$/app/Http/Requests/CreateClienteRequest.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/panel.blade.php" />
@@ -251,16 +193,19 @@
         <option value="$PROJECT_DIR$/database/migrations/2018_03_22_003715_create_datos_tarjeta_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_05_07_120250_create_foreign_keys.php" />
         <option value="$PROJECT_DIR$/app/Entities/FormaPago.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/CreateDatosTarjetaRequest.php" />
+        <option value="$PROJECT_DIR$/resources/views/ventas/partials/navbar-panel.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Repositories/MarcaTarjetaRepo.php" />
+        <option value="$PROJECT_DIR$/config/sistema/ventas.php" />
+        <option value="$PROJECT_DIR$/resources/views/ventas/partials/panel-productos.blade.php" />
         <option value="$PROJECT_DIR$/app/Entities/DatoTarjeta.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/partials/formulario-editar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/partials/formulario-datos-tarjeta.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Requests/CreateDatosTarjetaRequest.php" />
-        <option value="$PROJECT_DIR$/resources/views/ventas/partials/navbar-panel.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/VentasController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Repositories/MarcaTarjetaRepo.php" />
-        <option value="$PROJECT_DIR$/config/sistema/ventas.php" />
         <option value="$PROJECT_DIR$/app/Entities/Venta.php" />
-        <option value="$PROJECT_DIR$/resources/views/ventas/partials/panel-productos.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/ventas/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Routes/ventas.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/VentasController.php" />
+        <option value="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" />
       </list>
     </option>
   </component>
@@ -550,12 +495,12 @@
       <workItem from="1528237674913" duration="36063000" />
       <workItem from="1528406798840" duration="100169000" />
       <workItem from="1529017483494" duration="19735000" />
-      <workItem from="1529319740180" duration="23623000" />
+      <workItem from="1529319740180" duration="39987000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1152070000" />
+    <option name="totallyTimeSpent" value="1168434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -614,13 +559,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../mentores/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Updateable.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -691,13 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -893,34 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/DatoTarjeta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/formulario-editar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-          <folding>
-            <marker date="1529353538693" expanded="true" signature="756:964" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="770:962" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="1115:1341" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="1129:1339" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="1446:1635" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="1996:2291" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="2010:2289" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="2418:2626" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="2432:2624" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="2732:2927" ph="..." />
-            <marker date="1529353538693" expanded="true" signature="3054:3239" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/CreateDatosTarjetaRequest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="538">
@@ -929,34 +832,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Routes/ventas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/ventas/panel.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2091">
           <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/navbar-panel.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -977,17 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VentasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="330" column="0" lean-forward="false" selection-start-line="330" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
-          <folding>
-            <element signature="e#46#64#0#PHP" expanded="true" />
-            <element signature="e#2255#3115#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/sistema/ventas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -998,43 +866,125 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/DatoTarjeta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="64" lean-forward="false" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/formulario-editar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <marker date="1529417982369" expanded="true" signature="757:965" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="771:963" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="1116:1342" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="1130:1340" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="1447:1636" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="1770:1944" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="2278:2573" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="2292:2571" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="2700:2908" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="2714:2906" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="3014:3209" ph="..." />
+            <marker date="1529417982369" expanded="true" signature="3336:3521" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/formulario-datos-tarjeta.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="35" column="28" lean-forward="false" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+        <state relative-caret-position="527">
+          <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
           <folding>
-            <marker date="1529354186329" expanded="true" signature="584:792" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="598:790" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="975:1201" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="989:1199" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="1338:1527" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="2323:2618" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="2337:2616" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="2777:2985" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="2791:2983" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="3123:3318" ph="..." />
-            <marker date="1529354186329" expanded="true" signature="3477:3662" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="584:792" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="598:790" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="975:1201" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="989:1199" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="1338:1527" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="2663:2958" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="2677:2956" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="3117:3325" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="3131:3323" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="3463:3658" ph="..." />
+            <marker date="1529417982304" expanded="true" signature="3817:4002" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/navbar-panel.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/ventas/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding>
+            <element signature="e#4021#4045#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Routes/ventas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Venta.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="59" column="46" lean-forward="true" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
+        <state relative-caret-position="-216">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding>
-            <element signature="e#1137#1332#0#PHP" expanded="false" />
-            <element signature="e#1338#1539#0#PHP" expanded="false" />
+            <element signature="e#1067#1262#0#PHP" expanded="false" />
+            <element signature="e#1268#1469#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Repositories/VentaRepo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/VentasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="e#46#64#0#PHP" expanded="true" />
+            <element signature="e#2443#3303#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/panel-productos.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="243" column="10" lean-forward="false" selection-start-line="243" selection-start-column="10" selection-end-line="243" selection-end-column="10" />
+        <state relative-caret-position="289">
+          <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="97" lean-forward="false" selection-start-line="29" selection-start-column="97" selection-end-line="29" selection-end-column="97" />
           <folding>
-            <element signature="n#style#0;n#span#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#nav#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
