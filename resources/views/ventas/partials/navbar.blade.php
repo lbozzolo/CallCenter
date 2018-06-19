@@ -13,6 +13,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('ventas.index') }}" class="{{ (Request::is('ventas') ? 'navbar-item-selected' : '') }}"><small>Todas</small></a></li>
+                <li><a href="{{ route('ventas.index', 'cancelada') }}" class="{{ (Request::is('ventas/cancelada') ? 'navbar-item-selected' : '') }}"><small>Canceladas ({!! $total['cancelada'] !!})</small></a></li>
                 <li><a href="{{ route('ventas.index', 'auditable') }}" class="{{ (Request::is('ventas/auditable') ? 'navbar-item-selected' : '') }}"><small>Auditables ({!! $total['auditable'] !!})</small></a></li>
                 <li><a href="{{ route('ventas.index', 'confirmada') }}" class="{{ (Request::is('ventas/confirmada') ? 'navbar-item-selected' : '') }}"><small>Confirmadas ({!! $total['confirmada'] !!})</small></a></li>
                 <li><a href="{{ route('ventas.index', 'rechazada') }}" class="{{ (Request::is('ventas/rechazada') ? 'navbar-item-selected' : '') }}"><small>Rechazadas ({!! $total['rechazada'] !!})</small></a></li>

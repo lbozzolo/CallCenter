@@ -19,10 +19,14 @@ use Illuminate\Support\Facades\Auth;
 use SmartLine\Entities\MarcaTarjeta;
 use SmartLine\Entities\MetodoPago;
 use SmartLine\Entities\Promocion;
+use SmartLine\Entities\Updateable;
 use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\VentaRepo;
+use SmartLine\Http\Repositories\MarcaTarjetaRepo;
 use SmartLine\Entities\Banco;
 use SmartLine\Entities\ValidateCreditCard;
+use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
+use Illuminate\Support\Facades\Validator;
 
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
@@ -30,10 +34,12 @@ use SmartLine\Http\Controllers\Controller;
 class VentasController extends Controller
 {
     protected $ventaRepo;
+    protected $marcaTarjetaRepo;
 
-    public function __construct(VentaRepo $ventaRepo)
+    public function __construct(VentaRepo $ventaRepo, MarcaTarjetaRepo $marcaTarjetaRepo)
     {
         $this->ventaRepo = $ventaRepo;
+        $this->marcaTarjetaRepo = $marcaTarjetaRepo;
     }
 
     /**
@@ -90,22 +96,144 @@ class VentasController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function create($idCliente, $idProducto)
+    public function create(Request $request)
     {
         $iniciada = EstadoVenta::where('slug', 'iniciada')->first();
-        $producto = Producto::find($idProducto);
-        $cliente = Cliente::find($idCliente);
-        $total = $this->ventaRepo->totalesVentasByEstado();
+        $producto = Producto::find($request->id_producto);
+        $cliente = Cliente::find($request->id_cliente);
 
         $venta = Venta::create([
             'user_id' => Auth::user()->id,
             'cliente_id' => $cliente->id,
-            'estado_id' => $iniciada->id
+            'estado_id' => $iniciada->id //Por defecto se crea en estado INICIADA
         ]);
 
-        $venta->productos()->save($producto);
+        $venta->productos()->attach($producto);
 
-        return view('ventas.panel', compact('cliente', 'producto', 'total'));
+        return redirect()->route('ventas.panel', $venta->id);
+    }
+
+    public function panel($idVenta)
+    {
+        $data['venta'] = Venta::with('productos', 'cliente')->where('id', $idVenta)->first();
+        $data['total'] = $this->ventaRepo->totalesVentasByEstado();
+
+        $data['estados'] = EstadoCliente::lists('nombre', 'id');
+        $data['provincias'] = Provincia::lists('provincia', 'id');
+        $data['partidos'] = Partido::lists('partido', 'id', 'codProvincia');
+        $data['localidades'] = Localidad::lists('localidad', 'id', 'codProvincia');
+
+        $data['marcas'] = MarcaTarjeta::all();
+        $data['bancos'] = Banco::lists('nombre', 'id');
+        $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
+        $data['cuotas'] = config('sistema.ventas.cuotas');
+        $data['promociones'] = Promocion::lists('nombre', 'id');
+
+        if($data['venta']->cliente->domicilio){
+            if($data['venta']->cliente->domicilio->provincia){
+                $provinciaCliente = Provincia::find($data['venta']->cliente->domicilio->provincia->id);
+                $data['partidos'] = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
+            }
+            if($data['venta']->cliente->domicilio->partido){
+                $partidoCliente = Partido::find($data['venta']->cliente->domicilio->partido->id);
+                $data['localidades'] = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
+            }
+        }
+
+        return view('ventas.panel')->with($data);
+    }
+
+    public function agregarProducto(Request $request)
+    {
+        $producto = Producto::find($request->producto_id);
+        $venta = Venta::find($request->venta_id);
+        $venta->productos()->attach($producto);
+
+        return redirect()->route('ventas.panel', $venta->id)->with('Producto agregado con éxito');
+    }
+
+    public function editarModos(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'observaciones' => 'required|max:500',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        $venta = Venta::find($request->venta_id);
+        $venta->observaciones = $request->observaciones;
+        $venta->save();
+
+        return redirect()->route('ventas.panel', $venta->id)->with('Observaciones guardadas con éxito');
+    }
+
+    public function quitarProducto(Request $request)
+    {
+        $venta = Venta::find($request->venta_id);
+        $producto = Producto::find($request->producto_id);
+
+        $venta->productos()->detach($producto);
+        return redirect()->route('ventas.panel', $venta->id)->with('Producto quitado de la venta con éxita');
+    }
+
+    public function cancelar(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'motivo' => 'required|max:255',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        $venta = Venta::find($request->venta_id);
+        $cancelado = EstadoVenta::where('slug', 'cancelada')->first();
+        $motivo = $request->motivo;
+
+        $venta->updateable()->create([
+            'field' => 'estado_id',
+            'former_value' => $venta->estado_id,
+            'updated_value' => $cancelado->id,
+            'reason' => $motivo
+        ]);
+
+        $venta->estado_id = $cancelado->id;
+        $venta->save();
+
+        return redirect()->route('ventas.panel', $venta->id)->with('La venta ha sido cancelada');
+    }
+
+    public function aceptar(Request $request)
+    {
+        $venta = Venta::find($request->venta_id);
+        $auditable = EstadoVenta::where('slug', 'auditable')->first();
+
+        $venta->updateable()->create([
+            'field' => 'estado_id',
+            'former_value' => $venta->estado_id,
+            'updated_value' => $auditable->id,
+        ]);
+
+        $venta->estado_id = $auditable->id;
+        $venta->save();
+
+        return redirect()->route('ventas.panel', $venta->id)->with('La venta ha sido aceptada');
+    }
+
+    public function retomar(Request $request)
+    {
+        $venta = Venta::find($request->venta_id);
+
+        $venta->updateable()->create([
+            'field' => 'estado_id',
+            'former_value' => $venta->estado_id,
+            'updated_value' => $venta->former_status,
+        ]);
+
+        $venta->estado_id = $venta->former_status;
+        $venta->save();
+
+        return redirect()->route('ventas.panel', $venta->id)->with('La venta ha sido retomada');
     }
 
     /**
@@ -128,13 +256,14 @@ class VentasController extends Controller
     public function show($id)
     {
         $data['venta'] = Venta::find($id);
-        $producto = $data['venta']->producto;
+        //$producto = $data['venta']->producto;
         //$data['etapas'] = $producto->etapas->lists('nombre', 'id');
         $data['marcas'] = MarcaTarjeta::all();
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
+        $data['cuotas'] = config('sistema.ventas.cuotas');
 
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
 
@@ -179,21 +308,26 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateDatosTarjetaRequest $request, $id)
     {
         $venta = Venta::find($id);
         $venta->etapa_id = ($request->etapa_id)? $request->etapa_id : null;
         $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
         $venta->metodo_pago_id = $request->metodo_pago_id;
         $metodoPago = MetodoPago::find($request->metodo_pago_id);
+        $numeroCuotas = ($request->cuotas)? $request->cuotas : null;
 
         if($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito'){
 
             // Datos de tarjeta
-            $datosTarjeta = ($venta->datosTarjeta)? $venta->datosTarjeta : new DatoTarjeta();
             $marcaTarjeta = ($metodoPago->slug == 'credito')? $request->marca_id_credito : $request->marca_id_debito;
             $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
             $credit_card_user = $request->numero_tarjeta;
+
+            //Cantidad de cuotas
+            $cuotas = $this->marcaTarjetaRepo->hasCuotas($marcaTarjeta, $numeroCuotas);
+            if(!count($cuotas))
+                return redirect()->back()->withErrors('No existe la forma de pago en '.$numeroCuotas.' cuotas con la tarjeta seleccionada');
 
             //Validación
             $validacion = ValidateCreditCard::validateFormatCreditCard($credit_card_user);
@@ -203,12 +337,14 @@ class VentasController extends Controller
                 return redirect()->back()->withErrors('Tarjeta inválida. Revise los datos ingresados');
 
             //Actualización datos de tarjeta
+            $datosTarjeta = ($venta->datosTarjeta)? $venta->datosTarjeta : new DatoTarjeta();
             $datosTarjeta->marca_id = ($marcaTarjeta)? $marcaTarjeta : null;
             $datosTarjeta->banco_id = ($request->banco_id)? $request->banco_id : null;
             $datosTarjeta->numero_tarjeta = ($request->numero_tarjeta)? $request->numero_tarjeta : null;
             $datosTarjeta->fecha_expiracion = ($fechaExpiracion)? $fechaExpiracion : null;
             $datosTarjeta->titular = ($request->titular)? $request->titular : null;
             $datosTarjeta->codigo_seguridad = ($request->codigo_seguridad)? $request->codigo_seguridad : null;
+            $datosTarjeta->forma_pago_id = ($cuotas)? $cuotas->first()->id : null;
 
             //Asociación de datos de tarjeta a venta
             $datosTarjeta->venta()->associate($venta);
@@ -222,11 +358,31 @@ class VentasController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
+        $estado = EstadoVenta::find($request->estado_id);
+
+        if($estado->slug == 'cancelada'){
+            $validator = Validator::make($request->all(), [
+                'motivo' => 'required|max:255',
+            ]);
+
+            if ($validator->fails())
+                return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $venta = Venta::find($id);
-        $venta->estado_id = $request->estado_id;
+        $motivo = $request->motivo;
+
+        $venta->updateable()->create([
+            'field' => 'estado_id',
+            'former_value' => $venta->estado_id,
+            'updated_value' => $estado->id,
+            'reason' => ($motivo != '')? $motivo : null
+        ]);
+
+        $venta->estado_id = $estado->id;
         $venta->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('El estado de la venta ha sido actualizado');
     }
 
     /**

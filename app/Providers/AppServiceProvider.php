@@ -14,10 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Relation::morphMap([
-            'producto' => \SmartLine\Entities\Producto::class,
-            'user' => \SmartLine\User::class,
-        ]);
+        //
     }
 
     /**
@@ -27,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Relation::morphMap([
+            'producto' => \SmartLine\Entities\Producto::class,
+            'user' => \SmartLine\User::class,
+            'venta' => \SmartLine\Entities\Venta::class,
+        ]);
     }
 }

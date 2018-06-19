@@ -16,10 +16,10 @@ class CreateFormaPagoTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->tinyInteger('cuota_cantidad');
+            $table->integer('marca_tarjeta_id')->unsigned();
             $table->tinyInteger('cuota_valor');
-            $table->tinyInteger('interes');
-            $table->tinyInteger('descuento');
+            $table->tinyInteger('interes')->nullable();
+            $table->tinyInteger('descuento')->nullable();
 
             $table->timestamps();
         });

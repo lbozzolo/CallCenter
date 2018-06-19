@@ -12,4 +12,9 @@ class MarcaTarjeta extends Entity
         return $this->hasMany(Producto::class);
     }
 
+    public function formasPago()
+    {
+        return $this->hasMany(FormaPago::class);
+    }
+
 }

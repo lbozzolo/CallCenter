@@ -93,14 +93,14 @@
         <div class="form-group" id="partidoDiv">
             @if(isset($partidos))
             {!! Form::label('partido', 'Partido', ['id' => 'partidoLabel']) !!}
-            {!! Form::select('partido', $partidos, $cliente->domicilio->partido->id, ['class' => 'form-control']) !!}
+            {!! Form::select('partido', $partidos, $cliente->domicilio->partido->id, ['class' => 'form-control', 'placeholder' => '']) !!}
             @endif
         </div>
 
         <div class="form-group" id="localidadDiv">
             @if(isset($localidades))
             {!! Form::label('localidad', 'Localidad', ['id' => 'localidadLabel']) !!}
-            {!! Form::select('localidad', $localidades, $cliente->domicilio->localidad->id, ['class' => 'form-control']) !!}
+            {!! Form::select('localidad', $localidades, $cliente->domicilio->localidad->id, ['class' => 'form-control', 'placeholder' => '']) !!}
             @endif
         </div>
 

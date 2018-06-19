@@ -8,13 +8,9 @@
 
 @section('contenido')
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    @include('ventas.partials.listado-ventas')
-                </div>
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @include('ventas.partials.listado-ventas')
         </div>
     </div>
 
@@ -46,8 +42,6 @@
             });
             $("#div-table-ventas").show();
             $(".overlay").hide();
-
-
 
         });
 

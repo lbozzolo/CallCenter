@@ -20,6 +20,44 @@
                     <small class="text-muted"> / producto: {!! $producto->nombre !!}</small>
                 </h2>
                 <hr>
+
+                <div class="col-lg-6 col-md-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Subir imágenes</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="formularioFoto">
+
+
+                                {!! Form::open(['url' => route('imagenes.store', ['id' => $producto->id, 'model' => 'producto']), 'method' => 'post', 'class' => 'form', 'enctype' => 'multipart/form-data']) !!}
+
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputImagen']) !!}
+                                        <span class="input-group-btn">
+                                {!! Form::submit('Subir', ['class' => 'btn btn-info btn-flag']) !!}
+                                </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="titleDescription" style="display:none">
+                                    <label for="title"><small class="text-muted">Agregue una descripción de la foto</small></label>
+                                    {!! Form::text('title', null, ['class' => 'form-control']) !!}
+                                </div>
+
+                                {!! Form::close() !!}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-default">Cancelar</a>
+
+                </div>
+
                 <div class="col-lg-6 col-md-6">
 
                     <div class="panel" style="border: 1px dashed lightgrey">
@@ -91,43 +129,6 @@
                     </div>
 
 
-
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           <h3 class="panel-title">Subir imágenes</h3>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="formularioFoto">
-
-
-                                {!! Form::open(['url' => route('imagenes.store', ['id' => $producto->id, 'model' => 'producto']), 'method' => 'post', 'class' => 'form', 'enctype' => 'multipart/form-data']) !!}
-
-                                <div class="form-group">
-                                    <div class="input-group input-group-sm">
-                                        {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputImagen']) !!}
-                                        <span class="input-group-btn">
-                                {!! Form::submit('Subir', ['class' => 'btn btn-info btn-flag']) !!}
-                                </span>
-                                    </div>
-                                </div>
-                                <div class="form-group" id="titleDescription" style="display:none">
-                                    <label for="title"><small class="text-muted">Agregue una descripción de la foto</small></label>
-                                    {!! Form::text('title', null, ['class' => 'form-control']) !!}
-                                </div>
-
-                                {!! Form::close() !!}
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-default">Cancelar</a>
 
                 </div>
 

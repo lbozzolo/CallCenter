@@ -15,15 +15,66 @@ class Venta extends Entity
         return config('sistema.ventas.estados.'.$this->estado->slug);
     }
 
-    public function getImporteTotalAttribute()
+    public function getImporteTotalAttribute($total = null)
     {
-        $total = 0;
-        $productos = $this->productos;
-        foreach($productos as $producto){
+        if($this->interes())
+            $total = $this->total() + $this->interes();
+
+        if($this->descuento())
+            $total = $this->total() - $this->descuento();
+
+        //return $total;
+        return number_format($total, 2, ',', '.');
+    }
+
+    protected function total($total = 0)
+    {
+        foreach($this->productos as $producto){
             $total = $total + $producto->precio;
         }
-
         return $total;
+    }
+
+    protected function cuotas()
+    {
+        //return ($this->datosTarjeta->formaPago)? $this->datosTarjeta->formaPago : null;
+        return $this->datosTarjeta->formaPago;
+    }
+
+    protected function interes()
+    {
+        $cuotas = $this->cuotas();
+        $resto = ($cuotas && $cuotas->interes)? $cuotas->interes * $this->total() / 100 : null;
+
+        return $resto;
+    }
+
+    protected function descuento()
+    {
+        $cuotas = $this->cuotas();
+        $resto = ($cuotas && $cuotas->descuento)? $cuotas->descuento * $this->total() / 100 : null;
+
+        return $resto;
+    }
+
+    public function getInteresVentaAttribute()
+    {
+        return number_format($this->interes(), 2, ',', '.');
+    }
+
+    public function getDescuentoVentaAttribute()
+    {
+        return number_format($this->descuento(), 2, ',', '.');
+    }
+
+    public function getTotalVentaAttribute()
+    {
+        return number_format($this->total(), 2, ',', '.');
+    }
+
+    public function getFormerStatusAttribute()
+    {
+        return $this->updateable->where('field', 'estado_id')->last()->former_value;
     }
 
     // Relationships
@@ -82,4 +133,8 @@ class Venta extends Entity
         return $this->hasMany(Reclamo::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany('\SmartLine\Entities\Updateable', 'updateable');
+    }
 }
