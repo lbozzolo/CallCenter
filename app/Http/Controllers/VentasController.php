@@ -67,7 +67,8 @@ class VentasController extends Controller
         $clientes = Cliente::with('estado')->get();
         $ventas = $this->ventaRepo->getVentasByEstado(null);
         $total = $this->ventaRepo->totalesVentasByEstado();
-        return view('ventas.create', compact('clientes', 'ventas', 'total'));
+        $tags = EstadoVenta::lists('nombre', 'slug');
+        return view('ventas.create', compact('clientes', 'ventas', 'total', 'tags'));
     }
 
 
@@ -76,6 +77,7 @@ class VentasController extends Controller
         $cliente = Cliente::find($idCliente);
         $total = $this->ventaRepo->totalesVentasByEstado();
         $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
+        $tags = EstadoVenta::lists('nombre', 'slug');
 
         /*$estados = EstadoCliente::lists('nombre', 'id');
         $provincias = Provincia::lists('provincia', 'id');
@@ -94,7 +96,7 @@ class VentasController extends Controller
 
         }*/
 
-        return view('ventas.seleccion-producto', compact('productos', 'total', 'cliente'));
+        return view('ventas.seleccion-producto', compact('productos', 'total', 'cliente', 'tags'));
     }
 
     /**
@@ -123,6 +125,7 @@ class VentasController extends Controller
     {
         $data['venta'] = Venta::with('productos', 'cliente')->where('id', $idVenta)->first();
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
+        $data['tags'] = EstadoVenta::lists('nombre', 'slug');
 
         $data['estados'] = EstadoCliente::lists('nombre', 'id');
         $data['provincias'] = Provincia::lists('provincia', 'id');
@@ -272,6 +275,7 @@ class VentasController extends Controller
         $data['cuotas'] = config('sistema.ventas.cuotas');
 
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
+        $data['tags'] = EstadoVenta::lists('nombre', 'slug');
 
         return view('ventas.show')->with($data);
     }

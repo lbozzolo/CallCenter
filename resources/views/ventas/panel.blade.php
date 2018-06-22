@@ -126,7 +126,6 @@
 
         $(document).ready(function() {
 
-
             $('#div-table-resultados').hide();
             $('#sinresultados').hide();
 
@@ -151,7 +150,9 @@
                 }
             });
 
-            $("#btn_search").click(function( ev ){
+
+            $("#search").click(function( ev ){
+
 
                 $('#cargando').show();
                 ev.preventDefault();

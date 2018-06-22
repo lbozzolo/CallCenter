@@ -29,7 +29,7 @@
                                                                 <div class="input-group input-group-sm">
                                                                     {!! Form::text('nombre', null, ['class' => 'form-control', 'id' => 'producto_valor']) !!}
                                                                     <span class="input-group-btn">
-                                                                    <button type="button" class="btn btn-info btn-flat" id="btn_search">
+                                                                    <button type="button" class="btn btn-info btn-flat" id="search">
                                                                         <i class="fa fa-search"></i>
                                                                     </button>
                                                                 </span>
@@ -97,27 +97,47 @@
 
 <div class="row">
 
-    <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
+    <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
 
         @foreach($venta->productos as $producto)
 
-            @if(count($venta->productos) > 1)
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-            @else
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            @endif
 
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <div class="panel panel-default">
                     <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#producto{{ $producto->id }}" aria-expanded="false" aria-controls="producto{{ $producto->id }}">
                         <div class="row">
-                            <div class="col-lg-11">
+                            <div class="col-lg-10">
                                 <h4 class="panel-title">
                                     {!! ucfirst($producto->nombre) !!}
                                     {!! ($producto->marca)? ', '.$producto->marca->nombre : '' !!}
                                 </h4>
                             </div>
-                            <div class="col-lg-1 text-right"><i class="fa fa-caret-down"></i></div>
+                            <div class="col-lg-2 text-right">
+                                {{--<i class="fa fa-caret-down"></i>--}}
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#quitarProducto{{ $producto->id }}"><i class="fa fa-trash"></i></button>
+                                <div class="modal fade text-left" id="quitarProducto{{ $producto->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title text-danger"><i class="fa fa-exclamation-triangle"></i> Quitar producto</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>¿Está seguro que desea quitar el producto "{!! $producto->nombre !!}" de esta venta?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                {!! Form::open(['method' => 'DELETE', 'url' => route('ventas.quitar.producto')]) !!}
+                                                {!! Form::hidden('producto_id', $producto->id) !!}
+                                                {!! Form::hidden('venta_id', $venta->id) !!}
+                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                                {!! Form::submit('Quitar', ['class' => 'btn btn-danger']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="{{ ($venta->productos->count() > 1)? 'panel-body collapse' : 'panel-body' }}" id="producto{{ $producto->id }}" aria-labelledby="headingOne" data-parent="#accordion">
@@ -188,46 +208,80 @@
 
             </div>
             @if(count($venta->productos) > 1)
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        {{--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 
-                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#quitarProducto{{ $producto->id }}"><i class="fa fa-trash"></i></button>
-                <div class="modal fade" id="quitarProducto{{ $producto->id }}">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title text-danger"><i class="fa fa-exclamation-triangle"></i> Quitar producto</h4>
+                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#quitarProducto{{ $producto->id }}"><i class="fa fa-trash"></i></button>
+                            <div class="modal fade" id="quitarProducto{{ $producto->id }}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title text-danger"><i class="fa fa-exclamation-triangle"></i> Quitar producto</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>¿Está seguro que desea quitar el producto "{!! $producto->nombre !!}" de esta venta?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {!! Form::open(['method' => 'DELETE', 'url' => route('ventas.quitar.producto')]) !!}
+                                            {!! Form::hidden('producto_id', $producto->id) !!}
+                                            {!! Form::hidden('venta_id', $venta->id) !!}
+                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                            {!! Form::submit('Quitar', ['class' => 'btn btn-danger']) !!}
+                                            {!! Form::close() !!}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <p>¿Está seguro que desea quitar el producto "{!! $producto->nombre !!}" de esta venta?</p>
-                            </div>
-                            <div class="modal-footer">
-                                {!! Form::open(['method' => 'DELETE', 'url' => route('ventas.quitar.producto')]) !!}
-                                {!! Form::hidden('producto_id', $producto->id) !!}
-                                {!! Form::hidden('venta_id', $venta->id) !!}
-                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                {!! Form::submit('Quitar', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
+                        </div>--}}
             @endif
-            @if(count($venta->productos) > 1)
+            {{--@if(count($venta->productos) > 1)
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 text-right">
                     <span>${!! $producto->precio !!}</span>
                 </div>
-            @endif
+            @endif--}}
 
         @endforeach
 
     </div>
 
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-right">
+    <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 text-right">
 
         <ul class="list-unstyled">
+
+            @foreach($venta->productos as $producto)
+
+                <li class="list-group-item">
+                    <span class="pull-left"> {!! $producto->nombre !!}</span>
+                    <span class="">${!! $producto->precio !!}</span>
+                </li>
+
+            @endforeach
+
+            <li class="list-group-item">
+                <div >Subtotal<strong class="pull-right">${!! $venta->total_venta !!}</strong></div>
+                @if($venta->interes_venta)
+                    <div>Intereses ({!! $venta->datosTarjeta->formaPago->interes !!}%)<strong class="pull-right">+${!! $venta->interes_venta !!}</strong></div>
+                @endif
+                @if($venta->descuento_venta)
+                    <div>Descuentos ({!! $venta->datosTarjeta->formaPago->descuento !!}%)<strong class="pull-right">-${!! $venta->descuento_venta !!}</strong></div>
+                @endif
+                <div>IVA (21%) <strong class="pull-right" style="border-top: 1px solid lightgray">+${!! $venta->IVA !!}</strong> </div>
+            </li>
+            <li class="list-group-item">
+                <div class="text-right"><span class="text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span></div>
+                @if($venta->has_cuotas)
+                    <div class="text-right">
+                        <small class="text-muted">
+                            (p/cuota: <span class=" text-primary">${!! $venta->valor_cuota !!}</span>)
+                        </small>
+                    </div>
+                @endif
+            </li>
+
+        </ul>
+
+        {{--<ul class="list-unstyled">
             <li class="list-group-item"><em class="pull-left">subtotal</em> <strong>${!! $venta->total_venta !!}</strong></li>
             @if($venta->interes_venta)
                 <li class="list-group-item"><em class="pull-left">intereses</em> <strong>${!! $venta->interes_venta !!}</strong></li>
@@ -239,7 +293,7 @@
                 <em class="pull-left">total</em>
                 <span class="text-primary" style="font-size: 1.5em"> ${!! $venta->importe_total !!}</span>
             </li>
-        </ul>
+        </ul>--}}
 
     </div>
 

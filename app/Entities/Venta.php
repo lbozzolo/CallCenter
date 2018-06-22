@@ -17,6 +17,35 @@ class Venta extends Entity
 
     public function getImporteTotalAttribute()
     {
+        $total = $this->importeMasPromocion() + $this->iva();
+        return number_format($total, 2, ',', '.');
+    }
+
+    public function getIVAAttribute()
+    {
+        return number_format($this->iva(), 2, ',', '.');
+    }
+
+    public function getHasCuotasAttribute()
+    {
+        return $this->numeroCuotas();
+    }
+
+    public function getValorCuotaAttribute()
+    {
+        $total = $this->importeMasPromocion() + $this->iva();
+        $cuotas = $this->numeroCuotas();
+        $valorCuota = $total / $cuotas->cuota_cantidad;
+        return number_format($valorCuota, '2', ',', '.');
+    }
+
+    protected function iva()
+    {
+        return  21 * $this->importeMasPromocion() / 100;
+    }
+
+    protected function importeMasPromocion()
+    {
         $total = $this->total();
 
         if($this->interes())
@@ -25,7 +54,7 @@ class Venta extends Entity
         if($this->descuento())
             $total -= $this->descuento();
 
-        return number_format($total, 2, ',', '.');
+        return $total;
     }
 
     protected function total($total = 0)
@@ -36,14 +65,14 @@ class Venta extends Entity
         return $total;
     }
 
-    protected function cuotas()
+    protected function numeroCuotas()
     {
         return ($this->datosTarjeta && $this->datosTarjeta->formaPago)? $this->datosTarjeta->formaPago : null;
     }
 
     protected function interes()
     {
-        $cuotas = $this->cuotas();
+        $cuotas = $this->numeroCuotas();
         $resto = ($cuotas && $cuotas->interes)? $cuotas->interes * $this->total() / 100 : null;
 
         return $resto;
@@ -51,7 +80,7 @@ class Venta extends Entity
 
     protected function descuento()
     {
-        $cuotas = $this->cuotas();
+        $cuotas = $this->numeroCuotas();
         $resto = ($cuotas && $cuotas->descuento)? $cuotas->descuento * $this->total() / 100 : null;
 
         return $resto;
@@ -59,12 +88,12 @@ class Venta extends Entity
 
     public function getInteresVentaAttribute()
     {
-        return number_format($this->interes(), 2, ',', '.');
+        return ($this->interes())? number_format($this->interes(), 2, ',', '.') : null;
     }
 
     public function getDescuentoVentaAttribute()
     {
-        return number_format($this->descuento(), 2, ',', '.');
+        return ($this->descuento())? number_format($this->descuento(), 2, ',', '.') : null;
     }
 
     public function getTotalVentaAttribute()

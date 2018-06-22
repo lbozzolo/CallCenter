@@ -2,7 +2,7 @@
 
 @section('titulo')
 
-    <h2>Ventas<span class="text-muted">/ Seleccionar-cliente</span></h2>
+    <h2>Ventas<span class="text-muted">/ Llamar / Seleccionar-cliente</span></h2>
 
 @endsection
 

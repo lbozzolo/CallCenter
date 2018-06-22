@@ -10,16 +10,18 @@
 
         <div class="panel">
             <div class="panel-heading">
-                <div class="col-lg-9 col-md-12">
-                    <h3>
-                        <label class="label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</label>
-                        Venta #{!! $venta->id !!}
-                        <small class="text-muted"> / operador: {!! $venta->user->full_name !!}</small>
-                    </h3>
-                </div>
-                <div class="col-lg-3 col-md-12 text-right">
-                    Importe
-                    <span class="text-primary" style="font-size: 2.5em">${!! $venta->importe_total !!}</span>
+                <div class="row">
+                    <div class="col-lg-9 col-md-12">
+                        <h3>
+                            <label class="label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</label>
+                            Venta #{!! $venta->id !!}
+                            <small class="text-muted"> / operador: {!! $venta->user->full_name !!}</small>
+                        </h3>
+                    </div>
+                    <div class="col-lg-3 col-md-12 text-right">
+                        Importe
+                        <span class="text-primary" style="font-size: 2.5em">${!! $venta->importe_total !!}</span>
+                    </div>
                 </div>
             </div>
             <div class="panel-body">
@@ -60,17 +62,22 @@
                                     <li class="list-group-item">
                                         <div >Subtotal<strong class="pull-right">${!! $venta->total_venta !!}</strong></div>
                                         @if($venta->interes_venta)
-                                            <div>Intereses <strong class="pull-right">${!! $venta->interes_venta !!}</strong></div>
+                                            <div>Intereses ({!! $venta->datosTarjeta->formaPago->interes !!}%)<strong class="pull-right">+${!! $venta->interes_venta !!}</strong></div>
                                         @endif
                                         @if($venta->descuento_venta)
-                                            <div>Descuentos <strong class="pull-right">${!! $venta->descuento_venta !!}</strong></div>
+                                            <div>Descuentos ({!! $venta->datosTarjeta->formaPago->descuento !!}%)<strong class="pull-right">-${!! $venta->descuento_venta !!}</strong></div>
                                         @endif
-                                        {{--<div >
-                                            Total: <span class="pull-right text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span>
-                                        </div>--}}
+                                            <div>IVA (21%) <strong class="pull-right" style="border-top: 1px solid lightgray">+${!! $venta->IVA !!}</strong> </div>
                                     </li>
                                     <li class="list-group-item">
-                                        Total: <span class="pull-right text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span>
+                                        <div class="text-right"><span class="text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span></div>
+                                        @if($venta->has_cuotas)
+                                        <div class="text-right">
+                                            <small class="text-muted">
+                                                (p/cuota: <span class=" text-primary">${!! $venta->valor_cuota !!}</span>)
+                                            </small>
+                                        </div>
+                                        @endif
                                     </li>
 
                                 </ul>
