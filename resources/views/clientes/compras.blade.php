@@ -44,8 +44,9 @@
                     <table class="table" id="table-compras">
                         <thead>
                             <tr>
+                                <th>Id</th>
                                 <th>Estado</th>
-                                <th>Producto</th>
+                                <th>Productos</th>
                                 <th>Categorías</th>
                                 <th>Vendedor</th>
                                 <th>Fecha</th>
@@ -56,14 +57,26 @@
                         @forelse($compras as $venta)
 
                             <tr>
+                                <td>{!! $venta->id !!}</td>
                                 <td>
                                     <label class="label label-default estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! $venta->estado->nombre !!}</label>
                                 </td>
-                                <td>{!! $venta->producto->nombre !!}</td>
                                 <td>
-                                    @foreach($venta->producto->categorias as $categoria)
-                                        <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
+                                    <ul>
+                                        @foreach($venta->productos as $producto)
+                                            <li>{!! $producto->nombre !!}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>
+                                    @foreach($venta->productos as $producto)
+                                        @foreach($producto->categorias as $categoria)
+                                            <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
+                                        @endforeach
                                     @endforeach
+                                    {{--@foreach($venta->producto->categorias as $categoria)
+                                        <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
+                                    @endforeach--}}
                                 </td>
                                 <td>{!! $venta->user->full_name !!}</td>
                                 <td>{!! $venta->fecha_creado !!}</td>

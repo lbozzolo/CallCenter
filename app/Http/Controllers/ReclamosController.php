@@ -55,7 +55,7 @@ class ReclamosController extends Controller
      */
     public function create()
     {
-        //
+        return view('reclamos.crear');
     }
 
     /**
@@ -87,7 +87,7 @@ class ReclamosController extends Controller
     {
         $producto = Producto::find($id);
         $reclamos = $this->productoRepo->getProductoWithReclamos($id);
-        $reclamoFecha = ($reclamoFecha)? Reclamo::with('venta.cliente', 'venta.producto', 'venta.reclamos')->where('id', $reclamoFecha)->first() : null;
+        $reclamoFecha = ($reclamoFecha)? Reclamo::with('venta.cliente', 'venta.productos', 'venta.reclamos')->where('id', $reclamoFecha)->first() : null;
         $reclamoFecha->tipo = 'producto';
 
         return view('reclamos.show-producto-reclamos', compact('producto', 'reclamos', 'reclamoFecha'));

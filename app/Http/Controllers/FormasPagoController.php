@@ -12,8 +12,9 @@ class FormasPagoController extends Controller
     {
         $marcasTarjetas = MarcaTarjeta::lists('nombre', 'id');
         $tarjetas = MarcaTarjeta::with('formasPago')->get();
+        $cuotas = config('sistema.ventas.cuotas');
 
-        return view('pagos.index', compact('tarjetas', 'marcasTarjetas'));
+        return view('pagos.index', compact('tarjetas', 'marcasTarjetas', 'cuotas'));
     }
 
     public function store(Request $request)
@@ -26,8 +27,7 @@ class FormasPagoController extends Controller
         if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
 
-
-        $formaPago = FormaPago::create([
+        FormaPago::create([
             'marca_tarjeta_id' => $request->tarjeta_id,
             'cuota_cantidad' => $request->cuota_cantidad,
             'interes' => ($request->interes)? $request->interes : null,

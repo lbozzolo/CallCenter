@@ -36,27 +36,6 @@
             </tr>
 
         @endforeach
-       {{-- @foreach($ventas as $venta)
-
-            <tr>
-                <td>{!! $venta->producto->id !!}</td>
-                <td>
-                    <a href="{{ route('productos.show', $venta->producto->id) }}">
-                        {!! $venta->producto->nombre !!}
-                    </a>
-                </td>
-                <td>
-                    {!! ($venta->producto->marca)? $venta->producto->marca->nombre : '//' !!}
-                </td>
-                <td>{!! ($venta->producto->institucion)? $venta->producto->institucion->nombre : '//' !!}</td>
-                <td class="text-center">
-                    <a href="{{ route('reclamos.productos', $venta->producto->id) }}">
-                        ({!! ($venta->reclamos)? $venta->reclamos->count() : '//' !!})
-                    </a>
-                </td>
-            </tr>
-
-        @endforeach--}}
 
         </tbody>
     </table>

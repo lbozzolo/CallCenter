@@ -1,11 +1,5 @@
 @extends('ventas.base')
 
-@section('titulo')
-
-    <h2>VENTAS<small class="text-muted"> / {!! $venta->estado_plural !!}</small></h2>
-
-@endsection
-
 @section('contenido')
 
         <div class="panel">
@@ -19,8 +13,12 @@
                         </h3>
                     </div>
                     <div class="col-lg-3 col-md-12 text-right">
-                        Importe
                         <span class="text-primary" style="font-size: 2.5em">${!! $venta->importe_total !!}</span>
+                        @if($venta->has_cuotas)
+                            <div class="text-muted">
+                                {!! $venta->has_cuotas->cuota_cantidad !!} cuotas de <span class=" text-primary">${!! $venta->valor_cuota !!}</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -74,7 +72,7 @@
                                         @if($venta->has_cuotas)
                                         <div class="text-right">
                                             <small class="text-muted">
-                                                (p/cuota: <span class=" text-primary">${!! $venta->valor_cuota !!}</span>)
+                                                {!! $venta->has_cuotas->cuota_cantidad !!} cuotas de <span class=" text-primary">${!! $venta->valor_cuota !!}</span>
                                             </small>
                                         </div>
                                         @endif

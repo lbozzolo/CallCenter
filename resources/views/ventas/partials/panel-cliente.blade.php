@@ -98,14 +98,14 @@
             <div class="form-group" id="partidoDiv">
                 @if(isset($partidos))
                     {!! Form::label('partido', 'Partido', ['id' => 'partidoLabel']) !!}
-                    {!! Form::select('partido', $partidos, ($venta->cliente->domicilio->partido) ? $venta->cliente->domicilio->partido->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::select('partido', $partidos, ($venta->cliente->domicilio && $venta->cliente->domicilio->partido) ? $venta->cliente->domicilio->partido->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 @endif
             </div>
 
             <div class="form-group" id="localidadDiv">
                 @if(isset($localidades))
                     {!! Form::label('localidad', 'Localidad', ['id' => 'localidadLabel']) !!}
-                    {!! Form::select('localidad', $localidades, ($venta->cliente->domicilio->localidad)? $venta->cliente->domicilio->localidad->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::select('localidad', $localidades, ($venta->cliente->domicilio && $venta->cliente->domicilio->localidad)? $venta->cliente->domicilio->localidad->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
                 @endif
             </div>
 
@@ -115,15 +115,8 @@
 </div>
 
 
-
-
-
-
-
-
 {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-{{--
-<a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default">Cerrar</a>
---}}
+
+    <a href="{{ route('ventas.panel', $venta->id) }}" class="btn btn-default">Cancelar</a>
 
 {!! Form::close() !!}

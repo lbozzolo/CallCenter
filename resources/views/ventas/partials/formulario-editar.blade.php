@@ -62,7 +62,6 @@
         {!! Form::label('fecha_expiracion', 'Fecha de expiración') !!}
         {!! Form::text('fecha_expiracion', ($venta->datosTarjeta)? date('d/m/Y', strtotime($venta->datosTarjeta->fecha_expiracion)) : null, ['class' => 'form-control datepicker inputConTarjeta']) !!}
     </div>
-
     </div>
 
 

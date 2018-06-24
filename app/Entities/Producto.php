@@ -20,8 +20,8 @@ class Producto extends Entity
     public function getReclamosAttribute()
     {
         return DB::table('productos')
-            ->join('ventas', 'productos.id', '=', 'ventas.producto_id')
-            ->join('reclamos', 'ventas.id', '=', 'reclamos.venta_id')
+            ->join('producto_venta', 'productos.id', '=', 'producto_venta.producto_id')
+            ->join('reclamos', 'producto_venta.venta_id', '=', 'reclamos.venta_id')
             ->where('productos.id', '=', $this->id)
             ->select('productos.nombre', 'productos.id as productoId', 'reclamos.*')
             ->get();

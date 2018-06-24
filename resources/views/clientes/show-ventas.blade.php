@@ -39,8 +39,15 @@
                                                     <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
                                                     <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
                                                     <li class="list-group-item">
-                                                        Producto: {!! $venta->producto->nombre !!}<br>
-                                                        <small class="text-muted">{!! $venta->producto->descripcion !!}</small>
+                                                        Productos:
+                                                        <ul>
+                                                            @foreach($venta->productos as $producto)
+                                                                <li>
+                                                                    {!! $producto->nombre !!}<br>
+                                                                    <small class="text-muted">{!! $producto->descripcion !!}</small>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
                                                     </li>
                                                     <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
                                                     <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>

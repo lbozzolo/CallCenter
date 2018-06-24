@@ -17,7 +17,7 @@ class CreateFormaPagoTable extends Migration
 
             $table->increments('id');
             $table->integer('marca_tarjeta_id')->unsigned();
-            $table->tinyInteger('cuota_valor');
+            $table->tinyInteger('cuota_cantidad');
             $table->tinyInteger('interes')->nullable();
             $table->tinyInteger('descuento')->nullable();
 

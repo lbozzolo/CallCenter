@@ -291,6 +291,7 @@ class VentasController extends Controller
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
+        $data['cuotas'] = config('sistema.ventas.cuotas');
 
         return view('clientes.show-ventas')->with($data);
     }

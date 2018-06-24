@@ -29,18 +29,18 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     {!! Form::label('cuota_cantidad', 'Cuotas') !!}
-                                    {!! Form::number('cuota_cantidad', null, ['class' => 'form-control']) !!}
+                                    {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('interes', 'Interés') !!}
+                                    {!! Form::label('interes', 'Interés (%)') !!}
                                     {!! Form::number('interes', null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('descuento', 'Descuento') !!}
+                                    {!! Form::label('descuento', 'Descuento (%)') !!}
                                     {!! Form::number('descuento', null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>

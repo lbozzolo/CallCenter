@@ -11,7 +11,7 @@
             <th>Id</th>
             <th>Estado</th>
             <th>Venta</th>
-            <th>Producto</th>
+            <th>Productos</th>
             <th>Cliente</th>
             <th>Descripción</th>
             <th>solucionado</th>
@@ -36,8 +36,14 @@
                     #<a href="{{ route('ventas.show', $reclamo->venta->id) }}">{!! $reclamo->venta->id !!} <i class="fa fa-info-circle"></i> </a>
                 </td>
                 <td>
-                    {!! $reclamo->venta->producto->nombre !!}<br>
-                    <small class="text-muted">({!! $reclamo->venta->producto->marca->nombre !!})</small>
+                    <ul class="">
+                        @foreach($reclamo->venta->productos as $producto)
+                            <li>
+                                {!! $producto->nombre !!}<br>
+                                <small class="text-muted">({!! ($producto->marca)? $producto->marca->nombre : '' !!})</small>
+                            </li>
+                        @endforeach
+                    </ul>
                 </td>
                 <td>
                     <a href="{{ route('clientes.show', $reclamo->venta->cliente->id) }}">

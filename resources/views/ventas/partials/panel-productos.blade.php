@@ -144,16 +144,16 @@
 
                         <div class="row">
                             <div class="col-lg-6">
-                                <span class="pull-right">
-                                    <span class="text-info" style="font-size: 2em">
-                                        {!! ($producto->precio)? "$ ".$producto->precio : '' !!}
-                                    </span>
-                                </span>
+
+                                <span class="text-info" style="font-size: 2em">{!! ($producto->precio)? "$ ".$producto->precio : '' !!}</span>
                                 <div>{!! ($producto->descripcion)? $producto->descripcion : '' !!}</div>
                                 <div>
+                                    <div style="padding: 10px 0 0 0">
+                                    <strong>Categorías</strong><br>
                                     @foreach($producto->categorias as $categoria)
                                         <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
                                     @endforeach
+                                    </div>
                                     <div style="padding: 10px 0 0 0">
                                         <strong>Medida</strong>
                                         {!! ($producto->cantidad_medida)? $producto->cantidad_medida : '' !!}
@@ -259,21 +259,21 @@
             @endforeach
 
             <li class="list-group-item">
-                <div >Subtotal<strong class="pull-right">${!! $venta->total_venta !!}</strong></div>
+                <div class="text-right">Subtotal <strong> ${!! $venta->total_venta !!}</strong></div>
                 @if($venta->interes_venta)
-                    <div>Intereses ({!! $venta->datosTarjeta->formaPago->interes !!}%)<strong class="pull-right">+${!! $venta->interes_venta !!}</strong></div>
+                    <div class="text-right">Intereses ({!! $venta->datosTarjeta->formaPago->interes !!}%)<strong>+ ${!! $venta->interes_venta !!}</strong></div>
                 @endif
                 @if($venta->descuento_venta)
-                    <div>Descuentos ({!! $venta->datosTarjeta->formaPago->descuento !!}%)<strong class="pull-right">-${!! $venta->descuento_venta !!}</strong></div>
+                    <div class="text-right">Descuentos ({!! $venta->datosTarjeta->formaPago->descuento !!}%)<strong>- ${!! $venta->descuento_venta !!}</strong></div>
                 @endif
-                <div>IVA (21%) <strong class="pull-right" style="border-top: 1px solid lightgray">+${!! $venta->IVA !!}</strong> </div>
+                <div class="text-right">IVA (21%) <strong style="border-top: 1px solid lightgray">+${!! $venta->IVA !!}</strong> </div>
             </li>
             <li class="list-group-item">
                 <div class="text-right"><span class="text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span></div>
                 @if($venta->has_cuotas)
                     <div class="text-right">
                         <small class="text-muted">
-                            (p/cuota: <span class=" text-primary">${!! $venta->valor_cuota !!}</span>)
+                            {!! $venta->has_cuotas->cuota_cantidad !!} cuotas de <span class=" text-primary">${!! $venta->valor_cuota !!}</span>
                         </small>
                     </div>
                 @endif
