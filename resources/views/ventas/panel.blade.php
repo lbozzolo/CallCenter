@@ -130,7 +130,7 @@
             $('#sinresultados').hide();
 
             $("#producto_valor").keypress(function(ev) {
-                if(ev.which == 13) {
+                if(ev.which === 13) {
                     $('#cargando').show();
                     ev.preventDefault();
                     var token = $("input[name*='_token']").val();
