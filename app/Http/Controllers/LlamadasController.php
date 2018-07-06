@@ -12,6 +12,7 @@ use SmartLine\Entities\Producto;
 use SmartLine\Entities\Provincia;
 use SmartLine\Entities\Partido;
 use SmartLine\Entities\Localidad;
+use SmartLine\Entities\EstadoVenta;
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
 
@@ -150,7 +151,9 @@ class LlamadasController extends Controller
     public function show($id)
     {
         $llamada = Llamada::find($id);
-        return view('llamadas.show', compact('llamada'));
+        //dd($llamada->reclamo);
+        $tags = EstadoVenta::lists('nombre', 'slug');
+        return view('llamadas.show', compact('llamada', 'tags'));
     }
 
     /**

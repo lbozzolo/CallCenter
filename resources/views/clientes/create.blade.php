@@ -58,6 +58,17 @@
                                             {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '2']) !!}
                                         </div>
                                     </div>
+                                    <div class="form-group col-lg-12">
+                                        {!! Form::label('contacto', 'Horario de contacto:') !!}
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        {!! Form::label('from_date', 'Desde') !!}
+                                        {!! Form::time('from_date', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        {!! Form::label('to_date', 'Hasta') !!}
+                                        {!! Form::time('to_date', null, ['class' => 'form-control']) !!}
+                                    </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('puntos', 'Puntos') !!}

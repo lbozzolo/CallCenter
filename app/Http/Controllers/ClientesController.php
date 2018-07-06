@@ -13,6 +13,7 @@ use SmartLine\Entities\Provincia;
 use SmartLine\Entities\Localidad;
 use SmartLine\Http\Requests\CreateClienteRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use SmartLine\Http\Repositories\ClienteRepo;
 
 class ClientesController extends Controller
@@ -40,6 +41,9 @@ class ClientesController extends Controller
 
     public function store(CreateClienteRequest $request)
     {
+        $desde = ($request->from_date)? $request->from_date : Carbon::parse($request->from_date)->startOfDay()->format('H:i:s');
+        $hasta = ($request->to_date)? $request->to_date : Carbon::parse($request->to_date)->startOfDay()->format('H:i:s');
+
         $cliente = Cliente::create([
             'nombre' => ($request->nombre)? $request->nombre : '',
             'apellido' => ($request->apellido)? $request->apellido : '',
@@ -49,6 +53,8 @@ class ClientesController extends Controller
             'dni' => ($request->dni)? $request->dni : '',
             'referencia' => ($request->referencia)? $request->referencia : '',
             'observaciones' => ($request->observaciones)? $request->observaciones : '',
+            'from_date' => $desde,
+            'to_date' => $hasta,
             'puntos' => ($request->puntos)? $request->puntos : '',
             'estado_id' => ($request->estado_id)? $request->estado_id : '',
         ]);
@@ -104,6 +110,9 @@ class ClientesController extends Controller
 
         $this->clienteRepo->updateOrCreateDomicilio($id, $request->all());
 
+        $desde = ($request->from_date)? $request->from_date : Carbon::parse($request->from_date)->startOfDay()->format('H:i:s');
+        $hasta = ($request->to_date)? $request->to_date : Carbon::parse($request->to_date)->startOfDay()->format('H:i:s');
+
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;
         $cliente->telefono = $request->telefono;
@@ -112,6 +121,8 @@ class ClientesController extends Controller
         $cliente->dni = $request->dni;
         $cliente->referencia = $request->referencia;
         $cliente->observaciones = $request->observaciones;
+        $cliente->from_date = $desde;
+        $cliente->to_date = $hasta;
         $cliente->puntos = $request->puntos;
         $cliente->estado_id = $request->estado_id;
 
