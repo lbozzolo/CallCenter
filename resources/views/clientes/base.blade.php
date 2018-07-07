@@ -2,6 +2,7 @@
 
 @section('content')
 
+    @if(isset($cliente))
     <div class="row">
         <div class="col-lg-12">
 
@@ -9,6 +10,7 @@
 
         </div>
     </div>
+    @endif
     <div class="row">
 
         <div class="container">

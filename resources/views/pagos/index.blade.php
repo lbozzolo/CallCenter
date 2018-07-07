@@ -35,13 +35,13 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     {!! Form::label('interes', 'Interés (%)') !!}
-                                    {!! Form::number('interes', null, ['class' => 'form-control']) !!}
+                                    {!! Form::number('interes', null, ['class' => 'form-control', 'max' => '100', 'min' => '0']) !!}
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     {!! Form::label('descuento', 'Descuento (%)') !!}
-                                    {!! Form::number('descuento', null, ['class' => 'form-control']) !!}
+                                    {!! Form::number('descuento', null, ['class' => 'form-control', 'max' => '100', 'min' => '00']) !!}
                                 </div>
                             </div>
                         </div>
@@ -54,6 +54,12 @@
                 </div>
             </div>
 
+            @if(isset($formaEdit))
+
+                @include('pagos.partials.formulario-edit')
+
+            @endif
+
 
         </div>
 
@@ -65,6 +71,7 @@
                     <th class="text-center">Cuotas</th>
                     <th class="text-center">Interés</th>
                     <th class="text-center">Descuento</th>
+                    <th class="text-center">Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,6 +82,34 @@
                             <td class="text-center">{!! $formasPago->cuota_cantidad !!}</td>
                             <td class="text-center">{!! ($formasPago->interes)? $formasPago->interes.'%' : '--' !!}</td>
                             <td class="text-center">{!! ($formasPago->descuento)? $formasPago->descuento.'%' : '--' !!}</td>
+                            <td class="text-center">
+                                <a href="{{ route('formas.pago.edit', $formasPago->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                <button type="button" title="ELIMINAR" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#eliminarPago{!! $formasPago->id !!}" >
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                                <div class="modal fade" id="eliminarPago{!! $formasPago->id !!}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title"><i class="fa fa-warning "></i> Eliminar Forma de pago</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>¿Desea eliminar forma de pago?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                                {!! Form::open(['method' => 'delete', 'url' => route('formas.pago.destroy', $formasPago->id)]) !!}
+                                                <button type="submit" title="ELIMINAR" class="btn btn-danger" data-toggle="modal" data-target="#eliminarPago{!! $formasPago->id !!}" >
+                                                    Eliminar
+                                                </button>
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 @endforeach
