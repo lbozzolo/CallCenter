@@ -77,8 +77,13 @@ class FormasPagoController extends Controller
     public function destroy(Request $request, $id)
     {
         $formaPago = FormaPago::find($id);
-        $formaPago->delete();
 
+        if(count($formaPago->ventas)){
+            return redirect()->back()->withErrors('No se puede eliminar la forma de pago porque ya ha sido utilizada como forma de pago en alguna venta');
+        }
+        //$formaPago->delete();
+
+        dd($formaPago->ventas);
         return redirect()->back()->with('ok', 'Forma de pago eliminada con éxito');
     }
 

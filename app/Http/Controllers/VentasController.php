@@ -340,6 +340,10 @@ class VentasController extends Controller
             if(!count($cuotas))
                 return redirect()->back()->withErrors('No existe la forma de pago en '.$numeroCuotas.' cuotas con la tarjeta seleccionada');
 
+            /*dd($cuotas);
+            //Forma de pago
+            $formaPago = FormaPago::where('cuota_cantidad', $cuotas);*/
+
             //Validación
             $validacion = ValidateCreditCard::validateFormatCreditCard($credit_card_user);
             $luhn = ValidateCreditCard::calculateLuhn($credit_card_user);
@@ -359,6 +363,7 @@ class VentasController extends Controller
 
             //Asociación de datos de tarjeta a venta
             $datosTarjeta->venta()->associate($venta);
+            $venta->formaPago()->associate($cuotas->first());
             $datosTarjeta->save();
         }
 
