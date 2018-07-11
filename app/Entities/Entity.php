@@ -22,7 +22,7 @@ class Entity extends Model
 
     static function getModels()
     {
-        return ['banco', 'categoria', 'cliente', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'metodoPago', 'producto', 'promocion', 'reclamo', 'user', 'venta',];
+        return ['marca','banco', 'categoria', 'cliente', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'metodoPago', 'producto', 'promocion', 'reclamo', 'user', 'venta',];
     }
 
 }

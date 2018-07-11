@@ -1,3 +1,4 @@
+{{--
 <div class="row">
 
     {!! Form::model($user, ['method' => 'put', 'url' => route('users.assign.permissions', $user->id), 'class' => 'form']) !!}
@@ -278,4 +279,4 @@
 
     {!! Form::close() !!}
 
-</div>
+</div>--}}

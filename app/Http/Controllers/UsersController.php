@@ -76,7 +76,7 @@ class UsersController extends Controller
 
         Mail::send('emails.new-user', ['password' => $password], function ($message) use ($email){
 
-            $message->from('callcenter@gmail.com', 'CallCenter');
+            $message->from('callcenter@gmail.com', 'SmartLine');
             $message->to($email)->subject('Alta al sistema CallCenter');
 
         });
@@ -166,12 +166,6 @@ class UsersController extends Controller
         $user = User::withTrashed()->where('id', $id)->first();
         $message = $this->userRepo->changeState($user);
         return redirect()->back()->with('ok', 'El usuario ha sido '.$message.' con éxito');
-        /*if($message == 'habilitado'){
-            //return redirect()->route('users.index.disable')->with('ok', 'El usuario ha sido '.$message.' con éxito');
-            return redirect()->back()->with('ok', 'El usuario ha sido '.$message.' con éxito');
-        }else{
-            return redirect()->route('users.index')->with('ok', 'El usuario ha sido '.$message.' con éxito');
-        }*/
     }
 
     public function permissions($id)
