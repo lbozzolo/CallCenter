@@ -18,4 +18,9 @@ class DatoTarjeta extends Entity
         return $this->belongsTo(Venta::class);
     }
 
+    public function formaPago()
+    {
+        return $this->belongsTo(FormaPago::class, 'forma_pago_id');
+    }
+
 }

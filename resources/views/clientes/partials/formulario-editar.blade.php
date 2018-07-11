@@ -34,6 +34,16 @@
 </div>
 <div class="row">
     <div class="form-group col-xs-6">
+        {!! Form::label('from_date', 'Desde') !!}
+        {!! Form::text('from_date', null, ['class' => 'form-control datepicker']) !!}
+    </div>
+    <div class="form-group col-xs-6">
+        {!! Form::label('to_date', 'Hasta') !!}
+        {!! Form::text('to_date', null, ['class' => 'form-control datepicker']) !!}
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-xs-6">
         {!! Form::label('puntos', 'Puntos') !!}
         {!! Form::number('puntos', null, ['class' => 'form-control', 'min' => '0', 'max' => '10000']) !!}
     </div>
@@ -93,14 +103,14 @@
         <div class="form-group" id="partidoDiv">
             @if(isset($partidos))
             {!! Form::label('partido', 'Partido', ['id' => 'partidoLabel']) !!}
-            {!! Form::select('partido', $partidos, $cliente->domicilio->partido->id, ['class' => 'form-control']) !!}
+            {!! Form::select('partido', $partidos, $cliente->domicilio->partido->id, ['class' => 'form-control', 'placeholder' => '']) !!}
             @endif
         </div>
 
         <div class="form-group" id="localidadDiv">
             @if(isset($localidades))
             {!! Form::label('localidad', 'Localidad', ['id' => 'localidadLabel']) !!}
-            {!! Form::select('localidad', $localidades, $cliente->domicilio->localidad->id, ['class' => 'form-control']) !!}
+            {!! Form::select('localidad', $localidades, $cliente->domicilio->localidad->id, ['class' => 'form-control', 'placeholder' => '']) !!}
             @endif
         </div>
 

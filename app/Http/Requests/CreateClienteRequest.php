@@ -30,7 +30,7 @@ class CreateClienteRequest extends Request
 
                 'numero' => 'numeric',
                 'piso' => 'numeric',
-                'codigo_postal' => 'numeric|max:4',
+                'codigo_postal' => 'numeric|max:9999',
             ];
     }
 

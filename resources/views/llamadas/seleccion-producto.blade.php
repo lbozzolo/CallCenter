@@ -25,7 +25,7 @@
             </nav>
 
             <div>
-                @include('llamadas.partials.panel-cliente')
+                {{--@include('llamadas.partials.panel-cliente')--}}
             </div>
 
             <div class="panel panel-default">

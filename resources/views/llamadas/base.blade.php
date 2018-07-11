@@ -4,7 +4,18 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @include('llamadas.partials.navbar')
+            @if(isset($llamada))
+
+                @if($llamada->reclamo)
+                    @include('reclamos.partials.navbar')
+                @else
+                    {{--@include('ventas.partials.navbar')--}}
+                    @include('llamadas.partials.navbar')
+                @endif
+
+            @else
+                @include('llamadas.partials.navbar')
+            @endif
         </div>
     </div>
     <div class="row">

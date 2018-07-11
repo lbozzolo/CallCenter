@@ -12,9 +12,10 @@
             <th>Estado</th>
             <th>Operador</th>
             <th>Cliente</th>
-            <th>Producto</th>
+            <th>Productos</th>
             <th>Etapa</th>
             <th>Fecha</th>
+            <th>Total</th>
             <th>Opciones</th>
         </tr>
         </thead>
@@ -29,9 +30,23 @@
                 </td>
                 <td>{!! ($venta->user)? $venta->user->full_name : '' !!}</td>
                 <td>{!! ($venta->cliente)? $venta->cliente->full_name : '' !!}</td>
-                <td>{!!  ($venta->producto)?$venta->producto->nombre : '' !!}</td>
+                {{--<td>{!! ($venta->producto)? $venta->producto : '' !!}</td>--}}
+                <td>
+                    @if($venta->productos)
+                        <ul>
+                            @foreach($venta->productos as $producto)
+                                <li>
+                                    <a href="{{ route('productos.show', $producto->id) }}">{!! $producto->nombre !!}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </td>
                 <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '//' !!}</td>
                 <td>{!! $venta->fecha_creado !!}</td>
+                <td class="text-right">
+                    <span class="text-primary" style="font-size: 1.1em">${!! $venta->importe_total !!}</span>
+                </td>
                 <td class="text-center">
                     <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-default btn-sm">detalles</a>
                 </td>

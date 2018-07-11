@@ -41,7 +41,6 @@ class FakerVentasSeeder extends Seeder
             Venta::create([
                 'user_id' => ($users->count() > 0)? $users->random()->id : null,
                 'cliente_id' => ($clientes->count() > 0)? $clientes->random()->id : null,
-                'producto_id' => ($productos->count() > 0)? $productos->random()->id : null,
                 'estado_id' => ($estadosVentas->count() > 0)? $estadosVentas->random()->id : null,
                 'metodo_pago_id' => ($metodosPago->count() > 0)? $metodosPago->random()->id : null,
                 'forma_pago_id' => ($formasPago->count() > 0)? $formasPago->random()->id : null,
@@ -51,7 +50,20 @@ class FakerVentasSeeder extends Seeder
                 'updated_at' => $fecha
             ]);
 
+
         }
+
+        $ventas = Venta::all();
+
+        foreach ($ventas as $venta){
+
+            $max = rand(1, 3);
+            for($i = 1; $i <= $max; $i++){
+                $venta->productos()->save($productos->random());
+            }
+
+        }
+
     }
 
 }

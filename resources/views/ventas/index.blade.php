@@ -1,29 +1,16 @@
-@extends('base')
+@extends('ventas.base')
 
-@section('content')
+@section('titulo')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
+    <h2>Ventas<span class="text-muted">/ {!! $ventas->title !!}</span></h2>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>Ventas<span class="text-muted">/ {!! $ventas->title !!}</span></h2>
-                        @include('ventas.partials.navbar')
-                    </div>
-                </div>
+@endsection
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                @include('ventas.partials.listado-ventas')
-                            </div>
-                        </div>
-                    </div>
-                </div>
+@section('contenido')
 
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @include('ventas.partials.listado-ventas')
         </div>
     </div>
 
@@ -55,8 +42,6 @@
             });
             $("#div-table-ventas").show();
             $(".overlay").hide();
-
-
 
         });
 

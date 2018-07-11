@@ -1,18 +1,18 @@
 
 {!! Form::model($venta, ['method' => 'put', 'url' => route('ventas.update', $venta->id), 'class' =>'form']) !!}
 
-@if($etapas->count())
+{{--@if($etapas->count())
     <div class="form-group">
         {!! Form::label('etapa_id', 'Etapa') !!}
         {!! Form::select('etapa_id', $etapas, null, ['class' => 'form-control', 'placeholder' => '']) !!}
     </div>
-@endif
+@endif--}}
 
-<div class="form-group">
-    {!! Form::label('metodo_pago_id', 'Método de pago') !!}
-    {!! Form::select('metodo_pago_id', $metodosPago,  null, ['class' => 'form-control', 'id' => 'metodoPago']) !!}
-</div>
 
+    <div class="form-group">
+        {!! Form::label('metodo_pago_id', 'Método de pago') !!}
+        {!! Form::select('metodo_pago_id', $metodosPago,  null, ['class' => 'form-control', 'id' => 'metodoPago']) !!}
+    </div>
 
     <div id="conTarjeta" style="display:none">
 
@@ -30,6 +30,18 @@
         {!! Form::label('banco_id', 'Banco') !!}
         {!! Form::select('banco_id', $bancos, ($venta->datosTarjeta)? $venta->datosTarjeta->banco_id : null, ['id' => 'banco', 'class' => 'form-control select2 inputConTarjeta', 'placeholder' => '']) !!}
     </div>
+
+    @if($venta->datosTarjeta)
+    <div class="form-group">
+        {!! Form::label('cuotas', 'Cuotas') !!}
+        {!! Form::select('cuotas', $cuotas, ($venta->datosTarjeta->formaPago)? $venta->datosTarjeta->formaPago->cuota_cantidad : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+    </div>
+    @else
+    <div class="form-group">
+        {!! Form::label('cuotas', 'Cuotas') !!}
+        {!! Form::select('cuotas', $cuotas, '', ['class' => 'form-control', 'placeholder' => '']) !!}
+    </div>
+    @endif
 
     <div class="form-group">
         {!! Form::label('numero_tarjeta', 'Número de tarjeta') !!}
@@ -50,7 +62,6 @@
         {!! Form::label('fecha_expiracion', 'Fecha de expiración') !!}
         {!! Form::text('fecha_expiracion', ($venta->datosTarjeta)? date('d/m/Y', strtotime($venta->datosTarjeta->fecha_expiracion)) : null, ['class' => 'form-control datepicker inputConTarjeta']) !!}
     </div>
-
     </div>
 
 

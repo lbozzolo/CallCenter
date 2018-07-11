@@ -1,39 +1,18 @@
-@extends('base')
+@extends('reclamos.base')
 
-@section('content')
+@section('titulo')
 
-    <div class="row">
+    <h2>Reclamos<span class="text-muted"> / Todos</span></h2>
 
-        <div class="container">
+@endsection
 
-            <div class="content">
-                <div class="row">
-                    <div class="col-lg-12">
+@section('contenido')
 
-                    <h2>
-                        Reclamos
-                        <span class="text-muted"> / Todos</span>
-                    </h2>
-
-                    @include('reclamos.partials.navbar')
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                @include('reclamos.partials.listado-reclamos')
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @include('reclamos.partials.listado-reclamos')
             </div>
         </div>
-    </div>
 
 @endsection
 

@@ -20,6 +20,7 @@ class CreateUpdateablesTable extends Migration
             $table->string('field');
             $table->string('former_value');
             $table->string('updated_value');
+            $table->string('reason')->nullable();
 
             $table->timestamps();
 

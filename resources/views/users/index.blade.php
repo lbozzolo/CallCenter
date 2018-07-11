@@ -1,28 +1,19 @@
-@extends('base')
+@extends('users.base')
 
-@section('content')
+@section('titulo')
+
+    <h2>Usuarios<span class="text-muted"> / Habilitados</span></h2>
+
+@endsection
+
+@section('contenido')
 
     <div class="row">
-        <div class="container">
-            <div class="content">
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>Usuarios<span class="text-muted"> / Habilitados</span></h2>
-                        @include('users.partials.navbar')
-                    </div>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @include('users.partials.usuarios-habilitados')
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                @include('users.partials.usuarios-habilitados')
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>

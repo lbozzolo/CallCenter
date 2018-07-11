@@ -1,110 +1,128 @@
-@extends('base')
+@extends('ventas.base')
 
-@section('content')
+@section('contenido')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
-
+        <div class="panel">
+            <div class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h2>VENTAS<small class="text-muted"> / {!! $venta->estado_plural !!}</small></h2>
-                        @include('ventas.partials.navbar')
+                    <div class="col-lg-9 col-md-12">
+                        <h3>
+                            <label class="label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</label>
+                            Venta #{!! $venta->id !!}
+                            <small class="text-muted"> / operador: {!! $venta->user->full_name !!}</small>
+                        </h3>
+                    </div>
+                    <div class="col-lg-3 col-md-12 text-right">
+                        <span class="text-primary" style="font-size: 2.5em">${!! $venta->importe_total !!}</span>
+                        @if($venta->has_cuotas)
+                            <div class="text-muted">
+                                {!! $venta->has_cuotas->cuota_cantidad !!} cuotas de <span class=" text-primary">${!! $venta->valor_cuota !!}</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
-
-
+            </div>
+            <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="panel">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3>
-                                    <label class="label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</label>
-                                    Venta #{!! $venta->id !!}
-                                    <small class="text-muted"> / operador: {!! $venta->user->full_name !!}</small>
-                                </h3>
+                                <h3 class="panel-title">Información general</h3>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Información general</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <ul class="list-unstyled">
-                                                    <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
-                                                    <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
-                                                    <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
-                                                    <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
-                                                    <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
-                                                </ul>
-                                            </div>
+                                <ul class="list-unstyled">
+                                    <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
+                                    <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
+                                    <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
+                                    <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
+                                    <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Productos</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+
+                                @foreach($venta->productos as $producto)
+
+                                    <li class="list-group-item">
+                                        <span class="pull-right">${!! $producto->precio !!}</span>
+                                        Producto: {!! $producto->nombre !!}<br>
+                                        <small class="text-muted">{!! $producto->descripcion !!}</small>
+                                    </li>
+
+                                @endforeach
+
+                                    <li class="list-group-item">
+                                        <div >Subtotal<strong class="pull-right">${!! $venta->total_venta !!}</strong></div>
+                                        @if($venta->interes_venta)
+                                            <div>Intereses ({!! $venta->datosTarjeta->formaPago->interes !!}%)<strong class="pull-right">+${!! $venta->interes_venta !!}</strong></div>
+                                        @endif
+                                        @if($venta->descuento_venta)
+                                            <div>Descuentos ({!! $venta->datosTarjeta->formaPago->descuento !!}%)<strong class="pull-right">-${!! $venta->descuento_venta !!}</strong></div>
+                                        @endif
+                                            <div>IVA (21%) <strong class="pull-right" style="border-top: 1px solid lightgray">+${!! $venta->IVA !!}</strong> </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="text-right"><span class="text-primary" style="font-size: 1.5em">${!! $venta->importe_total !!}</span></div>
+                                        @if($venta->has_cuotas)
+                                        <div class="text-right">
+                                            <small class="text-muted">
+                                                {!! $venta->has_cuotas->cuota_cantidad !!} cuotas de <span class=" text-primary">${!! $venta->valor_cuota !!}</span>
+                                            </small>
                                         </div>
+                                        @endif
+                                    </li>
 
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Producto</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <ul class="list-unstyled">
-                                                    <li class="list-group-item">
-                                                        Producto: {!! $venta->producto->nombre !!}<br>
-                                                        <small class="text-muted">{!! $venta->producto->descripcion !!}</small>
-                                                    </li>
-                                                    <li class="list-group-item">Precio: ${!! $venta->producto->precio !!}</li>
-                                                    <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>
-                                                    <li class="list-group-item">Forma de pago: {!! ($venta->formaPago)? $venta->formaPago->nombre : '' !!}</li>
-                                                    <li class="list-group-item">Etapa: {!! ($venta->etapa)? $venta->etapa->nombre : '<small class="text-muted">No se ha seleccionado la etapa</small>' !!}</li>
-                                                    <li class="list-group-item">Promoción: {!! ($venta->promocion)? $venta->promocion->nombre : '' !!}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                </ul>
+                            </div>
+                        </div>
 
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Editar venta</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <p>Marcar esta venta como...</p>
-                                                {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                    </div>
 
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Editar venta</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>Marcar esta venta como...</p>
 
-                                                <div class="form-group">
-                                                    <div class="input-group input-group">
-                                                        {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control']) !!}
-                                                        <span class="input-group-btn">
+                                {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                                    <div class="form-group">
+                                        <div class="input-group input-group">
+                                            {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control', 'id' => 'selectEstados']) !!}
+                                            <span class="input-group-btn">
                                                 {!! Form::submit('Aplicar', ['class' => 'btn btn-info btn-flag']) !!}
-                                                    </span>
-                                                    </div>
-                                                </div>
-
-                                                {!! Form::close() !!}
-
-                                                <div class="panel panel-info">
-                                                    <div class="panel-heading">
-                                                        Editar métodos y formas de pago
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        @include('ventas.partials.formulario-editar')
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </span>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('motivo', 'Motivo') !!}
+                                        {!! Form::text('motivo', null, ['id' => 'cancelacion', 'class' => 'form-control', 'placeholder' => 'De ser necesario, describa aquí el motivo del cambio de estado']) !!}
+                                        <small class="text-warning">* El motivo es obligatorio sólo en el caso de cancelar la venta</small>
+                                    </div>
+                                {!! Form::close() !!}
+
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        Editar métodos y formas de pago
+                                    </div>
+                                    <div class="panel-body">
+                                        @include('ventas.partials.formulario-editar')
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
+
 
 @endsection
 

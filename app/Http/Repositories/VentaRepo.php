@@ -20,8 +20,8 @@ class VentaRepo extends BaseRepo
             return $value->estado->slug == $estado;
         });
 
-        $estadoVenta = EstadoVenta::where('slug', $estado)->first();
-        $ventas->title = (!$estado)? 'todas' : $estadoVenta->nombre;
+        $estadoVenta = (EstadoVenta::where('slug', $estado)->first())? EstadoVenta::where('slug', $estado)->first()->nombre : 'todas';
+        $ventas->title = (!$estado)? 'todas' : $estadoVenta;
 
         return $ventas;
     }

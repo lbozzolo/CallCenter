@@ -44,7 +44,7 @@
             <tr>
                 <td>
                     @if($user->profile_image)
-                        <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle pull-right" style="object-fit: cover; width: 30px; height: 30px">
+                        <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px">
                     @else
                         <span class="sinfoto text-center">
                             <small>{{ strtoupper(substr($user->nombre,0,2)) }}</small>

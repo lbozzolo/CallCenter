@@ -1,5 +1,6 @@
 <?php namespace SmartLine\Http\Controllers;
 
+use Bican\Roles\Models\Permission;
 use Illuminate\Http\Request;
 use SmartLine\Entities\Banco;
 use SmartLine\Entities\Cliente;
@@ -30,20 +31,11 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
-        $reclamos = DB::table('reclamos')
-            ->join('ventas', 'ventas.id', '=', 'reclamos.venta_id')
-            ->join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
-            ->where('clientes.id', '=', '10')
-            ->select('reclamos.*', 'clientes.nombre', 'ventas.id as ventaId')
-            ->get();
 
-        $reclamosa = Reclamo::whereHas('venta', function($query){
-            $query->where('cliente_id', '=', '26');
-        })->get();
+        $superadmin = Role::where('slug', '=', 'superadmin')->first();
+        $permissions = Permission::all();
 
-        $data = ['provincia' => 'C', 'codigoPostal' => '1405', 'peso' => '1.5', 'paquetes' => '20x3x5', 'direccionEnvio' => ''];
-
-        return redirect('../ws/cotizaciones/correos');
+        dd( $permissions );
 
     }
 

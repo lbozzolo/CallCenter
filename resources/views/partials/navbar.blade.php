@@ -24,6 +24,7 @@
                 <li><a href="{{ route('llamadas.index') }}" style="{{ (Request::is('llamadas'.'*') ? 'color: white' : '') }}">Llamadas</a></li>
                 <li><a href="{{ route('ventas.index') }}" style="{{ (Request::is('ventas'.'*') ? 'color: white' : '') }}">Ventas</a></li>
                 <li><a href="{{ route('reclamos.index') }}" style="{{ (Request::is('reclamos'.'*') ? 'color: white' : '') }}">Reclamos</a></li>
+                <li><a href="{{ route('formas.pago.index') }}" style="{{ (Request::is('formas-pago'.'*') ? 'color: white' : '') }}">Pagos</a></li>
 
                 @endif
             </ul>

@@ -41,7 +41,9 @@
                         {!! $cliente->ventas->count() !!}
                     </a>
                 </td>
-                <td>//</td>
+                <td class="text-center">
+                    <a href="{{ route('clientes.llamadas', $cliente->id) }}">{!! count($cliente->llamadas) !!}</a>
+                </td>
                 <td>{!! $cliente->fecha_creado !!}</td>
                 <td>{!! $cliente->fecha_editado !!}</td>
                 <td class="text-center">

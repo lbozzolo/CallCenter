@@ -28,7 +28,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-times"></i> Cerrar</a>
+            {{--<a href="{{ route('productos.show', $producto->id) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-times"></i> Cerrar</a>--}}
             <h2 class="panel-title">Editar producto - {!! $producto->nombre !!}</h2>
         </div>
         <div class="panel-body">
