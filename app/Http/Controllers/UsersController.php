@@ -151,9 +151,13 @@ class UsersController extends Controller
     {
         $user = User::find($request->user_id);
 
-        if(!Hash::check($request->current_password, $user->password)){
+        // Si no es su propia contraseña o no es SUPERADMIN o ADMIN
+        if(Auth::user()->id != $user->id && !Auth::user()->is('superadmin|admin'))
+            return redirect()->back()->withErrors('Usted no tiene los permisos necesarios para realizar esta acción. Este incidente será reportado');
+
+        // Si la contraseña actual no coincide
+        if(!Hash::check($request->current_password, $user->password))
             return redirect()->back()->withErrors('La contraseña actual no es válida');
-        }
 
         $user->password = bcrypt($request->password);
         $user->save();

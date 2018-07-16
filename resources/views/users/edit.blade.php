@@ -51,7 +51,6 @@
                     </div>
 
                     {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-                    {{--<a href="{{ route('users.profile', $user->id) }}" class="btn btn-default">Cerrar</a>--}}
 
                     {!! Form::close() !!}
                 </div>

@@ -16,9 +16,11 @@
                     <a href="{{ route('clientes.index') }}"><i class="fa fa-home"></i> </a>
                 </li>
                 <li>
+                @permission('ver.cliente')
                     <a href="{{ route('clientes.show', $cliente->id) }}" class="{{ (Request::is('clientes/'.'*'.'/datos') ? 'navbar-item-selected' : '') }}">
                         Datos
                     </a>
+                @endpermission
                 </li>
                 <li>
                     <a href="{{ route('clientes.compras', $cliente->id) }}" class="{{ (Request::is('clientes/'.'*'.'/compras'.'*') ? 'navbar-item-selected' : '') }}">

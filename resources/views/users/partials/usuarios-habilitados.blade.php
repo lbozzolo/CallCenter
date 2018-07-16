@@ -53,7 +53,11 @@
                 </td>
                 <td>{!! $user->id !!}</td>
                 <td>
+                @permission('ver.usuario')
                     <a href="{{ route('users.profile', $user->id) }}">{!! $user->full_name !!}</a>
+                @elsepermission
+                    {!! $user->full_name !!}
+                @endpermission
                 </td>
                 <td class="text-center">@include('users.partials.labels-roles')</td>
                 <td>{!! $user->email !!}</td>
@@ -62,6 +66,7 @@
                 <td>{!! $user->estado->nombre !!}</td>
                 <td class="text-center">
 
+                @permission('cambiar.estado.usuario')
                     <button type="button" title="DESHABILITAR" class="nonStyledButton" data-toggle="modal" data-target="#disableUser{!! $user->id !!}" >
                         <i class="fa fa-toggle-on text-danger"></i>
                     </button>
@@ -87,9 +92,15 @@
                             </div>
                         </div>
                     </div>
+                @endpermission
 
+                @permission('editar.usuario')
                     <a href="{{ route('users.edit', ['id' => $user->id, 'route' => 'users.index']) }}"><i class="glyphicon glyphicon-edit"></i></a>
+                @endpermission
+
+                @permission('editar.permisos.usuario')
                     <a href="{{ route('users.permissions', $user->id) }}"><i class="fa fa-file-powerpoint-o"></i></a>
+                @endpermission
 
                 </td>
             </tr>

@@ -13,6 +13,7 @@ class RolesController extends Controller
     public function __construct(RoleRepo $roleRepo)
     {
         $this->roleRepo = $roleRepo;
+        $this->middleware('role:superadmin');
     }
 
     public function index()

@@ -12,7 +12,9 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                @permission('listado.usuario')
                     @include('users.partials.usuarios-deshabilitados')
+                @endpermission
                 </div>
             </div>
         </div>

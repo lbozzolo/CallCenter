@@ -30,6 +30,8 @@
                 <td>{!! $user->dni !!}</td>
                 <td>{!! $user->estado->nombre !!}</td>
                 <td class="text-center">
+
+                @permission('cambiar.estado.usuario')
                     <button type="button" title="HABILITAR" class="nonStyledButton" data-toggle="modal" data-target="#enableUser{!! $user->id !!}" >
                         <i class="fa fa-toggle-off"></i>
                     </button>
@@ -51,6 +53,8 @@
                             </div>
                         </div>
                     </div>
+                @endpermission
+
                 </td>
             </tr>
 

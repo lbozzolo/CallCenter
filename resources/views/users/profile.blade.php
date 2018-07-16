@@ -35,11 +35,14 @@
                                 </li>
                             @endif
                         </ul>
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a>
+                        @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin|admin'))
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a>
+                        @endif
                     </div>
 
                     <div class="col-lg-6 col-md-6">
 
+                    @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin|admin'))
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Agregar foto de perfil</h3>
@@ -123,6 +126,7 @@
 
                             </div>
                         </div>
+                    @endif
 
                     </div>
 

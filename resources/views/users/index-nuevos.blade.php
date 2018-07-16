@@ -12,7 +12,9 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                @permission('listado.usuarios.nuevos')
                     @include('users.partials.usuarios-nuevos')
+                @endpermission
                 </div>
             </div>
         </div>

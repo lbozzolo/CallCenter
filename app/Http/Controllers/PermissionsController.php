@@ -15,6 +15,7 @@ class PermissionsController extends Controller
     {
         $this->roleRepo = $roleRepo;
         $this->permissionRepo = $permissionsRepo;
+        $this->middleware('role:superadmin');
     }
 
     public function index()

@@ -13,6 +13,6 @@ class LocalidadesPartidosProvinciasSeeder extends Seeder
      */
     public function run()
     {
-        DB::unprepared(File::get(storage_path('app/database/localidades_partidos_provincias_seeder.sql')));
+        DB::unprepared(File::get(storage_path('app\database\localidades_partidos_provincias_seeder.sql')));
     }
 }

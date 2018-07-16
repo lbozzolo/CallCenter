@@ -8,6 +8,7 @@
 
 @section('contenido')
 
+    @permission('editar.permisos.usuario')
     <div class="panel panel-default">
         {!! Form::model($user, ['method' => 'put', 'url' => route('users.assign.permissions', $user->id), 'class' => 'form']) !!}
         <div class="panel-heading">
@@ -21,5 +22,6 @@
         </div>
         {!! Form::close() !!}
     </div>
+    @endpermission
 
 @endsection
