@@ -2,6 +2,8 @@
 
 namespace SmartLine\Exceptions;
 
+use Bican\Roles\Exceptions\PermissionDeniedException;
+use Bican\Roles\Exceptions\RoleDeniedException;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -51,6 +53,17 @@ class Handler extends ExceptionHandler
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
+
+        if ($e instanceof RoleDeniedException) {
+            // you can for example flash message, redirect...
+            return redirect()->back()->withErrors('Lo sentimos. Ha ocurrido un error.');
+        }
+
+        if ($e instanceof PermissionDeniedException) {
+            // you can for example flash message, redirect...
+            return redirect()->route('/')->withErrors('Lo sentimos. Usted no tiene los permisos requeridos.');
+        }
+
 
         return parent::render($request, $e);
     }
