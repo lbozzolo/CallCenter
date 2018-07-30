@@ -19,8 +19,10 @@
                                 <h3 class="panel-title">Seleccione un cliente</h3>
                             </div>
                             <div class="panel-body">
+                            @permission('listado.cliente')
                                 @include('ventas.partials.listado-clientes')
                             </div>
+                            @endpermission
                         </div>
                     </div>
                 </div>

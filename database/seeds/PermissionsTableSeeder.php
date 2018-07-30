@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use SmartLine\Entities\Entity;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -53,6 +54,22 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'Retomar venta',
                 'slug' => 'retomar.venta',
                 'description' => 'Retomar una venta',
+                'model' => 'venta',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
+            [
+                'name' => 'Cerrar venta',
+                'slug' => 'cerrar.venta',
+                'description' => 'Cerrar una venta',
+                'model' => 'venta',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
+            [
+                'name' => 'Quitar producto de venta',
+                'slug' => 'quitar.producto.venta',
+                'description' => 'Quitar un producto de una venta',
                 'model' => 'venta',
                 'created_at' => date_create(),
                 'updated_at' => date_create()
@@ -136,6 +153,19 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => date_create(),
                 'updated_at' => date_create()
             ]
+        ]);
+
+        //Permisos de Reclamo
+
+        DB::table('permissions')->insert([
+            [
+                'name' => 'Cambiar estado de reclamo',
+                'slug' => 'cambiar.estado.reclamo',
+                'description' => 'Cambiar estado de un reclamo',
+                'model' => 'reclamo',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
         ]);
 
     }

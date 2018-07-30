@@ -37,9 +37,11 @@
                     @endif
                 </td>
                 <td class="text-center">
+                @permission('ver.compras.cliente')
                     <a href="{{ route('clientes.compras', $cliente->id) }}">
                         {!! $cliente->ventas->count() !!}
                     </a>
+                @endpermission
                 </td>
                 <td>//</td>
                 <td>{!! $cliente->fecha_creado !!}</td>

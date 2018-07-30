@@ -37,17 +37,29 @@
                     @endif
                 </td>
                 <td class="text-center">
+                @permission('ver.compras.cliente')
                     <a href="{{ route('clientes.compras', $cliente->id) }}">
                         {!! $cliente->ventas->count() !!}
                     </a>
+                @elsepermission
+                    {!! $cliente->ventas->count() !!}
+                @endpermission
                 </td>
                 <td class="text-center">
+                @permission('ver.llamadas.cliente')
                     <a href="{{ route('clientes.llamadas', $cliente->id) }}">{!! count($cliente->llamadas) !!}</a>
+                @elsepermission
+                    {!! count($cliente->llamadas) !!}
+                @endpermission
                 </td>
                 <td>{!! $cliente->fecha_creado !!}</td>
                 <td>{!! $cliente->fecha_editado !!}</td>
                 <td class="text-center">
+                @permission('ver.cliente')
                     <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default btn-xs">detalles</a>
+                @elsepermission
+                    <button class="btn btn-default btn-xs" disabled>detalles</button>
+                @endpermission
                 </td>
             </tr>
 

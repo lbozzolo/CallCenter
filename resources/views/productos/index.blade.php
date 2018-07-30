@@ -14,7 +14,9 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
+        @permission('listado.producto')
             @include('productos.partials.listado-productos')
+        @endpermission
         </div>
     </div>
 

@@ -33,7 +33,9 @@
                     @endif
                 </td>
                 <td>
+                @permission('ver.venta')
                     #<a href="{{ route('ventas.show', $reclamo->venta->id) }}">{!! $reclamo->venta->id !!} <i class="fa fa-info-circle"></i> </a>
+                @endpermission
                 </td>
                 <td>
                     <ul class="">
@@ -46,9 +48,11 @@
                     </ul>
                 </td>
                 <td>
+                    @permission('ver.cliente')
                     <a href="{{ route('clientes.show', $reclamo->venta->cliente->id) }}">
                         {!! $reclamo->venta->cliente->full_name !!}
                     </a>
+                    @endpermission
                 </td>
                 <td>{!! $reclamo->descripcion !!}</td>
                 <td>
@@ -60,7 +64,7 @@
                 </td>
                 <td>{!! $reclamo->fecha_creado !!}</td>
                 <td class="text-center">
-
+                @permission('cambiar.estado.reclamo')
                     <button type="button" {{ ($reclamo->estado && $reclamo->estado->slug == 'abierto')? 'title=CERRAR' : 'title=ABRIR' }} class="nonStyledButton" data-toggle="modal" data-target="#disableReclamo{!! $reclamo->id !!}" >
                         @if($reclamo->estado && $reclamo->estado->slug == 'activo')
                             <i class="fa fa-toggle-on text-primary"></i>
@@ -83,15 +87,20 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                    <a href="{{ route('productos.change.state', $reclamo->id) }}" class="btn btn-danger" title="CERRAR">Aceptar</a>
+                                    <a href="{{ route('reclamo.change.status', $reclamo->id) }}" class="btn btn-danger" title="CERRAR">Aceptar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                @endpermission
 
+                @permission('ver.reclamo')
                     <a href="{{ route('reclamos.show', ['id' => $reclamo->id]) }}" title="Info"><i class="fa fa-info-circle"></i> </a>
+                @endpermission
+                @permission('editar.producto')
                     <a href="{{ route('productos.edit', ['id' => $reclamo->id]) }}" title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
-
+                @endpermission
+                @permission('eliminar.reclamo')
                     <button type="button" title="ELIMINAR" class="nonStyledButton" data-toggle="modal" data-target="#eliminarReclamo{!! $reclamo->id !!}" >
                         <i class="fa fa-trash-o text-danger"></i>
                     </button>
@@ -121,6 +130,7 @@
                             </div>
                         </div>
                     </div>
+                @endpermission
 
                 </td>
             </tr>

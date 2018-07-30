@@ -247,7 +247,7 @@
             </span>
             <ul class="list-unstyled collapse"  id="collapseVentas" aria-labelledby="headingOne" data-parent="#accordion">
                 @foreach($permisos as $permiso)
-                    @if($permiso->model == 'ventas')
+                    @if($permiso->model == 'venta')
                         <li class="list-group-item">
                             @include('permissions.partials.options-permisos')
                             <strong>{!! $permiso->name !!} ({!! $permiso->slug !!}) </strong><br>

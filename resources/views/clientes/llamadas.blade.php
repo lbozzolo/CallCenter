@@ -34,12 +34,20 @@
                     <tr>
                         <td>
                             @if($llamada->user)
+                            @permission('ver.usuario')
                                 <a href="{{ route('users.profile', $llamada->user->id) }}">{!! $llamada->user->full_name !!}</a>
+                            @elsepermission
+                                {!! $llamada->user->full_name !!}
+                            @endpermission
                             @endif
                         </td>
                         <td>
                             @if($llamada->cliente)
+                            @permission('ver.cliente')
                                 <a href="{{ route('clientes.show', $llamada->cliente->id) }}">{!! $llamada->cliente->nombre !!}</a>
+                            @elsepermission
+                                {!! $llamada->cliente->nombre !!}
+                            @endpermission
                             @endif
                         </td>
                         <td>
@@ -61,10 +69,12 @@
                         </td>
                         <td class="text-center">
                             @if($llamada->venta)
+                            @permission('ver.venta')
+                                <a href="{{ route('ventas.show', $llamada->venta->id) }}">#{!! $llamada->venta->id !!}</a>
+                            @elsepermission
                                 #{!! $llamada->venta->id !!}
-                                <a href="{{ route('ventas.show', $llamada->venta->id) }}"><i class="fa fa-info-circle"></i> </a>
+                            @endpermission
                             @endif
-                            {{--{!! ($llamada->venta)? $llamada->venta->id : '<small class="text-muted">//</small>' !!}--}}
                         </td>
                         <td><a href="">{!! $llamada->url !!}</a></td>
                         <td>{!! $llamada->observaciones !!}</td>

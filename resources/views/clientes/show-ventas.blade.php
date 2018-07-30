@@ -54,24 +54,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        @permission('editar.venta')
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Editar información</h3>
                                 </div>
                                 <div class="panel-body">
+
                                     <p>Marcar esta venta como...</p>
                                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
 
-
-                                    <div class="form-group">
-                                        <div class="input-group input-group">
-                                            {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control']) !!}
-                                            <span class="input-group-btn">
-                                    {!! Form::submit('Aplicar', ['class' => 'btn btn-info btn-flag']) !!}
-                                        </span>
+                                        <div class="form-group">
+                                            <div class="input-group input-group">
+                                                {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control']) !!}
+                                                <span class="input-group-btn">
+                                                {!! Form::submit('Aplicar', ['class' => 'btn btn-info btn-flag']) !!}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
 
                                     {!! Form::close() !!}
 
@@ -86,6 +88,8 @@
                                 </div>
                             </div>
                         </div>
+                        @endpermission
+
                     </div>
                 </div>
             </div>

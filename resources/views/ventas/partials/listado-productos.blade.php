@@ -51,11 +51,15 @@
                 <td>${!! $producto->precio !!}</td>
                 <td>{!! $producto->fecha_editado !!}</td>
                 <td class="text-center">
+                @permission('crear.venta')
                     {!! Form::open(['url' => route('ventas.crear'), 'method' => 'post']) !!}
+
                         {!! Form::hidden('id_cliente', $cliente->id) !!}
                         {!! Form::hidden('id_producto', $producto->id) !!}
                         {!! Form::submit('seleccionar', ['class' => 'btn btn-primary btn-xs']) !!}
+
                     {!! Form::close() !!}
+                @endpermission
                     {{--<a href="{{ route('ventas.crear', ['idCliente' => $cliente->id, 'idProducto' => $producto->id]) }}" class="btn btn-primary btn-xs">seleccionar</a>--}}
                 </td>
             </tr>

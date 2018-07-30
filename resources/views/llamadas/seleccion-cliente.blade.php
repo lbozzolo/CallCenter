@@ -31,9 +31,9 @@
                             <h3 class="panel-title">Seleccione un cliente</h3>
                         </div>
                         <div class="panel-body">
-
+                        @permission('listado.cliente')
                             @include('llamadas.partials.listado-clientes')
-
+                        @endpermission
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,9 @@
 
         <div class="panel panel-default">
             <div class="panel-body">
+            @permission('listado.reclamo')
                 @include('reclamos.partials.listado-reclamos')
+            @endpermission
             </div>
         </div>
 

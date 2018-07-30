@@ -11,7 +11,9 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
+        @permission('listado.llamada')
             @include('llamadas.partials.listado-llamadas')
+        @endpermission
         </div>
     </div>
 

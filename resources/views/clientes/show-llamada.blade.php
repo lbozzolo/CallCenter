@@ -19,9 +19,13 @@
                     <ul class="list-unstyled">
                         @forelse($reclamos as $rec)
                             <li style="{!! (isset($reclamo) && $reclamo->id == $rec->id)? 'background-color: ghostwhite; color:white' : '' !!}" class="list-group-item">
+                            @permission('ver.reclamos.cliente')
                                 <a  href="{{ route('clientes.show.reclamo',  ['id' => $cliente->id, 'idReclamo' => $rec->id]) }}">
                                     {!! $rec->titulo !!}
                                 </a>
+                            @elsepermission
+                                {!! $rec->titulo !!}
+                            @endpermission
                                 <small class="text-muted">({!! $rec->fecha_creado !!})</small>
                             </li>
                         @empty
@@ -34,6 +38,7 @@
                 <div class="col-lg-9 col-md-9 col-sm-12">
                     @if(isset($llamada))
 
+                    @permission('ver.reclamos.cliente')
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
@@ -50,6 +55,7 @@
 
                             </div>
                         </div>
+                    @endpermission
 
                     @endif
                 </div>

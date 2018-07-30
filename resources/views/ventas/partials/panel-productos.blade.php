@@ -48,6 +48,7 @@
                                             <div class="text-center">
                                                 <i class="fa fa-refresh fa-spin" style="display: none; font-size: 2em" id="cargando"></i>
                                             </div>
+                                            @permission('crear.venta')
                                             <div class="col-xs-12">
                                                 <div class="panel panel-info">
                                                     <div class="table-responsive">
@@ -69,6 +70,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endpermission
                                         </div>
 
                                         <div class="row" id="sinresultados">
@@ -113,6 +115,7 @@
                                     {!! ($producto->marca)? ', '.$producto->marca->nombre : '' !!}
                                 </h4>
                             </div>
+                            @permission('quitar.producto.venta')
                             <div class="col-lg-2 text-right">
                                 {{--<i class="fa fa-caret-down"></i>--}}
                                 <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#quitarProducto{{ $producto->id }}"><i class="fa fa-trash"></i></button>
@@ -128,16 +131,17 @@
                                             </div>
                                             <div class="modal-footer">
                                                 {!! Form::open(['method' => 'DELETE', 'url' => route('ventas.quitar.producto')]) !!}
-                                                {!! Form::hidden('producto_id', $producto->id) !!}
-                                                {!! Form::hidden('venta_id', $venta->id) !!}
-                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                                {!! Form::submit('Quitar', ['class' => 'btn btn-danger']) !!}
+                                                    {!! Form::hidden('producto_id', $producto->id) !!}
+                                                    {!! Form::hidden('venta_id', $venta->id) !!}
+                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                                    {!! Form::submit('Quitar', ['class' => 'btn btn-danger']) !!}
                                                 {!! Form::close() !!}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @endpermission
                         </div>
                     </div>
                     <div class="{{ ($venta->productos->count() > 1)? 'panel-body collapse' : 'panel-body' }}" id="producto{{ $producto->id }}" aria-labelledby="headingOne" data-parent="#accordion">
@@ -165,10 +169,10 @@
 
                                 @if($producto->prospecto != '' && $producto->prospecto != null)
                                     <div>
-                            <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseComponentes{{ $producto->id }}" aria-expanded="false" aria-controls="collapseComponentes{{ $producto->id }}">
-                                <span class="text-primary">Prospecto (componentes)</span>
-                                <i class="fa fa-caret-down "></i>
-                            </span>
+                                        <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseComponentes{{ $producto->id }}" aria-expanded="false" aria-controls="collapseComponentes{{ $producto->id }}">
+                                            <span class="text-primary">Prospecto (componentes)</span>
+                                            <i class="fa fa-caret-down "></i>
+                                        </span>
                                         <div class="list-unstyled collapse"  id="collapseComponentes{{ $producto->id }}" aria-labelledby="headingOne" data-parent="#accordion">
                                             {!! $producto->prospecto !!}
                                         </div>
@@ -189,16 +193,20 @@
                                     </div>
                                 @endif
                             </div>
+                            @permission('editar.venta')
                             <div class="col-lg-6">
                                 <div>
                                     {!! Form::model($venta, ['method' => 'put', 'url' => route('ventas.editar.modos')]) !!}
-                                    {!! Form::submit('guardar', ['class' => 'btn btn-primary btn-xs pull-right']) !!}
-                                    {!! Form::hidden('venta_id', $venta->id) !!}
-                                    {!! Form::label('observaciones', 'Observaciones / modos de uso') !!}
-                                    {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '6']) !!}
+
+                                        {!! Form::submit('guardar', ['class' => 'btn btn-primary btn-xs pull-right']) !!}
+                                        {!! Form::hidden('venta_id', $venta->id) !!}
+                                        {!! Form::label('observaciones', 'Observaciones / modos de uso') !!}
+                                        {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '6']) !!}
+
                                     {!! Form::close() !!}
                                 </div>
                             </div>
+                            @endpermission
                         </div>
 
 

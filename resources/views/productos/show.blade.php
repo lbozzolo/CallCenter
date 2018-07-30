@@ -5,7 +5,7 @@
     <h2>
         Productos
         <span class="text-muted">
-                                / {!! $producto->nombre !!}
+            / {!! $producto->nombre !!}
             @if($producto->marca)
                 ({!! $producto->marca->nombre !!})
             @endif
@@ -18,7 +18,9 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
+        @permission('editar.producto')
             <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Editar</a>
+        @endpermission
             <h2 class="panel-title">Producto: {!! $producto->nombre !!}</h2>
         </div>
         <div class="panel-body">
@@ -89,6 +91,7 @@
 
             <div class="col-lg-6 col-md-6">
 
+            @permission('editar.producto')
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Modificar stock</h3>
@@ -99,8 +102,8 @@
                             <div class="input-group input-group-sm">
                                 {!! Form::number('stock', $producto->stock,['class' => 'form-control']) !!}
                                 <span class="input-group-btn">
-                                                {!! Form::submit('Guardar', ['class' => 'btn btn-info btn-flag']) !!}
-                                            </span>
+                                    {!! Form::submit('Guardar', ['class' => 'btn btn-info btn-flag']) !!}
+                                </span>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -189,6 +192,7 @@
                         @endif
                     </div>
                 </div>
+            @endpermission
 
                 <div class="panel panel-default">
                     <div class="panel-heading">

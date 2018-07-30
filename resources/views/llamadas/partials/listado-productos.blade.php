@@ -51,7 +51,11 @@
                 <td>${!! $producto->precio !!}</td>
                 <td>{!! $producto->fecha_editado !!}</td>
                 <td class="text-center">
+                @permission('crear.venta')
                     <a href="{{ route('llamadas.panel', ['idCliente' => $cliente->id, 'idProducto' => $producto->id]) }}" class="btn btn-primary btn-xs">seleccionar</a>
+                @elsepermission
+                    <button class="btn btn-primary btn-xs" disabled>seleccionar</button>
+                @endpermission
                 </td>
             </tr>
 

@@ -17,10 +17,14 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
+                            @permission('crear.cliente')
                                 <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fa fa-user-plus"></i> Agregar</a>
+                            @endpermission
                             </div>
                             <div class="panel-body">
+                            @permission('listado.cliente')
                                 @include('clientes.partials.listado-clientes')
+                            @endpermission
                             </div>
                         </div>
 

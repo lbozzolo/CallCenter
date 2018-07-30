@@ -24,18 +24,18 @@
                 </div>
             </nav>
 
-            <div>
-                {{--@include('llamadas.partials.panel-cliente')--}}
-            </div>
+            {{--<div>
+                @include('llamadas.partials.panel-cliente')
+            </div>--}}
 
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Seleccione un producto</h3>
                 </div>
                 <div class="panel-body">
-
+                @permission('listado.producto')
                     @include('llamadas.partials.listado-productos')
-
+                @endpermission
                 </div>
             </div>
 

@@ -19,7 +19,9 @@
                                 <h3 class="panel-title">Cliente: {!! $cliente->full_name !!} - Seleccione un producto para vender</h3>
                             </div>
                             <div class="panel-body">
+                            @permission('listado.productos')
                                 @include('ventas.partials.listado-productos')
+                            @endpermission
                             </div>
                         </div>
                     </div>

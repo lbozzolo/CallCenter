@@ -13,6 +13,7 @@
 
         <div class="col-lg-6">
 
+            @permission('crear.forma.de.pago')
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Nueva forma de pago</h3>
@@ -53,16 +54,19 @@
 
                 </div>
             </div>
+            @endpermission
 
+            @permission('editar.forma.de.pago')
             @if(isset($formaEdit))
 
                 @include('pagos.partials.formulario-edit')
 
             @endif
-
+            @endpermission
 
         </div>
 
+        @permission('listado.forma.de.pago')
         <div class="col-lg-6">
             <table class="table">
                 <thead>
@@ -180,6 +184,7 @@
 
             </table>
         </div>
+        @endpermission
 
     </div>
 

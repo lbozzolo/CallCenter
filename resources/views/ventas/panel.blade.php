@@ -70,9 +70,9 @@
                             <div class="panel-body collapse" id="collapseCliente" aria-labelledby="headingOne" data-parent="#accordion">
 
                                 <div class="row">
-
+                                @permission('editar.cliente')
                                     @include('ventas.partials.panel-cliente')
-
+                                @endpermission
                                 </div>
 
                             </div>
@@ -100,9 +100,9 @@
                                 </div>
                             </div>
                             <div class="panel-body collapse" id="collapseDatosTarjeta" aria-labelledby="headingOne" data-parent="#accordion">
-
+                            @permission('editar.venta')
                                 @include('ventas.partials.formulario-datos-tarjeta')
-
+                            @endpermission
                             </div>
                         </div>
                         @endif

@@ -84,6 +84,7 @@
 
                     </div>
 
+                    @permission('editar.venta')
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -119,6 +120,7 @@
                             </div>
                         </div>
                     </div>
+                    @endpermission
                 </div>
             </div>
         </div>

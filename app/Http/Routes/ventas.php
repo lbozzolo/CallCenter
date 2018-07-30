@@ -13,13 +13,13 @@ Route::get('ventas/{estado?}', [
 ]);
 
 //Creación de venta
-Route::get('ventas/crear/seleccionar-cliente', [
+Route::get('ventas/llamar/seleccionar-cliente', [
     'as' => 'ventas.seleccion.cliente',
     'uses' => 'VentasController@seleccionCliente',
     'middleware' => 'permission:crear.venta'
 ]);
 
-Route::get('ventas/crear/seleccionar-producto/{idCliente}', [
+Route::get('ventas/llamar/seleccionar-producto/{idCliente}', [
     'as' => 'ventas.seleccion.producto',
     'uses' => 'VentasController@seleccionProducto',
     'middleware' => 'permission:crear.venta'
@@ -46,7 +46,7 @@ Route::post('ventas/agregar-producto', [
 Route::delete('ventas/quitar-producto', [
     'as' => 'ventas.quitar.producto',
     'uses' => 'VentasController@quitarProducto',
-    'middleware' => 'permission:editar.venta'
+    'middleware' => 'permission:quitar.producto.venta'
 ]);
 
 Route::put('ventas/editar-modos', [

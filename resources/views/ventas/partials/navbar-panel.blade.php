@@ -13,6 +13,7 @@
                 Legales
             </button>
         </li>
+        @permission('aceptar.venta')
         <li>
             <button type="button" class="nonStyledButton" data-toggle="modal" data-target="#aceptarVenta">
                 <i class="fa fa-check text-success"></i>
@@ -39,6 +40,8 @@
                 </div>
             </div>
         </li>
+        @endpermission
+        @permission('cancelar.venta')
         <li>
             <button type="button" class="nonStyledButton" data-toggle="modal" data-target="#cancelarVenta">
                 <i class="fa fa-ban text-danger"></i>
@@ -67,7 +70,9 @@
                 </div>
             </div>
         </li>
+        @endpermission
     @else
+        @permission('retomar.venta')
         <li>
             <button type="button" class="nonStyledButton" data-toggle="modal" data-target="#retomarVenta">
                 <i class="fa fa-rotate-right text-primary"></i>
@@ -94,6 +99,7 @@
                 </div>
             </div>
         </li>
+        @endpermission
     @endif
 </ul>
 

@@ -22,9 +22,11 @@
             <tr>
                 <td>{!! $producto->id !!}</td>
                 <td>
+                @permission('ver.producto')
                     <a href="{{ route('productos.show', $producto->id) }}">
                         {!! $producto->nombre !!}
                     </a>
+                @endpermission
                 </td>
                 <td>{!! ($producto->marca)? $producto->marca->nombre : '---' !!}</td>
                 <td>{!! ($producto->institucion)? $producto->institucion->nombre : '---' !!}</td>

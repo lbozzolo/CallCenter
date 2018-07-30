@@ -10,7 +10,9 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
+        @permission('listado.venta')
             @include('ventas.partials.listado-ventas')
+        @endpermission
         </div>
     </div>
 

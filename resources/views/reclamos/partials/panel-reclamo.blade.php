@@ -15,6 +15,7 @@
         </span>
     </div>
     <div class="panel-body">
+        @permission('cambiar.estado.reclamo')
         <div>
             <span class="pull-right">
                 {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.solucionado', $reclamoFecha->id), 'class' => 'form', 'style' => 'display: inline-block']) !!}
@@ -140,4 +141,5 @@
             </ul>
         </div>
     </div>
+    @endpermission
 </div>

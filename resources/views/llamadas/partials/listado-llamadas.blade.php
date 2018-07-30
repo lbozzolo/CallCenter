@@ -30,14 +30,22 @@
             <tr>
                 <td>{!! $llamada->id !!}</td>
                 <td>
-                @if($llamada->user)
-                    <a href="{{ route('users.profile', $llamada->user->id) }}">{!! $llamada->user->full_name !!}</a>
-                @endif
+                @permission('ver.usuario')
+                    @if($llamada->user)
+                        <a href="{{ route('users.profile', $llamada->user->id) }}">{!! $llamada->user->full_name !!}</a>
+                    @endif
+                @elsepermission
+                        {!! $llamada->user->full_name !!}
+                @endpermission
                 </td>
                 <td>
-                @if($llamada->cliente)
-                    <a href="{{ route('clientes.show', $llamada->cliente->id) }}">{!! $llamada->cliente->nombre !!}</a>
-                @endif
+                @permission('ver.cliente')
+                    @if($llamada->cliente)
+                        <a href="{{ route('clientes.show', $llamada->cliente->id) }}">{!! $llamada->cliente->nombre !!}</a>
+                    @endif
+                @elsepermission
+                    {!! $llamada->cliente->nombre !!}
+                @endpermission
                 </td>
                 <td>
                 @if($llamada->resultado)
@@ -46,17 +54,19 @@
                 </td>
                 <td class="text-center">
 
-
+                @permission('ver.venta')
                     @if($llamada->venta_id)
                         #{!! $llamada->venta_id !!}
                         <a href="{{ route('ventas.show', $llamada->venta_id) }}"><i class="fa fa-info-circle"></i> </a>
                     @endif
+                @endpermission
 
-
+                @permission('ver.reclamo')
                     @if($llamada->reclamo_id)
                         #{!! $llamada->reclamo_id !!}
                         <a href="{{ route('reclamos.show', $llamada->reclamo_id) }}"><i class="fa fa-info-circle"></i> </a>
                     @endif
+                @endpermission
 
 
                 </td>

@@ -22,9 +22,11 @@
             <tr>
                 <td>{!! $cliente->id !!}</td>
                 <td>
+                @permission('ver.cliente')
                     <a href="{{ route('clientes.show', $cliente->id) }}">
                         {!! $cliente->full_name !!}
                     </a>
+                @endpermission
                 </td>
                 <td>{!! ($cliente->email)? $cliente->email : '---' !!}</td>
                 <td>{!! ($cliente->dni)? $cliente->dni : '---' !!}</td>

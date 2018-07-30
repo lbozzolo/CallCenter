@@ -32,15 +32,15 @@
                 <td>{!! ($venta->cliente)? $venta->cliente->full_name : '' !!}</td>
                 {{--<td>{!! ($venta->producto)? $venta->producto : '' !!}</td>--}}
                 <td>
+                @permission('ver.producto')
                     @if($venta->productos)
                         <ul>
                             @foreach($venta->productos as $producto)
-                                <li>
-                                    <a href="{{ route('productos.show', $producto->id) }}">{!! $producto->nombre !!}</a>
-                                </li>
+                                <li><a href="{{ route('productos.show', $producto->id) }}">{!! $producto->nombre !!}</a></li>
                             @endforeach
                         </ul>
                     @endif
+                @endpermission
                 </td>
                 <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '//' !!}</td>
                 <td>{!! $venta->fecha_creado !!}</td>
@@ -48,7 +48,9 @@
                     <span class="text-primary" style="font-size: 1.1em">${!! $venta->importe_total !!}</span>
                 </td>
                 <td class="text-center">
+                @permission('ver.venta')
                     <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-default btn-sm">detalles</a>
+                @endpermission
                 </td>
             </tr>
 
