@@ -3,7 +3,6 @@
 
 use SmartLine\Entities\Categoria;
 use SmartLine\Entities\Cliente;
-use SmartLine\Entities\Domicilio;
 use SmartLine\Entities\EstadoCliente;
 use SmartLine\Entities\Llamada;
 use SmartLine\Entities\Reclamo;
@@ -15,6 +14,7 @@ use SmartLine\Http\Requests\CreateClienteRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use SmartLine\Http\Repositories\ClienteRepo;
+use Illuminate\Support\Facades\Response;
 
 class ClientesController extends Controller
 {
@@ -198,6 +198,14 @@ class ClientesController extends Controller
         $categorias = Categoria::lists('nombre', 'id');
 
         return view('clientes.intereses', compact('cliente', 'intereses', 'categorias'));
+    }
+
+    public function downloadExcel()
+    {
+        $file = storage_path('app/clientes.xls');
+        $headers = array('Content-Type: application/vnd.ms-excel',);
+
+        return Response::download($file, 'clientes_nuevos.xls', $headers);
     }
 
 

@@ -54,8 +54,8 @@
                                     <div>Horario de contacto:</div>
                                     @if($cliente->from_date != $cliente->to_date)
                                     <div>
-                                        De <strong>{!! $cliente->from_date !!}</strong>
-                                        a <strong>{!! $cliente->to_date !!}</strong>
+                                        De <strong>{!! $cliente->horario_desde !!}</strong>
+                                        a <strong>{!! $cliente->horario_hasta !!}</strong>
                                     </div>
                                     @else
                                         <small class="text-muted">No hay horario especificado</small>

@@ -19,6 +19,9 @@
                             <div class="panel-heading">
                             @permission('crear.cliente')
                                 <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fa fa-user-plus"></i> Agregar</a>
+                                <a href="{{ route('clientes.download.excel') }}" class="btn btn-default">
+                                    <i class="fa fa-download"></i> excel
+                                </a>
                             @endpermission
                             </div>
                             <div class="panel-body">

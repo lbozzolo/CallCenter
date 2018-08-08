@@ -23,6 +23,7 @@ class CreateClientesTable extends Migration
             $table->string('email');
             $table->string('dni');
             $table->string('referencia');
+            $table->string('horario_contacto');
             $table->string('observaciones');
             $table->time('from_date')->nullable();
             $table->time('to_date')->nullable();

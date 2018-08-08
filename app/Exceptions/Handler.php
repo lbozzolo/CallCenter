@@ -45,24 +45,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof TokenMismatchException){
-            // Redirect to a form. Here is an example of how I handle mine
+        if ($e instanceof TokenMismatchException)
             return redirect($request->fullUrl())->with('csrf_error',"Se excedió el tiempo de espera para enviar el formulario. Vuelva a intentar.");
-        }
 
-        if ($e instanceof ModelNotFoundException) {
+        if ($e instanceof ModelNotFoundException)
             $e = new NotFoundHttpException($e->getMessage(), $e);
-        }
 
-        if ($e instanceof RoleDeniedException) {
-            // you can for example flash message, redirect...
-            return redirect()->back()->withErrors('Lo sentimos. Ha ocurrido un error.');
-        }
+        if ($e instanceof RoleDeniedException)
+            return redirect()->back()->withErrors('Lo sentimos. Usted no tiene el rol requerido.');
 
-        if ($e instanceof PermissionDeniedException) {
-            // you can for example flash message, redirect...
+        if ($e instanceof PermissionDeniedException)
             return redirect()->route('/')->withErrors('Lo sentimos. Usted no tiene los permisos requeridos.');
-        }
 
 
         return parent::render($request, $e);

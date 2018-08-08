@@ -30,6 +30,16 @@ class Cliente extends Entity
         return $domicilio;
     }
 
+    public function getHorarioDesdeAttribute()
+    {
+        return date("h:i", strtotime($this->from_date));
+    }
+
+    public function getHorarioHastaAttribute()
+    {
+        return date("h:i", strtotime($this->to_date));
+    }
+
     //Relationships
     public function estado()
     {

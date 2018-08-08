@@ -26,11 +26,15 @@
 </div>
 <div class="form-group">
     {!! Form::label('referencia', 'Referencia') !!}
-    {!! Form::textarea('referencia', null, ['class' => 'form-control', 'rows' => '4']) !!}
+    {!! Form::textarea('referencia', null, ['class' => 'form-control', 'rows' => '3']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('horario_contacto', 'Horario de Contacto') !!}
+    {!! Form::textarea('horario_contacto', null, ['class' => 'form-control', 'rows' => '3']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('observaciones', 'Observaciones') !!}
-    {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '4']) !!}
+    {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '3']) !!}
 </div>
 <div class="row">
     <div class="form-group col-xs-6">
@@ -96,7 +100,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('provincia', 'Provincia') !!}
-            {!! Form::select('provincia', $provincias, ($cliente->domicilio)? $cliente->domicilio->provincia->id : null, ['class' => 'form-control select2', 'id' => 'provincia']) !!}
+            {!! Form::select('provincia', $provincias, ($cliente->domicilio)? $cliente->domicilio->provincia->id : null, ['class' => 'form-control select2', 'id' => 'provincia', 'placeholder' => '']) !!}
         </div>
 
 
