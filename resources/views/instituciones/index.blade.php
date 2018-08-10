@@ -16,20 +16,20 @@
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Instituciones disponibles</h3>
+                                <h3 class="panel-title">Agregar nueva institución</h3>
                             </div>
                             <div class="panel-body">
-                                @include('instituciones.partials.instituciones-listado')
+                                @include('instituciones.partials.formulario-crear-institucion')
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Agregar nueva institución</h3>
+                                <h3 class="panel-title">Instituciones disponibles</h3>
                             </div>
                             <div class="panel-body">
-                                @include('instituciones.partials.formulario-crear-institucion')
+                                @include('instituciones.partials.instituciones-listado')
                             </div>
                         </div>
                     </div>
