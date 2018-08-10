@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace SmartLine\Http\Controllers\Auth;
 
-use App\User;
+use SmartLine\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use SmartLine\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -62,4 +64,37 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * Get the path to the login route.
+     *
+     * @return string
+     */
+    public function loginPath()
+    {
+        return route('login');
+    }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return route('/');
+    }
+
+    protected function getCredentials(Request $request)
+    {
+        return [
+            'email' => $request->get('email'),
+            'password' => $request->get('password'),
+            //'estado_id' => '1' //Usuario habilitado
+        ];
+    }
+
+
+
+
 }

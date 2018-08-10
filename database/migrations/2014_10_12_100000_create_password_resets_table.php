@@ -13,6 +13,8 @@ class CreatePasswordResetsTable extends Migration
     public function up()
     {
         Schema::create('password_resets', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at');
@@ -26,6 +28,8 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::drop('password_resets');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

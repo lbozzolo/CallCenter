@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace SmartLine\Events;
 
 abstract class Event
 {

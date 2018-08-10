@@ -11,6 +11,35 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+require(__DIR__ . '/Routes/auth.php');
+
+
+Route::group(['middleware' => ['auth', 'new.user']], function () {
+
+
+    Route::get('/', ['as' => '/', 'uses' => 'DashboardController@index']);
+
+    require(__DIR__ . '/Routes/users.php');
+    require(__DIR__ . '/Routes/roles.php');
+    require(__DIR__ . '/Routes/permissions.php');
+    require(__DIR__ . '/Routes/clientes.php');
+    require(__DIR__ . '/Routes/productos.php');
+    require(__DIR__ . '/Routes/categorias.php');
+    require(__DIR__ . '/Routes/marcas.php');
+    require(__DIR__ . '/Routes/instituciones.php');
+    require(__DIR__ . '/Routes/llamadas.php');
+    require(__DIR__ . '/Routes/ventas.php');
+    require(__DIR__ . '/Routes/imagenes.php');
+    require(__DIR__ . '/Routes/etapas.php');
+    require(__DIR__ . '/Routes/reclamos.php');
+    require(__DIR__ . '/Routes/address.php');
+    require(__DIR__ . '/Routes/enviopack.php');
+    require(__DIR__ . '/Routes/formas-pago.php');
+
+    //Ruta para ejecutar pruebas
+    Route::get('/test', ['as' => 'test', 'uses' => 'DashboardController@test']);
+
+
 });
+
+

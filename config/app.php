@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -140,10 +140,13 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        SmartLine\Providers\AppServiceProvider::class,
+        SmartLine\Providers\AuthServiceProvider::class,
+        SmartLine\Providers\EventServiceProvider::class,
+        SmartLine\Providers\RouteServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Bican\Roles\RolesServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -192,6 +195,9 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

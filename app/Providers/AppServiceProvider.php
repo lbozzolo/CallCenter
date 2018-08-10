@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace SmartLine\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Relation::morphMap([
+            'producto' => \SmartLine\Entities\Producto::class,
+            'user' => \SmartLine\User::class,
+            'venta' => \SmartLine\Entities\Venta::class,
+        ]);
     }
 }

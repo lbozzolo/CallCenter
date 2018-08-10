@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace SmartLine\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use SmartLine\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
@@ -29,4 +29,25 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return route('/');
+    }
+
+    /**
+     * Get the e-mail subject line to be used for the reset link email.
+     *
+     * @return string
+     */
+    protected function getEmailSubject()
+    {
+        return 'Tu link de reseteo de contraseña';
+    }
+
 }
