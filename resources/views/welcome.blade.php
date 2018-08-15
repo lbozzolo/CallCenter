@@ -3,103 +3,173 @@
 @section('header')
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <style>
+    
+        .altura
+        {
+            min-height: 3em;
+            border-radius: 2%;
+            margin: 2% 0;
+        }
+        .spanblanco
+        {
+            background-color:rgba(255,255,255,0.3); 
+            border-radius:10%;
+            font-weight: bold;
+        }
+        .botonIr
+        {
+            background-color: rgba(255,255,255,0.7);
+            color: #000;
+            font-size:2em;
+            padding:1% 10%;
+            border: 1px solid black;
+            border-radius:5%;
+            float: right;
+            margin-right:5%;
+        }
+        @media only screen and (max-width: 680px)
+        {
+            .botonIr
+            {
+                float: left;
+                margin-right:0;
+            }
+            .contenedor
+            {
+                padding: 5;
+            }
+        }
+
+        @media only screen and (min-width: 681px)
+        {
+            .barra
+            {
+                display: none;
+            }
+            .rowContenedor
+             {
+                 margin-bottom:2%;
+             }
+        }
+
+    
+    </style>
 @endsection
 
 @section('css')
-
-    <style>
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            display: table;
-            font-weight: 100;
-            font-family: 'Open Sans';
-        }
-
-        .container {
-            /*text-align: center;*/
-            display: table-cell;
-            vertical-align: middle;
-            padding: 50px 0px 0px 200px;
-        }
-
-        /*.content {
-            text-align: center;
-            display: inline-block;
-        }
-*/
-        h1{
-            color: darkslategray;
-            font-size: 4em;
-            font-family: 'Raleway';
-            /*letter-spacing: 10px;*/
-        }
-
-        .item {
-            background-color: lightgrey;
-            height: 150px;
-            margin: 5px;
-            text-align: center;
-        }
-
-        .item i{
-            font-size: 5em;
-            color: gray;
-            margin-top: 20%;
-        }
-    </style>
-
 @endsection
 
 @section('content')
 
-{{--
-@include('partials.navbar')
---}}
+<section style="background: url('/img/fondohome.jpg'); background-size: cover; width: 100%; height: auto;">
+<div class="container contenedor" style="padding:3%">
 
-<div class="row" style="background-color: darkslategray; color: white; margin-top: -30px">
-    <div class="container">
-        <div class="content">
-
-            <div class="col-lg-5 col-md-5">
-                <h1 style="color: #b3f0ff">SmartLine</h1>
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            <div class="col-lg-7 col-md-7">
-                <img src="{{ route('imagenes.ver', 'callcenter.png') }}" width="100%">
-            </div>
-
+    <div class="row altura" style="background-color: rgba(255,255,255,0.7); padding:2%">
+        <div class="col-md-3">
+            <span class="spanblanco">
+                <div class="row rowContenedor" style="margin-left:1%;">
+                    <i class="fas fa-users fa-2x"></i>
+                    <h2 style="display:inline;">Clientes</h2>
+                    <hr class="barra" style="border-bottom: 1px solid #ccc">
+                </div>
+            </span>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error sunt esse, praesentium ea ad eaque neque vel dolorum natus corrupti aliquid expedita aperiam dolorem accusantium distinctio vitae. Eum, voluptatibus ullam!
+            </p>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ route('clientes.index') }}"><button class="botonIr">Ir</button></a>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="panel">
-        <div class="panel-body" style="width: 80%; margin: 0px auto">
-            <div class="col-lg-4 col-md-4 text-center">
-                <img src="{{ route('imagenes.ver', 'icono1.png') }}" width="100px" >
-                <p style="padding: 20px 100px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-            </div>
-            <div class="col-lg-4 col-md-4 text-center">
-                <img src="{{ route('imagenes.ver', 'icono2.png') }}" width="100px">
-                <p style="padding: 20px 100px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-            </div>
-            <div class="col-lg-4 col-md-4 text-center">
-                <img src="{{ route('imagenes.ver', 'icono3.png') }}" width="100px" >
-                <p style="padding: 20px 100px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-            </div>
+    <div class="row altura" style="background-color: rgba(255,255,255,0.7); padding:2%">
+        <div class="col-md-3">
+            <span class="spanblanco">
+                <div class="row rowContenedor" style="margin-left:1%;">
+                    <i class="fas fa-shopping-cart fa-2x"></i>
+                    <h2 style="display:inline;">Productos</h2>
+                    <hr class="barra" style="border-bottom: 1px solid #ccc">
+                </div>
+                <hr class="barra" style="border-bottom: 1px solid #ccc">
+            </span>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error sunt esse, praesentium ea ad eaque neque vel dolorum natus corrupti aliquid expedita aperiam dolorem accusantium distinctio vitae. Eum, voluptatibus ullam!
+            </p>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ route('productos.index') }}"><button class="botonIr">Ir</button></a>
         </div>
     </div>
-
-    {{--<div class="col-lg-3 col-md-4 item"><i class="glyphicon glyphicon-tags"></i></div>
-    <div class="col-lg-3 col-md-4 item"><i class="glyphicon glyphicon-fire"></i></div>
-    <div class="col-lg-3 col-md-4 item"><i class="glyphicon glyphicon-knight"></i></div>--}}
+    <div class="row altura" style="background-color: rgba(255,255,255,0.7); padding:2%">
+        <div class="col-md-3">
+            <span class="spanblanco">
+                <div class="row rowContenedor" style="margin-left:1%;">
+                    <i class="fas fa-headset fa-2x"></i>
+                    <h2 style="display:inline;">Llamadas</h2>
+                    <hr class="barra" style="border-bottom: 1px solid #ccc">
+                </div>
+                <hr class="barra" style="border-bottom: 1px solid #ccc">
+            </span>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error sunt esse, praesentium ea ad eaque neque vel dolorum natus corrupti aliquid expedita aperiam dolorem accusantium distinctio vitae. Eum, voluptatibus ullam!
+            </p>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ route('llamadas.index') }}"><button class="botonIr">Ir</button></a>
+        </div>
+    </div>
+    <div class="row altura" style="background-color: rgba(255,255,255,0.7); padding:2%">
+        <div class="col-md-3">
+            <span class="spanblanco">
+                <div class="row rowContenedor" style="margin-left:1%;">
+                    <i class="fas fa-hand-holding-usd fa-2x"></i>
+                    <h2 style="display:inline;">Ventas</h2>
+                    <hr class="barra" style="border-bottom: 1px solid #ccc">
+                </div>
+                <hr class="barra" style="border-bottom: 1px solid #ccc">
+            </span>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error sunt esse, praesentium ea ad eaque neque vel dolorum natus corrupti aliquid expedita aperiam dolorem accusantium distinctio vitae. Eum, voluptatibus ullam!
+            </p>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ route('ventas.index') }}"><button class="botonIr">Ir</button></a>
+        </div>
+    </div>
+    <div class="row altura" style="background-color: rgba(255,255,255,0.7); padding:2%">
+        <div class="col-md-3">
+            <span class="spanblanco">
+                <div class="row rowContenedor" style="margin-left:1%;">
+                    <i class="fas fa-exclamation fa-2x"></i>
+                    <h2 style="display:inline;">Reclamos</h2>
+                    <hr class="barra" style="border-bottom: 1px solid #ccc">
+                </div>
+                <hr class="barra" style="border-bottom: 1px solid #ccc">
+            </span>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error sunt esse, praesentium ea ad eaque neque vel dolorum natus corrupti aliquid expedita aperiam dolorem accusantium distinctio vitae. Eum, voluptatibus ullam!
+            </p>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ route('reclamos.index') }}"><button class="botonIr">Ir</button></a>
+        </div>
+    </div>
+   
 </div>
+</section>
+
 
 @endsection
 
