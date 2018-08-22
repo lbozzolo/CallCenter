@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                    <a href="{{ route('reclamo.change.status', $reclamo->id) }}" class="btn btn-danger" title="CERRAR">Aceptar</a>
+                                    <a href="{{ route('reclamos.change.status', $reclamo->id) }}" class="btn btn-danger" title="CERRAR">Aceptar</a>
                                 </div>
                             </div>
                         </div>

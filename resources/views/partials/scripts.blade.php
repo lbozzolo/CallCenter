@@ -13,7 +13,7 @@
 
 {{-- ===================== Template ===================== --}}
 
-<script src="{{ asset('template/js/lib/jquery.min.js') }}"></script>
+
 <!-- jquery vendor -->
 <script src="{{ asset('template/js/lib/jquery.nanoscroller.min.js') }}"></script>
 <!-- nano scroller -->
