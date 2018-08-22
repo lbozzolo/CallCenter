@@ -16,15 +16,16 @@ class CreateClientesTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('telefono');
-            $table->string('celular');
-            $table->string('email');
-            $table->string('dni');
-            $table->string('referencia');
-            $table->string('horario_contacto');
-            $table->string('observaciones');
+            $table->string('nombre')->nullable();
+            $table->string('apellido')->nullable();
+            $table->string('nombre_completo')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('celular')->nullable();
+            $table->string('email')->nullable();
+            $table->string('dni')->nullable();
+            $table->string('referencia')->nullable();
+            $table->string('horario_contacto')->nullable();
+            $table->string('observaciones')->nullable();
             $table->time('from_date')->nullable();
             $table->time('to_date')->nullable();
             $table->integer('puntos')->nullable();

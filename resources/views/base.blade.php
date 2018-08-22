@@ -3,13 +3,21 @@
 
 @section('body')
 
-    <div class="row">
-        <div class="col-lg-12">
-            @include('partials.navbar')
-        </div>
-    </div>
+
+    @include('partials.navbar')
+
     @include('partials.messages')
 
-    @yield('content')
+    @include('partials.header')
+
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+
+                @yield('content')
+
+            </div>
+        </div>
+    </div>
 
 @endsection
