@@ -5,7 +5,7 @@ namespace SmartLine\Entities;
 class Cliente extends Entity
 {
     protected $table = 'clientes';
-    protected $fillable = ['nombre', 'apellido', 'domicilio_id', 'telefono', 'celular', 'email', 'dni', 'referencia', 'observaciones', 'from_date', 'to_date', 'puntos', 'estado_id', 'created_at', 'updated_at'];
+    protected $fillable = ['nombre', 'apellido', 'nombre_completo', 'domicilio_id', 'telefono', 'celular', 'email', 'dni', 'referencia', 'observaciones', 'from_date', 'to_date', 'puntos', 'estado_id', 'created_at', 'updated_at'];
 
 
     public function getFullNameAttribute()
@@ -32,12 +32,12 @@ class Cliente extends Entity
 
     public function getHorarioDesdeAttribute()
     {
-        return date("h:i", strtotime($this->from_date));
+        return date("H:i", strtotime($this->from_date));
     }
 
     public function getHorarioHastaAttribute()
     {
-        return date("h:i", strtotime($this->to_date));
+        return date("H:i", strtotime($this->to_date));
     }
 
     //Relationships

@@ -79,6 +79,16 @@ Route::get('clientes/{id}/intereses', [
     'middleware' => 'permission:ver.intereses.cliente'
 ]);
 
+Route::get('clientes/importacion', [
+    'as' => 'clientes.importacion',
+    'uses' => 'ClientesController@importacion'
+]);
+
+Route::post('clientes/importacion', [
+    'as' => 'clientes.importacion.subir',
+    'uses' => 'ClientesController@importacionUpload'
+]);
+
 Route::get('descargar-excel-clientes', [
     'as' => 'clientes.download.excel',
     'uses' => 'ClientesController@downloadExcel'

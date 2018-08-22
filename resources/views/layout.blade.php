@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 
-<html lang="es">
-<head>
+<html lang="es" class="dark">
+    <head>
 
-    @include('partials.htmlheader')
+        @include('partials.htmlheader')
 
-</head>
+    </head>
+    <body>
 
-<body>
+        @yield('login')
+        @yield('body')
+        @include('partials.scripts')
 
-    @yield('login')
-    @yield('body')
-    @include('partials.scripts')
-
-</body>
+    </body>
 </html>

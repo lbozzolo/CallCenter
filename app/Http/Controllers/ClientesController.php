@@ -1,6 +1,7 @@
 <?php namespace SmartLine\Http\Controllers;
 
 
+use Maatwebsite\Excel\Facades\Excel;
 use SmartLine\Entities\Categoria;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\EstadoCliente;
@@ -128,7 +129,7 @@ class ClientesController extends Controller
 
         $cliente->save();
 
-        return redirect()->back()->with('ok', 'Cliente editado con éxito');
+        return redirect()->route('clientes.show', $cliente->id)->with('ok', 'Cliente editado con éxito');
     }
 
     public function compras($id)
@@ -198,6 +199,45 @@ class ClientesController extends Controller
         $categorias = Categoria::lists('nombre', 'id');
 
         return view('clientes.intereses', compact('cliente', 'intereses', 'categorias'));
+    }
+
+    public function importacion()
+    {
+        return view('clientes.importacion');
+    }
+
+    public function importacionUpload(Request $request)
+    {
+        $file = $request->excel_file;
+        $estado = EstadoCliente::where('slug', '=', 'nuevo')->first()->id;
+
+        Excel::load($file, function($reader) use ($estado) {
+
+            foreach ($reader->get() as $cliente) {
+                if(!is_null($cliente->nombre) || !is_null($cliente->apellido) || !is_null($cliente->fullname) || !is_null($cliente->mail) || !is_null($cliente->telefono) || !is_null($cliente->dni)){
+
+                    $checkedDNI = null;
+                    if($cliente->dni) {
+                        $checkedDNI = (!Cliente::where('dni', '=', $cliente->dni)->first()) ? $cliente->dni : null;
+                    }
+
+                    Cliente::create([
+                        'nombre' => $cliente->nombre,
+                        'apellido' => $cliente->apellido,
+                        'nombre_completo' => $cliente->fullname,
+                        'email' => $cliente->mail,
+                        'telefono' => $cliente->telefono,
+                        'dni' => $checkedDNI,
+                        'estado_id' => $estado
+                    ]);
+
+                }
+            }
+
+        });
+
+        return redirect()->route('clientes.index')->with('ok', 'Se han insertado los clientes con éxito');
+
     }
 
     public function downloadExcel()

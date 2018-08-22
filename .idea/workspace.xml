@@ -2,7 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="243b5206-411e-4ce4-90f1-8f9603771e18" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/partials/header.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Cliente.php" afterPath="$PROJECT_DIR$/app/Entities/Cliente.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Routes/clientes.php" afterPath="$PROJECT_DIR$/app/Http/Routes/clientes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php" afterPath="$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/base.blade.php" afterPath="$PROJECT_DIR$/resources/views/base.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/compras.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/compras.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/intereses.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/intereses.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/llamadas.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/llamadas.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/partials/listado-clientes.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/partials/listado-clientes.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/reclamos.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/reclamos.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clientes/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/clientes/show.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout.blade.php" afterPath="$PROJECT_DIR$/resources/views/layout.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/htmlheader.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/htmlheader.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/navbar.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/navbar.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/scripts.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/scripts.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,48 +43,82 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Cliente.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Entities/Cliente.php">
+      <file leaf-file-name="layout.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/layout.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="51" column="5" lean-forward="false" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+            <state relative-caret-position="34">
+              <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Role.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Models/Role.php">
+      <file leaf-file-name="base.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/base.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/Bamdig/CallCenter/dark/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="337" column="41" lean-forward="true" selection-start-line="335" selection-start-column="4" selection-end-line="337" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/partials/header.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="391">
-              <caret line="23" column="8" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-              <folding>
-                <element signature="e#38#70#0#PHP" expanded="true" />
-              </folding>
+              <caret line="23" column="56" lean-forward="false" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SuperAdminPermissionsSeeder.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/SuperAdminPermissionsSeeder.php">
+      <file leaf-file-name="users.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Routes/users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-              <folding>
-                <element signature="e#7#38#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="-301">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientesController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientesController.php">
+      <file leaf-file-name="usuarios-habilitados.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/users/partials/usuarios-habilitados.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5">
-              <caret line="183" column="60" lean-forward="true" selection-start-line="183" selection-start-column="60" selection-end-line="183" selection-end-column="60" />
-              <folding>
-                <element signature="e#46#79#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="204">
+              <caret line="51" column="26" lean-forward="true" selection-start-line="45" selection-start-column="20" selection-end-line="51" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="navbar.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/partials/navbar.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="549">
+              <caret line="89" column="6" lean-forward="false" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index-template.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/Bamdig/CallCenter/index-template.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="157" column="16" lean-forward="true" selection-start-line="157" selection-start-column="16" selection-end-line="382" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,6 +156,7 @@
       <find>reclamos.p</find>
       <find>mail</find>
       <find>cierreVenta</find>
+      <find>all</find>
     </findStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\callcenter\database\migrations</dir>
@@ -116,22 +170,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/productos/partials/navbar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/productos/show.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/productos/pos-create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/productos/etapas-edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/productos/etapas.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/llamadas/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/llamadas/partials/listado-llamadas.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/llamadas/partials/navbar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/llamadas/partials/listado-productos.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/llamadas/seleccion-cliente.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/llamadas/seleccion-producto.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/reclamos/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/reclamos/index-clientes.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/reclamos/index-productos.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/ventas/partials/navbar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/ventas/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Routes/ventas.php" />
@@ -153,20 +191,36 @@
         <option value="$PROJECT_DIR$/database/seeds/LocalidadesPartidosProvinciasSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/UsuariosDePruebaSeeder.php" />
         <option value="$PROJECT_DIR$/app/Exceptions/Handler.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Cliente.php" />
-        <option value="$PROJECT_DIR$/resources/views/clientes/show.blade.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/resources/views/excel/clientes.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" />
         <option value="$PROJECT_DIR$/app/Http/Routes/clientes.php" />
-        <option value="$PROJECT_DIR$/resources/views/clientes/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/clientes/partials/formulario-editar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/clientes/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/instituciones/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/instituciones/partials/formulario-crear-institucion.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/ventas/seleccion-producto.blade.php" />
         <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Models/Role.php" />
+        <option value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php" />
+        <option value="$PROJECT_DIR$/database/seeds/SuperAdminPermissionsSeeder.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/index.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/partials/listado-clientes.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Cliente.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/intereses.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/reclamos.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/llamadas.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/compras.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/partials/htmlheader.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/partials/scripts.blade.php" />
+        <option value="$USER_HOME$/Desktop/Bamdig/CallCenter/dark/index.html" />
+        <option value="$PROJECT_DIR$/resources/views/layout.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/base.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/partials/navbar.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/partials/header.blade.php" />
       </list>
     </option>
   </component>
@@ -204,7 +258,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -233,6 +287,20 @@
             <path>
               <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
               <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Requests" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Routes" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -246,20 +314,21 @@
               <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="auth" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="users" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="callcenter" type="b2602c69:ProjectViewProjectNode" />
               <item name="callcenter" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="clientes" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="users" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="partials" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -370,18 +439,20 @@
       <workItem from="1533940152168" duration="603000" />
       <workItem from="1534029800849" duration="36000" />
       <workItem from="1534083423878" duration="1563000" />
+      <workItem from="1534713023995" duration="11826000" />
+      <workItem from="1534888793569" duration="7697000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1350734000" />
+    <option name="totallyTimeSpent" value="1373810000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2408492" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28257686" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -392,23 +463,12 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40729" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27086383" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -444,217 +504,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/pagos/base.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pagos/partials/formulario-edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/panel.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="104" column="42" lean-forward="false" selection-start-line="104" selection-start-column="42" selection-end-line="104" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/panel-productos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="58" lean-forward="false" selection-start-line="72" selection-start-column="58" selection-end-line="72" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/panel-cliente.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ventas/partials/navbar-panel.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="103" column="5" lean-forward="true" selection-start-line="103" selection-start-column="5" selection-end-line="103" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Routes/ventas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-148">
-          <caret line="48" column="47" lean-forward="false" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reclamos/partials/panel-reclamo.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="143" column="18" lean-forward="false" selection-start-line="143" selection-start-column="18" selection-end-line="143" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reclamos/show-producto-reclamos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reclamos/partials/navbar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="39" lean-forward="true" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reclamos/partials/listado-reclamos-productos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reclamos/partials/listado-reclamos-clientes.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reclamos/partials/listado-reclamos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="132" column="30" lean-forward="false" selection-start-line="132" selection-start-column="30" selection-end-line="132" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Routes/reclamos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/RoleTableSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/LocalidadesPartidosProvinciasSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Middleware/VerifyPermission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-233">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/PermissionsTableSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="105" column="29" lean-forward="false" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/HasRoleAndPermission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6248">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/PermissionHasRelations.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/RoleHasRelations.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-505">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Traits/Slugable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/RolesServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-663">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="34" column="37" lean-forward="false" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Exceptions/Handler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="39" column="49" lean-forward="true" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Cliente.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="51" column="5" lean-forward="false" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/clientes/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="57" column="77" lean-forward="false" selection-start-line="57" selection-start-column="77" selection-end-line="57" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../tren/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../tren/app/Http/Controllers/ReportesController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-748">
@@ -691,24 +540,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/excel/clientes.blade.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/clientes/partials/listado-clientes.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Routes/clientes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1394">
           <caret line="82" column="31" lean-forward="false" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/clientes/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="67" lean-forward="false" selection-start-line="22" selection-start-column="67" selection-end-line="22" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -761,21 +596,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="17" column="55" lean-forward="false" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/partials/navbar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-408">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/UsuariosDePruebaSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -783,23 +603,280 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="32" column="55" lean-forward="false" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Contracts/RoleHasRelations.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-182">
+          <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/Models/Role.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/SuperAdminPermissionsSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="31" lean-forward="true" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/auth/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="60" lean-forward="false" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/temporaria-SmartLine/clientes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/bican/roles/src/Bican/Roles/RolesServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-663">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_03_22_005834_create_clientes_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="55" lean-forward="false" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/CreateClienteRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/intereses.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/reclamos.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/llamadas.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="99" column="72" lean-forward="false" selection-start-line="99" selection-start-column="72" selection-end-line="99" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/Bamdig/tfc/FileZilla_lucas.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/agregado_de_modulos_para_el_core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="81" column="13" lean-forward="false" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/compras.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-          <folding>
-            <element signature="e#7#38#0#PHP" expanded="true" />
-          </folding>
+          <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
-          <caret line="183" column="60" lean-forward="true" selection-start-line="183" selection-start-column="60" selection-end-line="183" selection-end-column="60" />
-          <folding>
-            <element signature="e#46#79#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="131" column="62" lean-forward="false" selection-start-line="131" selection-start-column="62" selection-end-line="131" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/partials/navbar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/partials/listado-clientes.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="30" column="139" lean-forward="false" selection-start-line="30" selection-start-column="139" selection-end-line="30" selection-end-column="139" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="59" column="52" lean-forward="false" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Cliente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="39" column="22" lean-forward="false" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="137" lean-forward="false" selection-start-line="21" selection-start-column="137" selection-end-line="21" selection-end-column="137" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/Bamdig/CallCenter/dark/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="337" column="41" lean-forward="true" selection-start-line="335" selection-start-column="4" selection-end-line="337" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/navbar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="89" column="6" lean-forward="false" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DashboardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/htmlheader.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="22" column="58" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/scripts.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="34" column="31" lean-forward="false" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layout.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/base.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/Bamdig/CallCenter/index-template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="157" column="16" lean-forward="true" selection-start-line="157" selection-start-column="16" selection-end-line="382" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/nuevo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="232" column="0" lean-forward="true" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/partials/usuarios-habilitados.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="51" column="26" lean-forward="true" selection-start-line="45" selection-start-column="20" selection-end-line="51" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Routes/users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-301">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="56" lean-forward="false" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
