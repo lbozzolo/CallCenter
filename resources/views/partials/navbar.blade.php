@@ -22,6 +22,12 @@
                                 <a href="{{ route('clientes.create') }}">Agregar Cliente </a>
                             </li>
                             @endpermission
+
+                            @permission('crear.cliente')
+                            <li>
+                                <a href="{{ route('clientes.create') }}">Importar Lista </a>
+                            </li>
+                            @endpermission
                         </ul>
                     </li>
                 @endpermission
