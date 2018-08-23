@@ -46,7 +46,7 @@
     @endif
 
     {{-- Info --}}
-    @if (session()->has('nfo') || isset($info))
+    @if (session()->has('info') || isset($info))
         <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
 
             <div class="panel-body">

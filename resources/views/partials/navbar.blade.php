@@ -19,7 +19,7 @@
 
                             @permission('crear.cliente')
                             <li>
-                                <a href="{{ route('clientes.create') }}">Ingresar Cliente </a>
+                                <a href="{{ route('clientes.create') }}">Agregar Cliente </a>
                             </li>
                             @endpermission
                         </ul>
@@ -40,7 +40,7 @@
 
                             @permission('crear.reclamo')
                             <li>
-                                <a href="{{ route('reclamos.create') }}">Ingresar Reclamos </a>
+                                <a href="{{ route('reclamos.create') }}">Agregar Reclamos </a>
                             </li>
                             @endpermission
                         </ul>
@@ -130,6 +130,32 @@
                     </li>
                 @endpermission
 
+                @permission('listado.categoria')
+                    <li>
+                        <a class="sidebar-sub-toggle" href="{{ route('subcategorias.index') }}" style="{{ (Request::is('subcategorias'.'*') ? 'color: white' : '') }}"><i class="ti-menu-alt"></i> Subcategorias <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            @permission('listado.categoria')
+                            <li>
+                                <a href="{{ route('subcategorias.index') }}">Listar Subcategorias </a>
+                            </li>
+                            @endpermission
+                        </ul>
+                    </li>
+                @endpermission
+
+                @permission('listado.marca')
+                    <li>
+                        <a class="sidebar-sub-toggle" href="{{ route('marcas.index') }}" style="{{ (Request::is('marcas'.'*') ? 'color: white' : '') }}"><i class="ti-receipt"></i> Marcas <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                        <ul>
+                            @permission('listado.marca')
+                            <li>
+                                <a href="{{ route('marcas.index') }}">Listar Marcas </a>
+                            </li>
+                            @endpermission
+                        </ul>
+                    </li>
+                @endpermission
+
 
                 @permission('listado.institucion')
                     <li>
@@ -175,7 +201,7 @@
 
                             @permission('crear.usuario')
                             <li>
-                                <a href="{{ route('users.create') }}">Cargar Usuarios </a>
+                                <a href="{{ route('users.create') }}">Agregar Usuarios </a>
                             </li>
                             @endpermission
                         </ul>
