@@ -14,12 +14,6 @@
 {{-- ===================== Template ===================== --}}
 
 
-
-
-
-
-
-
 <!-- jquery vendor -->
 <script src="{{ asset('template/js/lib/jquery.nanoscroller.min.js') }}"></script>
 <!-- nano scroller -->
