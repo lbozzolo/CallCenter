@@ -17,9 +17,7 @@
                 <li><a href="{{ route('reclamos.index.productos') }}" class="{{ (Request::is('reclamos/productos'.'*') ? 'navbar-item-selected' : '') }}">Por producto</a></li>
                 <li><a href="{{ route('reclamos.index.clientes') }}" class="{{ (Request::is('reclamos/clientes'.'*') ? 'navbar-item-selected' : '') }}">Por cliente</a></li>
             @endpermission
-            @permission('crear.reclamo')
-                <li><a href="{{ route('reclamos.create') }}" class="{{ (Request::is('reclamos/crear') ? 'navbar-item-selected' : '') }}"><span class="text-primary"><i class="fa fa-plus"></i> Ingresar reclamo</span></a></li>
-            @endpermission
+            
             </ul>
         </div>
     </div>
