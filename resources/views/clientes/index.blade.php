@@ -46,6 +46,7 @@
 
     <script>
 
+
         $(document).ready(function() {
             $('#table-clientes').DataTable({
                 "language": {

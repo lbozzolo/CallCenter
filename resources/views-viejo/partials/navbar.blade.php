@@ -24,7 +24,7 @@
 
             @role('superadmin')
                 <li><a href="{{ route('roles.index') }}" style="{{ (Request::is('roles'.'*') ? 'color: white' : '') }}">Roles</a></li>
-            @endpermission
+            @endrole
 
             @permission('listado.cliente')
                 <li><a href="{{ route('clientes.index') }}" style="{{ (Request::is('clientes'.'*') ? 'color: white' : '') }}">Clientes</a></li>
