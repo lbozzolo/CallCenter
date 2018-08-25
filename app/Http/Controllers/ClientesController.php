@@ -242,7 +242,7 @@ class ClientesController extends Controller
 
     public function downloadExcel()
     {
-        $file = storage_path('app/clientes.xls');
+        $file = public_path('clientes.xls');
         $headers = array('Content-Type: application/vnd.ms-excel',);
 
         return Response::download($file, 'clientes_nuevos.xls', $headers);
