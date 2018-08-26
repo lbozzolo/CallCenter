@@ -23,19 +23,18 @@
                             <div class="card alert">
                                 <div class="card-header pr">
                                     <h4>Nueva forma de pago</h4>
-                                    
                                 </div>
                                 {!! Form::open(['url' => route('formas.pago.store'), 'method' => 'post']) !!}
                                 <div class="basic-form">
                                     <div class="form-group">
                                         {!! Form::label('tarjeta_id', 'Tarjeta') !!}
-                                    {!! Form::select('tarjeta_id', $marcasTarjetas, null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                                        {!! Form::select('tarjeta_id', $marcasTarjetas, null, ['class' => 'form-control', 'placeholder' => '', 'style' => 'color: gray']) !!}
                                     </div>
                                 </div>
                                 <div class="basic-form">
                                     <div class="form-group">
                                         {!! Form::label('cuota_cantidad', 'Cuotas') !!}
-                                    {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control']) !!}
+                                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control', 'style' => 'color: gray']) !!}
                                     </div>
                                 </div>
                                 
@@ -214,3 +213,4 @@
                 </div>
 
 @endsection
+

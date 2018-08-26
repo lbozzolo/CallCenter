@@ -7,6 +7,30 @@
             display: none;
         }
 
+        .datepicker-days  {
+            background: white !important;
+        }
+        .datepicker-switch{
+            background: gray !important;
+            color: white !important;
+        }
+        .prev, .next{
+            background: lightgrey !important;
+            color: white !important;
+        }
+        .day, .month, .year{
+            color: gray !important;
+        }
+        .active{
+            color: white !important;
+        }
+        .old{
+            color: lightgray !important;
+        }
+        input, .select2{
+            background-color: #404a6b !important;
+        }
+
     </style>
 @endsection
 
@@ -16,10 +40,10 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
+    <div class="card default">
         <div class="panel-body">
 
-            {!! Form::open(['method' => 'post', 'url' => route('productos.store'), 'class' =>'form']) !!}
+            {!! Form::open(['method' => 'post', 'url' => route('productos.store'), 'class' =>'form', 'autocomplete' => 'off']) !!}
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -62,7 +86,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 {!! Form::label('unidad_medida_id', 'Unidad de medida') !!}
-                                {!! Form::select('unidad_medida_id', $unidadesMedida,  null, ['class' => 'form-control ', 'placeholder' => '']) !!}
+                                {!! Form::select('unidad_medida_id', $unidadesMedida,  null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 {!! Form::label('cantidad_medida', 'Cantidad') !!}
@@ -75,13 +99,13 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="form-group">
                         {!! Form::label('precio', 'Precio') !!}
-                        {!! Form::number('precio', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('precio', null, ['class' => 'form-control', 'min' => '0']) !!}
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('stock', 'Stock') !!}
-                                {!! Form::number('stock', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('stock', null, ['class' => 'form-control', 'min' => '0']) !!}
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -94,7 +118,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('marca_id', 'Marca') !!}
-                        {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select22', 'placeholder' => '']) !!}
+                        {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('referencia', 'Referencia') !!}
@@ -102,7 +126,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('institucion_id', 'Institución') !!}
-                        {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control select2']) !!}
                         <small class="help-block">Solamente en el caso de que corresponda.</small>
                     </div>
                     {!! Form::submit('Agregar', ['class' => 'btn btn-primary']) !!}
@@ -130,6 +154,8 @@
             language: 'es',
             todayHighLight: true
         });
+
+
 
         $('.select2').select2({multiple: true});
         $('.select22').select2();
