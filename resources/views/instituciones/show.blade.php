@@ -3,8 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="container">
-            <div class="content">
+        <div class="col-lg-8">
                 <h2>
                     Instituciones
                     <span class="text-muted"> / {!! $institucion->nombre !!}</span>
@@ -25,9 +24,7 @@
                     </ul>
                     <a href="{{ route('instituciones.edit', $institucion->id) }}" class="btn btn-primary">Editar</a>
                     <a href="{{ URL::previous() }}" class="btn btn-default">Volver</a>
-                </div>
-
-            </div>
+                
         </div>
     </div>
 
