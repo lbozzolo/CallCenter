@@ -1,11 +1,10 @@
 @extends('layout')
 
-@include('partials.navbar')
 
 @section('login')
     <div class="container-fluid" style="background: url(/img/fondologin.jpg); background-size: cover); width: 100%; height: 100%">
         <div class="row text-center">
-            <img src="/img/logo.png" alt="Logo smartline" style="margin: 5% auto; width: 25%;">
+            <img src="{{ asset('/img/logo.png') }}" alt="Logo smartline" style="margin: 5% auto; width: 25%;">
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2" style="margin-top: 12%">

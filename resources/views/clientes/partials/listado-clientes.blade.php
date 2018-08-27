@@ -2,7 +2,7 @@
     Aguarde un momento por favor...<br>
     <i class="fa fa-refresh fa-spin" style="font-size: 2em"></i>
 </div>
-<div class="table-responsive" id="div-table-clientes" style="display: none">
+<div class="table-responsive" id="div-table-clientes" style="display: none;">
 
     <table class="table table-vertical dataTable" id="table-clientes">
 
@@ -16,7 +16,6 @@
             <th>Compras</th>
             <th>Llamadas</th>
             <th>Fecha de alta</th>
-            <th>Última acción</th>
             <th>Opciones</th>
         </tr>
         </thead>
@@ -53,7 +52,6 @@
                 @endpermission
                 </td>
                 <td>{!! $cliente->fecha_creado !!}</td>
-                <td>{!! $cliente->fecha_editado !!}</td>
                 <td class="text-center">
                 @permission('ver.cliente')
                     <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default btn-xs">detalles</a>
