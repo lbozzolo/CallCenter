@@ -61,13 +61,13 @@
                                 <div class="basic-form">
                                     <div class="form-group">
                                         {!! Form::label('tarjeta_id', 'Tarjeta') !!}
-                                        {!! Form::select('tarjeta_id', $marcasTarjetas, null, ['class' => 'form-control', 'placeholder' => '', 'style' => 'color: gray']) !!}
+                                        {!! Form::select('tarjeta_id', $marcasTarjetas, null, ['class' => 'form-control  select2', 'placeholder' => '', 'style' => 'color: white']) !!}
                                     </div>
                                 </div>
                                 <div class="basic-form">
                                     <div class="form-group">
                                         {!! Form::label('cuota_cantidad', 'Cuotas') !!}
-                                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control', 'style' => 'color: gray']) !!}
+                                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control  select2', 'style' => 'color: white']) !!}
                                     </div>
                                 </div>
                                 
