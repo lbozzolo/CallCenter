@@ -8,11 +8,11 @@
 
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h2 class="panel-title">Editar venta #{!! $venta->id !!}</h2>
+                        <div class="card card-default">
+                            <div class="card-heading">
+                                <h2 class="card-title">Editar venta #{!! $venta->id !!}</h2>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 {!! Form::model($venta, ['method' => 'put', 'url' => route('ventas.update', $venta->id), 'class' =>'form']) !!}
 
                                 <div class="form-group">

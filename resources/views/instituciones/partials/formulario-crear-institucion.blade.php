@@ -1,3 +1,36 @@
+@section('css')
+    <style type="text/css">
+
+        input::-webkit-calendar-picker-indicator{
+            display: none;
+        }
+
+        .datepicker-days  {
+            background: white !important;
+        }
+        .datepicker-switch{
+            background: gray !important;
+            color: white !important;
+        }
+        .prev, .next{
+            background: lightgrey !important;
+            color: white !important;
+        }
+        .day, .month, .year{
+            color: gray !important;
+        }
+        .active{
+            color: white !important;
+        }
+        .old{
+            color: lightgray !important;
+        }
+        input, .select2{
+            background-color: #404a6b !important;
+        }
+
+    </style>
+@endsection
 
 {!! Form::open(['method' => 'post', 'url' => route('instituciones.store'), 'class' => 'form']) !!}
 
@@ -43,6 +76,6 @@
     {!! Form::radio('estado_id', $estados[1], false) !!}
 </div>
 
-{!! Form::submit('+ Agregar', ['class' => 'btn btn-primary']) !!}
+<button type="submit" class="btn btn-primary">Agregar Institución</button>
 
 {!! Form::close() !!}

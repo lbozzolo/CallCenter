@@ -6,17 +6,14 @@
         <div class="container">
             <div class="content">
 
-                <h2>
-                    Instituciones
-                    <span class="text-muted"> / Editar</span>
-                </h2>
-
-                <div class="col-lg-5">
-
-                    @include('instituciones.partials.instituciones-listado')
-
+                <div class="row">
+                    <div class="col-lg-8 p-r-0 title-margin-center">
+                        <br><br>
+                    </div>
                 </div>
-                <div class="col-lg-5 col-lg-offset-1">
+
+                
+                <div class="col-lg-10 p-r-0 title-margin-right">
 
                     @include('instituciones.partials.formulario-editar-institucion')
 
@@ -24,6 +21,7 @@
 
             </div>
         </div>
+        
     </div>
 
 @endsection

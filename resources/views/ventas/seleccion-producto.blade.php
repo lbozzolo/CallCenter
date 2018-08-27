@@ -14,11 +14,11 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Cliente: {!! $cliente->full_name !!} - Seleccione un producto para vender</h3>
+                        <div class="card card-default">
+                            <div class="card-heading">
+                                <h3 class="card-title">Cliente: {!! $cliente->full_name !!} - Seleccione un producto para vender</h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
 
                                 @include('ventas.partials.listado-productos')
 

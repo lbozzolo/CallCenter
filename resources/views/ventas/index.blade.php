@@ -8,8 +8,8 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card card-default">
+        <div class="card-body">
         @permission('listado.venta')
             @include('ventas.partials.listado-ventas')
         @endpermission

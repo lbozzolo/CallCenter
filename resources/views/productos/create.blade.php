@@ -105,7 +105,8 @@
                         {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control select2']) !!}
                         <small class="help-block">Solamente en el caso de que corresponda.</small>
                     </div>
-                    {!! Form::submit('Agregar', ['class' => 'btn btn-primary']) !!}
+
+                     <button type="submit" class="btn btn-primary">Agregar Producto</button>
 
                 </div>
 
