@@ -13,11 +13,11 @@
                     <div class="modal-body">
 
 
-                        <div class="panel panel-default"  style="max-height: 500px; overflow: scroll; overflow-x: hidden">
-                            <div class="panel-heading">
-                                <span class="panel-title">Buscar producto</span>
+                        <div class="card card-default"  style="max-height: 500px; overflow: scroll; overflow-x: hidden">
+                            <div class="card-heading">
+                                <span class="card-title">Buscar producto</span>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="row">
@@ -50,7 +50,7 @@
                                             </div>
                                             @permission('crear.venta')
                                             <div class="col-xs-12">
-                                                <div class="panel panel-info">
+                                                <div class="card card-info">
                                                     <div class="table-responsive">
                                                         {!! Form::open(['url' => route('ventas.agregar.producto'), 'method' => 'POST']) !!}
                                                         <table class="table table-hover" id="tbl-resultados">
@@ -106,11 +106,11 @@
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#producto{{ $producto->id }}" aria-expanded="false" aria-controls="producto{{ $producto->id }}">
+                <div class="card card-default">
+                    <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#producto{{ $producto->id }}" aria-expanded="false" aria-controls="producto{{ $producto->id }}">
                         <div class="row">
                             <div class="col-lg-10">
-                                <h4 class="panel-title">
+                                <h4 class="card-title">
                                     {!! ucfirst($producto->nombre) !!}
                                     {!! ($producto->marca)? ', '.$producto->marca->nombre : '' !!}
                                 </h4>
@@ -144,7 +144,7 @@
                             @endpermission
                         </div>
                     </div>
-                    <div class="{{ ($venta->productos->count() > 1)? 'panel-body collapse' : 'panel-body' }}" id="producto{{ $producto->id }}" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="{{ ($venta->productos->count() > 1)? 'card-body collapse' : 'card-body' }}" id="producto{{ $producto->id }}" aria-labelledby="headingOne" data-parent="#accordion">
 
                         <div class="row">
                             <div class="col-lg-6">

@@ -30,8 +30,8 @@
                         @if($venta->estado->slug == 'cancelada')
 
                             <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
+                                <div class="card card-default">
+                                    <div class="card-body">
                                         <ul class="list-unstyled">
                                             <li>
                                                 <strong>Cliente:</strong> {!! $venta->cliente->full_name !!}
@@ -60,14 +60,14 @@
 
                         @else
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseCliente" aria-expanded="false" aria-controls="collapseCliente">
+                        <div class="card card-default">
+                            <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseCliente" aria-expanded="false" aria-controls="collapseCliente">
                                 <div class="row">
-                                    <div class="col-lg-11"><h3 class="panel-title">Datos cliente <span class="text-primary">{!! $venta->cliente->full_name !!}</span> </h3></div>
+                                    <div class="col-lg-11"><h3 class="card-title">Datos cliente <span class="text-primary">{!! $venta->cliente->full_name !!}</span> </h3></div>
                                     <div class="col-lg-1 text-right"><i class="fa fa-caret-down"></i></div>
                                 </div>
                             </div>
-                            <div class="panel-body collapse" id="collapseCliente" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body collapse" id="collapseCliente" aria-labelledby="headingOne" data-parent="#accordion">
 
                                 <div class="row">
                                 @permission('editar.cliente')
@@ -78,28 +78,28 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProductos" aria-expanded="false" aria-controls="collapseProductos">
+                        <div class="card card-default">
+                            <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProductos" aria-expanded="false" aria-controls="collapseProductos">
                                 <div class="row">
-                                    <div class="col-lg-11"><h3 class="panel-title">Productos</h3></div>
+                                    <div class="col-lg-11"><h3 class="card-title">Productos</h3></div>
                                     <div class="col-lg-1 text-right"><i class="fa fa-caret-down"></i></div>
                                 </div>
                             </div>
-                            <div class="panel-body collapse" id="collapseProductos" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body collapse" id="collapseProductos" aria-labelledby="headingOne" data-parent="#accordion">
 
                                 @include('ventas.partials.panel-productos')
 
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseDatosTarjeta" aria-expanded="false" aria-controls="collapseDatosTarjeta">
+                        <div class="card card-default">
+                            <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseDatosTarjeta" aria-expanded="false" aria-controls="collapseDatosTarjeta">
                                 <div class="row">
-                                    <div class="col-lg-11"><h3 class="panel-title">Datos de tarjeta</h3></div>
+                                    <div class="col-lg-11"><h3 class="card-title">Datos de tarjeta</h3></div>
                                     <div class="col-lg-1 text-right"><i class="fa fa-caret-down"></i></div>
                                 </div>
                             </div>
-                            <div class="panel-body collapse" id="collapseDatosTarjeta" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body collapse" id="collapseDatosTarjeta" aria-labelledby="headingOne" data-parent="#accordion">
                             @permission('editar.venta')
                                 @include('ventas.partials.formulario-datos-tarjeta')
                             @endpermission

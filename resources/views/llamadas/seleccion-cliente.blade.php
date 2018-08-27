@@ -9,8 +9,8 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card card-default">
+        <div class="card-body">
 
             <nav class="navbar navbar-default">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -18,7 +18,7 @@
                         <ul class="nav navbar-nav col-lg-12">
                             <li class="col-lg-4 text-center active"><a href="{{ route('llamadas.seleccion.cliente') }}">1. Seleccionar cliente</a></li>
                             <li class="col-lg-4 text-center disabled"><a href="">2. Seleccionar producto</a></li>
-                            <li class="col-lg-4 text-center disabled"><a href="">3. Panel de llamada</a></li>
+                            <li class="col-lg-4 text-center disabled"><a href="">3. card de llamada</a></li>
                         </ul>
                     </div>
                 </div>
@@ -26,11 +26,11 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Seleccione un cliente</h3>
+                    <div class="card card-default">
+                        <div class="card-heading">
+                            <h3 class="card-title">Seleccione un cliente</h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                         @permission('listado.cliente')
                             @include('llamadas.partials.listado-clientes')
                         @endpermission
@@ -64,7 +64,8 @@
                         "last": "Ultimo",
                         "next": "Siguiente",
                         "previous": "Anterior"
-                    }
+                    },
+                    "responsive": "true",
                 }
             });
             $("#div-table-clientes").show();

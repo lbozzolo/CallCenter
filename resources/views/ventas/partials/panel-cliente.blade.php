@@ -48,11 +48,11 @@
             {!! Form::select('estado_id', $estados, null, ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="panel-title">Domicilio</span>
+    <div class="card card-default">
+        <div class="card-heading">
+            <span class="card-title">Domicilio</span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="form-group">
@@ -117,6 +117,6 @@
 
 {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
 
-    <a href="{{ route('ventas.panel', $venta->id) }}" class="btn btn-default">Cancelar</a>
+    <a href="{{ route('ventas.card', $venta->id) }}" class="btn btn-default">Cancelar</a>
 
 {!! Form::close() !!}

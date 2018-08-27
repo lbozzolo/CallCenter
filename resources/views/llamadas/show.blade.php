@@ -16,8 +16,8 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card card-default">
+                <div class="card-heading">
 
                     <div class="pull-right">
                         @if(config('sistema.llamadas.TIPO_LLAMADA.'.$llamada->tipo_llamada) == 'saliente')
@@ -31,13 +31,13 @@
                     </div>
 
                     @if($llamada->reclamo)
-                        <h3 class="panel-title">Llamada N° {!! $llamada->id !!} - Reclamo N° {!! $llamada->reclamo->id !!}</h3>
+                        <h3 class="card-title">Llamada N° {!! $llamada->id !!} - Reclamo N° {!! $llamada->reclamo->id !!}</h3>
                     @else
-                        <h3 class="panel-title">Llamadas - venta</h3>
+                        <h3 class="card-title">Llamadas - venta</h3>
                     @endif
 
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     @if($llamada->reclamo)
 
                         @include('llamadas.partials.show-llamada-reclamo')

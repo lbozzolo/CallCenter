@@ -1,13 +1,13 @@
-<div class="panel panel-default">
-    <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProducto" aria-expanded="false" aria-controls="collapseCategoria">
+<div class="card card-default">
+    <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProducto" aria-expanded="false" aria-controls="collapseCategoria">
         <small class="pull-right label label-default">stock: {!! ($producto->stock)? $producto->stock : '' !!}</small>
-        <h3 class="panel-title">
+        <h3 class="card-title">
             Producto: {!! ucfirst($producto->nombre) !!} ({!! ($producto->marca)? $producto->marca->nombre : '' !!})
             <i class="fa fa-caret-down"></i>
         </h3>
 
     </div>
-    <div class="panel-body " id="collapseProducto" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body " id="collapseProducto" aria-labelledby="headingOne" data-parent="#accordion">
 
             <div>
                 @foreach($producto->categorias as $categoria)
