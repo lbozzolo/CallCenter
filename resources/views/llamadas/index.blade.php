@@ -9,8 +9,8 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card">
+        <div class="card-body">
         @permission('listado.llamada')
             @include('llamadas.partials.listado-llamadas')
         @endpermission

@@ -1,12 +1,12 @@
-{{--<div class="panel panel-default">
-    <div class="panel-heading">
+{{--<div class="card card-default">
+    <div class="card-heading">
         <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary btn-xs pull-right"><i class="fa fa-edit"></i> editar</a>
-        <h4 class="panel-title">
+        <h4 class="card-title">
             Cliente:
             <span class="text-info">{!! $cliente->full_name !!}</span>
         </h4>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <div class="col-lg-3 col-md-3 col-sm-4">
             <div><strong>Correo</strong> {!! $cliente->email !!}</div>
             <div><strong>DNI</strong> {!! $cliente->dni !!}</div>
@@ -42,8 +42,8 @@
 </div>--}}
 
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         {{--<a href="{{ route('clientes.edit', $cliente->id) }}" title="editar" class="pull-right"><i class="fa fa-edit"></i></a>--}}
 
         <button type="button" title="editar cliente" class="nonStyledButton pull-right" data-toggle="modal" data-target="#editarCliente{!! $cliente->id !!}" >
@@ -65,9 +65,9 @@
             </div>
         </div>
 
-        <h4 class="panel-title">Cliente:</h4>
+        <h4 class="card-title">Cliente:</h4>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <h4>{!! $cliente->full_name !!}</h4>
         <small>DNI: {!! $cliente->dni !!}</small>
         @if($cliente->puntos)
@@ -80,8 +80,8 @@
             <div>Alta: {!! $cliente->fecha_creado !!}</div>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-body">
+        <div class="card card-default">
+            <div class="card-body">
                 <strong>Contacto telefónico</strong>
                 @if($cliente->telefono)
                     <div><i class="fa fa-phone"></i> {!! $cliente->telefono !!}</div>
