@@ -11,6 +11,6 @@
     {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
 </div>
 
-{!! Form::submit('+ Agregar marca', ['class' => 'btn btn-primary']) !!}
+<button type="submit" class="btn btn-info">Agregar marca</button>
 
 {!! Form::close() !!}
