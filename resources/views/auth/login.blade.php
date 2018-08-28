@@ -2,7 +2,7 @@
 
 
 @section('login')
-    <div class="container-fluid" style="background: url(/img/fondologin.jpg); background-size: cover;">
+    <div class="container-fluid" style="background: url(/img/fondologin.jpg); background-size: cover; height: 100vh;">
     <div class="unix-login">
         <div class="container">
             <div class="row">
