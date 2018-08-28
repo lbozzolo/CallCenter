@@ -1,5 +1,5 @@
 
-<ul class="nav navbar-nav">
+<ul class="list-inline">
     @permission('listado.cliente')
     <li>
         <a href="{{ route('clientes.index') }}"><i class="fa fa-home"></i> </a>
@@ -8,7 +8,7 @@
     <li>
     @permission('ver.cliente')
         <a href="{{ route('clientes.show', $cliente->id) }}" class="{{ (Request::is('clientes/'.'*'.'/datos') ? 'navbar-item-selected' : '') }}">
-            Datos
+            Datos personales
         </a>
     @endpermission
     </li>

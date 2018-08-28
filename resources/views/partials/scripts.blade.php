@@ -35,4 +35,7 @@
 <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('plugins/datepicker/locales/bootstrap-datepicker.es.js') }}"></script>
 
+<script src="{{ asset('template/js/lib/sweetalert/sweetalert.min.js') }}"></script><!-- scripit init-->
+<script src="{{ asset('template/js/lib/sweetalert/sweetalert.init.js') }}"></script><!-- scripit init-->
+
 @yield('js')

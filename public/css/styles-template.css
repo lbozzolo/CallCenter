@@ -66,6 +66,6 @@ h1{
 
 /* Estilos para aclarar inputs de formularios */
 
-input, .select2{
+input, .select2, textarea{
     background-color: #404a6b !important;
 }

@@ -15,8 +15,8 @@
                 <div class="row">
                     <div class="col-lg-11">
 
-                        <div class="panel panel-default">
-                            <div class="panel-body">
+                        <div class="card card-default">
+                            <div class="card-body">
                             @permission('listado.cliente')
                                 @include('clientes.partials.listado-clientes')
                             @endpermission

@@ -14,7 +14,7 @@
                     @include('clientes.partials.navbar')
                 @endif
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-11 col-md-10">
                         @yield('contenido')
                     </div>
                 </div>

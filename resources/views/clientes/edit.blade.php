@@ -18,11 +18,11 @@
         <div class="col-lg-6 col-md-6">
 
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span class="panel-title">Editar datos</span>
+            <div class="card panel-default">
+                <div class="card-heading">
+                    <h3 class="card-title">Editar datos</h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
 
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group col-xs-6">
                             {!! Form::label('estado', 'Estado') !!}
-                            {!! Form::select('estado_id', $estados, null, ['class' => 'form-control']) !!}
+                            {!! Form::select('estado_id', $estados, null, ['class' => 'form-control select2']) !!}
                         </div>
                     </div>
 
@@ -89,11 +89,11 @@
 
         <div class="col-lg-6 col-md-6">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span class="panel-title">Editar domicilio</span>
+            <div class="card panel-default">
+                <div class="card-heading">
+                    <h3 class="card-title">Editar domicilio</h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -139,14 +139,14 @@
                     <div class="form-group" id="partidoDiv">
                         @if(isset($partidos))
                             {!! Form::label('partido', 'Partido', ['id' => 'partidoLabel']) !!}
-                            {!! Form::select('partido', $partidos, ($cliente->domicilio && $cliente->domicilio->partido)? $cliente->domicilio->partido->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::select('partido', $partidos, ($cliente->domicilio && $cliente->domicilio->partido)? $cliente->domicilio->partido->id : null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
                         @endif
                     </div>
 
                     <div class="form-group" id="localidadDiv">
                         @if(isset($localidades))
                             {!! Form::label('localidad', 'Localidad', ['id' => 'localidadLabel']) !!}
-                            {!! Form::select('localidad', $localidades, ($cliente->domicilio && $cliente->domicilio->localidad)? $cliente->domicilio->localidad->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                            {!! Form::select('localidad', $localidades, ($cliente->domicilio && $cliente->domicilio->localidad)? $cliente->domicilio->localidad->id : null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
                         @endif
                     </div>
 
@@ -154,8 +154,8 @@
 
             </div>
 
-            {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-            <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default">Cerrar</a>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default">Cancelar</a>
 
 
         </div>
