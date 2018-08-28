@@ -6,6 +6,9 @@
         .ck-editor__editable {
             min-height: 400px;
         }
+        .select2-selection__choice, .select2-selection__choice, .select2-results__option{
+            color: black;
+        }
     </style>
 
 @endsection
@@ -26,19 +29,19 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card card-default">
+        <div class="card-heading">
             {{--<a href="{{ route('productos.show', $producto->id) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-times"></i> Cerrar</a>--}}
-            <h2 class="panel-title">Editar producto - {!! $producto->nombre !!}</h2>
+            <h2 class="card-title">Editar producto - {!! $producto->nombre !!}</h2>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <div class="col-lg-6 col-md-6">
                 {!! Form::model($producto, ['method' => 'put', 'url' => route('productos.update', $producto->id), 'class' =>'form']) !!}
 
                 <div class="form-group">
                     {!! Form::label('categorias_id[]', 'Categoría') !!}
-                    {!! Form::select('categorias_id[]', $categorias, $producto->categorias->lists('pivot.categoria_id')->toArray(),['multiple', 'id' => 'categorias', 'class' => 'select2 form-control']) !!}
-                    {{-- <select name="categoria_id[]" class="form-control select2" multiple id="categorias">
+                    {!! Form::select('categorias_id[]', $categorias, $producto->categorias->lists('pivot.categoria_id')->toArray(),['multiple', 'id' => 'categorias', 'class' => 'select22 form-control']) !!}
+                     {{--<select name="categoria_id[]" class="form-control select2" multiple id="categorias">
                          <option value=""></option>
                          @foreach($categorias as $key => $value)
                              @if(in_array($key, $producto->categorias->lists('pivot.categoria_id')->toArray()))
@@ -46,7 +49,7 @@
                              @else
                                  <option value="{!! $key !!}">{!! $value !!}</option>
                              @endif
-                         @endforeac
+                         @endforeach
                      </select>--}}
                 </div>
                 <div class="form-group" id="subcategorias" style="display: none"></div>
@@ -56,7 +59,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('marca_id', 'Marca') !!}
-                    {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select22', 'placeholder' => '']) !!}
+                    {!! Form::select('marca_id', $marcas, null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('descripcion', 'Descripción') !!}
@@ -84,7 +87,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             {!! Form::label('unidad_medida_id', 'Unidad de medida') !!}
-                            {!! Form::select('unidad_medida_id', $unidadesMedida,  null, ['class' => 'form-control']) !!}
+                            {!! Form::select('unidad_medida_id', $unidadesMedida,  null, ['class' => 'form-control select2']) !!}
                         </div>
                         <div class="col-lg-6 col-md-6">
                             {!! Form::label('cantidad_medida', 'Cantidad') !!}
@@ -127,15 +130,15 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('institucion_id', 'Institución') !!}
-                    {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control']) !!}
+                    {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control select2']) !!}
                     <small class="help-block">Solamente en el caso de que corresponda.</small>
                 </div>
                 <div class="form-group">
                     {!! Form::label('prospecto', 'Prospecto (componentes)') !!}
                     {!! Form::textarea('prospecto', null, ['id'=>'ckeditor', 'class'=>'form-control', 'rows'=>'30', 'cols'=>'80']) !!}
                 </div>
-                {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('productos.index') }}" class="btn btn-default">Cerrar</a>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a href="{{ route('productos.index') }}" class="btn btn-default">Cancelar</a>
 
                 {!! Form::close() !!}
             </div>
@@ -153,8 +156,7 @@
             format: 'd/mm/yyyy'
         });
 
-        $('.select2').select2({multiple: true});
-        $('.select22').select2();
+        $('.select22').select2({multiple: true});
 
 
         $( '#categorias' ).change(function( event ) {
@@ -205,12 +207,6 @@
 
 
     <script src="{{ asset('plugins/ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
-    <script type="text/javascript">
-
-        ClassicEditor.create( document.querySelector( '#ckeditor' ) );
-
-
-
-    </script>
+    <script type="text/javascript">ClassicEditor.create( document.querySelector( '#ckeditor' ) );</script>
 
 @endsection
