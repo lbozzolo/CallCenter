@@ -30,6 +30,10 @@ input, .select2{
     background-color: #404a6b !important;
 }
 
+.select2-selection__choice, .select2-selection__choice, .select2-results__option{
+            color: black;
+        }
+
 </style>
 @endsection
 @section('titulo')
@@ -37,7 +41,7 @@ input, .select2{
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h1><font color="#ffffff">Formas de Pago</font></h1>
+                <h1><font color="#ffffff">Usuarios</font></h1>
             </div>
         </div>
     </div>
@@ -58,7 +62,7 @@ input, .select2{
 
                     <div class="form-group">
                         {!! Form::label('roles', 'Roles:') !!}
-                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control select2 multiple']) !!}
+                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control multiple select2']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
