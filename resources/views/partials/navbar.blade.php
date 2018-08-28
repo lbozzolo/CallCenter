@@ -25,7 +25,7 @@
 
                             @permission('crear.cliente')
                             <li>
-                                <a href="{{ route('clientes.create') }}">Importar Lista </a>
+                                <a href="{{ route('clientes.importacion') }}">Importar Lista </a>
                             </li>
                             @endpermission
                         </ul>

@@ -6,21 +6,15 @@
         Productos
         <span class="text-muted"> / {{ (Request::is('productos/inactivos'.'*') ? 'Inactivos' : 'Activos') }}</span>
     </h2>
-    @permission('listado.producto')
-    <ul class="nav navbar-nav">
-        <li><a href="{{ route('productos.index') }}" class="{{ (Request::is('productos') ? 'navbar-item-selected' : '') }}">Activos</a></li>
-        <li><a href="{{ route('productos.index.inactivos') }}" class="{{ (Request::is('productos/inactivos') ? 'navbar-item-selected' : '') }}">Inactivos</a></li>
-        <li><a href="{{ route('productos.create') }}"><span class="text-primary"><i class="fa fa-plus"></i> Agregar</span></a></li>
-    </ul>
-    @endpermission
+
 
 @endsection
 
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card card-default">
+        <div class="card-body">
         @permission('listado.producto')
             @include('productos.partials.listado-productos')
         @endpermission

@@ -13,11 +13,11 @@
 
     <div class="col-lg-6 col-md-6">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title">Datos personales</h2>
+        <div class="card card-default">
+            <div class="card-heading">
+                <h2 class="card-title">Datos personales</h2>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -83,7 +83,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             {!! Form::label('estado', 'Estado') !!}
-                            {!! Form::select('estado_id', $estados, null, ['class' => 'form-control']) !!}
+                            {!! Form::select('estado_id', $estados, null, ['class' => 'form-control select2']) !!}
                         </div>
                     </div>
                 </div>
@@ -93,11 +93,11 @@
     </div>
     <div class="col-lg-6 col-md-6">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span class="panel-title">Domicilio</span>
+        <div class="card panel-default">
+            <div class="card-heading">
+                <span class="card-title">Domicilio</span>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -158,7 +158,7 @@
 
         </div>
 
-        {!! Form::submit('Agregar cliente', ['class' => 'btn btn-primary']) !!}
+        <button type="submit" class="btn btn-primary">Agregar</button>
         <a href="{{ route('clientes.index') }}" class="btn btn-default">Cancelar</a>
 
     </div>
