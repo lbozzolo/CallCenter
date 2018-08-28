@@ -20,7 +20,6 @@ class CreateInstitucionRequest extends Request
                 'direccion' => 'max:255',
                 'telefono' => 'numeric',
                 'email' => 'email',
-                'url' => 'url',
                 'responsable' => 'max:255',
                 'descripcion' => 'max:255',
                 'estado_id' => 'between:1,'.$estados,
@@ -39,8 +38,6 @@ class CreateInstitucionRequest extends Request
                 'telefono.numeric' => 'El teléfono debe ser un número',
 
                 'email.email' => 'El formato del email es inválido',
-
-                'url.url' => 'La URL no es válida',
 
                 'responsable.max' => 'El responsable no puede exceder los 255 caracteres',
 

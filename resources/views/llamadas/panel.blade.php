@@ -9,8 +9,8 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card card-default">
+        <div class="card-body">
 
             <nav class="navbar navbar-default">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -18,13 +18,13 @@
                         <ul class="nav navbar-nav col-lg-12">
                             <li class="col-lg-4 text-center"><a href="{{ route('llamadas.seleccion.cliente') }}">1. Cambiar cliente <span class="glyphicon glyphicon-user"></span> </a></li>
                             <li class="col-lg-4 text-center"><a href="{{ route('llamadas.seleccion.producto', $cliente->id) }}">2. Cambiar producto <i class="fa fa-briefcase"></i> </a> </li>
-                            <li class="col-lg-4 text-center active"><a href="">3. Panel de llamada <i class="fa fa-phone-square"></i> </a></li>
+                            <li class="col-lg-4 text-center active"><a href="">3. card de llamada <i class="fa fa-phone-square"></i> </a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
 
-            <div class="panel panel-body small">
+            <div class="card card-body small">
                 <ul class="list-unstyled list-inline pull-right">
                     <li><a href="{{ route('llamadas.agregar.producto') }}"><i class="fa fa-plus"></i> agregar producto</a></li>
                     <li><a href="{{ route('llamadas.seleccion.cliente') }}" class="text-success"><i class="fa fa-check"></i> concretar venta</a></li>
@@ -36,11 +36,11 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6">
 
-                    <div class="panel panel-default"  style="max-height: 500px; overflow: scroll; overflow-x: hidden">
-                        <div class="panel-heading">
-                            <span class="panel-title">Buscar producto</span>
+                    <div class="card card-default"  style="max-height: 500px; overflow: scroll; overflow-x: hidden">
+                        <div class="card-heading">
+                            <span class="card-title">Buscar producto</span>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="row">
@@ -72,7 +72,7 @@
                                             <i class="fa fa-refresh fa-spin" style="display: none; font-size: 2em" id="cargando"></i>
                                         </div>
                                         <div class="col-xs-12">
-                                            <div class="panel panel-info">
+                                            <div class="card card-info">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover" id="tbl-resultados">
                                                         <thead>
@@ -116,23 +116,23 @@
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    @include('llamadas.partials.panel-producto')
+                    @include('llamadas.partials.card-producto')
                 </div>
 
                 <div class="col-lg-3">
-                    @include('llamadas.partials.panel-cliente')
+                    @include('llamadas.partials.card-cliente')
                 </div>
 
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                    @include('llamadas.partials.panel-cierre-venta')
+                    @include('llamadas.partials.card-cierre-venta')
                 </div>
 
                 {{--<div class="col-lg-2 col-md-2 col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Acciones</h4>
+                    <div class="card card-default">
+                        <div class="card-heading">
+                            <h4 class="card-title">Acciones</h4>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             Contenido...
                         </div>
                     </div>
@@ -214,16 +214,16 @@
                             listado.show();
                         }
 
-                        html = '<div class="panel panel-default" id="producto' + producto_id + '">';
+                        html = '<div class="card card-default" id="producto' + producto_id + '">';
 
-                            //Panel heading
-                            html += '<div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProducto' + producto_id + '" aria-expanded="false" aria-controls="collapseCategoria">';
+                            //card heading
+                            html += '<div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProducto' + producto_id + '" aria-expanded="false" aria-controls="collapseCategoria">';
                                 html += '<button type="button" class="quitar_de_la_lista nonStyledButton pull-right" data-id="' + producto_id + '"><i class="fa fa-close"></i></button>';
-                                html += '<h3 class="panel-title">Producto: ' + producto_nombre + '(' + producto_marca + ') <i class="fa fa-caret-down"></i></h3>';
+                                html += '<h3 class="card-title">Producto: ' + producto_nombre + '(' + producto_marca + ') <i class="fa fa-caret-down"></i></h3>';
                             html += '</div>';
 
-                            //Panel body
-                            html += '<div class="panel-body collapse" id="collapseProducto' + producto_id + '" aria-labelledby="headingOne" data-parent="#accordion">';
+                            //card body
+                            html += '<div class="card-body collapse" id="collapseProducto' + producto_id + '" aria-labelledby="headingOne" data-parent="#accordion">';
 
                                 html += '<div>';
                                     html += '<span class="text-info pull-right" style="font-size: 2em">$ ' + producto_precio + '</span>';
@@ -233,7 +233,7 @@
 
                                 html += '<div><strong>Descripción</strong><br>' + producto_descripcion + '</div>';
 
-                                html += '<div class="panel">';
+                                html += '<div class="card">';
                                     html += '<div>';
                                         html += '<form style="display: inline-block">';
                                             html += '<input type="hidden" name="productoId" value="' + producto_id + '">';
@@ -241,7 +241,7 @@
                                         html += '</form>';
                                     html += '</div>';
                                     html += '<button type="button" id="close_prospecto' + producto_id + '" style="display: none" class="close_prospecto nonStyledButton pull-right" data-id="' + producto_id + '"><i class="fa fa-caret-up"></i></button>';
-                                    html += '<div id="prospecto-div' + producto_id + '" class="panel-body"></div>';
+                                    html += '<div id="prospecto-div' + producto_id + '" class="card-body"></div>';
                                 html += '</div>';
 
                             html += '</div>';

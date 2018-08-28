@@ -1,5 +1,38 @@
 @extends('pagos.base')
 
+@section('css')
+    <style type="text/css">
+
+        input::-webkit-calendar-picker-indicator{
+            display: none;
+        }
+
+        .datepicker-days  {
+            background: white !important;
+        }
+        .datepicker-switch{
+            background: gray !important;
+            color: white !important;
+        }
+        .prev, .next{
+            background: lightgrey !important;
+            color: white !important;
+        }
+        .day, .month, .year{
+            color: gray !important;
+        }
+        .active{
+            color: white !important;
+        }
+        .old{
+            color: lightgray !important;
+        }
+        input, .select2{
+            background-color: #404a6b !important;
+        }
+
+    </style>
+@endsection
 @section('titulo')
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
@@ -28,13 +61,13 @@
                                 <div class="basic-form">
                                     <div class="form-group">
                                         {!! Form::label('tarjeta_id', 'Tarjeta') !!}
-                                        {!! Form::select('tarjeta_id', $marcasTarjetas, null, ['class' => 'form-control', 'placeholder' => '', 'style' => 'color: gray']) !!}
+                                        {!! Form::select('tarjeta_id', $marcasTarjetas, null, ['class' => 'form-control  select2', 'placeholder' => '', 'style' => 'color: white']) !!}
                                     </div>
                                 </div>
                                 <div class="basic-form">
                                     <div class="form-group">
                                         {!! Form::label('cuota_cantidad', 'Cuotas') !!}
-                                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control', 'style' => 'color: gray']) !!}
+                                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control  select2', 'style' => 'color: white']) !!}
                                     </div>
                                 </div>
                                 

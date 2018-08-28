@@ -1,6 +1,6 @@
-@extends('base')
+@extends('clientes.base')
 
-@section('content')
+@section('contenido')
 
     <div class="row">
         <div class="container">
@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-11">
 
                         <div class="panel panel-default">
                             <div class="panel-body">

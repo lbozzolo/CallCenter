@@ -22,7 +22,7 @@
                     <div class="dropdown-content-body">
                         <ul>
                             <li><a href="{{ route('users.profile', Auth::user()->id) }}"><i class="ti-user"></i> <span>Mi Perfil</span></a></li>
-                            <li><a href="#"><i class="ti-power-off"></i> <span>Logout</span></a></li>
+                            <li><a href="{{ route('logout') }}"><i class="ti-power-off"></i> <span>Logout</span></a></li>
                         </ul>
                     </div>
                 </div>

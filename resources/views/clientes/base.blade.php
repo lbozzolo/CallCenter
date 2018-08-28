@@ -2,15 +2,7 @@
 
 @section('content')
 
-    @if(isset($cliente))
-    <div class="row">
-        <div class="col-lg-12">
 
-            @include('clientes.partials.navbar')
-
-        </div>
-    </div>
-    @endif
     <div class="row">
 
         <div class="container">
@@ -18,6 +10,9 @@
 
                 @yield('titulo')
 
+                @if(isset($cliente))
+                    @include('clientes.partials.navbar')
+                @endif
                 <div class="row">
                     <div class="col-lg-12">
                         @yield('contenido')

@@ -7,7 +7,7 @@
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('/css/styles.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('styles-template.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/dataTables.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/rowReorder.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -44,5 +44,6 @@
 <link href="{{ asset('template/css/lib/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('template/css/lib/unix.css') }}" rel="stylesheet">
 <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/styles-template.css') }}" rel="stylesheet">
 
 @yield('css')

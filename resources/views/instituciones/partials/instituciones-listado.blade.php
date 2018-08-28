@@ -8,16 +8,37 @@
     @endif
 
     @forelse($instituciones as $institucion)
-        <li class="list-group-item">
-            <button type="button" title="Eliminar" class="pull-right nonStyledButton" data-toggle="modal" data-target="#eliminarInstitucion{!! $institucion->id !!}" style="border: none">
-                <i class="glyphicon glyphicon-trash small text-danger"></i>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table student-data-table m-t-20">
+                <thead>
+                    <tr>
+                        <th>Institucion</th>
+                        <th align="right">Opciones</th>
+                     </tr>
+                </thead>   
+                <tbody>
+                <tr>
+                    <td align="left">{!! $institucion->nombre !!}</td>
+        <td align="center">
+            <button type="button" title="Eliminar" class="pull-right btn btn-danger btn-xs" data-toggle="modal" data-target="#eliminarInstitucion{!! $institucion->id !!}">
+                <i class="fa fa-trash-o"></i>
+
             </button>
-            <a href="{{ route('instituciones.edit', $institucion->id) }}" class="pull-right nonStyledButton"><i class="glyphicon glyphicon-edit small text-info"></i></a>
-            <a href="{{ route('instituciones.show', $institucion->id) }}" class="pull-right nonStyledButton"><i class="fa fa-info-circle small text-info"></i></a>
+            <a href="{{ route('instituciones.edit', $institucion->id) }}" class="pull-right btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
 
-            {!! $institucion->nombre !!}
+            
+            <a href="{{ route('instituciones.show', $institucion->id) }}" class="pull-right btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 
-        </li>
+
+       
+        </td>
+
+
+        </tr>
+    </tbody>
+</table></div></div>
 
         <div class="modal fade" id="eliminarInstitucion{!! $institucion->id !!}">
             <div class="modal-dialog">

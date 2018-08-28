@@ -9,13 +9,13 @@
 
             <div class="form-group">
                 {!! Form::label('tarjeta_id', 'Tarjeta') !!}
-                {!! Form::select('tarjeta_id', $marcasTarjetas, $formaEdit->marca_tarjeta_id, ['class' => 'form-control', 'placeholder' => '']) !!}
+                {!! Form::select('tarjeta_id', $marcasTarjetas, $formaEdit->marca_tarjeta_id, ['class' => 'form-control select2', 'placeholder' => '']) !!}
             </div>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">
                         {!! Form::label('cuota_cantidad', 'Cuotas') !!}
-                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control select2']) !!}
                     </div>
                 </div>
                 <div class="col-lg-4">

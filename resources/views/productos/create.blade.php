@@ -7,30 +7,6 @@
             display: none;
         }
 
-        .datepicker-days  {
-            background: white !important;
-        }
-        .datepicker-switch{
-            background: gray !important;
-            color: white !important;
-        }
-        .prev, .next{
-            background: lightgrey !important;
-            color: white !important;
-        }
-        .day, .month, .year{
-            color: gray !important;
-        }
-        .active{
-            color: white !important;
-        }
-        .old{
-            color: lightgray !important;
-        }
-        input, .select2{
-            background-color: #404a6b !important;
-        }
-
     </style>
 @endsection
 
@@ -129,7 +105,8 @@
                         {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control select2']) !!}
                         <small class="help-block">Solamente en el caso de que corresponda.</small>
                     </div>
-                    {!! Form::submit('Agregar', ['class' => 'btn btn-primary']) !!}
+
+                     <button type="submit" class="btn btn-primary">Agregar Producto</button>
 
                 </div>
 
