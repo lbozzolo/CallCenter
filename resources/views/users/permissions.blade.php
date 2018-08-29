@@ -2,26 +2,28 @@
 
 @section('titulo')
 
-    <h2>{!! $user->full_name !!}<span class="text-muted"> / Asignar permisos</span></h2>
+    <h2>Usuarios<span class="text-muted"> / Asignar Permisos</span></h2>
 
 @endsection
 
 @section('contenido')
 
-    @permission('editar.permisos.usuario')
-    <div class="panel panel-default">
-        {!! Form::model($user, ['method' => 'put', 'url' => route('users.assign.permissions', $user->id), 'class' => 'form']) !!}
-        <div class="panel-heading">
-            {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary pull-right']) !!}
-            <h3 class="panel-title">Asignar permisos</h3>
-        </div>
-        <div class="panel-body">
+@permission('editar.permisos.usuario')
 
-            @include('permissions.partials.assign-permissions')
+        <div class="">
+            {!! Form::model($user, ['method' => 'put', 'url' => route('users.assign.permissions', $user->id), 'class' => 'form']) !!}
+            <div class="card-heading">
+                <button type="submit" class="btn btn-warning ">Guardar cambios</button>
+            </div>
+            
+           
 
+                @include('permissions.partials.assign-permissions')
+
+          
+            {!! Form::close() !!}
         </div>
-        {!! Form::close() !!}
-    </div>
-    @endpermission
+   
+@endpermission
 
 @endsection
