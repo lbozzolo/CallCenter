@@ -39,7 +39,7 @@
     <div class="card-body">
         <div>
 
-            <div class="modal fade col-lg-3" id="changeStatus{!! $reclamo->id !!}">
+            <div class="modal fade col-lg-3 col-lg-offset-9" id="changeStatus{!! $reclamo->id !!}">
 
                     <div class="card alert">
                         <div class="card-header">
@@ -64,21 +64,19 @@
                             @endif
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+
                             {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.status', $reclamo->id), 'class' => 'form']) !!}
 
                             <div class="sweetalert">
                                 <div class="text-center">
                                     @if($reclamo->estado->slug == 'abierto')
                                         <button type="submit" class="btn btn-danger sweet-confirm" title="Cerrar reclamo">Cerrar reclamo</button>
-                                        {{--{!! Form::submit('Cerrar reclamo', ['title' => 'Cerrar reclamo', 'class' => 'btn btn-danger']) !!}--}}
                                     @else
                                         <button type="submit" class="btn btn-primary sweet-confirm" title="Abrir reclamo">Abrir reclamo</button>
-                                        {{--{!! Form::submit('Abrir reclamo', ['title' => 'Abrir reclamo', 'class' => 'btn btn-success']) !!}--}}
                                     @endif
+                                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>
-
                             {!! Form::close() !!}
                         </div>
                     </div>
