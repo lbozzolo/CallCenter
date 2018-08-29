@@ -16,10 +16,8 @@
 
 
         <div class="col-lg-6 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">Editar perfil de {!! $user->full_name !!}</h2>
-                </div>
+            <div class="card-body">
+                
                 <div class="panel-body">
                     {!! Form::model($user, ['method' => 'put', 'url' => route('users.update', ['id' => $user->id, 'route' => $route]), 'class' =>'form']) !!}
 
@@ -50,7 +48,7 @@
                         {!! Form::text('dni', null, ['class' => 'form-control']) !!}
                     </div>
 
-                    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
 
                     {!! Form::close() !!}
                 </div>
@@ -59,7 +57,7 @@
 
         <div class="col-lg-6 col-md-6">
 
-            <div class="panel panel-default">
+            <div class="card-body">
                 <div class="panel-heading">
                     <h3 class="panel-title">Agregar foto de perfil</h3>
                 </div>
