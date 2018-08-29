@@ -37,15 +37,8 @@ input, .select2{
 </style>
 @endsection
 @section('titulo')
-<div class="row">
-    <div class="col-lg-8 p-r-0 title-margin-right">
-        <div class="page-header">
-            <div class="page-title">
-                <h1><font color="#ffffff">Usuarios</font></h1>
-            </div>
-        </div>
-    </div>
-</div>   
+
+    <h2>Usuarios</h2>
 
 @endsection
 

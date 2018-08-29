@@ -2,6 +2,11 @@
 
 @extends('productos.base')
 
+@section('titulo')
+
+    <h2>Marcas</h2>
+
+@endsection
 
 @section('contenido')
 
@@ -9,15 +14,7 @@
         <div class="container">
             <div class="content">
 
-                <div class="row">
-                    <div class="col-lg-8 p-r-0 title-margin-right">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <h1><font color="#ffffff">Marcas</font></h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             <div id="main-content">
                 <div class="row">
                     <div class="col-md-5">
