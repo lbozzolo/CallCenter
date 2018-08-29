@@ -17,8 +17,8 @@
 						{!! Form::text('slug', null, ['class' => 'form-control']) !!}
 					</div>
 				</div>
+				<button type="submit" class="btn btn-primary">Agregar Categoría</button>
 			</div>
-			<button type="submit" class="btn btn-primary">Agregar Categoría</button>
 		</div>
 	</div>
 </div>

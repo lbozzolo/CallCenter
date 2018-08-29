@@ -6,7 +6,7 @@
         <div class="col-lg-8 p-r-0 title-margin-right">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>Bienvenido, <span>Bozzolo, Lucas</span></h1>
+                    <h1 style="color:white">Bienvenido, <span>{!! Auth::user()->fullname !!}</span>.</h1>
                 </div>
             </div>
         </div>

@@ -2,12 +2,9 @@
 
 
 @section('login')
-<<<<<<< HEAD
 
     <div class="container-fluid" style="background: url({{ asset('/img/fondologin.jpg') }}); background-size: cover;height:100vh;">
-=======
-    <div class="container-fluid" style="background: url(/img/fondologin.jpg); background-size: cover; height: 100vh;">
->>>>>>> bc6099765a6eb16b3be8d913ca1c0eaac676d9a4
+
     <div class="unix-login">
         <div class="container">
             <div class="row">

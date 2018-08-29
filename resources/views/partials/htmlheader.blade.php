@@ -17,7 +17,6 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
-<script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
 
 {{-- ===================== Template ===================== --}}
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

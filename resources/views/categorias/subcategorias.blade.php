@@ -1,47 +1,44 @@
-@extends('productos.base')
+@extends('categorias.base')
+
 @section('css')
-<style type="text/css">
 
-input::-webkit-calendar-picker-indicator{
-    display: none;
-}
+    <style type="text/css">
 
-.datepicker-days  {
-    background: white !important;
-}
-.datepicker-switch{
-    background: gray !important;
-    color: white !important;
-}
-.prev, .next{
-    background: lightgrey !important;
-    color: white !important;
-}
-.day, .month, .year{
-    color: gray !important;
-}
-.active{
-    color: white !important;
-}
-.old{
-    color: lightgray !important;
-}
-input, .select2{
-    background-color: #404a6b !important;
-}
+        input::-webkit-calendar-picker-indicator{
+            display: none;
+        }
 
-</style>
+        .datepicker-days  {
+            background: white !important;
+        }
+        .datepicker-switch{
+            background: gray !important;
+            color: white !important;
+        }
+        .prev, .next{
+            background: lightgrey !important;
+            color: white !important;
+        }
+        .day, .month, .year{
+            color: gray !important;
+        }
+        .active{
+            color: white !important;
+        }
+        .old{
+            color: lightgray !important;
+        }
+        input, .select2{
+            background-color: #404a6b !important;
+        }
+
+    </style>
 @endsection
+
 @section('titulo')
-<div class="row">
-    <div class="col-lg-8 p-r-0 title-margin-right">
-        <div class="page-header">
-            <div class="page-title">
-                <h1><font color="#ffffff">Subcategorias</font></h1>
-            </div>
-        </div>
-    </div>
-</div>
+
+    <h2>Subcategorias</h2>
+
 @endsection
 
 @section('contenido')

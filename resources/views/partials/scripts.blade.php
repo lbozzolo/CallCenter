@@ -23,16 +23,18 @@
 <script src="{{ asset('template/js/lib/weather/weather-init.js') }}"></script>
 <script src="{{ asset('template/js/lib/circle-progress/circle-progress.min.js') }}"></script>
 <script src="{{ asset('template/js/lib/circle-progress/circle-progress-init.js') }}"></script>
-<script src="{{ asset('template/js/lib/chartist/chartist.min.js') }}"></script>
-<script src="{{ asset('template/js/lib/chartist/chartist-init.js') }}"></script>
+{{--<script src="{{ asset('template/js/lib/chartist/chartist.min.js') }}"></script>
+<script src="{{ asset('template/js/lib/chartist/chartist-init.js') }}"></script>--}}
 <script src="{{ asset('template/js/lib/sparklinechart/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('template/js/lib/sparklinechart/sparkline.init.js') }}"></script>
 <script src="{{ asset('template/js/lib/owl-carousel/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('template/js/lib/owl-carousel/owl.carousel-init.js') }}"></script>
-<script src="{{ asset('template/js/scripts.js') }}"></script>
+{{--<script src="{{ asset('template/js/scripts.js') }}"></script>--}}
+
 
 <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('plugins/datepicker/locales/bootstrap-datepicker.es.js') }}"></script>
+
 
 <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
 <script src="{{ asset('plugins/select2/i18n/es.js') }}"></script>

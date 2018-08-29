@@ -53,7 +53,6 @@
                 <td class="text-center">
 
 
-
                     <button type="button" {{ ($producto->estado && $producto->estado->slug == 'activo')? 'title=DESACTIVAR' : 'title=ACTIVAR' }} class="btn btn-xs btn-default" data-toggle="modal" data-target="#disableProducto{!! $producto->id !!}" >
                         @if($producto->estado && $producto->estado->slug == 'activo')
                             <i class="fa fa-lock text-primary"></i>
@@ -61,7 +60,7 @@
                             <i class="fa fa-unlock text-primary"></i>
                         @endif
                     </button>
-                    <div class="modal fade col-lg-4" id="disableProducto{!! $producto->id !!}">
+                    <div class="modal fade col-lg-4 col-lg-offset-8" id="disableProducto{!! $producto->id !!}">
                         <div class="card alert text-left">
                             <div class="card-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -92,7 +91,7 @@
                     <button type="button" title="ELIMINAR" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#eliminarProducto{!! $producto->id !!}" >
                         <i class="fa fa-trash-o"></i>
                     </button>
-                    <div class="modal fade col-lg-4" id="eliminarProducto{!! $producto->id !!}">
+                    <div class="modal fade col-lg-4 col-lg-offset-8" id="eliminarProducto{!! $producto->id !!}">
 
                             <div class="card alert text-left">
                                 <div class="card-header">

@@ -2,11 +2,7 @@ body {
     font-family: 'Open Sans';
 }
 
-h1{
-    color: darkslategray;
-    font-size: 4em;
-    font-family: 'Raleway';
-}
+
 
 .nonStyledButton{
     background: none;
@@ -68,4 +64,10 @@ h1{
 
 input, .select2, textarea{
     background-color: #404a6b !important;
+}
+
+/* Select2 */
+
+.select2-selection__choice, .select2-selection__choice, .select2-results__option{
+    color: black !important;
 }
