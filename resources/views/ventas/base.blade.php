@@ -2,28 +2,17 @@
 
 @section('content')
 
+    @yield('titulo')
+
     <div class="row">
+        <div class="col-lg-12">
 
-        <div class="container">
-            <div class="content">
+            @if(!isset($venta))
+                @include('ventas.partials.navbar')
+            @endif
 
-                @yield('titulo')
+            @yield('contenido')
 
-
-
-                <div class="row">
-                    <div class="col-lg-11">
-
-                        @if(!isset($venta))
-                            @include('ventas.partials.navbar')
-                        @endif
-
-                        @yield('contenido')
-
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 

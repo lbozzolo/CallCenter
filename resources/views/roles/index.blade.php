@@ -11,11 +11,11 @@
     <div class="row">
         <div class="col-lg-6">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Roles actuales</h3>
+            <div class="card card-default">
+                <div class="card-heading">
+                    <h3 class="card-title">Roles actuales</h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     @include('roles.partials.roles-list')
                 </div>
             </div>
@@ -23,11 +23,11 @@
         </div>
         <div class="col-lg-6">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Agregar nuevo rol</h3>
+            <div class="card card-default">
+                <div class="card-heading">
+                    <h3 class="card-title">Agregar nuevo rol</h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
 
                     {!! Form::open(['method' => 'post', 'url' => route('roles.create'), 'class' => 'form']) !!}
 

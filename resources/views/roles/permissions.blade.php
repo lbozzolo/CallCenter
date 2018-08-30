@@ -11,18 +11,15 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        {!! Form::model($role, ['method' => 'put', 'url' => route('roles.assign.permissions', $role->id), 'class' => 'form']) !!}
-        <div class="panel-heading">
-            {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary pull-right']) !!}
-            <h3 class="panel-title">Asignar permisos</h3>
-        </div>
-        <div class="panel-body">
+    {!! Form::model($role, ['method' => 'put', 'url' => route('roles.assign.permissions', $role->id), 'class' => 'form']) !!}
 
-            @include('permissions.partials.assign-permissions')
-
+        <div class="card">
+            <span>Asignar permisos a {!! strtoupper($role->name)!!}</span>
+            <button type="submit" class="btn btn-warning pull-right">Guardar cambios</button>
         </div>
-        {!! Form::close() !!}
-    </div>
+
+        @include('permissions.partials.assign-permissions')
+
+    {!! Form::close() !!}
 
 @endsection

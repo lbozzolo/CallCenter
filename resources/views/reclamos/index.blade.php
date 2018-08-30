@@ -8,13 +8,13 @@
 
 @section('contenido')
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-            @permission('listado.reclamo')
-                @include('reclamos.partials.listado-reclamos')
-            @endpermission
-            </div>
+    <div class="card card-default">
+        <div class="card-body">
+        @permission('listado.reclamo')
+            @include('reclamos.partials.listado-reclamos')
+        @endpermission
         </div>
+    </div>
 
 @endsection
 

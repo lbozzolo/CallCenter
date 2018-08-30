@@ -8,16 +8,11 @@
 
 @section('contenido')
 
-    <div class="row">
-                    <div class="col-lg-11">
-
-                        <div class="card card-default">
-                            <div class="card-body">
-                @permission('listado.usuario')
-                    @include('users.partials.usuarios-habilitados')
-                @endpermission
-                </div>
-            </div>
+    <div class="card card-default">
+        <div class="card-body">
+        @permission('listado.usuario')
+            @include('users.partials.usuarios-habilitados')
+        @endpermission
         </div>
     </div>
 

@@ -78,7 +78,7 @@ class ReclamosController extends Controller
     public function show($id = null, $reclamoFecha = null)
     {
         $reclamo = Reclamo::with('venta.cliente', 'venta.producto', 'venta.reclamos')->where('id', $id)->first();
-        $reclamoFecha = ($reclamoFecha)? Reclamo::with('venta.cliente', 'venta.producto', 'venta.reclamos')->where('id', $reclamoFecha)->first() : null;
+        $reclamoFecha = ($reclamoFecha)? Reclamo::with('venta.cliente', 'venta.productos', 'venta.reclamos')->where('id', $reclamoFecha)->first() : null;
 
         return view('reclamos.show', compact('reclamo', 'reclamoFecha'));
     }
@@ -97,7 +97,7 @@ class ReclamosController extends Controller
     {
         $cliente = Cliente::find($id);
         $reclamos = $this->clienteRepo->getClienteWithReclamos($id);
-        $reclamoFecha = ($reclamoFecha)? Reclamo::with('venta.cliente', 'venta.producto', 'venta.reclamos')->where('id', $reclamoFecha)->first() : null;
+        $reclamoFecha = ($reclamoFecha)? Reclamo::with('venta.cliente', 'venta.productos', 'venta.reclamos')->where('id', $reclamoFecha)->first() : null;
         $reclamoFecha->tipo = 'cliente';
 
         return view('reclamos.show-cliente-reclamos', compact('cliente', 'reclamos', 'reclamoFecha'));

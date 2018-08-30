@@ -2,16 +2,13 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-lg-8 p-r-0 title-margin-right">
+
             <div class="page-header">
                 <div class="page-title">
                     <h1 style="color:white">Bienvenido, <span>{!! Auth::user()->fullname !!}</span>.</h1>
                 </div>
             </div>
-        </div>
 
-    </div>
     <!-- /# row -->
     <div id="main-content">
         <div class="row">
@@ -217,16 +214,6 @@
             </div>
         </div>
 
-
-
-        <!-- /# row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="footer">
-                    <p>Smartline @ 2018 - Desarrollado por <a href="#" class="page-refresh">Bamdig.com</a></p>
-                </div>
-            </div>
-        </div>
     </div>
 
 @endsection

@@ -57,12 +57,10 @@
 
         <div class="col-lg-6 col-md-6">
 
-            <div class="card-body">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Agregar foto de perfil</h3>
-                </div>
-                <div class="panel-body">
+            <div class="card">
 
+                <div class="card-body">
+                    <p>Agregar foto de perfil</p>
                     <div class="formularioFoto">
                         {!! Form::open(['url' => route('imagenes.store', ['id' => $user->id, 'model' => 'user']), 'method' => 'post', 'class' => 'form', 'enctype' => 'multipart/form-data']) !!}
 
@@ -93,9 +91,8 @@
                                         <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="{!! ($imagen->principal == 0)? 'opacity: 0.5;' : '' !!} height: 80px">
                                     </a>
                                     </span>
-                                    <div class="modal fade" id="modalVerImage{!! $imagen->id !!}">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
+                                    <div class="modal fade col-lg-6 col-lg-offset-3" id="modalVerImage{!! $imagen->id !!}">
+                                            <div class="card">
                                                 <div class="modal-body">
                                                     <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="margin: 0px auto">
                                                 </div>
@@ -131,7 +128,6 @@
 
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </li>
                             @endforeach
