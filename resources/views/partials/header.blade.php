@@ -16,7 +16,6 @@
                 <li class="header-icon dib"><img class="avatar-img" src="{{ asset('template/images/avatar/1.jpg') }}" alt="" /> <span class="user-avatar"><font size="2">{{ Auth::user()->fullname }}</font><i class="ti-angle-down f-s-10"></i></span>
             @endif
 
-
                 <div class="drop-down dropdown-profile">
 
                     <div class="dropdown-content-body">

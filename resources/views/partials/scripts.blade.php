@@ -17,6 +17,7 @@
 <!-- nano scroller -->
 <script src="{{ asset('template/js/lib/menubar/sidebar.js') }}"></script>
 <script src="{{ asset('template/js/lib/preloader/pace.min.js') }}"></script>
+<script src="{{ asset('template/js/lib/bootstrap.min.js') }}"></script>
 <script src="{{asset('template/js/lib/data-table/datatables.min.js') }}"></script>
 
 <script src="{{ asset('template/js/lib/weather/jquery.simpleWeather.min.js') }}"></script>
@@ -29,7 +30,7 @@
 <script src="{{ asset('template/js/lib/sparklinechart/sparkline.init.js') }}"></script>
 <script src="{{ asset('template/js/lib/owl-carousel/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('template/js/lib/owl-carousel/owl.carousel-init.js') }}"></script>
-{{--<script src="{{ asset('template/js/scripts.js') }}"></script>--}}
+<script src="{{ asset('template/js/scripts.js') }}"></script>
 
 
 <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
@@ -38,5 +39,6 @@
 
 <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
 <script src="{{ asset('plugins/select2/i18n/es.js') }}"></script>
+
 
 @yield('js')

@@ -39,7 +39,7 @@
 <link href="{{ asset('template/css/lib/owl.theme.default.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('template/css/lib/weather-icons.css') }}" rel="stylesheet" />
 <link href="{{ asset('template/css/lib/menubar/sidebar.css') }}" rel="stylesheet">
-<link href="{{ asset('template/css/lib/bootstrap.min.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('template/css/lib/bootstrap.min.css') }}" rel="stylesheet">--}}
 <link href="{{ asset('template/css/lib/unix.css') }}" rel="stylesheet">
 <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('css/styles-template.css') }}" rel="stylesheet" type="text/css">
