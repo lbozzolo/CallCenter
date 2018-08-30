@@ -20,9 +20,19 @@
                     {!! Form::file('excel_file') !!}
                 </div>
 
-                <button type="submit" class="btn btn-primary">Aceptrar</button>
+            @permission('crear.cliente')
+            <div class="form-group">
+                <a href="{{ route('clientes.download.excel') }}" style="padding: 0px 20px">
+                    <i class="fa fa-file-excel-o"></i> descargar excel
+                </a>
+            </div>
+            @endpermission
+
+                <button type="submit" class="btn btn-primary">Aceptar</button>
 
             {!! Form::close() !!}
+
+
 
         </div>
     </div>

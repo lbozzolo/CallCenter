@@ -1,9 +1,6 @@
-
 <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script src="{{ asset('js/dataTables.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.rowReorder.min.js') }}"></script>
 <script src="{{ asset('js/scripts.js') }}"></script>
@@ -17,7 +14,7 @@
 <!-- nano scroller -->
 <script src="{{ asset('template/js/lib/menubar/sidebar.js') }}"></script>
 <script src="{{ asset('template/js/lib/preloader/pace.min.js') }}"></script>
-<script src="{{ asset('template/js/lib/bootstrap.min.js') }}"></script>
+{{--<script src="{{ asset('template/js/lib/bootstrap.min.js') }}"></script>--}}
 <script src="{{asset('template/js/lib/data-table/datatables.min.js') }}"></script>
 
 <script src="{{ asset('template/js/lib/weather/jquery.simpleWeather.min.js') }}"></script>

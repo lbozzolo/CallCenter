@@ -11,21 +11,27 @@
         <ul>
 
             @if(Auth::user()->profile_image)
-                <li><img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px"></li>
+                <li class="header-icon dib">
+                    <img src="{{ route('imagenes.ver', Auth::user()->profile_image) }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px">
+                    <span class="user-avatar">{{ Auth::user()->fullname }}<i class="ti-angle-down f-s-10"></i></span>
+
             @else
-                <li class="header-icon dib"><img class="avatar-img" src="{{ asset('template/images/avatar/1.jpg') }}" alt="" /> <span class="user-avatar"><font size="2">{{ Auth::user()->fullname }}</font><i class="ti-angle-down f-s-10"></i></span>
+                <li class="header-icon dib">
+                    <img class="avatar-img" src="{{ asset('template/images/avatar/1.jpg') }}" alt="" />
+                    <span class="user-avatar">{{ Auth::user()->fullname }}<i class="ti-angle-down f-s-10"></i></span>
+
             @endif
+                    <div class="drop-down dropdown-profile">
 
-                <div class="drop-down dropdown-profile">
-
-                    <div class="dropdown-content-body">
-                        <ul>
-                            <li><a href="{{ route('users.profile', Auth::user()->id) }}"><i class="ti-user"></i> <span>Mi Perfil</span></a></li>
-                            <li><a href="{{ route('logout') }}"><i class="ti-power-off"></i> <span>Logout</span></a></li>
-                        </ul>
+                        <div class="dropdown-content-body" style="background-color: #333B54">
+                            <ul>
+                                <li><a href="{{ route('users.profile', Auth::user()->id) }}"><i class="ti-user"></i> <span>Mi Perfil</span></a></li>
+                                <li><a href="{{ route('logout') }}"><i class="ti-power-off"></i> <span>Logout</span></a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+
         </ul>
     </div>
 </div>
