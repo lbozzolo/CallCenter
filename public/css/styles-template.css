@@ -1,8 +1,16 @@
 body {
     font-family: 'Open Sans';
+    margin-bottom:50px;
 }
 
-
+#footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 15px;
+}
 
 .nonStyledButton{
     background: none;
@@ -62,12 +70,16 @@ body {
 
 /* Estilos para aclarar inputs de formularios */
 
-input, .select2, textarea{
+input, .select2, textarea, .select2b{
     background-color: #404a6b !important;
 }
 
 /* Select2 */
 
-.select2-selection__choice, .select2-selection__choice, .select2-results__option{
+.select2-selection__choice, .select2-selection__choice, .select2-results__option, .select2-container{
+    color: black !important;
+}
+
+.ck > p{
     color: black !important;
 }

@@ -7,23 +7,16 @@
         <div class="container">
             <div class="content">
 
-                <div class="row">
-                    <div class="col-lg-12">
+                @yield('titulo')
 
-                        @yield('titulo')
 
-                    </div>
-                </div>
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-11">
 
-                        
-                        <div class="row" style="margin-top:2%">
-                            <div class="col-lg-12">
-                                @include('ventas.partials.navbar')
-                            </div>
-                        </div>
+                        @if(!isset($venta))
+                            @include('ventas.partials.navbar')
+                        @endif
 
                         @yield('contenido')
 

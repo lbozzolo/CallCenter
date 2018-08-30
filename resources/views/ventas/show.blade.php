@@ -1,5 +1,11 @@
 @extends('ventas.base')
 
+@section('titulo')
+
+    <h2>Ventas<span class="text-muted"> / Datos</span> </h2>
+
+@endsection
+
 @section('contenido')
 
         <div class="card">
@@ -105,9 +111,9 @@
                                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                                         <div class="form-group">
                                             <div class="input-group input-group">
-                                                {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control', 'id' => 'selectEstados']) !!}
+                                                {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2', 'id' => 'selectEstados']) !!}
                                                 <span class="input-group-btn">
-                                                    {!! Form::submit('Aplicar', ['class' => 'btn btn-info btn-flag']) !!}
+                                                    <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -141,7 +147,7 @@
 
     <script>
 
-        $('.select2').select2();
+        /*$('.select2').select2();*/
         $('.datepicker').datepicker({
             format: 'd/mm/yyyy'
         });
@@ -149,13 +155,13 @@
         if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){
             $('#conTarjeta').show();
             $('#conCredito').show();
-            $('.select2').select2();
+            //$('.select2').select2();
         }
 
         if($('#metodoPago option:selected').html() === 'Tarjeta de débito'){
             $('#conTarjeta').show();
             $('#conDebito').show();
-            $('.select2').select2();
+            //$('.select2').select2();
         }
 
         $('#metodoPago').change(function () {
@@ -163,7 +169,7 @@
             if($('#metodoPago option:selected').html() === 'Tarjeta de crédito' || $('#metodoPago option:selected').html() === 'Tarjeta de débito'){
 
                 $('#conTarjeta').show();
-                $('.select2').select2();
+                //$('.select2').select2();
 
                 if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){
                     $('#marcaDebito').val('');

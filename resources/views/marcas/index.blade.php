@@ -30,13 +30,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-11">
-            <div class="footer">
-                <p>Smartline @ 2018 - Desarrollado por <a href="http://www.bamdig.com/" target="_new" class="page-refresh">Bamdig.com</a></p>
-            </div>
-        </div>
-    </div>
 
 
 @endsection

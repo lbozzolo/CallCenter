@@ -2,11 +2,13 @@
 
 @section('titulo')
 
-    <h2>Ventas<span class="text-muted">/ {!! $ventas->title !!}</span></h2>
+    <h2>Ventas<span class="text-muted"> / {!! $ventas->title !!}</span></h2>
 
 @endsection
 
 @section('contenido')
+
+    {{--@include('ventas.partials.navbar')--}}
 
     <div class="card card-default">
         <div class="card-body">
