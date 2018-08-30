@@ -2,7 +2,9 @@
 
 @section('titulo')
 
-    <h2>Formas de pago</h2>
+
+    <h2>Formas de Pago</h2>
+
 
 @endsection
 

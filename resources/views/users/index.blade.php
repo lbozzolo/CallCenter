@@ -9,9 +9,10 @@
 @section('contenido')
 
     <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
+                    <div class="col-lg-11">
+
+                        <div class="card card-default">
+                            <div class="card-body">
                 @permission('listado.usuario')
                     @include('users.partials.usuarios-habilitados')
                 @endpermission

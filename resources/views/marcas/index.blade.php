@@ -4,6 +4,11 @@
 
     <h2>Marcas</h2>
 
+
+@section('titulo')
+
+    <h2>Marcas</h2>
+
 @endsection
 
 @section('contenido')
