@@ -15,29 +15,26 @@
 
             {!! $marca->nombre !!}<br>
             <small class="text-muted">{!! $marca->descripcion !!}</small>
-
         </li>
 
-        <div class="modal fade" id="eliminarMarca{!! $marca->id !!}">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><i class="fa fa-warning "></i> Eliminar marca</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p class="text-danger">
-                            Usted está a punto de eliminar la marca '{!! $marca->nombre !!}'<br>
-                        </p>
-                        <p>¿Desea continuar?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        {!! Form::open(['route'  => ['marcas.destroy', $marca->id], 'method' => 'delete']) !!}
-                        <button type="submit" class="btn btn-danger pull-right">Eliminar</button>
-                        {!! Form::close() !!}
-                    </div>
+        <div class="modal fade col-lg-3 col-lg-offset-9" id="eliminarMarca{!! $marca->id !!}">
+            <div class="card">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="fa fa-warning "></i> Eliminar marca</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-danger">
+                        Usted está a punto de eliminar la marca '{!! $marca->nombre !!}'<br>
+                    </p>
+                    <p>¿Desea continuar?</p>
+                </div>
+                <div class="modal-footer">
+                    {!! Form::open(['route'  => ['marcas.destroy', $marca->id], 'method' => 'delete']) !!}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

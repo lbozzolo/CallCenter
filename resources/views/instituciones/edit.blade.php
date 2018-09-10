@@ -1,29 +1,13 @@
-@extends('base')
+@extends('instituciones.base')
 
-@section('content')
+@section('titulo')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
+    <h2>Instituciones</h2>
 
-                <h2>
-                    Instituciones
-                    <span class="text-muted"> / Editar</span>
-                </h2>
+@endsection
 
-                <div class="col-lg-5">
+@section('contenido')
 
-                    @include('instituciones.partials.instituciones-listado')
-
-                </div>
-                <div class="col-lg-5 col-lg-offset-1">
-
-                    @include('instituciones.partials.formulario-editar-institucion')
-
-                </div>
-
-            </div>
-        </div>
-    </div>
+    @include('instituciones.partials.formulario-editar-institucion')
 
 @endsection

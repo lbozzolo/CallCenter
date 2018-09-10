@@ -1,17 +1,53 @@
 @extends('users.base')
+@section('css')
+<style type="text/css">
 
+input::-webkit-calendar-picker-indicator{
+    display: none;
+}
+
+.datepicker-days  {
+    background: white !important;
+}
+.datepicker-switch{
+    background: gray !important;
+    color: white !important;
+}
+.prev, .next{
+    background: lightgrey !important;
+    color: white !important;
+}
+.day, .month, .year{
+    color: gray !important;
+}
+.active{
+    color: white !important;
+}
+.old{
+    color: lightgray !important;
+}
+input, .select2{
+    background-color: #404a6b !important;
+}
+
+.select2-selection__choice, .select2-selection__choice, .select2-results__option{
+            color: black;
+        }
+
+</style>
+@endsection
 @section('titulo')
 
-    <h2>Usuarios<span class="text-muted"> / Crear nuevo usuario</span></h2>
+    <h2>Usuarios</h2>
 
 @endsection
 
 @section('contenido')
 
     <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+        <div class="col-md-8">
+            <div class="card alert">
+                <div class="card-header pr">
                     <h2 class="panel-title">Crear nuevo usuario</h2>
                 </div>
                 <div class="panel-body">
@@ -19,7 +55,7 @@
 
                     <div class="form-group">
                         {!! Form::label('roles', 'Roles:') !!}
-                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control select2 multiple']) !!}
+                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control multiple select2']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
@@ -42,9 +78,7 @@
                         {!! Form::text('dni', null, ['class' => 'form-control']) !!}
                     </div>
 
-                    {!! Form::submit('Crear usuario', ['class' => 'btn btn-primary']) !!}
-                    <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
-
+                    <button type="submit" class="btn btn-primary">Crear usuario</button>
                     {!! Form::close() !!}
                 </div>
             </div>

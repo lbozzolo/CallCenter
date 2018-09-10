@@ -1,22 +1,20 @@
-@extends('base')
+@extends('categorias.base')
 
-@section('content')
+@section('titulo')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
+    <h2>Categorías</h2>
 
-                <h2>CATEGORÍAS</h2>
+@endsection
 
-                @include('productos.partials.navbar')
+@section('contenido')
 
-                <div class="col-lg-5">
+<div class="row">
+    <div class="container">
+        <div class="content">
 
-                    @include('categorias.partials.categorias-listado')
-
-                </div>
-                <div class="col-lg-5 col-lg-offset-1">
-
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="card alert">
                     <h3>Editar categoría: {!! $categoria->nombre !!}</h3>
 
                     {!! Form::model($categoria, ['method' => 'put', 'url' => route('categorias.update', $categoria->id), 'class' => 'form']) !!}
@@ -31,14 +29,15 @@
                         {!! Form::text('slug', null, ['class' => 'form-control']) !!}
                     </div>
 
-                    {!! Form::submit('+ Guardar cambios', ['class' => 'btn btn-primary']) !!}
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    <a href="{{ route('categorias.index') }}" class="btn btn-default">Cancelar</a>
 
                     {!! Form::close() !!}
-
                 </div>
-
-            </div>
         </div>
     </div>
+</div>
 
 @endsection
+
+

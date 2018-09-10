@@ -11,19 +11,19 @@
 
     <div class="form-group">
         {!! Form::label('metodo_pago_id', 'Método de pago') !!}
-        {!! Form::select('metodo_pago_id', $metodosPago,  null, ['class' => 'form-control', 'id' => 'metodoPago']) !!}
+        {!! Form::select('metodo_pago_id', $metodosPago,  null, ['class' => 'form-control select2', 'id' => 'metodoPago']) !!}
     </div>
 
     <div id="conTarjeta" style="display:none">
 
     <div class="form-group" style="display: none" id="conCredito">
         {!! Form::label('marca_id_credito', 'Tarjeta') !!}
-        {!! Form::select('marca_id_credito', $marcas->where('tipo', 'credito')->lists('nombre', 'id'), ($venta->datosTarjeta)? $venta->datosTarjeta->marca_id : null, ['id' => 'marcaCredito', 'class' => 'form-control']) !!}
+        {!! Form::select('marca_id_credito', $marcas->where('tipo', 'credito')->lists('nombre', 'id'), ($venta->datosTarjeta)? $venta->datosTarjeta->marca_id : null, ['id' => 'marcaCredito', 'class' => 'form-control select2']) !!}
     </div>
 
     <div class="form-group" style="display: none" id="conDebito">
         {!! Form::label('marca_id_debito', 'Tarjeta') !!}
-        {!! Form::select('marca_id_debito', $marcas->where('tipo', 'debito')->lists('nombre', 'id'), ($venta->datosTarjeta)? $venta->datosTarjeta->marca_id : null, ['id' => 'marcaDebito', 'class' => 'form-control', 'placeholder' => '']) !!}
+        {!! Form::select('marca_id_debito', $marcas->where('tipo', 'debito')->lists('nombre', 'id'), ($venta->datosTarjeta)? $venta->datosTarjeta->marca_id : null, ['id' => 'marcaDebito', 'class' => 'form-control select2', 'placeholder' => '']) !!}
     </div>
 
     <div class="form-group">
@@ -34,12 +34,12 @@
     @if($venta->datosTarjeta)
     <div class="form-group">
         {!! Form::label('cuotas', 'Cuotas') !!}
-        {!! Form::select('cuotas', $cuotas, ($venta->datosTarjeta->formaPago)? $venta->datosTarjeta->formaPago->cuota_cantidad : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+        {!! Form::select('cuotas', $cuotas, ($venta->datosTarjeta->formaPago)? $venta->datosTarjeta->formaPago->cuota_cantidad : null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
     </div>
     @else
     <div class="form-group">
         {!! Form::label('cuotas', 'Cuotas') !!}
-        {!! Form::select('cuotas', $cuotas, '', ['class' => 'form-control', 'placeholder' => '']) !!}
+        {!! Form::select('cuotas', $cuotas, '', ['class' => 'form-control select2', 'placeholder' => '']) !!}
     </div>
     @endif
 
@@ -69,7 +69,7 @@
 @if($venta->promocion)
 <div class="form-group">
     {!! Form::label('promocion_id', 'Promoción') !!}
-    {!! Form::select('promocion_id', $promociones, null, ['class' => 'form-control']) !!}
+    {!! Form::select('promocion_id', $promociones, null, ['class' => 'form-control select2']) !!}
 </div>
 @endif
 

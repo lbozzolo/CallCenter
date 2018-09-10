@@ -15,8 +15,7 @@
             <th>Estado</th>
             <th>Compras</th>
             <th>Llamadas</th>
-            <th>Fecha de alta</th>
-            <th>Última acción</th>
+            <th>Alta</th>
             <th>Opciones</th>
         </tr>
         </thead>
@@ -45,7 +44,6 @@
                 </td>
                 <td>//</td>
                 <td>{!! $cliente->fecha_creado !!}</td>
-                <td>{!! $cliente->fecha_editado !!}</td>
                 <td class="text-center">
                     <a href="{{ route('ventas.seleccion.producto', $cliente->id) }}" class="btn btn-primary btn-xs">seleccionar</a>
                 </td>

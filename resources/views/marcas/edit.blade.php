@@ -1,38 +1,33 @@
-@extends('productos.base')
+@extends('marcas.base')
 
 @section('titulo')
 
-    <h2>Productos<span class="text-muted"> / Marcas / editar</span></h2>
+    <h2>Marcas</h2>
 
 @endsection
 
 @section('contenido')
 
-    <div class="col-lg-5">
-
-        @include('marcas.partials.marcas-listado')
-
-    </div>
-    <div class="col-lg-5 col-lg-offset-1">
+    <div class="card alert">
 
         <h3>Editar marca: {!! $marca->nombre !!}</h3>
 
         {!! Form::model($marca, ['method' => 'put', 'url' => route('marcas.update', $marca->id), 'class' => 'form']) !!}
 
-        <div class="form-group">
-            {!! Form::label('nombre', 'Nombre') !!}
-            {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
-        </div>
+            <div class="form-group">
+                {!! Form::label('nombre', 'Nombre') !!}
+                {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('descripcion', 'Descripción') !!}
+                {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
+            </div>
 
-        <div class="form-group">
-            {!! Form::label('descripcion', 'Descripción') !!}
-            {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
-        </div>
-
-        {!! Form::submit('+ Guardar cambios', ['class' => 'btn btn-primary']) !!}
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a href="{{ route('marcas.index') }}" class="btn btn-default">Cancelar</a>
 
         {!! Form::close() !!}
 
     </div>
-
+    
 @endsection

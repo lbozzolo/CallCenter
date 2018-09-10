@@ -6,29 +6,8 @@
         input::-webkit-calendar-picker-indicator{
             display: none;
         }
-
-        .datepicker-days  {
-            background: white !important;
-        }
-        .datepicker-switch{
-            background: gray !important;
-            color: white !important;
-        }
-        .prev, .next{
-            background: lightgrey !important;
-            color: white !important;
-        }
-        .day, .month, .year{
-            color: gray !important;
-        }
-        .active{
-            color: white !important;
-        }
-        .old{
-            color: lightgray !important;
-        }
-        input, .select2{
-            background-color: #404a6b !important;
+        .select2-selection__choice, .select2-selection__choice, .select2-results__option{
+            color: black !important;
         }
 
     </style>
@@ -48,7 +27,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         {!! Form::label('categoria_id[]', 'Categoría') !!}
-                        <select name="categoria_id[]" class="form-control select2" id="categorias">
+                        <select name="categoria_id[]" class="form-control select22" id="categorias">
                             <option value=""></option>
                             @foreach($categorias as $key => $value)
                                 <option value="{!! $key !!}">{!! $value !!}</option>
@@ -85,12 +64,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
-                                {!! Form::label('unidad_medida_id', 'Unidad de medida') !!}
-                                {!! Form::select('unidad_medida_id', $unidadesMedida,  null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
+                                {!! Form::label('cantidad_medida', 'Cantidad') !!}
+                                {!! Form::number('cantidad_medida', null, ['class' => 'form-control', 'min' => 0]) !!}
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                {!! Form::label('cantidad_medida', 'Cantidad') !!}
-                                {!! Form::number('cantidad_medida', null, ['class' => 'form-control']) !!}
+                                {!! Form::label('unidad_medida_id', 'Unidad de medida') !!}
+                                {!! Form::select('unidad_medida_id', $unidadesMedida,  null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
                             </div>
                         </div>
                     </div>
@@ -111,7 +90,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 {!! Form::label('alerta_stock', 'Alerta stock') !!}
-                                {!! Form::number('alerta_stock', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('alerta_stock', null, ['class' => 'form-control', 'min' => 0]) !!}
                                 <small class="help-block">Ingrese el número mínimo de productos en stock para lanzar una alerta.</small>
                             </div>
                         </div>
@@ -129,7 +108,8 @@
                         {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control select2']) !!}
                         <small class="help-block">Solamente en el caso de que corresponda.</small>
                     </div>
-                    {!! Form::submit('Agregar', ['class' => 'btn btn-primary']) !!}
+
+                     <button type="submit" class="btn btn-primary">Agregar Producto</button>
 
                 </div>
 
@@ -157,8 +137,7 @@
 
 
 
-        $('.select2').select2({multiple: true});
-        $('.select22').select2();
+        $('.select22').select2({multiple: true});
 
         $( '#categorias' ).change(function( event ) {
             event.preventDefault();
@@ -181,7 +160,7 @@
 
                         var html;
                         html = '<label for="subcategoria_id[]">Subcategorías</label>';
-                        html += '<select name="subcategoria_id[]" class="form-control select2">';
+                        html += '<select name="subcategoria_id[]" class="form-control select22">';
                         html += '<option></option>';
                         $.each(resp, function(i, d) {
 
@@ -191,7 +170,7 @@
                         html += '</select>';
 
                         subcategorias.append(html);
-                        $('.select2').select2({multiple: true});
+                        $('.select22').select2({multiple: true});
 
                     }else{
 

@@ -1,70 +1,49 @@
-@extends('base')
+@extends('reclamos.base')
 
-@section('content')
+@section('titulo')
+
+    <h2>
+        Reclamos
+        <span class="text-muted">
+            / Producto: {!! $producto->nombre !!} {!! ($producto->marca)? '('.$producto->marca->nombre.')' : '' !!}
+        </span>
+    </h2>
+
+@endsection
+
+@section('contenido')
 
     <div class="row">
-
-        <div class="container">
-
-            <div class="content">
-
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <h2>
-                            Reclamos
-                            <span class="text-muted">
-                                / Producto: {!! $producto->nombre !!} {!! ($producto->marca)? '('.$producto->marca->nombre.')' : '' !!}
-                            </span>
-                        </h2>
-
-                        @include('reclamos.partials.navbar')
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <small class="text-muted">Producto</small>
-                                {!! ucfirst($producto->nombre) !!} ({!! $producto->marca->nombre !!}{!! ($producto->institucion)? ','.$producto->institucion->nombre : '' !!})
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <small class="text-muted">Reclamos</small><br>
-                                        <ul class="list-unstyled">
-                                            @forelse($reclamos as $reclamo)
-                                                <li>
-                                                    <a class="{!! (isset($reclamoFecha) && $reclamoFecha->id == $reclamo->id)? 'bg-info' : '' !!}" href="{{ route('reclamos.show.productos',  ['id' => $producto->id, 'reclamoFecha' => $reclamo->id]) }}">
-                                                        <i class="fa fa-thumbs-o-down"></i>
-                                                        {!! $reclamo->created_at !!}
-                                                    </a>
-                                                </li>
-                                            @empty
-                                                <p class="col-lg-12">No hay ningún reclamo realizado por este producto</p>
-                                            @endforelse
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-10 col-md-10 col-sm-12">
-                                        @if(isset($reclamoFecha))
-
-                                            <div class="row">
-                                                @include('reclamos.partials.panel-reclamo')
-                                            </div>
-
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <div class="card">
+                <small class="text-muted">Reclamos</small><br>
+                <ul class="list-unstyled">
+                    @forelse($reclamos as $reclamo)
+                        <li>
+                            <a class="{!! (isset($reclamoFecha) && $reclamoFecha->id == $reclamo->id)? 'bg-info' : '' !!}" href="{{ route('reclamos.show.productos',  ['id' => $producto->id, 'reclamoFecha' => $reclamo->id]) }}">
+                                <i class="fa fa-thumbs-o-down"></i>
+                                {!! $reclamo->created_at !!}
+                            </a>
+                        </li>
+                    @empty
+                        <p class="col-lg-12">No hay ningún reclamo realizado por este producto</p>
+                    @endforelse
+                </ul>
             </div>
         </div>
+        <div class="col-lg-10 col-md-10 col-sm-12">
+
+            @if(isset($reclamoFecha))
+
+                <div class="row">
+                    @include('reclamos.partials.panel-reclamo')
+                </div>
+
+            @endif
+
+        </div>
     </div>
+
 
 @endsection
 

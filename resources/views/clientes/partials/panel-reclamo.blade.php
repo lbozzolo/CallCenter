@@ -1,46 +1,48 @@
-<div class="panel panel-default">
+<div class="card card-default">
 
-    <div class="panel-heading">
+    <div class="card-heading">
 
-        <h3 class="panel-title">
-            Reclamo
-            <span class="text-muted">(id #{!! $reclamo->id !!})</span>
-            <span>- {!! $reclamo->fecha_creado !!}</span>
-            <span>
+        <div class="pull-right">
+            <span>{!! $reclamo->fecha_creado !!}</span>
+            <label class="{!! ($reclamo->estado->slug == 'abierto')? 'label label-success' : 'label label-danger' !!}">{!! $reclamo->estado->nombre !!}</label>
+        </div>
+
+        <h3 class="card-title">Reclamo #{!! $reclamo->id !!}</h3>
+
+        <span class="text-muted">
             @if($reclamo->tipo == 'cliente')
-                    acerca del producto {!! ucfirst($reclamo->venta->producto->nombre) !!} ({!! $reclamo->venta->producto->marca->nombre !!})
-                    <a href="{{ route('productos.show', $reclamo->venta->producto->id) }}" title="Ver Producto"><i class="fa fa-user"></i></a>
-                @else
-                    - realizado por {!! $reclamo->venta->cliente->full_name !!}
-                    <a href="{{ route('clientes.show', $reclamo->venta->cliente->id) }}" title="Ver Cliente"><i class="fa fa-user"></i></a>
-                @endif
+                acerca del producto {!! ucfirst($reclamo->venta->producto->nombre) !!} ({!! $reclamo->venta->producto->marca->nombre !!})
+                <a href="{{ route('productos.show', $reclamo->venta->producto->id) }}" title="Ver Producto"></a>
+            @else
+                por {!! $reclamo->venta->cliente->full_name !!}
+                <a href="{{ route('clientes.show', $reclamo->venta->cliente->id) }}" title="Ver Cliente"></a>
+            @endif
         </span>
-            <label class="{!! ($reclamo->estado->slug == 'abierto')? 'label label-success pull-right' : 'label label-danger pull-right' !!}">{!! $reclamo->estado->nombre !!}</label>
-        </h3>
+
+        <div class="pull-right">
+            {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.solucionado', $reclamo->id), 'class' => 'form', 'style' => 'display: inline-block']) !!}
+            @if($reclamo->solucionado == config('sistema.reclamos.SOLUCIONADO.sinsolucion'))
+                <button type="submit" title="Marcar como solucionado" class="btn btn-default btn-sm"><i class="fa fa-check-circle-o"></i></button>
+            @else
+                <button type="submit" title="Marcar como sin solución" class="btn btn-default btn-sm"><i class="fa fa-exclamation-triangle"></i></button>
+            @endif
+            {!! Form::close() !!}
+
+            @if($reclamo->estado->slug == 'abierto')
+                <span class="btn btn-default btn-sm" title="Cerrar reclamo" data-toggle="modal" data-target="#changeStatus{!! $reclamo->id !!}"><i class="fa fa-window-close-o"></i></span>
+            @else
+                <span class="btn btn-default btn-sm" title="Volver a abrir reclamo" data-toggle="modal" data-target="#changeStatus{!! $reclamo->id !!}"><i class="fa fa-folder-open"></i></span>
+            @endif
+            <span title="Editar descripción" class="btn btn-default btn-sm" id="editarReclamo"><i class="fa fa-edit"></i></span>
+        </div>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <div>
-            <span class="pull-right">
-                {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.solucionado', $reclamo->id), 'class' => 'form', 'style' => 'display: inline-block']) !!}
-                @if($reclamo->solucionado == config('sistema.reclamos.SOLUCIONADO.sinsolucion'))
-                    <button type="submit" title="Marcar como solucionado" class="btn btn-default btn-sm"><i class="fa fa-check-circle-o"></i></button>
-                @else
-                    <button type="submit" title="Marcar como sin solución" class="btn btn-default btn-sm"><i class="fa fa-exclamation-triangle"></i></button>
-                @endif
-                {!! Form::close() !!}
 
-                @if($reclamo->estado->slug == 'abierto')
-                    <span class="btn btn-default btn-sm" title="Cerrar reclamo" data-toggle="modal" data-target="#changeStatus{!! $reclamo->id !!}"><i class="fa fa-window-close-o"></i></span>
-                @else
-                    <span class="btn btn-default btn-sm" title="Volver a abrir reclamo" data-toggle="modal" data-target="#changeStatus{!! $reclamo->id !!}"><i class="fa fa-folder-open"></i></span>
-                @endif
-                <span title="Editar descripción" class="btn btn-default btn-sm" id="editarReclamo"><i class="fa fa-edit"></i></span>
-            </span>
+            <div class="modal fade col-lg-3 col-lg-offset-9" id="changeStatus{!! $reclamo->id !!}">
 
-            <div class="modal fade" id="changeStatus{!! $reclamo->id !!}">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                    <div class="card alert">
+                        <div class="card-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title"><i class="fa fa-warning "></i>
@@ -51,7 +53,7 @@
                                 @endif
                             </h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="card-body">
                             @if($reclamo->estado->slug == 'abierto')
                                 <p>¿Desea cerrar el reclamo?</p>
                             @else
@@ -62,38 +64,47 @@
                             @endif
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+
                             {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.status', $reclamo->id), 'class' => 'form']) !!}
-                            @if($reclamo->estado->slug == 'abierto')
-                                {!! Form::submit('Cerrar reclamo', ['title' => 'Cerrar reclamo', 'class' => 'btn btn-danger']) !!}
-                            @else
-                                {!! Form::submit('Abrir reclamo', ['title' => 'Abrir reclamo', 'class' => 'btn btn-success']) !!}
-                            @endif
+
+                            <div class="sweetalert">
+                                <div class="text-center">
+                                    @if($reclamo->estado->slug == 'abierto')
+                                        <button type="submit" class="btn btn-danger sweet-confirm" title="Cerrar reclamo">Cerrar reclamo</button>
+                                    @else
+                                        <button type="submit" class="btn btn-primary sweet-confirm" title="Abrir reclamo">Abrir reclamo</button>
+                                    @endif
+                                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
+
+            </div>
+
+            <div>
+                <p class="lead" id="titulo">{!! $reclamo->titulo !!}</p>
+                <p id="descripcion">{!! $reclamo->descripcion !!}</p>
+                {!! Form::open(['method' => 'put', 'url' => route('reclamos.description.update', $reclamo->id), 'id' => 'formDescripcion','class' => 'form', 'style' => 'display: none']) !!}
+
+                <div class="form-group">
+                    {!! Form::label('titulo', 'Título') !!}
+                    {!! Form::text('titulo', $reclamo->titulo, ['class' => 'form-control', 'id' => 'inputTitulo']) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('descripcion', 'Descripción') !!}
+                    {!! Form::textarea('descripcion', $reclamo->descripcion, ['class' => 'form-control', 'rows' => '6']) !!}
+                    <small class="text-warning"><i class="fa fa-exclamation-circle"></i> Máximo 1000 caracteres</small>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    {!! Form::button('Cancelar', ['id' => 'cancelarEdicion', 'class' => 'btn btn-default']) !!}
+                </div>
+
+                {!! Form::close() !!}
             </div>
 
-            <p class="lead" id="titulo">{!! $reclamo->titulo !!}</p>
-            <p id="descripcion">{!! $reclamo->descripcion !!}</p>
-            {!! Form::open(['method' => 'put', 'url' => route('reclamos.description.update', $reclamo->id), 'id' => 'formDescripcion','class' => 'form', 'style' => 'display: none']) !!}
-
-            <div class="form-group">
-                {!! Form::label('titulo', 'Título') !!}
-                {!! Form::text('titulo', $reclamo->titulo, ['class' => 'form-control', 'id' => 'inputTitulo']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('descripcion', 'Descripción') !!}
-                {!! Form::textarea('descripcion', $reclamo->descripcion, ['class' => 'form-control', 'rows' => '6']) !!}
-                <small class="text-warning"><i class="fa fa-exclamation-circle"></i> Máximo 1000 caracteres</small>
-            </div>
-            <div class="form-group">
-                {!! Form::submit('Guardar', ['class' => 'btn btn-info']) !!}
-                {!! Form::button('Cancelar', ['id' => 'cancelarEdicion', 'class' => 'btn btn-default']) !!}
-            </div>
-
-            {!! Form::close() !!}
         </div><hr>
         <div class="col-lg-6 col-md-6">
             <ul class="list-unstyled">

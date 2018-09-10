@@ -8,26 +8,12 @@
 
 @section('contenido')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
+    <div class="card card-default">
+        <p class="text-center" style="background-color: #1de9b6; color: black; padding: 5px">Cliente: {!! $cliente->full_name !!} - Seleccione un producto para vender</p>
+        <div class="card-body">
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Cliente: {!! $cliente->full_name !!} - Seleccione un producto para vender</h3>
-                            </div>
-                            <div class="panel-body">
+            @include('ventas.partials.listado-productos')
 
-                                @include('ventas.partials.listado-productos')
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 

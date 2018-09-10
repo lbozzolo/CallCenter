@@ -1,53 +1,31 @@
-@extends('base')
+@extends('instituciones.base')
 
-@section('content')
+@section('titulo')
+
+    <h2>Instituciones</h2>
+
+@endsection
+
+@section('contenido')
+
 
     <div class="row">
-        <div class="container">
-            <div class="content">
-
-                <div class="row">
-                    <div class="col-lg-8 p-r-0 title-margin-right">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <h1>Instituciones</h1>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-md-6">
+            <div class="card alert">
+                <div class="card-header pr">
+                    <h3>Agregar nueva institución</h3>
                 </div>
-            <div id="main-content">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card alert">
-                                <div class="card-header pr">
-                                <h3 class="panel-title">Agregar nueva institución</h3>
-                            </div>
-                            <div class="panel-body">
-                                @include('instituciones.partials.formulario-crear-institucion')
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card alert">
-                                <div class="card-header pr">
-                                <h3 class="panel-title">Instituciones disponibles</h3>
-                            </div>
-                            <div class="panel-body">
-                                @include('instituciones.partials.instituciones-listado')
-                            </div>
-                        </div>
-                    </div>
+                <div class="panel-body">
+                    @include('instituciones.partials.formulario-crear-institucion')
                 </div>
             </div>
-
-            <div class="row">
-                        <div class="col-lg-12">
-                            <div class="footer">
-                                <p>Smartline @ 2018 - Desarrollado por <a href="http://www.bamdig.com/" target="_new" class="page-refresh">Bamdig.com</a></p>
-                            </div>
-                        </div>
-                    </div>
-
+        </div>
+        <div class="col-lg-6">
+            <div class="card alert">
+                <div class="card-header pr">
+                    <h3>Instituciones disponibles</h3>
+                </div>
+                    @include('instituciones.partials.instituciones-listado')
             </div>
         </div>
     </div>

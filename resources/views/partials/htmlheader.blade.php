@@ -7,7 +7,6 @@
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('/css/styles.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/dataTables.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/rowReorder.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -18,7 +17,6 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
-<script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
 
 {{-- ===================== Template ===================== --}}
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,8 +39,9 @@
 <link href="{{ asset('template/css/lib/owl.theme.default.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('template/css/lib/weather-icons.css') }}" rel="stylesheet" />
 <link href="{{ asset('template/css/lib/menubar/sidebar.css') }}" rel="stylesheet">
-<link href="{{ asset('template/css/lib/bootstrap.min.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('template/css/lib/bootstrap.min.css') }}" rel="stylesheet">--}}
 <link href="{{ asset('template/css/lib/unix.css') }}" rel="stylesheet">
 <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('css/styles-template.css') }}" rel="stylesheet" type="text/css">
 
 @yield('css')

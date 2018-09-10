@@ -45,14 +45,14 @@
         </div>
         <div class="form-group col-xs-6">
             {!! Form::label('estado', 'Estado') !!}
-            {!! Form::select('estado_id', $estados, null, ['class' => 'form-control']) !!}
+            {!! Form::select('estado_id', $estados, null, ['class' => 'form-control select2b']) !!}
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="panel-title">Domicilio</span>
+    <div class="card card-default">
+        <div class="card-heading">
+            <span class="card-title">Domicilio</span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="form-group">
@@ -91,32 +91,33 @@
             </div>
             <div class="form-group">
                 {!! Form::label('provincia', 'Provincia') !!}
-                {!! Form::select('provincia', $provincias, ($venta->cliente->domicilio)? $venta->cliente->domicilio->provincia->id : null, ['class' => 'form-control select2', 'id' => 'provincia', 'placeholder' => '']) !!}
+                {!! Form::select('provincia', $provincias, ($venta->cliente->domicilio && $venta->cliente->domicilio->provincia)? $venta->cliente->domicilio->provincia->id : null, ['class' => 'form-control select2b', 'id' => 'provincia', 'placeholder' => '']) !!}
             </div>
-
 
             <div class="form-group" id="partidoDiv">
                 @if(isset($partidos))
                     {!! Form::label('partido', 'Partido', ['id' => 'partidoLabel']) !!}
-                    {!! Form::select('partido', $partidos, ($venta->cliente->domicilio && $venta->cliente->domicilio->partido) ? $venta->cliente->domicilio->partido->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::select('partido', $partidos, ($venta->cliente->domicilio && $venta->cliente->domicilio->partido) ? $venta->cliente->domicilio->partido->id : null, ['class' => 'form-control select2b', 'placeholder' => '']) !!}
                 @endif
             </div>
 
             <div class="form-group" id="localidadDiv">
                 @if(isset($localidades))
                     {!! Form::label('localidad', 'Localidad', ['id' => 'localidadLabel']) !!}
-                    {!! Form::select('localidad', $localidades, ($venta->cliente->domicilio && $venta->cliente->domicilio->localidad)? $venta->cliente->domicilio->localidad->id : null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::select('localidad', $localidades, ($venta->cliente->domicilio && $venta->cliente->domicilio->localidad)? $venta->cliente->domicilio->localidad->id : null, ['class' => 'form-control select2b', 'placeholder' => '']) !!}
                 @endif
             </div>
 
         </div>
+
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a href="{{ route('ventas.panel', $venta->id) }}" class="btn btn-default">Cancelar</a>
+
     </div>
 
 </div>
 
 
-{!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
 
-    <a href="{{ route('ventas.panel', $venta->id) }}" class="btn btn-default">Cancelar</a>
 
 {!! Form::close() !!}

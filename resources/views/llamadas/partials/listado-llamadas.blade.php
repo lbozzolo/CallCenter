@@ -74,7 +74,7 @@
                 <td>{!! $llamada->observaciones !!}</td>
                 <td>{!! $llamada->fecha_creado !!}</td>
                 <td class="text-center">
-                    <a href="{{ route('llamadas.show', $llamada->id) }}" class="btn btn-default btn-xs">ver</a>
+                    <a href="{{ route('llamadas.show', $llamada->id) }}" class="btn btn-default btn-xs">detalles</a>
                 </td>
             </tr>
 

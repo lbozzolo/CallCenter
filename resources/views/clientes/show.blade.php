@@ -11,11 +11,9 @@
 
 @section('contenido')
 
-    <div class="row">
-        <div class="col-lg-12">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card alert">
+                <div class="card-heading">
 
                     @if(!$cliente->dni)
                         <span class="label label-danger pull-right">sin dni</span>
@@ -27,12 +25,11 @@
                         <label class="label label-default pull-right">{!! $cliente->estado->nombre !!}</label>
                     @endif
 
+                    {{--<h3 class="card-title">{!! $cliente->full_name !!}</h3>--}}
+                    <h3 class="card-title"> <span class="text-info">{!! $cliente->email !!}</span></h3>
 
-
-                    <h3 class="panel-title">{!! $cliente->full_name !!}</h3>
-                    <span class="text-info">{!! $cliente->email !!}</span>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
@@ -44,11 +41,11 @@
                                             <small>pts</small>
                                         </div>
                                     @endif
-                                    <div>Fecha de alta <i class="fa fa-arrow-right"></i> {!! $cliente->fecha_creado !!}</div>
-                                    <div>Última edición <i class="fa fa-arrow-right"></i> {!! $cliente->fecha_editado !!}</div>
+                                    <div>Fecha de alta -- {!! $cliente->fecha_creado !!}</div>
+                                    <div>Última edición -- {!! $cliente->fecha_editado !!}</div>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Contacto</strong>
+                                    Contacto
                                     @if($cliente->telefono)
                                         <div><i class="fa fa-phone"></i> {!! $cliente->telefono !!}</div>
                                     @endif
@@ -57,22 +54,22 @@
                                     @endif
                                 </li>
                                 <li class="list-group-item">
-                                    <div><strong>DNI</strong></div>
+                                    <div>DNI</div>
                                     {!! ($cliente->dni)? $cliente->dni : '<small class="text-muted">No hay DNI espeficifado</small>' !!}
                                 </li>
                                 <li class="list-group-item">
-                                    <div><strong>Horario de contacto</strong></div>
+                                    <div>Horario de contacto</div>
                                     @if($cliente->from_date != $cliente->to_date)
-                                    <div>
-                                        De <strong>{!! $cliente->horario_desde !!}</strong>
-                                        a <strong>{!! $cliente->horario_hasta !!}</strong>
-                                    </div>
+                                        <div>
+                                            De <strong>{!! $cliente->horario_desde !!}</strong>
+                                            a <strong>{!! $cliente->horario_hasta !!}</strong>
+                                        </div>
                                     @else
                                         <small class="text-muted">No hay horario especificado</small>
                                     @endif
                                 </li>
                                 <li class="list-group-item">
-                                    <div><strong>Dirección</strong></div>
+                                    <div>Dirección</div>
 
                                     @if($cliente->address == '')
                                         <small class="text-muted">No hay una dirección registrada</small>
@@ -85,16 +82,13 @@
                                     </div>
                                     <div>
                                         @if($cliente->domicilio)
-                                        <span class="text-info">
+                                            <span class="text-info">
                                             {!! ($cliente->domicilio->localidad)? $cliente->domicilio->localidad->localidad.',' : '' !!}
                                             {!! ($cliente->domicilio->partido)? $cliente->domicilio->partido->partido : '' !!}
                                             {!! ($cliente->domicilio->provincia)? '('.$cliente->domicilio->provincia->provincia.')' : '' !!}
-                                        </span>
+                                </span>
                                         @endif
                                     </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary">Editar</a>
                                 </li>
                             </ul>
                         </div>
@@ -102,11 +96,11 @@
                         <div class="col-lg-6 col-md-6">
                             <ul class="list-unstyled">
                                 <li class="list-group-item">
-                                    <strong>Referencia</strong><br>
+                                    Referencia<br>
                                     {!! ($cliente->referencia)? $cliente->referencia : '<small class="text-muted">sin datos</small>' !!}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Observaciones</strong><br>
+                                    Observaciones<br>
                                     {!! ($cliente->observaciones)? $cliente->observaciones : '<small class="text-muted">sin datos</small>' !!}
                                 </li>
                             </ul>
@@ -114,10 +108,11 @@
                     </div>
 
                 </div>
+                <div class="card card-footer">
+                    <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary">Editar</a>
+                </div>
             </div>
 
-        </div>
-    </div>
 
 
 @endsection

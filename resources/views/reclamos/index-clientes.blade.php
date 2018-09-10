@@ -9,8 +9,8 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card card-default">
+        <div class="card-body">
         @permission('listado.reclamo')
             @include('reclamos.partials.listado-reclamos-clientes')
         @endpermission

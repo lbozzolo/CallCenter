@@ -43,6 +43,6 @@
     {!! Form::radio('estado_id', $estados[1], false) !!}
 </div>
 
-{!! Form::submit('+ Agregar', ['class' => 'btn btn-primary']) !!}
+<button type="submit" class="btn btn-primary">Agregar Institución</button>
 
 {!! Form::close() !!}

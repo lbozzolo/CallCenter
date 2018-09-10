@@ -2,14 +2,16 @@
 
 @section('titulo')
 
-    <h2>Ventas<span class="text-muted">/ {!! $ventas->title !!}</span></h2>
+    <h2>Ventas<span class="text-muted"> / {!! $ventas->title !!}</span></h2>
 
 @endsection
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    {{--@include('ventas.partials.navbar')--}}
+
+    <div class="card card-default">
+        <div class="card-body">
         @permission('listado.venta')
             @include('ventas.partials.listado-ventas')
         @endpermission
