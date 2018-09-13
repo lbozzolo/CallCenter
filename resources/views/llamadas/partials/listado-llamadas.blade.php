@@ -17,7 +17,6 @@
             @else
                 <th class="text-center">Reclamo</th>
             @endif
-            <th>Archivo</th>
             <th>Observaciones</th>
             <th>Fecha</th>
             <th>Opciones</th>
@@ -70,7 +69,6 @@
 
 
                 </td>
-                <td><a href="">{!! $llamada->url !!}</a></td>
                 <td>{!! $llamada->observaciones !!}</td>
                 <td>{!! $llamada->fecha_creado !!}</td>
                 <td class="text-center">

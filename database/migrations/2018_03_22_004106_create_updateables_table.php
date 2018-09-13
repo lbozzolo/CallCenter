@@ -1,4 +1,4 @@
-<?php
+d<?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +15,7 @@ class CreateUpdateablesTable extends Migration
         Schema::create('updateables', function (Blueprint $table) {
 
             $table->increments('id');
+            $table->integer('user_id');
             $table->integer('updateable_id');
             $table->string('updateable_type');
             $table->string('field');
