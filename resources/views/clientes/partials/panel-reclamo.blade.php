@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('descripcion', 'Descripción') !!}
-                    {!! Form::textarea('descripcion', $reclamo->descripcion, ['class' => 'form-control', 'rows' => '6']) !!}
+                    {!! Form::textarea('descripcion', $reclamo->descripcion, ['class' => 'form-control', 'rows' => '16']) !!}
                     <small class="text-warning"><i class="fa fa-exclamation-circle"></i> Máximo 1000 caracteres</small>
                 </div>
                 <div class="form-group">

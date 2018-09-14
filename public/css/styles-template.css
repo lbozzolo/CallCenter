@@ -40,6 +40,11 @@ body {
     padding: 10px;
 }
 
+.listado li {
+    background-color: #404a6b !important;
+    border: 1px solid #2D4558 !important;
+}
+
 /* Estilos para datepicker */
 
 .datepicker-days  {

@@ -92,7 +92,7 @@
             {!! Form::close() !!}
         </div><hr>
         <div class="col-lg-6 col-md-6">
-            <ul class="list-unstyled">
+            <ul class="list-unstyled listado">
                 <li class="list-group-item">
                     @if($reclamoFecha->solucionado == 0)
                         <i class="fa fa-exclamation-triangle text-danger"></i>
@@ -122,7 +122,7 @@
         </div>
         <div class="col-lg-6 col-md-6">
             Llamadas relacionadas:
-            <ul class="list-unstyled">
+            <ul class="list-unstyled listado">
                 @forelse($reclamoFecha->llamadas as $llamada)
 
                     <li>

@@ -6,6 +6,19 @@
 
 @endsection
 
+@section('css')
+
+    <style>
+
+        .listado li {
+            background-color: #404a6b !important;
+            border: 1px solid #193144 !important;
+        }
+
+    </style>
+
+@endsection
+
 @section('contenido')
 
     <div class="row">

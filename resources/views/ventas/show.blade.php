@@ -6,6 +6,19 @@
 
 @endsection
 
+@section('css')
+
+    <style>
+
+        .listado li {
+            background-color: #404a6b !important;
+            border: 1px solid #193144 !important;
+        }
+
+    </style>
+
+@endsection
+
 @section('contenido')
 
         <div class="card">
@@ -40,7 +53,7 @@
                             <h3 class="card-title">Información general</h3>
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled listado">
                                 <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
                                 <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
                                 <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
@@ -48,6 +61,15 @@
                                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
                             </ul>
                         </div>
+                        @if($venta->reclamos->count())
+
+                            <span style="padding: 10px 5px;"><a href="{!! route('reclamos.show', '4') !!}" style="color: cyan">Reclamos ( {!! $venta->reclamos->count() !!} )</a></span>
+
+                        @else
+
+                            <span style="padding: 10px 5px; color: cyan">Reclamos ( 0 )</span>
+
+                        @endif
                     </div>
                 </div>
 
@@ -58,7 +80,7 @@
                             <h3 class="card-title">Productos</h3>
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled listado">
 
                             @foreach($venta->productos as $producto)
 
