@@ -1,4 +1,4 @@
-<ul class="nav navbar-nav">
+<ul class="list-inline">
 
 @permission('listado.llamada')
     <li><a href="{{ route('llamadas.index') }}" class="{{ (Request::is('llamadas/salientes'.'*') ? 'navbar-item-selected' : '') }}">Salientes</a></li>
@@ -7,6 +7,6 @@
 @endpermission
 
 @permission('crear.venta')
-    <li><a href="{{ route('ventas.seleccion.cliente') }}" class="{{ (Request::is('llamadas/llamar'.'*') ? 'navbar-item-selected' : '') }}"><i class="fa fa-phone-square text-success"></i> Llamar</a></li>
+    <li><a href="{{ route('ventas.seleccion.cliente') }}" class="{{ (Request::is('llamadas/llamar'.'*') ? 'navbar-item-selected' : '') }} btn btn-default btn-sm"><i class="fa fa-phone-square text-success"></i> Llamar</a></li>
 @endpermission
 </ul>

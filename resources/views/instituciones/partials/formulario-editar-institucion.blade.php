@@ -1,36 +1,3 @@
-@section('css')
-    <style type="text/css">
-
-        input::-webkit-calendar-picker-indicator{
-            display: none;
-        }
-
-        .datepicker-days  {
-            background: white !important;
-        }
-        .datepicker-switch{
-            background: gray !important;
-            color: white !important;
-        }
-        .prev, .next{
-            background: lightgrey !important;
-            color: white !important;
-        }
-        .day, .month, .year{
-            color: gray !important;
-        }
-        .active{
-            color: white !important;
-        }
-        .old{
-            color: lightgray !important;
-        }
-        input, .select2{
-            background-color: #404a6b !important;
-        }
-
-    </style>
-@endsection
 
 <div id="main-content">
     <div class="row">
@@ -98,17 +65,12 @@
                     {!! Form::radio('estado_id', $estados[1], false) !!}
                 </div>
 
-                <button type="submit" class="btn btn-warning">Editar Info</button>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a href="{{ route('instituciones.index') }}" class="btn btn-default">Cancelar</a>
+
                 {!! Form::close() !!}
                 <br>
             </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="footer">
-            <p>Smartline @ 2018 - Desarrollado por <a href="http://www.bamdig.com/" target="_new" class="page-refresh">Bamdig.com</a></p>
         </div>
     </div>
 </div>

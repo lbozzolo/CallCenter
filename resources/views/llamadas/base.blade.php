@@ -2,38 +2,26 @@
 
 @section('content')
 
-   
+    @yield('titulo')
+
     <div class="row">
+        <div class="col-lg-12">
 
-        <div class="container">
-            <div class="content">
+            @if(isset($llamada))
 
-                @yield('titulo')
-                <div class="row">
-                        <div class="col-lg-12">
-                            @if(isset($llamada))
+                @if($llamada->reclamo)
+                    {{--@include('reclamos.partials.navbar')--}}
+                @else
+                    @include('llamadas.partials.navbar')
+                @endif
 
-                                @if($llamada->reclamo)
-                                    @include('reclamos.partials.navbar')
-                                @else
-                                    {{--@include('ventas.partials.navbar')--}}
-                                    @include('llamadas.partials.navbar')
-                                @endif
+            @else
+                @include('llamadas.partials.navbar')
+            @endif
 
-                            @else
-                                @include('llamadas.partials.navbar')
-                            @endif
-                        </div>
-                    </div>
-                <div class="row">
-                    <div class="col-lg-11">
-                        @yield('contenido')
-                    </div>
-                </div>
+            @yield('contenido')
 
-            </div>
         </div>
     </div>
-    
 
 @endsection

@@ -10,11 +10,11 @@
         <tr>
             <th>Id</th>
             <th>Nombre</th>
-            <th>Email</th>
             <th>DNI</th>
             <th>Estado</th>
             <th>Compras</th>
             <th>Llamadas</th>
+            <th>Reclamos</th>
             <th>Fecha de alta</th>
             <th>Opciones</th>
         </tr>
@@ -26,7 +26,6 @@
             <tr>
                 <td>{!! $cliente->id !!}</td>
                 <td>{!! $cliente->full_name !!}</td>
-                <td>{!! $cliente->email !!}</td>
                 <td>{!! ($cliente->dni)? $cliente->dni : "<span class='label label-danger'>sin dni</span><i class='fa fa-exclamation-circle'></i>" !!}</td>
                 <td>
                     @if($cliente->estado->slug == 'nuevo')
@@ -50,6 +49,13 @@
                 @elsepermission
                     {!! count($cliente->llamadas) !!}
                 @endpermission
+                </td>
+                <td class="text-center">
+                    @permission('ver.reclamos.cliente')
+                    <a href="{{ route('clientes.reclamos', $cliente->id) }}">{!! count($cliente->reclamos) !!}</a>
+                    @elsepermission
+                    {!! count($cliente->reclamos) !!}
+                    @endpermission
                 </td>
                 <td>{!! $cliente->fecha_creado !!}</td>
                 <td class="text-center">

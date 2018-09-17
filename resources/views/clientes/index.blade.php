@@ -1,32 +1,18 @@
 @extends('clientes.base')
 
+@section('titulo')
+
+    <h2>Listado de Clientes</h2>
+
+@endsection
+
 @section('contenido')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>Listado de Clientes</h2>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-11">
-
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                            @permission('listado.cliente')
-                                @include('clientes.partials.listado-clientes')
-                            @endpermission
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+    <div class="card card-default">
+        <div class="card-body">
+        @permission('listado.cliente')
+            @include('clientes.partials.listado-clientes')
+        @endpermission
         </div>
     </div>
 

@@ -2,7 +2,7 @@
     Aguarde un momento por favor...<br>
     <i class="fa fa-refresh fa-spin" style="font-size: 2em"></i>
 </div>
-<div class="table-responsive" id="div-table-productos" style="display: none; width: 90%">
+<div class="table-responsive" id="div-table-productos" style="display: none;">
 
     <table class="table table-vertical dataTable" id="table-productos">
 
@@ -53,7 +53,6 @@
                 <td class="text-center">
 
 
-
                     <button type="button" {{ ($producto->estado && $producto->estado->slug == 'activo')? 'title=DESACTIVAR' : 'title=ACTIVAR' }} class="btn btn-xs btn-default" data-toggle="modal" data-target="#disableProducto{!! $producto->id !!}" >
                         @if($producto->estado && $producto->estado->slug == 'activo')
                             <i class="fa fa-lock text-primary"></i>
@@ -61,29 +60,27 @@
                             <i class="fa fa-unlock text-primary"></i>
                         @endif
                     </button>
-                    <div class="modal fade" id="disableProducto{!! $producto->id !!}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title"><i class="fa fa-warning "></i>
-                                        {!! ($producto->estado->slug == 'activo')? 'Desactivar producto' : 'Activar producto' !!}
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        Usted está a punto de
-                                        {!! ($producto->estado->slug == 'activo')? 'desactivar' : 'activar' !!}
-                                        al producto<br>
-                                        <em class="text-danger">{!! $producto->nombre !!}</em>
-                                    </p>
-                                    <p>¿Desea continuar?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                    <a href="{{ route('productos.change.state', $producto->id) }}" class="btn btn-danger" title="DESACTIVAR">Aceptar</a>
-                                </div>
+                    <div class="modal fade col-lg-4 col-lg-offset-8" id="disableProducto{!! $producto->id !!}">
+                        <div class="card alert text-left">
+                            <div class="card-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"><i class="fa fa-warning "></i>
+                                    {!! ($producto->estado->slug == 'activo')? 'Desactivar producto' : 'Activar producto' !!}
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    Usted está a punto de
+                                    {!! ($producto->estado->slug == 'activo')? 'desactivar' : 'activar' !!}
+                                    el producto<br>
+                                    <em class="text-danger">{!! $producto->nombre !!}</em>
+                                </p>
+                                <p>¿Desea continuar?</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ route('productos.change.state', $producto->id) }}" class="btn btn-danger" title="DESACTIVAR">Aceptar</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -94,31 +91,31 @@
                     <button type="button" title="ELIMINAR" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#eliminarProducto{!! $producto->id !!}" >
                         <i class="fa fa-trash-o"></i>
                     </button>
-                    <div class="modal fade" id="eliminarProducto{!! $producto->id !!}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                    <div class="modal fade col-lg-4 col-lg-offset-8" id="eliminarProducto{!! $producto->id !!}">
+
+                            <div class="card alert text-left">
+                                <div class="card-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title"><i class="fa fa-warning "></i> Eliminar producto</h4>
+                                    <h4 class="card-title"><i class="fa fa-warning "></i> Eliminar producto</h4>
                                 </div>
-                                <div class="modal-body">
+                                <div class="card-body">
                                     <p>
                                         Usted está a punto de elminar al producto<br>
                                         <em class="text-danger">{!! $producto->nombre !!}</em>
                                     </p>
                                     <p>¿Desea continuar?</p>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                <div class="card-footer">
                                     {!! Form::open(['method' => 'delete', 'url' => route('productos.destroy', $producto->id)]) !!}
                                     <button type="submit" title="ELIMINAR" class="btn btn-danger" data-toggle="modal" data-target="#eliminarProducto{!! $producto->id !!}" >
                                         Eliminar
                                     </button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                     {!! Form::close() !!}
                                 </div>
                             </div>
-                        </div>
+
                     </div>
 
                 </td>

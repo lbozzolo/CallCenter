@@ -1,4 +1,4 @@
-<ul class="list-unstyled">
+<ul class="list-unstyled listado">
 
     <li class="list-group-item">
         <small class="text-muted">Cliente</small><br>

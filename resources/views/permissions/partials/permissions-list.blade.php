@@ -1,5 +1,5 @@
 
-<ul class="list-group list-unstyled" id="accordion">
+<ul class="list-group list-unstyled listado" id="accordion">
     @if(isset($permiso))
         <li class="list-group-item text-center">
             <a href="{{ route('permissions.index') }}"  class="btn btn-sm btn-default">Agregar nuevo permiso</a>

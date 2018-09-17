@@ -14,6 +14,7 @@
             <th>Cliente</th>
             <th>Productos</th>
             <th>Etapa</th>
+            <th>Reclamos</th>
             <th>Fecha</th>
             <th>Total</th>
             <th>Opciones</th>
@@ -42,7 +43,8 @@
                     @endif
                 @endpermission
                 </td>
-                <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '//' !!}</td>
+                <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '-' !!}</td>
+                <td class="text-center">{!! ($venta->reclamos)? $venta->reclamos->count() : '0' !!}</td>
                 <td>{!! $venta->fecha_creado !!}</td>
                 <td class="text-right">
                     <span class="text-primary" style="font-size: 1.1em">${!! $venta->importe_total !!}</span>

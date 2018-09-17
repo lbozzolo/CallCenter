@@ -40,7 +40,7 @@ $( window ).load(function() {
                 function renderLocalidadesSelect(loc) {
 
                     var html = '<label for="localidades" id="localidadLabel">Localidad</label>';
-                    html += '<select name="localidad" class="form-control" id="localidad">';
+                    html += '<select name="localidad" class="form-control select2b" id="localidad">';
                     for(var i = 0; i < loc.length; i++){
                         html += '<option value="' + loc[i].id + '">' + loc[i].localidad + '</option>';
                     }
@@ -58,7 +58,7 @@ $( window ).load(function() {
     function renderPartidosSelect(resp) {
 
         var html = '<label for="partidos" id="partidoLabel">Partido</label>';
-        html += '<select name="partido" class="form-control" id="partido">';
+        html += '<select name="partido" class="form-control select2b" id="partido">';
         for(var i = 0; i < resp.length; i++){
             html += '<option value="' + resp[i].id + '">' + resp[i].partido + '</option>';
         }

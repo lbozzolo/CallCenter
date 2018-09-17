@@ -4,11 +4,11 @@
 
 <div class="col-lg-4 col-md-4 col-sm-6">
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Bancos</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Bancos</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
             @foreach($permisos as $permiso)
                 @if($permiso->model == 'banco')
@@ -28,11 +28,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Categorías</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Categorías</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'categoria')
@@ -52,11 +52,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Clientes</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Clientes</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'cliente')
@@ -76,11 +76,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Etapas</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Etapas</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'etapa')
@@ -100,11 +100,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Formas de Pago</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Formas de Pago</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'formaPago')
@@ -132,11 +132,11 @@
 
 <div class="col-lg-4 col-md-4 col-sm-6">
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Imágenes</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Imágenes</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'imagen')
@@ -156,11 +156,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Instituciones</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Instituciones</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'institucion')
@@ -180,11 +180,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Llamadas</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Llamadas</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'llamada')
@@ -204,11 +204,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Métodos de Pago</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Métodos de Pago</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'metodoPago')
@@ -228,11 +228,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Productos</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Productos</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'producto')
@@ -256,11 +256,11 @@
 
 <div class="col-lg-4 col-md-4 col-sm-6">
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Promociones</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Promociones</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'promocion')
@@ -280,11 +280,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Reclamos</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Reclamos</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'reclamo')
@@ -304,11 +304,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Usuarios</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Usuarios</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'user')
@@ -328,11 +328,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Ventas</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Ventas</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'venta')
@@ -352,11 +352,11 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Marcas</h4>
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Marcas</h4>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <ul class="list-unstyled">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'marca')

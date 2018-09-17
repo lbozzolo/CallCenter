@@ -8,26 +8,12 @@
 
 @section('contenido')
 
-    <div class="row">
-        <div class="container">
-            <div class="content">
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card card-default">
-                            <div class="card-heading">
-                                <h3 class="card-title">Seleccione un cliente</h3>
-                            </div>
-                            <div class="card-body">
-                            @permission('listado.cliente')
-                                @include('ventas.partials.listado-clientes')
-                            </div>
-                            @endpermission
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+    <div class="card card-default">
+        <p class="text-center" style="background-color: #1de9b6; color: black; padding: 5px">Seleccione un cliente</p>
+        <div class="card-body">
+        @permission('listado.cliente')
+            @include('ventas.partials.listado-clientes')
+        @endpermission
         </div>
     </div>
 

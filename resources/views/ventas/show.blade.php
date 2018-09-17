@@ -1,5 +1,24 @@
 @extends('ventas.base')
 
+@section('titulo')
+
+    <h2>Ventas<span class="text-muted"> / Datos</span> </h2>
+
+@endsection
+
+@section('css')
+
+    <style>
+
+        .listado li {
+            background-color: #404a6b !important;
+            border: 1px solid #193144 !important;
+        }
+
+    </style>
+
+@endsection
+
 @section('contenido')
 
         <div class="card">
@@ -34,7 +53,7 @@
                             <h3 class="card-title">Información general</h3>
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled listado">
                                 <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
                                 <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
                                 <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
@@ -42,6 +61,15 @@
                                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
                             </ul>
                         </div>
+                        @if($venta->reclamos->count())
+
+                            <span style="padding: 10px 5px;"><a href="{!! route('reclamos.show', '4') !!}" style="color: cyan">Reclamos ( {!! $venta->reclamos->count() !!} )</a></span>
+
+                        @else
+
+                            <span style="padding: 10px 5px; color: cyan">Reclamos ( 0 )</span>
+
+                        @endif
                     </div>
                 </div>
 
@@ -52,7 +80,7 @@
                             <h3 class="card-title">Productos</h3>
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled listado">
 
                             @foreach($venta->productos as $producto)
 
@@ -105,9 +133,9 @@
                                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                                         <div class="form-group">
                                             <div class="input-group input-group">
-                                                {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control', 'id' => 'selectEstados']) !!}
+                                                {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2', 'id' => 'selectEstados']) !!}
                                                 <span class="input-group-btn">
-                                                    {!! Form::submit('Aplicar', ['class' => 'btn btn-info btn-flag']) !!}
+                                                    <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -141,7 +169,7 @@
 
     <script>
 
-        $('.select2').select2();
+        /*$('.select2').select2();*/
         $('.datepicker').datepicker({
             format: 'd/mm/yyyy'
         });
@@ -149,13 +177,13 @@
         if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){
             $('#conTarjeta').show();
             $('#conCredito').show();
-            $('.select2').select2();
+            //$('.select2').select2();
         }
 
         if($('#metodoPago option:selected').html() === 'Tarjeta de débito'){
             $('#conTarjeta').show();
             $('#conDebito').show();
-            $('.select2').select2();
+            //$('.select2').select2();
         }
 
         $('#metodoPago').change(function () {
@@ -163,7 +191,7 @@
             if($('#metodoPago option:selected').html() === 'Tarjeta de crédito' || $('#metodoPago option:selected').html() === 'Tarjeta de débito'){
 
                 $('#conTarjeta').show();
-                $('.select2').select2();
+                //$('.select2').select2();
 
                 if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){
                     $('#marcaDebito').val('');

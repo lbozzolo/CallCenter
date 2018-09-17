@@ -1,11 +1,11 @@
-<div class="panel panel-default">
+<div class="card panel-default">
 
-    <div class="panel-heading">
+    <div class="card-heading">
         <span>RECLAMO N° {!! $reclamoFecha->id !!}</span>
         <label class="{!! ($reclamoFecha->estado->slug == 'abierto')? 'label label-success' : 'label label-danger' !!}">{!! $reclamoFecha->estado->nombre !!}</label>
         <span>{!! $reclamoFecha->fecha_creado !!}</span>
         <span>
-            @if($reclamoFecha->tipo == 'cliente')
+            @if($reclamoFecha->tipo == 'cliente' && $reclamoFecha->venta->producto)
                 acerca del producto {!! ucfirst($reclamoFecha->venta->producto->nombre) !!} ({!! $reclamoFecha->venta->producto->marca->nombre !!})
                 <a href="{{ route('productos.show', $reclamoFecha->venta->producto->id) }}" title="Ver Producto"> <i class="fa fa-briefcase"></i></a>
             @else
@@ -14,7 +14,7 @@
             @endif
         </span>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         @permission('cambiar.estado.reclamo')
         <div>
             <span class="pull-right">
@@ -34,9 +34,8 @@
                 <span title="Editar descripción" class="btn btn-default btn-sm" id="editarReclamo"><i class="fa fa-edit"></i></span>
             </span>
 
-            <div class="modal fade" id="changeStatus{!! $reclamoFecha->id !!}">
-                <div class="modal-dialog">
-                    <div class="modal-content">
+            <div class="modal fade col-lg-4 col-lg-offset-8" id="changeStatus{!! $reclamoFecha->id !!}">
+                    <div class="card">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
@@ -59,17 +58,17 @@
                             @endif
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+
                             {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.status', $reclamoFecha->id), 'class' => 'form']) !!}
                             @if($reclamoFecha->estado->slug == 'abierto')
-                                {!! Form::submit('Cerrar reclamo', ['title' => 'Cerrar reclamo', 'class' => 'btn btn-danger']) !!}
+                                <button type="submit" class="btn btn-danger">Cerrar reclamo</button>
                             @else
-                                {!! Form::submit('Abrir reclamo', ['title' => 'Abrir reclamo', 'class' => 'btn btn-success']) !!}
+                                <button type="submit" class="btn btn-success">Abrir reclamo</button>
                             @endif
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             {!! Form::close() !!}
                         </div>
                     </div>
-                </div>
             </div>
 
             <p class="lead" id="titulo">{!! $reclamoFecha->titulo !!}</p>
@@ -86,14 +85,14 @@
                 <small class="text-warning"><i class="fa fa-exclamation-circle"></i> Máximo 1000 caracteres</small>
             </div>
             <div class="form-group">
-                {!! Form::submit('Guardar', ['class' => 'btn btn-info']) !!}
-                {!! Form::button('Cancelar', ['id' => 'cancelarEdicion', 'class' => 'btn btn-default']) !!}
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-default" id="cancelarEdicion">Cancelar</button>
             </div>
 
             {!! Form::close() !!}
         </div><hr>
         <div class="col-lg-6 col-md-6">
-            <ul class="list-unstyled">
+            <ul class="list-unstyled listado">
                 <li class="list-group-item">
                     @if($reclamoFecha->solucionado == 0)
                         <i class="fa fa-exclamation-triangle text-danger"></i>
@@ -123,7 +122,7 @@
         </div>
         <div class="col-lg-6 col-md-6">
             Llamadas relacionadas:
-            <ul class="list-unstyled">
+            <ul class="list-unstyled listado">
                 @forelse($reclamoFecha->llamadas as $llamada)
 
                     <li>
