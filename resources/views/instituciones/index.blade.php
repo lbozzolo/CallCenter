@@ -19,15 +19,21 @@
             <div id="main-content">
                 <div class="row">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="col-md-6">
                         <div class="card alert">
                                 <div class="card-header pr">
                                 <h3 class="panel-title">Agregar nueva institución</h3>
 =======
+=======
+>>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
                     <div class="col-md-5">
                         <div class="card alert">
                             <div class="card-header pr">
                                 <h4>Agregar nueva institución</h4>
+<<<<<<< HEAD
+>>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
+=======
 >>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
                             </div>
                             <div class="panel-body">
@@ -39,9 +45,14 @@
                         <div class="card alert">
                                 <div class="card-header pr">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <h3 class="panel-title">Instituciones disponibles</h3>
                             </div>
                             <div class="panel-body">
+=======
+                                <h4>Instituciones disponibles</h3>
+                                </div>
+>>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
 =======
                                 <h4>Instituciones disponibles</h3>
                                 </div>
@@ -52,9 +63,14 @@
                 </div>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             <div class="row">
                         <div class="col-lg-12">
+=======
+            <div class="row">
+                        <div class="col-lg-11">
+>>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
 =======
             <div class="row">
                         <div class="col-lg-11">
@@ -65,7 +81,10 @@
                         </div>
                     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
 =======
 >>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
             </div>

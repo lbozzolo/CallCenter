@@ -8,6 +8,7 @@
                     <br>
                 </h2>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <hr>
                 <div class="col-lg-6 col-md-6">
                     <ul class="list-unstyled">
@@ -26,6 +27,8 @@
                     <a href="{{ URL::previous() }}" class="btn btn-default">Volver</a>
                 
 =======
+=======
+>>>>>>> dda8b1e6c14fe8b48768134f58acd2d7e28c0867
                 
 
             </div>
