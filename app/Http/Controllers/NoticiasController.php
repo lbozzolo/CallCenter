@@ -1,5 +1,6 @@
 <?php namespace SmartLine\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use SmartLine\Http\Requests\CreateNoticiaRequest;
 use SmartLine\Entities\Noticia;
 
@@ -8,7 +9,8 @@ class NoticiasController extends Controller
 
     public function index()
     {
-        return view('noticias.index');
+        $noticias = Noticia::all();
+        return view('noticias.index', compact('noticias'));
     }
 
     public function create()
@@ -19,10 +21,12 @@ class NoticiasController extends Controller
     public function store(CreateNoticiaRequest $request)
     {
         Noticia::create([
-            'nombre' => $request->nombre,
+            'user_id' => Auth::user()->id,
+            'titulo' => $request->titulo,
             'descripcion' => $request->descripcion
         ]);
-        return redirect()->route('noticias.index')->with('La noticia ha sido agregada con éxito');
+
+        return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido agregada con éxito');
     }
 
     public function edit($id)
@@ -36,7 +40,7 @@ class NoticiasController extends Controller
     {
         $noticia = Noticia::find($id);
 
-        $noticia->nombre = $request->nombre;
+        $noticia->titulo = $request->titulo;
         $noticia->descripcion = $request->descripcion;
         $noticia->save();
 
@@ -46,11 +50,6 @@ class NoticiasController extends Controller
     public function destroy($id)
     {
         $noticia = Noticia::find($id);
-
-        if($noticia->productos->count()){
-            return redirect()->back()->withErrors('No puede eliminar la noticia porque tiene algo asignado');
-        }
-
         $noticia->delete();
 
         return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido eliminada con éxito');
