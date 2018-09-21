@@ -4,6 +4,7 @@ namespace SmartLine;
 
 use Bican\Roles\Models\Role;
 use Bican\Roles\Models\Permission;
+use SmartLine\Entities\Asignacion;
 use SmartLine\Entities\EstadoUser;
 use Illuminate\Auth\Authenticatable;
 use SmartLine\Entities\Venta;
@@ -92,6 +93,11 @@ class User extends Entity implements AuthenticatableContract,
     public function ventas()
     {
         return $this->hasMany(Venta::class);
+    }
+
+    public function asignaciones()
+    {
+        return $this->hasMany(Asignacion::class);
     }
 
 

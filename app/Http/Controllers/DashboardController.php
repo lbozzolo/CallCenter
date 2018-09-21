@@ -2,6 +2,7 @@
 
 use Bican\Roles\Models\Permission;
 use Illuminate\Http\Request;
+use SmartLine\Entities\Asignacion;
 use SmartLine\Entities\Banco;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Entity;
@@ -32,10 +33,9 @@ class DashboardController extends Controller
             abort(404);
 
 
-        $superadmin = Role::where('slug', '=', 'superadmin')->first();
-        $permissions = Permission::all();
+        $asignacion = Asignacion::find(1);
 
-        dd( $permissions );
+        dd( $asignacion->cliente );
 
     }
 

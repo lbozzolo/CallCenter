@@ -32,9 +32,17 @@ class RoleTableSeeder extends Seeder
                 'updated_at' => date_create()
             ],
             [
-                'name' => 'Operador',
-                'slug' => 'operador',
-                'description' => 'Operador de llamadas telefónicas',
+                'name' => 'Operador IN',
+                'slug' => 'operador.in',
+                'description' => 'Operador IN de llamadas telefónicas',
+                'level' => '1',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
+            [
+                'name' => 'Operador OUT',
+                'slug' => 'operador.out',
+                'description' => 'Operador OUT de llmadas telefónicas',
                 'level' => '1',
                 'created_at' => date_create(),
                 'updated_at' => date_create()
@@ -51,6 +59,22 @@ class RoleTableSeeder extends Seeder
                 'name' => 'Supervisor',
                 'slug' => 'supervisor',
                 'description' => 'Supervisor de ventas',
+                'level' => '1',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
+            [
+                'name' => 'Logística',
+                'slug' => 'logistica',
+                'description' => 'Logística',
+                'level' => '1',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
+            [
+                'name' => 'Atención al cliente',
+                'slug' => 'atencion.al.cliente',
+                'description' => 'Atención al cliente',
                 'level' => '1',
                 'created_at' => date_create(),
                 'updated_at' => date_create()
