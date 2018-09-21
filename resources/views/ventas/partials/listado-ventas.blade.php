@@ -44,7 +44,7 @@
                 @endpermission
                 </td>
                 <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '-' !!}</td>
-                <td class="text-center">{!! ($venta->reclamos)? $venta->reclamos->count() : '0' !!}</td>
+                <td class="text-center"><a href="{!! $ !!}">{!! ($venta->reclamos)? $venta->reclamos->count() : '0' !!}</td>
                 <td>{!! $venta->fecha_creado !!}</td>
                 <td class="text-right">
                     <span class="text-primary" style="font-size: 1.1em">${!! $venta->importe_total !!}</span>

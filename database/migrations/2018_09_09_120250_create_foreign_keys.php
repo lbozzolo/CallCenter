@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateForeignKeys extends Migration
 {
@@ -303,12 +304,32 @@ class CreateForeignKeys extends Migration
                 ->onDelete('NO ACTION');
         });
 
-        Schema::table('noticias', function(Blueprint $table){
+
+        Schema::table('noticias', function(Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
+        });
+
+        Schema::table('asignaciones', function(Blueprint $table){
+            $table->foreign('supervisor_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('operador_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+
         });
 
 

@@ -1,14 +1,16 @@
 @extends('layout')
 
-@include('partials.navbar')
+
 
 @section('login')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Resetear Contraseña</div>
-                    <div class="panel-body">
+                <div class="card card-default">
+                    <div class="card-heading text-center">
+                        <h2>Resetear Contraseña</h2>
+                    </div>
+                    <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
