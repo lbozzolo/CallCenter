@@ -24,7 +24,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                <a href="#" class="btn btn-default">Cancelar</a>
+                <a href="{!! route('noticias.index') !!}" class="btn btn-default">Cancelar</a>
 
                 {!! Form::close() !!}
                 <br>

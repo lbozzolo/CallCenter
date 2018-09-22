@@ -15,7 +15,7 @@ class CreateNoticiaRequest extends Request
         return
             [
                 'titulo' => 'required|max:255',
-                'descripcion' => 'max:255',
+                'descripcion' => 'max:5000',
             ];
     }
 
@@ -26,7 +26,7 @@ class CreateNoticiaRequest extends Request
                 'titulo.required' => 'El título es obligatorio',
                 'titulo.max' => 'El título no puede exceder los 255 caracteres',
 
-                'descripcion.required' => 'La descripción no puede exceder los 255 caracteres',
+                'descripcion.required' => 'La descripción no puede exceder los 5000 caracteres',
             ];
     }
 }

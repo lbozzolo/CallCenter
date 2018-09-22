@@ -47,6 +47,12 @@ class NoticiasController extends Controller
         return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido editada con éxito');
     }
 
+    public function show($id)
+    {
+        $noticia = Noticia::find($id);
+        return view('noticias.show', compact('noticia'));
+    }
+
     public function destroy($id)
     {
         $noticia = Noticia::find($id);

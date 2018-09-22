@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6">
             <div class="card">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled listado">
                     <li class="list-group-item">Fecha de alta: {!! $user->fecha_creado !!}</li>
                     <li class="list-group-item"><i class="fa fa-phone"></i> {!! $user->telefono !!}</li>
                     <li class="list-group-item">DNI: {!! $user->dni !!}</li>

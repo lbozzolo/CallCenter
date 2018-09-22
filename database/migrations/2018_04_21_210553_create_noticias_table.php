@@ -19,7 +19,7 @@ class CreateNoticiasTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('titulo');
-            $table->string('descripcion')->nullable();
+            $table->text('descripcion')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
