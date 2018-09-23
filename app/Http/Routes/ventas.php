@@ -67,6 +67,11 @@ Route::get('ventas/{id}/ver', [
     'middleware' => 'permission:ver.venta'
 ]);
 
+Route::get('ventas/{id}/reclamos', [
+    'as' => 'ventas.reclamos',
+    'uses' => 'VentasController@reclamos',
+]);
+
 Route::get('ventas-cliente/{id}/ver', [
     'as' => 'ventas.show.cliente.ventas',
     'uses' => 'VentasController@showClienteVentas',

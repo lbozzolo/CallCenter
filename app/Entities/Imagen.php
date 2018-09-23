@@ -15,4 +15,9 @@ class Imagen extends Entity
         return $this->morphTo();
     }
 
+    public function getImageExistsAttribute()
+    {
+        return file_exists( storage_path(  "imagenes/".$this->path));
+    }
+
 }

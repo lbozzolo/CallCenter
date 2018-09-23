@@ -85,51 +85,53 @@
 
                         <ul class="list-inline">
                             @foreach($user->images as $imagen)
-                                <li>
-                                    <span style="display: inline-block">
-                                        <a href="" data-toggle="modal" data-target="#modalVerImage{!! $imagen->id !!}">
-                                        <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="{!! ($imagen->principal == 0)? 'opacity: 0.5;' : '' !!} height: 80px">
-                                    </a>
-                                    </span>
-                                    <div class="modal fade col-lg-6 col-lg-offset-3" id="modalVerImage{!! $imagen->id !!}">
-                                            <div class="card">
-                                                <div class="modal-body">
-                                                    <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="margin: 0px auto">
-                                                </div>
-                                                <div class="modal-footer">
+                                @if($imagen->image_exists)
+                                    <li>
+                                        <span style="display: inline-block">
+                                            <a href="" data-toggle="modal" data-target="#modalVerImage{!! $imagen->id !!}">
+                                            <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="{!! ($imagen->principal == 0)? 'opacity: 0.5;' : '' !!} height: 80px">
+                                        </a>
+                                        </span>
+                                        <div class="modal fade col-lg-6 col-lg-offset-3" id="modalVerImage{!! $imagen->id !!}">
+                                                <div class="card">
+                                                    <div class="modal-body">
+                                                        <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="margin: 0px auto">
+                                                    </div>
+                                                    <div class="modal-footer">
 
-                                                    @if($imagen->principal == 0)
-                                                        <a href="{{ route('imagenes.principal', $imagen->id) }}" class="btn btn-primary" title="Marcar como principal">Marcar como principal</a>
-                                                    @else
-                                                        <a href="#" class="btn btn-primary" disabled title="Marcar como principal">Marcar como principal</a>
-                                                    @endif
-                                                    <button class="btn btn-danger" title="Eliminar foto" data-toggle="modal" data-target="#modalDeleteImage{!! $imagen->id !!}">Eliminar</button>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                    <div class="modal fade text-left" id="modalDeleteImage{!! $imagen->id !!}">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span></button>
-                                                                    <h4 class="modal-title">Eliminar imagen</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p class="text-red">¿Está seguro que desea eliminar la imagen?</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                                                    {!! Form::open(['method' => 'DELETE', 'url' => route('imagenes.delete', $imagen->id)]) !!}
-                                                                    {!! Form::submit('Eliminar de todos modos', ['class' => 'btn btn-danger']) !!}
-                                                                    {!! Form::close() !!}
+                                                        @if($imagen->principal == 0)
+                                                            <a href="{{ route('imagenes.principal', $imagen->id) }}" class="btn btn-primary" title="Marcar como principal">Marcar como principal</a>
+                                                        @else
+                                                            <a href="#" class="btn btn-primary" disabled title="Marcar como principal">Marcar como principal</a>
+                                                        @endif
+                                                        <button class="btn btn-danger" title="Eliminar foto" data-toggle="modal" data-target="#modalDeleteImage{!! $imagen->id !!}">Eliminar</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                        <div class="modal fade text-left" id="modalDeleteImage{!! $imagen->id !!}">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title">Eliminar imagen</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p class="text-red">¿Está seguro que desea eliminar la imagen?</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                                                        {!! Form::open(['method' => 'DELETE', 'url' => route('imagenes.delete', $imagen->id)]) !!}
+                                                                        {!! Form::submit('Eliminar de todos modos', ['class' => 'btn btn-danger']) !!}
+                                                                        {!! Form::close() !!}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                    </div>
-                                </li>
+                                        </div>
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
                     @endif

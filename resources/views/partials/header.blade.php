@@ -17,7 +17,7 @@
 
             @else
                 <li class="header-icon dib">
-                    <img class="avatar-img" src="{{ asset('template/images/avatar/1.jpg') }}" alt="" />
+                    <img src="{{ route('imagenes.ver', 'x') }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px">
                     <span class="user-avatar">{{ Auth::user()->fullname }}<i class="ti-angle-down f-s-10"></i></span>
 
             @endif
@@ -37,3 +37,4 @@
         </ul>
     </div>
 </div>
+
