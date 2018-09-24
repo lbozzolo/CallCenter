@@ -64,6 +64,16 @@ class User extends Entity implements AuthenticatableContract,
         return $this->roles()->get()->lists('id')->toArray();
     }
 
+    public function IsEnabled()
+    {
+        return ($this->estado->slug == 'habilitado');
+    }
+
+    public function IsNew()
+    {
+        return ($this->estado->slug == 'nuevo');
+    }
+
     //RelationShips
 
     public function roles()
