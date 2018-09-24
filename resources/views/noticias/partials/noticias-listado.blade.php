@@ -2,9 +2,6 @@
 
 <ul class="list-group">
     
-        <li class="list-group-item text-center">
-            <a href=""  class="btn btn-sm btn-default">Agregar Nueva Noticia</a>
-        </li>
    
 
 

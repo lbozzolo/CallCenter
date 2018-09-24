@@ -7,9 +7,8 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('descripcion', 'Descripción') !!}
-    {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
-
+	{!! Form::label('descripcion', 'Descripcion') !!}
+	{!! Form::textarea('descripcion', null, ['id'=>'ckeditor', 'class'=>'form-control', 'rows'=>'30', 'cols'=>'80']) !!}
 
 </div>
 
@@ -31,3 +30,7 @@
 
 <button type="submit" class="btn btn-primary">Agregar Noticia</button>
 
+
+
+
+{!! Form::close() !!}

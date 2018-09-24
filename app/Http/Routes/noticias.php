@@ -34,3 +34,9 @@ Route::delete('noticias/{id}/eliminar', [
     'as' => 'noticias.destroy',
     'uses' => 'NoticiasController@destroy',
 ]);
+
+
+Route::delete('noticias/todas', [
+    'as' => 'noticias.noticias',
+    'uses' => 'NoticiasController@noticias',
+]);

@@ -94,11 +94,17 @@
                                 <a href="{{ route('llamadas.index') }}">Llamadas Salientes</a>
                             </li>
                             @endpermission
+
                         </ul>
                     </li>
                 @endpermission
 
-                <li class="label">Seteos</li>
+                
+                            <li>
+                                <a href="{{ route('noticias.noticias') }}"><i class="ti-notepad"></i> Noticias </a>
+                            </li>
+
+                <li class="label">Gestion</li>
 
                 <li><a href="#"><i class="ti-signal"></i> Asignación de Tareas </a></li>
 
