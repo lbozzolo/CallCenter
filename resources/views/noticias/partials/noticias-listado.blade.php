@@ -1,4 +1,3 @@
-
 <div class="card-body">
     <div class="table-responsive">
         <table class="table student-data-table m-t-20">

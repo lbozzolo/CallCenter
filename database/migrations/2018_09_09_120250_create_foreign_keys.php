@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-
 class CreateForeignKeys extends Migration
 {
     /**
@@ -25,7 +23,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('ventas', function(Blueprint $table){
             $table->foreign('user_id')
                 ->references('id')
@@ -63,7 +60,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('metodo_pago', function(Blueprint $table){
             $table->foreign('banco_id')
                 ->references('id')
@@ -71,7 +67,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('forma_pago', function(Blueprint $table){
             $table->foreign('marca_tarjeta_id')
                 ->references('id')
@@ -79,7 +74,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('etapas', function(Blueprint $table){
             $table->foreign('etapa_anterior_id')
                 ->references('id')
@@ -97,7 +91,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('categorias', function(Blueprint $table){
             $table->foreign('parent_id')
                 ->references('id')
@@ -105,7 +98,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('productos', function(Blueprint $table){
             $table->foreign('estado_id')
                 ->references('id')
@@ -133,7 +125,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('categoria_producto', function(Blueprint $table){
             $table->foreign('categoria_id')
                 ->references('id')
@@ -146,7 +137,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
-
         Schema::table('llamadas', function(Blueprint $table){
             $table->foreign('cliente_id')
                 ->references('id')
@@ -174,7 +164,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('reclamos', function(Blueprint $table){
             $table->foreign('venta_id')
                 ->references('id')
@@ -202,7 +191,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('instituciones', function(Blueprint $table){
             $table->foreign('estado_id')
                 ->references('id')
@@ -210,7 +198,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('categoria_institucion', function(Blueprint $table){
             $table->foreign('categoria_id')
                 ->references('id')
@@ -223,7 +210,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('domicilios', function(Blueprint $table){
             $table->foreign('localidad_id')
                 ->references('id')
@@ -246,7 +232,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('clientes', function(Blueprint $table){
             $table->foreign('estado_id')
                 ->references('id')
@@ -254,7 +239,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('categoria_cliente', function(Blueprint $table){
             $table->foreign('categoria_id')
                 ->references('id')
@@ -267,7 +251,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('datos_tarjeta', function(Blueprint $table){
             $table->foreign('venta_id')
                 ->references('id')
@@ -290,7 +273,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('producto_venta', function(Blueprint $table){
             $table->foreign('producto_id')
                 ->references('id')
@@ -303,8 +285,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
-
         Schema::table('noticias', function(Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')
@@ -312,7 +292,6 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
         Schema::table('asignaciones', function(Blueprint $table){
             $table->foreign('supervisor_id')
                 ->references('id')
@@ -329,12 +308,8 @@ class CreateForeignKeys extends Migration
                 ->on('clientes')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
-
         });
-
-
     }
-
     /**
      * Reverse the migrations.
      *

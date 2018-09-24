@@ -13,6 +13,19 @@ class NoticiasController extends Controller
         return view('noticias.index', compact('noticias'));
     }
 
+    public function noticias()
+    {
+        $noticias = Noticia::all();
+        return view('noticias.noticias', compact('noticias'));
+    }
+
+    public function show($id)
+    {
+        $noticia = Noticia::find($id);
+        return view('noticias.show',compact('noticia'));
+    }
+
+
     public function create()
     {
         return view('noticias.create');
@@ -45,12 +58,6 @@ class NoticiasController extends Controller
         $noticia->save();
 
         return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido editada con éxito');
-    }
-
-    public function show($id)
-    {
-        $noticia = Noticia::find($id);
-        return view('noticias.show', compact('noticia'));
     }
 
     public function destroy($id)
