@@ -7,33 +7,24 @@
                     <h4>Editar Noticia</h4>
                 </div>
 
-                {!! Form::model($noticia, ['method' => 'put', 'url' => route('noticias.update'), 'class' => 'form']) !!}
+                {!! Form::model($noticia, ['method' => 'put', 'url' => route('noticias.update', $noticia->id), 'class' => 'form']) !!}
 
                 <div class="basic-form">
                     <div class="form-group">
-                        {!! Form::label('nombre', 'Titulo') !!}
-                        {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+                        {!! Form::label('titulo', 'Titulo') !!}
+                        {!! Form::text('titulo', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
 
                 <div class="basic-form">
                     <div class="form-group">
                         {!! Form::label('descripcion', 'Descripción') !!}
-                        {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
+                        {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
 
-                
-
-                <div class="form-group panel-body" id="divEstado">
-                    {!! Form::label('estado_id', 'Activa') !!}
-                    {!! Form::radio('estado_id', $estados[0], true) !!}
-                    {!! Form::label('estado_id', 'Inactiva') !!}
-                    {!! Form::radio('estado_id', $estados[1], false) !!}
-                </div>
-
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                <a href="#" class="btn btn-default">Cancelar</a>
+                <a href="{!! route('noticias.index') !!}" class="btn btn-default">Cancelar</a>
 
                 {!! Form::close() !!}
                 <br>

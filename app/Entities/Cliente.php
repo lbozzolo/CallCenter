@@ -66,4 +66,9 @@ class Cliente extends Entity
         return $this->hasOne(Domicilio::class);
     }
 
+    public function asignaciones()
+    {
+        return $this->hasMany(Asignacion::class);
+    }
+
 }

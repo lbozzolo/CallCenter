@@ -6,23 +6,11 @@
 
 @endsection
 
-@section('css')
-
-    <style>
-
-        .listado li {
-            background-color: #404a6b !important;
-            border: 1px solid #193144 !important;
-        }
-
-    </style>
-
-@endsection
 
 @section('contenido')
 
         <div class="card">
-            <div class="card-heading">
+            <div class="card-header">
                 <div class="row">
                     <div class="col-lg-9 col-md-12">
                         <h3>
@@ -49,7 +37,7 @@
 
                 <div class="col-12">
                     <div class="card card-default">
-                        <div class="card-heading">
+                        <div class="card-header">
                             <h3 class="card-title">Información general</h3>
                         </div>
                         <div class="card-body">
@@ -61,22 +49,24 @@
                                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
                             </ul>
                         </div>
+                        @permission('ver.reclamos.venta')
                         @if($venta->reclamos->count())
 
-                            <span style="padding: 10px 5px;"><a href="{!! route('reclamos.show', '4') !!}" style="color: cyan">Reclamos ( {!! $venta->reclamos->count() !!} )</a></span>
+                            <span style="padding: 10px 5px;"><a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color: cyan">Reclamos ( {!! $venta->reclamos->count() !!} )</a></span>
 
                         @else
 
                             <span style="padding: 10px 5px; color: cyan">Reclamos ( 0 )</span>
 
                         @endif
+                        @endpermission
                     </div>
                 </div>
 
 
                 <div class="col-12">
                     <div class="card card-default">
-                        <div class="card-heading">
+                        <div class="card-header">
                             <h3 class="card-title">Productos</h3>
                         </div>
                         <div class="card-body">
@@ -124,7 +114,7 @@
                 @permission('editar.venta')
                         <div class="col-12">
                             <div class="card card-default">
-                                <div class="card-heading">
+                                <div class="card-header">
                                     <h3 class="card-title">Editar venta</h3>
                                 </div>
                                 <div class="card-body">

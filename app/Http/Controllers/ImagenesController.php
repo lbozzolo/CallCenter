@@ -48,7 +48,13 @@ class ImagenesController extends Controller
 
     public function verImage($file)
     {
-        return response()->make(File::get(storage_path("imagenes/".$file)),200)->header('Content-Type', 'image/jpg');
+        if (file_exists( storage_path(  "imagenes/".$file))) {
+            return response()->make(File::get(storage_path("imagenes/".$file)),200)->header('Content-Type', 'image/jpg');
+        } else {
+            return response()->make(File::get(storage_path("imagenes/default-profile-picture.jpg")),200)->header('Content-Type', 'image/jpg');
+        }
+
+        //return response()->make(File::get(storage_path("imagenes/".$file)),200)->header('Content-Type', 'image/jpg');
     }
 
     public function principalImage($id)

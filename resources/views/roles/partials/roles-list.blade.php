@@ -1,5 +1,5 @@
 
-<ul class="list-group">
+<ul class="list-group listado">
     @if(isset($role))
         <li class="list-group-item text-center">
             <a href="{{ route('roles.index') }}"  class="btn btn-sm btn-default">Agregar nuevo rol</a>

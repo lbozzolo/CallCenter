@@ -73,6 +73,14 @@ class PermissionsTableSeeder extends Seeder
                 'model' => 'venta',
                 'created_at' => date_create(),
                 'updated_at' => date_create()
+            ],
+            [
+                'name' => 'Ver reclamos venta',
+                'slug' => 'ver.reclamos.venta',
+                'description' => 'Ver los reclamos de una venta',
+                'model' => 'venta',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
             ]
         ]);
 

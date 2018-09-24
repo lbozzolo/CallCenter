@@ -296,6 +296,12 @@ class VentasController extends Controller
         return view('clientes.show-ventas')->with($data);
     }
 
+    public function reclamos($id)
+    {
+        $venta = Venta::find($id);
+        return view('ventas.reclamos', compact('venta'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

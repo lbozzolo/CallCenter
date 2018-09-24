@@ -11,84 +11,22 @@
     <div class="row">
 
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card" style="color: black; background-color: white">
 
-                <h3>Titulo de la Noticia  </h3>
-                <p></p>
-                 <spam>09/09/2018</spam>
-                
-                    <h5>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</h5>
-
-            </div>
-
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-
-                <h3>Titulo de la Noticia  </h3>
-                <p></p>
-                 <spam>09/09/2018</spam>
-
-                 <h5>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</h5>
+                <div class="card-header" style="padding: 10px 20px">
+                    <h3>{!! $noticia->titulo !!}</h3>
+                    <span>{!! $noticia->fecha_creado !!}</span>
+                </div>
+                <div class="card-body" style="padding: 10px 20px; background-color:white">
+                    <p style="color: black; background-color: white">{!! $noticia->descripcion !!}</p>
+                </div>
 
             </div>
 
-        </div>
-
-        <div class="col-lg-6">
-            <div class="card">
-
-                <h3>Titulo de la Noticia  </h3>
-                <p></p>
-                 <spam>09/09/2018</spam>
-
-                 <h5>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</h5>
-
+            <div class="card-footer">
+                <a href="{!! route('noticias.index') !!}" class="btn btn-default">Volver</a>
             </div>
 
         </div>
-        <div class="col-lg-6">
-            <div class="card">
-
-                <h3>Titulo de la Noticia  </h3>
-                <p></p>
-                 <spam>09/09/2018</spam>
-
-                 <h5>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</h5>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-6">
-            <div class="card">
-
-               <h3>Titulo de la Noticia  </h3>
-                <p></p>
-                 <spam>09/09/2018</spam>
-
-                 <h5>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</h5>
-
-            </div>
-
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-
-                <h3>Titulo de la Noticia  </h3>
-                <p></p>
-                 <spam>09/09/2018</spam>
-                 
-                 <h5>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</h5>
-
-            </div>
-
-        </div>
-    </div>    
 
 @endsection
-
-
-
-
-

@@ -1,6 +1,6 @@
 @extends('layout')
 
-@include('partials.navbar')
+
 
 @section('login')
     <div class="container-fluid">

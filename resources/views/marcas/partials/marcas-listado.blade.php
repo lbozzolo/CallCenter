@@ -1,5 +1,5 @@
 
-<ul class="list-group">
+<ul class="list-group listado">
     @if(isset($marca))
         <li class="list-group-item text-center">
             <a href="{{ route('marcas.index') }}"  class="btn btn-sm btn-default">Agregar nueva marca</a>

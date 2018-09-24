@@ -2,10 +2,11 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateForeignKeys extends Migration
 {
-    /**
+    /
      * Run the migrations.
      *
      * @return void
@@ -116,7 +117,7 @@ class CreateForeignKeys extends Migration
                 ->on('unidades_medida')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
-            $table->foreign('marca_id')
+$table->foreign('marca_id')
                 ->references('id')
                 ->on('marcas')
                 ->onUpdate('NO ACTION')
@@ -222,8 +223,7 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
-
-        Schema::table('domicilios', function(Blueprint $table){
+Schema::table('domicilios', function(Blueprint $table){
             $table->foreign('localidad_id')
                 ->references('id')
                 ->on('tbl_localidades')
@@ -304,9 +304,37 @@ class CreateForeignKeys extends Migration
         });
 
 
+        Schema::table('noticias', function(Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+        });
+
+        Schema::table('asignaciones', function(Blueprint $table){
+            $table->foreign('supervisor_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('operador_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+
+        });
+
+
     }
 
-    /**
+    /
      * Reverse the migrations.
      *
      * @return void
