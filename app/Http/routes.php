@@ -27,7 +27,6 @@ Route::group(['middleware' => ['auth', 'new.user']], function () {
     require(__DIR__ . '/Routes/categorias.php');
     require(__DIR__ . '/Routes/marcas.php');
     require(__DIR__ . '/Routes/noticias.php');
-    require(__DIR__ . '/Routes/tareas.php');
     require(__DIR__ . '/Routes/instituciones.php');
     require(__DIR__ . '/Routes/llamadas.php');
     require(__DIR__ . '/Routes/ventas.php');
