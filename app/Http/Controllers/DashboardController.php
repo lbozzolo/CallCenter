@@ -33,9 +33,8 @@ class DashboardController extends Controller
             abort(404);
 
 
-        $asignacion = Asignacion::find(1);
 
-        dd( $asignacion->cliente );
+        dd( Auth::user()->isEnabled() );
 
     }
 
