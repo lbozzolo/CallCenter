@@ -1,11 +1,12 @@
-<div class="row navbar-fixed-top">
+{{--<div class="row navbar-fixed-top">--}}
+<div class="row">
 
     {{-- Errores --}}
     @if ($errors->count() > 0)
         <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
 
             <div class="panel-body">
-                <div class="alert alert-danger alert-dismissible">
+                <div class="alert alert-danger alert-dismissible bg-danger">
 
                     <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
                     <i class="icon fa fa-warning"></i>
@@ -31,7 +32,7 @@
         <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 message">
 
             <div class="panel-body">
-                <div class="alert alert-success alert-dismissible">
+                <div class="alert alert-success alert-dismissible bg-success">
                     <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
                     <i class="icon fa fa-check"></i>
                     @if (session()->has('ok'))
@@ -50,7 +51,7 @@
         <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
 
             <div class="panel-body">
-                <div class="alert alert-info alert-dismissible">
+                <div class="alert alert-info alert-dismissible bg-info">
                     <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
                     <i class="icon fa fa-exclamation-triangle"></i>
                     @if (session()->has('info'))

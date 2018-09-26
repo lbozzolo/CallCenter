@@ -75,6 +75,10 @@ class VentasController extends Controller
     public function seleccionProducto($idCliente)
     {
         $cliente = Cliente::find($idCliente);
+
+        if(!$cliente->dni)
+            return redirect()->back()->withErrors('No se puede seleccionar el cliente: '. strtoupper($cliente->fullname).', porque no tiene DNI');
+
         $total = $this->ventaRepo->totalesVentasByEstado();
         $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
         $tags = EstadoVenta::lists('nombre', 'slug');
@@ -159,6 +163,15 @@ class VentasController extends Controller
         $venta->productos()->attach($producto);
 
         return redirect()->route('ventas.panel', $venta->id)->with('Producto agregado con éxito');
+    }
+
+    public function numeroGuia(Request $request, $id)
+    {
+        $venta = Venta::find($id);
+        $venta->numero_guia = $request->numero_guia;
+        $venta->save();
+
+        return redirect()->back()->with('ok', 'Número de guía guardado con éxito');
     }
 
     public function editarModos(Request $request)

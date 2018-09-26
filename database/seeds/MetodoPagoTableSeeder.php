@@ -19,7 +19,7 @@ class MetodoPagoTableSeeder extends Seeder
             ['nombre' => 'Transferencia', 'slug' => 'transferencia'],
             ['nombre' => 'Mercado Pago', 'slug' => 'mercadopago'],
             ['nombre' => 'Todo Pago', 'slug' => 'todopago'],
-            ['nombre' => 'Contra reemboldo', 'slug' => 'contrareembolso'],
+            ['nombre' => 'Contra reembolso', 'slug' => 'contrareembolso'],
         ]);
     }
 }

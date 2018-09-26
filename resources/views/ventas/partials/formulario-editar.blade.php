@@ -45,7 +45,7 @@
 
     <div class="form-group">
         {!! Form::label('numero_tarjeta', 'Número de tarjeta') !!}
-        {!! Form::number('numero_tarjeta', ($venta->datosTarjeta)? $venta->datosTarjeta->numero_tarjeta : null, ['id' => 'numeroTarjeta', 'class' => 'form-control inputConTarjeta', 'placeholder' => 'Ingrese los 16 números de la tarjeta sin espacios ni guiones', 'min' => '1', 'max' => '9999999999999999']) !!}
+        {!! Form::number('numero_tarjeta', ($venta->datosTarjeta)? $venta->datosTarjeta->card_number : null, ['id' => 'numeroTarjeta', 'class' => 'form-control inputConTarjeta', 'placeholder' => 'Ingrese los 16 números de la tarjeta sin espacios ni guiones', 'min' => '1', 'max' => '9999999999999999']) !!}
     </div>
 
     <div class="form-group">

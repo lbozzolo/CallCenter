@@ -23,6 +23,7 @@ class CreateDomiciliosTable extends Migration
             $table->string('departamento', 20);
             $table->integer('codigo_postal')->nullable();
             $table->string('entre_calles');
+            $table->string('barrio');
             $table->integer('localidad_id')->unsigned()->nullable();
             $table->integer('partido_id')->unsigned()->nullable();
             $table->integer('provincia_id')->unsigned()->nullable();

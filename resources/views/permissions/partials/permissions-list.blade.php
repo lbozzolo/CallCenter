@@ -62,6 +62,24 @@
         </li>
 
         <li class="list-group-item">
+            <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseDatosTarjeta" aria-expanded="false" aria-controls="collapseCliente">
+                Permisos de Datos de Tarjeta
+            </span>
+            <ul class="list-unstyled collapse"  id="collapseDatosTarjeta" aria-labelledby="headingOne" data-parent="#accordion">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'datoTarjeta')
+                        <li class="list-group-item">
+                            @include('permissions.partials.options-permisos')
+                            <strong>{!! $permiso->name !!} ({!! $permiso->slug !!}) </strong><br>
+                            <small>{!! $permiso->description !!}</small>
+                            @include('permissions.partials.modal-eliminar-permiso')
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </li>
+
+        <li class="list-group-item">
             <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseEtapa" aria-expanded="false" aria-controls="collapseEtapa">
                 Permisos de Etapas
             </span>

@@ -94,7 +94,7 @@
 
     <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
 
-        <ul class="list-unstyled">
+        <ul class="list-unstyled listado">
         @foreach($venta->productos as $producto)
 
             <li class="list-group-item">
@@ -225,9 +225,21 @@
 
     </div>
 
-    <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 text-right">
+    <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 ">
 
-        <ul class="list-unstyled">
+        <div>
+        {!! Form::model($venta, ['url' => route('ventas.numero.guia', $venta->id), 'method' => 'post']) !!}
+
+            <div class="form-group">
+                {!! Form::label('numero_guia', 'Número de guía') !!}
+                {!! Form::text('numero_guia', $venta->numero_guia, ['class' => 'form-control']) !!}
+                <button type="submit" class="btn btn-xs btn-info">guardar</button>
+            </div>
+
+        {!! Form::close() !!}
+        </div>
+
+        <ul class="list-unstyled listado text-right">
 
             @foreach($venta->productos as $producto)
 

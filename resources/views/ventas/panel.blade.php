@@ -37,30 +37,36 @@
 
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
+                @permission('editar.cliente')
                 <li class="active"><a href="#tab_1" data-toggle="tab">Datos cliente</a></li>
+                @endpermission
                 <li><a href="#tab_2" data-toggle="tab">Productos</a></li>
-                <li><a href="#tab_3" data-toggle="tab">Datos de tarjeta</a></li>
+                @permission('editar.venta')
+                <li><a href="#tab_3" data-toggle="tab">Información de pago</a></li>
+                @endpermission
             </ul>
             <div class="tab-content">
+                @permission('editar.cliente')
                 <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
 
-                    @permission('editar.cliente')
                     @include('ventas.partials.panel-cliente')
-                    @endpermission
 
                 </div>
+                @endpermission
+
                 <div class="tab-pane card" id="tab_2" style="margin-top: 0px">
 
                     @include('ventas.partials.panel-productos')
 
                 </div>
+
+                @permission('editar.venta')
                 <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
 
-                    @permission('editar.venta')
                     @include('ventas.partials.formulario-datos-tarjeta')
-                    @endpermission
 
                 </div>
+                @endpermission
             </div>
         </div>
 

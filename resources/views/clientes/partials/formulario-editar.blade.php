@@ -99,6 +99,10 @@
             {!! Form::text('entre_calles', ($cliente->domicilio)? $cliente->domicilio->entre_calles : null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
+            {!! Form::label('barrio', 'Barrio') !!}
+            {!! Form::text('barrio', ($cliente->domicilio)? $cliente->domicilio->barrio : null, ['class' => 'form-control', 'placeholder' => 'ej: Barrio Los Álamos']) !!}
+        </div>
+        <div class="form-group">
             {!! Form::label('provincia', 'Provincia') !!}
             {!! Form::select('provincia', $provincias, ($cliente->domicilio)? $cliente->domicilio->provincia->id : null, ['class' => 'form-control select2', 'id' => 'provincia', 'placeholder' => '']) !!}
         </div>
