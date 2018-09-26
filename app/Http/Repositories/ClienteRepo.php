@@ -49,6 +49,7 @@ class ClienteRepo extends BaseRepo
             $domicilio->departamento = ($request['departamento'])? $request['departamento'] : '';
             $domicilio->codigo_postal = ($request['codigo_postal'])? $request['codigo_postal'] : null;
             $domicilio->entre_calles = ($request['entre_calles'])? $request['entre_calles'] : '';
+            $domicilio->barrio =  ($request['barrio'])? $request['barrio'] : '';
             $domicilio->localidad_id = (array_key_exists('localidad', $request) && $request['localidad'] != '')? $request['localidad'] : null;
             $domicilio->partido_id = (array_key_exists('partido', $request) && $request['partido'] != '')? $request['partido'] : null;
             $domicilio->provincia_id = (array_key_exists('provincia', $request) && $request['provincia'] != '')? $request['provincia'] : null;
@@ -74,6 +75,7 @@ class ClienteRepo extends BaseRepo
                 'departamento' => ($request['departamento'])? $request['departamento'] : '',
                 'codigo_postal' => ($request['codigo_postal'])? $request['codigo_postal'] : null,
                 'entre_calles' => ($request['entre_calles'])? $request['entre_calles'] : '',
+                'barrio' => ($request['barrio'])? $request['barrio'] : '',
                 'localidad_id' => (array_key_exists('localidad', $request) && $request['localidad'] != '')? $request['localidad'] : null,
                 'partido_id' => (array_key_exists('partido', $request) && $request['partido'] != '')? $request['partido'] : null,
                 'provincia_id' => (array_key_exists('provincia', $request) && $request['provincia'] != '')? $request['provincia'] : null,

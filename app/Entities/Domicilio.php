@@ -5,7 +5,7 @@ namespace SmartLine\Entities;
 class Domicilio extends Entity
 {
     protected $table = 'domicilios';
-    protected $fillable = ['cliente_id', 'calle', 'numero', 'piso', 'departamento', 'codigo_postal', 'entre_calles', 'localidad_id', 'partido_id', 'provincia_id'];
+    protected $fillable = ['cliente_id', 'calle', 'numero', 'piso', 'departamento', 'codigo_postal', 'entre_calles', 'barrio', 'localidad_id', 'partido_id', 'provincia_id'];
     public $timestamps = false;
 
 

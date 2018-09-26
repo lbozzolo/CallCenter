@@ -47,6 +47,7 @@
                                 <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
                                 <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
                                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
+                                <li class="list-group-item">Número de guía: {!! $venta->numero_guia !!}</li>
                             </ul>
                         </div>
                         @permission('ver.reclamos.venta')
@@ -61,6 +62,29 @@
                         @endif
                         @endpermission
                     </div>
+
+                    @if($venta->metodoPago)
+                        @if($venta->metodoPago->slug == 'credito' || $venta->metodoPago->slug == 'debito')
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de la tarjeta</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled listado">
+                                    <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>
+                                    <li class="list-group-item">Tarjeta: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->marca->nombre : '' !!}</li>
+                                    <li class="list-group-item">Banco: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->banco->nombre : '' !!}</li>
+                                    <li class="list-group-item">Cuotas: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->formaPago->cuota_cantidad : '' !!}</li>
+                                    <li class="list-group-item">Número de tarjeta: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->card_number : '' !!}</li>
+                                    <li class="list-group-item">Código de seguridad: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->security_number : '' !!}</li>
+                                    <li class="list-group-item">Titular: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->titular : '' !!}</li>
+                                    <li class="list-group-item">Fecha de expiración: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->expiration_date : '' !!}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+                    @endif
+
                 </div>
 
 

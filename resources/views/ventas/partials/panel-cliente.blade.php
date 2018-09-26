@@ -2,6 +2,7 @@
 
 <div class="col-lg-6 col-md-6">
 
+    {!! Form::hidden('redirect-back', true) !!}
     <div class="form-group">
         {!! Form::label('nombre', 'Nombre') !!}
         {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
@@ -88,6 +89,10 @@
             <div class="form-group">
                 {!! Form::label('entre_calles', 'Entre Calles') !!}
                 {!! Form::text('entre_calles', ($venta->cliente->domicilio)? $venta->cliente->domicilio->entre_calles : null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('barrio', 'Barrio') !!}
+                {!! Form::text('barrio', ($venta->cliente->domicilio)? $venta->cliente->domicilio->barrio : null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('provincia', 'Provincia') !!}

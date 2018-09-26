@@ -106,6 +106,9 @@ class Venta extends Entity
         return $this->updateable->where('field', 'estado_id')->last()->former_value;
     }
 
+
+
+
     // Relationships
     public function user()
     {

@@ -33,7 +33,7 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled listado">
                                 <li class="list-group-item">
                                     @if($cliente->puntos)
                                         <div class="pull-right">
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="col-lg-6 col-md-6">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled listado">
                                 <li class="list-group-item">
                                     Referencia<br>
                                     {!! ($cliente->referencia)? $cliente->referencia : '<small class="text-muted">sin datos</small>' !!}

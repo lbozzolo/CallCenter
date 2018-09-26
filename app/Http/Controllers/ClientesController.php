@@ -129,6 +129,9 @@ class ClientesController extends Controller
 
         $cliente->save();
 
+        if($request->has('redirect-back'))
+            return redirect()->back()->with('ok', 'Cliente editado con éxito');
+
         return redirect()->route('clientes.show', $cliente->id)->with('ok', 'Cliente editado con éxito');
     }
 

@@ -134,6 +134,12 @@
                     {!! Form::label('entre_calles', 'Entre Calles') !!}
                     {!! Form::text('entre_calles', null, ['class' => 'form-control', 'placeholder' => 'ej: Av San Martín y Saavedra']) !!}
                 </div>
+
+                <div class="form-group">
+                    {!! Form::label('barrio', 'Barrio') !!}
+                    {!! Form::text('barrio', null, ['class' => 'form-control', 'placeholder' => 'ej: Barrio Los Álamos']) !!}
+                </div>
+
                 <div class="form-group">
                     {!! Form::label('provincia', 'Provincia') !!}
                     {!! Form::select('provincia', $provincias, null, ['class' => 'form-control select2', 'id' => 'provincia', 'placeholder' => '']) !!}

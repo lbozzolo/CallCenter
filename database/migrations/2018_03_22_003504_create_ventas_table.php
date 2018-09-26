@@ -22,6 +22,7 @@ class CreateVentasTable extends Migration
             $table->integer('metodo_pago_id')->unsigned()->nullable();
             $table->integer('forma_pago_id')->unsigned()->nullable();
             $table->text('observaciones')->nullable();
+            $table->string('numero_guia');
             $table->integer('etapa_id')->unsigned()->nullable();
             $table->integer('promocion_id')->unsigned()->nullable();
             $table->softDeletes();
