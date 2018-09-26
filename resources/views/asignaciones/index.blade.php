@@ -2,7 +2,8 @@
 
 @section('titulo')
 
-    <h2>Asignaciones</h2>
+    <h2>Asignaciones de Tareas</h2>
+    <br>
 
 @endsection
 

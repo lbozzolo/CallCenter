@@ -1,42 +1,74 @@
 
+<div class="table-responsive">
 
-<pre>
+    <table class="table table-vertical dataTable">
 
-    ACÁ VA LA TABLA DE CLIENTES (DATOS) --> aparece en el index / desaparece luego de presionado el botón 'aceptar'
+        <thead>
+        <tr>
+            
+            <th class="text-center">Nombre</th>
+            <th class="text-center">DNI</th>
+            <th class="text-center">Asignado a</th>
+            <th class="text-center">Tipo</th>
+            <th class="text-center">Ultima Llamada</th>
+            <th class="text-center">Asignar</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    - Nombre del cliente
-    - Columna que indique si está asignado o no
-    - Operador al que está asignado (si lo estuviese)
-    - Columna de tipo (con valores 'pendiente' o 'activo')
-    - Columna de 'Última llamada'
-    - Checkbox de selección de cliente
+        
 
-    - Botón (arriba o abajo de la tabla) para confirmar los datos seleccionados para asignar.
+            <tr>
+                <td class="text-center">Fernando Alfonso</td>
+                <td class="text-center">24.750.553</td>
+                <td class="text-center">Operador Juan Pablo</td>
+                <td class="text-center">Activo</td>
+                <td class="text-center">01/01/2018</td>
+                <td style="text-align:center;">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                </td>
+            </tr>
 
-    - El tbody de la tabla debe tener dentro de sí un formulario que tendrá los clientes.
+            <tr>
+                <td class="text-center">Fernando Alfonso</td>
+                <td class="text-center">24.750.553</td>
+                <td class="text-center">Operador Juan Pablo</td>
+                <td class="text-center">Pendiente</td>
+                <td class="text-center">01/01/2018</td>
+                <td style="text-align:center;">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                </td>
+            </tr>
 
-    <code>
+            <tr>
+                <td class="text-center">Fernando Alfonso</td>
+                <td class="text-center">24.750.553</td>
+                <td class="text-center">Operador Juan Pablo</td>
+                <td class="text-center">Pendiente</td>
+                <td class="text-center">01/01/2018</td>
+                <td style="text-align:center;">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                </td>
+            </tr>
 
-        < table>
-            < thead>
-                - Código del header de la tabla
-            < /thead>
-            < tbody>
-                < form>
-                    < tr>
-                        < td>< /td>
-                        < td>< /td>
-                        < td>< /td>
-                        < td> Aquí iría el checkbox < /td>
-                    < /tr>
-                    < tr>
-                        Aquí iría el botón de aceptar (por fuera del foreach)
-                    < /tr>
-                < /form>
-            < /tbody>
-        < /table>
+            <tr>
+                <td class="text-center">Fernando Alfonso</td>
+                <td class="text-center">24.750.553</td>
+                <td class="text-center">Operador Juan Pablo</td>
+                <td class="text-center">Activo</td>
+                <td class="text-center">01/01/2018</td>
+                <td style="text-align:center;">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                </td>
+            </tr>
 
-    </code>
+         
 
-</pre>
+        </tbody>
+    </table>
+
+        <button type="submit" class="btn btn-info">Asignar Tareas</button>
+
+
+</div>
 
