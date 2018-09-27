@@ -6,6 +6,7 @@ Route::get('asignaciones', [
     //'middleware' => 'permission:listado.asignaciones'
 ]);
 
+
 Route::post('asignaciones/seleccion-operador', [
     'as' => 'asignaciones.seleccion.operador',
     'uses' => 'AsignacionesController@seleccionOperador',

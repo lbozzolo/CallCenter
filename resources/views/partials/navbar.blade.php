@@ -80,7 +80,7 @@
                 @endpermission
 
 
-                <li class="label">Seteos</li>
+                <li class="label">Informacion</li>
 
                 <li><a href="{{ route('noticias.noticias') }}"><i class="ti-notepad"></i> Noticias </a></li>
 
