@@ -20,9 +20,14 @@ class Entity extends Model
         return date_format($this->updated_at,"d/m/Y");
     }
 
+    public function getHoraCreatedAttribute()
+    {
+        return date_format($this->updated_at,"H:i");
+    }
+
     static function getModels()
     {
-        return ['marca','banco', 'categoria', 'cliente', 'datoTarjeta', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'metodoPago', 'producto', 'promocion', 'reclamo', 'user', 'venta',];
+        return ['marca','banco', 'categoria', 'cliente', 'datoTarjeta', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'noticia', 'metodoPago', 'producto', 'promocion', 'reclamo', 'user', 'venta',];
     }
 
 }

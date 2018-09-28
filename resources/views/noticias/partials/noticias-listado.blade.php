@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th>Titulo</th>
-                    <th>Descripción</th>
+                    <th>Fecha</th>
                     <th class="text-right">Opciones</th>
                  </tr>
             </thead>
@@ -12,8 +12,9 @@
             @forelse($noticias as $noticia)
                 <tr>
                     <td>{!! $noticia->titulo !!}</td>
-                    <td>{!! str_limit($noticia->descripcion, 35) !!}</td>
+                    <td>{!! $noticia->fecha_creado !!}</td>
                     <td>
+                        @permission('')
                         <button type="button" title="Eliminar" class=" btn btn-danger btn-xs" data-toggle="modal" data-target="#noticia{!! $noticia->id !!}"><i class="fa fa-trash-o"></i></button>
                         <a href="{!! route('noticias.edit', $noticia->id) !!}" class=" btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                         <a href="{!! route('noticias.show', $noticia->id) !!}" class=" btn btn-success btn-xs"><i class="fa fa-eye"></i></a>

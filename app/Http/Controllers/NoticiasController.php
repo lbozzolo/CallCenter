@@ -15,7 +15,7 @@ class NoticiasController extends Controller
 
     public function noticias()
     {
-        $noticias = Noticia::all();
+        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(10);
         return view('noticias.noticias', compact('noticias'));
     }
 
