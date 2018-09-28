@@ -10,24 +10,33 @@
 
 
     <div class="row">
-        <div class="col-md-6">
+
+        @permission('crear.noticia')
+        <div class="col-md-12">
             <div class="card alert">
                 <div class="card-header pr">
                     <h3>Agregar Nueva Noticia</h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     @include('noticias.partials.formulario-crear-noticia')
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        @endpermission
+
+        @permission('listado.noticia')
+        <div class="col-lg-12">
             <div class="card alert">
                 <div class="card-header pr">
                     <h3>Noticias Disponibles</h3>
                 </div>
+                <div class="card-body">
                     @include('noticias.partials.noticias-listado')
+                </div>
             </div>
         </div>
+        @endpermission
+
     </div>
 
 @endsection

@@ -15,7 +15,7 @@ Route::post('noticias/crear', [
     'uses' => 'NoticiasController@store',
 ]);
 
-Route::get('noticias/{id}', [
+Route::get('noticias/{id}/ver', [
     'as' => 'noticias.show',
     'uses' => 'NoticiasController@show',
 ]);
@@ -36,7 +36,7 @@ Route::delete('noticias/{id}/eliminar', [
 ]);
 
 
-Route::delete('noticias/todas', [
+Route::get('noticias/todas', [
     'as' => 'noticias.noticias',
     'uses' => 'NoticiasController@noticias',
 ]);

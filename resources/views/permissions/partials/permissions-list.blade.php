@@ -135,7 +135,7 @@
 
         <li class="list-group-item">
             <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseInstitucion" aria-expanded="false" aria-controls="collapseInstitucion">
-                Permisos de Instituciónes
+                Permisos de Instituciones
             </span>
             <ul class="list-unstyled collapse"  id="collapseInstitucion" aria-labelledby="headingOne" data-parent="#accordion">
                 @foreach($permisos as $permiso)
@@ -176,6 +176,24 @@
             <ul class="list-unstyled collapse"  id="collapseMetodoPago" aria-labelledby="headingOne" data-parent="#accordion">
                 @foreach($permisos as $permiso)
                     @if($permiso->model == 'metodoPago')
+                        <li class="list-group-item">
+                            @include('permissions.partials.options-permisos')
+                            <strong>{!! $permiso->name !!} ({!! $permiso->slug !!}) </strong><br>
+                            <small>{!! $permiso->description !!}</small>
+                            @include('permissions.partials.modal-eliminar-permiso')
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </li>
+
+        <li class="list-group-item">
+            <span style="cursor: pointer" data-toggle="collapse" data-target="#collapseMetodoPago" aria-expanded="false" aria-controls="collapseMetodoPago">
+                Permisos de Noticias
+            </span>
+            <ul class="list-unstyled collapse"  id="collapseMetodoPago" aria-labelledby="headingOne" data-parent="#accordion">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'noticia')
                         <li class="list-group-item">
                             @include('permissions.partials.options-permisos')
                             <strong>{!! $permiso->name !!} ({!! $permiso->slug !!}) </strong><br>

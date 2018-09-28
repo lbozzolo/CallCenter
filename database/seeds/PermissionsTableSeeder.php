@@ -14,7 +14,7 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         $models = Entity::getModels();
-        $names = ['marca', 'banco', 'categoría', 'cliente', 'datos de tarjeta', 'etapa', 'forma de pago', 'imagen', 'institución', 'llamada', 'método de pago', 'producto', 'promoción', 'reclamo', 'usuario', 'venta',];
+        $names = ['marca', 'banco', 'categoría', 'cliente', 'datos de tarjeta', 'etapa', 'forma de pago', 'imagen', 'institución', 'llamada', 'método de pago', 'noticia', 'producto', 'promoción', 'reclamo', 'usuario', 'venta',];
         $acciones = array_combine($models, $names);
 
         foreach($acciones as $model => $name){

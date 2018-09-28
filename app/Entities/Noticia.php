@@ -14,7 +14,7 @@ class Noticia extends Entity
 
     public function autor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

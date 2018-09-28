@@ -1,49 +1,57 @@
+@extends('noticias.base')
 
-<ul class="list-group">
-    @if(isset($marca))
-        <li class="list-group-item text-center">
-            <a href="{{ route('marcas.index') }}"  class="btn btn-sm btn-default">Agregar nueva marca</a>
-        </li>
-    @endif
+@section('css')
 
-    @forelse($marcas as $marca)
-        <li class="list-group-item">
-            <button type="button" title="Eliminar" class="pull-right nonStyledButton" data-toggle="modal" data-target="#eliminarMarca{!! $marca->id !!}" style="border: none">
-                <i class="glyphicon glyphicon-trash small text-danger"></i>
-            </button>
-            <a href="{{ route('marcas.edit', $marca->id) }}" class="pull-right nonStyledButton"><i class="glyphicon glyphicon-edit small text-info"></i></a>
+    <style type="text/css">
 
-            {!! $marca->nombre !!}<br>
-            <small class="text-muted">{!! $marca->descripcion !!}</small>
-        </li>
+        .noticia, .noticia p{
+            background-color: whitesmoke;
+            color: black !important;
+            margin: 10px;
+            border-radius: 3px;
+        }
 
-        <div class="modal fade col-lg-3 col-lg-offset-9" id="eliminarMarca{!! $marca->id !!}">
-            <div class="card">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="fa fa-warning "></i> Eliminar marca</h4>
-                </div>
-                <div class="modal-body">
-                    <p class="text-danger">
-                        Usted está a punto de eliminar la marca '{!! $marca->nombre !!}'<br>
-                    </p>
-                    <p>¿Desea continuar?</p>
-                </div>
-                <div class="modal-footer">
-                    {!! Form::open(['route'  => ['marcas.destroy', $marca->id], 'method' => 'delete']) !!}
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    {!! Form::close() !!}
-                </div>
-            </div>
+    </style>
+
+@endsection
+
+@section('titulo')
+
+    <h2>Noticias</h2>
+
+@endsection
+
+@section('contenido')
+
+    <div class="row">
+        <div class="col-lg-7">
+
+            @permission('listado.noticia')
+            <ul class="list-unstyled">
+
+                @forelse($noticias as $noticia)
+
+                    <li>
+                        {{--<div class="card" style="padding: 10px 20px">--}}
+                        <div class="noticia" style="padding: 10px 20px">
+                            <span>{!! $noticia->fecha_creado !!} - {!! $noticia->hora_created !!} hs</span>
+                            <span class="pull-right">Autor: {!! $noticia->autor->full_name !!}</span>
+                            <div style="padding: 10px 20px" class="noticia">{!! $noticia->descripcion !!}</div>
+                        </div>
+                    </li>
+
+                @empty
+
+                    <p>Todavía no hay ninguna noticia cargada en el sistema.</p>
+
+                @endforelse
+
+            </ul>
+
+            {!! $noticias->render() !!}
+            @endpermission
+
         </div>
+    </div>
 
-    @empty
-
-        <p>Todavía no hay ninguna marca</p>
-
-    @endforelse
-
-</ul>
-
+@endsection
