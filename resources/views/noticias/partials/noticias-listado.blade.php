@@ -14,13 +14,21 @@
                     <td>{!! $noticia->titulo !!}</td>
                     <td>{!! $noticia->fecha_creado !!}</td>
                     <td>
-                        @permission('')
+                        @permission('eliminar.noticia')
                         <button type="button" title="Eliminar" class=" btn btn-danger btn-xs" data-toggle="modal" data-target="#noticia{!! $noticia->id !!}"><i class="fa fa-trash-o"></i></button>
+                        @endpermission
+
+                        @permission('editar.noticia')
                         <a href="{!! route('noticias.edit', $noticia->id) !!}" class=" btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                        @endpermission
+
+                        @permission('ver.noticia')
                         <a href="{!! route('noticias.show', $noticia->id) !!}" class=" btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                        @endpermission
                     </td>
                 </tr>
 
+                @permission('eliminar.noticia')
                 <div class="modal fade col-lg-4 col-lg-offset-8" id="noticia{!! $noticia->id !!}">
                     <div class="card">
                         <div class="card-header">
@@ -40,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+                @endpermission
 
             @empty
                 <tr>
