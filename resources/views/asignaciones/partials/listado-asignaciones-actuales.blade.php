@@ -1,82 +1,68 @@
+<div class="card">
+    <div class="card-header">
+        <h3>Listado de asignaciones actuales</h3>
+        <hr>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" id="div-table-asignaciones-actuales">
 
-<div class="table-responsive">
+            <table class="table table-vertical dataTable" id="table-asignaciones-actuales">
 
-    <table class="table table-vertical dataTable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Supervisor</th>
+                        <th>Operador</th>
+                        <th>Dato</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        <thead>
-        <tr>
-            
-            <th class="text-center">Nombre</th>
-            <th class="text-center">DNI</th>
-            <th class="text-center">Asignado a</th>
-            <th class="text-center">Tipo</th>
-            <th class="text-center">Ultima Llamada</th>
-            <th class="text-center">Accion</th>
-        </tr>
-        </thead>
-        <tbody>
+                @foreach($asignaciones as $asignacion)
 
-        
+                        <tr>
+                            <td>{!! $asignacion->id !!}</td>
+                            <td>{!! $asignacion->supervisor->full_name !!}</td>
+                            <td>{!! $asignacion->operador->full_name !!}</td>
+                            <td>{!! $asignacion->cliente->full_name !!}</td>
+                            <td>
 
-            <tr>
-                <td class="text-center">Fernando Alfonso</td>
-                <td class="text-center">24.750.553</td>
-                <td class="text-center">Operador Juan Pablo</td>
-                <td class="text-center">Activo</td>
-                <td class="text-center">01/01/2018</td>
-                <td style="text-align:center;">
-                    <button type="button" title="Eliminar" class="pull-center nonStyledButton" data-toggle="modal" style="border: none">
-		                <i class="glyphicon glyphicon-trash small text-danger"></i>
-		            </button>
-                </td>
-            </tr>
+                                <button type="button" title="BORRAR ASINGACION" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#borrarAsignacion{!! $asignacion->id !!}" >borrar</button>
+                                <div class="modal fade col-lg-3 col-md-4 col-sm-6 col-lg-offset-9 col-md-offset-8 col-sm-offset-6" id="borrarAsignacion{!! $asignacion->id !!}">
 
-            <tr>
-                <td class="text-center">Lucas Bozzolo</td>
-                <td class="text-center">24.750.553</td>
-                <td class="text-center">Operador Juan</td>
-                <td class="text-center">Pendiente</td>
-                <td class="text-center">01/01/2018</td>
-                <td style="text-align:center;">
-                    <button type="button" title="Eliminar" class="pull-center nonStyledButton" data-toggle="modal" style="border: none">
-		                <i class="glyphicon glyphicon-trash small text-danger"></i>
-		            </button>
-                </td>
-            </tr>
+                                    <div class="card alert text-left">
+                                        <div class="card-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="card-title">Borrar asignación</h4>
+                                        </div>
+                                        <div class="card-body">
 
-            <tr>
-                <td class="text-center">Oscar Martinez</td>
-                <td class="text-center">24.750.553</td>
-                <td class="text-center">Operador Pablo</td>
-                <td class="text-center">Pendiente</td>
-                <td class="text-center">01/01/2018</td>
-                <td style="text-align:center;">
-                    <button type="button" title="Eliminar" class="pull-center nonStyledButton" data-toggle="modal" style="border: none">
-		                <i class="glyphicon glyphicon-trash small text-danger"></i>
-		            </button>
-                </td>
-            </tr>
+                                            <p>¿Desea borrar la asignación seleccionada?</p>
 
-            <tr>
-                <td class="text-center">Fernando Alfonso</td>
-                <td class="text-center">24.750.553</td>
-                <td class="text-center">Operador Juan Pablo</td>
-                <td class="text-center">Activo</td>
-                <td class="text-center">01/01/2018</td>
-                <td style="text-align:center;">
-                    <button type="button" title="Eliminar" class="pull-center nonStyledButton" data-toggle="modal" style="border: none">
-		                <i class="glyphicon glyphicon-trash small text-danger"></i>
-		            </button>
-                </td>
-            </tr>
+                                        </div>
+                                        <div class="card-footer" style="margin-top: 20px">
 
-         
+                                            {!! Form::open(['url' => route('asignaciones.destroy', $asignacion->id), 'method' => 'delete']) !!}
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                </div>
+                                            {!! Form::close() !!}
+                                        </div>
+                                    </div>
 
-        </tbody>
-    </table>
+                                </div>
 
+                            </td>
+                        </tr>
 
+                @endforeach
 
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 </div>
-
-

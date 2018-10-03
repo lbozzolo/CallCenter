@@ -20,6 +20,7 @@ use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use SmartLine\Entities\Imagen;
 use SmartLine\Entities\Llamada;
+use Carbon\Carbon;
 
 
 class User extends Entity implements AuthenticatableContract,
@@ -59,6 +60,41 @@ class User extends Entity implements AuthenticatableContract,
         }
     }
 
+    public function getAsignacionesActualesAttribute()
+    {
+        $today = Carbon::now()->toDateString();
+
+        $asignacion = Asignacion::where('operador_id', $this->id)
+            ->whereDate('created_at', 'like', $today)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $asignacion;
+    }
+
+    public function getTotalAsignacionesActualesAttribute()
+    {
+        $today = Carbon::now()->toDateString();
+
+        $asignaciones = Asignacion::where('operador_id', $this->id)
+            ->whereDate('created_at', 'like', $today)
+            ->count();
+
+        return $asignaciones;
+    }
+
+    public function asignacionesAnteriores()
+    {
+        $today = Carbon::now()->toDateString();
+
+        $asignaciones = Asignacion::where('operador_id', $this->id)
+            ->whereDate('created_at', '!=', $today)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $asignaciones;
+    }
+
     public function getRolesIdsAttribute()
     {
         return $this->roles()->get()->lists('id')->toArray();
@@ -73,6 +109,7 @@ class User extends Entity implements AuthenticatableContract,
     {
         return ($this->estado->slug == 'nuevo');
     }
+
 
     //RelationShips
 

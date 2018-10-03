@@ -9,7 +9,6 @@
 
 @section('contenido')
 
-
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_1" data-toggle="tab">Asignar</a></li>
@@ -19,13 +18,13 @@
         <div class="tab-content">
             <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
 
-                @if(!isset($datos))
+                @if(isset($datos))
 
-                    @include('asignaciones.partials.listado-clientes')
+                    @include('asignaciones.partials.listado-operadores')
 
                 @else
 
-                    @include('asignaciones.partials.listado-operadores')
+                    @include('asignaciones.partials.listado-clientes')
 
                 @endif
 
@@ -42,6 +41,120 @@
             </div>
         </div>
     </div>
+
+
+@endsection
+
+
+@section('js')
+
+    <script>
+
+
+        $(document).ready(function() {
+
+            $('#table-clientes').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+            $("#div-table-clientes").show();
+            $(".overlay").hide();
+
+
+            //=====================================================================
+
+
+            $('#table-enable-users').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+            $("#div-table-enable-users").show();
+            $(".overlay").hide();
+
+
+            //=====================================================================
+
+
+            $("#div-table-enable-datos").show();
+            $("#listado-datos").show();
+            $(".overlay").hide();
+
+
+            //=====================================================================
+
+
+            $('#table-asignaciones-actuales').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+
+            //=====================================================================
+
+
+            $('#table-asignaciones-historicas').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            }).order([0, 'desc']).draw();
+
+
+        });
+
+
+
+    </script>
 
 
 @endsection

@@ -34,7 +34,7 @@ class DashboardController extends Controller
 
 
 
-        dd( Auth::user()->isEnabled() );
+        dd( Auth::user()->is('operador') );
 
     }
 

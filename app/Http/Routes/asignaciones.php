@@ -1,6 +1,6 @@
 <?php
 
-Route::get('asignaciones', [
+Route::get('asignaciones/{datosModificar?}', [
     'as' => 'asignaciones.index',
     'uses' => 'AsignacionesController@index',
     //'middleware' => 'permission:listado.asignaciones'
@@ -22,6 +22,18 @@ Route::post('asignaciones/store', [
 Route::delete('asignaciones/{id}/eliminar', [
     'as' => 'asignaciones.destroy',
     'uses' => 'AsignacionesController@destroy',
+    //'middleware' => 'permission:eliminar.asignaciones'
+]);
+
+Route::get('mis-tareas', [
+    'as' => 'asignaciones.mis.tareas',
+    'uses' => 'AsignacionesController@misTareas',
+    //'middleware' => 'permission:eliminar.asignaciones'
+]);
+
+Route::get('mis-tareas-anteriores', [
+    'as' => 'asignaciones.mis.tareas.anteriores',
+    'uses' => 'AsignacionesController@misTareasAnteriores',
     //'middleware' => 'permission:eliminar.asignaciones'
 ]);
 

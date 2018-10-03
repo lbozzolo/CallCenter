@@ -5,6 +5,7 @@ namespace SmartLine\Entities;
 use SmartLine\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use SmartLine\Entities\Cliente;
+use Carbon\Carbon;
 
 class Asignacion extends Entity
 {
