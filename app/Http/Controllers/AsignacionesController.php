@@ -37,10 +37,10 @@ class AsignacionesController extends Controller
         $data['asignaciones'] = $this->asignacionRepo->asignacionesActuales();
         $data['historicas'] = Asignacion::withTrashed()->get();
         $data['clientes'] = Cliente::all();
-        $data['operadores'] = User::all();
-//        $data['operadores'] = User::all()->filter(function ($user){
-//            return $user->is('operador.in') || $user->is('operador.out');
-//        })->all();
+        //$data['operadores'] = User::all();
+        $data['operadores'] = User::all()->filter(function ($user){
+            return $user->is('operador.in') || $user->is('operador.out');
+        })->all();
 
         return view('asignaciones.index')->with($data);
     }

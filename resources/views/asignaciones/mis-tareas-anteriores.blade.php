@@ -8,6 +8,7 @@
 
 @section('contenido')
 
+    @permission('ver.mis.asignaciones')
     <div class="card">
         <div class="card-header">
             <ul class="list-unstyled list-inline">
@@ -56,9 +57,8 @@
 
             </div>
 
-
-
         </div>
     </div>
+    @endpermission
 
 @endsection

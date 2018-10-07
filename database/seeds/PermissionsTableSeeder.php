@@ -14,7 +14,7 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         $models = Entity::getModels();
-        $names = ['marca', 'banco', 'categoría', 'cliente', 'datos de tarjeta', 'etapa', 'forma de pago', 'imagen', 'institución', 'llamada', 'método de pago', 'noticia', 'producto', 'promoción', 'reclamo', 'usuario', 'venta',];
+        $names = ['marca', 'banco', 'asignacion', 'categoría', 'cliente', 'datos de tarjeta', 'etapa', 'forma de pago', 'imagen', 'institución', 'llamada', 'método de pago', 'noticia', 'producto', 'promoción', 'reclamo', 'usuario', 'venta',];
         $acciones = array_combine($models, $names);
 
         foreach($acciones as $model => $name){
@@ -171,6 +171,19 @@ class PermissionsTableSeeder extends Seeder
                 'slug' => 'cambiar.estado.reclamo',
                 'description' => 'Cambiar estado de un reclamo',
                 'model' => 'reclamo',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
+        ]);
+
+        //Permisos de Asignaciones
+
+        DB::table('permissions')->insert([
+            [
+                'name' => 'Ver mis asignaciones',
+                'slug' => 'ver.mis.asignaciones',
+                'description' => 'Ver mis asignaciones',
+                'model' => 'asignacion',
                 'created_at' => date_create(),
                 'updated_at' => date_create()
             ],

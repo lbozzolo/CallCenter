@@ -28,6 +28,7 @@
                             <td>{!! $asignacion->cliente->full_name !!}</td>
                             <td>
 
+                                @permission('eliminar.asignacion')
                                 <button type="button" title="BORRAR ASINGACION" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#borrarAsignacion{!! $asignacion->id !!}" >borrar</button>
                                 <div class="modal fade col-lg-3 col-md-4 col-sm-6 col-lg-offset-9 col-md-offset-8 col-sm-offset-6" id="borrarAsignacion{!! $asignacion->id !!}">
 
@@ -54,6 +55,7 @@
                                     </div>
 
                                 </div>
+                                @endpermission
 
                             </td>
                         </tr>

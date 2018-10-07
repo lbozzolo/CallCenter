@@ -11,11 +11,16 @@
 
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
+            @permission('crear.asignacion')
             <li class="active"><a href="#tab_1" data-toggle="tab">Asignar</a></li>
+            @endpermission
+            @permission('listado.asignacion')
             <li><a href="#tab_2" data-toggle="tab">Asignaciones actuales</a></li>
             <li><a href="#tab_3" data-toggle="tab">Asignaciones históricas</a></li>
+            @endpermission
         </ul>
         <div class="tab-content">
+            @permission('crear.asignacion')
             <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
 
                 @if(isset($datos))
@@ -29,6 +34,8 @@
                 @endif
 
             </div>
+            @endpermission
+            @permission('listado.asignacion')
             <div class="tab-pane card" id="tab_2" style="margin-top: 0px">
 
                 @include('asignaciones.partials.listado-asignaciones-actuales')
@@ -39,6 +46,7 @@
                 @include('asignaciones.partials.listado-historico')
 
             </div>
+            @endpermission
         </div>
     </div>
 

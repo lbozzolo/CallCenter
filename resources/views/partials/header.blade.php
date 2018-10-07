@@ -26,12 +26,14 @@
                         <div class="dropdown-content-body" style="background-color: #333B54">
                             <ul>
                                 <li><a href="{{ route('users.profile', Auth::user()->id) }}"><i class="ti-user"></i> <span>Mi Perfil</span></a></li>
+                                @permission('ver.mis.asignaciones')
                                 <li>
                                     <a href="{{ route('asignaciones.mis.tareas') }}">
                                         <i class="ti-signal"></i> <span>Mis tareas</span>
-                                        <small class="label label-danger">{!! Auth::user()->total_asignaciones_actuales !!}</small>
+                                        <small class="label label-default">{!! Auth::user()->total_asignaciones_actuales !!}</small>
                                     </a>
                                 </li>
+                                @endpermission
                                 <li><a href="{{ route('logout') }}"><i class="ti-power-off"></i> <span>Logout</span></a></li>
                             </ul>
                         </div>
