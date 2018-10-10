@@ -32,6 +32,75 @@
         </div>
 
         <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Métodos de pago</h3>
+                    </div>
+                    <div class="card-body">
+                        @if($venta->metodoPago)
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr style="background-color: gray">
+                                            <th>Método</th>
+                                            <th>Tarjeta</th>
+                                            <th>Banco</th>
+                                            <th>Cuotas</th>
+                                            <th>Nº Tarjeta</th>
+                                            <th>Código</th>
+                                            <th>Titular</th>
+                                            <th>Fecha expiración</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse($venta->metodoPago as $metodoPago)
+
+                                        @if($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito')
+
+                                            <tr>
+                                                <td>{!! ($metodoPago)? $metodoPago->nombre : '' !!}</td>
+                                                <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->marca->nombre : '' !!}</td>
+                                                <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->banco->nombre : '' !!}</td>
+                                                <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->formaPago->cuota_cantidad : '' !!}</td>
+                                                <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->card_number : '' !!}</td>
+                                                <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->security_number : '' !!}</td>
+                                                <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->titular : '' !!}</td>
+                                                <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->expiration_date : '' !!}</td>
+                                            </tr>
+
+                                        @else
+
+                                            <tr>
+                                                <td>{!! ($metodoPago)? $metodoPago->nombre : '' !!}</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+
+                                            </tr>
+
+                                        @endif
+                                    @empty
+                                        <tr>
+                                            <td colspan="8">
+                                                <span class="text-left">Todavía no se ha cargado ningún método de pago</span>
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
 
             <div class="col-lg-6">
 
@@ -62,28 +131,6 @@
                         @endif
                         @endpermission
                     </div>
-
-                    @if($venta->metodoPago)
-                        @if($venta->metodoPago->slug == 'credito' || $venta->metodoPago->slug == 'debito')
-                        <div class="card card-default">
-                            <div class="card-header">
-                                <h3 class="card-title">Datos de la tarjeta</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-unstyled listado">
-                                    <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>
-                                    <li class="list-group-item">Tarjeta: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->marca->nombre : '' !!}</li>
-                                    <li class="list-group-item">Banco: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->banco->nombre : '' !!}</li>
-                                    <li class="list-group-item">Cuotas: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->formaPago->cuota_cantidad : '' !!}</li>
-                                    <li class="list-group-item">Número de tarjeta: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->card_number : '' !!}</li>
-                                    <li class="list-group-item">Código de seguridad: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->security_number : '' !!}</li>
-                                    <li class="list-group-item">Titular: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->titular : '' !!}</li>
-                                    <li class="list-group-item">Fecha de expiración: {!! ($venta->datosTarjeta)? $venta->datosTarjeta->expiration_date : '' !!}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        @endif
-                    @endif
 
                 </div>
 

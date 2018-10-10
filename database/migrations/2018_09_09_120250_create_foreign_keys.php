@@ -39,11 +39,6 @@ class CreateForeignKeys extends Migration
                 ->on('estados_ventas')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
-            $table->foreign('metodo_pago_id')
-                ->references('id')
-                ->on('metodo_pago')
-                ->onUpdate('NO ACTION')
-                ->onDelete('NO ACTION');
             $table->foreign('forma_pago_id')
                 ->references('id')
                 ->on('forma_pago')
@@ -66,6 +61,18 @@ class CreateForeignKeys extends Migration
                 ->on('bancos')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
+        });
+        Schema::table('metodo_pago_venta', function(Blueprint $table){
+            $table->foreign('venta_id')
+                ->references('id')
+                ->on('ventas')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('metodopago_id')
+                ->references('id')
+                ->on('metodo_pago')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
         });
         Schema::table('forma_pago', function(Blueprint $table){
             $table->foreign('marca_tarjeta_id')

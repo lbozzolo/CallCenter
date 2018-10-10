@@ -6,6 +6,7 @@ use SmartLine\Entities\Asignacion;
 use SmartLine\Entities\Banco;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Entity;
+use SmartLine\Entities\MetodoPago;
 use SmartLine\Entities\Provincia;
 use SmartLine\User;
 use SmartLine\Entities\Venta;
@@ -32,9 +33,9 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
+        $metodoPago = MetodoPago::find(1);
 
-
-        dd( Auth::user()->is('operador') );
+        dd( $metodoPago->ventas );
 
     }
 

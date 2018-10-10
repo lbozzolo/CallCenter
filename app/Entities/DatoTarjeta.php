@@ -47,9 +47,9 @@ class DatoTarjeta extends Entity
         return $this->belongsTo(MarcaTarjeta::class);
     }
 
-    public function venta()
+    public function metodoPagoVenta()
     {
-        return $this->belongsTo(Venta::class);
+        return $this->belongsTo(MetodoPagoVenta::class);
     }
 
     public function formaPago()

@@ -31,7 +31,6 @@ class FakerVentasSeeder extends Seeder
         $clientes = Cliente::all();
         $productos = Producto::all();
         $estadosVentas = EstadoVenta::all();
-        $metodosPago = MetodoPago::all();
         $formasPago = FormaPago::all();
         $etapas = Etapa::all();
         $promociones = Promocion::all();
@@ -42,7 +41,6 @@ class FakerVentasSeeder extends Seeder
                 'user_id' => ($users->count() > 0)? $users->random()->id : null,
                 'cliente_id' => ($clientes->count() > 0)? $clientes->random()->id : null,
                 'estado_id' => ($estadosVentas->count() > 0)? $estadosVentas->random()->id : null,
-                'metodo_pago_id' => ($metodosPago->count() > 0)? $metodosPago->random()->id : null,
                 'forma_pago_id' => ($formasPago->count() > 0)? $formasPago->random()->id : null,
                 'etapa_id' => ($etapas->count() > 0)? $etapas->random()->id : null,
                 'promocion_id' => ($promociones->count() > 0)? $promociones->random()->id : null,

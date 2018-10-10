@@ -19,7 +19,6 @@ class CreateVentasTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('cliente_id')->unsigned();
             $table->integer('estado_id')->unsigned();
-            $table->integer('metodo_pago_id')->unsigned()->nullable();
             $table->integer('forma_pago_id')->unsigned()->nullable();
             $table->text('observaciones')->nullable();
             $table->string('numero_guia');
@@ -33,7 +32,6 @@ class CreateVentasTable extends Migration
             $table->index('user_id');
             $table->index('cliente_id');
             $table->index('estado_id');
-            $table->index('metodo_pago_id');
             $table->index('forma_pago_id');
             $table->index('etapa_id');
             $table->index('promocion_id');

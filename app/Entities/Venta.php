@@ -137,17 +137,12 @@ class Venta extends Entity
 
     public function metodoPago()
     {
-        return $this->belongsTo(MetodoPago::class);
+        return $this->belongsToMany(MetodoPago::class, 'metodo_pago_venta', 'venta_id', 'metodopago_id');
     }
 
     public function formaPago()
     {
         return $this->belongsTo(FormaPago::class);
-    }
-
-    public function datosTarjeta()
-    {
-        return $this->hasOne(DatoTarjeta::class);
     }
 
     public function promocion()

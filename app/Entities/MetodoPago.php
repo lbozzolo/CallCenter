@@ -9,7 +9,7 @@ class MetodoPago extends Entity
 
     public function ventas()
     {
-        return $this->hasMany(Venta::class);
+        return $this->belongsToMany(Venta::class, 'metodo_pago_venta', 'metodopago_id', 'venta_id');
     }
 
 
