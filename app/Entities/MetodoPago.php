@@ -7,9 +7,16 @@ class MetodoPago extends Entity
 {
     protected $table = 'metodo_pago';
 
-    public function ventas()
+    public function isCardMethod()
     {
-        return $this->belongsToMany(Venta::class, 'metodo_pago_venta', 'metodopago_id', 'venta_id');
+        return ($this->slug == 'credito' || $this->slug == 'debito');
+    }
+
+    // Relationships
+
+    public function metodoPagoVenta()
+    {
+        return $this->hasMany(MetodoPagoVenta::class);
     }
 
 

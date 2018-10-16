@@ -97,6 +97,12 @@ Route::put('ventas/{id}/cambiar-estado', [
     'middleware' => 'permission:editar.venta'
 ]);
 
+Route::put('ventas/{id}/ajustar', [
+    'as' => 'ventas.ajustar',
+    'uses' => 'VentasController@ajustar',
+    //'middleware' => 'permission:editar.venta'
+]);
+
 Route::post('ventas/{id}/numero-guia', [
     'as' => 'ventas.numero.guia',
     'uses' => 'VentasController@numeroGuia',

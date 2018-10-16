@@ -103,6 +103,11 @@ class Cliente extends Entity
         return $this->hasOne(Domicilio::class);
     }
 
+    public function datosTarjeta()
+    {
+        return $this->hasMany(DatoTarjeta::class);
+    }
+
     public function asignaciones()
     {
         return $this->hasMany(Asignacion::class);

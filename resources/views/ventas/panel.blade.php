@@ -63,7 +63,8 @@
                 @permission('editar.venta')
                 <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
 
-                    @include('ventas.partials.formulario-datos-tarjeta')
+                    {{--@include('ventas.partials.formulario-datos-tarjeta')--}}
+                    @include('ventas.partials.panel-metodos-de-pago')
 
                 </div>
                 @endpermission

@@ -51,6 +51,7 @@
                                             <th>Código</th>
                                             <th>Titular</th>
                                             <th>Fecha expiración</th>
+                                            <th>Importe</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,6 +68,7 @@
                                                 <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->security_number : '' !!}</td>
                                                 <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->titular : '' !!}</td>
                                                 <td>{!! ($venta->datosTarjeta)? $venta->datosTarjeta->expiration_date : '' !!}</td>
+                                                <td>{!! $metodoPago->pivot->importe !!}</td>
                                             </tr>
 
                                         @else
@@ -80,18 +82,24 @@
                                                 <td class="text-center">-</td>
                                                 <td class="text-center">-</td>
                                                 <td class="text-center">-</td>
-
+                                                <td>${!! $metodoPago->pivot->importe !!}</td>
                                             </tr>
 
                                         @endif
                                     @empty
                                         <tr>
-                                            <td colspan="8">
+                                            <td colspan="9">
                                                 <span class="text-left">Todavía no se ha cargado ningún método de pago</span>
                                             </td>
                                         </tr>
                                     @endforelse
                                     </tbody>
+                                    <tfooter>
+                                        <tr>
+                                            <td colspan="8">Total</td>
+                                            <td>$</td>
+                                        </tr>
+                                    </tfooter>
                                 </table>
                             </div>
                         @endif

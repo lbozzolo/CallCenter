@@ -420,6 +420,11 @@ class VentasController extends Controller
         return redirect()->back()->with('El estado de la venta ha sido actualizado');
     }
 
+
+    public function ajustar($id)
+    {
+        $venta = Venta::find($id);
+    }
     /**
      * Remove the specified resource from storage.
      *

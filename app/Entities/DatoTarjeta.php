@@ -16,10 +16,10 @@ class DatoTarjeta extends Entity
         // Número válido de ejemplo: 5370517873215895
         $user = Auth::user();
         $tarjeta = $this->numero_tarjeta;
-        $encrypted_card = substr($tarjeta, 0, 4) . str_repeat('X', strlen($tarjeta) - 8) . substr($tarjeta, -4);
+        $encrypted_card_number = substr($tarjeta, 0, 4) . str_repeat('X', strlen($tarjeta) - 8) . substr($tarjeta, -4);
 
         if(!$user->canDo('ver.datos.de.tarjeta'))
-            return $encrypted_card;
+            return $encrypted_card_number;
 
         return $tarjeta;
     }
@@ -49,7 +49,12 @@ class DatoTarjeta extends Entity
 
     public function metodoPagoVenta()
     {
-        return $this->belongsTo(MetodoPagoVenta::class);
+        return $this->hasMany(MetodoPagoVenta::class);
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
     }
 
     public function formaPago()
@@ -60,6 +65,11 @@ class DatoTarjeta extends Entity
     public function banco()
     {
         return $this->belongsTo(Banco::class);
+    }
+
+    public function metodoPago()
+    {
+        return $this->hasMany(MetodoPagoVenta::class);
     }
 
 }
