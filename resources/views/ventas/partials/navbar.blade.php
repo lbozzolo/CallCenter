@@ -6,7 +6,7 @@
             <li class="card">
 
                 @permission('listado.venta')
-                <div class="col-lg-4">
+                <div class="col-lg-8">
 
                     {!! Form::open(['url' => route('ventas.choose.tag'), 'method' => 'get']) !!}
                     <div class="input-group input-group-sm">
@@ -20,7 +20,7 @@
                     {!! Form::close() !!}
 
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-6">
 
                     <a href="{{ route('ventas.index') }}" class="btn btn-primary btn-sm">ver todas</a>
                     @permission('crear.venta')
