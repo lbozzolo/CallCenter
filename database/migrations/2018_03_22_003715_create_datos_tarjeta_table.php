@@ -16,7 +16,7 @@ class CreateDatosTarjetaTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->integer('venta_id')->unsigned();
+            $table->integer('cliente_id')->unsigned();
             $table->integer('marca_id')->unsigned()->nullable();
             $table->integer('banco_id')->unsigned()->nullable();
             $table->string('numero_tarjeta', 16);
@@ -28,7 +28,7 @@ class CreateDatosTarjetaTable extends Migration
             $table->timestamps();
 
             $table->index('id');
-            $table->index('venta_id');
+            $table->index('cliente_id');
             $table->index('marca_id');
             $table->index('banco_id');
             $table->index('forma_pago_id');

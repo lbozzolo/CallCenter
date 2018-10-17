@@ -103,6 +103,18 @@ Route::put('ventas/{id}/ajustar', [
     //'middleware' => 'permission:editar.venta'
 ]);
 
+Route::put('ventas/{id}/quitar-ajuste', [
+    'as' => 'ventas.quitar.ajuste',
+    'uses' => 'VentasController@quitarAjuste',
+    //'middleware' => 'permission:editar.venta'
+]);
+
+Route::delete('ventas/{id}/quitar-metodo-pago', [
+    'as' => 'ventas.quitar.metodopago',
+    'uses' => 'VentasController@quitarMetodoPago',
+    //'middleware' => 'permission:editar.venta'
+]);
+
 Route::post('ventas/{id}/numero-guia', [
     'as' => 'ventas.numero.guia',
     'uses' => 'VentasController@numeroGuia',

@@ -9,6 +9,7 @@ use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Etapa;
 use SmartLine\Entities\FormaPago;
+use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\EstadoCliente;
@@ -421,9 +422,30 @@ class VentasController extends Controller
     }
 
 
-    public function ajustar($id)
+    public function ajustar(Request $request, $id)
     {
         $venta = Venta::find($id);
+        $venta->ajuste = $venta->total() - $request->ajuste;
+        $venta->save();
+
+        return redirect()->back()->with('ok', 'Importe de venta ajustado con éxito');
+    }
+
+    public function quitarAjuste(Request $request, $id)
+    {
+        $venta = Venta::find($id);
+        $venta->ajuste = 0.00;
+        $venta->save();
+
+        return redirect()->back()->with('ok', 'Ajuste de venta quitado con éxito');
+    }
+
+    public function quitarMetodoPago(Request $request, $id)
+    {
+        $metodopago = MetodoPagoVenta::find($id);
+        $metodopago->delete();
+
+        return redirect()->back()->with('ok', 'Método de pago eliminado con éxito');
     }
     /**
      * Remove the specified resource from storage.

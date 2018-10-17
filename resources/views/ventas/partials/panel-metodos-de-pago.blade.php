@@ -23,6 +23,7 @@
                         <th>Descuento</th>
                         <th>Valor cuota</th>
                         <th>Total</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +49,33 @@
                             </td>
                             <td class="text-center">{!! ($metodoPagoVenta->valor_cuota)? '$'.$metodoPagoVenta->valor_cuota : '-' !!}</td>
                             <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                            <td>
+                                <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
+                                    eliminar
+                                </button>
+                                <div class="modal fade col-lg-3 col-lg-offset-9" id="eliminar{!! $metodoPagoVenta->id !!}">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Eliminar Método de pago</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-danger">¿Desea eliminar este método de pago?</p>
+                                        </div>
+                                        <div class="card-footer">
+
+                                            {!! Form::open(['url' => route('ventas.quitar.metodopago', $metodoPagoVenta->id), 'method' => 'delete']) !!}
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                </div>
+                                            {!! Form::close() !!}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
 
                     @else
@@ -66,6 +94,33 @@
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
                             <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                            <td>
+                                <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
+                                    eliminar
+                                </button>
+                                <div class="modal fade col-lg-3 col-lg-offset-9" id="eliminar{!! $metodoPagoVenta->id !!}">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Eliminar Método de pago</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-danger">¿Desea eliminar este método de pago?</p>
+                                        </div>
+                                        <div class="card-footer">
+
+                                            {!! Form::open(['url' => route('ventas.quitar.metodopago', $metodoPagoVenta->id), 'method' => 'delete']) !!}
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                            {!! Form::close() !!}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
 
                     @endif
@@ -87,18 +142,72 @@
                         <td>${!! $venta->iva !!}</td>
                     </tr>
                     <tr>
-                        <td colspan="10">Total</td>
-                        <td colspan="2">
-                            {!! Form::open(['url' => route('ventas.ajustar', $venta->id), 'method' => 'put']) !!}
-                                <div class="form-group">
-                                    <div class="input-group input-group">
-                                        {!! Form::number('ajuste') !!}
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-primary btn-xs btn-flag">Ajuste</button>
-                                        </span>
+                        <td colspan="9">Total</td>
+                        <td colspan="3">
+
+                            @if($venta->ajuste == 0.00)
+
+                                <button type="button" title="Ajustar" class="pull-right btn btn-warning btn-flat" data-toggle="modal" data-target="#ajustar{!! $venta->id !!}" style="border: none">
+                                    ajustar
+                                </button>
+                                <div class="modal fade col-lg-4 col-lg-offset-4" id="ajustar{!! $venta->id !!}">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Ajustar venta</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-danger">Ingrese el número que desea fijar como importe final de la compra.</p>
+                                            <span class="text-muted">(Importe actual: {!! $venta->importe_total !!})</span>
+                                        </div>
+                                        <div class="card-footer">
+
+                                            {!! Form::open(['url' => route('ventas.ajustar', $venta->id), 'method' => 'put']) !!}
+                                            <div class="form-group">
+                                                {!! Form::hidden('importe_actual', $venta->importe_total) !!}
+                                                {!! Form::number('ajuste') !!}
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Ajustar</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                            {!! Form::close() !!}
+
+                                        </div>
                                     </div>
                                 </div>
-                            {!! Form::close() !!}
+
+                            @else
+
+                                <button type="button" title="Quitar ajuste" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#quitarAjuste{!! $venta->id !!}">quitar ajuste</button><br>
+                                <span class="text-muted">ajuste actual: ($ {!! $venta->ajuste !!})</span>
+                                <div class="modal fade col-lg-4 col-lg-offset-4" id="quitarAjuste{!! $venta->id !!}">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Quitar ajuste de venta</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-danger">¿Desea quitar el ajuste hecho a esta venta?</p>
+                                            <span class="text-muted">(Ajuste actual: $ {!! $venta->ajuste !!})</span>
+                                        </div>
+                                        <div class="card-footer">
+
+                                            {!! Form::open(['url' => route('ventas.quitar.ajuste', $venta->id), 'method' => 'put']) !!}
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-danger">Quitar</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                            {!! Form::close() !!}
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endif
+
                         </td>
                         <td>${!! $venta->importe_total !!}</td>
                     </tr>

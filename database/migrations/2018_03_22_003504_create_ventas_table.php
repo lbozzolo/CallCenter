@@ -24,6 +24,7 @@ class CreateVentasTable extends Migration
             $table->string('numero_guia');
             $table->integer('etapa_id')->unsigned()->nullable();
             $table->integer('promocion_id')->unsigned()->nullable();
+            $table->float('ajuste');
             $table->softDeletes();
 
             $table->timestamps();
