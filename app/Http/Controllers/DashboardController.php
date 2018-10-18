@@ -33,9 +33,9 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
-        $metodoPago = MetodoPago::find(1);
+        $cliente = Cliente::find(1);
 
-        dd( $metodoPago->ventas );
+        dd( $cliente->hasDebitoCard() );
 
     }
 

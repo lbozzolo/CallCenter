@@ -2,10 +2,15 @@
     <div class="card-header">
         <ul class="list-unstyled list-inline">
             <li><h3>Métodos de pago</h3></li>
-            <li><button class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button> </li>
+            <li><button class="btn btn-primary" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
         </ul>
     </div>
     <div class="card-body">
+
+
+        @include('ventas.partials.agregar-metodo-pago')
+
+
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -31,6 +36,7 @@
 
                     @if($metodoPagoVenta->metodoPago->isCardMethod())
 
+                        {{--TARJETA DE CRÉDITO O DE DÉBITO--}}
                         <tr>
                             <td>{!! $metodoPagoVenta->metodoPago->nombre !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->marca->nombre !!}</td>
@@ -80,6 +86,7 @@
 
                     @else
 
+                        {{--EFECTIVO--}}
                         <tr>
                             <td>{!! $metodoPagoVenta->metodoPago->nombre !!}</td>
                             <td class="text-center">--</td>

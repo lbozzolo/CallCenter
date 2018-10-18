@@ -97,6 +97,12 @@ Route::put('ventas/{id}/cambiar-estado', [
     'middleware' => 'permission:editar.venta'
 ]);
 
+Route::post('ventas/{id}/agregar-metodo-de-pago', [
+    'as' => 'ventas.agregar.metodo.de.pago',
+    'uses' => 'VentasController@agregarMetodoDePago',
+    //'middleware' => 'permission:editar.venta'
+]);
+
 Route::put('ventas/{id}/ajustar', [
     'as' => 'ventas.ajustar',
     'uses' => 'VentasController@ajustar',
