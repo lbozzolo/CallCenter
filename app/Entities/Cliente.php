@@ -2,12 +2,20 @@
 
 namespace SmartLine\Entities;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Cliente extends Entity
 {
     protected $table = 'clientes';
     protected $fillable = ['nombre', 'apellido', 'nombre_completo', 'domicilio_id', 'telefono', 'celular', 'email', 'dni', 'referencia', 'observaciones', 'from_date', 'to_date', 'puntos', 'estado_id', 'created_at', 'updated_at'];
 
+
+    public function hasCard($tipo = null)
+    {
+        return DatoTarjeta::whereHas('marca', function($q) use ($tipo){
+            $q->where('tipo', '=', $tipo);
+        })->count();
+    }
 
     public function getFullNameAttribute()
     {

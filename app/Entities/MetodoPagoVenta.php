@@ -6,7 +6,8 @@ namespace SmartLine\Entities;
 class MetodoPagoVenta extends Entity
 {
     protected $table = 'metodo_pago_venta';
-    protected $fillable = ['venta_id', 'metodopago_id', 'datostarjeta_id'];
+    protected $fillable = ['venta_id', 'metodopago_id', 'datostarjeta_id', 'importe'];
+    public $timestamps = false;
 
     protected function iva()
     {

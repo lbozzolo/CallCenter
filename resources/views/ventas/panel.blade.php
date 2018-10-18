@@ -131,6 +131,8 @@
 
         $(document).ready(function() {
 
+            $('.select2').select2();
+
             $('#div-table-resultados').hide();
             $('#sinresultados').hide();
 
@@ -217,6 +219,22 @@
                 }
 
             }
+
+            $('#botonNuevoMetodo').click(function () {
+                $('#nuevoMetodo').show();
+            });
+            
+            $('#selectMetodo').change(function () {
+                var selected = $('#selectMetodo option:selected').text();
+                if(selected === 'Tarjeta de crédito'){
+                    $('#selectTarjetaDebito').hide();
+                    $('#selectTarjetaCredito').show();
+                }
+                if(selected === 'Tarjeta de débito'){
+                    $('#selectTarjetaCredito').hide();
+                    $('#selectTarjetaDebito').show();
+                }
+            });
 
         });
 

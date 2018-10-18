@@ -101,9 +101,9 @@ class Venta extends Entity
         return  21 * $this->subtotal() / 100;
     }
 
-    protected function total()
+    public function total()
     {
-        return $this->subtotal() + $this->iva();
+        return $this->subtotal() + $this->iva() - $this->ajuste;
     }
 
     public function getIVAAttribute()
@@ -119,6 +119,11 @@ class Venta extends Entity
     public function getImporteTotalAttribute()
     {
         return number_format($this->total(), 2, ',', '.');
+    }
+
+    public function getImporteParaAjustarAttribute()
+    {
+        return $this->total();
     }
 
     // Relationships

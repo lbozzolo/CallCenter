@@ -9,6 +9,7 @@ use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Etapa;
 use SmartLine\Entities\FormaPago;
+use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\EstadoCliente;
@@ -27,6 +28,7 @@ use SmartLine\Entities\Banco;
 use SmartLine\Entities\ValidateCreditCard;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 use SmartLine\Http\Requests;
 use SmartLine\Http\Controllers\Controller;
@@ -141,6 +143,8 @@ class VentasController extends Controller
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['promociones'] = Promocion::lists('nombre', 'id');
+        $data['tarjetas'] = $data['venta']->cliente->datosTarjeta;
+
 
         if($data['venta']->cliente->domicilio){
             if($data['venta']->cliente->domicilio->provincia){
@@ -152,6 +156,7 @@ class VentasController extends Controller
                 $data['localidades'] = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
             }
         }
+        //dd($data['venta']->metodoPagoVenta);
 
         return view('ventas.panel')->with($data);
     }
@@ -420,10 +425,43 @@ class VentasController extends Controller
         return redirect()->back()->with('El estado de la venta ha sido actualizado');
     }
 
-
-    public function ajustar($id)
+    public function ajustar(Request $request, $id)
     {
         $venta = Venta::find($id);
+        $venta->ajuste = $venta->total() - $request->ajuste;
+        $venta->save();
+
+        return redirect()->back()->with('ok', 'Importe de venta ajustado con éxito');
+    }
+
+    public function quitarAjuste(Request $request, $id)
+    {
+        $venta = Venta::find($id);
+        $venta->ajuste = 0.00;
+        $venta->save();
+
+        return redirect()->back()->with('ok', 'Ajuste de venta quitado con éxito');
+    }
+
+    public function agregarMetodoDePago(Request $request, $id)
+    {
+        $metodoPagoVenta = MetodoPagoVenta::find($request->metodo_pago);
+        MetodoPagoVenta::create([
+            'venta_id' => $id,
+            'metodopago_id' => $request->metodo_pago,
+            'datostarjeta_id' => ($metodoPagoVenta->slug == 'credito' || $metodoPagoVenta->slug == 'debito')? $request->datos_tarjeta_id : null,
+            'importe' => $request->importe
+        ]);
+
+        return redirect()->back()->with('ok', 'Método de pago agregado con éxito');
+    }
+
+    public function quitarMetodoPago(Request $request, $id)
+    {
+        $metodopago = MetodoPagoVenta::find($id);
+        $metodopago->delete();
+
+        return redirect()->back()->with('ok', 'Método de pago eliminado con éxito');
     }
     /**
      * Remove the specified resource from storage.

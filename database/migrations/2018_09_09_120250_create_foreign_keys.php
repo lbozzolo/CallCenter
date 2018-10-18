@@ -264,11 +264,11 @@ class CreateForeignKeys extends Migration
                 ->onDelete('NO ACTION');
         });
         Schema::table('datos_tarjeta', function(Blueprint $table){
-            $table->foreign('venta_id')
+            $table->foreign('cliente_id')
                 ->references('id')
-                ->on('ventas')
-                ->onUpdate('NO ACTION')
-                ->onDelete('NO ACTION');
+                ->on('clientes')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
             $table->foreign('marca_id')
                 ->references('id')
                 ->on('marcas_tarjetas')
