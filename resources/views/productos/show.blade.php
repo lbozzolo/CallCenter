@@ -16,8 +16,8 @@
 
 @section('contenido')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card ">
+        <div class="card-header">
         @permission('editar.producto')
             <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit"></i> Editar</a>
         @endpermission
@@ -26,7 +26,7 @@
         <div class="panel-body">
 
             <div class="col-lg-6 col-md-6">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled listado">
                     <li class="list-group-item">Nombre: {!! $producto->nombre !!}</li>
                     <li class="list-group-item">Descripción: {!! ($producto->descripcion)? $producto->descripcion : '' !!}</li>
                     <li class="list-group-item">Marca: {!! ($producto->marca)? $producto->marca->nombre : '' !!}</li>
@@ -92,7 +92,7 @@
             <div class="col-lg-6 col-md-6">
 
             @permission('editar.producto')
-                <div class="panel panel-default">
+                <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Modificar stock</h3>
                     </div>
@@ -109,7 +109,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Agregar imágenes</h3>
                     </div>
@@ -194,7 +194,7 @@
                 </div>
             @endpermission
 
-                <div class="panel panel-default">
+                <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Prospecto (componentes)</h3>
                     </div>

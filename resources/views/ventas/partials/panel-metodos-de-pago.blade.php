@@ -2,7 +2,14 @@
     <div class="card-header">
         <ul class="list-unstyled list-inline">
             <li><h3>Métodos de pago</h3></li>
-            <li><button class="btn btn-primary" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
+            <li><button class="nonStyledButton" style="color:cyan" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
+            <li class="pull-right">
+                @if($venta->diferencia < 0)
+                    <span class="text-danger" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                @else
+                    <span class="text-success" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                @endif
+            </li>
         </ul>
     </div>
     <div class="card-body">
@@ -143,6 +150,13 @@
                     <tr>
                         <td colspan="12">Subtotal</td>
                         <td>${!! $venta->subtotal !!}</td>
+                        <td>
+                            @if($venta->diferencia < 0)
+                                <span class="text-danger" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
+                            @else
+                                <span class="text-success" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="12">IVA (21%)</td>

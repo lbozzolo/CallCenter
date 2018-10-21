@@ -66,7 +66,7 @@ class Producto extends Entity
 
     public function ventas()
     {
-        return $this->belongsToMany(Venta::class);
+        return $this->belongsToMany(Venta::class)->withPivot('observaciones');
     }
 
     public function etapas()

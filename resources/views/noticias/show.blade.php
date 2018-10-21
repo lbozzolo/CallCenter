@@ -1,19 +1,19 @@
 @extends('noticias.base')
 
-@section('css')
+{{--@section('css')--}}
 
-    <style type="text/css">
+    {{--<style type="text/css">--}}
 
-        .noticia, .noticia p{
-            background-color: whitesmoke;
-            color: black !important;
-            margin: 10px;
-            border-radius: 3px;
-        }
+        {{--.noticia, .noticia p{--}}
+            {{--background-color: whitesmoke;--}}
+            {{--color: black !important;--}}
+            {{--margin: 10px;--}}
+            {{--border-radius: 3px;--}}
+        {{--}--}}
 
-    </style>
+    {{--</style>--}}
 
-@endsection
+{{--@endsection--}}
 
 @section('titulo')
 

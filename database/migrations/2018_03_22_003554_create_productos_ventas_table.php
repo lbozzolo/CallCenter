@@ -18,6 +18,7 @@ class CreateProductosVentasTable extends Migration
             $table->increments('id');
             $table->integer('producto_id')->unsigned()->nullable();
             $table->integer('venta_id')->unsigned()->nullable();
+            $table->text('observaciones')->nullable();
 
             $table->index('id');
             $table->index('producto_id');

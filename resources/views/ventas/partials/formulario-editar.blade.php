@@ -18,7 +18,7 @@
 
     <div class="form-group" style="display: none" id="conCredito">
         {!! Form::label('marca_id_credito', 'Tarjeta') !!}
-        {!! Form::select('marca_id_credito', $marcas->where('tipo', 'credito')->lists('nombre', 'id'), ($venta->datosTarjeta)? $venta->datosTarjeta->marca_id : null, ['id' => 'marcaCredito', 'class' => 'form-control select2']) !!}
+        {!! Form::select('marca_id_credito', $marcas->where('tipo', 'credito')->lists('nombre', 'id'), ($venta->datosTarjeta)? $venta->datosTarjeta->marca_id : null, ['id' => 'marcaCredito', 'class' => 'form-control select2b']) !!}
     </div>
 
     <div class="form-group" style="display: none" id="conDebito">

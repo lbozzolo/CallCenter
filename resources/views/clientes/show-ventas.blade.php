@@ -27,7 +27,7 @@
                     <h3 class="card-title">Información general</h3>
                 </div>
                 <div class="card-body">
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled listado">
                         <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
                         <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
                         <li class="list-group-item">
@@ -42,8 +42,6 @@
                             </ul>
                         </li>
                         <li class="list-group-item">Estado:{!! $venta->estado->nombre !!}</li>
-                        <li class="list-group-item">Método de pago: {!! ($venta->metodoPago)? $venta->metodoPago->nombre : '' !!}</li>
-                        <li class="list-group-item">Forma de pago: {!! ($venta->formaPago)? $venta->formaPago->nombre : '' !!}</li>
                         <li class="list-group-item">Etapa: {!! ($venta->etapa)? $venta->etapa->nombre : '<small class="text-muted">Este producto no se vende en etapas</small>' !!}</li>
                         <li class="list-group-item">Promoción: {!! ($venta->promocion)? $venta->promocion->nombre : '' !!}</li>
                         <li class="list-group-item">Fecha de alta: {!! $venta->fecha_creado !!}</li>

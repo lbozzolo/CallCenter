@@ -2,7 +2,10 @@
 
 @section('titulo')
 
-    <h2>Ventas<span class="text-muted">/ Panel / Operador: {!! Auth::user()->full_name !!}</span></h2>
+    <h2>
+        Ventas<span class="text-muted"> / Panel / Operador: {!! Auth::user()->full_name !!}</span>
+        <span class="label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>
+    </h2>
 
 @endsection
 
@@ -38,18 +41,19 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 @permission('editar.cliente')
-                <li class="active"><a href="#tab_1" data-toggle="tab">Datos cliente</a></li>
+                <li class="active"><a href="#tab_1" data-toggle="tab">Métodos de pago</a></li>
                 @endpermission
                 <li><a href="#tab_2" data-toggle="tab">Productos</a></li>
                 @permission('editar.venta')
-                <li><a href="#tab_3" data-toggle="tab">Información de pago</a></li>
+                <li><a href="#tab_3" data-toggle="tab">Datos del cliente</a></li>
+                <li><a href="#tab_4" data-toggle="tab">Tarjetas asociadas</a></li>
                 @endpermission
             </ul>
             <div class="tab-content">
                 @permission('editar.cliente')
                 <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
 
-                    @include('ventas.partials.panel-cliente')
+                    @include('ventas.partials.panel-metodos-de-pago')
 
                 </div>
                 @endpermission
@@ -63,8 +67,12 @@
                 @permission('editar.venta')
                 <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
 
-                    {{--@include('ventas.partials.formulario-datos-tarjeta')--}}
-                    @include('ventas.partials.panel-metodos-de-pago')
+                    @include('ventas.partials.panel-cliente')
+
+                </div>
+                <div class="tab-pane card" id="tab_4" style="margin-top: 0px">
+
+                    @include('ventas.partials.panel-tarjetas-asociadas')
 
                 </div>
                 @endpermission
@@ -130,6 +138,7 @@
     <script>
 
         $(document).ready(function() {
+
 
             $('.select2').select2();
 
@@ -220,7 +229,20 @@
 
             }
 
+            $('#botonNuevoProducto').click(function () {
+                $('#botonNuevoProducto').hide();
+                $('#botonNuevoProductoCancelar').show();
+                $('#listadoProductos').show();
+            });
+
+            $('#botonNuevoProductoCancelar').click(function () {
+                $('#botonNuevoProducto').show();
+                $('#botonNuevoProductoCancelar').hide();
+                $('#listadoProductos').hide();
+            });
+
             $('#botonNuevoMetodo').click(function () {
+                $('#botonNuevoMetodo').hide();
                 $('#nuevoMetodo').show();
             });
             
@@ -235,6 +257,59 @@
                     $('#selectTarjetaDebito').show();
                 }
             });
+
+            $('#botonNuevaTarjeta').click(function () {
+                $('#botonNuevaTarjeta').hide();
+                $('#nuevaTarjeta').show();
+            });
+
+            $('#cancelarAgregarMetodoPago').click(function () {
+                $('#selectMetodo').val('');
+                $('#selectCredito').val('');
+                $('#selectDebito').val('');
+                $('#inputImporte').val('');
+                $('#selectTarjetaCredito').hide();
+                $('#selectTarjetaDebito').hide();
+                $('#botonNuevoMetodo').show()
+                $('#nuevoMetodo').hide();
+            });
+
+            $('#cancelarAsociarTarjeta').click(function () {
+                $('#marcaCredito').val('');
+                $('#banco').val('');
+                $('#numeroTarjeta').val('');
+                $('#codigoSeguridad').val('');
+                $('#titular').val('');
+                $('#fechaExpiracion').val('');
+                $('#botonNuevaTarjeta').show()
+                $('#nuevaTarjeta').hide();
+            });
+
+        });
+
+        $(document).ready(function() {
+            $('#table-productos').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            $("#div-table-productos").show();
+            $(".overlay").hide();
+
+
 
         });
 

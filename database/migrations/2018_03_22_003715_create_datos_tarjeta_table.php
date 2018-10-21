@@ -26,6 +26,7 @@ class CreateDatosTarjetaTable extends Migration
             $table->integer('codigo_seguridad');
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('id');
             $table->index('cliente_id');

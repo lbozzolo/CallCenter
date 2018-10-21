@@ -3,6 +3,7 @@
 namespace SmartLine\Http\Requests;
 
 use Illuminate\Support\Facades\Input;
+use SmartLine\Entities\MarcaTarjeta;
 use SmartLine\Entities\MetodoPago;
 
 class CreateDatosTarjetaRequest extends Request
@@ -14,8 +15,10 @@ class CreateDatosTarjetaRequest extends Request
 
     public function rules()
     {
-        $metodoPago = MetodoPago::find(Input::get('metodo_pago_id'));
-        $required = ($metodoPago->slug == 'credito')? 'required' : '';
+        $marcaTarjeta = MarcaTarjeta::find(Input::get('marca_id'));
+        $required = ($marcaTarjeta->tipo == 'credito' || $marcaTarjeta->tipo == 'debito')? 'required' : '';
+//        $metodoPago = MetodoPago::find(Input::get('metodo_pago_id'));
+//        $required = ($metodoPago->slug == 'credito')? 'required' : '';
         return
             [
                 'numero_tarjeta' => $required.'|numeric',

@@ -1,4 +1,4 @@
-<div class="panel panel-default" id="nuevoMetodo" style="display:none;">
+<div class="panel " id="nuevoMetodo" style="display:none;">
     <div class="panel-heading">
         <h4 class="panel-title" style="color:white">Nuevo método de pago</h4>
     </div>
@@ -15,7 +15,7 @@
                 <div class="form-group">
                     {!! Form::label('datos_tarjeta_id', 'Tarjeta') !!}
                     @if($venta->cliente->hasCard('credito'))
-                        <select name="datos_tarjeta_id" class="form-control select2b">
+                        <select name="datos_tarjeta_id" class="form-control select2b" id="selectCredito">
                             @foreach($tarjetas as $tarjeta)
                                 @if($tarjeta->marca->tipo == 'credito')
                                     <option value="{!! $tarjeta->id !!}">{!! $tarjeta->marca->nombre !!} ( {!! $tarjeta->titular !!})</option>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     {!! Form::label('datos_tarjeta_id', 'Tarjeta') !!}
                     @if($venta->cliente->hasCard('debito'))
-                        <select name="datos_tarjeta_id" class="form-control select2b">
+                        <select name="datos_tarjeta_id" class="form-control select2b" id="selectDebito">
                             @foreach($tarjetas as $tarjeta)
                                 @if($tarjeta->marca->tipo == 'debito')
                                     <option value="{!! $tarjeta->id !!}">{!! $tarjeta->marca->nombre !!} ( {!! $tarjeta->titular !!})</option>
@@ -46,12 +46,13 @@
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="form-group">
                     {!! Form::label('importe', 'Importe') !!}
-                    {!! Form::text('importe', null, ['min' => 1, 'class' => 'form-control']) !!}
+                    {!! Form::text('importe', null, ['min' => 1, 'class' => 'form-control', 'id' => 'inputImporte']) !!}
                 </div>
             </div>
 
             <div class="col-lg-12 form-group">
                 <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+                <button type="button" id="cancelarAgregarMetodoPago" class="btn btn-default btn-sm">Cancelar</button>
             </div>
 
             {!! Form::close() !!}
