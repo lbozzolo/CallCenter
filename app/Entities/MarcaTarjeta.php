@@ -14,7 +14,7 @@ class MarcaTarjeta extends Entity
 
     public function formasPago()
     {
-        return $this->hasMany(FormaPago::class);
+        return $this->hasMany(FormaPago::class, 'marca_tarjeta_id');
     }
 
 }

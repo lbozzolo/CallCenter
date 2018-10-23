@@ -250,6 +250,7 @@
                 var selected = $('#selectMetodo option:selected').text();
                 if(selected === 'Tarjeta de crédito'){
                     $('#selectTarjetaDebito').hide();
+                    $('#selectCuotas').show();
                     $('#selectTarjetaCredito').show();
                 }
                 if(selected === 'Tarjeta de débito'){
@@ -268,8 +269,10 @@
                 $('#selectCredito').val('');
                 $('#selectDebito').val('');
                 $('#inputImporte').val('');
+                $('#cuotas').val('');
                 $('#selectTarjetaCredito').hide();
                 $('#selectTarjetaDebito').hide();
+                $('#selectCuotas').hide();
                 $('#botonNuevoMetodo').show()
                 $('#nuevoMetodo').hide();
             });

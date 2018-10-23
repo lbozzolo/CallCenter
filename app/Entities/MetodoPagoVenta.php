@@ -6,7 +6,7 @@ namespace SmartLine\Entities;
 class MetodoPagoVenta extends Entity
 {
     protected $table = 'metodo_pago_venta';
-    protected $fillable = ['venta_id', 'metodopago_id', 'datostarjeta_id', 'importe'];
+    protected $fillable = ['venta_id', 'metodopago_id', 'datostarjeta_id', 'formadepago_id', 'importe'];
     public $timestamps = false;
 
     protected function iva()
@@ -27,9 +27,14 @@ class MetodoPagoVenta extends Entity
         return $total;
     }
 
+    protected function importeMasPromocionMasIVA()
+    {
+        return $this->importeMasPromocion() + $this->iva();
+    }
+
     protected function numeroCuotas()
     {
-        return ($this->datosTarjeta && $this->datosTarjeta->formaPago)? $this->datosTarjeta->formaPago : null;
+        return ($this->formaPago)? $this->formaPago : null;
     }
 
     protected function interes()
@@ -54,8 +59,7 @@ class MetodoPagoVenta extends Entity
 
     public function getImporteTotalAttribute()
     {
-        $total = $this->importeMasPromocion();
-        return number_format($total, 2, ',', '.');
+        return number_format($this->importeMasPromocion(), 2, ',', '.');
     }
 
     public function getIVAAttribute()
@@ -63,9 +67,14 @@ class MetodoPagoVenta extends Entity
         return number_format($this->iva(), 2, ',', '.');
     }
 
+    public function getImporteMasPromocionMasIVAAttribute()
+    {
+        return number_format($this->importeMasPromocionMasIVA(), 2, ',', '.');
+    }
+
     public function getValorCuotaAttribute()
     {
-        $total = $this->importeMasPromocion();
+        $total = $this->importeMasPromocionMasIVA();
         $cuotas = $this->numeroCuotas();
         $valorCuota = $total / $cuotas->cuota_cantidad;
         return number_format($valorCuota, '2', ',', '.');
@@ -100,6 +109,11 @@ class MetodoPagoVenta extends Entity
     public function metodoPago()
     {
         return $this->belongsTo(MetodoPago::class, 'metodopago_id');
+    }
+
+    public function formaPago()
+    {
+        return $this->belongsTo(FormaPago::class, 'formadepago_id');
     }
 
 

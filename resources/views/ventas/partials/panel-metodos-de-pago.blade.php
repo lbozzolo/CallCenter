@@ -30,10 +30,10 @@
                         <th>Titular</th>
                         <th>Fecha expiración</th>
                         <th>Importe</th>
-                        <th>Cuotas</th>
                         <th>Interés</th>
                         <th>Descuento</th>
-                        <th>Valor cuota</th>
+                        <th>IVA (21%)</th>
+                        <th>Cuotas</th>
                         <th>Total</th>
                         <th>Opciones</th>
                     </tr>
@@ -53,15 +53,26 @@
                             <td>{!! $metodoPagoVenta->datosTarjeta->titular !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->expiration_date !!}</td>
                             <td>${!! $metodoPagoVenta->importe !!}</td>
-                            <td class="text-center">{!! $metodoPagoVenta->datosTarjeta->formaPago->cuota_cantidad !!}</td>
                             <td class="text-center">
-                                {!! ($metodoPagoVenta->datosTarjeta->formaPago->interes != 0)? $metodoPagoVenta->datosTarjeta->formaPago->interes .' %'  : '-' !!}
+                                @if($metodoPagoVenta->formaPago)
+                                {!! ($metodoPagoVenta->formaPago->interes != 0)? $metodoPagoVenta->formaPago->interes .' %'  : '-' !!}
+                                @else
+                                    -
+                                @endif
                             </td>
                             <td class="text-center">
-                                {!! ($metodoPagoVenta->datosTarjeta->formaPago->descuento != 0)? $metodoPagoVenta->datosTarjeta->formaPago->descuento .' %'  : '-' !!}
+                                @if($metodoPagoVenta->formaPago)
+                                {!! ($metodoPagoVenta->formaPago->descuento != 0)? $metodoPagoVenta->formaPago->descuento .' %'  : '-' !!}
+                                @else
+                                    -
+                                @endif
                             </td>
-                            <td class="text-center">{!! ($metodoPagoVenta->valor_cuota)? '$'.$metodoPagoVenta->valor_cuota : '-' !!}</td>
-                            <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                            <td>${!! $metodoPagoVenta->IVA !!}</td>
+                            <td class="text-center">
+                                {!! ($metodoPagoVenta->formaPago)? $metodoPagoVenta->formaPago->cuota_cantidad.' x ' : '-' !!}
+                                {!! ($metodoPagoVenta->formaPago)? '$'.$metodoPagoVenta->valor_cuota : '' !!}
+                            </td>
+                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_iva !!}</td>
                             <td>
                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
                                     eliminar
@@ -105,9 +116,9 @@
                             <td>${!! $metodoPagoVenta->importe !!}</td>
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
+                            <td class="text-center">${!! $metodoPagoVenta->IVA !!}</td>
                             <td class="text-center">-</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_IVA !!}</td>
                             <td>
                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
                                     eliminar
@@ -140,7 +151,7 @@
                     @endif
                 @empty
                     <tr>
-                        <td colspan="9">
+                        <td colspan="10">
                             <span class="text-left">Todavía no se ha cargado ningún método de pago</span>
                         </td>
                     </tr>

@@ -450,10 +450,26 @@ class VentasController extends Controller
     public function agregarMetodoDePago(Request $request, $id)
     {
         $metodoPago = MetodoPago::find($request->metodo_pago);
+        $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
+        $tarjetaYcuotas = null;
+
+        // Chequeo que exista el pago en las cuotas seleccionadas con la tarjeta seleccionada
+        if($datosTarjeta){
+            $formasPago = $datosTarjeta->marca->formasPago->contains(function ($key, $value) use ($request) {
+                return $value->cuota_cantidad == $request->cuotas;
+            });
+
+            if(!$formasPago)
+                return redirect()->back()->withErrors('No hay formas de pago en '.$request->cuotas.' cuotas para la tarjeta seleccionada');
+
+            $tarjetaYcuotas = FormaPago::where('marca_tarjeta_id', $datosTarjeta->marca_id)->where('cuota_cantidad', $request->cuotas)->first();
+        }
+
         MetodoPagoVenta::create([
             'venta_id' => $id,
             'metodopago_id' => $request->metodo_pago,
             'datostarjeta_id' => ($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito')? $request->datos_tarjeta_id : null,
+            'formadepago_id' => ($tarjetaYcuotas)? $tarjetaYcuotas->id : null,
             'importe' => $request->importe
         ]);
 
