@@ -2,7 +2,14 @@
     <div class="card-header">
         <ul class="list-unstyled list-inline">
             <li><h3>Métodos de pago</h3></li>
-            <li><button class="btn btn-primary" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
+            <li><button class="nonStyledButton" style="color:cyan" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
+            <li class="pull-right">
+                @if($venta->diferencia < 0)
+                    <span class="text-danger" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                @else
+                    <span class="text-success" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                @endif
+            </li>
         </ul>
     </div>
     <div class="card-body">
@@ -23,10 +30,10 @@
                         <th>Titular</th>
                         <th>Fecha expiración</th>
                         <th>Importe</th>
-                        <th>Cuotas</th>
                         <th>Interés</th>
                         <th>Descuento</th>
-                        <th>Valor cuota</th>
+                        <th>IVA (21%)</th>
+                        <th>Cuotas</th>
                         <th>Total</th>
                         <th>Opciones</th>
                     </tr>
@@ -46,15 +53,26 @@
                             <td>{!! $metodoPagoVenta->datosTarjeta->titular !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->expiration_date !!}</td>
                             <td>${!! $metodoPagoVenta->importe !!}</td>
-                            <td class="text-center">{!! $metodoPagoVenta->datosTarjeta->formaPago->cuota_cantidad !!}</td>
                             <td class="text-center">
-                                {!! ($metodoPagoVenta->datosTarjeta->formaPago->interes != 0)? $metodoPagoVenta->datosTarjeta->formaPago->interes .' %'  : '-' !!}
+                                @if($metodoPagoVenta->formaPago)
+                                {!! ($metodoPagoVenta->formaPago->interes != 0)? $metodoPagoVenta->formaPago->interes .' %'  : '-' !!}
+                                @else
+                                    -
+                                @endif
                             </td>
                             <td class="text-center">
-                                {!! ($metodoPagoVenta->datosTarjeta->formaPago->descuento != 0)? $metodoPagoVenta->datosTarjeta->formaPago->descuento .' %'  : '-' !!}
+                                @if($metodoPagoVenta->formaPago)
+                                {!! ($metodoPagoVenta->formaPago->descuento != 0)? $metodoPagoVenta->formaPago->descuento .' %'  : '-' !!}
+                                @else
+                                    -
+                                @endif
                             </td>
-                            <td class="text-center">{!! ($metodoPagoVenta->valor_cuota)? '$'.$metodoPagoVenta->valor_cuota : '-' !!}</td>
-                            <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                            <td>${!! $metodoPagoVenta->IVA !!}</td>
+                            <td class="text-center">
+                                {!! ($metodoPagoVenta->formaPago)? $metodoPagoVenta->formaPago->cuota_cantidad.' x ' : '-' !!}
+                                {!! ($metodoPagoVenta->formaPago)? '$'.$metodoPagoVenta->valor_cuota : '' !!}
+                            </td>
+                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_iva !!}</td>
                             <td>
                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
                                     eliminar
@@ -98,9 +116,9 @@
                             <td>${!! $metodoPagoVenta->importe !!}</td>
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
+                            <td class="text-center">${!! $metodoPagoVenta->IVA !!}</td>
                             <td class="text-center">-</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_IVA !!}</td>
                             <td>
                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
                                     eliminar
@@ -133,7 +151,7 @@
                     @endif
                 @empty
                     <tr>
-                        <td colspan="9">
+                        <td colspan="10">
                             <span class="text-left">Todavía no se ha cargado ningún método de pago</span>
                         </td>
                     </tr>
@@ -143,6 +161,13 @@
                     <tr>
                         <td colspan="12">Subtotal</td>
                         <td>${!! $venta->subtotal !!}</td>
+                        <td>
+                            @if($venta->diferencia < 0)
+                                <span class="text-danger" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
+                            @else
+                                <span class="text-success" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="12">IVA (21%)</td>

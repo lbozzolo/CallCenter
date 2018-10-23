@@ -129,7 +129,7 @@ class VentasController extends Controller
 
     public function panel($idVenta)
     {
-        $data['venta'] = Venta::with('productos', 'cliente')->where('id', $idVenta)->first();
+        $data['venta'] = Venta::with('productos.marca', 'productos.institucion', 'productos.etapas', 'cliente', 'cliente.datosTarjeta', 'cliente.datosTarjeta.marca', 'cliente.domicilio.localidad', 'cliente.domicilio.partido', 'cliente.domicilio.provincia')->where('id', $idVenta)->first();
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
         $data['tags'] = EstadoVenta::lists('nombre', 'slug');
 
@@ -137,14 +137,14 @@ class VentasController extends Controller
         $data['provincias'] = Provincia::lists('provincia', 'id');
         $data['partidos'] = Partido::lists('partido', 'id', 'codProvincia');
         $data['localidades'] = Localidad::lists('localidad', 'id', 'codProvincia');
+        $data['productos'] = Producto::all();
 
-        $data['marcas'] = MarcaTarjeta::all();
+        $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['tarjetas'] = $data['venta']->cliente->datosTarjeta;
-
 
         if($data['venta']->cliente->domicilio){
             if($data['venta']->cliente->domicilio->provincia){
@@ -156,7 +156,6 @@ class VentasController extends Controller
                 $data['localidades'] = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
             }
         }
-        //dd($data['venta']->metodoPagoVenta);
 
         return view('ventas.panel')->with($data);
     }
@@ -179,7 +178,7 @@ class VentasController extends Controller
         return redirect()->back()->with('ok', 'Número de guía guardado con éxito');
     }
 
-    public function editarModos(Request $request)
+    public function editarModos(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'observaciones' => 'required|max:500',
@@ -189,10 +188,14 @@ class VentasController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
 
         $venta = Venta::find($request->venta_id);
-        $venta->observaciones = $request->observaciones;
-        $venta->save();
+        $producto = $venta->productos->filter(function ($item) use ($id) {
+            return $item->id == $id;
+        })->first();
 
-        return redirect()->route('ventas.panel', $venta->id)->with('Observaciones guardadas con éxito');
+        $producto->pivot->observaciones = $request->observaciones;
+        $producto->pivot->save();
+
+        return redirect()->route('ventas.panel', $venta->id)->with('ok', 'Observaciones guardadas con éxito');
     }
 
     public function quitarProducto(Request $request)
@@ -428,6 +431,7 @@ class VentasController extends Controller
     public function ajustar(Request $request, $id)
     {
         $venta = Venta::find($id);
+
         $venta->ajuste = $venta->total() - $request->ajuste;
         $venta->save();
 
@@ -445,15 +449,31 @@ class VentasController extends Controller
 
     public function agregarMetodoDePago(Request $request, $id)
     {
-        $metodoPagoVenta = MetodoPagoVenta::find($request->metodo_pago);
+        $metodoPago = MetodoPago::find($request->metodo_pago);
+        $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
+        $tarjetaYcuotas = null;
+
+        // Chequeo que exista el pago en las cuotas seleccionadas con la tarjeta seleccionada
+        if($datosTarjeta){
+            $formasPago = $datosTarjeta->marca->formasPago->contains(function ($key, $value) use ($request) {
+                return $value->cuota_cantidad == $request->cuotas;
+            });
+
+            if(!$formasPago)
+                return redirect()->back()->withErrors('No hay formas de pago en '.$request->cuotas.' cuotas para la tarjeta seleccionada');
+
+            $tarjetaYcuotas = FormaPago::where('marca_tarjeta_id', $datosTarjeta->marca_id)->where('cuota_cantidad', $request->cuotas)->first();
+        }
+
         MetodoPagoVenta::create([
             'venta_id' => $id,
             'metodopago_id' => $request->metodo_pago,
-            'datostarjeta_id' => ($metodoPagoVenta->slug == 'credito' || $metodoPagoVenta->slug == 'debito')? $request->datos_tarjeta_id : null,
+            'datostarjeta_id' => ($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito')? $request->datos_tarjeta_id : null,
+            'formadepago_id' => ($tarjetaYcuotas)? $tarjetaYcuotas->id : null,
             'importe' => $request->importe
         ]);
 
-        return redirect()->back()->with('ok', 'Método de pago agregado con éxito');
+        return redirect()->back()->with('ok', 'Método de pago agregado con éxito')->with([$tab3 = 'active']);
     }
 
     public function quitarMetodoPago(Request $request, $id)

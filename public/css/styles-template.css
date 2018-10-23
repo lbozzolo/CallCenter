@@ -89,3 +89,11 @@ input, .select2, textarea, .select2b{
 .ck > p{
     color: black !important;
 }
+
+.noticia, .noticia p{
+    background-color: whitesmoke;
+    color: black !important;
+    margin: 10px;
+    border-radius: 3px;
+    padding: 10px 20px;
+}

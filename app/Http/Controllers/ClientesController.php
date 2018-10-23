@@ -4,6 +4,7 @@
 use Maatwebsite\Excel\Facades\Excel;
 use SmartLine\Entities\Categoria;
 use SmartLine\Entities\Cliente;
+use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoCliente;
 use SmartLine\Entities\Llamada;
 use SmartLine\Entities\Reclamo;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use SmartLine\Http\Repositories\ClienteRepo;
 use Illuminate\Support\Facades\Response;
+use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 
 class ClientesController extends Controller
 {
@@ -249,6 +251,36 @@ class ClientesController extends Controller
         $headers = array('Content-Type: application/vnd.ms-excel',);
 
         return Response::download($file, 'clientes_nuevos.xls', $headers);
+    }
+
+    public function agregarTarjeta(CreateDatosTarjetaRequest $request, $id)
+    {
+        $cliente = Cliente::find($id);
+
+        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+
+        $datosTarjeta = $cliente->datosTarjeta()->create([
+            'marca_id' => $request->marca_id,
+            'banco_id' => $request->banco_id,
+            'numero_tarjeta' => $request->numero_tarjeta,
+            'codigo_seguridad' => $request->codigo_seguridad,
+            'titular' => $request->titular,
+            'fecha_expiracion' => $fechaExpiracion,
+        ]);
+
+        if(!$datosTarjeta)
+            return redirect()->back()->withErrors('No se pudo asociar la tarjera');
+
+        return redirect()->back()->with('ok', 'Nueva tarjeta asociada con éxito');
+
+    }
+
+    public function eliminarTarjeta(Request $request, $id)
+    {
+        $datoTarjeta = DatoTarjeta::find($id);
+        $datoTarjeta->delete();
+
+        return redirect()->back()->with('ok', 'Tarjeta eliminada con éxito');
     }
 
 

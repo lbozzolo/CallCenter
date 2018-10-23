@@ -20,12 +20,14 @@ class CreateMetodoPagoVentaTable extends Migration
             $table->integer('venta_id')->unsigned()->nullable();
             $table->integer('metodopago_id')->unsigned()->nullable();
             $table->integer('datostarjeta_id')->unsigned()->nullable();
+            $table->integer('formadepago_id')->unsigned()->nullable();
             $table->string('importe');
 
             $table->index('id');
             $table->index('venta_id');
             $table->index('metodopago_id');
             $table->index('datostarjeta_id');
+            $table->index('formadepago_id');
         });
     }
 

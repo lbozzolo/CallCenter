@@ -49,7 +49,7 @@ Route::delete('ventas/quitar-producto', [
     'middleware' => 'permission:quitar.producto.venta'
 ]);
 
-Route::put('ventas/editar-modos', [
+Route::put('ventas/{id}/editar-modos', [
     'as' => 'ventas.editar.modos',
     'uses' => 'VentasController@editarModos',
     'middleware' => 'permission:editar.venta'

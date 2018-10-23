@@ -23,5 +23,10 @@ class FormaPago extends Entity
         return $this->hasMany(DatoTarjeta::class);
     }
 
+    public function metodoPagoVenta()
+    {
+        return $this->hasMany(MetodoPagoVenta::class);
+    }
+
 
 }
