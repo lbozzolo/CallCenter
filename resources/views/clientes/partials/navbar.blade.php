@@ -1,5 +1,5 @@
 
-<ul class="list-inline">
+<ul class="list-inline panel panel-barra">
     @permission('listado.cliente')
     <li>
         <a href="{{ route('clientes.index') }}"><i class="fa fa-home"></i> </a>

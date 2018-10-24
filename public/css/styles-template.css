@@ -97,3 +97,7 @@ input, .select2, textarea, .select2b{
     border-radius: 3px;
     padding: 10px 20px;
 }
+
+.panel-barra {
+    padding: 8px;
+}

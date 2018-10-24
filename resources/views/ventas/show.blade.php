@@ -77,8 +77,8 @@
                                 <div class="input-group input-group">
                                     {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2', 'id' => 'selectEstados']) !!}
                                     <span class="input-group-btn">
-                                                    <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
-                                                </span>
+                                        <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
+                                    </span>
                                 </div>
                             </div>
                             <div class="form-group">
