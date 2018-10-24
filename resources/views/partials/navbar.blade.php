@@ -59,27 +59,6 @@
                 @endpermission
 
 
-                @permission('listado.llamada')
-                    <li>
-                        <a class="sidebar-sub-toggle" href="{{ route('llamadas.index') }}" style="{{ (Request::is('llamadas'.'*') ? 'color: white' : '') }}"><i class="ti-headphone-alt"></i> Llamadas <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            @permission('listado.llamada')
-                            <li><a href="{{ route('llamadas.index') }}">Listar Llamadas </a></li>
-                            @endpermission
-
-                            @permission('listado.llamada')
-                            <li><a href="{{ route('llamadas.index.entrantes') }}">Lamadas Entrantes</a></li>
-                            @endpermission
-
-                            @permission('listado.llamada')
-                            <li><a href="{{ route('llamadas.index') }}">Llamadas Salientes</a></li>
-                            @endpermission
-
-                        </ul>
-                    </li>
-                @endpermission
-
-
                 <li class="label">Informacion</li>
 
                 <li><a href="{{ route('noticias.noticias') }}"><i class="ti-notepad"></i> Noticias </a></li>

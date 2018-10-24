@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-8">
-        <ul class="list-inline panel" style="padding: 8px">
+        <ul class="list-inline panel panel-barra">
             @if($venta->estado->slug != 'cancelada')
                 <li>
                     <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#cierreVenta">

@@ -1,4 +1,4 @@
-<ul class="list-inline">
+<ul class="list-inline panel panel-barra">
 
     @permission('listado.producto')
         <li><a href="{{ route('productos.index') }}" class="{{ (Request::is('productos') ? 'navbar-item-selected' : '') }}">Activos</a></li>
