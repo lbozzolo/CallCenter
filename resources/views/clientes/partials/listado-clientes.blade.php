@@ -29,9 +29,9 @@
                 <td>{!! ($cliente->dni)? $cliente->dni : "<span class='label label-danger'>sin dni</span><i class='fa fa-exclamation-circle'></i>" !!}</td>
                 <td>
                     @if($cliente->estado->slug == 'nuevo')
-                        <label class="label label-success">{!! $cliente->estado->nombre !!}</label>
+                        <label class="label label-warning">{!! $cliente->estado->nombre !!}</label>
                     @elseif($cliente->estado->slug == 'frecuente')
-                        <label class="label label-default">{!! $cliente->estado->nombre !!}</label>
+                        <label class="label label-default" style="background-color: rgb(8, 142, 83);">{!! $cliente->estado->nombre !!}</label>
                     @endif
                 </td>
                 <td class="text-center">

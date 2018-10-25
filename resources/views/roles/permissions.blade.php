@@ -15,7 +15,7 @@
 
         <div class="card">
             <span>Asignar permisos a {!! strtoupper($role->name)!!}</span>
-            <button type="submit" class="btn btn-warning pull-right">Guardar cambios</button>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         </div>
 
         @include('permissions.partials.assign-permissions')

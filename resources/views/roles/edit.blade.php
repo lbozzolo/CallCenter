@@ -34,7 +34,7 @@
             {!! Form::number('level', $role->level, ['class' => 'form-control', 'min' => '1', 'max' => '10']) !!}
         </div>
 
-        {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
 
         {!! Form::close() !!}
 

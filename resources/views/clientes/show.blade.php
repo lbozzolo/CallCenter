@@ -20,9 +20,9 @@
                     @endif
 
                     @if($cliente->estado->slug == 'nuevo')
-                        <label class="label label-success pull-right">{!! $cliente->estado->nombre !!}</label>
+                        <label class="label label-warning pull-right">{!! $cliente->estado->nombre !!}</label>
                     @else
-                        <label class="label label-default pull-right">{!! $cliente->estado->nombre !!}</label>
+                        <label class="label label-default pull-right"  style="background-color: rgb(8, 142, 83);">{!! $cliente->estado->nombre !!}</label>
                     @endif
 
                     {{--<h3 class="card-title">{!! $cliente->full_name !!}</h3>--}}
