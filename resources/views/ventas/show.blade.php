@@ -43,7 +43,10 @@
                         <div class="card-body">
                             <ul class="list-unstyled listado">
                                 <li class="list-group-item">Operador: {!! $venta->user->full_name !!}</li>
-                                <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
+                                <li class="list-group-item">
+                                    Cliente: {!! $venta->cliente->full_name !!}
+                                    <a href="{{ route('clientes.show', $venta->cliente->id) }}" class="btn btn-default btn-xs pull-right">ver</a>
+                                </li>
                                 <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
                                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
                                 <li class="list-group-item">Número de guía: {!! $venta->numero_guia !!}</li>
@@ -99,9 +102,17 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Productos</h3>
+                        <ul class="list-unstyled list-inline">
+                            <li><h3>Productos</h3></li>
+                            <li>
+                                <button class="nonStyledButton" style="color:cyan" id="botonNuevoProducto"><i class="fa fa-plus"></i> Agregar</button>
+                                <button class="btn btn-default" id="botonNuevoProductoCancelar" style="display: none">Cancelar</button>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
+
+                        @include('ventas.partials.busqueda-productos')
 
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -238,9 +249,21 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Métodos de pago</h3>
+                        <ul class="list-unstyled list-inline">
+                            <li><h3>Métodos de pago</h3></li>
+                            <li><button class="nonStyledButton" style="color:cyan" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
+                            <li class="pull-right">
+                                @if($venta->diferencia < 0)
+                                    <span class="text-danger" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                                @else
+                                    <span class="text-success" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                                @endif
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
+
+                        @include('ventas.partials.agregar-metodo-pago')
 
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -254,10 +277,10 @@
                                     <th>Titular</th>
                                     <th>Fecha expiración</th>
                                     <th>Importe</th>
-                                    <th>Cuotas</th>
                                     <th>Interés</th>
                                     <th>Descuento</th>
-                                    <th>Valor cuota</th>
+                                    <th>IVA (21%)</th>
+                                    <th>Cuotas</th>
                                     <th>Total</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -277,15 +300,26 @@
                                             <td>{!! $metodoPagoVenta->datosTarjeta->titular !!}</td>
                                             <td>{!! $metodoPagoVenta->datosTarjeta->expiration_date !!}</td>
                                             <td>${!! $metodoPagoVenta->importe !!}</td>
-                                            <td class="text-center">{!! $metodoPagoVenta->datosTarjeta->formaPago->cuota_cantidad !!}</td>
                                             <td class="text-center">
-                                                {!! ($metodoPagoVenta->datosTarjeta->formaPago->interes != 0)? $metodoPagoVenta->datosTarjeta->formaPago->interes .' %'  : '-' !!}
+                                                @if($metodoPagoVenta->formaPago)
+                                                    {!! ($metodoPagoVenta->formaPago->interes != 0)? $metodoPagoVenta->formaPago->interes .' %'  : '-' !!}
+                                                @else
+                                                    -
+                                                @endif
                                             </td>
                                             <td class="text-center">
-                                                {!! ($metodoPagoVenta->datosTarjeta->formaPago->descuento != 0)? $metodoPagoVenta->datosTarjeta->formaPago->descuento .' %'  : '-' !!}
+                                                @if($metodoPagoVenta->formaPago)
+                                                    {!! ($metodoPagoVenta->formaPago->descuento != 0)? $metodoPagoVenta->formaPago->descuento .' %'  : '-' !!}
+                                                @else
+                                                    -
+                                                @endif
                                             </td>
-                                            <td class="text-center">{!! ($metodoPagoVenta->valor_cuota)? '$'.$metodoPagoVenta->valor_cuota : '-' !!}</td>
-                                            <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                                            <td>${!! $metodoPagoVenta->IVA !!}</td>
+                                            <td class="text-center">
+                                                {!! ($metodoPagoVenta->formaPago)? $metodoPagoVenta->formaPago->cuota_cantidad.' x ' : '-' !!}
+                                                {!! ($metodoPagoVenta->formaPago)? '$'.$metodoPagoVenta->valor_cuota : '' !!}
+                                            </td>
+                                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_iva !!}</td>
                                             <td>
                                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
                                                     eliminar
@@ -329,9 +363,9 @@
                                             <td>${!! $metodoPagoVenta->importe !!}</td>
                                             <td class="text-center">-</td>
                                             <td class="text-center">-</td>
+                                            <td class="text-center">${!! $metodoPagoVenta->IVA !!}</td>
                                             <td class="text-center">-</td>
-                                            <td class="text-center">-</td>
-                                            <td class="text-center">${!! $metodoPagoVenta->importe_total !!}</td>
+                                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_IVA !!}</td>
                                             <td>
                                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
                                                     eliminar
@@ -364,38 +398,44 @@
                                     @endif
                                 @empty
                                     <tr>
-                                        <td colspan="9">
+                                        <td colspan="10">
                                             <span class="text-left">Todavía no se ha cargado ningún método de pago</span>
                                         </td>
                                     </tr>
                                 @endforelse
                                 </tbody>
                                 <tfooter>
-                                    <tr>
-                                        <td colspan="12">Subtotal</td>
-                                        <td>${!! $venta->subtotal !!}</td>
-                                        <td>
-                                            @if($venta->diferencia < 0)
-                                                <span class="text-danger" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
-                                            @else
-                                                <span class="text-success" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="12">IVA (21%)</td>
-                                        <td>${!! $venta->iva !!}</td>
-                                    </tr>
+                                    {{--<tr>--}}
+                                    {{--<td colspan="12">Subtotal</td>--}}
+                                    {{--<td>${!! $venta->subtotal !!}</td>--}}
+                                    {{--<td>--}}
+                                    {{--@if($venta->diferencia < 0)--}}
+                                    {{--<span class="text-danger" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>--}}
+                                    {{--@else--}}
+                                    {{--<span class="text-success" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>--}}
+                                    {{--@endif--}}
+                                    {{--</td>--}}
+                                    {{--</tr>--}}
+                                    {{--<tr>--}}
+                                    {{--<td colspan="12">IVA (21%)</td>--}}
+                                    {{--<td>${!! $venta->iva !!}</td>--}}
+                                    {{--</tr>--}}
                                     <tr>
                                         <td colspan="9">Total</td>
-                                        <td colspan="3">
+                                        <td colspan="3" class="text-center">
+
+                                            <span class="text-muted">AJUSTE ACTUAL: $ {!! $venta->ajuste !!}</span>
+
+                                        </td>
+                                        <td>${!! $venta->importe_total !!}</td>
+                                        <td>
 
                                             @if($venta->ajuste == 0.00)
 
                                                 <button type="button" title="Ajustar" class="pull-right btn btn-warning btn-flat" data-toggle="modal" data-target="#ajustar{!! $venta->id !!}" style="border: none">
                                                     ajustar
                                                 </button>
-                                                <div class="modal fade col-lg-4 col-lg-offset-4" id="ajustar{!! $venta->id !!}">
+                                                <div class="modal fade col-lg-3 col-lg-offset-4 text-left" id="ajustar{!! $venta->id !!}">
                                                     <div class="card">
                                                         <div class="card-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -426,8 +466,8 @@
                                             @else
 
                                                 <button type="button" title="Quitar ajuste" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#quitarAjuste{!! $venta->id !!}">quitar ajuste</button><br>
-                                                <span class="text-muted">ajuste actual: ($ {!! $venta->ajuste !!})</span>
-                                                <div class="modal fade col-lg-4 col-lg-offset-4" id="quitarAjuste{!! $venta->id !!}">
+
+                                                <div class="modal fade col-lg-3 col-lg-offset-4 text-left" id="quitarAjuste{!! $venta->id !!}">
                                                     <div class="card">
                                                         <div class="card-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -454,11 +494,6 @@
                                             @endif
 
                                         </td>
-                                        <td>${!! $venta->importe_total !!}</td>
-                                        <td>
-                                            <small style="line-height: 1px!important">Total prod.</small>
-                                            <span class="text-warning">${!! $venta->suma_total_productos !!}</span>
-                                        </td>
                                     </tr>
                                 </tfooter>
                             </table>
@@ -483,6 +518,99 @@
         $('.datepicker').datepicker({
             format: 'd/mm/yyyy'
         });
+
+        // Agregar método de pago
+
+        $('#botonNuevoProducto').click(function () {
+            $('#botonNuevoProducto').hide();
+            $('#botonNuevoProductoCancelar').show();
+            $('#listadoProductos').show();
+        });
+
+        $('#botonNuevoProductoCancelar').click(function () {
+            $('#botonNuevoProducto').show();
+            $('#botonNuevoProductoCancelar').hide();
+            $('#listadoProductos').hide();
+        });
+
+        $('#botonNuevoMetodo').click(function () {
+            $('#botonNuevoMetodo').hide();
+            $('#nuevoMetodo').show();
+        });
+
+        $('#selectMetodo').change(function () {
+            var selected = $('#selectMetodo option:selected').text();
+            if(selected === 'Tarjeta de crédito'){
+                $('#selectTarjetaDebito').hide();
+                $('#selectCuotas').show();
+                $('#selectTarjetaCredito').show();
+            }
+            if(selected === 'Tarjeta de débito'){
+                $('#selectTarjetaCredito').hide();
+                $('#selectTarjetaDebito').show();
+            }
+            if(selected === 'Efectivo'){
+                $('#selectCredito').val('');
+                $('#selectDebito').val('');
+                $('#cuotas').val('');
+                $('#selectTarjetaCredito').hide();
+                $('#selectTarjetaDebito').hide();
+                $('#selectCuotas').hide();
+            }
+        });
+
+        $('#botonNuevaTarjeta').click(function () {
+            $('#botonNuevaTarjeta').hide();
+            $('#nuevaTarjeta').show();
+        });
+
+        $('#cancelarAgregarMetodoPago').click(function () {
+            $('#selectMetodo').val('');
+            $('#selectCredito').val('');
+            $('#selectDebito').val('');
+            $('#inputImporte').val('');
+            $('#cuotas').val('');
+            $('#selectTarjetaCredito').hide();
+            $('#selectTarjetaDebito').hide();
+            $('#selectCuotas').hide();
+            $('#botonNuevoMetodo').show()
+            $('#nuevoMetodo').hide();
+        });
+
+        $('#cancelarAsociarTarjeta').click(function () {
+            $('#marcaCredito').val('');
+            $('#banco').val('');
+            $('#numeroTarjeta').val('');
+            $('#codigoSeguridad').val('');
+            $('#titular').val('');
+            $('#fechaExpiracion').val('');
+            $('#botonNuevaTarjeta').show()
+            $('#nuevaTarjeta').hide();
+        });
+
+        $(document).ready(function() {
+            $('#table-productos').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            $("#div-table-productos").show();
+            $(".overlay").hide();
+        });
+
 
         // if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){
         //     $('#conTarjeta').show();

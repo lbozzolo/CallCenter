@@ -18,6 +18,8 @@ use Carbon\Carbon;
 use SmartLine\Http\Repositories\ClienteRepo;
 use Illuminate\Support\Facades\Response;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
+use SmartLine\Entities\MarcaTarjeta;
+use SmartLine\Entities\Banco;
 
 class ClientesController extends Controller
 {
@@ -72,8 +74,11 @@ class ClientesController extends Controller
 
     public function show($id)
     {
-        $cliente = Cliente::with('domicilio.localidad', 'domicilio.provincia')->where('id', $id)->first();
-        return view('clientes.show', compact('cliente'));
+        $data['cliente'] = Cliente::with('domicilio.localidad', 'domicilio.provincia')->where('id', $id)->first();
+        $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
+        $data['bancos'] = Banco::lists('nombre', 'id');
+
+        return view('clientes.show')->with($data);
     }
 
     public function edit($id)

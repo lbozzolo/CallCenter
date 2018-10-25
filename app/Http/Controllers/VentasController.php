@@ -166,7 +166,7 @@ class VentasController extends Controller
         $venta = Venta::find($request->venta_id);
         $venta->productos()->attach($producto);
 
-        return redirect()->route('ventas.panel', $venta->id)->with('Producto agregado con éxito');
+        return redirect()->back()->with('Producto agregado con éxito');
     }
 
     public function numeroGuia(Request $request, $id)
@@ -204,7 +204,7 @@ class VentasController extends Controller
         $producto = Producto::find($request->producto_id);
 
         $venta->productos()->detach($producto);
-        return redirect()->route('ventas.panel', $venta->id)->with('Producto quitado de la venta con éxita');
+        return redirect()->back()->with('Producto quitado de la venta con éxita');
     }
 
     public function cancelar(Request $request)
@@ -294,6 +294,8 @@ class VentasController extends Controller
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
+        $data['tarjetas'] = $data['venta']->cliente->datosTarjeta;
+        $data['productos'] = Producto::all();
 
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
         $data['tags'] = EstadoVenta::lists('nombre', 'slug');
@@ -431,7 +433,6 @@ class VentasController extends Controller
     public function ajustar(Request $request, $id)
     {
         $venta = Venta::find($id);
-
         $venta->ajuste = $venta->total() - $request->ajuste;
         $venta->save();
 
@@ -454,7 +455,7 @@ class VentasController extends Controller
         $tarjetaYcuotas = null;
 
         // Chequeo que exista el pago en las cuotas seleccionadas con la tarjeta seleccionada
-        if($datosTarjeta){
+        if($metodoPago->isCardMethod() && $datosTarjeta){
             $formasPago = $datosTarjeta->marca->formasPago->contains(function ($key, $value) use ($request) {
                 return $value->cuota_cantidad == $request->cuotas;
             });

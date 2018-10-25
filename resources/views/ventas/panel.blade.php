@@ -229,6 +229,8 @@
 
             }
 
+            // Agregar método de pago
+
             $('#botonNuevoProducto').click(function () {
                 $('#botonNuevoProducto').hide();
                 $('#botonNuevoProductoCancelar').show();
@@ -256,6 +258,14 @@
                 if(selected === 'Tarjeta de débito'){
                     $('#selectTarjetaCredito').hide();
                     $('#selectTarjetaDebito').show();
+                }
+                if(selected === 'Efectivo'){
+                    $('#selectCredito').val('');
+                    $('#selectDebito').val('');
+                    $('#cuotas').val('');
+                    $('#selectTarjetaCredito').hide();
+                    $('#selectTarjetaDebito').hide();
+                    $('#selectCuotas').hide();
                 }
             });
 
