@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Response;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use SmartLine\Entities\MarcaTarjeta;
 use SmartLine\Entities\Banco;
+use SmartLine\Entities\ValidateCreditCard;
 
 class ClientesController extends Controller
 {
@@ -263,6 +264,12 @@ class ClientesController extends Controller
         $cliente = Cliente::find($id);
 
         $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+
+        $validateFormat = ValidateCreditCard::validateFormatCreditCard($request->numero_tarjeta);
+        $validateLuhn = ValidateCreditCard::calculateLuhn($request->numero_tarjeta);
+
+        if(!$validateFormat || !$validateLuhn)
+            return redirect()->back()->withErrors('Formato de tarjeta incorrecto');
 
         $datosTarjeta = $cliente->datosTarjeta()->create([
             'marca_id' => $request->marca_id,
