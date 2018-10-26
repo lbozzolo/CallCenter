@@ -158,31 +158,37 @@
                 @endforelse
                 </tbody>
                 <tfooter>
-                    <tr>
-                        <td colspan="12">Subtotal</td>
-                        <td>${!! $venta->subtotal !!}</td>
-                        <td>
-                            @if($venta->diferencia < 0)
-                                <span class="text-danger" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
-                            @else
-                                <span class="text-success" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="12">IVA (21%)</td>
-                        <td>${!! $venta->iva !!}</td>
-                    </tr>
+                    {{--<tr>--}}
+                        {{--<td colspan="12">Subtotal</td>--}}
+                        {{--<td>${!! $venta->subtotal !!}</td>--}}
+                        {{--<td>--}}
+                            {{--@if($venta->diferencia < 0)--}}
+                                {{--<span class="text-danger" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>--}}
+                            {{--@else--}}
+                                {{--<span class="text-success" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>--}}
+                            {{--@endif--}}
+                        {{--</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr>--}}
+                        {{--<td colspan="12">IVA (21%)</td>--}}
+                        {{--<td>${!! $venta->iva !!}</td>--}}
+                    {{--</tr>--}}
                     <tr>
                         <td colspan="9">Total</td>
-                        <td colspan="3">
+                        <td colspan="3" class="text-center">
+
+                            <span class="text-muted">AJUSTE ACTUAL: $ {!! $venta->ajuste !!}</span>
+
+                        </td>
+                        <td>${!! $venta->importe_total !!}</td>
+                        <td>
 
                             @if($venta->ajuste == 0.00)
 
                                 <button type="button" title="Ajustar" class="pull-right btn btn-warning btn-flat" data-toggle="modal" data-target="#ajustar{!! $venta->id !!}" style="border: none">
                                     ajustar
                                 </button>
-                                <div class="modal fade col-lg-4 col-lg-offset-4" id="ajustar{!! $venta->id !!}">
+                                <div class="modal fade col-lg-3 col-lg-offset-4 text-left" id="ajustar{!! $venta->id !!}">
                                     <div class="card">
                                         <div class="card-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -213,8 +219,8 @@
                             @else
 
                                 <button type="button" title="Quitar ajuste" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#quitarAjuste{!! $venta->id !!}">quitar ajuste</button><br>
-                                <span class="text-muted">ajuste actual: ($ {!! $venta->ajuste !!})</span>
-                                <div class="modal fade col-lg-4 col-lg-offset-4" id="quitarAjuste{!! $venta->id !!}">
+
+                                <div class="modal fade col-lg-3 col-lg-offset-4 text-left" id="quitarAjuste{!! $venta->id !!}">
                                     <div class="card">
                                         <div class="card-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -241,7 +247,6 @@
                             @endif
 
                         </td>
-                        <td>${!! $venta->importe_total !!}</td>
                     </tr>
                 </tfooter>
             </table>

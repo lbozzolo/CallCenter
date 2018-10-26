@@ -19,13 +19,6 @@
         </a>
     </li>
     @endpermission
-    @permission('ver.llamadas.cliente')
-    <li>
-        <a href="{{ route('clientes.llamadas', $cliente->id) }}" class="{{ (Request::is('clientes/'.'*'.'/llamadas'.'*') ? 'navbar-item-selected' : '') }}">
-            Llamadas ({!! count($cliente->llamadas) !!})
-        </a>
-    </li>
-    @endpermission
     @permission('ver.reclamos.cliente')
     <li>
         <a href="{{ route('clientes.reclamos', $cliente->id) }}" class="{{ (Request::is('clientes/'.'*'.'/reclamos'.'*') ? 'navbar-item-selected' : '') }}">

@@ -15,7 +15,7 @@ class Venta extends Entity
         $subtotal = 0;
         $metodosPagoVenta = $this->metodoPagoVenta()->get();
         foreach($metodosPagoVenta as $metodoPagoVenta){
-            $subtotal += $metodoPagoVenta->importeMasPromocion();
+            $subtotal += $metodoPagoVenta->importeMasPromocionMasIVA();
         }
 
         return $subtotal;
@@ -47,14 +47,17 @@ class Venta extends Entity
 
     protected function diferencia()
     {
-        //return $this->sumaSubtotalProductos() - $this->subtotal();
-        return $this->subtotal() - $this->sumaSubtotalProductos();
-        //return  $this->subtotal() - ($this->sumaSubtotalProductos() - $this->ajuste );
+        return $this->sumaSubtotalProductos() - $this->subtotal() / 1.21;
+    }
+
+    protected function diferenciaConAjuste()
+    {
+        return $this->sumaTotalProductos() - $this->total();
     }
 
     public function total()
     {
-        return $this->subtotal() + $this->iva() - $this->ajuste;
+        return $this->subtotal() - $this->ajuste;
     }
 
     public function getIVAAttribute()
@@ -95,6 +98,11 @@ class Venta extends Entity
     public function getDiferenciaAttribute()
     {
         return $this->diferencia();
+    }
+
+    public function getDiferenciaConAjusteAttribute()
+    {
+        return $this->diferenciaConAjuste();
     }
 
 

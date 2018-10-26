@@ -27,7 +27,7 @@ class MetodoPagoVenta extends Entity
         return $total;
     }
 
-    protected function importeMasPromocionMasIVA()
+    public function importeMasPromocionMasIVA()
     {
         return $this->importeMasPromocion() + $this->iva();
     }

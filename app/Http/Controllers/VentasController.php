@@ -166,7 +166,7 @@ class VentasController extends Controller
         $venta = Venta::find($request->venta_id);
         $venta->productos()->attach($producto);
 
-        return redirect()->route('ventas.panel', $venta->id)->with('Producto agregado con éxito');
+        return redirect()->back()->with('Producto agregado con éxito');
     }
 
     public function numeroGuia(Request $request, $id)
@@ -204,7 +204,7 @@ class VentasController extends Controller
         $producto = Producto::find($request->producto_id);
 
         $venta->productos()->detach($producto);
-        return redirect()->route('ventas.panel', $venta->id)->with('Producto quitado de la venta con éxita');
+        return redirect()->back()->with('Producto quitado de la venta con éxita');
     }
 
     public function cancelar(Request $request)
@@ -221,6 +221,7 @@ class VentasController extends Controller
         $motivo = $request->motivo;
 
         $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
             'field' => 'estado_id',
             'former_value' => $venta->estado_id,
             'updated_value' => $cancelado->id,
@@ -253,17 +254,19 @@ class VentasController extends Controller
     public function retomar(Request $request)
     {
         $venta = Venta::find($request->venta_id);
+        $iniciada = EstadoVenta::where('slug', 'iniciada')->first();
 
         $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
             'field' => 'estado_id',
             'former_value' => $venta->estado_id,
-            'updated_value' => $venta->former_status,
+            'updated_value' => $iniciada->id,
         ]);
 
-        $venta->estado_id = $venta->former_status;
+        $venta->estado_id = $iniciada->id;
         $venta->save();
 
-        return redirect()->route('ventas.panel', $venta->id)->with('La venta ha sido retomada');
+        return redirect()->route('ventas.panel', $venta->id)->with('ok', 'La venta ha sido retomada');
     }
 
     /**
@@ -294,6 +297,8 @@ class VentasController extends Controller
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
+        $data['tarjetas'] = $data['venta']->cliente->datosTarjeta;
+        $data['productos'] = Producto::all();
 
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
         $data['tags'] = EstadoVenta::lists('nombre', 'slug');
@@ -401,7 +406,13 @@ class VentasController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
+        $venta = Venta::find($id);
         $estado = EstadoVenta::find($request->estado_id);
+        $estadoAnterior = $venta->estado->slug;
+
+        // Redirecciono atrás si el cliente no tiene un barrio en sus datos personales
+        if($estadoAnterior == 'iniciada' && !$venta->cliente->domicilio->barrio)
+            return redirect()->back()->withErrors('No se puede realizar la operación. El cliente no tiene ingresado un barrio en sus datos personales.');
 
         if($estado->slug == 'cancelada'){
             $validator = Validator::make($request->all(), [
@@ -412,10 +423,10 @@ class VentasController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $venta = Venta::find($id);
         $motivo = $request->motivo;
 
         $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
             'field' => 'estado_id',
             'former_value' => $venta->estado_id,
             'updated_value' => $estado->id,
@@ -431,17 +442,34 @@ class VentasController extends Controller
     public function ajustar(Request $request, $id)
     {
         $venta = Venta::find($id);
+        $nuevoAjuste = $venta->total() - $request->ajuste;
 
-        $venta->ajuste = $venta->total() - $request->ajuste;
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'field' => 'ajuste',
+            'former_value' => $venta->ajuste,
+            'updated_value' => $nuevoAjuste
+        ]);
+
+        $venta->ajuste = $nuevoAjuste;
         $venta->save();
 
         return redirect()->back()->with('ok', 'Importe de venta ajustado con éxito');
     }
 
-    public function quitarAjuste(Request $request, $id)
+    public function quitarAjuste($id)
     {
         $venta = Venta::find($id);
-        $venta->ajuste = 0.00;
+        $nuevoAjuste = 0.00;
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'field' => 'ajuste',
+            'former_value' => $venta->ajuste,
+            'updated_value' => $nuevoAjuste
+        ]);
+
+        $venta->ajuste = $nuevoAjuste;
         $venta->save();
 
         return redirect()->back()->with('ok', 'Ajuste de venta quitado con éxito');
@@ -454,7 +482,7 @@ class VentasController extends Controller
         $tarjetaYcuotas = null;
 
         // Chequeo que exista el pago en las cuotas seleccionadas con la tarjeta seleccionada
-        if($datosTarjeta){
+        if($metodoPago->isCardMethod() && $datosTarjeta){
             $formasPago = $datosTarjeta->marca->formasPago->contains(function ($key, $value) use ($request) {
                 return $value->cuota_cantidad == $request->cuotas;
             });
