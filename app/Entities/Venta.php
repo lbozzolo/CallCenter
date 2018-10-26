@@ -50,6 +50,11 @@ class Venta extends Entity
         return $this->sumaSubtotalProductos() - $this->subtotal() / 1.21;
     }
 
+    protected function diferenciaConAjuste()
+    {
+        return $this->sumaTotalProductos() - $this->total();
+    }
+
     public function total()
     {
         return $this->subtotal() - $this->ajuste;
@@ -93,6 +98,11 @@ class Venta extends Entity
     public function getDiferenciaAttribute()
     {
         return $this->diferencia();
+    }
+
+    public function getDiferenciaConAjusteAttribute()
+    {
+        return $this->diferenciaConAjuste();
     }
 
 

@@ -14,11 +14,12 @@
 
         @if($venta->estado->slug == 'cancelada')
 
+
             <div class="card card-default">
                 <div class="card-body">
-                    <ul class="list-unstyled">
-                        <li><strong>Cliente:</strong> {!! $venta->cliente->full_name !!}</li>
-                        <li>
+                    <ul class="list-unstyled listado">
+                        <li class="list-group-item"><strong>Cliente:</strong> {!! $venta->cliente->full_name !!}</li>
+                        <li class="list-group-item">
                             <strong>{!! (count($venta->productos) > 1)? 'Productos:' : 'Producto:' !!}</strong>
                             <ul>
                                 @foreach($venta->productos as $producto)
@@ -26,9 +27,35 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li><strong>Fecha:</strong> {!! $venta->fecha_creado !!}</li>
-                        <li><strong>Cancelación:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->fecha_creado !!}</li>
-                        <li><strong>Motivo:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->reason !!}</li>
+                        <li class="list-group-item"><strong>Fecha:</strong> {!! $venta->fecha_creado !!}</li>
+                        <li class="list-group-item"><strong>Cancelación:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->fecha_creado !!}</li>
+                        <li class="list-group-item"><strong>Motivo:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->reason !!}</li>
+                        @permission('retomar.venta')
+                        <li class="list-group-item">
+                            <button type="button" class="nonStyledButton" data-toggle="modal" data-target="#retomarVenta">
+                                <i class="fa fa-rotate-right text-primary"></i>
+                                Retomar
+                            </button>
+                            <div class="modal fade col-lg-3 col-lg-offset-4" id="retomarVenta">
+                                <div class="card">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Retomar venta</h4>
+                                    </div>
+                                    {!! Form::open(['url' => route('ventas.retomar'), 'method' => 'put']) !!}
+                                    <div class="modal-body">
+                                        <p>¿Desea retomar esta venta?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        {!! Form::hidden('venta_id', $venta->id) !!}
+                                        <button type="submit" class="btn btn-primary pull-left">Retomar venta</button>
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                        </li>
+                        @endpermission
                     </ul>
                 </div>
             </div>
@@ -79,51 +106,7 @@
             </div>
         </div>
 
-        {{--<div class="card card-default">
-            <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseCliente" aria-expanded="false" aria-controls="collapseCliente">
-                <div class="row">
-                    <div class="col-lg-11"><h3 class="card-title">Datos cliente <span class="text-primary">{!! $venta->cliente->full_name !!}</span> </h3></div>
-                    <div class="col-lg-1 text-right"><i class="fa fa-caret-down"></i></div>
-                </div>
-            </div>
-            <div class="card-body collapse" id="collapseCliente" aria-labelledby="headingOne" data-parent="#accordion">
 
-                <div class="row">
-                @permission('editar.cliente')
-                    @include('ventas.partials.panel-cliente')
-                @endpermission
-                </div>
-
-            </div>
-        </div>
-
-        <div class="card card-default">
-            <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseProductos" aria-expanded="false" aria-controls="collapseProductos">
-                <div class="row">
-                    <div class="col-lg-11"><h3 class="card-title">Productos</h3></div>
-                    <div class="col-lg-1 text-right"><i class="fa fa-caret-down"></i></div>
-                </div>
-            </div>
-            <div class="card-body collapse" id="collapseProductos" aria-labelledby="headingOne" data-parent="#accordion">
-
-                @include('ventas.partials.panel-productos')
-
-            </div>
-        </div>
-
-        <div class="card card-default">
-            <div class="card-heading" style="cursor: pointer" data-toggle="collapse" data-target="#collapseDatosTarjeta" aria-expanded="false" aria-controls="collapseDatosTarjeta">
-                <div class="row">
-                    <div class="col-lg-11"><h3 class="card-title">Datos de tarjeta</h3></div>
-                    <div class="col-lg-1 text-right"><i class="fa fa-caret-down"></i></div>
-                </div>
-            </div>
-            <div class="card-body collapse" id="collapseDatosTarjeta" aria-labelledby="headingOne" data-parent="#accordion">
-            @permission('editar.venta')
-                @include('ventas.partials.formulario-datos-tarjeta')
-            @endpermission
-            </div>
-        </div>--}}
         @endif
 
 @endsection

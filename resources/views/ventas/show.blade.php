@@ -70,7 +70,7 @@
                 <div class="col-12">
                     <div class="card card-default" style="height: 310px">
                         <div class="card-header">
-                            <h3 class="card-title">Editar venta</h3>
+                            <h3 class="card-title">Estado de la venta</h3>
                         </div>
                         <div class="card-body">
                             <p>Marcar esta venta como...</p>
