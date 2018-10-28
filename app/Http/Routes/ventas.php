@@ -55,12 +55,6 @@ Route::put('ventas/{id}/editar-modos', [
     'middleware' => 'permission:editar.venta'
 ]);
 
-/*Route::post('ventas/crear', [
-    'as' => 'ventas.store',
-    'uses' => 'VentasController@store'
-]);*/
-
-
 Route::get('ventas/{id}/ver', [
     'as' => 'ventas.show',
     'uses' => 'VentasController@show',
@@ -100,25 +94,31 @@ Route::put('ventas/{id}/cambiar-estado', [
 Route::post('ventas/{id}/agregar-metodo-de-pago', [
     'as' => 'ventas.agregar.metodo.de.pago',
     'uses' => 'VentasController@agregarMetodoDePago',
-    //'middleware' => 'permission:editar.venta'
+    'middleware' => 'permission:agregar.metodo.pago.venta'
 ]);
 
 Route::put('ventas/{id}/ajustar', [
     'as' => 'ventas.ajustar',
     'uses' => 'VentasController@ajustar',
-    //'middleware' => 'permission:editar.venta'
+    'middleware' => 'permission:ajustar.venta'
 ]);
 
 Route::put('ventas/{id}/quitar-ajuste', [
     'as' => 'ventas.quitar.ajuste',
     'uses' => 'VentasController@quitarAjuste',
-    //'middleware' => 'permission:editar.venta'
+    'middleware' => 'permission:quitar.ajuste.venta'
 ]);
 
 Route::delete('ventas/{id}/quitar-metodo-pago', [
     'as' => 'ventas.quitar.metodopago',
     'uses' => 'VentasController@quitarMetodoPago',
-    //'middleware' => 'permission:editar.venta'
+    'middleware' => 'permission:quitar.metodo.pago.venta'
+]);
+
+Route::put('ventas/{id}/editar-metodo-pago-venta', [
+    'as' => 'ventas.editar.metodo.pago.venta',
+    'uses' => 'VentasController@editarMetodoPagoVenta',
+    'middleware' => 'permission:editar.metodo.pago.venta'
 ]);
 
 Route::post('ventas/{id}/numero-guia', [
@@ -149,10 +149,4 @@ Route::delete('ventas/{id}/eliminar', [
     'as' => 'ventas.destroy',
     'uses' => 'VentasController@destroy',
     'middleware' => 'permission:eliminar.venta'
-]);
-
-Route::put('ventas/{id}/editar-metodo-pago-venta', [
-    'as' => 'ventas.editar.metodo.pago.venta',
-    'uses' => 'VentasController@editarMetodoPagoVenta',
-    //'middleware' => 'permission:retomar.venta'
 ]);

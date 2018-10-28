@@ -1,6 +1,6 @@
-<tr id="editarMetodoPagoVenta{!! $metodoPagoVenta->id !!}" class="editarMetodoPagoVenta" style="display: none; background-color: rgb(31, 32, 55);">
+<tr id="editarMetodoPagoVenta{!! $metodoPagoVenta->id !!}" class="editarMetodoPagoVenta" style="display: none; background-color: #262c3f">
     {!! Form::open(['url' => route('ventas.editar.metodo.pago.venta', $metodoPagoVenta->id), 'method' => 'put']) !!}
-    <td>{!! $metodoPagoVenta->metodoPago->nombre !!}</td>
+    <td style="border-left: 2px solid cyan">{!! $metodoPagoVenta->metodoPago->nombre !!}</td>
     <td class="text-center">--</td>
     <td class="text-center">-</td>
     <td class="text-center">-</td>
@@ -16,7 +16,8 @@
     <td class="text-center">-</td>
     <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_IVA !!}</td>
     <td>
-        <button type="submit" class="btn btn-success btn-flat" style="color:gray">aceptar</button>
+        <button type="submit" class="btn btn-success btn-flat" title="Aceptar"><i class="fa fa-check"></i> </button>
+        <button type="button" class="btn btn-default btn-flat botonCancelarEdicionMetodoPago" title="Cancelar"><i class="fa fa-close"></i> </button>
     </td>
     {!! Form::close() !!}
 </tr>

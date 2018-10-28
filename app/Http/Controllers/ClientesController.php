@@ -220,6 +220,10 @@ class ClientesController extends Controller
     public function importacionUpload(Request $request)
     {
         $file = $request->excel_file;
+
+        if(!$file)
+            return redirect()->back()->withErrors('No se pudo cargar el archivo.');
+
         $estado = EstadoCliente::where('slug', '=', 'nuevo')->first()->id;
 
         Excel::load($file, function($reader) use ($estado) {
@@ -291,6 +295,8 @@ class ClientesController extends Controller
     {
         $tarjeta = DatoTarjeta::find($id);
 
+        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+
         $validateFormat = ValidateCreditCard::validateFormatCreditCard($request->numero_tarjeta);
         $validateLuhn = ValidateCreditCard::calculateLuhn($request->numero_tarjeta);
 
@@ -302,7 +308,7 @@ class ClientesController extends Controller
         $tarjeta->numero_tarjeta = $request->numero_tarjeta;
         $tarjeta->codigo_seguridad = $request->codigo_seguridad;
         $tarjeta->titular = $request->titular;
-        $tarjeta->fecha_expiracion = $request->fecha_expiracion;
+        $tarjeta->fecha_expiracion = $fechaExpiracion;
 
         $tarjeta->save();
 

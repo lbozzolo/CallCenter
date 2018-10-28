@@ -1,7 +1,7 @@
 <tr id="editarTarjetaAsociada{!! $tarjeta->id !!}" class="editarTarjetaAsociada" style="display: none; background-color: #262c3f">
     {!! Form::open(['method' => 'put', 'url' => route('clientes.update.tarjeta', $tarjeta->id), 'class' =>'form']) !!}
 
-    {!! Form::hidden('cliente_id', $venta->cliente->id) !!}
+    {!! Form::hidden('cliente_id', $cliente->id) !!}
     <td style="border-left: 2px solid cyan">
         {!! Form::select('marca_id', $marcas, $tarjeta->marca->id, ['id' => 'marcaCredito', 'class' => 'form-control select2b']) !!}
     </td>

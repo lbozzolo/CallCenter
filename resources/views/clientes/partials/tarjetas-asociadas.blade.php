@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <ul class="list-unstyled list-inline">
-            <li><h3>{!! $venta->cliente->fullname !!}</h3></li>
+            <li><h3>{!! $cliente->fullname !!}</h3></li>
             @permission('agregar.tarjeta.cliente')
             <li><button class="nonStyledButton" style="color:cyan" id="botonNuevaTarjeta"><i class="fa fa-plus"></i> Agregar</button> </li>
             @endpermission
@@ -11,7 +11,7 @@
     <div class="card-body">
 
         @permission('agregar.tarjeta.cliente')
-        @include('ventas.partials.agregar-tarjeta-asociada')
+        @include('clientes.partials.agregar-tarjeta-asociada')
         @endpermission
 
         <div class="table-responsive">
@@ -28,8 +28,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($venta->cliente->hasCard('credito') || $venta->cliente->hasCard('debito'))
-                    @foreach($venta->cliente->datosTarjeta as $tarjeta)
+                @if($cliente->hasCard('credito') || $cliente->hasCard('debito'))
+                    @foreach($cliente->datosTarjeta as $tarjeta)
 
                         <tr id="showTarjetaAsociada{!! $tarjeta->id !!}" class="showTarjetaAsociada">
                             <td>{!! $tarjeta->marca->nombre !!}</td>
@@ -73,7 +73,7 @@
                         </tr>
 
                         @permission('editar.tarjeta.cliente')
-                        @include('ventas.partials.editar-tarjeta-asociada')
+                        @include('clientes.partials.editar-tarjeta-asociada')
                         @endpermission
 
                     @endforeach

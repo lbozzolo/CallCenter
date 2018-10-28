@@ -2,7 +2,9 @@
     <div class="card-header">
         <ul class="list-unstyled list-inline">
             <li><h3>Métodos de pago</h3></li>
+            @permission('agregar.metodo.pago.venta')
             <li><button class="nonStyledButton" style="color:cyan" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
+            @endpermission
             <li class="pull-right">
                 @if($venta->diferencia < 0)
                     <span class="text-danger" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
@@ -14,9 +16,9 @@
     </div>
     <div class="card-body">
 
-
+        @permission('agregar.metodo.pago.venta')
         @include('ventas.partials.agregar-metodo-pago')
-
+        @endpermission
 
         @if(count($venta->metodoPagoVenta) > 0)
 
@@ -76,7 +78,10 @@
                             </td>
                             <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_iva !!}</td>
                             <td>
+                                @permission('editar.metodo.pago.venta')
                                 <button type="button" class="btn btn-primary btn-flat botonEditarMetodoPagoVenta" data-id="{!! $metodoPagoVenta->id !!}"><i class="fa fa-edit"></i></button>
+                                @endpermission
+                                @permission('quitar.metodo.pago')
                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}">
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -102,10 +107,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endpermission
                             </td>
                         </tr>
 
+                        @permission('editar.metodo.pago.venta')
                         @include('ventas.partials.editar-metodo-pago-venta-tarjeta')
+                        @endpermission
 
                     @else
 
@@ -125,7 +133,10 @@
                             <td class="text-center">-</td>
                             <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_IVA !!}</td>
                             <td>
+                                @permission('editar.metodo.pago.venta')
                                 <button type="button" class="btn btn-primary btn-flat botonEditarMetodoPagoVenta" data-id="{!! $metodoPagoVenta->id !!}"><i class="fa fa-edit"></i></button>
+                                @endpermission
+                                @permission('quitar.metodo.pago.venta')
                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}">
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -151,10 +162,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endpermission
                             </td>
                         </tr>
 
+                        @permission('editar.metodo.pago.venta')
                         @include('ventas.partials.editar-metodo-pago-venta-efectivo')
+                        @endpermission
 
                     @endif
                 @empty
@@ -166,21 +180,7 @@
                 @endforelse
                 </tbody>
                 <tfooter>
-                    {{--<tr>--}}
-                        {{--<td colspan="12">Subtotal</td>--}}
-                        {{--<td>${!! $venta->subtotal !!}</td>--}}
-                        {{--<td>--}}
-                            {{--@if($venta->diferencia < 0)--}}
-                                {{--<span class="text-danger" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>--}}
-                            {{--@else--}}
-                                {{--<span class="text-success" title="Diferencia con la suma total de productos" style="cursor: default">$ {!! $venta->diferencia !!}</span>--}}
-                            {{--@endif--}}
-                        {{--</td>--}}
-                    {{--</tr>--}}
-                    {{--<tr>--}}
-                        {{--<td colspan="12">IVA (21%)</td>--}}
-                        {{--<td>${!! $venta->iva !!}</td>--}}
-                    {{--</tr>--}}
+
                     <tr>
                         <td colspan="9">Total</td>
                         <td colspan="3" class="text-center">
@@ -193,6 +193,7 @@
 
                             @if($venta->ajuste == 0.00)
 
+                                @permission('ajustar.venta')
                                 <button type="button" title="Ajustar" class="pull-right btn btn-warning btn-flat" data-toggle="modal" data-target="#ajustar{!! $venta->id !!}" style="border: none">
                                     ajustar
                                 </button>
@@ -223,9 +224,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endpermission
 
                             @else
 
+                                @permission('quitar.ajuste.venta')
                                 <button type="button" title="Quitar ajuste" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#quitarAjuste{!! $venta->id !!}">quitar ajuste</button><br>
 
                                 <div class="modal fade col-lg-3 col-lg-offset-4 text-left" id="quitarAjuste{!! $venta->id !!}">
@@ -251,6 +254,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endpermission
 
                             @endif
 
