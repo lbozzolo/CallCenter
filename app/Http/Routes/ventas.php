@@ -150,3 +150,9 @@ Route::delete('ventas/{id}/eliminar', [
     'uses' => 'VentasController@destroy',
     'middleware' => 'permission:eliminar.venta'
 ]);
+
+Route::put('ventas/{id}/editar-metodo-pago-venta', [
+    'as' => 'ventas.editar.metodo.pago.venta',
+    'uses' => 'VentasController@editarMetodoPagoVenta',
+    //'middleware' => 'permission:retomar.venta'
+]);

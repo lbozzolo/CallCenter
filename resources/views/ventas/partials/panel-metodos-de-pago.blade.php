@@ -18,6 +18,8 @@
         @include('ventas.partials.agregar-metodo-pago')
 
 
+        @if(count($venta->metodoPagoVenta) > 0)
+
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -35,7 +37,7 @@
                         <th>IVA (21%)</th>
                         <th>Cuotas</th>
                         <th>Total</th>
-                        <th>Opciones</th>
+                        <th style="width: 100px">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +46,7 @@
                     @if($metodoPagoVenta->metodoPago->isCardMethod())
 
                         {{--TARJETA DE CRÉDITO O DE DÉBITO--}}
-                        <tr>
+                        <tr id="showMetodoPagoVenta{!! $metodoPagoVenta->id !!}" class="showMetodoPagoVenta">
                             <td>{!! $metodoPagoVenta->metodoPago->nombre !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->marca->nombre !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->banco->nombre !!}</td>
@@ -74,8 +76,9 @@
                             </td>
                             <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_iva !!}</td>
                             <td>
-                                <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
-                                    eliminar
+                                <button type="button" class="btn btn-primary btn-flat botonEditarMetodoPagoVenta" data-id="{!! $metodoPagoVenta->id !!}"><i class="fa fa-edit"></i></button>
+                                <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}">
+                                    <i class="fa fa-trash"></i>
                                 </button>
                                 <div class="modal fade col-lg-3 col-lg-offset-9" id="eliminar{!! $metodoPagoVenta->id !!}">
                                     <div class="card">
@@ -102,10 +105,12 @@
                             </td>
                         </tr>
 
+                        @include('ventas.partials.editar-metodo-pago-venta-tarjeta')
+
                     @else
 
                         {{--EFECTIVO--}}
-                        <tr>
+                        <tr id="showMetodoPagoVenta{!! $metodoPagoVenta->id !!}" class="showMetodoPagoVenta">
                             <td>{!! $metodoPagoVenta->metodoPago->nombre !!}</td>
                             <td class="text-center">--</td>
                             <td class="text-center">-</td>
@@ -120,8 +125,9 @@
                             <td class="text-center">-</td>
                             <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_IVA !!}</td>
                             <td>
-                                <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}" style="border: none">
-                                    eliminar
+                                <button type="button" class="btn btn-primary btn-flat botonEditarMetodoPagoVenta" data-id="{!! $metodoPagoVenta->id !!}"><i class="fa fa-edit"></i></button>
+                                <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}">
+                                    <i class="fa fa-trash"></i>
                                 </button>
                                 <div class="modal fade col-lg-3 col-lg-offset-9" id="eliminar{!! $metodoPagoVenta->id !!}">
                                     <div class="card">
@@ -147,6 +153,8 @@
                                 </div>
                             </td>
                         </tr>
+
+                        @include('ventas.partials.editar-metodo-pago-venta-efectivo')
 
                     @endif
                 @empty
@@ -251,5 +259,8 @@
                 </tfooter>
             </table>
         </div>
+
+        @endif
+
     </div>
 </div>

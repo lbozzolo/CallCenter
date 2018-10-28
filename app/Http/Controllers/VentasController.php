@@ -521,4 +521,13 @@ class VentasController extends Controller
     {
         //
     }
+
+    public function editarMetodoPagoVenta(Request $request, $id)
+    {
+        $metodoPagoVenta = MetodoPagoVenta::find($id);
+        $metodoPagoVenta->importe = $request->importe;
+        $metodoPagoVenta->save();
+
+        return redirect()->back();
+    }
 }

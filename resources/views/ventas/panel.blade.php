@@ -80,7 +80,20 @@
                 @permission('editar.cliente')
                 <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
 
-                    @include('ventas.partials.panel-metodos-de-pago')
+                    @if(count($venta->productos) > 0)
+
+                        @include('ventas.partials.panel-metodos-de-pago')
+
+                    @else
+
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="text-warning">Todavía no puede agregar métodos de pago ya que aún no hay ningún producto seleccionado en esta venta.</span>
+                            </div>
+                        </div>
+
+                    @endif
+
 
                 </div>
                 @endpermission
@@ -306,6 +319,17 @@
             $(".overlay").hide();
 
 
+            // Edición Método Pago Venta
+
+            $('.botonEditarMetodoPagoVenta').click(function (ev){
+                ev.preventDefault();
+                var metodoPagoVentaId = $(this).attr('data-id');
+                $('.showMetodoPagoVenta').show();
+                $('.editarMetodoPagoVenta').hide();
+                $('#showMetodoPagoVenta' + metodoPagoVentaId).hide();
+                $('#editarMetodoPagoVenta' + metodoPagoVentaId).show();
+                $('#input' + metodoPagoVentaId).focus();
+            });
 
         });
 

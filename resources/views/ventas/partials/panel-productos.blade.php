@@ -12,20 +12,24 @@
 
         @include('ventas.partials.busqueda-productos')
 
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                <tr style="background-color: gray">
-                    <th>Producto</th>
-                    <th>Marca</th>
-                    <th>Descripción</th>
-                    <th>Categorías</th>
-                    <th>Medida</th>
-                    <th>Precio</th>
-                    <th class="text-center">Opciones</th>
-                </tr>
-                </thead>
-                <tbody>
+
+        @if(count($venta->productos) > 0)
+
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr style="background-color: gray">
+                        <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Descripción</th>
+                        <th>Categorías</th>
+                        <th>Medida</th>
+                        <th>Precio</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     @foreach($venta->productos as $producto)
                         <tr>
                             <td>{!! ucwords($producto->nombre) !!}</td>
@@ -47,10 +51,10 @@
                                     <button type="button" class="btn btn-default btn-flat btn-sm" data-target="#verProspecto{{ $producto->id }}" data-toggle="modal" title="Prospecto (Componenetes)"><i class="fa fa-file-text-o"></i> </button>
                                 @endif
                                 @permission('editar.venta')
-                                    <button type="button" class="btn btn-warning btn-flat btn-sm" data-target="#editarObservaciones{{ $producto->id }}" data-toggle="modal" title="Modos de Uso (observaciones)"><i class="fa fa-book"></i> </button>
+                                <button type="button" class="btn btn-warning btn-flat btn-sm" data-target="#editarObservaciones{{ $producto->id }}" data-toggle="modal" title="Modos de Uso (observaciones)"><i class="fa fa-book"></i> </button>
                                 @endpermission
                                 @permission('quitar.producto.venta')
-                                    <button type="button" class="btn btn-danger btn-flat btn-sm" data-toggle="modal" data-target="#quitarProducto{{ $producto->id }}" title="Quitar Producto"><i class="fa fa-trash-o"></i> </button>
+                                <button type="button" class="btn btn-danger btn-flat btn-sm" data-toggle="modal" data-target="#quitarProducto{{ $producto->id }}" title="Quitar Producto"><i class="fa fa-trash-o"></i> </button>
                                 @endpermission
 
                                 @permission('editar.venta')
@@ -120,8 +124,8 @@
                             </td>
                         </tr>
                     @endforeach
-                </tbody>
-                <tfoot>
+                    </tbody>
+                    <tfoot>
                     <tr>
                         <td colspan="5">Subtotal</td>
                         <td>${!! $venta->suma_subtotal_productos !!}</td>
@@ -134,8 +138,12 @@
                         <td colspan="5">Total</td>
                         <td>${!! $venta->suma_total_productos !!}</td>
                     </tr>
-                </tfoot>
-            </table>
-        </div>
+                    </tfoot>
+                </table>
+            </div>
+
+        @endif
+
+
     </div>
 </div>
