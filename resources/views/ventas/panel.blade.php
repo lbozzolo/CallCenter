@@ -331,6 +331,17 @@
                 $('#input' + metodoPagoVentaId).focus();
             });
 
+            // Edición Tarjeta Asociada
+
+            $('.botonEditarTarjetaAsociada').click(function (ev){
+                ev.preventDefault();
+                var tarjetaId = $(this).attr('data-id');
+                $('.showTarjetaAsociada').show();
+                $('.editarTarjetaAsociada').hide();
+                $('#showTarjetaAsociada' + tarjetaId).hide();
+                $('#editarTarjetaAsociada' + tarjetaId).show();
+            });
+
         });
 
     </script>

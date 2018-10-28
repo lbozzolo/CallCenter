@@ -42,6 +42,12 @@ Route::post('clientes/{id}/agregar-tarjeta', [
     //'middleware' => 'permission:editar.cliente'
 ]);
 
+Route::put('clientes/{id}/update-tarjeta', [
+    'as' => 'clientes.update.tarjeta',
+    'uses' => 'ClientesController@updateTarjeta',
+    //'middleware' => 'permission:editar.cliente'
+]);
+
 Route::delete('clientes/{id}/eliminar-tarjeta', [
     'as' => 'clientes.eliminar.tarjeta',
     'uses' => 'ClientesController@eliminarTarjeta',

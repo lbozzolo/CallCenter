@@ -287,6 +287,28 @@ class ClientesController extends Controller
 
     }
 
+    public function updateTarjeta(CreateDatosTarjetaRequest $request, $id)
+    {
+        $tarjeta = DatoTarjeta::find($id);
+
+        $validateFormat = ValidateCreditCard::validateFormatCreditCard($request->numero_tarjeta);
+        $validateLuhn = ValidateCreditCard::calculateLuhn($request->numero_tarjeta);
+
+        if(!$validateFormat || !$validateLuhn)
+            return redirect()->back()->withErrors('Formato de tarjeta incorrecto');
+
+        $tarjeta->marca_id = $request->marca_id;
+        $tarjeta->banco_id = $request->banco_id;
+        $tarjeta->numero_tarjeta = $request->numero_tarjeta;
+        $tarjeta->codigo_seguridad = $request->codigo_seguridad;
+        $tarjeta->titular = $request->titular;
+        $tarjeta->fecha_expiracion = $request->fecha_expiracion;
+
+        $tarjeta->save();
+
+        return redirect()->back()->with('ok', 'Tarjeta editada con éxito');
+    }
+
     public function eliminarTarjeta(Request $request, $id)
     {
         $datoTarjeta = DatoTarjeta::find($id);

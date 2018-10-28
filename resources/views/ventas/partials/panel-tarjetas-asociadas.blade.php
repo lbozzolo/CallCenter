@@ -22,13 +22,14 @@
                         <th>Código</th>
                         <th>Titular</th>
                         <th>Fecha expiración</th>
-                        <th>Opciones</th>
+                        <th style="width: 100px">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                 @if($venta->cliente->hasCard('credito') || $venta->cliente->hasCard('debito'))
                     @foreach($venta->cliente->datosTarjeta as $tarjeta)
-                        <tr>
+
+                        <tr id="showTarjetaAsociada{!! $tarjeta->id !!}" class="showTarjetaAsociada">
                             <td>{!! $tarjeta->marca->nombre !!}</td>
                             <td>{!! $tarjeta->banco->nombre !!}</td>
                             <td>{!! $tarjeta->card_number !!}</td>
@@ -36,7 +37,8 @@
                             <td>{!! $tarjeta->titular !!}</td>
                             <td>{!! $tarjeta->expiration_date !!}</td>
                             <td>
-                                <button type="button" title="Eliminar tarjeta" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminarTarjeta{!! $tarjeta->id !!}" style="border: none">
+                                <button type="button" class="btn btn-primary btn-flat botonEditarTarjetaAsociada" data-id="{!! $tarjeta->id !!}"><i class="fa fa-edit"></i></button>
+                                <button type="button" title="Eliminar tarjeta" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminarTarjeta{!! $tarjeta->id !!}">
                                     <i class="fa fa-trash-o"></i>
                                 </button>
                                 <div class="modal fade col-lg-2 col-lg-offset-10" id="eliminarTarjeta{!! $tarjeta->id !!}">
@@ -63,6 +65,9 @@
                                 </div>
                             </td>
                         </tr>
+
+                        @include('ventas.partials.editar-tarjeta-asociada')
+
                     @endforeach
                 @else
                     <span class="text-muted">No hay ninguna tarjeta asociada a este cliente</span><br>
