@@ -24,9 +24,9 @@
                         </li>
                         <li>
                             @if($cliente->estado->slug == 'nuevo')
-                                <span class="label label-success">{!! $cliente->estado->nombre !!}</span>
+                                <span class="label label-warning">{!! $cliente->estado->nombre !!}</span>
                             @else
-                                <span class="label label-default pull-right">{!! $cliente->estado->nombre !!}</span>
+                                <span class="label label-default pull-right" style="background-color: rgb(8, 142, 83);">{!! $cliente->estado->nombre !!}</span>
                             @endif
                         </li>
                         @if(!$cliente->dni)
@@ -38,7 +38,6 @@
                             <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary btn-sm">Editar</a>
                         </li>
                     </ul>
-
 
                 </div>
                 <div class="card-body">

@@ -1,5 +1,5 @@
 
-<ul class="list-inline">
+<ul class="list-inline panel panel-barra">
     
     @permission('listado.usuario')
     <li><a href="{{ route('users.index') }}" class="{{ (Request::is('usuarios') ? 'navbar-item-selected' : '') }}">Habilitados</a></li>

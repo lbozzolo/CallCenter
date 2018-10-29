@@ -47,7 +47,7 @@
                         {!! Form::label('level', 'Nivel (de 1 a 10)') !!}
                         {!! Form::number('level',null, ['class' => 'form-control', 'min' => '1', 'max' => '10']) !!}
                     </div>
-                    {!! Form::submit('+ Agregar rol', ['class' => 'btn btn-primary']) !!}
+                    <button type="submit" class="btn btn-primary">Agregar Rol</button>
 
                     {!! Form::close() !!}
 

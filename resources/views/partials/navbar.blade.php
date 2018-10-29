@@ -111,7 +111,7 @@
 
 
                 @permission('listado.forma.de.pago')
-                <li><a href="{{ route('formas.pago.index') }}"><i class="ti-money"></i> Pagos </a></li>
+                <li><a href="{{ route('formas.pago.index') }}"><i class="ti-money"></i> Metodos de Pagos </a></li>
                 @endpermission
 
 
