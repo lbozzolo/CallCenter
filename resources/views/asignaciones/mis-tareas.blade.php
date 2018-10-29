@@ -32,6 +32,7 @@
                         <th>Asignado por...</th>
                         <th>Dato asignado</th>
                         <th>Fecha</th>
+                        <th class="text-right">Tomar asignación</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,11 @@
                             <td>{!! $asignacion->supervisor->full_name !!}</td>
                             <td>{!! $asignacion->cliente->full_name !!}</td>
                             <td>{!! $asignacion->fecha_creado !!}</td>
+                            <td>
+                            @permission('crear.venta')
+                                <a href="{{ route('asignaciones.tomar', $asignacion->id) }}" class="btn btn-sm btn-primary">Empezar venta</a>
+                            @endpermission
+                            </td>
                         </tr>
 
                     @empty

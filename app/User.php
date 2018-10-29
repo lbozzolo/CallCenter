@@ -85,14 +85,25 @@ class User extends Entity implements AuthenticatableContract,
 
     public function asignacionesAnteriores()
     {
+        return $this->asignacionesPasadas()->merge($this->asignacionesTomadas());
+    }
+
+    protected function asignacionesTomadas()
+    {
+        return Asignacion::where('operador_id', $this->id)
+            ->onlyTrashed()
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
+    protected function asignacionesPasadas()
+    {
         $today = Carbon::now()->toDateString();
 
-        $asignaciones = Asignacion::where('operador_id', $this->id)
+        return Asignacion::where('operador_id', $this->id)
             ->whereDate('created_at', '!=', $today)
             ->orderBy('id', 'desc')
             ->get();
-
-        return $asignaciones;
     }
 
     public function getRolesIdsAttribute()

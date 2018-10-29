@@ -37,3 +37,9 @@ Route::get('mis-tareas-anteriores', [
     'middleware' => 'permission:ver.mis.asignaciones'
 ]);
 
+Route::get('asignaciones/{id}/tomar', [
+    'as' => 'asignaciones.tomar',
+    'uses' => 'AsignacionesController@tomar',
+    'middleware' => 'permission:crear.venta'
+]);
+
