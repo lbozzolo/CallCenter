@@ -25,7 +25,7 @@ Route::get('ventas/llamar/seleccionar-producto/{idCliente}', [
     'middleware' => 'permission:crear.venta'
 ]);
 
-Route::post('ventas/crear', [
+Route::get('ventas/{id}/crear', [
     'as' => 'ventas.crear',
     'uses' => 'VentasController@create',
     'middleware' => 'permission:crear.venta'

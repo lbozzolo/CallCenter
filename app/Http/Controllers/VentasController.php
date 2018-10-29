@@ -110,19 +110,16 @@ class VentasController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function create(Request $request)
+    public function create($id)
     {
         $iniciada = EstadoVenta::where('slug', 'iniciada')->first();
-        //$producto = Producto::find($request->id_producto);
-        $cliente = Cliente::find($request->cliente_id);
+        $cliente = Cliente::find($id);
 
         $venta = Venta::create([
             'user_id' => Auth::user()->id,
             'cliente_id' => $cliente->id,
             'estado_id' => $iniciada->id //Por defecto se crea en estado INICIADA
         ]);
-
-        //$venta->productos()->attach($producto);
 
         return redirect()->route('ventas.panel', $venta->id);
     }

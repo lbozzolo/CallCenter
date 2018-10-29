@@ -27,13 +27,15 @@
 
                 <table class="table table-vertical dataTable" id="table-asignaciones-historicas">
 
+                    @if($asignaciones->count())
                     <thead>
-                    <tr>
-                        <th>Asignado por...</th>
-                        <th>Dato asignado</th>
-                        <th>Fecha</th>
-                    </tr>
+                        <tr>
+                            <th>Asignado por...</th>
+                            <th>Dato asignado</th>
+                            <th>Fecha</th>
+                        </tr>
                     </thead>
+                    @endif
                     <tbody>
 
                     @forelse($asignaciones as $asignacion)

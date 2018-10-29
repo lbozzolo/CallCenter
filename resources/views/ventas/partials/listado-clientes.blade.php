@@ -45,13 +45,9 @@
                 <td>//</td>
                 <td>{!! $cliente->fecha_creado !!}</td>
                 <td class="text-center">
-                    {!! Form::open(['url' => route('ventas.crear'), 'method' => 'post', 'class' => 'form']) !!}
-
-                        {!! Form::hidden('cliente_id', $cliente->id) !!}
-                        <button type="submit" class="btn btn-sm btn-primary">seleccionar</button>
-
-                    {!! Form::close() !!}
-                    {{--<a href="{{ route('ventas.seleccion.producto', $cliente->id) }}" class="btn btn-primary btn-xs">seleccionar</a>--}}
+                @permission('crear.venta')
+                    <a href="{{ route('ventas.crear', $cliente->id) }}" class="btn btn-sm btn-primary">seleccionar</a>
+                @endpermission
                 </td>
             </tr>
 
