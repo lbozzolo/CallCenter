@@ -80,7 +80,20 @@
                 @permission('editar.cliente')
                 <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
 
-                    @include('ventas.partials.panel-metodos-de-pago')
+                    @if(count($venta->productos) > 0)
+
+                        @include('ventas.partials.panel-metodos-de-pago')
+
+                    @else
+
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="text-warning">Todavía no puede agregar métodos de pago ya que aún no hay ningún producto seleccionado en esta venta.</span>
+                            </div>
+                        </div>
+
+                    @endif
+
 
                 </div>
                 @endpermission
@@ -117,171 +130,10 @@
     <script src="{{ asset('js/tarjetas-de-credito.js') }}"></script>
     <script src="{{ asset('js/provincias-partidos-localidades.js') }}"></script>
     <script src="{{ asset('js/estados-ventas.js') }}"></script>
+    <script src="{{ asset('js/edicion-metodo-pago-tarjeta-asociada.js') }}"></script>
+    <script src="{{ asset('js/agregar-metodo-pago.js') }}"></script>
 
     <script>
-
-        $(document).ready(function() {
-
-
-            $('.select2').select2();
-
-            $('#div-table-resultados').hide();
-            $('#sinresultados').hide();
-
-            $("#producto_valor").keypress(function(ev) {
-                if(ev.which === 13) {
-                    $('#cargando').show();
-                    ev.preventDefault();
-                    var token = $("input[name*='_token']").val();
-                    var valor = $("#producto_valor").val();
-                    $('#tbl-resultados tbody').empty();
-
-                    $.ajax({
-                        method: 'GET',
-                        url: 'productos/buscar',
-                        headers: {"X-CSRF-TOKEN": token},
-                        dataType: 'json',
-                        data: {
-                            valor: valor
-                        }
-
-                    }).done(ResultadoSearch);
-                }
-            });
-
-
-            $("#search").click(function( ev ){
-
-
-                $('#cargando').show();
-                ev.preventDefault();
-                var token = $("input[name*='_token']").val();
-                var valor = $("#producto_valor").val();
-                $('#tbl-resultados tbody').empty();
-
-                $.ajax({
-                    method: 'GET',
-                    url: 'productos/buscar',
-                    headers: {"X-CSRF-TOKEN": token},
-                    dataType: 'json',
-                    data: {
-                        valor: valor
-                    }
-
-                }).done(ResultadoSearch);
-
-            });
-
-            function ResultadoSearch(data)
-            {
-
-                $('#cargando').hide();
-                var html;
-                var table = $('#tbl-resultados tbody');
-
-                if(data.length > 0) {
-                    $.each(data, function (i, d) {
-
-                        var id = d.id;
-                        html = '<tr>';
-                        html += '<td>' + d.id + '</td>';
-                        html += '<td><em class="icon-layers"></em> ' + d.nombre + '</td>';
-                        if(d.marca){
-                            html += '<td><em class="icon-layers"></em> ' + d.marca.nombre + '</td>';
-                        }else{
-                            html += '<td><em class="icon-layers"></em>--</td>';
-                        }
-                        html += '<td>$' + d.precio + '</td>';
-                        html += '<td>';
-                        html += '<input name="venta_id" type="hidden" value="{{ $venta->id }}">';
-                        html += '<input name="producto_id" type="hidden" value="' + d.id + '">';
-                        html += '<button type="submit" id="agregar_producto" class="btn btn-primary btn-xs">agregar</button>';
-                        html += '</td>';
-                        html += '</tr>';
-                        table.append(html);
-                    });
-                    $('#sinresultados').hide();
-                    $('#div-table-resultados').show();
-
-                }else{
-
-                    $('#div-table-resultados').hide();
-                    $('#sinresultados').show();
-
-                }
-
-            }
-
-            // Agregar método de pago
-
-            $('#botonNuevoProducto').click(function () {
-                $('#botonNuevoProducto').hide();
-                $('#botonNuevoProductoCancelar').show();
-                $('#listadoProductos').show();
-            });
-
-            $('#botonNuevoProductoCancelar').click(function () {
-                $('#botonNuevoProducto').show();
-                $('#botonNuevoProductoCancelar').hide();
-                $('#listadoProductos').hide();
-            });
-
-            $('#botonNuevoMetodo').click(function () {
-                $('#botonNuevoMetodo').hide();
-                $('#nuevoMetodo').show();
-            });
-            
-            $('#selectMetodo').change(function () {
-                var selected = $('#selectMetodo option:selected').text();
-                if(selected === 'Tarjeta de crédito'){
-                    $('#selectTarjetaDebito').hide();
-                    $('#selectCuotas').show();
-                    $('#selectTarjetaCredito').show();
-                }
-                if(selected === 'Tarjeta de débito'){
-                    $('#selectTarjetaCredito').hide();
-                    $('#selectTarjetaDebito').show();
-                }
-                if(selected === 'Efectivo'){
-                    $('#selectCredito').val('');
-                    $('#selectDebito').val('');
-                    $('#cuotas').val('');
-                    $('#selectTarjetaCredito').hide();
-                    $('#selectTarjetaDebito').hide();
-                    $('#selectCuotas').hide();
-                }
-            });
-
-            $('#botonNuevaTarjeta').click(function () {
-                $('#botonNuevaTarjeta').hide();
-                $('#nuevaTarjeta').show();
-            });
-
-            $('#cancelarAgregarMetodoPago').click(function () {
-                $('#selectMetodo').val('');
-                $('#selectCredito').val('');
-                $('#selectDebito').val('');
-                $('#inputImporte').val('');
-                $('#cuotas').val('');
-                $('#selectTarjetaCredito').hide();
-                $('#selectTarjetaDebito').hide();
-                $('#selectCuotas').hide();
-                $('#botonNuevoMetodo').show()
-                $('#nuevoMetodo').hide();
-            });
-
-            $('#cancelarAsociarTarjeta').click(function () {
-                $('#marcaCredito').val('');
-                $('#banco').val('');
-                $('#numeroTarjeta').val('');
-                $('#codigoSeguridad').val('');
-                $('#titular').val('');
-                $('#fechaExpiracion').val('');
-                $('#botonNuevaTarjeta').show()
-                $('#nuevaTarjeta').hide();
-            });
-
-        });
 
         $(document).ready(function() {
             $('#table-productos').DataTable({
@@ -304,8 +156,6 @@
 
             $("#div-table-productos").show();
             $(".overlay").hide();
-
-
 
         });
 

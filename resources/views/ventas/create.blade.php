@@ -9,7 +9,9 @@
 @section('contenido')
 
     <div class="card card-default">
-        <p class="text-center" style="background-color: #1de9b6; color: black; padding: 5px">Seleccione un cliente</p>
+        <div class="alert alert-warning bg-warning text-center">
+            <span class="lead "><i class="fa fa-arrow-down pull-left"></i> Seleccione un cliente <i class="fa fa-arrow-down pull-right"></i></span>
+        </div>
         <div class="card-body">
         @permission('listado.cliente')
             @include('ventas.partials.listado-clientes')

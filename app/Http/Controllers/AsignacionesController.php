@@ -79,10 +79,17 @@ class AsignacionesController extends Controller
 
     public function misTareasAnteriores()
     {
-        $operador = Auth::user();
-        $asignaciones = $operador->asignacionesAnteriores();
-
+        $asignaciones = Auth::user()->asignacionesAnteriores();
         return view('asignaciones.mis-tareas-anteriores', compact('asignaciones'));
+    }
+
+    public function tomar($id)
+    {
+        $asignacion = Asignacion::find($id);
+        $clienteId = $asignacion->id;
+        $asignacion->delete();
+
+        return redirect()->route('ventas.crear', $clienteId);
     }
 
     public function destroy($id)

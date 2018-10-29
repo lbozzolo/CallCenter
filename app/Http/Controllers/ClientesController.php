@@ -220,6 +220,10 @@ class ClientesController extends Controller
     public function importacionUpload(Request $request)
     {
         $file = $request->excel_file;
+
+        if(!$file)
+            return redirect()->back()->withErrors('No se pudo cargar el archivo.');
+
         $estado = EstadoCliente::where('slug', '=', 'nuevo')->first()->id;
 
         Excel::load($file, function($reader) use ($estado) {
@@ -285,6 +289,30 @@ class ClientesController extends Controller
 
         return redirect()->back()->with('ok', 'Nueva tarjeta asociada con éxito');
 
+    }
+
+    public function updateTarjeta(CreateDatosTarjetaRequest $request, $id)
+    {
+        $tarjeta = DatoTarjeta::find($id);
+
+        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+
+        $validateFormat = ValidateCreditCard::validateFormatCreditCard($request->numero_tarjeta);
+        $validateLuhn = ValidateCreditCard::calculateLuhn($request->numero_tarjeta);
+
+        if(!$validateFormat || !$validateLuhn)
+            return redirect()->back()->withErrors('Formato de tarjeta incorrecto');
+
+        $tarjeta->marca_id = $request->marca_id;
+        $tarjeta->banco_id = $request->banco_id;
+        $tarjeta->numero_tarjeta = $request->numero_tarjeta;
+        $tarjeta->codigo_seguridad = $request->codigo_seguridad;
+        $tarjeta->titular = $request->titular;
+        $tarjeta->fecha_expiracion = $fechaExpiracion;
+
+        $tarjeta->save();
+
+        return redirect()->back()->with('ok', 'Tarjeta editada con éxito');
     }
 
     public function eliminarTarjeta(Request $request, $id)
