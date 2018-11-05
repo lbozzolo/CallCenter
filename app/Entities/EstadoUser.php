@@ -14,4 +14,9 @@ class EstadoUser extends Entity
         return $this->hasMany(User::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

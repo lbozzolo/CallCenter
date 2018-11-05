@@ -121,4 +121,9 @@ class Cliente extends Entity
         return $this->hasMany(Asignacion::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

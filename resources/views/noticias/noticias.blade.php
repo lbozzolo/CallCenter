@@ -32,7 +32,6 @@
                 @forelse($noticias as $noticia)
 
                     <li>
-                        {{--<div class="card" style="padding: 10px 20px">--}}
                         <div class="noticia" style="padding: 10px 20px">
                             <span>{!! $noticia->fecha_creado !!} - {!! $noticia->hora_created !!} hs</span>
                             <span class="pull-right">Autor: {!! $noticia->autor->full_name !!}</span>
@@ -42,7 +41,9 @@
 
                 @empty
 
-                    <p>Todavía no hay ninguna noticia cargada en el sistema.</p>
+                    <div class="card">
+                        <p>Todavía no hay ninguna noticia cargada en el sistema.</p>
+                    </div>
 
                 @endforelse
 
