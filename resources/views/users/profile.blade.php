@@ -23,11 +23,11 @@
             <div class="card">
                 <ul class="list-unstyled listado">
                     <li class="list-group-item">Fecha de alta: {!! $user->fecha_creado !!}</li>
-                    <li class="list-group-item"><i class="fa fa-phone"></i> {!! $user->telefono !!}</li>
-                    <li class="list-group-item">DNI: {!! $user->dni !!}</li>
-                    @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin|admin'))
+                    <li class="list-group-item"><i class="fa fa-phone"></i>Teléfono:  {!! ($user->telefono)? $user->telefono : "<small class='text-muted'>sin datos</small>" !!}</li>
+                    <li class="list-group-item">DNI: {!! ($user->dni)? $user->dni : "<small class='text-muted'>sin datos</small>" !!}</li>
+                    @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin'))
                         <li class="list-group-item">
-                            <a href="{{ route('users.changePassword', $user->id) }}">Cambiar contraseña</a>
+                            <a href="{{ route('users.changePassword', $user->id) }}" style="color: cyan">Cambiar contraseña</a>
                         </li>
                     @endif
                 </ul>

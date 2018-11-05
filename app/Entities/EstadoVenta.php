@@ -17,4 +17,9 @@ class EstadoVenta extends Entity
         return $this->hasMany(Venta::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

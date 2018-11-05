@@ -14,7 +14,7 @@
             <th>Teléfono</th>
             <th>DNI</th>
             <th>Estado</th>
-            <th>Opciones</th>
+            <th class="text-center">Opciones</th>
         </tr>
         </thead>
         <tbody>
@@ -32,27 +32,29 @@
                 <td class="text-center">
 
                 @permission('cambiar.estado.usuario')
-                    <button type="button" title="HABILITAR" class="nonStyledButton" data-toggle="modal" data-target="#enableUser{!! $user->id !!}" >
+                    <button type="button" title="HABILITAR" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#enableUser{!! $user->id !!}" >
                         <i class="fa fa-toggle-off"></i>
                     </button>
-                    <div class="modal fade" id="enableUser{!! $user->id !!}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Habilitar usuario</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>¿Desea habilitar el usuario '{!! $user->full_name !!}'?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                    <a href="{{ route('users.change.state', $user->id) }}" class="btn btn-primary" title="DESHABILITAR">Habilitar</a>
-                                </div>
+                    <div class="modal fade col-lg-3 col-lg-offset-9 text-left" id="enableUser{!! $user->id !!}">
+                        <div class="card">
+                            <div class="card-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Habilitar usuario</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>¿Desea habilitar el usuario '{!! $user->full_name !!}'?</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ route('users.change.state', $user->id) }}" class="btn btn-primary" title="DESHABILITAR">Habilitar</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>
+                @endpermission
+
+                @permission('ver.updateable')
+                    <a href="{{ route('updateables.entidad.show', ['entity' => $user->getClass(), 'id' => $user->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>
                 @endpermission
 
                 </td>

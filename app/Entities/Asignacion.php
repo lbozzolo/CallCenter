@@ -32,4 +32,9 @@ class Asignacion extends Entity
         return $this->belongsTo(Cliente::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

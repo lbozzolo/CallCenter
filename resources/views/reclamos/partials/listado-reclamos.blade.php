@@ -10,13 +10,13 @@
         <tr>
             <th>Id</th>
             <th>Estado</th>
-            <th>Venta</th>
+            <th class="text-right">Venta</th>
             <th>Productos</th>
             <th>Cliente</th>
-            <th>Descripción</th>
-            <th>solucionado</th>
+            <th style="width: 300px">Descripción</th>
+            <th class="text-center">solucionado</th>
             <th>Fecha</th>
-            <th>Opciones</th>
+            <th class="text-right">Opciones</th>
         </tr>
         </thead>
         <tbody>
@@ -32,9 +32,9 @@
                         <label class="label label-default">{!! $reclamo->estado->nombre !!}</label>
                     @endif
                 </td>
-                <td>
+                <td class="text-center">
                 @permission('ver.venta')
-                    #<a href="{{ route('ventas.show', $reclamo->venta->id) }}">{!! $reclamo->venta->id !!} <i class="fa fa-info-circle"></i> </a>
+                    <a href="{{ route('ventas.show', $reclamo->venta->id) }}" style="color: cyan">{!! $reclamo->venta->id !!}</a>
                 @endpermission
                 </td>
                 <td>
@@ -55,7 +55,7 @@
                     @endpermission
                 </td>
                 <td>{!! $reclamo->descripcion !!}</td>
-                <td>
+                <td class="text-center">
                     @if($reclamo->solucionado)
                         <i class="fa fa-check text-success"></i>
                     @else
@@ -65,11 +65,11 @@
                 <td>{!! $reclamo->fecha_creado !!}</td>
                 <td class="text-center">
                 @permission('cambiar.estado.reclamo')
-                    <button type="button" {{ ($reclamo->estado && $reclamo->estado->slug == 'abierto')? 'title=CERRAR' : 'title=ABRIR' }} class="nonStyledButton" data-toggle="modal" data-target="#disableReclamo{!! $reclamo->id !!}" >
+                    <button type="button" {{ ($reclamo->estado && $reclamo->estado->slug == 'abierto')? 'title=CERRAR' : 'title=ABRIR' }} class="btn btn-default btn-xs" data-toggle="modal" data-target="#disableReclamo{!! $reclamo->id !!}" >
                         @if($reclamo->estado && $reclamo->estado->slug == 'activo')
-                            <i class="fa fa-toggle-on text-primary"></i>
+                            <i class="fa fa-toggle-on"></i>
                         @else
-                            <i class="fa fa-toggle-off text-primary"></i>
+                            <i class="fa fa-toggle-off"></i>
                         @endif
                     </button>
                     <div class="modal fade" id="disableReclamo{!! $reclamo->id !!}">
@@ -95,14 +95,16 @@
                 @endpermission
 
                 @permission('ver.reclamo')
-                    <a href="{{ route('reclamos.show', ['id' => $reclamo->id]) }}" title="Info"><i class="fa fa-info-circle"></i> </a>
+                    <a href="{{ route('reclamos.show', ['id' => $reclamo->id]) }}" class="btn btn-success btn-xs" title="Info"><i class="fa fa-eye"></i> </a>
                 @endpermission
+
                 @permission('editar.producto')
-                    <a href="{{ route('productos.edit', ['id' => $reclamo->id]) }}" title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{{ route('productos.edit', ['id' => $reclamo->id]) }}" title="Editar" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
                 @endpermission
+
                 @permission('eliminar.reclamo')
-                    <button type="button" title="ELIMINAR" class="nonStyledButton" data-toggle="modal" data-target="#eliminarReclamo{!! $reclamo->id !!}" >
-                        <i class="fa fa-trash-o text-danger"></i>
+                    <button type="button" title="ELIMINAR" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#eliminarReclamo{!! $reclamo->id !!}" >
+                        <i class="fa fa-trash-o"></i>
                     </button>
                     <div class="modal fade" id="eliminarReclamo{!! $reclamo->id !!}">
                         <div class="modal-dialog">
@@ -130,6 +132,10 @@
                             </div>
                         </div>
                     </div>
+                @endpermission
+
+                @permission('ver.updateable')
+                <a href="{{ route('updateables.entidad.show', ['entity' => $reclamo->getClass(), 'id' => $reclamo->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>
                 @endpermission
 
                 </td>

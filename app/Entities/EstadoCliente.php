@@ -13,4 +13,9 @@ class EstadoCliente extends Entity
         return $this->hasMany(Cliente::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

@@ -17,4 +17,9 @@ class Noticia extends Entity
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

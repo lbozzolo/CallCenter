@@ -78,4 +78,10 @@ class Producto extends Entity
     {
         return $this->morphMany(Imagen::class, 'imageable');
     }
+
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

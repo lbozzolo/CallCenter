@@ -1,20 +1,3 @@
-@section('css')
-
-    <style type="text/css">
-        .sinfoto{
-            background-color: #1b6d85;
-            color: whitesmoke;
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            padding: 5px;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            border-radius: 15px;
-        }
-    </style>
-
-@endsection
 
 <div class="overlay col-lg-12 text-center" style="padding: 100px; border: 1px solid lightgrey; border-radius: 5px">
     Aguarde un momento por favor...<br>
@@ -34,7 +17,7 @@
                 <th>Teléfono</th>
                 <th>DNI</th>
                 <th>Estado</th>
-                <th>Opciones</th>
+                <th class="text-right">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -57,16 +40,18 @@
                     {!! $user->full_name !!}
                 @endpermission
                 </td>
-                <td class="text-center">@include('users.partials.labels-roles')</td>
+                <td class="text-center">
+                    @include('users.partials.labels-roles')
+                </td>
                 <td>{!! $user->email !!}</td>
-                <td>{!! ($user->telefono)? $user->telefono : '---' !!}</td>
-                <td>{!! ($user->dni)? $user->dni : '---' !!}</td>
+                <td class="text-center">{!! ($user->telefono)? $user->telefono : '---' !!}</td>
+                <td class="text-center">{!! ($user->dni)? $user->dni : '---' !!}</td>
                 <td>{!! $user->estado->nombre !!}</td>
                 <td class="text-center">
 
                 @permission('cambiar.estado.usuario')
-                    <button type="button" title="DESHABILITAR" class="nonStyledButton" data-toggle="modal" data-target="#disableUser{!! $user->id !!}" >
-                        <i class="fa fa-toggle-on text-danger"></i>
+                    <button type="button" title="DESHABILITAR" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#disableUser{!! $user->id !!}" >
+                        <i class="fa fa-toggle-on"></i>
                     </button>
                     <div class="modal fade col-lg-4 col-lg-offset-8 text-left" id="disableUser{!! $user->id !!}">
                         <div class="card">
@@ -91,11 +76,15 @@
                 @endpermission
 
                 @permission('editar.usuario')
-                    <a href="{{ route('users.edit', ['id' => $user->id, 'route' => 'users.index']) }}"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{{ route('users.edit', ['id' => $user->id, 'route' => 'users.index']) }}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
                 @endpermission
 
                 @permission('editar.permisos.usuario')
-                    <a href="{{ route('users.permissions', $user->id) }}"><i class="fa fa-file-powerpoint-o"></i></a>
+                    <a href="{{ route('users.permissions', $user->id) }}" class="btn btn-default btn-xs"><i class="fa fa-file-powerpoint-o"></i></a>
+                @endpermission
+
+                @permission('ver.updateable')
+                    <a href="{{ route('updateables.entidad.show', ['entity' => $user->getClass(), 'id' => $user->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>
                 @endpermission
 
                 </td>

@@ -71,6 +71,8 @@
 
                 <li><a href="{{ route('noticias.index') }}"><i class="ti-notepad"></i> Carga de Noticias </a></li>
 
+                <li><a href="{{ route('updateables.index') }}"><i class="ti-notepad"></i> Movimientos </a></li>
+
                 <li class="label">Seteos</li>
 
                 @permission('listado.producto')

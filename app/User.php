@@ -21,7 +21,7 @@ use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use SmartLine\Entities\Imagen;
 use SmartLine\Entities\Llamada;
 use Carbon\Carbon;
-
+use SmartLine\Entities\Updateable;
 
 class User extends Entity implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -164,5 +164,14 @@ class User extends Entity implements AuthenticatableContract,
         return $this->hasMany(Noticia::class);
     }
 
+    public function movimientos()
+    {
+        return $this->hasMany(Updateable::class, 'user_id');
+    }
+
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
 
 }

@@ -3,6 +3,8 @@
 namespace SmartLine\Entities;
 
 
+use SmartLine\User;
+
 class Updateable extends Entity
 {
     protected $table = 'updateables';
@@ -13,6 +15,11 @@ class Updateable extends Entity
     public function updateable()
     {
         return $this->morphTo();
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }
