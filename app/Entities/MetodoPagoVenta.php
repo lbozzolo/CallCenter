@@ -116,5 +116,10 @@ class MetodoPagoVenta extends Entity
         return $this->belongsTo(FormaPago::class, 'formadepago_id');
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 
 }

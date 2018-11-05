@@ -13,4 +13,9 @@ class EstadoReclamo extends Entity
         return $this->hasMany(Reclamo::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

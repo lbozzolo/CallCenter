@@ -1,23 +1,8 @@
 @extends('noticias.base')
 
-{{--@section('css')--}}
-
-    {{--<style type="text/css">--}}
-
-        {{--.noticia, .noticia p{--}}
-            {{--background-color: whitesmoke;--}}
-            {{--color: black !important;--}}
-            {{--margin: 10px;--}}
-            {{--border-radius: 3px;--}}
-        {{--}--}}
-
-    {{--</style>--}}
-
-{{--@endsection--}}
-
 @section('titulo')
 
-<h2>Noticias <span class="text-muted">/ Ver noticia #{!! $noticia->id !!}</span> </h2>
+    <h2>Noticias <span class="text-muted">/ Ver noticia #{!! $noticia->id !!}</span> </h2>
 
 @endsection
 

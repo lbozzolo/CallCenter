@@ -64,6 +64,10 @@
                 @elsepermission
                     <button class="btn btn-default btn-xs" disabled>detalles</button>
                 @endpermission
+
+                @permission('ver.updateable')
+                    <a href="{{ route('updateables.entidad.show', ['entity' => $cliente->getClass(), 'id' => $cliente->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>
+                @endpermission
                 </td>
             </tr>
 

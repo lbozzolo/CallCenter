@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth', 'new.user']], function () {
     require(__DIR__ . '/Routes/enviopack.php');
     require(__DIR__ . '/Routes/formas-pago.php');
     require(__DIR__ . '/Routes/asignaciones.php');
+    require(__DIR__ . '/Routes/updateables.php');
 
     //Ruta para ejecutar pruebas
     Route::get('/test', ['as' => 'test', 'uses' => 'DashboardController@test']);

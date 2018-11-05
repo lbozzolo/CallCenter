@@ -13,4 +13,9 @@ class EstadoProducto extends Entity
         return $this->hasMany(Producto::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

@@ -19,5 +19,9 @@ class MetodoPago extends Entity
         return $this->hasMany(MetodoPagoVenta::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
 
 }

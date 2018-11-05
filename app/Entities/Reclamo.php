@@ -41,4 +41,9 @@ class Reclamo extends Entity
         return $this->hasMany(Llamada::class);
     }
 
+    public function updateable()
+    {
+        return $this->morphMany(Updateable::class, 'updateable');
+    }
+
 }

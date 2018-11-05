@@ -19,11 +19,15 @@
                         @endpermission
 
                         @permission('editar.noticia')
-                        <a href="{!! route('noticias.edit', $noticia->id) !!}" class=" btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                        <a href="{!! route('noticias.edit', $noticia->id) !!}" class=" btn btn-primary btn-xs" title="editar"><i class="fa fa-edit"></i></a>
                         @endpermission
 
                         @permission('ver.noticia')
-                        <a href="{!! route('noticias.show', $noticia->id) !!}" class=" btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                        <a href="{!! route('noticias.show', $noticia->id) !!}" class=" btn btn-success btn-xs" title="ver"><i class="fa fa-eye"></i></a>
+                        @endpermission
+
+                        @permission('ver.updateable')
+                        <a href="{{ route('updateables.entidad.show', ['entity' => $noticia->getClass(), 'id' => $noticia->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>
                         @endpermission
                     </td>
                 </tr>

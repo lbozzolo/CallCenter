@@ -10,6 +10,12 @@ class Entity extends Model
         return get_class(new static);
     }
 
+    public function getClassNameAttribute()
+    {
+        $class = substr($this->getClass(), 19);
+        return config('sistema.updateables.entidades.'.$class);
+    }
+
     public function getFechaCreadoAttribute()
     {
         return date_format($this->created_at,"d/m/Y");
@@ -27,7 +33,7 @@ class Entity extends Model
 
     static function getModels()
     {
-        return ['marca','banco', 'asignacion', 'categoria', 'cliente', 'datoTarjeta', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'noticia', 'metodoPago', 'producto', 'promocion', 'reclamo', 'user', 'venta',];
+        return ['marca','banco', 'asignacion', 'categoria', 'cliente', 'datoTarjeta', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'noticia', 'metodoPago', 'producto', 'promocion', 'reclamo', 'updateable', 'user', 'venta',];
     }
 
 }

@@ -101,3 +101,35 @@ input, .select2, textarea, .select2b{
 .panel-barra {
     padding: 8px;
 }
+
+.btn-updateable {
+    background-color: #28776C;
+}
+
+.sinfoto{
+    background-color: #1b6d85;
+    color: whitesmoke;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.label-operador-in{
+    background-color: #5C2D1F;
+}
+
+.label-operador-out{
+    background-color: #D6CF85;
+}
+
+.label-atencion-al-cliente{
+    background-color: #4F36A1;
+}
+
+.label-logistica{
+    background-color: #90A838;
+}
