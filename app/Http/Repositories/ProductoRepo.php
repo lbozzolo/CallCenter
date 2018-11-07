@@ -30,6 +30,45 @@ class ProductoRepo extends BaseRepo
         return $productos;
     }
 
+    public function updateProducto($id, $request)
+    {
+        $producto = Producto::find($id);
+
+        $fechaInicio = Carbon::createFromFormat('d/m/Y', $request->fecha_inicio)->toDateTimeString();
+        $fechaFinalizacion = Carbon::createFromFormat('d/m/Y', $request->fecha_finalizacion)->toDateTimeString();
+
+//        if($request['calle'] && $request['calle'] != $domicilio->calle){
+//            $domicilio->updateable()->create([
+//                'user_id' => Auth::user()->id,
+//                'action' => 'update',
+//                'field' => 'calle',
+//                'former_value' => $domicilio->calle,
+//                'updated_value' => $request['calle']
+//            ]);
+//            $domicilio->calle = $request['calle'];
+//        }
+
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->fecha_inicio = ($request->fecha_inicio)? $fechaInicio : null;
+        $producto->fecha_finalizacion = ($request->fecha_finalizacion)? $fechaFinalizacion : null;
+        $producto->estado_id = $request->estado_id;
+        $producto->unidad_medida_id = $request->unidad_medida_id;
+        $producto->cantidad_medida = $request->cantidad_medida;
+        $producto->stock = $request->stock;
+        $producto->alerta_stock = $request->alerta_stock;
+        $producto->marca_id = ($request->marca_id)? $request->marca_id : null;
+        $producto->precio = $request->precio;
+        $producto->institucion_id = $request->institucion_id;
+        $producto->prospecto = ($request->prospecto)? $request->prospecto : null;
+
+        $producto->categorias()->sync($request->categorias_id);
+
+        $producto->save();
+
+        return $producto;
+    }
+
     public function changeState($id)
     {
         $producto = Producto::withTrashed()->where('id', $id)->first();

@@ -10,42 +10,47 @@
     </style>
 @endsection
 
+@section('titulo')
+
+
+
+@endsection
+
 @section('content')
 
     <div class="row">
         <div class="container">
             <div class="content">
+
                 <h2>
                     Administrar imágenes
                     <small class="text-muted"> / producto: {!! $producto->nombre !!}</small>
                 </h2>
-                <hr>
+                <div class="col-lg-4 col-md-4">
 
-                <div class="col-lg-6 col-md-6">
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Subir imágenes</h3>
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Subir imágenes</h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
 
                             <div class="formularioFoto">
 
 
                                 {!! Form::open(['url' => route('imagenes.store', ['id' => $producto->id, 'model' => 'producto']), 'method' => 'post', 'class' => 'form', 'enctype' => 'multipart/form-data']) !!}
 
-                                <div class="form-group">
-                                    <div class="input-group input-group-sm">
-                                        {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputImagen']) !!}
-                                        <span class="input-group-btn">
-                                {!! Form::submit('Subir', ['class' => 'btn btn-info btn-flag']) !!}
-                                </span>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-sm">
+                                            {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputImagen']) !!}
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-primary btn-flag">subir</button>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group" id="titleDescription" style="display:none">
-                                    <label for="title"><small class="text-muted">Agregue una descripción de la foto</small></label>
-                                    {!! Form::text('title', null, ['class' => 'form-control']) !!}
-                                </div>
+                                    <div class="form-group" id="titleDescription" style="display:none">
+                                        <label for="title"><small class="text-muted">Agregue una descripción de la foto</small></label>
+                                        {!! Form::text('title', null, ['class' => 'form-control']) !!}
+                                    </div>
 
                                 {!! Form::close() !!}
 
@@ -58,13 +63,13 @@
 
                 </div>
 
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-8 col-md-8">
 
-                    <div class="panel" style="border: 1px dashed lightgrey">
-                        <div class="panel-heading">
-                            <h3 class="-title">Imágenes</h3>
+                    <div class="card" style="border: 1px dashed lightgrey">
+                        <div class="card-header">
+                            <h3 class="card-title">Imágenes</h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
 
                             @if(count($producto->images) > 0)
                                 <ul class="list-inline">

@@ -3,6 +3,7 @@
 @section('titulo')
 
     <h2>
+        Clientes /
         {!! $cliente->full_name !!}
         <span class="text-muted"> / Datos personales</span>
     </h2>
@@ -139,7 +140,9 @@
 
         $( window ).load(function() {
 
-            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                format: 'd/mm/yyyy'
+            });
 
             $( '#provincia' ).change(function( event ) {
                 event.preventDefault();

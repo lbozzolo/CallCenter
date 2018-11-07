@@ -33,10 +33,15 @@ class NoticiasController extends Controller
 
     public function store(CreateNoticiaRequest $request)
     {
-        Noticia::create([
+        $noticia = Noticia::create([
             'user_id' => Auth::user()->id,
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion
+        ]);
+
+        $noticia->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
         ]);
 
         return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido agregada con éxito');
@@ -53,8 +58,28 @@ class NoticiasController extends Controller
     {
         $noticia = Noticia::find($id);
 
-        $noticia->titulo = $request->titulo;
-        $noticia->descripcion = $request->descripcion;
+        if($request['titulo'] && $request['titulo'] != $noticia->titulo){
+            $noticia->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'titulo',
+                'former_value' => $noticia->titulo,
+                'updated_value' => $request['titulo']
+            ]);
+            $noticia->titulo = $request['titulo'];
+        }
+
+        if($request['descripcion'] && $request['descripcion'] != $noticia->descripcion){
+            $noticia->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'descripcion',
+                'former_value' => $noticia->descripcion,
+                'updated_value' => $request['descripcion']
+            ]);
+            $noticia->descripcion = $request['descripcion'];
+        }
+
         $noticia->save();
 
         return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido editada con éxito');
@@ -63,6 +88,12 @@ class NoticiasController extends Controller
     public function destroy($id)
     {
         $noticia = Noticia::find($id);
+
+        $noticia->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete'
+        ]);
+
         $noticia->delete();
 
         return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido eliminada con éxito');
