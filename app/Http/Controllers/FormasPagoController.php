@@ -4,9 +4,17 @@ use SmartLine\Entities\FormaPago;
 use SmartLine\Entities\MarcaTarjeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use SmartLine\Http\Repositories\FormaPagoRepo;
+use Illuminate\Support\Facades\Auth;
 
 class FormasPagoController extends Controller
 {
+    protected $formaPagoRepo;
+
+    public function __construct(FormaPagoRepo $formaPagoRepo)
+    {
+        $this->formaPagoRepo = $formaPagoRepo;
+    }
 
     public function index()
     {
@@ -30,11 +38,16 @@ class FormasPagoController extends Controller
         if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
 
-        FormaPago::create([
+        $formaPago = FormaPago::create([
             'marca_tarjeta_id' => $request->tarjeta_id,
             'cuota_cantidad' => $request->cuota_cantidad,
             'interes' => ($request->interes)? $request->interes : null,
             'descuento' => ($request->descuento)? $request->descuento : null
+        ]);
+
+        $formaPago->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
         ]);
 
         return redirect()->route('formas.pago.index')->with('ok', 'Forma de pago agregada con éxito');
@@ -62,14 +75,10 @@ class FormasPagoController extends Controller
         if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
 
-        $formaPago = FormaPago::find($id);
+        $formaPago = $this->formaPagoRepo->updateFormaPago($id, $request);
 
-        $formaPago->marca_tarjeta_id = $request->tarjeta_id;
-        $formaPago->cuota_cantidad = $request->cuota_cantidad;
-        $formaPago->interes = $request->interes;
-        $formaPago->descuento = $request->descuento;
-
-        $formaPago->save();
+        if(!$formaPago)
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar la forma de pago');
 
         return redirect()->route('formas.pago.index')->with('ok', 'Forma de pago actualizada con éxito');
     }
@@ -78,12 +87,16 @@ class FormasPagoController extends Controller
     {
         $formaPago = FormaPago::find($id);
 
-        if(count($formaPago->ventas)){
+        if(count($formaPago->ventas))
             return redirect()->back()->withErrors('No se puede eliminar la forma de pago porque ya ha sido utilizada como forma de pago en alguna venta');
-        }
-        //$formaPago->delete();
 
-        dd($formaPago->ventas);
+        $formaPago->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete'
+        ]);
+
+        $formaPago->delete();
+
         return redirect()->back()->with('ok', 'Forma de pago eliminada con éxito');
     }
 
