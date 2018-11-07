@@ -37,7 +37,6 @@ class AsignacionesController extends Controller
         $data['asignaciones'] = $this->asignacionRepo->asignacionesActuales();
         $data['historicas'] = Asignacion::withTrashed()->get();
         $data['clientes'] = Cliente::all();
-        //$data['operadores'] = User::all();
         $data['operadores'] = User::all()->filter(function ($user){
             return $user->is('operador.in') || $user->is('operador.out');
         })->all();
@@ -57,12 +56,17 @@ class AsignacionesController extends Controller
             if($asignacion)
                 $asignacion->delete();
 
-            Asignacion::create([
+            $asignment = Asignacion::create([
                 'supervisor_id' => $supervisor->id,
                 'operador_id' => $request['operador_id'],
                 'cliente_id' => $id
             ]);
         }
+
+        $asignment->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
+        ]);
 
         // BLOQUE DE CÓDIGO QUE ENVIA NOTIFICACIONES A LOS USUARIOS QUE HAN RECIBIDO ASIGNACIONES
 
@@ -86,7 +90,13 @@ class AsignacionesController extends Controller
     public function tomar($id)
     {
         $asignacion = Asignacion::find($id);
-        $clienteId = $asignacion->id;
+        $clienteId = $asignacion->cliente_id;
+
+        $asignacion->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'take'
+        ]);
+
         $asignacion->delete();
 
         return redirect()->route('ventas.crear', $clienteId);
@@ -95,6 +105,12 @@ class AsignacionesController extends Controller
     public function destroy($id)
     {
         $asignacion = Asignacion::find($id);
+
+        $asignacion->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete'
+        ]);
+
         $asignacion->delete();
 
         return redirect()->route('asignaciones.index')->with('ok', 'Asignación eliminada con éxito');

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use SmartLine\Http\Controllers\Controller;
 use SmartLine\Entities\ValidateCreditCard;
+use SmartLine\Http\Repositories\UpdateableRepo;
 
 class DashboardController extends Controller
 {
@@ -33,9 +34,10 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
-        $cliente = Cliente::find(1);
 
-        dd( $cliente->hasDebitoCard() );
+        $bbb = 'j';
+
+        dd($bbb);
 
     }
 

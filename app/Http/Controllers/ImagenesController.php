@@ -20,6 +20,9 @@ class ImagenesController extends Controller
 
     public function storeImage(Request $request, $id, $model)
     {
+        if(!$request->file('img'))
+            return redirect()->back()->withErrors('No se ha seleccionado ningún archivo');
+
         $imageable = ($model == 'producto')? Producto::find($id) : User::find($id);
 
         // Redirección si supera el máximo de fotos permitido

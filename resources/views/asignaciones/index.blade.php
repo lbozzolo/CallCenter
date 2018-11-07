@@ -61,6 +61,7 @@
 
         $(document).ready(function() {
 
+
             $('#table-clientes').DataTable({
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ registros por página",

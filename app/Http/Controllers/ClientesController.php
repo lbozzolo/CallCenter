@@ -21,6 +21,7 @@ use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use SmartLine\Entities\MarcaTarjeta;
 use SmartLine\Entities\Banco;
 use SmartLine\Entities\ValidateCreditCard;
+use Illuminate\Support\Facades\Auth;
 
 class ClientesController extends Controller
 {
@@ -63,6 +64,11 @@ class ClientesController extends Controller
             'to_date' => $hasta,
             'puntos' => ($request->puntos)? $request->puntos : '',
             'estado_id' => ($request->estado_id)? $request->estado_id : '',
+        ]);
+
+        $cliente->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
         ]);
 
         $this->clienteRepo->updateOrCreateDomicilio($cliente->id, $request->all());
@@ -115,27 +121,14 @@ class ClientesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $cliente = Cliente::find($id);
+        $cliente = $this->clienteRepo->updateCliente($id, $request);
+        $domicilio = $this->clienteRepo->updateOrCreateDomicilio($id, $request->all());
 
-        $this->clienteRepo->updateOrCreateDomicilio($id, $request->all());
+        if(!$cliente)
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar el cliente');
 
-        $desde = ($request->from_date)? $request->from_date : Carbon::parse($request->from_date)->startOfDay()->format('H:i:s');
-        $hasta = ($request->to_date)? $request->to_date : Carbon::parse($request->to_date)->startOfDay()->format('H:i:s');
-
-        $cliente->nombre = $request->nombre;
-        $cliente->apellido = $request->apellido;
-        $cliente->telefono = $request->telefono;
-        $cliente->celular = $request->celular;
-        $cliente->email = $request->email;
-        $cliente->dni = $request->dni;
-        $cliente->referencia = $request->referencia;
-        $cliente->observaciones = $request->observaciones;
-        $cliente->from_date = $desde;
-        $cliente->to_date = $hasta;
-        $cliente->puntos = $request->puntos;
-        $cliente->estado_id = $request->estado_id;
-
-        $cliente->save();
+        if(!$domicilio)
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar el domicilio');
 
         if($request->has('redirect-back'))
             return redirect()->back()->with('ok', 'Cliente editado con éxito');
@@ -266,14 +259,13 @@ class ClientesController extends Controller
     public function agregarTarjeta(CreateDatosTarjetaRequest $request, $id)
     {
         $cliente = Cliente::find($id);
-
         $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
 
-        $validateFormat = ValidateCreditCard::validateFormatCreditCard($request->numero_tarjeta);
-        $validateLuhn = ValidateCreditCard::calculateLuhn($request->numero_tarjeta);
+        $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
 
-        if(!$validateFormat || !$validateLuhn)
+        if(!$validateCreditCard)
             return redirect()->back()->withErrors('Formato de tarjeta incorrecto');
+
 
         $datosTarjeta = $cliente->datosTarjeta()->create([
             'marca_id' => $request->marca_id,
@@ -287,30 +279,23 @@ class ClientesController extends Controller
         if(!$datosTarjeta)
             return redirect()->back()->withErrors('No se pudo asociar la tarjera');
 
+        $datosTarjeta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
+        ]);
+
         return redirect()->back()->with('ok', 'Nueva tarjeta asociada con éxito');
 
     }
 
     public function updateTarjeta(CreateDatosTarjetaRequest $request, $id)
     {
-        $tarjeta = DatoTarjeta::find($id);
+        $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
 
-        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
-
-        $validateFormat = ValidateCreditCard::validateFormatCreditCard($request->numero_tarjeta);
-        $validateLuhn = ValidateCreditCard::calculateLuhn($request->numero_tarjeta);
-
-        if(!$validateFormat || !$validateLuhn)
+        if(!$validateCreditCard)
             return redirect()->back()->withErrors('Formato de tarjeta incorrecto');
 
-        $tarjeta->marca_id = $request->marca_id;
-        $tarjeta->banco_id = $request->banco_id;
-        $tarjeta->numero_tarjeta = $request->numero_tarjeta;
-        $tarjeta->codigo_seguridad = $request->codigo_seguridad;
-        $tarjeta->titular = $request->titular;
-        $tarjeta->fecha_expiracion = $fechaExpiracion;
-
-        $tarjeta->save();
+        $this->clienteRepo->updateTarjeta($id, $request);
 
         return redirect()->back()->with('ok', 'Tarjeta editada con éxito');
     }
@@ -318,6 +303,12 @@ class ClientesController extends Controller
     public function eliminarTarjeta(Request $request, $id)
     {
         $datoTarjeta = DatoTarjeta::find($id);
+
+        $datoTarjeta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete'
+        ]);
+
         $datoTarjeta->delete();
 
         return redirect()->back()->with('ok', 'Tarjeta eliminada con éxito');
