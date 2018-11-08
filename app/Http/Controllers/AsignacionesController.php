@@ -21,7 +21,7 @@ class AsignacionesController extends Controller
     {
         $data['asignaciones'] = $this->asignacionRepo->asignacionesActuales();
         $data['historicas'] = Asignacion::withTrashed()->get();
-        $data['clientes'] = Cliente::all();
+        $data['clientes'] = Cliente::get(['id', 'nombre', 'apellido', 'dni']);
         $data['datosModificar'] = $request->datosModificar;
 
         return view('asignaciones.index')->with($data);
@@ -36,7 +36,7 @@ class AsignacionesController extends Controller
         $data['datos'] = $this->asignacionRepo->arrayToEloquent($request->clientes);
         $data['asignaciones'] = $this->asignacionRepo->asignacionesActuales();
         $data['historicas'] = Asignacion::withTrashed()->get();
-        $data['clientes'] = Cliente::all();
+        $data['clientes'] = Cliente::get(['id', 'nombre', 'apellido', 'dni']);
         $data['operadores'] = User::all()->filter(function ($user){
             return $user->is('operador.in') || $user->is('operador.out');
         })->all();

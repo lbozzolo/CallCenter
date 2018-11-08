@@ -17,6 +17,11 @@ class Cliente extends Entity
         })->count();
     }
 
+    public function hasVentas()
+    {
+        return (count($this->ventas) > 0);
+    }
+
     public function getFullNameAttribute()
     {
         return $this->nombre.' '.$this->apellido;
