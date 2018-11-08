@@ -15,6 +15,7 @@ use SmartLine\Entities\Marca;
 use SmartLine\Entities\Categoria;
 use SmartLine\Http\Repositories\ProductoRepo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductosController extends Controller
 {
