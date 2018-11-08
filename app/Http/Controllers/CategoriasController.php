@@ -99,7 +99,7 @@ class CategoriasController extends Controller
 
         if($categoria->subcategorias()->count()){
 
-            return redirect()->back()->withErrors('No puede eliminar la categoría porque tiene subcategorías');
+            return redirect()->back()->withErrors('No puede eliminar la Categoría porque tiene Subcategorías asignadas');
 
         }else{
 

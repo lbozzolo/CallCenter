@@ -34,9 +34,9 @@ class RolesController extends Controller
 
         if($role){
             return view('roles.index', compact('roles'))
-                ->with('ok', 'El rol '.$role->name.' ha sido creado con éxito');
+                ->with('ok', 'El Rol '.$role->name.' ha sido creado con éxito');
         }else{
-            return redirect()->route('roles.index')->withErrors('No se pudo crear el rol');
+            return redirect()->route('roles.index')->withErrors('No se pudo crear el Rol');
         }
     }
 
@@ -59,7 +59,7 @@ class RolesController extends Controller
 
         $role->save();
 
-        return redirect()->back()->with('ok', 'El rol se ha actualizado con éxito');
+        return redirect()->back()->with('ok', 'El Rol se ha actualizado con éxito');
     }
 
     public function destroy($id)
@@ -69,7 +69,7 @@ class RolesController extends Controller
 
         if($usersWithRole){
             return redirect()->route('roles.index')
-                ->withErrors('No se puede eliminar el rol "'.$role->name.'"" porque tiene usuarios asignados');
+                ->withErrors('No se puede eliminar el Rol "'.$role->name.'"" porque tiene Usuarios asignados');
         }
 
         $role->delete();
@@ -99,7 +99,7 @@ class RolesController extends Controller
         }
 
 
-        return redirect()->route('roles.index')->with('ok', 'Se han asignado los permisos correctamente');
+        return redirect()->route('roles.index')->with('ok', 'Se han asignado los Permisos correctamente');
     }
 
 

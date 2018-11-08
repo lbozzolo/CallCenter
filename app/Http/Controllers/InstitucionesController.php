@@ -43,7 +43,7 @@ class InstitucionesController extends Controller
             'estado_id' => $request->estado_id
         ]);
 
-        return redirect()->route('instituciones.index')->with('ok', 'Intitución creada con éxito');
+        return redirect()->route('instituciones.index')->with('ok', 'Institución creada con éxito');
     }
 
     /**

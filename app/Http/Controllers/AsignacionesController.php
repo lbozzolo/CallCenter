@@ -70,7 +70,7 @@ class AsignacionesController extends Controller
 
         // BLOQUE DE CÓDIGO QUE ENVIA NOTIFICACIONES A LOS USUARIOS QUE HAN RECIBIDO ASIGNACIONES
 
-        return redirect()->route('asignaciones.index')->with('ok', 'Datos asignados con éxito');
+        return redirect()->route('asignaciones.index')->with('ok', 'Los datos asignados con éxito');
     }
 
     public function misTareas()
@@ -113,7 +113,7 @@ class AsignacionesController extends Controller
 
         $asignacion->delete();
 
-        return redirect()->route('asignaciones.index')->with('ok', 'Asignación eliminada con éxito');
+        return redirect()->route('asignaciones.index')->with('ok', 'La asignación eliminada con éxito');
     }
 
 }

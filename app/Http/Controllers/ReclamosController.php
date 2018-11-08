@@ -189,7 +189,7 @@ class ReclamosController extends Controller
         $estado = ($reclamo->estado->slug == 'abierto')? EstadoReclamo::where('slug', 'cerrado')->first() : EstadoReclamo::where('slug', 'abierto')->first();
 
         if(!$estado)
-            return redirect()->back()->withErrors('Ocurrió un error. No se pudo cambiar el estado del reclamo.');
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo cambiar el Estado del Reclamo.');
 
         $reclamo->updateable()->create([
             'user_id' => Auth::user()->id,

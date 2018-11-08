@@ -51,7 +51,7 @@ class ProductosController extends Controller
     public function store(CreateProductoRequest $request)
     {
         if(count($request->categoria_id) == 1 && $request->categoria_id == ''){
-            return redirect()->back()->withErrors('La categoría es obligatoria');
+            return redirect()->back()->withErrors('La Categoría es obligatoria');
         }
 
         if($request->fecha_inicio)
@@ -121,7 +121,7 @@ class ProductosController extends Controller
         $producto = $this->productoRepo->updateProducto($id, $request);
 
         if(!$producto)
-            return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar el producto');
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar el Producto');
 
         return redirect()->route('productos.index')->with('ok', 'Producto editado con éxito');
     }
@@ -181,7 +181,7 @@ class ProductosController extends Controller
         $producto = Producto::find($id);
 
         if($producto->ventas->count())
-            return redirect()->route('productos.index')->withErrors('No se puede eliminar el producto porque hay ventas relacionadas a él. Proceda a desactivarlo');
+            return redirect()->route('productos.index')->withErrors('No se puede eliminar el Producto porque hay Ventas relacionadas a él. Proceda a desactivarlo');
 
 
         $producto->updateable()->create([
