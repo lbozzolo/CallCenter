@@ -61,7 +61,9 @@
 
                 <li class="label">Informacion</li>
 
+                @permission('ver.noticia')
                 <li><a href="{{ route('noticias.noticias') }}"><i class="ti-notepad"></i> Noticias </a></li>
+                @endpermission
 
                 <li class="label">Gestion</li>
 
