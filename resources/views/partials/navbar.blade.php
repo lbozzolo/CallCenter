@@ -61,7 +61,9 @@
 
                 <li class="label">Informacion</li>
 
+                @permission('ver.noticia')
                 <li><a href="{{ route('noticias.noticias') }}"><i class="ti-notepad"></i> Noticias </a></li>
+                @endpermission
 
                 <li class="label">Gestion</li>
 
@@ -69,9 +71,13 @@
                 <li><a href="{{ route('asignaciones.index') }}"><i class="ti-signal"></i> Asignación de Tareas </a></li>
                 @endpermission
 
+                @permission('crear.noticia')
                 <li><a href="{{ route('noticias.index') }}"><i class="ti-notepad"></i> Carga de Noticias </a></li>
+                @endpermission
 
+                @permission('listado.updateable')
                 <li><a href="{{ route('updateables.index') }}"><i class="ti-notepad"></i> Movimientos </a></li>
+                @endpermission
 
                 <li class="label">Seteos</li>
 

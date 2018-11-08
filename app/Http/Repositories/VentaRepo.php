@@ -38,7 +38,48 @@ class VentaRepo extends BaseRepo
             $total[$estado->slug] = count($ventas);
         }
         return $total;
+    }
 
+    public function updateVenta($id, $request)
+    {
+        $venta = Venta::find($id);
+
+        if($request['etapa_id'] && $request['etapa_id'] != $venta->etapa_id) {
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'etapa_id',
+                'former_value' => $venta->etapa_id,
+                'updated_value' => $request->etapa_id
+            ]);
+            $venta->etapa_id = ($request->etapa_id)? $request->etapa_id : null;
+        }
+
+        if($request['promocion_id'] && $request['promocion_id'] != $venta->promocion_id) {
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'promocion_id',
+                'former_value' => $venta->promocion_id,
+                'updated_value' => $request->promocion_id
+            ]);
+            $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
+        }
+
+        if($request['promocion_id'] && $request['promocion_id'] != $venta->promocion_id) {
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'promocion_id',
+                'former_value' => $venta->promocion_id,
+                'updated_value' => $request->promocion_id
+            ]);
+            $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
+        }
+
+        $venta->save();
+
+        return $venta;
     }
 
 }

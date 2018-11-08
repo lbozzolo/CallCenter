@@ -5,8 +5,6 @@ use Carbon\Carbon;
 use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\Etapa;
 use SmartLine\Entities\Institucion;
-use SmartLine\Entities\Promocion;
-use SmartLine\Entities\Reclamo;
 use SmartLine\Entities\UnidadMedida;
 use SmartLine\Http\Requests\CreateEtapaRequest;
 use SmartLine\Http\Requests\CreateProductoRequest;
@@ -120,29 +118,6 @@ class ProductosController extends Controller
 
     public function update(CreateProductoRequest $request, $id)
     {
-//        $producto = Producto::find($id);
-//
-//        $fechaInicio = Carbon::createFromFormat('d/m/Y', $request->fecha_inicio)->toDateTimeString();
-//        $fechaFinalizacion = Carbon::createFromFormat('d/m/Y', $request->fecha_finalizacion)->toDateTimeString();
-//
-//        $producto->nombre = $request->nombre;
-//        $producto->descripcion = $request->descripcion;
-//        $producto->fecha_inicio = ($request->fecha_inicio)? $fechaInicio : null;
-//        $producto->fecha_finalizacion = ($request->fecha_finalizacion)? $fechaFinalizacion : null;
-//        $producto->estado_id = $request->estado_id;
-//        $producto->unidad_medida_id = $request->unidad_medida_id;
-//        $producto->cantidad_medida = $request->cantidad_medida;
-//        $producto->stock = $request->stock;
-//        $producto->alerta_stock = $request->alerta_stock;
-//        $producto->marca_id = ($request->marca_id)? $request->marca_id : null;
-//        $producto->precio = $request->precio;
-//        $producto->institucion_id = $request->institucion_id;
-//        $producto->prospecto = ($request->prospecto)? $request->prospecto : null;
-//
-//        $producto->categorias()->sync($request->categorias_id);
-//
-//        $producto->save();
-
         $producto = $this->productoRepo->updateProducto($id, $request);
 
         if(!$producto)
@@ -154,6 +129,15 @@ class ProductosController extends Controller
     public function updateStock(Request $request, $id)
     {
         $producto = Producto::find($id);
+
+        $producto->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'stock',
+            'former_value' => $producto->stock,
+            'updated_value' => $request->stock
+        ]);
+
         $producto->stock = $request->stock;
         $producto->save();
 
@@ -170,6 +154,7 @@ class ProductosController extends Controller
     {
         $producto = Producto::find($id);
         $ultimaEtapa = $producto->etapas->last();
+
         $etapa = Etapa::create([
             'nombre' => $request->nombre,
             'dias_pendiente' => ($request->dias_pendiente)? $request->dias_pendiente : null,
@@ -197,6 +182,12 @@ class ProductosController extends Controller
 
         if($producto->ventas->count())
             return redirect()->route('productos.index')->withErrors('No se puede eliminar el producto porque hay ventas relacionadas a él. Proceda a desactivarlo');
+
+
+        $producto->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'destroy'
+        ]);
 
         $producto->forceDelete();
 

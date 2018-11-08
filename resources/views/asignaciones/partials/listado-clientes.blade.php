@@ -41,10 +41,10 @@
                         <td>{!! $cliente->full_name !!}</td>
                         <td>{!! ($cliente->dni)? $cliente->dni : "<span class='label label-danger'>sin dni</span><i class='fa fa-exclamation-circle'></i>" !!}</td>
                         <td>
-                            @if(count($cliente->ventas) == 0)
-                                <label class="label label-warning">pendiente</label>
-                            @else
+                            @if($cliente->hasVentas())
                                 <label class="label label-success">activo</label>
+                            @else
+                                <label class="label label-warning">pendiente</label>
                             @endif
                         </td>
                         <td>{!! ($cliente->asignacion_actual)? $cliente->asignacion_actual->operador->fullname : '<small class="text-muted">sin asignar</small>' !!}</td>
@@ -52,15 +52,10 @@
                         <td class="text-center">{!! count($cliente->reclamos) !!}</td>
                         <td>
                             @if(isset($datosModificar))
-                                @if(in_array($cliente->id, $datosModificar))
-                                    {!! Form::checkbox('clientes[]', $cliente->id,  true, ['style' => 'font-size: 2em']) !!}
-                                @else
-                                    {!! Form::checkbox('clientes[]', $cliente->id,  false, ['style' => 'font-size: 2em']) !!}
-                                @endif
+                                {!! Form::checkbox('clientes[]', $cliente->id,  (in_array($cliente->id, $datosModificar))? true : false, ['style' => 'font-size: 2em']) !!}
                             @else
                                 {!! Form::checkbox('clientes[]', $cliente->id,  false, ['style' => 'font-size: 2em']) !!}
                             @endif
-
                         </td>
                     </tr>
 

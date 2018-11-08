@@ -23,9 +23,9 @@
 
                     <tr>
                         <td style="color: darkgray">{!! $asignacion->id !!}</td>
-                        <td style="color: darkgray">{!! $asignacion->supervisor->full_name !!}</td>
-                        <td style="color: darkgray">{!! $asignacion->operador->full_name !!}</td>
-                        <td style="color: darkgray">{!! $asignacion->cliente->full_name !!}</td>
+                        <td style="color: darkgray">{!! ($asignacion->supervisor)? $asignacion->supervisor->full_name : '#'.$asignacion->supervisor_id !!}</td>
+                        <td style="color: darkgray">{!! ($asignacion->operador)? $asignacion->operador->full_name : '#'.$asignacion->operador_id !!}</td>
+                        <td style="color: darkgray">{!! ($asignacion->cliente)? $asignacion->cliente->full_name : '#'.$asignacion->cliente_id !!}</td>
                         <td style="color: darkgray">{!! $asignacion->fecha_creado !!}</td>
                     </tr>
 
