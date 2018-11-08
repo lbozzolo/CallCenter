@@ -55,8 +55,13 @@
                 </td>
                 <td class="text-center">
                 @permission('ver.venta')
-                    <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-default btn-sm">detalles</a>
+                    <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-default btn-xs">detalles</a>
                 @endpermission
+
+                @permission('ver.updateable')
+                <a href="{{ route('updateables.entidad.show', ['entity' => $venta->getClass(), 'id' => $venta->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>
+                @endpermission
+
                 </td>
             </tr>
 

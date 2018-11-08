@@ -11,8 +11,7 @@ use SmartLine\Entities\Cliente;
 use SmartLine\Http\Repositories\ProductoRepo;
 use SmartLine\Http\Repositories\ClienteRepo;
 use Illuminate\Support\Facades\Validator;
-use SmartLine\Http\Requests;
-use SmartLine\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ReclamosController extends Controller
 {
@@ -146,21 +145,39 @@ class ReclamosController extends Controller
             'descripcion.max' => 'No puede escribir más de 1000 caracteres en la descripción. Usted escribió '.strlen($request->descripcion),
             'title.max' => 'No puede escribir más de 255 caracteres en el título. Usted escribió '.strlen($request->titulo),
         ];
+
         $validator = Validator::make($request->all(), [
             'descripcion' => 'max:1000',
             'titulo' => 'max:255'
         ], $messages);
 
-        if ($validator->fails()) {
-
+        if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        //$this->validate($request, ['descripcion' => 'max:1000', 'titulo' => 'max:255']);
 
         $reclamo = Reclamo::find($id);
-        $reclamo->descripcion = $request->descripcion;
-        $reclamo->titulo = $request->titulo;
+
+        if($request['descripcion'] && $request['descripcion'] != $reclamo->descripcion){
+            $reclamo->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'descripcion',
+                'former_value' => $reclamo->descripcion,
+                'updated_value' => $request->descripcion
+            ]);
+            $reclamo->descripcion = $request->descripcion;
+        }
+
+        if($request['titulo'] && $request['titulo'] != $reclamo->titulo){
+            $reclamo->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'titulo',
+                'former_value' => $reclamo->titulo,
+                'updated_value' => $request->titulo
+            ]);
+            $reclamo->titulo = $request->titulo;
+        }
+
         $reclamo->save();
 
         return redirect()->back()->with('ok', 'Descripción editada con éxito');
@@ -170,6 +187,18 @@ class ReclamosController extends Controller
     {
         $reclamo = Reclamo::find($id);
         $estado = ($reclamo->estado->slug == 'abierto')? EstadoReclamo::where('slug', 'cerrado')->first() : EstadoReclamo::where('slug', 'abierto')->first();
+
+        if(!$estado)
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo cambiar el estado del reclamo.');
+
+        $reclamo->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'estado_id',
+            'former_value' => $reclamo->estado_id,
+            'updated_value' => $estado->id
+        ]);
+
         $reclamo->estado()->associate($estado);
         $reclamo->save();
 
@@ -179,7 +208,20 @@ class ReclamosController extends Controller
     public function changeSolucionado($id)
     {
         $reclamo = Reclamo::find($id);
-        $reclamo->solucionado = ($reclamo->solucionado == config('sistema.reclamos.SOLUCIONADO.solucionado'))? config('sistema.reclamos.SOLUCIONADO.sinsolucion') : config('sistema.reclamos.SOLUCIONADO.solucionado');
+        $valorSolucionado = ($reclamo->solucionado == config('sistema.reclamos.SOLUCIONADO.solucionado'))? config('sistema.reclamos.SOLUCIONADO.sinsolucion') : config('sistema.reclamos.SOLUCIONADO.solucionado');
+
+        if(!$valorSolucionado)
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo cambiar el valor de la solución.');
+
+        $reclamo->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'solucionado',
+            'former_value' => $reclamo->solucionado,
+            'updated_value' => $valorSolucionado
+        ]);
+
+        $reclamo->solucionado = $valorSolucionado;
         $reclamo->save();
 
         return redirect()->back();
