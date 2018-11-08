@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
-use SmartLine\Entities\Etapa;
 use SmartLine\Entities\FormaPago;
 use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Producto;
@@ -20,7 +19,6 @@ use Illuminate\Support\Facades\Auth;
 use SmartLine\Entities\MarcaTarjeta;
 use SmartLine\Entities\MetodoPago;
 use SmartLine\Entities\Promocion;
-use SmartLine\Entities\Updateable;
 use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\VentaRepo;
 use SmartLine\Http\Repositories\MarcaTarjetaRepo;
@@ -28,10 +26,6 @@ use SmartLine\Entities\Banco;
 use SmartLine\Entities\ValidateCreditCard;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-
-use SmartLine\Http\Requests;
-use SmartLine\Http\Controllers\Controller;
 
 class VentasController extends Controller
 {
@@ -85,23 +79,6 @@ class VentasController extends Controller
         $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
         $tags = EstadoVenta::lists('nombre', 'slug');
 
-        /*$estados = EstadoCliente::lists('nombre', 'id');
-        $provincias = Provincia::lists('provincia', 'id');
-        $partidos = Partido::lists('partido', 'id', 'codProvincia');
-        $localidades = Localidad::lists('localidad', 'id', 'codProvincia');
-
-        if($cliente->domicilio){
-            if($cliente->domicilio->provincia){
-                $provinciaCliente = Provincia::find($cliente->domicilio->provincia->id);
-                $partidos = Partido::where('codProvincia', $provinciaCliente->codProvincia)->lists('partido', 'id', 'codProvincia');
-            }
-            if($cliente->domicilio->partido){
-                $partidoCliente = Partido::find($cliente->domicilio->partido->id);
-                $localidades = Localidad::where('idPartido', $partidoCliente->idPartido)->lists('localidad', 'id', 'codProvincia');
-            }
-
-        }*/
-
         return view('ventas.seleccion-producto', compact('productos', 'total', 'cliente', 'tags'));
     }
 
@@ -119,6 +96,11 @@ class VentasController extends Controller
             'user_id' => Auth::user()->id,
             'cliente_id' => $cliente->id,
             'estado_id' => $iniciada->id //Por defecto se crea en estado INICIADA
+        ]);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
         ]);
 
         return redirect()->route('ventas.panel', $venta->id);
@@ -169,7 +151,18 @@ class VentasController extends Controller
     public function numeroGuia(Request $request, $id)
     {
         $venta = Venta::find($id);
-        $venta->numero_guia = $request->numero_guia;
+
+        if($request['numero_guia']){
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'numero_guia',
+                'former_value' => $venta->numero_guia,
+                'updated_value' => $request->numero_guia
+            ]);
+            $venta->numero_guia = $request->numero_guia;
+        }
+
         $venta->save();
 
         return redirect()->back()->with('ok', 'Número de guía guardado con éxito');
@@ -219,6 +212,7 @@ class VentasController extends Controller
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,
+            'action' => 'update',
             'field' => 'estado_id',
             'former_value' => $venta->estado_id,
             'updated_value' => $cancelado->id,
@@ -237,6 +231,8 @@ class VentasController extends Controller
         $auditable = EstadoVenta::where('slug', 'auditable')->first();
 
         $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
             'field' => 'estado_id',
             'former_value' => $venta->estado_id,
             'updated_value' => $auditable->id,
@@ -255,6 +251,7 @@ class VentasController extends Controller
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,
+            'action' => 'update',
             'field' => 'estado_id',
             'former_value' => $venta->estado_id,
             'updated_value' => $iniciada->id,
@@ -286,8 +283,6 @@ class VentasController extends Controller
     public function show($id)
     {
         $data['venta'] = Venta::find($id);
-        //$producto = $data['venta']->producto;
-        //$data['etapas'] = $producto->etapas->lists('nombre', 'id');
         $data['marcas'] = MarcaTarjeta::all();
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
@@ -307,8 +302,6 @@ class VentasController extends Controller
     {
         $data['venta'] = Venta::find($id);
         $data['cliente'] = $data['venta']->cliente;
-        /*$producto = $data['venta']->producto;
-        $data['etapas'] = $producto->etapas->lists('nombre', 'id');*/
         $data['marcas'] = MarcaTarjeta::all();
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
@@ -350,53 +343,47 @@ class VentasController extends Controller
      */
     public function update(CreateDatosTarjetaRequest $request, $id)
     {
-        $venta = Venta::find($id);
-        $venta->etapa_id = ($request->etapa_id)? $request->etapa_id : null;
-        $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
-        $venta->metodo_pago_id = $request->metodo_pago_id;
-        $metodoPago = MetodoPago::find($request->metodo_pago_id);
-        $numeroCuotas = ($request->cuotas)? $request->cuotas : null;
+        $this->ventaRepo->updateVenta($id, $request);
 
-        if($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito'){
-
-            // Datos de tarjeta
-            $marcaTarjeta = ($metodoPago->slug == 'credito')? $request->marca_id_credito : $request->marca_id_debito;
-            $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
-            $credit_card_user = $request->numero_tarjeta;
-
-            //Cantidad de cuotas
-            $cuotas = $this->marcaTarjetaRepo->hasCuotas($marcaTarjeta, $numeroCuotas);
-            if(!count($cuotas))
-                return redirect()->back()->withErrors('No existe la forma de pago en '.$numeroCuotas.' cuotas con la tarjeta seleccionada');
-
-            /*dd($cuotas);
-            //Forma de pago
-            $formaPago = FormaPago::where('cuota_cantidad', $cuotas);*/
-
-            //Validación
-            $validacion = ValidateCreditCard::validateFormatCreditCard($credit_card_user);
-            $luhn = ValidateCreditCard::calculateLuhn($credit_card_user);
-
-            if(!$validacion || !$luhn)
-                return redirect()->back()->withErrors('Tarjeta inválida. Revise los datos ingresados');
-
-            //Actualización datos de tarjeta
-            $datosTarjeta = ($venta->datosTarjeta)? $venta->datosTarjeta : new DatoTarjeta();
-            $datosTarjeta->marca_id = ($marcaTarjeta)? $marcaTarjeta : null;
-            $datosTarjeta->banco_id = ($request->banco_id)? $request->banco_id : null;
-            $datosTarjeta->numero_tarjeta = ($request->numero_tarjeta)? $request->numero_tarjeta : null;
-            $datosTarjeta->fecha_expiracion = ($fechaExpiracion)? $fechaExpiracion : null;
-            $datosTarjeta->titular = ($request->titular)? $request->titular : null;
-            $datosTarjeta->codigo_seguridad = ($request->codigo_seguridad)? $request->codigo_seguridad : null;
-            $datosTarjeta->forma_pago_id = ($cuotas)? $cuotas->first()->id : null;
-
-            //Asociación de datos de tarjeta a venta
-            $datosTarjeta->venta()->associate($venta);
-            $venta->formaPago()->associate($cuotas->first());
-            $datosTarjeta->save();
-        }
-
-        $venta->save();
+//        $metodoPago = MetodoPago::find($request->metodo_pago_id);
+//        $numeroCuotas = ($request->cuotas)? $request->cuotas : null;
+//
+//        if($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito'){
+//
+//            // Datos de tarjeta
+//            $marcaTarjeta = ($metodoPago->slug == 'credito')? $request->marca_id_credito : $request->marca_id_debito;
+//            $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+//            $credit_card_user = $request->numero_tarjeta;
+//
+//            //Cantidad de cuotas
+//            $cuotas = $this->marcaTarjetaRepo->hasCuotas($marcaTarjeta, $numeroCuotas);
+//            if(!count($cuotas))
+//                return redirect()->back()->withErrors('No existe la forma de pago en '.$numeroCuotas.' cuotas con la tarjeta seleccionada');
+//
+//            //Validación
+//            $validacion = ValidateCreditCard::validateFormatCreditCard($credit_card_user);
+//            $luhn = ValidateCreditCard::calculateLuhn($credit_card_user);
+//
+//            if(!$validacion || !$luhn)
+//                return redirect()->back()->withErrors('Tarjeta inválida. Revise los datos ingresados');
+//
+//            //Actualización datos de tarjeta
+//            $datosTarjeta = ($venta->datosTarjeta)? $venta->datosTarjeta : new DatoTarjeta();
+//            $datosTarjeta->marca_id = ($marcaTarjeta)? $marcaTarjeta : null;
+//            $datosTarjeta->banco_id = ($request->banco_id)? $request->banco_id : null;
+//            $datosTarjeta->numero_tarjeta = ($request->numero_tarjeta)? $request->numero_tarjeta : null;
+//            $datosTarjeta->fecha_expiracion = ($fechaExpiracion)? $fechaExpiracion : null;
+//            $datosTarjeta->titular = ($request->titular)? $request->titular : null;
+//            $datosTarjeta->codigo_seguridad = ($request->codigo_seguridad)? $request->codigo_seguridad : null;
+//            $datosTarjeta->forma_pago_id = ($cuotas)? $cuotas->first()->id : null;
+//
+//            //Asociación de datos de tarjeta a venta
+//            $datosTarjeta->venta()->associate($venta);
+//            $venta->formaPago()->associate($cuotas->first());
+//            $datosTarjeta->save();
+//        }
+//
+//        $venta->save();
 
         return redirect()->back()->with('ok', 'Venta editada con éxito');
     }
@@ -424,6 +411,7 @@ class VentasController extends Controller
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,
+            'action' => 'update',
             'field' => 'estado_id',
             'former_value' => $venta->estado_id,
             'updated_value' => $estado->id,
@@ -443,6 +431,7 @@ class VentasController extends Controller
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,
+            'action' => 'update',
             'field' => 'ajuste',
             'former_value' => $venta->ajuste,
             'updated_value' => $nuevoAjuste
@@ -461,6 +450,7 @@ class VentasController extends Controller
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,
+            'action' => 'update',
             'field' => 'ajuste',
             'former_value' => $venta->ajuste,
             'updated_value' => $nuevoAjuste
@@ -490,7 +480,7 @@ class VentasController extends Controller
             $tarjetaYcuotas = FormaPago::where('marca_tarjeta_id', $datosTarjeta->marca_id)->where('cuota_cantidad', $request->cuotas)->first();
         }
 
-        MetodoPagoVenta::create([
+        $metodoPagoVenta = MetodoPagoVenta::create([
             'venta_id' => $id,
             'metodopago_id' => $request->metodo_pago,
             'datostarjeta_id' => ($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito')? $request->datos_tarjeta_id : null,
@@ -498,13 +488,24 @@ class VentasController extends Controller
             'importe' => $request->importe
         ]);
 
+        $metodoPagoVenta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
+        ]);
+
         return redirect()->back()->with('ok', 'Método de pago agregado con éxito')->with([$tab3 = 'active']);
     }
 
     public function quitarMetodoPago(Request $request, $id)
     {
-        $metodopago = MetodoPagoVenta::find($id);
-        $metodopago->delete();
+        $metodoPagoVenta = MetodoPagoVenta::find($id);
+
+        $metodoPagoVenta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete'
+        ]);
+
+        $metodoPagoVenta->delete();
 
         return redirect()->back()->with('ok', 'Método de pago eliminado con éxito');
     }
@@ -522,7 +523,18 @@ class VentasController extends Controller
     public function editarMetodoPagoVenta(Request $request, $id)
     {
         $metodoPagoVenta = MetodoPagoVenta::find($id);
-        $metodoPagoVenta->importe = $request->importe;
+
+        if($request['importe'] && $request['importe'] != $metodoPagoVenta->importe) {
+            $metodoPagoVenta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'importe',
+                'former_value' => $metodoPagoVenta->importe,
+                'updated_value' => $request->importe
+            ]);
+            $metodoPagoVenta->importe = ($request->importe)? $request->importe : null;
+        }
+
         $metodoPagoVenta->save();
 
         return redirect()->back();

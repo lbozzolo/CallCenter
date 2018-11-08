@@ -1,4 +1,4 @@
-@extends('base')
+@extends('productos.base')
 
 @section('css')
     <style type="text/css">
@@ -10,28 +10,38 @@
     </style>
 @endsection
 
-@section('content')
+@section('titulo')
+
+    <h2>
+        Configurar etapas
+        <small class="text-muted"> / producto: {!! $producto->nombre !!}</small>
+        <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-sm btn-primary">editar</a>
+    </h2>
+
+@endsection
+
+@section('contenido')
 
     <div class="row">
-        <div class="container">
-            <div class="content">
-                <h2>
-                    Configurar etapas
-                    <small class="text-muted"> / producto: {!! $producto->nombre !!}</small>
-                    <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-sm btn-primary">editar</a>
-                </h2>
-                <p>Si este producto se vende en etapas, describirlas abajo.</p>
-                <hr>
+
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <span class="text-warning">Si este producto se vende en etapas, describirlas abajo.</span>
+                    </div>
+                </div>
+
+
                 <div class="col-lg-6 col-md-6">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Etapas registradas</h3>
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Etapas registradas</h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             @if($producto->etapas->count() > 0)
 
-                                <ol class="list-group" style="padding: 0px 15px">
+                                <ol class="list-group listado" style="padding: 0px 15px">
                                     @foreach($producto->etapas as $etapa)
                                         <li class="list-group-item">
                                             <button type="button" title="Eliminar" class="pull-right nonStyledButton" data-toggle="modal" data-target="#eliminarEtapa{!! $etapa->id !!}" style="border: none">
@@ -44,9 +54,8 @@
                                                 ({!! $etapa->dias_pendiente !!} días después)
                                             @endif
 
-                                            <div class="modal fade" id="eliminarEtapa{!! $etapa->id !!}">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
+                                            <div class="modal fade col-lg-3 col-lg-offset-4" id="eliminarEtapa{!! $etapa->id !!}">
+                                                    <div class="card alert">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span></button>
@@ -63,7 +72,6 @@
                                                             {!! Form::close() !!}
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
 
                                         </li>
@@ -84,20 +92,20 @@
 
                 <div class="col-lg-6 col-md-6">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             @if($producto->etapas->count())
 
-                                <h3 class="panel-title">Ingresar más etapas</h3>
+                                <h3 class="card-title">Ingresar más etapas</h3>
 
                             @else
 
-                                <h3 class="panel-title">Ingresar etapa</h3>
+                                <h3 class="card-title">Ingresar etapa</h3>
 
                             @endif
 
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
 
                             {!! Form::open(['method' => 'post', 'url' => route('productos.etapas.store', $producto->id), 'class' => 'form']) !!}
                             <div class="form-group">
@@ -117,7 +125,7 @@
                             @endif
 
 
-                            {!! Form::submit('+ Agregar etapa', ['class' => 'btn btn-info']) !!}
+                            <button type="submit" class="btn btn-primary">+ Agregar etapa</button>
                             <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-default">Cancelar</a>
 
                             {!! Form::close() !!}
@@ -128,8 +136,6 @@
                 </div>
 
 
-            </div>
-        </div>
     </div>
 
 @endsection

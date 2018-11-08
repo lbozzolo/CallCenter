@@ -62,6 +62,11 @@ class UsersController extends Controller
             'estado_id' => $disableStatus->id
         ]);
 
+        $user->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
+        ]);
+
         foreach($request->roles as $id){
 
             $role = Role::find($id);
@@ -76,14 +81,20 @@ class UsersController extends Controller
 
         Mail::send('emails.new-user', ['password' => $password], function ($message) use ($email){
 
-            $message->from('callcenter@gmail.com', 'SmartLine');
+            $message->from('Info@smartline.com.ar', 'SmartLine');
             $message->to($email)->subject('Alta al sistema CallCenter');
 
         });
 
-        if($user){
+        if ($user) {
+
             return redirect()->route('users.index')->with('ok', 'Usuario creado con éxito');
-        }else{ abort(400);}
+
+        } else {
+
+            abort(400);
+
+        }
     }
 
     public function indexDisable()
@@ -123,20 +134,11 @@ class UsersController extends Controller
 
     public function update(UpdateUserProfileRequest $request, $id, $route = null)
     {
-        $user = User::find($id);
+        $user = $this->userRepo->updateUser($id, $request);
 
-        $user->nombre = $request->nombre;
-        $user->apellido = $request->apellido;
-        $user->email = $request->email;
-        $user->telefono = $request->telefono;
-        $user->dni = $request->dni;
-        $user->roles()->sync($request->roles);
-
-        $user->save();
-
-        if($route){
+        if($route)
             return redirect()->route($route)->with('ok', 'Se han guardado los cambios con éxito');
-        }
+
         return redirect()->route('users.profile', $user->id)->with('ok', 'Se han guardado los cambios con éxito');
 
     }
@@ -159,7 +161,19 @@ class UsersController extends Controller
         if(!Hash::check($request->current_password, $user->password))
             return redirect()->back()->withErrors('La contraseña actual no es válida');
 
-        $user->password = bcrypt($request->password);
+        $hashedPassword = bcrypt($request->password);
+
+        if($request['password']){
+            $user->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'password',
+                'former_value' => $user->password,
+                'updated_value' => $hashedPassword
+            ]);
+            $user->password = $hashedPassword;
+        }
+
         $user->save();
 
         return redirect()->route('users.profile', compact('user'))->with('ok', 'Tu contraseña ha sido cambiada exitosamente');
