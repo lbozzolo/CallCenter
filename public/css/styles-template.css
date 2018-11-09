@@ -90,6 +90,12 @@ input, .select2, textarea, .select2b{
     color: black !important;
 }
 
+.ck > h1, h2, h3, h4{
+    color: dimgray !important;
+}
+
+
+
 .noticia, .noticia p{
     background-color: whitesmoke;
     color: black !important;

@@ -25,7 +25,9 @@
 
             <tr>
                 <td>{!! $producto->id !!}</td>
-                <td>{!! $producto->nombre !!}</td>
+                <td>
+                    <a href="{{ route('productos.show', $producto->id) }}" style="color: cyan">{!! $producto->nombre !!}</a>
+                </td>
                 <td>{!! ($producto->marca)? $producto->marca->nombre : '' !!}</td>
                 <td>{!! $producto->descripcion !!}</td>
                 <td>
