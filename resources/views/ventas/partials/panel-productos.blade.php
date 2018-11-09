@@ -32,7 +32,9 @@
                     <tbody>
                     @foreach($venta->productos as $producto)
                         <tr>
-                            <td>{!! ucwords($producto->nombre) !!}</td>
+                            <td>
+                                <a href="{{ route('productos.show', $producto->id) }}" style="color: cyan">{!! $producto->nombre !!}</a>
+                            </td>
                             <td>{!! ucWords($producto->marca->nombre) !!}</td>
                             <td>{!! ($producto->descripcion)? $producto->descripcion : '' !!}</td>
                             <td>

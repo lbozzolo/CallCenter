@@ -15,7 +15,7 @@ class CreateCategoriaRequest extends Request
         return
             [
                 'nombre' => 'required',
-                'slug' => 'unique:roles,slug,' . $this->id,
+                'slug' => 'unique:categorias,slug,' . $this->id,
                 'parent_id' => 'required_if:subcategoria,1|exists:categorias,id',
             ];
     }
