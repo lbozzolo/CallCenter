@@ -7,9 +7,9 @@
             @endpermission
             <li class="pull-right">
                 @if($venta->diferencia < 0)
-                    <span class="text-danger" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                    excede monto de venta por<span class="text-danger" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos"> $ {!! $venta->diferencia !!}</span>
                 @else
-                    <span class="text-success" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos">$ {!! $venta->diferencia !!}</span>
+                    resta abonar<span class="text-success" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos"> $ {!! $venta->diferencia !!}</span>
                 @endif
             </li>
         </ul>
@@ -205,15 +205,26 @@
                                             <h4 class="modal-title">Ajustar venta</h4>
                                         </div>
                                         <div class="card-body">
-                                            <p class="text-danger">Ingrese el número que desea fijar como importe final de la compra.</p>
-                                            <span class="text-muted">(Importe actual: {!! $venta->importe_total !!})</span>
+
+                                            <ul class="listado">
+                                                <li class="list-group-item">
+                                                    Importe a alcanzar:
+                                                    <span class="text-warning">${!! $venta->suma_total_productos !!}</span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    Importe actual:
+                                                    <span class="text-warning">${!! $venta->importe_total !!}</span>
+                                                </li>
+                                            </ul>
+
                                         </div>
                                         <div class="card-footer">
 
                                             {!! Form::open(['url' => route('ventas.ajustar', $venta->id), 'method' => 'put']) !!}
                                             <div class="form-group">
                                                 {!! Form::hidden('importe_actual', $venta->importe_total) !!}
-                                                {!! Form::number('ajuste') !!}
+                                                {!! Form::label('ajuste', 'Ingrese el número que desea fijar como importe final de la venta') !!}
+                                                {!! Form::number('ajuste', null, ['class' => 'form-control', 'placeholder' => "Ingrese el número final...( ej: ".$venta->suma_total_productos." )"]) !!}
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">Ajustar</button>

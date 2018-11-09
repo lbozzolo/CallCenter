@@ -26,7 +26,7 @@
 
                         <thead>
                         <tr>
-                            <th>Usuario</th>
+                            <th>Actor</th>
                             <th class="text-center">Identificador</th>
                             <th>Campo</th>
                             <th>Valor anterior</th>
