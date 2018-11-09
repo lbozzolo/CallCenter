@@ -25,7 +25,7 @@
                                     <div class="card-body">
 
                                         <p class="lead">Cliente: {!! $venta->cliente->fullname !!}</p>
-                                        <p class="panel panel-barra">Productos:</p>
+                                        <p class="panel panel-barra">Productos</p>
                                         <ul class="list-unstyled listado">
                                             @forelse($venta->productos as $producto)
                                                 <li class="list-group-item" style="background-color: gray">{!! $producto->nombre !!}, {!! $producto->marca->nombre !!}</li>
@@ -33,9 +33,10 @@
                                                 <li class="list-group-item">No hay ningún producto cargado</li>
                                             @endforelse
                                         </ul>
-                                        <p class="panel panel-barra">Métodos de pago:</p>
+                                        <p class="panel panel-barra">Métodos de pago</p>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-condensed">
+                                                <tbody>
                                                 @forelse($venta->metodoPagoVenta as $metodoPago)
                                                     <tr>
                                                         <td>{!! $metodoPago->metodoPago->nombre !!}</td>
@@ -46,9 +47,16 @@
                                                         <td>No hay ningún método de pago seleccionado aún.</td>
                                                     </tr>
                                                 @endforelse
+                                                </tbody>
+                                                <tfooter>
+                                                    <tr>
+                                                        <td>Importe total + IVA (21%)</td>
+                                                        <td>${!! $venta->importe_total !!}</td>
+                                                    </tr>
+                                                </tfooter>
                                             </table>
                                         </div>
-                                        <p class="panel panel-barra">Importe:</p>
+                                        <p class="panel panel-barra">Importe</p>
                                         <ul class="list-unstyled listado">
                                             <li class="list-group-item">
                                                 Importe productos:
@@ -61,6 +69,10 @@
                                             <li class="list-group-item">
                                                 Total productos:
                                                 <span class="pull-right">${!! $venta->suma_total_productos !!}</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Total métodos de pago:
+                                                <span class="pull-right">${!! $venta->importe_total !!}</span>
                                             </li>
                                         </ul>
 

@@ -68,8 +68,8 @@
                             <div class="input-group input-group-sm">
                                 {!! Form::file('img', ['class' => 'form-control', 'id' => 'inputImagen']) !!}
                                 <span class="input-group-btn">
-                                    {!! Form::submit('Subir', ['class' => 'btn btn-info btn-flag']) !!}
-                                    </span>
+                                    <button type="submit" class="btn btn-primary btn-flag">Subir</button>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group" id="titleDescription" style="display:none">
@@ -106,23 +106,21 @@
                                                         @endif
                                                         <button class="btn btn-danger" title="Eliminar foto" data-toggle="modal" data-target="#modalDeleteImage{!! $imagen->id !!}">Eliminar</button>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                        <div class="modal fade text-left" id="modalDeleteImage{!! $imagen->id !!}">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span></button>
-                                                                        <h4 class="modal-title">Eliminar imagen</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p class="text-red">¿Está seguro que desea eliminar la imagen?</p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                                                        {!! Form::open(['method' => 'DELETE', 'url' => route('imagenes.delete', $imagen->id)]) !!}
-                                                                        {!! Form::submit('Eliminar de todos modos', ['class' => 'btn btn-danger']) !!}
-                                                                        {!! Form::close() !!}
-                                                                    </div>
+                                                        <div class="modal fade text-left col-lg-3 col-md-3 col-sm-4 col-lg-offset-9 col-md-offset-9 col-sm-offset-8" id="modalDeleteImage{!! $imagen->id !!}">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Eliminar imagen</h4>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <p class="text-red">¿Está seguro que desea eliminar la imagen?</p>
+                                                                </div>
+                                                                <div class="card-footer">
+                                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                                                    {!! Form::open(['method' => 'DELETE', 'url' => route('imagenes.delete', $imagen->id)]) !!}
+                                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                                    {!! Form::close() !!}
                                                                 </div>
                                                             </div>
                                                         </div>

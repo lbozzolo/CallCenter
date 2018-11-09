@@ -7,7 +7,7 @@
                     <h4>Editar institución</h4>
                 </div>
 
-                {!! Form::model($institucion, ['method' => 'put', 'url' => route('instituciones.update'), 'class' => 'form']) !!}
+                {!! Form::model($institucion, ['method' => 'put', 'url' => route('instituciones.update', $institucion->id), 'class' => 'form']) !!}
 
                 <div class="basic-form">
                     <div class="form-group">

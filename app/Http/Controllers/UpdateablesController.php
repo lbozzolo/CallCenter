@@ -30,7 +30,8 @@ class UpdateablesController extends Controller
 
     public function show($entity, $id)
     {
-        $data['model'] = $entity::with('updateable')->where('id', $id)->first();
+        $data['model'] = $entity::withTrashed('updateable')->where('id', $id)->first();
+        //dd(substr($data['model']->getClass(), 10));
         $data['results'] = $data['model']->updateable;
 
         if(!$data['results'])

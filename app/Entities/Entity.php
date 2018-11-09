@@ -12,7 +12,8 @@ class Entity extends Model
 
     public function getClassNameAttribute()
     {
-        $class = substr($this->getClass(), 19);
+        $start = ($this->getClass() == 'SmartLine\User')? 10 : 19;
+        $class = substr($this->getClass(), $start);
         return config('sistema.updateables.entidades.'.$class);
     }
 

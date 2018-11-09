@@ -90,7 +90,7 @@ class InstitucionesController extends Controller
         $institucion->url = $request->url;
         $institucion->responsable = $request->responsable;
         $institucion->descripcion = $request->descripcion;
-        $institucion->estado_id = $request->estdo_id;
+        $institucion->estado_id = $request->estado_id;
 
         $institucion->save();
 
@@ -105,6 +105,9 @@ class InstitucionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $institucion = Institucion::find($id);
+        $institucion->delete();
+
+        return redirect()->route('instituciones.index')->with('ok', 'Institución eliminada con éxito');
     }
 }
