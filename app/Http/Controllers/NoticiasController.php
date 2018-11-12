@@ -1,6 +1,8 @@
 <?php namespace SmartLine\Http\Controllers;
 
+use Bican\Roles\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use SmartLine\Entities\Destinatario;
 use SmartLine\Http\Requests\CreateNoticiaRequest;
 use SmartLine\Entities\Noticia;
 
@@ -10,13 +12,28 @@ class NoticiasController extends Controller
     public function index()
     {
         $noticias = Noticia::all();
-        return view('noticias.index', compact('noticias'));
+        $roles = Role::all();
+
+        $destinatarios = $roles->reject(function($value){
+            return $value->slug == 'superadmin';
+        });
+
+        $destinatarios = $destinatarios->lists('name', 'id');
+
+        return view('noticias.index', compact('noticias', 'destinatarios'));
     }
 
     public function noticias()
     {
+        $roles = Role::all();
+
+        $destinatarios = $roles->reject(function($value){
+            return $value->slug == 'superadmin';
+        });
+        $destinatarios = $destinatarios->lists('name', 'id');
+
         $noticias = Noticia::orderBy('created_at', 'desc')->paginate(10);
-        return view('noticias.noticias', compact('noticias'));
+        return view('noticias.noticias', compact('noticias', 'destinatarios'));
     }
 
     public function show($id)
@@ -39,6 +56,15 @@ class NoticiasController extends Controller
             'descripcion' => $request->descripcion
         ]);
 
+        if(count($request->destinatarios) > 0){
+            foreach($request->destinatarios as $id){
+                Destinatario::create([
+                    'role_id' => $id,
+                    'noticia_id' => $noticia->id
+                ]);
+            }
+        }
+
         $noticia->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'create'
@@ -49,14 +75,36 @@ class NoticiasController extends Controller
 
     public function edit($id)
     {
+        $roles = Role::all();
+
+        $destinatarios = $roles->reject(function($value){
+            return $value->slug == 'superadmin';
+        });
+        $destinatarios = $destinatarios->lists('name', 'id');
+
         $noticia = Noticia::find($id);
         $noticias = Noticia::all();
-        return view('noticias.edit', compact('noticia', 'noticias'));
+        return view('noticias.edit', compact('noticia', 'noticias', 'destinatarios'));
     }
 
     public function update(CreateNoticiaRequest $request, $id)
     {
-        $noticia = Noticia::find($id);
+        $noticia = Noticia::with('destinatarios')->find( $id);
+
+        if(count($request->destinatarios) > 0){
+
+            foreach($noticia->destinatarios as $destinatario){
+                Destinatario::destroy($destinatario->id);
+            }
+
+            foreach($request->destinatarios as $id){
+                Destinatario::create([
+                    'role_id' => $id,
+                    'noticia_id' => $noticia->id
+                ]);
+            }
+
+        }
 
         if($request['titulo'] && $request['titulo'] != $noticia->titulo){
             $noticia->updateable()->create([

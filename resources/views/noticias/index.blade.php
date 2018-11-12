@@ -42,6 +42,15 @@
 @endsection
 
 @section('js')
+
     <script src="{{ asset('plugins/ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
     <script type="text/javascript">ClassicEditor.create( document.querySelector( '#ckeditor' ) );</script>
+    <script>
+
+        $('.select2b').select2({
+            multiple: true
+        });
+
+    </script>
+
 @endsection
