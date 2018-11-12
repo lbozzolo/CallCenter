@@ -31,6 +31,15 @@
 
     <script src="{{ asset('plugins/ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
     <script type="text/javascript">ClassicEditor.create( document.querySelector( '#ckeditor' ) );</script>
+    <script>
+
+        var rolesActuales =  [<?php echo '"'.implode('","', $noticia->roles_ids).'"' ?>];
+
+        $('.select2b').select2({
+            multiple: true
+        }).select2('val', rolesActuales);
+
+    </script>
 
 @endsection
 

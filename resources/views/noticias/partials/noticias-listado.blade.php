@@ -4,6 +4,7 @@
             <thead>
                 <tr>
                     <th>Titulo</th>
+                    <th>Destinatarios</th>
                     <th>Fecha</th>
                     <th class="text-right">Opciones</th>
                  </tr>
@@ -12,6 +13,11 @@
             @forelse($noticias as $noticia)
                 <tr>
                     <td>{!! $noticia->titulo !!}</td>
+                    <td>
+                        @foreach($noticia->destinatarios as $destinatario)
+                            <span class="label label-default">{!! $destinatario->role->name !!}</span>
+                        @endforeach
+                    </td>
                     <td>{!! $noticia->fecha_creado !!}</td>
                     <td>
                         @permission('eliminar.noticia')

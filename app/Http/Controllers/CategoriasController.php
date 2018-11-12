@@ -31,6 +31,7 @@ class CategoriasController extends Controller
     public function store(CreateCategoriaRequest $request)
     {
         $subcategoria = $request->subcategoria;
+
         $categoria = Categoria::create([
             'nombre' => $request->nombre,
             'slug' => $this->categoriaRepo->setToSlug($request->slug, $request->nombre),
@@ -47,9 +48,9 @@ class CategoriasController extends Controller
                 return view('categorias.subcategorias', compact('subcategorias', 'parents'))
                     ->with('ok', 'La subcategoría '.$categoria->nombre.' ha sido creada con éxito');
             }else{
-                $categorias = Categoria::whereNull('parent_id')->get()->sortBy('nombre');
-                return view('categorias.index', compact('categorias', 'parents'))
-                    ->with('ok', 'La categoría '.$categoria->nombre.' ha sido creada con éxito');
+
+                return redirect()->route('categorias.index')->with('ok', 'La categoría'.$categoria->nombre.' ha sido creada con éxito.');
+
             }
 
         }else{

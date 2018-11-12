@@ -23,6 +23,13 @@
                     </div>
                 </div>
 
+                <div class="basic-form">
+                    <div class="form-group">
+                        {!! Form::label('destinatarios[]', 'Destinatarios') !!}
+                        {!! Form::select('destinatarios[]', $destinatarios, null, ['class'=>'select2b form-control']) !!}
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 <a href="{!! route('noticias.index') !!}" class="btn btn-default">Cancelar</a>
 
