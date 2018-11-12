@@ -37,6 +37,7 @@
                             <th>Actor</th>
                             <th class="text-center">Identificador</th>
                             <th>Modelo</th>
+                            <th>Acción</th>
                             <th>Campo</th>
                             <th>Valor anterior</th>
                             <th>Valor actualizado</th>
@@ -53,6 +54,7 @@
                             <td><a href="{{ route('users.profile', $item->author->id) }}" style="color: cyan">{!! $item->author->fullname !!}</a></td>
                             <td class="text-center">{!! $item->updateable_id !!}</td>
                             <td>{!! $item->updateable_type !!}</td>
+                            <td>{!! $item->action !!}</td>
                             <td>{!! $item->field !!}</td>
                             <td class="text-center">{!! $item->former_value !!}</td>
                             <td class="text-center">{!! $item->updated_value !!}</td>

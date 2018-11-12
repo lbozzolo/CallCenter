@@ -12,6 +12,11 @@
     </div>
 
     <div class="form-group">
+        {!! Form::label('destinatarios[]', 'Destinatarios') !!}
+        {!! Form::select('destinatarios[]', $destinatarios, null, ['class'=>'select2b form-control']) !!}
+    </div>
+
+    <div class="form-group">
         <button type="submit" class="btn btn-info">Agregar</button>
     </div>
 

@@ -3,11 +3,15 @@
 namespace SmartLine\Entities;
 
 use SmartLine\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Venta extends Entity
 {
+    use SoftDeletes;
+
     protected $table = 'ventas';
     protected $fillable = ['user_id', 'cliente_id', 'producto_id', 'estado_id', 'metodo_pago_id', 'forma_pago_id', 'observaciones', 'etapa_id', 'promocion_id', 'created_at', 'updated_at'];
+    protected $dates = ['deleted_at'];
 
 
     protected function subtotal()
