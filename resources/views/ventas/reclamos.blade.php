@@ -32,6 +32,38 @@
     </div>
 
     <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-default">
+                <div class="card-body">
+                    <ul class="list-unstyled list-inline listado">
+                        <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
+                        <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
+                        <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
+                        <li class="list-group-item">
+                            @permission('ver.venta')
+                            <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">ver venta</a>
+                            @endpermission
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <ul>
+            @foreach($venta->reclamos as $reclamo)
+
+                <li>@include('ventas.partials.reclamo')</li>
+
+            @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
 
         <div class="col-lg-4">
 
@@ -116,26 +148,21 @@
 
     <script>
 
-        $('.reclamo-list-item').click(function () {
-            $('#seleccione').hide();
-            var id = '#panel-' + $(this).attr('id');
-            $('.reclamos-paneles').hide();
-            $(id).show();
+        $('.editar-descripcion').click(function () {
+            var id = $(this).attr('data-id');
+            $('#formDescripcion' + id).show();
+            $('#titulo' + id).hide();
+            $('#descripcion' + id).hide();
         });
 
-
-        $('#editarReclamo').click(function () {
-            $('#descripcion').hide();
-            $('#formDescripcion').show();
-            $('#titulo').hide();
-        });
-
-        $('#cancelarEdicion').click(function () {
-            $('#descripcion').show();
-            $('#formDescripcion textarea').val('{!! (isset($reclamo))? $reclamo->descripcion : '' !!}');
-            $('#formDescripcion').hide();
-            $('#inputTitulo').val('{!! (isset($reclamo))? $reclamo->titulo : '' !!}');
-            $('#titulo').show();
+        $('.cancelar-edicion').click(function () {
+            var id = $(this).attr('data-id');
+            $('#descripcion' + id).show();
+            $('#formDescripcion' + id + 'textarea').val('{!! (isset($reclamo))? $reclamo->descripcion : '' !!}');
+            $('#inputTitulo' + id).val('{!! (isset($reclamo))? $reclamo->titulo : '' !!}');
+            $('#formDescripcion' + id).hide();
+            $('#titulo' + id).show();
+            $('#descripcion' + id).show();
         });
 
 
