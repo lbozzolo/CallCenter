@@ -101,3 +101,9 @@ Route::put('reclamos/{id}/change-solucionado', [
     'uses' => 'ReclamosController@changeSolucionado',
     'middleware' => 'permission:editar.reclamo'
 ]);
+
+Route::post('reclamos/{id}/derivar', [
+    'as' => 'reclamos.derivar',
+    'uses' => 'ReclamosController@derivar',
+    'middleware' => 'permission:derivar.reclamo'
+]);

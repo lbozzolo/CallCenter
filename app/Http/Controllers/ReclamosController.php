@@ -265,6 +265,36 @@ class ReclamosController extends Controller
         return redirect()->back();
     }
 
+    public function derivar(Request $request, $id)
+    {
+        $reclamo = Reclamo::find($id);
+
+        $updateableResponsable = [
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'responsable_id',
+            'former_value' => $reclamo->responsable_id,
+            'updated_value' => $request->user_id
+        ];
+
+        $updateableDerivador = [
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'derivador_id',
+            'former_value' => $reclamo->derivador_id,
+            'updated_value' => Auth::user()->id
+        ];
+
+        $reclamo->responsable_id = $request->user_id;
+        $reclamo->derivador_id = Auth::user()->id;
+        $reclamo->save();
+
+        $reclamo->updateable()->create($updateableResponsable);
+        $reclamo->updateable()->create($updateableDerivador);
+
+        return redirect()->back()->with('ok', 'Reclamo derivado con éxito');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -33,7 +33,6 @@
 
         @if($reclamo->estado->slug == 'abierto')
 
-
             {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.solucionado', $reclamo->id), 'class' => 'form', 'style' => 'display: inline-block']) !!}
             @if($reclamo->solucionado == config('sistema.reclamos.SOLUCIONADO.sinsolucion'))
                 <button type="submit" title="Marcar como solucionado" class="btn btn-success btn-sm btn-outline"><i class="fa fa-check-circle-o text-success"></i></button>
@@ -45,12 +44,9 @@
             <span title="Editar descripción" class="btn btn-primary btn-sm btn-outline editar-descripcion" data-id="{!! $reclamo->id !!}"><i class="fa fa-edit text-info"></i></span>
             <button type="button" class="btn btn-outline btn-sm btn-danger" data-toggle="modal" data-target="#eliminarReclamo{!! $reclamo->id !!}"><i class="fa fa-trash-o"></i> </button>
 
-
         @else
 
-
             <span class="btn btn-primary btn-sm btn-outline" title="Volver a abrir reclamo" data-toggle="modal" data-target="#changeStatus{!! $reclamo->id !!}"><i class="fa fa-folder-open text-primary"></i></span>
-
 
         @endif
 
@@ -117,29 +113,26 @@
             </div>
         </div>
 
+        <p class="lead" id="titulo{!! $reclamo->id !!}">{!! $reclamo->titulo !!}</p>
+        <p id="descripcion{!! $reclamo->id !!}">{!! $reclamo->descripcion !!}</p>
 
+        {!! Form::open(['method' => 'put', 'url' => route('reclamos.description.update', $reclamo->id), 'id' => 'formDescripcion'.$reclamo->id,'class' => 'form', 'style' => 'display: none']) !!}
 
-            <p class="lead" id="titulo{!! $reclamo->id !!}">{!! $reclamo->titulo !!}</p>
-            <p id="descripcion{!! $reclamo->id !!}">{!! $reclamo->descripcion !!}</p>
+        <div class="form-group">
+            {!! Form::label('titulo', 'Título') !!}
+            {!! Form::text('titulo', $reclamo->titulo, ['class' => 'form-control', 'id' => 'inputTitulo'.$reclamo->id]) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('descripcion', 'Descripción') !!}
+            {!! Form::textarea('descripcion', $reclamo->descripcion, ['class' => 'form-control', 'rows' => '6', 'id' => 'textareaDescripcion'.$reclamo->id]) !!}
+            <small class="text-warning"><i class="fa fa-exclamation-circle"></i> Máximo 1000 caracteres</small>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-default cancelar-edicion" data-id="{!! $reclamo->id !!}">Cancelar</button>
+        </div>
 
-            {!! Form::open(['method' => 'put', 'url' => route('reclamos.description.update', $reclamo->id), 'id' => 'formDescripcion'.$reclamo->id,'class' => 'form', 'style' => 'display: none']) !!}
-
-            <div class="form-group">
-                {!! Form::label('titulo', 'Título') !!}
-                {!! Form::text('titulo', $reclamo->titulo, ['class' => 'form-control', 'id' => 'inputTitulo'.$reclamo->id]) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('descripcion', 'Descripción') !!}
-                {!! Form::textarea('descripcion', $reclamo->descripcion, ['class' => 'form-control', 'rows' => '6', 'id' => 'textareaDescripcion'.$reclamo->id]) !!}
-                <small class="text-warning"><i class="fa fa-exclamation-circle"></i> Máximo 1000 caracteres</small>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <button type="button" class="btn btn-default cancelar-edicion" data-id="{!! $reclamo->id !!}">Cancelar</button>
-            </div>
-
-            {!! Form::close() !!}
-
+        {!! Form::close() !!}
 
 
     </div><hr>
@@ -162,12 +155,35 @@
                         <small class="text-muted">Responsable</small><br>
                         {!! $reclamo->responsable->full_name !!}
                     </li>
-                @else
-                    <li class="list-group-item">
-                        <small class="text-muted">Responsable</small><br>
-                        <a class="btn btn-primary btn-xs btn-flat">Derivar este reclamo</a>
-                    </li>
                 @endif
+                @permission('derivar.reclamo')
+                    <li class="list-group-item">
+                        <small class="text-muted">Derivación</small><br>
+                        <button type="button" data-toggle="modal" data-target="#derivarReclamo{!! $reclamo->id !!}" class="btn btn-primary btn-xs btn-flat">Derivar este reclamo</button>
+
+                        <div class="modal fade col-lg-8 col-lg-offset-2" id="derivarReclamo{!! $reclamo->id !!}">
+                            <div class="card">
+                                <div class="panel panel-barra">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h3>Derivar reclamo</h3>
+                                    <span class="text-warning">Seleccione un usuario para derivar este reclamo.</span>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    @include('reclamos.partials.derivacion')
+
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                @endpermission
             </ul>
         </div>
     @endif

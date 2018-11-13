@@ -84,7 +84,7 @@
                 @endpermission
 
                 @permission('crear.venta')
-                <li><a href="{{ route('ventas.seleccion.cliente') }}"> <i class="ti-money"></i>Ventas para Facturar</a></li>
+                <li><a href="{{ route('ventas.seleccion.cliente') }}"> <i class="ti-money"></i>Facturación</a></li>
                 @endpermission
 
                 @permission('crear.venta')

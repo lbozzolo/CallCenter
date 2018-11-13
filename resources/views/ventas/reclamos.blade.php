@@ -41,11 +41,15 @@
                         <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
                         <li class="list-group-item">
                             @permission('ver.venta')
-                            <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">ver venta</a>
+                            <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">Ver venta</a>
+                            @endpermission
+                        </li>
+                        <li class="list-group-item">
+                            @permission('crear.reclamo')
+                            <a href="{{ route('reclamos.create', $venta->id) }}" style="color: cyan">Generar un nuevo reclamo</a>
                             @endpermission
                         </li>
                     </ul>
-
                 </div>
             </div>
         </div>
@@ -63,80 +67,7 @@
         </div>
     </div>
 
-    <div class="row">
 
-        <div class="col-lg-4">
-
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Información general</h3>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled listado">
-                        <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
-                        <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
-                        <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
-                    </ul>
-                    @permission('ver.venta')
-                    <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">ver venta</a>
-                    @endpermission
-                </div>
-            </div>
-            <div class="card">
-                @if($venta->reclamos->count())
-
-                    <div class="card-header">
-                        <h3>Listado de reclamos</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul class="listado">
-                            @foreach($venta->reclamos as $reclamo)
-                                <li class="list-group-item reclamo-list-item" id="reclamo{!! $reclamo->id !!}" style="cursor: pointer">
-                                    <span class="text-info">{!! '#'.$reclamo->id !!}</span>
-                                    {!! ($reclamo->titulo)? $reclamo->titulo : '' !!}
-                                    @if($reclamo->estado->slug == 'cerrado')
-                                        <span class="pull-right" title="reclamo cerrado"><i class="fa fa-window-close-o text-danger"></i></span>
-                                    @else
-                                        <span class="pull-right" title="reclamo abierto"><i class="fa fa-folder-open text-primary"></i></span>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-
-                @else
-
-                    <p>Esta venta no tiene ningún reclamo.</p>
-
-                @endif
-            </div>
-
-        </div>
-        <div class="col-lg-8">
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>Reclamo</h3>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled">
-                        <li>
-                            <p id="seleccione">Seleccione un reclamo de la lista</p>
-                        </li>
-                        @foreach($venta->reclamos as $reclamo)
-
-                            @permission('ver.reclamos.venta')
-                            @include('ventas.partials.panel-reclamo')
-                            @endpermission
-
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
 
 @endsection
 
@@ -163,6 +94,28 @@
             $('#formDescripcion' + id).hide();
             $('#titulo' + id).show();
             $('#descripcion' + id).show();
+        });
+
+
+        $(document).ready(function() {
+            $('#table-enable-users').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
         });
 
 

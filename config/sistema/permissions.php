@@ -201,6 +201,14 @@ return [
             'created_at' => date_create(),
             'updated_at' => date_create()
         ],
+        [
+            'name' => 'Derivar reclamo',
+            'slug' => 'derivar.reclamo',
+            'description' => 'Derivar reclamo',
+            'model' => 'reclamo',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
     ],
 
     'asignacion' => [
