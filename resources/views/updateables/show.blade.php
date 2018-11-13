@@ -28,6 +28,7 @@
                         <tr>
                             <th>Actor</th>
                             <th class="text-center">Identificador</th>
+                            <th>Acción</th>
                             <th>Campo</th>
                             <th>Valor anterior</th>
                             <th>Valor actualizado</th>
@@ -43,9 +44,10 @@
                             <tr>
                                 <td><a href="{{ route('users.profile', $item->author->id) }}" style="color: cyan">{!! $item->author->fullname !!}</a></td>
                                 <td class="text-center">{!! $item->updateable_id !!}</td>
-                                <td>{!! $item->field !!}</td>
-                                <td class="text-center">{!! $item->former_value !!}</td>
-                                <td class="text-center">{!! $item->updated_value !!}</td>
+                                <td>{!! $item->action !!}</td>
+                                <td>{!! ($item->field)? $item->field : '-' !!}</td>
+                                <td class="text-center">{!! ($item->former_value)? $item->former_value : '-' !!}</td>
+                                <td class="text-center">{!! ($item->updated_value)? $item->updated_value : '-' !!}</td>
                                 <td class="text-center">{!! ($item->reason)? $item->reason : '-' !!}</td>
                                 <td>{!! $item->fecha_creado !!}</td>
                                 <td>{!! $item->hora_created !!} hs</td>

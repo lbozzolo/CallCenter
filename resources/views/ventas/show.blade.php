@@ -49,7 +49,7 @@
                                 </li>
                                 <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
                                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
-                                <li class="list-group-item">Número de guía: {!! $venta->numero_guia !!}</li>
+                                <li class="list-group-item">Número de guía: {!! ($venta->numero_guia)? $venta->numero_guia : '<small class="text-muted">sin número de guía</small>' !!}</li>
                                 @permission('ver.reclamos.venta')
                                 <li class="list-group-item">
                                     <span style="padding: 10px 5px;"><a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color: cyan">Reclamos ( {!! $venta->reclamos->count() !!} )</a></span>

@@ -37,7 +37,7 @@
                             @endpermission
 
                             @permission('crear.reclamo')
-                            <li><a href="{{ route('reclamos.create') }}">Agregar Reclamos </a></li>
+                            <li><a href="{{ route('reclamos.index.ventas') }}">Iniciar Reclamo </a></li>
                             @endpermission
                         </ul>
                     </li>

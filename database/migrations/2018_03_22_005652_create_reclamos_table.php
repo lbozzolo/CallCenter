@@ -23,7 +23,7 @@ class CreateReclamosTable extends Migration
             $table->tinyInteger('solucionado');
             $table->integer('owner_id')->unsigned();
             $table->integer('derivador_id')->unsigned()->nullable();
-            $table->integer('responsable_id')->unsigned();
+            $table->integer('responsable_id')->unsigned()->nullable();
             $table->softDeletes();
 
             $table->timestamps();

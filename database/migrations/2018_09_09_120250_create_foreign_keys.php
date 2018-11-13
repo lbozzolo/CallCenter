@@ -309,6 +309,18 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
+        Schema::table('destinatarios', function(Blueprint $table) {
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('noticia_id')
+                ->references('id')
+                ->on('noticias')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+        });
         Schema::table('asignaciones', function(Blueprint $table){
             $table->foreign('supervisor_id')
                 ->references('id')
