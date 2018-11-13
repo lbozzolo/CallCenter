@@ -2,7 +2,7 @@
 
 @section('titulo')
 
-    <h2>Ventas<span class="text-muted"> / {!! $ventas->title !!}</span></h2>
+    <h2>Mis ventas<span class="text-muted"> / {!! $user->fullname !!}</span></h2>
 
 @endsection
 
@@ -10,9 +10,9 @@
 
     <div class="card card-default">
         <div class="card-body">
-        @permission('listado.venta')
+            @permission('listado.venta')
             @include('ventas.partials.listado-ventas')
-        @endpermission
+            @endpermission
         </div>
     </div>
 

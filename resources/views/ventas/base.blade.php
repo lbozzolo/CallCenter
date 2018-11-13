@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12">
 
-            @if(!isset($venta))
+            @if(isset($tags))
                 @include('ventas.partials.navbar')
             @endif
 

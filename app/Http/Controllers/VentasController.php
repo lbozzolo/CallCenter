@@ -300,6 +300,47 @@ class VentasController extends Controller
         return view('ventas.show')->with($data);
     }
 
+    public function misVentas()
+    {
+        $user = Auth::user();
+        $ventas = $user->ventas;
+
+        return view('ventas.mis-ventas', compact('user', 'ventas'));
+    }
+
+    public function auditoria()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('auditable');
+
+        return view('ventas.auditoria', compact('ventas'));
+    }
+
+    public function postVenta()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('entregado');
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
+
+        return view('ventas.post-venta', compact('ventas'));
+    }
+
+    public function facturacion()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('confirmada');
+
+        return view('ventas.facturacion', compact('ventas'));
+    }
+
+    public function logistica()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('enviada');
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('entregado'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
+
+        return view('ventas.logistica', compact('ventas'));
+    }
+
     public function showClienteVentas($id)
     {
         $data['venta'] = Venta::find($id);
