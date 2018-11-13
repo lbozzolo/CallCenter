@@ -51,6 +51,10 @@
                             <li><a href="{{ route('ventas.index') }}">Listar Ventas </a></li>
                             @endpermission
 
+                            @permission('listado.venta')
+                            <li><a href="{{ route('ventas.index') }}">Mis Ventas </a></li>
+                            @endpermission
+
                             @permission('crear.venta')
                             <li><a href="{{ route('ventas.seleccion.cliente') }}"> Generar Venta</a></li>
                             @endpermission
@@ -76,8 +80,21 @@
                 @endpermission
 
                 @permission('listado.updateable')
-                <li><a href="{{ route('updateables.index') }}"><i class="ti-notepad"></i> Movimientos </a></li>
+                <li><a href="{{ route('updateables.index') }}"><i class="ti-direction-alt"></i> Movimientos </a></li>
                 @endpermission
+
+                @permission('crear.venta')
+                <li><a href="{{ route('ventas.seleccion.cliente') }}"> <i class="ti-money"></i>Ventas para Facturar</a></li>
+                @endpermission
+
+                @permission('crear.venta')
+                <li><a href="{{ route('ventas.seleccion.cliente') }}"> <i class="ti-eye"></i>Auditoria</a></li>
+                @endpermission
+
+                @permission('crear.venta')
+                <li><a href="{{ route('ventas.seleccion.cliente') }}"> <i class="ti-truck"></i>Logística</a></li>
+                @endpermission
+
 
                 <li class="label">Seteos</li>
 
