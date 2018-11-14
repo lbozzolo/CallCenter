@@ -8,10 +8,12 @@ use SmartLine\Entities\EstadoReclamo;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\Reclamo;
 use SmartLine\Entities\Cliente;
+use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\ProductoRepo;
 use SmartLine\Http\Repositories\ClienteRepo;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use SmartLine\Http\Requests\CreateReclamoRequest;
 
 class ReclamosController extends Controller
 {
@@ -47,14 +49,33 @@ class ReclamosController extends Controller
         return view('reclamos.index-clientes', compact('clientes'));
     }
 
+    public function indexVentas()
+    {
+        $ventas = Venta::with(['cliente' => function ($query) {
+            $query->get(['nombre', 'apellido', 'id']);
+        },
+        'user' => function ($query) {
+            $query->get(['id', 'nombre', 'apellido']);
+        },
+        'productos' => function ($query) {
+            $query->get(['productos.id', 'nombre']);
+        },
+        'estado' => function ($query) {
+            $query->get(['id', 'slug', 'nombre']);
+        }])->get(['id', 'estado_id', 'cliente_id', 'user_id', 'created_at']);
+
+        return view('reclamos.index-ventas', compact('ventas'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('reclamos.crear');
+        $venta = Venta::find($id);
+        return view('reclamos.crear', compact('venta'));
     }
 
     /**
@@ -63,9 +84,26 @@ class ReclamosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateReclamoRequest $request, $id)
     {
-        //
+        $reclamo = Reclamo::create([
+            'venta_id' => $id,
+            'titulo' => ($request->titulo)? $request->titulo : null,
+            'descripcion' => ($request->descripcion)? $request->descripcion : null,
+            'estado_id' => 1,
+            'solucionado' => 0,
+            'owner_id' => Auth::user()->id
+        ]);
+
+        if(!$reclamo)
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo crear el reclamo.');
+
+        $reclamo->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create'
+        ]);
+
+        return redirect()->back()->with('ok', 'Reclamo creado con éxito');
     }
 
     /**
@@ -210,7 +248,7 @@ class ReclamosController extends Controller
         $reclamo = Reclamo::find($id);
         $valorSolucionado = ($reclamo->solucionado == config('sistema.reclamos.SOLUCIONADO.solucionado'))? config('sistema.reclamos.SOLUCIONADO.sinsolucion') : config('sistema.reclamos.SOLUCIONADO.solucionado');
 
-        if(!$valorSolucionado)
+        if($valorSolucionado == null && $valorSolucionado != 0)
             return redirect()->back()->withErrors('Ocurrió un error. No se pudo cambiar el valor de la solución.');
 
         $reclamo->updateable()->create([
@@ -227,14 +265,53 @@ class ReclamosController extends Controller
         return redirect()->back();
     }
 
+    public function derivar(Request $request, $id)
+    {
+        $reclamo = Reclamo::find($id);
+
+        $updateableResponsable = [
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'responsable_id',
+            'former_value' => $reclamo->responsable_id,
+            'updated_value' => $request->user_id
+        ];
+
+        $updateableDerivador = [
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'derivador_id',
+            'former_value' => $reclamo->derivador_id,
+            'updated_value' => Auth::user()->id
+        ];
+
+        $reclamo->responsable_id = $request->user_id;
+        $reclamo->derivador_id = Auth::user()->id;
+        $reclamo->save();
+
+        $reclamo->updateable()->create($updateableResponsable);
+        $reclamo->updateable()->create($updateableDerivador);
+
+        return redirect()->back()->with('ok', 'Reclamo derivado con éxito');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $reclamo = Reclamo::find($id);
+
+        $reclamo->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete'
+        ]);
+
+        $reclamo->delete();
+
+        return redirect()->back()->with('ok', 'Reclamo eliminado con éxito');
     }
 }

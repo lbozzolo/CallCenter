@@ -3,6 +3,10 @@ body {
     margin-bottom:50px;
 }
 
+h1, h2, h3, h4 {
+    color: white !important;
+}
+
 #footer {
     position: fixed;
     height: 50px;

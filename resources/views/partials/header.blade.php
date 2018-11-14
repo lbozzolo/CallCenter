@@ -1,6 +1,10 @@
 <div class="header">
     <div class="pull-left">
-        <div class="logo"><a href="#"><!-- <img src="assets/images/logo.png" alt="" /> --><img src="img/logo_sis.png" alt="Smartline"></a></div>
+        <div class="logo" style="padding: 5px 10px; margin:  10px">
+            <a href="#">
+                <img src="{{ asset('img/logo_sis.png') }}" alt="Smartline"  height="30px">
+            </a>
+        </div>
         <div class="hamburger sidebar-toggle">
             <span class="line"></span>
             <span class="line"></span>
