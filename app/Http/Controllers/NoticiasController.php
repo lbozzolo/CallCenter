@@ -70,7 +70,7 @@ class NoticiasController extends Controller
             'action' => 'create'
         ]);
 
-        return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido agregada con éxito');
+        return redirect()->route('noticias.index')->with('ok', 'La Noticia ha sido agregada con éxito');
     }
 
     public function edit($id)
@@ -130,7 +130,7 @@ class NoticiasController extends Controller
 
         $noticia->save();
 
-        return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido editada con éxito');
+        return redirect()->route('noticias.index')->with('ok', 'La Noticia ha sido editada con éxito');
     }
 
     public function destroy($id)
@@ -144,7 +144,7 @@ class NoticiasController extends Controller
 
         $noticia->delete();
 
-        return redirect()->route('noticias.index')->with('ok', 'La noticia ha sido eliminada con éxito');
+        return redirect()->route('noticias.index')->with('ok', 'La Noticia ha sido eliminada con éxito');
     }
 
 }

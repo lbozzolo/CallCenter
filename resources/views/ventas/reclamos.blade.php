@@ -32,79 +32,42 @@
     </div>
 
     <div class="row">
-
-        <div class="col-lg-4">
-
+        <div class="col-lg-12">
             <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Información general</h3>
-                </div>
                 <div class="card-body">
-                    <ul class="list-unstyled listado">
+                    <ul class="list-unstyled list-inline listado">
                         <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
                         <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
                         <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
-                    </ul>
-                    @permission('ver.venta')
-                    <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">ver venta</a>
-                    @endpermission
-                </div>
-            </div>
-            <div class="card">
-                @if($venta->reclamos->count())
-
-                    <div class="card-header">
-                        <h3>Listado de reclamos</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul class="listado">
-                            @foreach($venta->reclamos as $reclamo)
-                                <li class="list-group-item reclamo-list-item" id="reclamo{!! $reclamo->id !!}" style="cursor: pointer">
-                                    <span class="text-info">{!! '#'.$reclamo->id !!}</span>
-                                    {!! ($reclamo->titulo)? $reclamo->titulo : '' !!}
-                                    @if($reclamo->estado->slug == 'cerrado')
-                                        <span class="pull-right" title="reclamo cerrado"><i class="fa fa-window-close-o text-danger"></i></span>
-                                    @else
-                                        <span class="pull-right" title="reclamo abierto"><i class="fa fa-folder-open text-primary"></i></span>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-
-                @else
-
-                    <p>Esta venta no tiene ningún reclamo.</p>
-
-                @endif
-            </div>
-
-        </div>
-        <div class="col-lg-8">
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>Reclamo</h3>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled">
-                        <li>
-                            <p id="seleccione">Seleccione un reclamo de la lista</p>
-                        </li>
-                        @foreach($venta->reclamos as $reclamo)
-
-                            @permission('ver.reclamos.venta')
-                            @include('ventas.partials.panel-reclamo')
+                        <li class="list-group-item">
+                            @permission('ver.venta')
+                            <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">Ver venta</a>
                             @endpermission
-
-                        @endforeach
+                        </li>
+                        <li class="list-group-item">
+                            @permission('crear.reclamo')
+                            <a href="{{ route('reclamos.create', $venta->id) }}" style="color: cyan">Generar un nuevo reclamo</a>
+                            @endpermission
+                        </li>
                     </ul>
                 </div>
             </div>
-
         </div>
-
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <ul>
+            @foreach($venta->reclamos as $reclamo)
+
+                <li>@include('ventas.partials.reclamo')</li>
+
+            @endforeach
+            </ul>
+        </div>
+    </div>
+
+
 
 @endsection
 
@@ -116,26 +79,43 @@
 
     <script>
 
-        $('.reclamo-list-item').click(function () {
-            $('#seleccione').hide();
-            var id = '#panel-' + $(this).attr('id');
-            $('.reclamos-paneles').hide();
-            $(id).show();
+        $('.editar-descripcion').click(function () {
+            var id = $(this).attr('data-id');
+            $('#formDescripcion' + id).show();
+            $('#titulo' + id).hide();
+            $('#descripcion' + id).hide();
+        });
+
+        $('.cancelar-edicion').click(function () {
+            var id = $(this).attr('data-id');
+            $('#descripcion' + id).show();
+            $('#formDescripcion' + id + 'textarea').val('{!! (isset($reclamo))? $reclamo->descripcion : '' !!}');
+            $('#inputTitulo' + id).val('{!! (isset($reclamo))? $reclamo->titulo : '' !!}');
+            $('#formDescripcion' + id).hide();
+            $('#titulo' + id).show();
+            $('#descripcion' + id).show();
         });
 
 
-        $('#editarReclamo').click(function () {
-            $('#descripcion').hide();
-            $('#formDescripcion').show();
-            $('#titulo').hide();
-        });
+        $(document).ready(function() {
+            $('#table-enable-users').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
 
-        $('#cancelarEdicion').click(function () {
-            $('#descripcion').show();
-            $('#formDescripcion textarea').val('{!! (isset($reclamo))? $reclamo->descripcion : '' !!}');
-            $('#formDescripcion').hide();
-            $('#inputTitulo').val('{!! (isset($reclamo))? $reclamo->titulo : '' !!}');
-            $('#titulo').show();
         });
 
 

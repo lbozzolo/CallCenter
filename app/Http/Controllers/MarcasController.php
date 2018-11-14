@@ -23,7 +23,7 @@ class MarcasController extends Controller
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion
         ]);
-        return redirect()->route('marcas.index')->with('La marca ha sido agregada con éxito');
+        return redirect()->route('marcas.index')->with('La Marca ha sido agregada con éxito');
     }
 
     public function edit($id)
@@ -41,7 +41,7 @@ class MarcasController extends Controller
         $marca->descripcion = $request->descripcion;
         $marca->save();
 
-        return redirect()->route('marcas.index')->with('ok', 'La marca ha sido editada con éxito');
+        return redirect()->route('marcas.index')->with('ok', 'La Marca ha sido editada con éxito');
     }
 
     public function destroy($id)
@@ -49,12 +49,12 @@ class MarcasController extends Controller
         $marca = Marca::find($id);
 
         if($marca->productos->count()){
-            return redirect()->back()->withErrors('No puede eliminar la marca porque tiene productos asignados');
+            return redirect()->back()->withErrors('No puede eliminar la marca porque tiene Productos asignados');
         }
 
         $marca->delete();
 
-        return redirect()->route('marcas.index')->with('ok', 'La marca ha sido eliminada con éxito');
+        return redirect()->route('marcas.index')->with('ok', 'La Marca ha sido eliminada con éxito');
     }
 
 }

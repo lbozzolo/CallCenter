@@ -37,9 +37,9 @@ class PermissionsController extends Controller
         ]);
 
         if($permiso){
-            return redirect()->route('permissions.index')->with('ok', 'El permiso "'.$permiso->name.'" ha sido creado con éxito');
+            return redirect()->route('permissions.index')->with('ok', 'El Permiso "'.$permiso->name.'" ha sido creado con éxito');
         }else{
-            return redirect()->route('permissions.index')->withErrors('No se pudo crear el permiso');
+            return redirect()->route('permissions.index')->withErrors('No se pudo crear el Permiso');
         }
     }
 
@@ -61,7 +61,7 @@ class PermissionsController extends Controller
 
         $permiso->save();
 
-        return redirect()->route('permissions.index')->with('ok', 'El permiso se ha actualizado con éxito');
+        return redirect()->route('permissions.index')->with('ok', 'El Permiso se ha actualizado con éxito');
     }
 
     public function destroy($id)

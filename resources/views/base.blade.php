@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="footer" style="margin-bottom: 0px">
-                <p>Smartline @ 2018 - Desarrollado por <a href="http://www.bamdig.com/" target="_new" class="page-refresh">Bamdig.com</a></p>
+                <p>Smartline @ 2018 - Desarrollado por <a href="http://www.verticedigital.com.ar/" target="_new" class="page-refresh">Verticedigital.com.ar</a></p>
             </div>
         </div>
     </div>

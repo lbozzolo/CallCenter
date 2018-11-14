@@ -12,6 +12,36 @@ Route::get('ventas/{estado?}', [
     'middleware' => 'permission:listado.venta'
 ]);
 
+Route::get('ventas/mis-ventas/ver', [
+    'as' => 'ventas.mis.ventas',
+    'uses' => 'VentasController@misVentas',
+    //'middleware' => 'permission:ver.venta'
+]);
+
+Route::get('ventas/auditoria/ver', [
+    'as' => 'ventas.auditoria',
+    'uses' => 'VentasController@auditoria',
+    //'middleware' => 'permission:ver.venta'
+]);
+
+Route::get('ventas/post-venta/ver', [
+    'as' => 'ventas.post.venta',
+    'uses' => 'VentasController@postVenta',
+    //'middleware' => 'permission:ver.venta'
+]);
+
+Route::get('ventas/facturacion/ver', [
+    'as' => 'ventas.facturacion',
+    'uses' => 'VentasController@facturacion',
+    //'middleware' => 'permission:ver.venta'
+]);
+
+Route::get('ventas/logistica/ver', [
+    'as' => 'ventas.logistica',
+    'uses' => 'VentasController@logistica',
+    //'middleware' => 'permission:ver.venta'
+]);
+
 //Creación de venta
 Route::get('ventas/llamar/seleccionar-cliente', [
     'as' => 'ventas.seleccion.cliente',

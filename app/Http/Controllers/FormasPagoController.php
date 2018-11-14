@@ -50,7 +50,7 @@ class FormasPagoController extends Controller
             'action' => 'create'
         ]);
 
-        return redirect()->route('formas.pago.index')->with('ok', 'Forma de pago agregada con éxito');
+        return redirect()->route('formas.pago.index')->with('ok', 'Forma de Pago agregada con éxito');
     }
 
     public function edit($id)
@@ -78,9 +78,9 @@ class FormasPagoController extends Controller
         $formaPago = $this->formaPagoRepo->updateFormaPago($id, $request);
 
         if(!$formaPago)
-            return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar la forma de pago');
+            return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar la Forma de Pago');
 
-        return redirect()->route('formas.pago.index')->with('ok', 'Forma de pago actualizada con éxito');
+        return redirect()->route('formas.pago.index')->with('ok', 'Forma de Pago actualizada con éxito');
     }
 
     public function destroy(Request $request, $id)
@@ -88,7 +88,7 @@ class FormasPagoController extends Controller
         $formaPago = FormaPago::find($id);
 
         if(count($formaPago->ventas))
-            return redirect()->back()->withErrors('No se puede eliminar la forma de pago porque ya ha sido utilizada como forma de pago en alguna venta');
+            return redirect()->back()->withErrors('No se puede eliminar la Forma de Pago porque ya ha sido utilizada como Forma de pago en alguna venta');
 
         $formaPago->updateable()->create([
             'user_id' => Auth::user()->id,
@@ -97,7 +97,7 @@ class FormasPagoController extends Controller
 
         $formaPago->delete();
 
-        return redirect()->back()->with('ok', 'Forma de pago eliminada con éxito');
+        return redirect()->back()->with('ok', 'Forma de Pago eliminada con éxito');
     }
 
 }

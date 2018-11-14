@@ -26,6 +26,7 @@ use SmartLine\Entities\Banco;
 use SmartLine\Entities\ValidateCreditCard;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use Illuminate\Support\Facades\Validator;
+use SmartLine\User;
 
 class VentasController extends Controller
 {
@@ -166,7 +167,7 @@ class VentasController extends Controller
 
         $venta->save();
 
-        return redirect()->back()->with('ok', 'Número de guía guardado con éxito');
+        return redirect()->back()->with('ok', 'Número de Guía guardado con éxito');
     }
 
     public function editarModos(Request $request, $id)
@@ -223,7 +224,7 @@ class VentasController extends Controller
         $venta->estado_id = $cancelado->id;
         $venta->save();
 
-        return redirect()->route('ventas.panel', $venta->id)->with('La venta ha sido cancelada');
+        return redirect()->route('ventas.panel', $venta->id)->with('La Venta ha sido cancelada');
     }
 
     public function aceptar(Request $request)
@@ -299,6 +300,47 @@ class VentasController extends Controller
         return view('ventas.show')->with($data);
     }
 
+    public function misVentas()
+    {
+        $user = Auth::user();
+        $ventas = $user->ventas;
+
+        return view('ventas.mis-ventas', compact('user', 'ventas'));
+    }
+
+    public function auditoria()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('auditable');
+
+        return view('ventas.auditoria', compact('ventas'));
+    }
+
+    public function postVenta()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('entregado');
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
+
+        return view('ventas.post-venta', compact('ventas'));
+    }
+
+    public function facturacion()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('confirmada');
+
+        return view('ventas.facturacion', compact('ventas'));
+    }
+
+    public function logistica()
+    {
+        $ventas = $this->ventaRepo->getVentasByEstado('enviada');
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('entregado'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
+
+        return view('ventas.logistica', compact('ventas'));
+    }
+
     public function showClienteVentas($id)
     {
         $data['venta'] = Venta::find($id);
@@ -316,7 +358,15 @@ class VentasController extends Controller
     public function reclamos($id)
     {
         $venta = Venta::find($id);
-        return view('ventas.reclamos', compact('venta'));
+        $users = User::with(['roles' => function ($query) {
+            $query->get(['roles.id', 'name', 'slug']);
+        }])->get(['id', 'nombre', 'apellido']);
+
+        $users = $users->filter(function($value){
+            return $value->is('supervisor|atencion.al.cliente|admin');
+        })->all();
+
+        return view('ventas.reclamos', compact('venta', 'users'));
     }
 
     /**
@@ -356,7 +406,7 @@ class VentasController extends Controller
 
         // Redirecciono atrás si el cliente no tiene un barrio en sus datos personales
         if($estadoAnterior == 'iniciada' && !$venta->cliente->domicilio->barrio)
-            return redirect()->back()->withErrors('No se puede realizar la operación. El cliente no tiene ingresado un barrio en sus datos personales.');
+            return redirect()->back()->withErrors('No se puede realizar la operación. El Cliente no tiene ingresado un barrio en sus datos personales.');
 
         if($estado->slug == 'cancelada'){
             $validator = Validator::make($request->all(), [
@@ -381,7 +431,7 @@ class VentasController extends Controller
         $venta->estado_id = $estado->id;
         $venta->save();
 
-        return redirect()->back()->with('El estado de la venta ha sido actualizado');
+        return redirect()->back()->with('El Estado de la venta ha sido actualizado');
     }
 
     public function ajustar(Request $request, $id)
@@ -400,7 +450,7 @@ class VentasController extends Controller
         $venta->ajuste = $nuevoAjuste;
         $venta->save();
 
-        return redirect()->back()->with('ok', 'Importe de venta ajustado con éxito');
+        return redirect()->back()->with('ok', 'Importe de Venta ajustado con éxito');
     }
 
     public function quitarAjuste($id)
@@ -419,7 +469,7 @@ class VentasController extends Controller
         $venta->ajuste = $nuevoAjuste;
         $venta->save();
 
-        return redirect()->back()->with('ok', 'Ajuste de venta quitado con éxito');
+        return redirect()->back()->with('ok', 'Ajuste de Venta quitado con éxito');
     }
 
     public function agregarMetodoDePago(Request $request, $id)
@@ -435,7 +485,7 @@ class VentasController extends Controller
             });
 
             if(!$formasPago)
-                return redirect()->back()->withErrors('No hay formas de pago en '.$request->cuotas.' cuotas para la tarjeta seleccionada');
+                return redirect()->back()->withErrors('No hay Formas de Pago en '.$request->cuotas.' cuotas para la Tarjeta seleccionada');
 
             $tarjetaYcuotas = FormaPago::where('marca_tarjeta_id', $datosTarjeta->marca_id)->where('cuota_cantidad', $request->cuotas)->first();
         }
@@ -453,7 +503,7 @@ class VentasController extends Controller
             'action' => 'create'
         ]);
 
-        return redirect()->back()->with('ok', 'Método de pago agregado con éxito')->with([$tab3 = 'active']);
+        return redirect()->back()->with('ok', 'Método de Pago agregado con éxito')->with([$tab3 = 'active']);
     }
 
     public function quitarMetodoPago(Request $request, $id)
@@ -467,7 +517,7 @@ class VentasController extends Controller
 
         $metodoPagoVenta->delete();
 
-        return redirect()->back()->with('ok', 'Método de pago eliminado con éxito');
+        return redirect()->back()->with('ok', 'Método de Pago eliminado con éxito');
     }
     /**
      * Remove the specified resource from storage.

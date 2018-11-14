@@ -1,23 +1,26 @@
-@extends('ventas.base')
+@extends('reclamos.base')
 
 @section('titulo')
 
-    <h2>Ventas<span class="text-muted"> / {!! $ventas->title !!}</span></h2>
+    <h2>Reclamos <span class="text-muted">/ Ingresar-reclamo</span> </h2>
 
 @endsection
+
 
 @section('contenido')
 
     <div class="card card-default">
+        <div class="card-header">
+            <h3>Seleccione la venta a la que le asignará un reclamo.</h3>
+        </div>
         <div class="card-body">
-        @permission('listado.venta')
-            @include('ventas.partials.listado-ventas')
-        @endpermission
+
+            @include('reclamos.partials.listado-ventas')
+
         </div>
     </div>
 
 @endsection
-
 
 @section('js')
 
@@ -50,4 +53,3 @@
     </script>
 
 @endsection
-

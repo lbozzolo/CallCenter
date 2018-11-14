@@ -24,7 +24,7 @@
 @section('contenido')
 
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-9">
 
             @permission('listado.noticia')
             <ul class="list-unstyled">

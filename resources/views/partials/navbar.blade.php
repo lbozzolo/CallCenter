@@ -37,7 +37,7 @@
                             @endpermission
 
                             @permission('crear.reclamo')
-                            <li><a href="{{ route('reclamos.create') }}">Agregar Reclamos </a></li>
+                            <li><a href="{{ route('reclamos.index.ventas') }}">Iniciar Reclamo </a></li>
                             @endpermission
                         </ul>
                     </li>
@@ -49,6 +49,10 @@
                         <ul>
                             @permission('listado.venta')
                             <li><a href="{{ route('ventas.index') }}">Listar Ventas </a></li>
+                            @endpermission
+
+                            @permission('listado.venta')
+                            <li><a href="{{ route('ventas.mis.ventas') }}">Mis Ventas </a></li>
                             @endpermission
 
                             @permission('crear.venta')
@@ -76,8 +80,25 @@
                 @endpermission
 
                 @permission('listado.updateable')
-                <li><a href="{{ route('updateables.index') }}"><i class="ti-notepad"></i> Movimientos </a></li>
+                <li><a href="{{ route('updateables.index') }}"><i class="ti-direction-alt"></i> Movimientos </a></li>
                 @endpermission
+
+                @permission('crear.venta')
+                <li><a href="{{ route('ventas.facturacion') }}"> <i class="ti-money"></i>Facturación</a></li>
+                @endpermission
+
+                @permission('crear.venta')
+                <li><a href="{{ route('ventas.auditoria') }}"> <i class="ti-eye"></i>Auditoria</a></li>
+                @endpermission
+
+                @permission('crear.venta')
+                <li><a href="{{ route('ventas.logistica') }}"> <i class="ti-truck"></i>Logística</a></li>
+                @endpermission
+
+                @permission('crear.venta')
+                <li><a href="{{ route('ventas.post.venta') }}"> <i class="ti-truck"></i>Post-Venta</a></li>
+                @endpermission
+
 
                 <li class="label">Seteos</li>
 

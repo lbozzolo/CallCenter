@@ -264,7 +264,7 @@ class ClientesController extends Controller
         $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
 
         if(!$validateCreditCard)
-            return redirect()->back()->withErrors('Formato de tarjeta incorrecto');
+            return redirect()->back()->withErrors('Formato de Tarjeta incorrecto');
 
 
         $datosTarjeta = $cliente->datosTarjeta()->create([
@@ -277,14 +277,14 @@ class ClientesController extends Controller
         ]);
 
         if(!$datosTarjeta)
-            return redirect()->back()->withErrors('No se pudo asociar la tarjera');
+            return redirect()->back()->withErrors('No se pudo asociar la Tarjeta');
 
         $datosTarjeta->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'create'
         ]);
 
-        return redirect()->back()->with('ok', 'Nueva tarjeta asociada con éxito');
+        return redirect()->back()->with('ok', 'Nueva Tarjeta asociada con éxito');
 
     }
 
@@ -293,7 +293,7 @@ class ClientesController extends Controller
         $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
 
         if(!$validateCreditCard)
-            return redirect()->back()->withErrors('Formato de tarjeta incorrecto');
+            return redirect()->back()->withErrors('Formato de Tarjeta incorrecto');
 
         $this->clienteRepo->updateTarjeta($id, $request);
 
