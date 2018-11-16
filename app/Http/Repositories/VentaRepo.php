@@ -66,17 +66,6 @@ class VentaRepo extends BaseRepo
             $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
         }
 
-        if($request['promocion_id'] && $request['promocion_id'] != $venta->promocion_id) {
-            $venta->updateable()->create([
-                'user_id' => Auth::user()->id,
-                'action' => 'update',
-                'field' => 'promocion_id',
-                'former_value' => $venta->promocion_id,
-                'updated_value' => $request->promocion_id
-            ]);
-            $venta->promocion_id = ($request->promocion_id)? $request->promocion_id : null;
-        }
-
         $venta->save();
 
         return $venta;

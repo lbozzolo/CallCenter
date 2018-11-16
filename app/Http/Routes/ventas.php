@@ -42,6 +42,12 @@ Route::get('ventas/logistica/ver', [
     //'middleware' => 'permission:ver.venta'
 ]);
 
+Route::get('ventas/{id}/timeline', [
+    'as' => 'ventas.timeline',
+    'uses' => 'VentasController@timeline',
+    //'middleware' => 'permission:ver.venta'
+]);
+
 //Creación de venta
 Route::get('ventas/llamar/seleccionar-cliente', [
     'as' => 'ventas.seleccion.cliente',

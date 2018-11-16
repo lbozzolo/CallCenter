@@ -99,6 +99,9 @@
 
                                             {!! Form::open(['url' => route('ventas.quitar.metodopago', $metodoPagoVenta->id), 'method' => 'delete']) !!}
                                                 <div class="form-group">
+                                                    {!! Form::text('reason', null, ['class' => 'form-control']) !!}
+                                                </div>
+                                                <div class="form-group">
                                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                                 </div>
@@ -153,6 +156,9 @@
                                         <div class="card-footer">
 
                                             {!! Form::open(['url' => route('ventas.quitar.metodopago', $metodoPagoVenta->id), 'method' => 'delete']) !!}
+                                            <div class="form-group">
+                                                {!! Form::text('reason', null, ['class' => 'form-control', 'placeholder' => 'Motivo (obligatorio)']) !!}
+                                            </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-danger">Eliminar</button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

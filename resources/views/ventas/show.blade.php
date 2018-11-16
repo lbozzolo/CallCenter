@@ -9,6 +9,12 @@
 
 @section('contenido')
 
+    @if($venta->estado->slug == 'cancelada')
+
+        @include('ventas.partials.venta-cancelada')
+
+    @else
+
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -36,7 +42,7 @@
             <div class="col-lg-6">
 
                 <div class="col-12">
-                    <div class="card card-default" style="height: 310px">
+                    <div class="card card-default" style="min-height: 310px">
                         <div class="card-header">
                             <h3 class="card-title">Información general</h3>
                         </div>
@@ -70,7 +76,11 @@
                 <div class="col-12">
                     <div class="card card-default" style="height: 310px">
                         <div class="card-header">
-                            <h3 class="card-title">Estado de la venta</h3>
+                            <ul class="list-inline">
+                                <li><h3 class="card-title">Estado de la venta</h3></li>
+                                <li><a href="{{ route('ventas.timeline', $venta->id) }}" style="color: cyan">Ver Timeline</a></li>
+                            </ul>
+
                         </div>
                         <div class="card-body">
                             <p>Marcar esta venta como...</p>
@@ -113,6 +123,8 @@
 
             </div>
         </div>
+
+    @endif
 
 
 
