@@ -349,6 +349,7 @@ class VentasController extends Controller
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('entregado'));
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('facturada'));
 
         return view('ventas.logistica', compact('ventas'));
     }
