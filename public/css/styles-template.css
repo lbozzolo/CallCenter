@@ -49,6 +49,13 @@ h1, h2, h3, h4 {
     border: 1px solid #2D4558 !important;
 }
 
+.listado-timeline li {
+    background-color: slategray !important;
+    padding: 5px 10px !important;
+    margin: 2px;
+    border-radius: 3px !important;
+}
+
 /* Estilos para datepicker */
 
 .datepicker-days  {

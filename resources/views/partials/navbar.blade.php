@@ -83,20 +83,20 @@
                 <li><a href="{{ route('updateables.index') }}"><i class="ti-direction-alt"></i> Movimientos </a></li>
                 @endpermission
 
-                @permission('crear.venta')
+                @permission('listado.facturacion.venta')
                 <li><a href="{{ route('ventas.facturacion') }}"> <i class="ti-money"></i>Facturación</a></li>
                 @endpermission
 
-                @permission('crear.venta')
+                @permission('listado.auditoria.venta')
                 <li><a href="{{ route('ventas.auditoria') }}"> <i class="ti-eye"></i>Auditoria</a></li>
                 @endpermission
 
-                @permission('crear.venta')
+                @permission('listado.logistica.venta')
                 <li><a href="{{ route('ventas.logistica') }}"> <i class="ti-truck"></i>Logística</a></li>
                 @endpermission
 
-                @permission('crear.venta')
-                <li><a href="{{ route('ventas.post.venta') }}"> <i class="ti-truck"></i>Post-Venta</a></li>
+                @permission('listado.postventa.venta')
+                <li><a href="{{ route('ventas.post.venta') }}"> <i class="ti-truck"></i>Postventa</a></li>
                 @endpermission
 
 

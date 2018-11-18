@@ -55,12 +55,43 @@
                                 </li>
                                 <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
                                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
-                                <li class="list-group-item">Número de guía: {!! ($venta->numero_guia)? $venta->numero_guia : '<small class="text-muted">sin número de guía</small>' !!}</li>
                                 @permission('ver.reclamos.venta')
                                 <li class="list-group-item">
                                     <span style="padding: 10px 5px;"><a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color: cyan">Reclamos ( {!! $venta->reclamos->count() !!} )</a></span>
                                 </li>
                                 @endpermission
+                            </ul>
+                            <ul class="panel panel-barra">
+                                <li>
+                                    Número de guía:
+                                    {!! ($venta->numero_guia)? $venta->numero_guia : '<small class="text-muted">sin número de guía</small>' !!}
+                                    {!! Form::model($venta, ['url' => route('ventas.numero.guia', $venta->id), 'method' => 'post']) !!}
+
+                                    <div class="input-group margin">
+                                        {!! Form::text('numero_guia', $venta->numero_guia, ['class' => 'form-control']) !!}
+                                        <span class="input-group-btn">
+                                          <button type="button" class="btn btn-info btn-flat" style="padding: 9px 5px" data-target="#guardarNumeroGuia" data-toggle="modal">Guardar</button>
+                                        </span>
+                                    </div>
+
+                                    <div class="modal fade col-lg-3 col-lg-offset-9" id="guardarNumeroGuia">
+                                        <div class="card">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Guardar Número de guía</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>¿Desea guardar el número de guía?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {!! Form::close() !!}
+                                </li>
+
                             </ul>
                         </div>
 
@@ -74,11 +105,13 @@
             <div class="col-lg-6">
                 @permission('editar.venta')
                 <div class="col-12">
-                    <div class="card card-default" style="height: 310px">
+                    <div class="card card-default" style="height: 382px">
                         <div class="card-header">
                             <ul class="list-inline">
                                 <li><h3 class="card-title">Estado de la venta</h3></li>
+                                @permission('ver.timeline.venta')
                                 <li><a href="{{ route('ventas.timeline', $venta->id) }}" style="color: cyan">Ver Timeline</a></li>
+                                @endpermission
                             </ul>
 
                         </div>

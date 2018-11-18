@@ -147,7 +147,30 @@ class VentasController extends Controller
         $venta = Venta::find($request->venta_id);
         $venta->productos()->attach($producto);
 
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'add',
+            'related_model_id' => $producto->id,
+            'related_model_type' => 'producto'
+        ]);
+
         return redirect()->back()->with('Producto agregado con éxito');
+    }
+
+    public function quitarProducto(Request $request)
+    {
+        $venta = Venta::find($request->venta_id);
+        $producto = Producto::find($request->producto_id);
+        $venta->productos()->detach($producto);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete',
+            'related_model_id' => $producto->id,
+            'related_model_type' => 'producto',
+        ]);
+
+        return redirect()->back()->with('Producto quitado de la venta con éxita');
     }
 
     public function numeroGuia(Request $request, $id)
@@ -187,16 +210,16 @@ class VentasController extends Controller
         $producto->pivot->observaciones = $request->observaciones;
         $producto->pivot->save();
 
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'related_model_id' => $producto->id,
+            'related_model_type' => 'producto',
+            'field' => 'observaciones',
+            'updated_value' => $request->observaciones
+        ]);
+
         return redirect()->route('ventas.panel', $venta->id)->with('ok', 'Observaciones guardadas con éxito');
-    }
-
-    public function quitarProducto(Request $request)
-    {
-        $venta = Venta::find($request->venta_id);
-        $producto = Producto::find($request->producto_id);
-
-        $venta->productos()->detach($producto);
-        return redirect()->back()->with('Producto quitado de la venta con éxita');
     }
 
     public function cancelar(Request $request)
@@ -263,17 +286,6 @@ class VentasController extends Controller
         $venta->save();
 
         return redirect()->back()->with('ok', 'La venta ha sido retomada');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**

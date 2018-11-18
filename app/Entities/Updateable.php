@@ -32,4 +32,14 @@ class Updateable extends Entity
         return $this->belongsTo(MetodoPagoVenta::class, 'related_model_id');
     }
 
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'related_model_id');
+    }
+
+    public function responsable()
+    {
+        return $this->belongsTo(User::class, 'related_model_id');
+    }
+
 }
