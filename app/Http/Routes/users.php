@@ -30,6 +30,12 @@ Route::get('usuarios/nuevos', [
     'middleware' => 'permission:listado.usuarios.nuevos'
 ]);
 
+Route::get('usuarios/{id}/blanqueo-de-contraseña', [
+    'as' => 'users.blanqueo.password',
+    'uses' => 'UsersController@blanqueoPassword',
+    //'middleware' => 'permission:listado.usuarios.nuevos'
+]);
+
 Route::get('perfil/{id}', [
     'as' => 'users.profile',
     'uses' => 'UsersController@profile',
