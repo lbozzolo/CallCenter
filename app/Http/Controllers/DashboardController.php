@@ -36,10 +36,11 @@ class DashboardController extends Controller
 
 
         $bbb = 'j';
-
-        dd($bbb);
-
+        $password = 'lucas pruebas';
+        return view('emails.blanqueo-password')->with('password', $password);
+    
     }
+
 
     public function enviopack()
     {
