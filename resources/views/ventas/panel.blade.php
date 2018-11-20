@@ -14,51 +14,7 @@
 
         @if($venta->estado->slug == 'cancelada')
 
-
-            <div class="card card-default">
-                <div class="card-body">
-                    <ul class="list-unstyled listado">
-                        <li class="list-group-item"><strong>Cliente:</strong> {!! $venta->cliente->full_name !!}</li>
-                        <li class="list-group-item">
-                            <strong>{!! (count($venta->productos) > 1)? 'Productos:' : 'Producto:' !!}</strong>
-                            <ul>
-                                @foreach($venta->productos as $producto)
-                                    <li>{!! $producto->nombre !!}</li>
-                                @endforeach
-                            </ul>
-                        </li>
-                        <li class="list-group-item"><strong>Fecha:</strong> {!! $venta->fecha_creado !!}</li>
-                        <li class="list-group-item"><strong>Cancelación:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->fecha_creado !!}</li>
-                        <li class="list-group-item"><strong>Motivo:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->reason !!}</li>
-                        @permission('retomar.venta')
-                        <li class="list-group-item">
-                            <button type="button" class="nonStyledButton" data-toggle="modal" data-target="#retomarVenta">
-                                <i class="fa fa-rotate-right text-primary"></i>
-                                Retomar
-                            </button>
-                            <div class="modal fade col-lg-3 col-lg-offset-4" id="retomarVenta">
-                                <div class="card">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">Retomar venta</h4>
-                                    </div>
-                                    {!! Form::open(['url' => route('ventas.retomar'), 'method' => 'put']) !!}
-                                    <div class="modal-body">
-                                        <p>¿Desea retomar esta venta?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        {!! Form::hidden('venta_id', $venta->id) !!}
-                                        <button type="submit" class="btn btn-primary pull-left">Retomar venta</button>
-                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                    </div>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
-                        </li>
-                        @endpermission
-                    </ul>
-                </div>
-            </div>
+            @include('ventas.partials.venta-cancelada')
 
         @else
 

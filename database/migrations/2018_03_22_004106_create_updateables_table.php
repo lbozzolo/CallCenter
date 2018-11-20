@@ -18,10 +18,12 @@ class CreateUpdateablesTable extends Migration
             $table->integer('user_id');
             $table->integer('updateable_id');
             $table->string('updateable_type');
+            $table->integer('related_model_id')->nullable();
+            $table->string('related_model_type')->nullable();
             $table->string('action')->nullable();
-            $table->string('field');
-            $table->string('former_value');
-            $table->string('updated_value');
+            $table->string('field')->nullable();
+            $table->string('former_value')->nullable();
+            $table->string('updated_value')->nullable();
             $table->string('reason')->nullable();
 
             $table->timestamps();

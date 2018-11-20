@@ -86,6 +86,8 @@ class ReclamosController extends Controller
      */
     public function store(CreateReclamoRequest $request, $id)
     {
+        $venta = Venta::find($id);
+
         $reclamo = Reclamo::create([
             'venta_id' => $id,
             'titulo' => ($request->titulo)? $request->titulo : null,
@@ -101,6 +103,13 @@ class ReclamosController extends Controller
         $reclamo->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'create'
+        ]);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'add',
+            'related_model_id' => $reclamo->id,
+            'related_model_type' => 'reclamo'
         ]);
 
         return redirect()->back()->with('ok', 'Reclamo creado con éxito');
@@ -224,6 +233,7 @@ class ReclamosController extends Controller
     public function changeStatus($id)
     {
         $reclamo = Reclamo::find($id);
+        $venta = $reclamo->venta;
         $estado = ($reclamo->estado->slug == 'abierto')? EstadoReclamo::where('slug', 'cerrado')->first() : EstadoReclamo::where('slug', 'abierto')->first();
 
         if(!$estado)
@@ -232,6 +242,16 @@ class ReclamosController extends Controller
         $reclamo->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'update',
+            'field' => 'estado_id',
+            'former_value' => $reclamo->estado_id,
+            'updated_value' => $estado->id
+        ]);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'related_model_id' => $reclamo->id,
+            'related_model_type' => 'reclamo',
             'field' => 'estado_id',
             'former_value' => $reclamo->estado_id,
             'updated_value' => $estado->id
@@ -246,6 +266,7 @@ class ReclamosController extends Controller
     public function changeSolucionado($id)
     {
         $reclamo = Reclamo::find($id);
+        $venta = $reclamo->venta;
         $valorSolucionado = ($reclamo->solucionado == config('sistema.reclamos.SOLUCIONADO.solucionado'))? config('sistema.reclamos.SOLUCIONADO.sinsolucion') : config('sistema.reclamos.SOLUCIONADO.solucionado');
 
         if($valorSolucionado == null && $valorSolucionado != 0)
@@ -254,6 +275,16 @@ class ReclamosController extends Controller
         $reclamo->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'update',
+            'field' => 'solucionado',
+            'former_value' => $reclamo->solucionado,
+            'updated_value' => $valorSolucionado
+        ]);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'related_model_id' => $reclamo->id,
+            'related_model_type' => 'reclamo',
             'field' => 'solucionado',
             'former_value' => $reclamo->solucionado,
             'updated_value' => $valorSolucionado
@@ -268,6 +299,7 @@ class ReclamosController extends Controller
     public function derivar(Request $request, $id)
     {
         $reclamo = Reclamo::find($id);
+        $venta = $reclamo->venta;
 
         $updateableResponsable = [
             'user_id' => Auth::user()->id,
@@ -285,6 +317,16 @@ class ReclamosController extends Controller
             'updated_value' => Auth::user()->id
         ];
 
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'related_model_id' => $reclamo->id,
+            'related_model_type' => 'reclamo',
+            'field' => 'responsable_id',
+            'former_value' => $reclamo->responsable_id,
+            'updated_value' => $request->responsable_id
+        ]);
+
         $reclamo->responsable_id = $request->user_id;
         $reclamo->derivador_id = Auth::user()->id;
         $reclamo->save();
@@ -301,13 +343,21 @@ class ReclamosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         $reclamo = Reclamo::find($id);
+        $venta = $reclamo->venta;
 
         $reclamo->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'delete'
+        ]);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete',
+            'related_model_id' => $reclamo->id,
+            'related_model_type' => 'reclamo',
         ]);
 
         $reclamo->delete();

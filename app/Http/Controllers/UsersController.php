@@ -149,6 +149,30 @@ class UsersController extends Controller
         return view('users.change-password', compact('user'));
     }
 
+    public function blanqueoPassword($id)
+    {
+        $user = User::find($id);
+
+        if(!$user->email)
+            return redirect()->back()->withErrors('No se puede blanquear la contraseña del usuario porque el mismo no tiene un email asociado. Recuerde que una vez blanqueada, la nueva contraseña será enviada al usuario por email.');
+
+        $password = str_random(6);
+        $user->password = bcrypt($password);
+        $user->save();
+
+        $email = $user->email;
+
+
+        Mail::send('emails.blanqueo-password', ['password' => $password], function ($message) use ($email){
+
+            $message->from('Info@smartline.com.ar', 'SmartLine');
+            $message->to($email)->subject('Blanqueo de contraseña');
+
+        });
+
+        return redirect()->back()->with('ok', 'Contraseña blanqueada con éxito');
+    }
+
     public function storeNewPassword(ChangePasswordRequest $request)
     {
         $user = User::find($request->user_id);

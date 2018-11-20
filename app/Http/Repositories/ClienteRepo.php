@@ -281,6 +281,8 @@ class ClienteRepo extends BaseRepo
 
             $domicilio->save();
 
+            return $domicilio;
+
 
         }else{
 

@@ -35,6 +35,7 @@
             <h2 class="card-title">Editar producto - {!! $producto->nombre !!}</h2>
         </div>
         <div class="card-body">
+            <div class="row">
             <div class="col-lg-6 col-md-6">
                 {!! Form::model($producto, ['method' => 'put', 'url' => route('productos.update', $producto->id), 'class' =>'form']) !!}
 
@@ -141,6 +142,8 @@
                 <a href="{{ route('productos.index') }}" class="btn btn-default">Cancelar</a>
 
                 {!! Form::close() !!}
+            </div>
+
             </div>
         </div>
     </div>
