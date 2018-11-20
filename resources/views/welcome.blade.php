@@ -23,7 +23,7 @@
                         <div class="stat-content">
                             <div class="pull-left">
                                 <i class="ti-arrow-up color-success"></i>
-                                <span class="stat-digit"> 2158</span>
+                                <span class="stat-digit">{!! $clientes !!}</span>
                             </div>
 
                         </div>
@@ -40,14 +40,14 @@
                 <div class="card">
                     <div class="stat-widget-eight">
                         <div class="stat-header">
-                            <div class="header-title pull-left">Llamadas Diarias</div>
+                            <div class="header-title pull-left">Asignaciones Actuales</div>
 
                         </div>
                         <div class="clearfix"></div>
                         <div class="stat-content">
                             <div class="pull-left">
                                 <i class="ti-arrow-up color-success"></i>
-                                <span class="stat-digit"> 350</span>
+                                <span class="stat-digit">{!! $asignacionesActuales !!}</span>
                             </div>
 
                         </div>
@@ -90,14 +90,14 @@
                 <div class="card">
                     <div class="stat-widget-eight">
                         <div class="stat-header">
-                            <div class="header-title pull-left">Ventas Diarias</div>
+                            <div class="header-title pull-left">Ventas Totales</div>
 
                         </div>
                         <div class="clearfix"></div>
                         <div class="stat-content">
                             <div class="pull-left">
                                 <i class="ti-arrow-down color-danger"></i>
-                                <span class="stat-digit"> 235</span>
+                                <span class="stat-digit">{!! $ventas !!}</span>
                             </div>
 
                         </div>
@@ -118,14 +118,14 @@
                 <div class="card">
                     <div class="stat-widget-eight">
                         <div class="stat-header">
-                            <div class="header-title pull-left">Usuarios del Sistema</div>
+                            <div class="header-title pull-left">Ventas del mes</div>
 
                         </div>
                         <div class="clearfix"></div>
                         <div class="stat-content">
                             <div class="pull-left">
                                 <i class="ti-arrow-up color-success"></i>
-                                <span class="stat-digit"> 15</span>
+                                <span class="stat-digit">{!! $ventasDelMes !!}</span>
                             </div>
 
                         </div>
