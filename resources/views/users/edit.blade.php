@@ -58,6 +58,11 @@
         <div class="col-lg-6 col-md-6">
 
             <div class="card">
+                <div class="card-body">
+                    <a href="{{ route('users.blanqueo.password', $user->id) }}" style="color:cyan">Blanquear contraseña</a>
+                </div>
+            </div>
+            <div class="card">
 
                 <div class="card-body">
                     <p>Agregar foto de perfil</p>

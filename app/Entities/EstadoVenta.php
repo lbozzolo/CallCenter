@@ -12,6 +12,16 @@ class EstadoVenta extends Entity
         return config('sistema.ventas.estados.'.$this->slug);
     }
 
+    public function getName($id)
+    {
+        return $this->find($id)->nombre;
+    }
+
+    public function getSlug($id)
+    {
+        return $this->find($id)->slug;
+    }
+
     public function ventas()
     {
         return $this->hasMany(Venta::class);

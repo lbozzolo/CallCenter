@@ -112,7 +112,7 @@ class VentasController extends Controller
         $productoActivo = EstadoProducto::where('slug', 'activo')->first();
         $data['venta'] = Venta::with('productos.marca', 'productos.institucion', 'productos.etapas', 'cliente', 'cliente.datosTarjeta', 'cliente.datosTarjeta.marca', 'cliente.domicilio.localidad', 'cliente.domicilio.partido', 'cliente.domicilio.provincia')->where('id', $idVenta)->first();
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
-        $data['tags'] = EstadoVenta::lists('nombre', 'slug');
+        //$data['tags'] = EstadoVenta::lists('nombre', 'slug');
 
         $data['estados'] = EstadoCliente::lists('nombre', 'id');
         $data['provincias'] = Provincia::lists('provincia', 'id');
@@ -147,7 +147,30 @@ class VentasController extends Controller
         $venta = Venta::find($request->venta_id);
         $venta->productos()->attach($producto);
 
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'add',
+            'related_model_id' => $producto->id,
+            'related_model_type' => 'producto'
+        ]);
+
         return redirect()->back()->with('Producto agregado con éxito');
+    }
+
+    public function quitarProducto(Request $request)
+    {
+        $venta = Venta::find($request->venta_id);
+        $producto = Producto::find($request->producto_id);
+        $venta->productos()->detach($producto);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete',
+            'related_model_id' => $producto->id,
+            'related_model_type' => 'producto',
+        ]);
+
+        return redirect()->back()->with('Producto quitado de la venta con éxita');
     }
 
     public function numeroGuia(Request $request, $id)
@@ -187,16 +210,16 @@ class VentasController extends Controller
         $producto->pivot->observaciones = $request->observaciones;
         $producto->pivot->save();
 
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'related_model_id' => $producto->id,
+            'related_model_type' => 'producto',
+            'field' => 'observaciones',
+            'updated_value' => $request->observaciones
+        ]);
+
         return redirect()->route('ventas.panel', $venta->id)->with('ok', 'Observaciones guardadas con éxito');
-    }
-
-    public function quitarProducto(Request $request)
-    {
-        $venta = Venta::find($request->venta_id);
-        $producto = Producto::find($request->producto_id);
-
-        $venta->productos()->detach($producto);
-        return redirect()->back()->with('Producto quitado de la venta con éxita');
     }
 
     public function cancelar(Request $request)
@@ -262,18 +285,7 @@ class VentasController extends Controller
         $venta->estado_id = $iniciada->id;
         $venta->save();
 
-        return redirect()->route('ventas.panel', $venta->id)->with('ok', 'La venta ha sido retomada');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return redirect()->back()->with('ok', 'La venta ha sido retomada');
     }
 
     /**
@@ -295,7 +307,7 @@ class VentasController extends Controller
         $data['productos'] = Producto::all();
 
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
-        $data['tags'] = EstadoVenta::lists('nombre', 'slug');
+        //$data['tags'] = EstadoVenta::lists('nombre', 'slug');
 
         return view('ventas.show')->with($data);
     }
@@ -337,8 +349,19 @@ class VentasController extends Controller
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('entregado'));
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
+        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('facturada'));
 
         return view('ventas.logistica', compact('ventas'));
+    }
+
+    public function timeline($id)
+    {
+        $data['venta'] = Venta::find($id);
+        $data['updateable'] = $data['venta']->updateable;
+        $data['metodosPago'] = $data['venta']->metodoPagoVenta;
+
+
+        return view('ventas.timeline')->with($data);
     }
 
     public function showClienteVentas($id)
@@ -405,7 +428,7 @@ class VentasController extends Controller
         $estadoAnterior = $venta->estado->slug;
 
         // Redirecciono atrás si el cliente no tiene un barrio en sus datos personales
-        if($estadoAnterior == 'iniciada' && !$venta->cliente->domicilio->barrio)
+        if($estadoAnterior == 'iniciada' && (!$venta->cliente->domicilio || !$venta->cliente->domicilio->barrio))
             return redirect()->back()->withErrors('No se puede realizar la operación. El Cliente no tiene ingresado un barrio en sus datos personales.');
 
         if($estado->slug == 'cancelada'){
@@ -460,7 +483,7 @@ class VentasController extends Controller
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,
-            'action' => 'update',
+            'action' => 'delete',
             'field' => 'ajuste',
             'former_value' => $venta->ajuste,
             'updated_value' => $nuevoAjuste
@@ -474,6 +497,7 @@ class VentasController extends Controller
 
     public function agregarMetodoDePago(Request $request, $id)
     {
+        $venta = Venta::find($id);
         $metodoPago = MetodoPago::find($request->metodo_pago);
         $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
         $tarjetaYcuotas = null;
@@ -503,16 +527,42 @@ class VentasController extends Controller
             'action' => 'create'
         ]);
 
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'add',
+            'related_model_id' => $metodoPagoVenta->id,
+            'related_model_type' => 'metodoPagoVenta',
+            'field' => 'importe',
+            'updated_value' => $metodoPagoVenta->importe
+        ]);
+
         return redirect()->back()->with('ok', 'Método de Pago agregado con éxito')->with([$tab3 = 'active']);
     }
 
     public function quitarMetodoPago(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'reason' => 'required|max:255',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
         $metodoPagoVenta = MetodoPagoVenta::find($id);
+        $venta = $metodoPagoVenta->venta;
 
         $metodoPagoVenta->updateable()->create([
             'user_id' => Auth::user()->id,
-            'action' => 'delete'
+            'action' => 'delete',
+            'reason' => $request->reason
+        ]);
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete',
+            'related_model_id' => $metodoPagoVenta->id,
+            'related_model_type' => 'metodoPagoVenta',
+            'reason' => $request->reason
         ]);
 
         $metodoPagoVenta->delete();
@@ -533,6 +583,7 @@ class VentasController extends Controller
     public function editarMetodoPagoVenta(Request $request, $id)
     {
         $metodoPagoVenta = MetodoPagoVenta::find($id);
+        $venta = $metodoPagoVenta->venta;
 
         if($request['importe'] && $request['importe'] != $metodoPagoVenta->importe) {
             $metodoPagoVenta->updateable()->create([
@@ -542,6 +593,17 @@ class VentasController extends Controller
                 'former_value' => $metodoPagoVenta->importe,
                 'updated_value' => $request->importe
             ]);
+
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'related_model_id' => $metodoPagoVenta->id,
+                'related_model_type' => 'metodoPagoVenta',
+                'field' => 'importe',
+                'former_value' => $metodoPagoVenta->importe,
+                'updated_value' => $request->importe
+            ]);
+
             $metodoPagoVenta->importe = ($request->importe)? $request->importe : null;
         }
 

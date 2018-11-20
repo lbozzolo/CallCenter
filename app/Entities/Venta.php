@@ -69,6 +69,8 @@ class Venta extends Entity
         return number_format($this->iva(), 2, ',', '.');
     }
 
+    // Mutators
+
     public function getSumaProductosIVAAttribute()
     {
         return number_format($this->sumaProductosIVA(), 2, ',', '.');

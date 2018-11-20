@@ -11,7 +11,14 @@
 
     <div class="card card-default">
         <div class="card-header">
-            <h3>Datos de la venta #{!! $venta->id !!}</h3>
+            <ul class="list-inline">
+                <li><h3>Datos de la venta #{!! $venta->id !!}</h3></li>
+                @permission('ver.reclamos.venta')
+                <li>
+                    <span style="padding: 10px 5px;"><a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color: cyan">ver reclamos ( {!! $venta->reclamos->count() !!} )</a></span>
+                </li>
+                @endpermission
+            </ul>
         </div>
         <div class="card-body">
             <ul class="list-unstyled listado">
@@ -23,11 +30,7 @@
                 <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
                 <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
                 <li class="list-group-item">Número de guía: {!! ($venta->numero_guia)? $venta->numero_guia : '<small class="text-muted">sin número de guía</small>' !!}</li>
-                @permission('ver.reclamos.venta')
-                <li class="list-group-item">
-                    <span style="padding: 10px 5px;"><a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color: cyan">Reclamos ( {!! $venta->reclamos->count() !!} )</a></span>
-                </li>
-                @endpermission
+
             </ul>
         </div>
     </div>

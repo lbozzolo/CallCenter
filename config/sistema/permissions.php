@@ -51,6 +51,46 @@ return [
             'created_at' => date_create(),
             'updated_at' => date_create()
         ],
+        [
+            'name' => 'Ver timeline venta',
+            'slug' => 'ver.timeline.venta',
+            'description' => 'Ver el timeline de una venta',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Listar ventas para auditoría',
+            'slug' => 'listado.auditoria.venta',
+            'description' => 'Listar ventas listas para auditar',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Listar ventas para facturación',
+            'slug' => 'listado.facturacion.venta',
+            'description' => 'Listar ventas listas para facturar',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Listar ventas para logística',
+            'slug' => 'listado.logistica.venta',
+            'description' => 'Listar ventas listas para hacer seguimiento de logística',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Listar ventas para postventa',
+            'slug' => 'listado.postventa.venta',
+            'description' => 'Listar ventas para hacer postventa',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
         // Nuevos permisos
 
         [
