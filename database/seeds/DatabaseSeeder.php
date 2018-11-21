@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ResultadosLlamadasTableSeeder::class);
         $this->call(MetodoPagoTableSeeder::class);
         $this->call(LocalidadesPartidosProvinciasSeeder::class);
+        $this->call(TicketsLevelsTableSeeder::class);
+        $this->call(EstadosTicketsSeeder::class);
 
         Model::reguard();
     }

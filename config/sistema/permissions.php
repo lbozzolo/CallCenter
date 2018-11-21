@@ -262,4 +262,15 @@ return [
         ],
     ],
 
+    'ticket' => [
+        [
+            'name' => 'Cambiar estado de ticket',
+            'slug' => 'change.state.ticket',
+            'description' => 'Cambia el estado de un ticket',
+            'model' => 'ticket',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+    ],
+
 ];

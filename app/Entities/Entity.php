@@ -34,7 +34,7 @@ class Entity extends Model
 
     static function getModels()
     {
-        return ['marca','banco', 'asignacion', 'categoria', 'cliente', 'datoTarjeta', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'noticia', 'metodoPago', 'producto', 'promocion', 'reclamo', 'updateable', 'user', 'venta',];
+        return ['marca','banco', 'asignacion', 'categoria', 'cliente', 'datoTarjeta', 'ticket', 'etapa', 'formaPago', 'imagen', 'institucion', 'llamada', 'noticia', 'metodoPago', 'producto', 'promocion', 'reclamo', 'updateable', 'user', 'venta',];
     }
 
 }

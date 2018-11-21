@@ -173,10 +173,12 @@
                             @endrole
                         </ul>
                     </li>
+                    <li><a href="{{ route('tickets.index') }}"><i class="ti-flag"></i> Soporte </a></li>
                 @endrole
 
 
                 @endif
+
             </ul>
         </div>
     </div>

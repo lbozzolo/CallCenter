@@ -8,6 +8,7 @@ use SmartLine\Entities\Asignacion;
 use SmartLine\Entities\EstadoUser;
 use Illuminate\Auth\Authenticatable;
 use SmartLine\Entities\Noticia;
+use SmartLine\Entities\Ticket;
 use SmartLine\Entities\Venta;
 use SmartLine\Entities\Entity;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -167,6 +168,11 @@ class User extends Entity implements AuthenticatableContract,
     public function movimientos()
     {
         return $this->hasMany(Updateable::class, 'user_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 
     public function updateable()

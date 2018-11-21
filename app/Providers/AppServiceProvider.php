@@ -18,6 +18,7 @@ use SmartLine\Entities\MetodoPago;
 use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Noticia;
 use SmartLine\Entities\Reclamo;
+use SmartLine\Entities\Ticket;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -54,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
             'noticia' => Noticia::class,
             'producto' => \SmartLine\Entities\Producto::class,
             'reclamo' => Reclamo::class,
+            'ticket' => Ticket::class,
             'user' => \SmartLine\User::class,
             'venta' => \SmartLine\Entities\Venta::class,
         ]);
