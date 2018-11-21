@@ -38,6 +38,9 @@
                                     </a>
                                 </li>
                                 @endpermission
+                                <li>
+                                    <a href="{{ route('tickets.create') }}"><i class="fa fa-flag-o"></i><span>Soporte</span></a>
+                                </li>
                                 <li><a href="{{ route('logout') }}"><i class="ti-power-off"></i> <span>Logout</span></a></li>
                             </ul>
                         </div>

@@ -23,7 +23,6 @@ use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\VentaRepo;
 use SmartLine\Http\Repositories\MarcaTarjetaRepo;
 use SmartLine\Entities\Banco;
-use SmartLine\Entities\ValidateCreditCard;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use Illuminate\Support\Facades\Validator;
 use SmartLine\User;

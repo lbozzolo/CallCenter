@@ -338,6 +338,36 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
+        Schema::table('tickets', function(Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+            $table->foreign('estado_id')
+                ->references('id')
+                ->on('estados_tickets')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+            $table->foreign('level_id')
+                ->references('id')
+                ->on('tickets_levels')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+        });
+
+        Schema::table('tickets_comments', function(Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+            $table->foreign('ticket_id')
+                ->references('id')
+                ->on('tickets')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+        });
     }
     /**
      * Reverse the migrations.
