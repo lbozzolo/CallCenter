@@ -26,6 +26,38 @@ class VentaRepo extends BaseRepo
         return $ventas;
     }
 
+    public function getVentasFacturadas()
+    {
+        // Este método incluye también ventas que se enviaron, se entregaron, no se entregaron, o se devolvieron
+        $ventas = $this->getVentasByEstado('enviada');
+        $ventas = $ventas->merge($this->getVentasByEstado('entregado'));
+        $ventas = $ventas->merge($this->getVentasByEstado('noentregado'));
+        $ventas = $ventas->merge($this->getVentasByEstado('devuelto'));
+        $ventas = $ventas->merge($this->getVentasByEstado('facturada'));
+
+        return $ventas;
+    }
+
+    public function getFacturacion()
+    {
+        $ventas = $this->getVentasFacturadas();
+        $total = 0;
+        foreach($ventas as $venta){
+            $total = $total + $venta->total();
+        }
+        return $total;
+    }
+
+    public function getFacturacionByEstado($estado)
+    {
+        $ventas = $this->getVentasByEstado($estado);
+        $total = 0;
+        foreach($ventas as $venta){
+            $total = $total + $venta->total();
+        }
+        return $total;
+    }
+
     public function totalesVentasByEstado()
     {
         $estadosVentas = EstadoVenta::all();

@@ -2,7 +2,7 @@
 
 @section('titulo')
 
-    <h2>Soporte</h2>
+    <h2>Soporte / Listado de tickets</h2>
 
 @endsection
 
@@ -10,15 +10,17 @@
 
     @permission('listado.ticket')
     <div class="card">
-        <div class="card-header">
-            <h3>Listado de tickets</h3>
-        </div>
         <div class="card-body">
 
-            <div class="table-responsive">
-                <table class="table">
+            <div class="overlay col-lg-12 text-center" style="padding: 100px; border: 1px solid lightgrey; border-radius: 5px">
+                Aguarde un momento por favor...<br>
+                <i class="fa fa-refresh fa-spin" style="font-size: 2em"></i>
+            </div>
+
+            <div class="table-responsive" id="div-table-tickets">
+                <table class="table" id="table-tickets">
                     <thead>
-                        <tr>
+                        <tr style="background-color: #404a6b">
                             <th>ID</th>
                             <th>Autor</th>
                             <th>Asunto</th>
@@ -67,6 +69,42 @@
         </div>
     </div>
     @endpermission
+
+@endsection
+
+@section('js')
+
+    <script src="{{ asset('js/sin_foto.js') }}"></script>
+    <script>
+
+        $(document).ready(function() {
+            $('#table-tickets').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "emptyTable": "Sin datos disponibles",
+                    "infoEmpty": "Sin registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "<i class='fa fa-search'></i> buscar",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+            $("#div-table-tickets").show();
+            $(".overlay").hide();
+
+
+
+        });
+
+
+
+    </script>
 
 @endsection
 

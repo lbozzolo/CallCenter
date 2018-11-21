@@ -56,6 +56,10 @@ h1, h2, h3, h4 {
     border-radius: 3px !important;
 }
 
+table > thead > tr {
+    background-color: #404a6b;
+}
+
 /* Estilos para datepicker */
 
 .datepicker-days  {

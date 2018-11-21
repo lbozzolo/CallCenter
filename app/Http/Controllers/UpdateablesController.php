@@ -13,7 +13,8 @@ class UpdateablesController extends Controller
     public function entidad(Request $request)
     {
         $data['entidad'] = $request->entidad;
-        $model = "\SmartLine\Entities\\".$request->entidad;
+
+        $model = ($data['entidad'] != 'User')? "\SmartLine\Entities\\".$request->entidad : "\SmartLine\\".$request->entidad;
         $query = $model::has('updateable')->with('updateable')->get();
 
         $data['results'] = $query->map(function ($item) {

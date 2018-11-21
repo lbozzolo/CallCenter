@@ -344,11 +344,7 @@ class VentasController extends Controller
 
     public function logistica()
     {
-        $ventas = $this->ventaRepo->getVentasByEstado('enviada');
-        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('entregado'));
-        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
-        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
-        $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('facturada'));
+        $ventas = $this->ventaRepo->getVentasFacturadas();
 
         return view('ventas.logistica', compact('ventas'));
     }

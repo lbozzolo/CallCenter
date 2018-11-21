@@ -115,6 +115,9 @@
                                 </li>
                                 <li class="list-group-item">Módulo: {!! $ticket->modulo($ticket->modulo) !!}</li>
                                 <li class="list-group-item">Fecha: {!! $ticket->fecha_creado !!}</li>
+                                @permission('crear.ticket')
+                                <li class="list-group-item"><a href="{{ route('tickets.mis.tickets') }}" style="color:cyan">Ver mis tickets</a></li>
+                                @endpermission
                             </ul>
                         </div>
                     </div>

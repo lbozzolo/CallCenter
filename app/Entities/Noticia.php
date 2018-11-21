@@ -2,10 +2,14 @@
 
 namespace SmartLine\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use SmartLine\User;
 
 class Noticia extends Entity
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $table = 'noticias';
     protected $fillable = ['user_id', 'titulo', 'descripcion'];
 
