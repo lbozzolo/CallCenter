@@ -7,97 +7,126 @@
                 @if(Auth::check() && Auth::user()->isEnabled())
 
                 <li class="label">Menu</li>
-                 @permission('listado.cliente')
-                    <li>
-                        <a class="sidebar-sub-toggle" href="{{ route('clientes.index') }}" style="{{ (Request::is('clientes'.'*') ? 'color: white' : '') }}"><i class="ti-user"></i> Clientes <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            @permission('listado.cliente')
-                            <li><a href="{{ route('clientes.index') }}">Listar Clientes </a></li>
-                            @endpermission
+                @role('superadmin|admin')
+                     @permission('listado.cliente')
+                        <li>
+                            <a class="sidebar-sub-toggle" href="{{ route('clientes.index') }}" style="{{ (Request::is('clientes'.'*') ? 'color: white' : '') }}"><i class="ti-user"></i> Clientes <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                @permission('listado.cliente')
+                                <li><a href="{{ route('clientes.index') }}">Listar Clientes </a></li>
+                                @endpermission
 
-                            @permission('crear.cliente')
-                            <li><a href="{{ route('clientes.create') }}">Agregar Cliente </a></li>
-                            @endpermission
+                                @permission('crear.cliente')
+                                <li><a href="{{ route('clientes.create') }}">Agregar Cliente </a></li>
+                                @endpermission
 
-                            @permission('crear.cliente')
-                            <li><a href="{{ route('clientes.importacion') }}">Importar Lista </a></li>
-                            @endpermission
-                        </ul>
-                    </li>
-                @endpermission
+                                @permission('crear.cliente')
+                                <li><a href="{{ route('clientes.importacion') }}">Importar Lista </a></li>
+                                @endpermission
+                            </ul>
+                        </li>
+                    @endpermission
+                @endrole
 
 
+                @role('superadmin|admin|supervisor|operador.in|operador.out|atencion.al.cliente')
+                    @permission('listado.reclamo')
+                        <li>
+                            <a class="sidebar-sub-toggle" href="{{ route('reclamos.index') }}" style="{{ (Request::is('reclamos'.'*') ? 'color: white' : '') }}"><i class="ti-face-sad"></i> Reclamos <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                @permission('listado.reclamo')
+                                <li><a href="{{ route('reclamos.index') }}">Listar Reclamos </a></li>
+                                @endpermission
 
-                @permission('listado.reclamo')
-                    <li>
-                        <a class="sidebar-sub-toggle" href="{{ route('reclamos.index') }}" style="{{ (Request::is('reclamos'.'*') ? 'color: white' : '') }}"><i class="ti-face-sad"></i> Reclamos <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            @permission('listado.reclamo')
-                            <li><a href="{{ route('reclamos.index') }}">Listar Reclamos </a></li>
-                            @endpermission
+                                @permission('crear.reclamo')
+                                <li><a href="{{ route('reclamos.index.ventas') }}">Iniciar Reclamo </a></li>
+                                @endpermission
+                            </ul>
+                        </li>
+                    @endpermission
+                @endrole
 
-                            @permission('crear.reclamo')
-                            <li><a href="{{ route('reclamos.index.ventas') }}">Iniciar Reclamo </a></li>
-                            @endpermission
-                        </ul>
-                    </li>
-                @endpermission
-                
-                @permission('listado.venta')
-                    <li>
-                        <a class="sidebar-sub-toggle" href="{{ route('ventas.index') }}" style="{{ (Request::is('ventas'.'*') ? 'color: white' : '') }}"><i class="ti-ticket"></i> Ventas <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            @permission('listado.venta')
-                            <li><a href="{{ route('ventas.index') }}">Listar Ventas </a></li>
-                            @endpermission
+                @role('superadmin|admin|operador.in|operador.out|supervisor')
+                    @permission('listado.venta')
+                        <li>
+                            <a class="sidebar-sub-toggle" href="{{ route('ventas.index') }}" style="{{ (Request::is('ventas'.'*') ? 'color: white' : '') }}"><i class="ti-ticket"></i> Ventas <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                @role('superadmin|admin')
+                                    @permission('listado.venta')
+                                    <li><a href="{{ route('ventas.index') }}">Listar Ventas </a></li>
+                                    @endpermission
+                                @endrole
 
-                            @permission('listado.venta')
-                            <li><a href="{{ route('ventas.mis.ventas') }}">Mis Ventas </a></li>
-                            @endpermission
+                                @permission('listado.venta')
+                                <li><a href="{{ route('ventas.mis.ventas') }}">Mis Ventas </a></li>
+                                @endpermission
 
-                            @permission('crear.venta')
-                            <li><a href="{{ route('ventas.seleccion.cliente') }}"> Generar Venta</a></li>
-                            @endpermission
-                        </ul>
-                    </li>
-                @endpermission
+                                @permission('crear.venta')
+                                <li><a href="{{ route('ventas.seleccion.cliente') }}"> Generar Venta</a></li>
+                                @endpermission
+                            </ul>
+                        </li>
+                    @endpermission
+                @endrole
+
 
 
                 <li class="label">Informacion</li>
 
                 @permission('ver.noticia')
-                <li><a href="{{ route('noticias.noticias') }}"><i class="ti-notepad"></i> Noticias </a></li>
+                <li>
+                    <a href="{{ route('noticias.noticias') }}">
+                        <i class="ti-notepad"></i> Noticias
+                        @if(\SmartLine\Entities\Noticia::todaysNews() > 0)
+                        <span class="label label-default text-center">{!! \SmartLine\Entities\Noticia::todaysNews() !!}</span>
+                        @endif
+                    </a>
+                </li>
                 @endpermission
 
                 <li class="label">Gestion</li>
 
-                @permission('listado.asignacion')
-                <li><a href="{{ route('asignaciones.index') }}"><i class="ti-signal"></i> Asignación de Tareas </a></li>
-                @endpermission
+                @role(superadmin|admin|supervisor)
+                    @permission('listado.asignacion')
+                    <li><a href="{{ route('asignaciones.index') }}"><i class="ti-signal"></i> Asignación de Tareas </a></li>
+                    @endpermission
+                @endrole
 
-                @permission('crear.noticia')
-                <li><a href="{{ route('noticias.index') }}"><i class="ti-notepad"></i> Carga de Noticias </a></li>
-                @endpermission
+                @role(superadmin|admin)
+                    @permission('crear.noticia')
+                    <li><a href="{{ route('noticias.index') }}"><i class="ti-notepad"></i> Carga de Noticias </a></li>
+                    @endpermission
+                @endrole
 
-                @permission('listado.updateable')
-                <li><a href="{{ route('updateables.index') }}"><i class="ti-direction-alt"></i> Movimientos </a></li>
-                @endpermission
+                @role(superadmin|admin)
+                    @permission('listado.updateable')
+                    <li><a href="{{ route('updateables.index') }}"><i class="ti-direction-alt"></i> Movimientos </a></li>
+                    @endpermission
+                @endrole
 
-                @permission('listado.facturacion.venta')
-                <li><a href="{{ route('ventas.facturacion') }}"> <i class="ti-money"></i>Facturación</a></li>
-                @endpermission
+                @role(superadmin|admin)
+                    @permission('listado.facturacion.venta')
+                    <li><a href="{{ route('ventas.facturacion') }}"> <i class="ti-money"></i>Facturación</a></li>
+                    @endpermission
+                @endrole
 
-                @permission('listado.auditoria.venta')
-                <li><a href="{{ route('ventas.auditoria') }}"> <i class="ti-eye"></i>Auditoria</a></li>
-                @endpermission
+                @role(superadmin|admin|supervisor|auditor)
+                    @permission('listado.auditoria.venta')
+                    <li><a href="{{ route('ventas.auditoria') }}"> <i class="ti-eye"></i>Auditoria</a></li>
+                    @endpermission
+                @endrole
 
-                @permission('listado.logistica.venta')
-                <li><a href="{{ route('ventas.logistica') }}"> <i class="ti-truck"></i>Logística</a></li>
-                @endpermission
+                @role(superadmin|admin|supervisor|logistica)
+                    @permission('listado.logistica.venta')
+                    <li><a href="{{ route('ventas.logistica') }}"> <i class="ti-truck"></i>Logística</a></li>
+                    @endpermission
+                @endrole
 
-                @permission('listado.postventa.venta')
-                <li><a href="{{ route('ventas.post.venta') }}"> <i class="ti-package"></i>Postventa</a></li>
-                @endpermission
+                @role(superadmin|admin|supervisor|atencion.al.cliente)
+                    @permission('listado.postventa.venta')
+                    <li><a href="{{ route('ventas.post.venta') }}"> <i class="ti-package"></i>Postventa</a></li>
+                    @endpermission
+                @endrole
 
 
                 <li class="label">Seteos</li>
@@ -110,57 +139,68 @@
                             <li><a href="{{ route('productos.index') }}">Listar Productos </a></li>
                             @endpermission
 
-                            @permission('crear.producto')
-                            <li><a href="{{ route('productos.create') }}">Agregar Productos </a></li>
-                            @endpermission
+                            @role(superadmin|admin)
+                                @permission('crear.producto')
+                                <li><a href="{{ route('productos.create') }}">Agregar Productos </a></li>
+                                @endpermission
+                            @endrole
+
                         </ul>
                     </li>
                 @endpermission
 
 
-                @permission('listado.categoria')
-                <li><a href="{{ route('categorias.index') }}"><i class="ti-control-shuffle"></i> Categorias </a></li>
-                @endpermission
+                @role(superadmin|admin)
+                    @permission('listado.categoria')
+                    <li><a href="{{ route('categorias.index') }}"><i class="ti-control-shuffle"></i> Categorias </a></li>
+                    @endpermission
+                @endrole
 
-                
-                @permission('listado.categoria')
-                <li><a href="{{ route('subcategorias.index') }}"><i class="ti-menu-alt"></i> Subcategorías </a></li>
-                @endpermission
+                @role(superadmin|admin)
+                    @permission('listado.categoria')
+                    <li><a href="{{ route('subcategorias.index') }}"><i class="ti-menu-alt"></i> Subcategorías </a></li>
+                    @endpermission
+                @endrole
 
-                
-                @permission('listado.marca')
-                <li><a href="{{ route('marcas.index') }}"><i class="ti-receipt"></i> Marcas </a></li>
-                @endpermission
+                @role(superadmin|admin)
+                    @permission('listado.marca')
+                    <li><a href="{{ route('marcas.index') }}"><i class="ti-receipt"></i> Marcas </a></li>
+                    @endpermission
+                @endrole
+
+                @role(superadmin|admin)
+                    @permission('listado.institucion')
+                    <li><a href="{{ route('instituciones.index') }}"><i class="ti-medall-alt"></i> Instituciones </a></li>
+                    @endpermission
+                @endrole
 
 
-                @permission('listado.institucion')
-                <li><a href="{{ route('instituciones.index') }}"><i class="ti-medall-alt"></i> Instituciones </a></li>
-                @endpermission
-
-
-
-                @permission('listado.forma.de.pago')
-                <li><a href="{{ route('formas.pago.index') }}"><i class="ti-money"></i> Metodos de Pagos </a></li>
-                @endpermission
+                @role(superadmin|admin)
+                    @permission('listado.forma.de.pago')
+                    <li><a href="{{ route('formas.pago.index') }}"><i class="ti-money"></i> Metodos de Pagos </a></li>
+                    @endpermission
+                @endrole
 
 
 
                 <li class="label">Administración</li>
 
-                @permission('listado.usuario')
-                    <li>
-                        <a class="sidebar-sub-toggle" href="{{ route('users.index') }}" style="{{ (Request::is('usuarios'.'*') ? 'color: white' : '') }}"><i class="ti-face-smile"></i> Usuarios <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            @permission('listado.usuario')
-                            <li><a href="{{ route('users.index') }}">Listar Usuarios </a></li>
-                            @endpermission
+                @role(superadmin|admin)
+                    @permission('listado.usuario')
+                        <li>
+                            <a class="sidebar-sub-toggle" href="{{ route('users.index') }}" style="{{ (Request::is('usuarios'.'*') ? 'color: white' : '') }}"><i class="ti-face-smile"></i> Usuarios <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                @permission('listado.usuario')
+                                <li><a href="{{ route('users.index') }}">Listar Usuarios </a></li>
+                                @endpermission
 
-                            @permission('crear.usuario')
-                            <li><a href="{{ route('users.create') }}">Agregar Usuarios </a></li>
-                            @endpermission
-                        </ul>
-                    </li>
-                @endpermission
+                                @permission('crear.usuario')
+                                <li><a href="{{ route('users.create') }}">Agregar Usuarios </a></li>
+                                @endpermission
+                            </ul>
+                        </li>
+                    @endpermission
+                @endrole
 
 
                 @role('superadmin')

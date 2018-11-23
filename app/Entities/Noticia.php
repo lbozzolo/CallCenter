@@ -2,6 +2,7 @@
 
 namespace SmartLine\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use SmartLine\User;
 
@@ -13,6 +14,17 @@ class Noticia extends Entity
     protected $table = 'noticias';
     protected $fillable = ['user_id', 'titulo', 'descripcion'];
 
+    static function todaysNews()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        return Noticia::whereDate('created_at', 'like', $today)->count();
+    }
+
+    public function isTodaysNew()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        return $this->created_at >= $today;
+    }
 
     public function getRolesIdsAttribute()
     {

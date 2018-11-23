@@ -112,7 +112,7 @@ class ReclamosController extends Controller
             'related_model_type' => 'reclamo'
         ]);
 
-        return redirect()->back()->with('ok', 'Reclamo creado con éxito');
+        return redirect()->route('ventas.reclamos', $venta->id)->with('ok', 'Reclamo creado con éxito');
     }
 
     /**

@@ -8,11 +8,8 @@
 
 @section('contenido')
 
-
-    <div class="row">
-
         @permission('crear.noticia')
-        <div class="col-md-12">
+
             <div class="card alert">
                 <div class="card-header pr">
                     <h3>Agregar Nueva Noticia</h3>
@@ -21,11 +18,11 @@
                     @include('noticias.partials.formulario-crear-noticia')
                 </div>
             </div>
-        </div>
+
         @endpermission
 
         @permission('listado.noticia')
-        <div class="col-lg-12">
+
             <div class="card alert">
                 <div class="card-header pr">
                     <h3>Noticias Disponibles</h3>
@@ -34,10 +31,8 @@
                     @include('noticias.partials.noticias-listado')
                 </div>
             </div>
-        </div>
-        @endpermission
 
-    </div>
+        @endpermission
 
 @endsection
 

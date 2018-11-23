@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use SmartLine\Entities\Destinatario;
 use SmartLine\Http\Requests\CreateNoticiaRequest;
 use SmartLine\Entities\Noticia;
+use Carbon\Carbon;
 
 class NoticiasController extends Controller
 {
@@ -26,14 +27,20 @@ class NoticiasController extends Controller
     public function noticias()
     {
         $roles = Role::all();
-
-        $destinatarios = $roles->reject(function($value){
-            return $value->slug == 'superadmin';
+        //$thisMonth = Carbon::now()->startOfMonth();
+        $thisWeek = Carbon::now()->startOfWeek();
+        $recientes = Noticia::where('created_at', '>=', $thisWeek)->get()->sortByDesc('id');
+        $recientesIds = array_flatten(Noticia::where('created_at', '>=', $thisWeek)->get(['id'])->toArray());
+        $anteriores = Noticia::orderBy('created_at', 'desc')->get()->filter(function ($item) use ($recientesIds) {
+            return array_has($recientesIds, $item->id);
         });
-        $destinatarios = $destinatarios->lists('name', 'id');
 
-        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(10);
-        return view('noticias.noticias', compact('noticias', 'destinatarios'));
+//        $destinatarios = $roles->reject(function($value){
+//            return $value->slug == 'superadmin';
+//        });
+//        $destinatarios = $destinatarios->lists('name', 'id');
+
+        return view('noticias.noticias', compact('recientes', 'anteriores'));
     }
 
     public function show($id)
