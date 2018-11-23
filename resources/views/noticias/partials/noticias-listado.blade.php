@@ -1,6 +1,7 @@
 <div class="card-body">
     <div class="table-responsive">
         <table class="table student-data-table m-t-20">
+            @if($noticias->count())
             <thead>
                 <tr>
                     <th>Titulo</th>
@@ -9,6 +10,7 @@
                     <th class="text-right">Opciones</th>
                  </tr>
             </thead>
+            @endif
             <tbody>
             @forelse($noticias as $noticia)
                 <tr>
@@ -62,7 +64,7 @@
 
             @empty
                 <tr>
-                    <td colspan="3">Todavía no hay ninguna noticia</td>
+                    <td class="pull-left" colspan="4">Todavía no hay ninguna noticia</td>
                 </tr>
             @endforelse
             </tbody>

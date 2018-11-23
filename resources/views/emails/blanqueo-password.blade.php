@@ -219,7 +219,7 @@
                                 <td height="35" class="em_height">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td align="center" valign="top" style="font-family:'Open Sans', Arial, sans-serif; font-size:20pxl; line-height:22px; color:#30373b; text-transform:uppercase;">Su contraseña se ha blanqueado con éxito</td>
+                                <td align="center" valign="top" style="font-family:'Open Sans', Arial, sans-serif; font-size:20px; line-height:22px; color:#30373b; text-transform:uppercase;">Su contraseña se ha blanqueado con éxito</td>
                               </tr>
                               <tr>
                                 <td height="12" style="line-height:1px; font-size:1px;">&nbsp;</td>

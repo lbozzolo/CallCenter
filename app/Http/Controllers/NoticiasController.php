@@ -31,8 +31,10 @@ class NoticiasController extends Controller
         $thisWeek = Carbon::now()->startOfWeek();
         $recientes = Noticia::where('created_at', '>=', $thisWeek)->get()->sortByDesc('id');
         $recientesIds = array_flatten(Noticia::where('created_at', '>=', $thisWeek)->get(['id'])->toArray());
+
         $anteriores = Noticia::orderBy('created_at', 'desc')->get()->filter(function ($item) use ($recientesIds) {
-            return array_has($recientesIds, $item->id);
+            if(!in_array($item->id, $recientesIds))
+                return $item;
         });
 
 //        $destinatarios = $roles->reject(function($value){

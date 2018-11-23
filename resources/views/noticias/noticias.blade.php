@@ -42,9 +42,10 @@
 
                             <li>
                                 <div class="noticia" style="padding: 10px 20px">
+                                    <small class="text-primary pull-right">#{!! $noticia->id !!}</small>
                                     <strong>{!! $noticia->titulo !!}</strong>
                                     @if($noticia->isTodaysNew())
-                                    <span class="label label-warning pull-right">Noticia de hoy</span>
+                                    <span class="label label-warning pull-right" style="margin-right: 10px">Noticia de hoy</span>
                                     @endif
                                     <br>
                                     <em>{!! $noticia->autor->full_name !!}</em>
@@ -82,6 +83,7 @@
 
                             <li>
                                 <div class="noticia noticia-anterior" style="padding: 10px 20px">
+                                    <small class="pull-right">#{!! $noticia->id !!}</small>
                                     <strong>{!! $noticia->titulo !!}</strong><br>
                                     <em>{!! $noticia->autor->full_name !!}</em>
                                     <span class="pull-right">{!! $noticia->fecha_creado !!} - {!! $noticia->hora_created !!} hs</span>
@@ -101,9 +103,11 @@
 
                     @endpermission
                 </div>
+                @if($anteriores->count())
                 <div class="card-footer">
                     <p class="panel panel-barra text-center">más noticias... <i class="fa fa-angle-double-down"></i> </p>
                 </div>
+                @endif
             </div>
 
 
