@@ -18,6 +18,7 @@ class PermissionsTableSeeder extends Seeder
         $acciones = array_combine($models, $names);
 
         foreach($acciones as $model => $name){
+
             DB::table('permissions')->insert([
                 $this->crearModel($model, $name),
                 $this->verModel($model, $name),

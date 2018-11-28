@@ -27,7 +27,9 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::with('estado')->get();
+        $estadoNuevo = EstadoUser::where('slug', 'nuevo')->first();
+        $users = User::where('estado_id', '!=', $estadoNuevo->id)->get();
+        //$users = User::with('estado')->get();
 
         return view('users.index', compact('users'));
     }
@@ -70,12 +72,13 @@ class UsersController extends Controller
         foreach($request->roles as $id){
 
             $role = Role::find($id);
+
             if(count($request->roles) == 1 && $role->slug == 'superadmin' && !Auth::user()->is('superadmin')){
                 $user->forceDelete();
                 return abort('403');
             }
-            if(!$role->slug == 'superadmin' && !Auth::user()->is('superadmin'))
-                $user->attachRole($role);
+            if($role->slug != 'superadmin' && Auth::user()->is('superadmin|admin'))
+                $user->roles()->save($role);
 
         }
 

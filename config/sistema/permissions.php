@@ -229,7 +229,39 @@ return [
             'model' => 'user',
             'created_at' => date_create(),
             'updated_at' => date_create()
-        ]
+        ],
+        [
+            'name' => 'Ver Perfil',
+            'slug' => 'ver.perfil',
+            'description' => 'Ver el perfil del usuario',
+            'model' => 'user',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Editar Perfil',
+            'slug' => 'editar.perfil',
+            'description' => 'Editar el perfil del usuario',
+            'model' => 'user',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Cambiar contraseña del usuario',
+            'slug' => 'cambiar.password.perfil',
+            'description' => 'Cambiar la contraseña del usuario',
+            'model' => 'user',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Subir imagen del usuario',
+            'slug' => 'subir.imagen.perfil',
+            'description' => 'Subir imagen del usuario',
+            'model' => 'user',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
     ],
 
     'reclamo' => [

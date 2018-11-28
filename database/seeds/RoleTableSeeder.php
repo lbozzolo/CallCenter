@@ -72,6 +72,14 @@ class RoleTableSeeder extends Seeder
                 'updated_at' => date_create()
             ],
             [
+                'name' => 'Facturación',
+                'slug' => 'facturacion',
+                'description' => 'Facturación',
+                'level' => '1',
+                'created_at' => date_create(),
+                'updated_at' => date_create()
+            ],
+            [
                 'name' => 'Atención al cliente',
                 'slug' => 'atencion.al.cliente',
                 'description' => 'Atención al cliente',

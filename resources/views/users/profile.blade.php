@@ -25,18 +25,24 @@
                     <li class="list-group-item">Fecha de alta: {!! $user->fecha_creado !!}</li>
                     <li class="list-group-item"><i class="fa fa-phone"></i>Teléfono:  {!! ($user->telefono)? $user->telefono : "<small class='text-muted'>sin datos</small>" !!}</li>
                     <li class="list-group-item">DNI: {!! ($user->dni)? $user->dni : "<small class='text-muted'>sin datos</small>" !!}</li>
+                    @permission('cambiar.password.perfil')
                     @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin'))
                         <li class="list-group-item">
                             <a href="{{ route('users.changePassword', $user->id) }}" style="color: cyan">Cambiar contraseña</a>
                         </li>
                     @endif
+                    @endpermission
                 </ul>
+                @permission('editar.perfil')
                 @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin|admin'))
                     <div style="padding: 10px 0px"><a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a></div>
                 @endif
+                @endpermission
             </div>
         </div>
         <div class="col-lg-6 col-md-6">
+
+            @permission('subir.imagen.perfil')
             @if(Auth::user()->id == $user->id || Auth::user()->is('superadmin|admin'))
                 <div class="card card-default">
                     <div class="card-heading">
@@ -118,6 +124,8 @@
 
                     </div>
                 </div>
+                @endpermission
+
             @endif
         </div>
     </div>

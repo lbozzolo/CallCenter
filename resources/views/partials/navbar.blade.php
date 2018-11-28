@@ -6,7 +6,11 @@
                 <li><a href="{{route('/')}}"><i class="ti-home"></i> Dashboard </a></li>
                 @if(Auth::check() && Auth::user()->isEnabled())
 
+                @role('superadmin|admin|supervisor|operador.in|operador.out|atencion.al.cliente')
                 <li class="label">Menu</li>
+                @endrole
+
+
                 @role('superadmin|admin')
                      @permission('listado.cliente')
                         <li>
@@ -70,10 +74,8 @@
                 @endrole
 
 
-
-                <li class="label">Informacion</li>
-
                 @permission('ver.noticia')
+                <li class="label">Informacion</li>
                 <li>
                     <a href="{{ route('noticias.noticias') }}">
                         <i class="ti-notepad"></i> Noticias
@@ -84,7 +86,9 @@
                 </li>
                 @endpermission
 
+                @role('superadmin|admin|supervisor|facturacion|auditor|logistica|atencion.al.cliente')
                 <li class="label">Gestion</li>
+                @endrole
 
                 @role('superadmin|admin|supervisor')
                     @permission('listado.asignacion')
@@ -104,7 +108,7 @@
                     @endpermission
                 @endrole
 
-                @role('superadmin|admin')
+                @role('superadmin|admin|facturacion')
                     @permission('listado.facturacion.venta')
                     <li><a href="{{ route('ventas.facturacion') }}"> <i class="ti-money"></i>Facturación</a></li>
                     @endpermission
@@ -129,9 +133,9 @@
                 @endrole
 
 
+                @permission('listado.producto')
                 <li class="label">Seteos</li>
 
-                @permission('listado.producto')
                     <li>
                         <a class="sidebar-sub-toggle" href="{{ route('productos.index') }}" style="{{ (Request::is('productos'.'*') ? 'color: white' : '') }}"><i class="ti-shopping-cart"></i> Productos <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>
@@ -144,7 +148,6 @@
                                 <li><a href="{{ route('productos.create') }}">Agregar Productos </a></li>
                                 @endpermission
                             @endrole
-
                         </ul>
                     </li>
                 @endpermission
@@ -182,10 +185,10 @@
                 @endrole
 
 
+                @role('superadmin|admin')
 
                 <li class="label">Administración</li>
 
-                @role('superadmin|admin')
                     @permission('listado.usuario')
                         <li>
                             <a class="sidebar-sub-toggle" href="{{ route('users.index') }}" style="{{ (Request::is('usuarios'.'*') ? 'color: white' : '') }}"><i class="ti-face-smile"></i> Usuarios <span class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -200,20 +203,20 @@
                             </ul>
                         </li>
                     @endpermission
-                @endrole
 
+                    @role('superadmin')
+                        <li>
+                            <a class="sidebar-sub-toggle" href="{{ route('roles.index') }}" style="{{ (Request::is('roles'.'*') ? 'color: white' : '') }}"><i class="ti-settings"></i> Roles <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                @role('superadmin')
+                                <li><a href="{{ route('roles.index') }}">Listar Roles </a></li>
+                                <li><a href="{{ route('permissions.index') }}">Listar Permisos </a></li>
+                                @endrole
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('tickets.index') }}"><i class="ti-flag"></i> Soporte </a></li>
+                    @endrole
 
-                @role('superadmin')
-                    <li>
-                        <a class="sidebar-sub-toggle" href="{{ route('roles.index') }}" style="{{ (Request::is('roles'.'*') ? 'color: white' : '') }}"><i class="ti-settings"></i> Roles <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            @role('superadmin')
-                            <li><a href="{{ route('roles.index') }}">Listar Roles </a></li>
-                            <li><a href="{{ route('permissions.index') }}">Listar Permisos </a></li>
-                            @endrole
-                        </ul>
-                    </li>
-                    <li><a href="{{ route('tickets.index') }}"><i class="ti-flag"></i> Soporte </a></li>
                 @endrole
 
 
