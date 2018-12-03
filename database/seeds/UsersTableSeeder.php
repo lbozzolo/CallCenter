@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             [
                 'nombre' => 'Lucas',
                 'apellido' => 'Bozzolo',
-                'email' => 'lucas@bamdig.com',
+                'email' => 'lucas@verticedigital.com.ar',
                 'telefono' => '1163583276',
                 'dni' => '26966447',
                 'estado_id' => '1',
@@ -26,20 +26,9 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => date_create()
             ],
             [
-                'nombre' => 'Tomás',
-                'apellido' => 'Milgron',
-                'email' => 'tomas@bamdig.com',
-                'telefono' => '',
-                'dni' => '',
-                'estado_id' => '1',
-                'password' => bcrypt('1234'),
-                'created_at' => date_create(),
-                'updated_at' => date_create()
-            ],
-            [
                 'nombre' => 'Fernando',
                 'apellido' => 'Alfonso',
-                'email' => 'fernando@bamdig.com',
+                'email' => 'fernando@verticedigital.com.ar',
                 'telefono' => '',
                 'dni' => '',
                 'estado_id' => '1',
@@ -49,13 +38,11 @@ class UsersTableSeeder extends Seeder
             ],
         ]);
 
-        $lucas = User::where('email', '=', 'lucas@bamdig.com')->first();
-        $tomy = User::where('email', '=', 'tomas@bamdig.com')->first();
-        $pelado = User::where('email', '=', 'fernando@bamdig.com')->first();
+        $lucas = User::where('email', '=', 'lucas@verticedigital.com.ar')->first();
+        $pelado = User::where('email', '=', 'fernando@verticedigital.com.ar')->first();
 
         $superAdmin = Role::where('slug', '=', 'superadmin')->first();
         $lucas->attachRole($superAdmin->id);
-        $tomy->attachRole($superAdmin->id);
         $pelado->attachRole($superAdmin->id);
 
     }
