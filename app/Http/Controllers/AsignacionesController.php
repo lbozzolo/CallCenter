@@ -111,7 +111,7 @@ class AsignacionesController extends Controller
             'action' => 'delete'
         ]);
 
-        $asignacion->delete();
+        $asignacion->forceDelete();
 
         return redirect()->route('asignaciones.index')->with('ok', 'La asignación eliminada con éxito');
     }

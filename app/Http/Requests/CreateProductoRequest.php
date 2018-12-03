@@ -16,7 +16,7 @@ class CreateProductoRequest extends Request
             [
 
                 'nombre' => 'required|max:255',
-                'descripcion' => 'max:255',
+                'descripcion' => 'max:1000',
                 'estado_id' => 'required',
                 //'fecha_finalizacion' => 'after:fecha_inicio',
                 'unidad_medida_id' => 'exists:unidades_medida,id',
@@ -38,7 +38,7 @@ class CreateProductoRequest extends Request
                 'nombre.required' => 'El nombre es obligatorio',
                 'nombre.max' => 'El nombre no puede exceder los 255 caracteres',
 
-                'descripcion.max' => 'La descripción no puede exceder los 255 caracteres',
+                'descripcion.max' => 'La descripción no puede exceder los 1000 caracteres',
 
                 'fecha_finalizacion.after' => 'La fecha de finalización debe ser posterior a la fecha de inicio',
 

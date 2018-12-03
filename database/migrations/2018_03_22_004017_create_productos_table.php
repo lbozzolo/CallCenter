@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
 
             $table->increments('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->dateTime('fecha_inicio')->nullable();
             $table->dateTime('fecha_finalizacion')->nullable();
             $table->integer('estado_id')->unsigned();

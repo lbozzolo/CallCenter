@@ -19,7 +19,8 @@ class Venta extends Entity
         $subtotal = 0;
         $metodosPagoVenta = $this->metodoPagoVenta()->get();
         foreach($metodosPagoVenta as $metodoPagoVenta){
-            $subtotal += $metodoPagoVenta->importeMasPromocionMasIVA();
+            //$subtotal += $metodoPagoVenta->importeMasPromocionMasIVA();
+            $subtotal += $metodoPagoVenta->importeMasPromocion();
         }
 
         return $subtotal;
