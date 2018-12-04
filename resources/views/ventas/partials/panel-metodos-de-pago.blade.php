@@ -38,7 +38,7 @@
                         <th>Descuento</th>
                         {{--<th>IVA (21%)</th>--}}
                         <th>Cuotas</th>
-                        <th>Total</th>
+                        <th style="width: 180px" class="text-center">Total</th>
                         <th style="width: 100px">Opciones</th>
                     </tr>
                 </thead>
@@ -77,7 +77,7 @@
                                 {!! ($metodoPagoVenta->formaPago)? '$'.$metodoPagoVenta->valor_cuota : '' !!}
                             </td>
 {{--                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_iva !!}</td>--}}
-                            <td class="text-center">${!! $metodoPagoVenta->importe !!}</td>
+                            <td class="text-right">${!! $metodoPagoVenta->importe_mas_promocion !!}</td>
                             <td>
                                 @permission('editar.metodo.pago.venta')
                                 <button type="button" class="btn btn-primary btn-flat botonEditarMetodoPagoVenta" data-id="{!! $metodoPagoVenta->id !!}"><i class="fa fa-edit"></i></button>
@@ -196,7 +196,7 @@
                             <span class="text-muted">AJUSTE ACTUAL: $ {!! $venta->ajuste !!}</span>
 
                         </td>
-                        <td class="text-right">${!! $venta->importe_total !!}</td>
+                        <td class="text-right lead">${!! $venta->importe_total !!}</td>
                         <td>
 
                             @if($venta->ajuste == 0.00)

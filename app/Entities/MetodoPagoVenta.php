@@ -67,6 +67,11 @@ class MetodoPagoVenta extends Entity
         return number_format($this->iva(), 2, ',', '.');
     }
 
+    public function getImporteMasPromocionAttribute()
+    {
+        return number_format($this->importeMasPromocion(), 2, ',', '.');
+    }
+
     public function getImporteMasPromocionMasIVAAttribute()
     {
         return number_format($this->importeMasPromocionMasIVA(), 2, ',', '.');

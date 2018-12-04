@@ -57,7 +57,7 @@ class Venta extends Entity
 
     protected function diferenciaConAjuste()
     {
-        return $this->sumaTotalProductos() - $this->total();
+        return ($this->sumaTotalProductos() > $this->total())? $this->sumaTotalProductos() - $this->total() : $this->total() - $this->sumaTotalProductos();
     }
 
     public function total()

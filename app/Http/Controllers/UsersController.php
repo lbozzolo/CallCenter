@@ -84,7 +84,7 @@ class UsersController extends Controller
 
         Mail::send('emails.new-user', ['password' => $password], function ($message) use ($email){
 
-            $message->from('Info@smartline.com.ar', 'SmartLine');
+            $message->from(config('mail.from.address'), config('mail.from.name'));
             $message->to($email)->subject('Alta al sistema CallCenter');
 
         });
@@ -168,7 +168,7 @@ class UsersController extends Controller
 
         Mail::send('emails.blanqueo-password', ['password' => $password], function ($message) use ($email){
 
-            $message->from('Info@smartline.com.ar', 'SmartLine');
+            $message->from(config('mail.from.address'), config('mail.from.name'));
             $message->to($email)->subject('Blanqueo de contraseña');
 
         });

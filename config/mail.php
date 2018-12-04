@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'Info@smartline.com.ar', 'name' => 'SmartLine'],
+    'from' => ['address' => 'info@verticedigital.com.ar', 'name' => 'SmartLine'],
 
     /*
     |--------------------------------------------------------------------------

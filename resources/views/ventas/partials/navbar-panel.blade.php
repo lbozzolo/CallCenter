@@ -40,7 +40,7 @@
                                                 @forelse($venta->metodoPagoVenta as $metodoPago)
                                                     <tr>
                                                         <td>{!! $metodoPago->metodoPago->nombre !!}</td>
-                                                        <td>${!! $metodoPago->importe !!}</td>
+                                                        <td>${!! $metodoPago->importe_mas_promocion !!}</td>
                                                     </tr>
                                                 @empty
                                                     <tr>

@@ -79,6 +79,7 @@ class DashboardController extends Controller
             abort(404);
 
 
+        dd(config('mail.from.address'));
         $bbb = 'j';
         $password = 'lucas pruebas';
         return view('emails.blanqueo-password')->with('password', $password);

@@ -124,7 +124,7 @@ class VentasController extends Controller
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['promociones'] = Promocion::lists('nombre', 'id');
-        $data['tarjetas'] = $data['venta']->cliente->datosTarjeta;
+        $data['tarjetas'] = ($data['venta']->cliente->datosTarjeta)? $data['venta']->cliente->datosTarjeta : null;
 
         if($data['venta']->cliente->domicilio){
             if($data['venta']->cliente->domicilio->provincia){

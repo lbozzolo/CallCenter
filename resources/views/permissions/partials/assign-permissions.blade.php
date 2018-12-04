@@ -300,6 +300,30 @@
         </div>
     </div>
 
+    <div class="card card-default">
+        <div class="card-heading">
+            <h4 class="card-title">Soporte</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled">
+                @foreach($permisos as $permiso)
+                    @if($permiso->model == 'ticket')
+                        <li >
+                            <div class="form-check">
+                                @if(isset($user))
+                                    {!! Form::checkbox('permissions[]', $permiso->id, ($user->hasPermission($permiso->id))) !!}
+                                @else
+                                    {!! Form::checkbox('permissions[]', $permiso->id) !!}
+                                @endif
+                                {!! $permiso->name !!}
+                            </div>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
 </div>
 
 <div class="col-lg-4 col-md-4 col-sm-6">
