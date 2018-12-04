@@ -12,7 +12,6 @@
 
         <label class="label label-success">{!! $role->name !!}</label><br>
 
-
     @elseif($role->slug == 'operador.in')
 
         <label class="label label-operador-in">{!! $role->name !!}</label><br>
@@ -28,6 +27,10 @@
     @elseif($role->slug == 'logistica')
 
         <label class="label label-logistica">{!! $role->name !!}</label><br>
+
+    @elseif($role->slug == 'facturacion')
+
+        <label class="label label-facturacion">{!! $role->name !!}</label><br>
 
     @elseif($role->slug == 'auditor')
 

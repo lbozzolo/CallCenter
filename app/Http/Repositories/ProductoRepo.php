@@ -169,6 +169,7 @@ class ProductoRepo extends BaseRepo
             $producto->precio = $request['precio'];
         }
 
+        //dd($request['institucion_id']);
         if($request['institucion_id'] && $request['institucion_id'] != $producto->institucion_id){
             $producto->updateable()->create([
                 'user_id' => Auth::user()->id,

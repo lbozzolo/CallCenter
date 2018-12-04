@@ -5,6 +5,7 @@ use Bican\Roles\Models\Role;
 use Bican\Roles\Models\Permission;
 use SmartLine\Http\Repositories\RoleRepo;
 use Illuminate\Http\Request;
+use SmartLine\Entities\Entity;
 
 class RolesController extends Controller
 {
@@ -82,7 +83,12 @@ class RolesController extends Controller
     {
         $role = Role::find($id);
         $permisos = Permission::all();
-        return view('roles.permissions', compact('role', 'permisos'));
+        $models = Entity::getModels();
+        $quantity = round(count($models) / 3);
+        $models = array_chunk($models, $quantity);
+        $names = ['marca' => 'Marca', 'banco' => 'Banco', 'asignacion' => 'Asignación', 'categoria' => 'Categoría', 'cliente' => 'Cliente', 'datoTarjeta' => 'Datos de tarjeta', 'ticket' => 'Soporte', 'etapa' => 'Etapa', 'formaPago' => 'Forma de pago', 'imagen' => 'Imagen', 'institucion' => 'Institución', 'llamada' => 'Llamada', 'noticia' => 'Noticia', 'metodoPago' => 'Método de pago', 'producto' => 'Producto', 'promocion' => 'Promoción', 'reclamo' => 'Reclamo', 'updateable' => 'Updateable', 'user' => 'Usuario', 'venta' => 'Venta',];
+
+        return view('roles.permissions', compact('role', 'permisos', 'models', 'names'));
     }
 
     public function assignPermissions(Request $request, $id)
