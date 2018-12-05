@@ -82,7 +82,7 @@
                                 @permission('editar.metodo.pago.venta')
                                 <button type="button" class="btn btn-primary btn-flat botonEditarMetodoPagoVenta" data-id="{!! $metodoPagoVenta->id !!}"><i class="fa fa-edit"></i></button>
                                 @endpermission
-                                @permission('quitar.metodo.pago')
+                                @permission('quitar.metodo.pago.venta')
                                 <button type="button" title="Eliminar método de pago" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar{!! $metodoPagoVenta->id !!}">
                                     <i class="fa fa-trash"></i>
                                 </button>

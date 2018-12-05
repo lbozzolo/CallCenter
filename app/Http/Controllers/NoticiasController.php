@@ -13,19 +13,27 @@ class NoticiasController extends Controller
     public function index()
     {
         $noticias = Noticia::all();
-        $roles = Role::all();
 
-        $destinatarios = $roles->reject(function($value){
+        $destinatarios = Role::all()->reject(function($value){
             return $value->slug == 'superadmin';
-        });
-
-        $destinatarios = $destinatarios->lists('name', 'id');
+        })->lists('name', 'id');
 
         return view('noticias.index', compact('noticias', 'destinatarios'));
     }
 
     public function noticias()
     {
+//        $thisWeek = Carbon::now()->startOfWeek();
+//        $role = Auth::user()->roles->first();
+//        $destinatarios = Destinatario::with('noticia')->where('role_id', $role->id)->get();
+//
+//        $noticias = Noticia::whereHas('destinatarios', function ($query) use ($role) {
+//            $query->where('role_id', $role->id);
+//        })->get();
+//
+//        $recientes = $noticias->where('created_at', '>=', $thisWeek);
+
+
         $roles = Role::all();
         //$thisMonth = Carbon::now()->startOfMonth();
         $thisWeek = Carbon::now()->startOfWeek();

@@ -16,7 +16,7 @@
             <th style="width: 200px">Categorías</th>
             <th>Stock</th>
             <th>Estado</th>
-            <th class="text-right">Opciones</th>
+            <th class="text-right" style="width: 100px">Opciones</th>
         </tr>
         </thead>
         <tbody>

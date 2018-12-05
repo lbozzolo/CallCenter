@@ -11,7 +11,7 @@
                 @endrole
 
 
-                @role('superadmin|admin')
+                @role('superadmin|admin|supervisor')
                      @permission('listado.cliente')
                         <li>
                             <a class="sidebar-sub-toggle" href="{{ route('clientes.index') }}" style="{{ (Request::is('clientes'.'*') ? 'color: white' : '') }}"><i class="ti-user"></i> Clientes <span class="sidebar-collapse-icon ti-angle-down"></span></a>

@@ -17,8 +17,8 @@
 {{--<script src="{{ asset('template/js/lib/bootstrap.min.js') }}"></script>--}}
 <script src="{{asset('template/js/lib/data-table/datatables.min.js') }}"></script>
 
-<script src="{{ asset('template/js/lib/weather/jquery.simpleWeather.min.js') }}"></script>
-<script src="{{ asset('template/js/lib/weather/weather-init.js') }}"></script>
+{{--<script src="{{ asset('template/js/lib/weather/jquery.simpleWeather.min.js') }}"></script>--}}
+{{--<script src="{{ asset('template/js/lib/weather/weather-init.js') }}"></script>--}}
 <script src="{{ asset('template/js/lib/circle-progress/circle-progress.min.js') }}"></script>
 <script src="{{ asset('template/js/lib/circle-progress/circle-progress-init.js') }}"></script>
 {{--<script src="{{ asset('template/js/lib/chartist/chartist.min.js') }}"></script>

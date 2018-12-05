@@ -18,7 +18,7 @@
             
            
 
-                @include('permissions.partials.assign-permissions')
+                @include('permissions.partials.assign-permissions.blade.php.tmp')
 
           
             {!! Form::close() !!}
