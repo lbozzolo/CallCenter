@@ -28,7 +28,7 @@ class RolesController extends Controller
         $role =Role::create([
             'name' => $request->name,
             'description' => $request->description,
-            'level' => $request->level,
+            'level' => 1,
             'slug' => $this->roleRepo->setToSlug($request->slug, $request->name)
         ]);
         $roles = Role::all();
@@ -37,7 +37,7 @@ class RolesController extends Controller
             return view('roles.index', compact('roles'))
                 ->with('ok', 'El Rol '.$role->name.' ha sido creado con éxito');
         }else{
-            return redirect()->route('roles.index')->withErrors('No se pudo crear el Rol');
+            return redirect()->route('roles.index')->withErrors('Ocurrión un error. No se pudo crear el rol correctamente');
         }
     }
 

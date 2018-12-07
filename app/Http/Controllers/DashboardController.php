@@ -78,11 +78,9 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
+        $tarjetas = \SmartLine\Entities\MarcaTarjeta::where('tipo', 'credito')->get();
+        dd($tarjetas);
 
-        dd(config('mail.from.address'));
-        $bbb = 'j';
-        $password = 'lucas pruebas';
-        return view('emails.blanqueo-password')->with('password', $password);
     
     }
 

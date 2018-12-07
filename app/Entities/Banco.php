@@ -12,4 +12,9 @@ class Banco extends Entity
         return $this->hasMany(DatoTarjeta::class);
     }
 
+    public function formasPago()
+    {
+        return $this->hasMany(FormaPago::class);
+    }
+
 }

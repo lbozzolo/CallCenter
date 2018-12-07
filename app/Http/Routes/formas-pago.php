@@ -30,3 +30,8 @@ Route::delete('formas-pago/{id}/eliminar', [
     'middleware' => 'permission:eliminar.forma.de.pago'
 ]);
 
+Route::get('formas-pago/tarjeta', [
+    'as' => 'formas.choose.card',
+    'uses' => 'FormasPagoController@chooseCard',
+    //'middleware' => 'permission:editar.forma.de.pago'
+]);

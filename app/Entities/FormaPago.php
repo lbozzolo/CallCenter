@@ -6,7 +6,7 @@ namespace SmartLine\Entities;
 class FormaPago extends Entity
 {
     protected $table = 'forma_pago';
-    protected $fillable = ['marca_tarjeta_id', 'cuota_cantidad', 'cuota_valor', 'interes', 'descuento'];
+    protected $fillable = ['marca_tarjeta_id', 'banco_id', 'cuota_cantidad', 'cuota_valor', 'interes', 'descuento'];
 
     public function ventas()
     {
@@ -16,6 +16,11 @@ class FormaPago extends Entity
     public function tarjeta()
     {
         return $this->belongsTo(Marca::class);
+    }
+
+    public function banco()
+    {
+        return $this->belongsTo(Banco::class);
     }
 
     public function datosTarjeta()

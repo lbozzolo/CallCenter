@@ -23,7 +23,7 @@ class CreateProductoRequest extends Request
                 'cantidad_medida' => 'numeric|min:0|max:100000',
                 'stock' => 'numeric|min:0|max:100000',
                 'alerta_stock' => 'numeric|min:0|max:100000',
-                'marca_id' => 'exists:marcas,id',
+                'marca_id' => 'required|exists:marcas,id',
                 'precio' => 'numeric|min:0|max:100000',
                 'institucion_id' => 'exists:instituciones,id',
 
@@ -58,6 +58,7 @@ class CreateProductoRequest extends Request
                 'alerta_stock.min' => 'La alerta de stock no puede ser menor a 0',
                 'alerta_stock.max' => 'La alerta de stock no puede ser mayor a 100000',
 
+                'marca_id.required' => 'La marca es obligatoria',
                 'marca_id.exists' => 'La marca seleccionada no existe',
 
                 'precio.numeric' => 'El precio debe ser un número',

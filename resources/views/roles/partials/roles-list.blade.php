@@ -14,8 +14,9 @@
                 <a href="{{ route('roles.edit', $role->id) }}" class="pull-right nonStyledButton"><i class="glyphicon glyphicon-edit small text-info"></i></a>
             @endif
             <a href="{{ route('roles.permissions', $role->id) }}" style="display: block; padding: 10px 20px; margin: 0px">
-                <strong>{!! $role->name !!} ({!! $role->slug !!}) - </strong>Nivel {!! $role->level !!}<br>
-                <small>{!! $role->description !!}</small>
+                <span>{!! strtoupper($role->name) !!}</span>
+                {{--Nivel {!! $role->level !!}<br>--}}
+                <small class="text-muted"> / {!! $role->description !!}</small>
             </a>
         </li>
 

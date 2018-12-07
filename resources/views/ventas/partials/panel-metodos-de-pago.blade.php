@@ -33,10 +33,8 @@
                         <th>Código</th>
                         <th>Titular</th>
                         <th>Fecha expiración</th>
-                        {{--<th>Importe</th>--}}
                         <th>Interés</th>
                         <th>Descuento</th>
-                        {{--<th>IVA (21%)</th>--}}
                         <th>Cuotas</th>
                         <th style="width: 180px" class="text-center">Total</th>
                         <th style="width: 100px">Opciones</th>
@@ -56,7 +54,6 @@
                             <td>{!! $metodoPagoVenta->datosTarjeta->security_number !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->titular !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->expiration_date !!}</td>
-{{--                            <td>${!! $metodoPagoVenta->importe !!}</td>--}}
                             <td class="text-center">
                                 @if($metodoPagoVenta->formaPago)
                                 {!! ($metodoPagoVenta->formaPago->interes != 0)? $metodoPagoVenta->formaPago->interes .' %'  : '-' !!}
@@ -71,12 +68,10 @@
                                     -
                                 @endif
                             </td>
-{{--                            <td>${!! $metodoPagoVenta->IVA !!}</td>--}}
                             <td class="text-center">
                                 {!! ($metodoPagoVenta->formaPago)? $metodoPagoVenta->formaPago->cuota_cantidad.' x ' : '-' !!}
                                 {!! ($metodoPagoVenta->formaPago)? '$'.$metodoPagoVenta->valor_cuota : '' !!}
                             </td>
-{{--                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_iva !!}</td>--}}
                             <td class="text-right">${!! $metodoPagoVenta->importe_mas_promocion !!}</td>
                             <td>
                                 @permission('editar.metodo.pago.venta')
@@ -130,12 +125,9 @@
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
-{{--                            <td>${!! $metodoPagoVenta->importe !!}</td>--}}
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
-{{--                            <td class="text-center">${!! $metodoPagoVenta->IVA !!}</td>--}}
                             <td class="text-center">-</td>
-{{--                            <td class="text-center">${!! $metodoPagoVenta->importe_mas_promocion_mas_IVA !!}</td>--}}
                             <td class="text-right">${!! $metodoPagoVenta->importe !!}</td>
                             <td>
                                 @permission('editar.metodo.pago.venta')

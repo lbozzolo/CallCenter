@@ -79,9 +79,9 @@
                     <a href="{{ route('users.edit', ['id' => $user->id, 'route' => 'users.index']) }}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
                 @endpermission
 
-                @permission('editar.permisos.usuario')
-                    <a href="{{ route('users.permissions', $user->id) }}" class="btn btn-default btn-xs"><i class="fa fa-file-powerpoint-o"></i></a>
-                @endpermission
+                {{--@permission('editar.permisos.usuario')--}}
+                    {{--<a href="{{ route('users.permissions', $user->id) }}" class="btn btn-default btn-xs"><i class="fa fa-file-powerpoint-o"></i></a>--}}
+                {{--@endpermission--}}
 
                 @permission('ver.updateable')
                     <a href="{{ route('updateables.entidad.show', ['entity' => $user->getClass(), 'id' => $user->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>

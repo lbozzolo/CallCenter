@@ -1,5 +1,6 @@
 <?php namespace SmartLine\Http\Controllers;
 
+use SmartLine\Entities\Banco;
 use SmartLine\Entities\FormaPago;
 use SmartLine\Entities\MarcaTarjeta;
 use Illuminate\Http\Request;
@@ -18,18 +19,46 @@ class FormasPagoController extends Controller
 
     public function index()
     {
-        $marcasTarjetas = MarcaTarjeta::lists('nombre', 'id');
         $tarjetas = MarcaTarjeta::with('formasPago')->get();
+        $marcasTarjetas = MarcaTarjeta::where('tipo', 'credito')->lists('nombre', 'id');
         $cuotas = config('sistema.ventas.cuotas');
+        $bancos = Banco::lists('nombre', 'id');
 
-        return view('pagos.index', compact('tarjetas', 'marcasTarjetas', 'cuotas'));
+        return view('pagos.index', compact('tarjetas', 'marcasTarjetas', 'cuotas', 'bancos'));
+    }
+
+    public function chooseCard(Request $request)
+    {
+        $messages = [
+            'card_id.required'    => 'Debe elegir una tarjeta',
+            'banco_id.required'    => 'Debe elegir un banco.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'card_id' => 'required',
+            'banco_id' => 'required',
+        ], $messages);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        $data['card'] = MarcaTarjeta::find($request->card_id);
+        $data['banco'] = Banco::find($request->banco_id);
+        $data['formasPagoTotal'] = FormaPago::where('marca_tarjeta_id', $request->card_id)->where('banco_id', $request->banco_id)->get();
+        
+        $data['tarjetas'] = MarcaTarjeta::with('formasPago')->get();
+        $data['marcasTarjetas'] = MarcaTarjeta::where('tipo', 'credito')->lists('nombre', 'id');
+        $data['cuotas'] = config('sistema.ventas.cuotas');
+        $data['bancos'] = Banco::lists('nombre', 'id');
+
+        return view('pagos.index')->with($data);
     }
 
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'tarjeta_id' => 'required',
+            'banco_id' => 'required',
             'cuota_cantidad' => 'required',
             'interes' => 'max:100|min:0',
             'descuento' => 'max:100|min:0'
@@ -40,6 +69,7 @@ class FormasPagoController extends Controller
 
         $formaPago = FormaPago::create([
             'marca_tarjeta_id' => $request->tarjeta_id,
+            'banco_id' => $request->banco_id,
             'cuota_cantidad' => $request->cuota_cantidad,
             'interes' => ($request->interes)? $request->interes : null,
             'descuento' => ($request->descuento)? $request->descuento : null

@@ -17,11 +17,16 @@ class CreateFormaPagoTable extends Migration
 
             $table->increments('id');
             $table->integer('marca_tarjeta_id')->unsigned();
+            $table->integer('banco_id')->unsigned()->nullable();
             $table->tinyInteger('cuota_cantidad');
             $table->tinyInteger('interes')->nullable();
             $table->tinyInteger('descuento')->nullable();
 
             $table->timestamps();
+
+            $table->index('id');
+            $table->index('marca_tarjeta_id');
+            $table->index('banco_id');
         });
     }
 
