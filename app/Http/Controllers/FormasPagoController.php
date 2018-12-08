@@ -45,7 +45,7 @@ class FormasPagoController extends Controller
         $data['card'] = MarcaTarjeta::find($request->card_id);
         $data['banco'] = Banco::find($request->banco_id);
         $data['formasPagoTotal'] = FormaPago::where('marca_tarjeta_id', $request->card_id)->where('banco_id', $request->banco_id)->get();
-        
+
         $data['tarjetas'] = MarcaTarjeta::with('formasPago')->get();
         $data['marcasTarjetas'] = MarcaTarjeta::where('tipo', 'credito')->lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
@@ -60,12 +60,22 @@ class FormasPagoController extends Controller
             'tarjeta_id' => 'required',
             'banco_id' => 'required',
             'cuota_cantidad' => 'required',
-            'interes' => 'max:100|min:0',
-            'descuento' => 'max:100|min:0'
+            'valor' => 'max:100|min:0'
         ]);
 
         if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
+
+        $forma = $this->formaPagoRepo->getFormaPago($request->tarjeta_id, $request->banco_id, $request->cuota_cantidad);
+
+        if($forma)
+            return redirect()->route('formas.pago.edit', $forma->id)->withErrors('Ya existe una forma de pago con los datos ingresados. Si desea puede editarla.');
+
+        if($request->interes_descuento == 'interes')
+            $request['interes'] = $request->valor;
+
+        if($request->interes_descuento == 'descuento')
+            $request['descuento'] = $request->valor;
 
         $formaPago = FormaPago::create([
             'marca_tarjeta_id' => $request->tarjeta_id,
@@ -86,20 +96,25 @@ class FormasPagoController extends Controller
     public function edit($id)
     {
         $formaEdit = FormaPago::find($id);
-        $marcasTarjetas = MarcaTarjeta::lists('nombre', 'id');
+
         $tarjetas = MarcaTarjeta::with('formasPago')->get();
         $cuotas = config('sistema.ventas.cuotas');
+        $marcasTarjetas = MarcaTarjeta::where('tipo', 'credito')->lists('nombre', 'id');
+        $bancos = Banco::lists('nombre', 'id');
 
-        return view('pagos.index', compact('tarjetas', 'marcasTarjetas', 'cuotas', 'formaEdit'));
+        $card = $formaEdit->tarjeta;
+        $banco = $formaEdit->banco;
+
+        return view('pagos.index', compact('tarjetas', 'marcasTarjetas', 'cuotas', 'formaEdit', 'bancos', 'banco', 'card'));
     }
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'tarjeta_id' => 'required',
+            'banco_id' => 'required',
             'cuota_cantidad' => 'required',
-            'interes' => 'max:100|min:0',
-            'descuento' => 'max:100|min:0'
+            'valor' => 'max:100|min:0'
         ]);
 
         if ($validator->fails())
@@ -107,10 +122,19 @@ class FormasPagoController extends Controller
 
         $formaPago = $this->formaPagoRepo->updateFormaPago($id, $request);
 
+        $data['card'] = $formaPago->tarjeta;
+        $data['banco'] = $formaPago->banco;
+        $data['formasPagoTotal'] = FormaPago::where('marca_tarjeta_id', $formaPago->marca_tarjeta_id)->where('banco_id', $formaPago->banco_id)->get();
+
+        $data['tarjetas'] = MarcaTarjeta::with('formasPago')->get();
+        $data['marcasTarjetas'] = MarcaTarjeta::where('tipo', 'credito')->lists('nombre', 'id');
+        $data['cuotas'] = config('sistema.ventas.cuotas');
+        $data['bancos'] = Banco::lists('nombre', 'id');
+
         if(!$formaPago)
             return redirect()->back()->withErrors('Ocurrió un error. No se pudo actualizar la Forma de Pago');
 
-        return redirect()->route('formas.pago.index')->with('ok', 'Forma de Pago actualizada con éxito');
+        return view('pagos.index')->with($data)->with('ok', 'Forma de Pago actualizada con éxito');
     }
 
     public function destroy(Request $request, $id)

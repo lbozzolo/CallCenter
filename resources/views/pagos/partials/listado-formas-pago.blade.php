@@ -20,8 +20,8 @@
                 @foreach($formasPagoTotal as $formasPago)
                     <tr>
                         <td align="center">{!! $formasPago->cuota_cantidad !!}</td>
-                        <td align="center">{!! ($formasPago->interes)? $formasPago->interes.'%' : '--' !!}</td>
-                        <td align="center">{!! ($formasPago->descuento)? $formasPago->descuento.'%' : '--' !!}</td>
+                        <td align="center">{!! ($formasPago->interes)? $formasPago->interes.'%' : '0' !!}</td>
+                        <td align="center">{!! ($formasPago->descuento)? $formasPago->descuento.'%' : '0' !!}</td>
                         <td class="text-right">
                             @permission('ver.forma.de.pago')
                             <button type="button" title="ver usos" class="btn btn-default btn-xs" data-toggle="modal" data-target="#usos{!! $formasPago->id !!}" style="width: 35px" >
@@ -36,14 +36,14 @@
                                     <div class="modal-body">
                                         @if(count($formasPago->ventas))
                                             <div class="table-responsive">
-                                                <table class="table">
+                                                <table class="table table-bordered">
                                                     <thead>
-                                                    <tr>
-                                                        <th>Id</th>
-                                                        <th>Cliente</th>
-                                                        <th>Productos</th>
-                                                        <th>Opciones</th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Cliente</th>
+                                                            <th>Productos</th>
+                                                            <th>Opciones</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
                                                     @foreach($formasPago->ventas as $venta)
@@ -115,8 +115,6 @@
 
                         </td>
 
-
-
                     </tr>
                 @endforeach
                 </tbody>
@@ -124,4 +122,12 @@
         </div>
     </div>
 </div>
+@else
+
+    @if(!isset($formaEdit))
+    <div class="card">
+        Seleccione una tarjeta y un banco para ver las formas de pago.
+    </div>
+    @endif
+
 @endif

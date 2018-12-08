@@ -15,7 +15,7 @@ class FormaPago extends Entity
 
     public function tarjeta()
     {
-        return $this->belongsTo(Marca::class);
+        return $this->belongsTo(MarcaTarjeta::class, 'marca_tarjeta_id');
     }
 
     public function banco()
