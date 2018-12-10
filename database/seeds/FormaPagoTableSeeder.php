@@ -11,13 +11,31 @@ class FormaPagoTableSeeder extends Seeder
      */
     public function run()
     {
-       /* DB::table('forma_pago')->insert([
-            [
-                'cuota_cantidad' => '',
-                'cuota_valor' => '',
-                'interes' => '',
-                'descuento' => ''
-            ],
-        ]);*/
+        $tarjetas = \SmartLine\Entities\MarcaTarjeta::where('tipo', 'credito')->get();
+        $bancos = \SmartLine\Entities\Banco::all();
+        $cuotas = config('sistema.ventas.cuotas');
+
+        foreach ($tarjetas as $tarjeta){
+
+            foreach ($bancos as $banco) {
+
+                foreach ($cuotas as $cuota) {
+
+                    DB::table('forma_pago')->insert([
+                        [
+                            'marca_tarjeta_id' => $tarjeta->id,
+                            'banco_id' => $banco->id,
+                            'cuota_cantidad' => $cuota,
+                            'interes' => null,
+                            'descuento' => null
+                        ],
+                    ]);
+
+                }
+
+            }
+
+        }
+
     }
 }

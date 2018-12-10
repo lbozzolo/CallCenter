@@ -2,38 +2,48 @@
     <div class="card alert">
         
             <h4>Editar forma de pago</h4>
-        
+            <ul class="list">
+                <li class="h4">
+                    {!! $formaEdit->tarjeta->nombre !!} / {!! $formaEdit->banco->nombre !!}
+                </li>
+                <li>
+                    <span class="label label-primary">{!! $formaEdit->cuota_cantidad !!} {!! ($formaEdit->cuota_cantidad == 1)? 'CUOTA' : 'CUOTAS' !!}</span>
+                    @if($formaEdit->interes || $formaEdit->descuento)
+                    <span class="label label-default">{!! ($formaEdit->interes)? $formaEdit->interes : $formaEdit->descuento !!}% de {!! ($formaEdit->interes)? 'interés' : 'descuento' !!}</span>
+                    @endif
+                </li>
+            </ul>
+
         <div class="panel-body">
 
             {!! Form::model($formaEdit, ['url' => route('formas.pago.update', $formaEdit->id), 'method' => 'put']) !!}
 
-            <div class="form-group">
-                {!! Form::label('tarjeta_id', 'Tarjeta') !!}
-                {!! Form::select('tarjeta_id', $marcasTarjetas, $formaEdit->marca_tarjeta_id, ['class' => 'form-control select2', 'placeholder' => '']) !!}
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        {!! Form::label('cuota_cantidad', 'Cuotas') !!}
-                        {!! Form::select('cuota_cantidad', $cuotas, null, ['class' => 'form-control select2']) !!}
+                {!! Form::hidden('tarjeta_id', $formaEdit->marca_tarjeta_id) !!}
+                {!! Form::hidden('banco_id', $formaEdit->banco_id) !!}
+                {!! Form::hidden('cuota_cantidad', $formaEdit->cuota_cantidad) !!}
+
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="interes_descuento" id="optionsRadios1" value="interes" {!! ($formaEdit->interes)? 'checked' : '' !!}>
+                            Interés
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="interes_descuento" id="optionsRadios2" value="descuento" {!! ($formaEdit->descuento)? 'checked' : '' !!}>
+                            Descuento
+                        </label>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        {!! Form::label('interes', 'Interés (%)') !!}
-                        {!! Form::number('interes', null, ['class' => 'form-control', 'max' => '100', 'min' => '0']) !!}
-                    </div>
+                <div class="form-group">
+                    {!! Form::label('valor', 'Valor') !!}
+                    {!! Form::number('valor', ($formaEdit->interes)? $formaEdit->interes : $formaEdit->descuento, ['class' => 'form-control', 'max' => '100', 'min' => '00']) !!}
                 </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        {!! Form::label('descuento', 'Descuento (%)') !!}
-                        {!! Form::number('descuento', null, ['class' => 'form-control', 'max' => '100', 'min' => '00']) !!}
-                    </div>
+
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-warning">Actualizar</button>
                 </div>
-            </div>
-            <div class="form-group text-right">
-                <button type="submit" class="btn btn-warning">Actualizar Forma de Pago</button>
-            </div>
 
             {!! Form::close() !!}
 

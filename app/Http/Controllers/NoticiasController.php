@@ -23,32 +23,27 @@ class NoticiasController extends Controller
 
     public function noticias()
     {
-//        $thisWeek = Carbon::now()->startOfWeek();
-//        $role = Auth::user()->roles->first();
-//        $destinatarios = Destinatario::with('noticia')->where('role_id', $role->id)->get();
-//
-//        $noticias = Noticia::whereHas('destinatarios', function ($query) use ($role) {
-//            $query->where('role_id', $role->id);
-//        })->get();
-//
-//        $recientes = $noticias->where('created_at', '>=', $thisWeek);
-
-
-        $roles = Role::all();
-        //$thisMonth = Carbon::now()->startOfMonth();
         $thisWeek = Carbon::now()->startOfWeek();
-        $recientes = Noticia::where('created_at', '>=', $thisWeek)->get()->sortByDesc('id');
-        $recientesIds = array_flatten(Noticia::where('created_at', '>=', $thisWeek)->get(['id'])->toArray());
+        $role = Auth::user()->roles->first();
 
-        $anteriores = Noticia::orderBy('created_at', 'desc')->get()->filter(function ($item) use ($recientesIds) {
-            if(!in_array($item->id, $recientesIds))
-                return $item;
+        $noticias = Noticia::whereHas('destinatarios', function ($query) use ($role) {
+            $query->where('role_id', $role->id);
+        })->get();
+
+        $recientes = $noticias->filter(function ($value) use ($thisWeek) {
+            return $value->created_at >= $thisWeek;
         });
 
-//        $destinatarios = $roles->reject(function($value){
-//            return $value->slug == 'superadmin';
-//        });
-//        $destinatarios = $destinatarios->lists('name', 'id');
+        $recientesIds = [];
+        foreach($recientes as $reciente){
+            array_push($recientesIds, $reciente->id);
+        }
+
+        $anteriores = $noticias->sortByDesc('created_at')->filter(function ($item) use ($recientesIds) {
+//            if(!in_array($item->id, $recientesIds))
+                //return (!in_array($item->id, $recientesIds))? $item : false;
+                return !in_array($item->id, $recientesIds);
+        });
 
         return view('noticias.noticias', compact('recientes', 'anteriores'));
     }

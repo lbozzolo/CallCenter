@@ -180,7 +180,7 @@
 
                 @role('superadmin|admin')
                     @permission('listado.forma.de.pago')
-                    <li><a href="{{ route('formas.pago.index') }}"><i class="ti-money"></i> Metodos de Pagos </a></li>
+                    <li><a href="{{ route('formas.pago.index') }}"><i class="ti-money"></i> Formas de Pagos </a></li>
                     @endpermission
                 @endrole
 

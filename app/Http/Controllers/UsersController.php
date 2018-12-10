@@ -12,6 +12,7 @@ use SmartLine\Http\Repositories\UserRepo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use SmartLine\Entities\Entity;
 use Mockery\Exception;
 
 class UsersController extends Controller
@@ -215,9 +216,14 @@ class UsersController extends Controller
 
     public function permissions($id)
     {
-        $user = User::find($id);
-        $permisos = Permission::all();
-        return view('users.permissions', compact('user', 'permisos'));
+        $data['user'] = User::find($id);
+        $data['permisos'] = Permission::all();
+        $data['models'] = Entity::getModels();
+        $quantity = round(count($data['models']) / 3);
+        $data['models'] = array_chunk($data['models'], $quantity);
+        $data['names'] = ['marca' => 'Marca', 'banco' => 'Banco', 'asignacion' => 'Asignación', 'categoria' => 'Categoría', 'cliente' => 'Cliente', 'datoTarjeta' => 'Datos de tarjeta', 'ticket' => 'Soporte', 'etapa' => 'Etapa', 'formaPago' => 'Forma de pago', 'imagen' => 'Imagen', 'institucion' => 'Institución', 'llamada' => 'Llamada', 'noticia' => 'Noticia', 'metodoPago' => 'Método de pago', 'producto' => 'Producto', 'promocion' => 'Promoción', 'reclamo' => 'Reclamo', 'updateable' => 'Updateable', 'user' => 'Usuario', 'venta' => 'Venta',];
+
+        return view('users.permissions')->with($data);
     }
 
     public function assignPermissions(Request $request, $id)
@@ -225,12 +231,13 @@ class UsersController extends Controller
         $user = User::find($id);
         $permisos = $request->permissions;
 
-        $user->detachAllPermissions();
-
         if($permisos){
+            $user->detachAllPermissions();
             foreach($permisos as $key => $permiso){
                 $user->attachPermission($permiso);
             }
+        } else {
+            return redirect()->back()->withErrors('Ocurrió un error. No pudieron asignarse los permisos correctamente');
         }
 
         return redirect()->route('users.index')->with('ok', 'Se han asignado los permisos correctamente');

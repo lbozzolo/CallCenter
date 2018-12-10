@@ -2,11 +2,13 @@
 $(document).ready(function() {
 
 
-    if($('.message').is(':visible')){
-        setTimeout(function(){
-            $('.message').fadeOut("slow");
-        }, 3000);
-    }
+    // FADE OUT DEL MENSAJE DE CONFIRMACION
+
+    // if($('.message').is(':visible')){
+    //     setTimeout(function(){
+    //         $('.message').fadeOut("slow");
+    //     }, 3000);
+    // }
 
     function preventDoubleSubmission() {
 

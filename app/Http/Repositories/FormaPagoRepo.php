@@ -10,9 +10,23 @@ class FormaPagoRepo extends BaseRepo
         return new FormaPago();
     }
 
+    public function getFormaPago($tarjetaId, $bancoId, $cuotaCantidad)
+    {
+        return FormaPago::where('marca_tarjeta_id', $tarjetaId)
+            ->where('banco_id', $bancoId)
+            ->where('cuota_cantidad', $cuotaCantidad)
+            ->first();
+    }
+
     public function updateFormaPago($id, $request)
     {
         $formaPago = FormaPago::find($id);
+
+        if($request->interes_descuento == 'interes')
+            $request['interes'] = $request->valor;
+
+        if($request->interes_descuento == 'descuento')
+            $request['descuento'] = $request->valor;
 
         if($request['marca_tarjeta_id'] && $request['marca_tarjeta_id'] != $formaPago->marca_tarjeta_id){
             $formaPago->updateable()->create([
@@ -45,6 +59,7 @@ class FormaPagoRepo extends BaseRepo
                 'updated_value' => $request['interes']
             ]);
             $formaPago->interes = $request['interes'];
+            $formaPago->descuento = null;
         }
 
         if($request['descuento'] && $request['descuento'] != $formaPago->descuento){
@@ -56,6 +71,7 @@ class FormaPagoRepo extends BaseRepo
                 'updated_value' => $request['descuento']
             ]);
             $formaPago->descuento = $request['descuento'];
+            $formaPago->interes = null;
         }
 
         $formaPago->save();
