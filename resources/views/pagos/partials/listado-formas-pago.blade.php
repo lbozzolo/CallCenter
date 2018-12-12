@@ -25,43 +25,31 @@
                         <td class="text-right">
                             @permission('ver.forma.de.pago')
                             <button type="button" title="ver usos" class="btn btn-default btn-xs" data-toggle="modal" data-target="#usos{!! $formasPago->id !!}" style="width: 35px" >
-                                {!! count($formasPago->ventas) !!}
+                                {!! $formasPago->ventasAbiertas($formasPago->id) !!}
                             </button>
                             <div class="modal fade col-lg-6 col-lg-offset-3" id="usos{!! $formasPago->id !!}">
                                 <div class="card">
-                                    <div class="modal-header">
+                                    <div class="card-header text-left">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title">Listado de usos</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        @if(count($formasPago->ventas))
+                                    <div class="card-body">
+                                        @if($formasPago->ventasAbiertas($formasPago->id))
                                             <div class="table-responsive">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>Id</th>
+                                                            <th class="text-right">Id</th>
                                                             <th>Cliente</th>
-                                                            <th>Productos</th>
                                                             <th>Opciones</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($formasPago->ventas as $venta)
-                                                        <tr>
-                                                            <td>#{!! $venta->id !!}</td>
-                                                            <td class="text-left">{!! $venta->cliente->full_name !!}</td>
-                                                            <td class="text-left">
-                                                                @if($venta->productos)
-                                                                    <ul>
-                                                                        @foreach($venta->productos as $producto)
-                                                                            <li class="text-left">
-                                                                                <a href="{{ route('productos.show', $producto->id) }}">{!! $producto->nombre !!}</a>
-                                                                            </li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                @endif
-                                                            </td>
-                                                            <td><a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-xs btn-default">ver</a></td>
+                                                    @foreach($formasPago->metodoPagoVenta as $metodoPagoVenta)
+                                                        <tr class="panel panel-barra">
+                                                            <td>#{!! $metodoPagoVenta->venta->id !!}</td>
+                                                            <td class="text-left">{!! $metodoPagoVenta->venta->cliente->full_name !!}</td>
+                                                            <td><a href="{{ route('ventas.show', $metodoPagoVenta->venta->id) }}" class="pull-left btn btn-primary">ver venta</a></td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
@@ -71,7 +59,7 @@
                                             <span>No hay ventas que utilicen esta forma de pago</span>
                                         @endif
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="card-footer" style="margin-top: 20px">
                                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
@@ -84,7 +72,7 @@
                             @endpermission
 
                             @permission('eliminar.forma.de.pago')
-                            <button type="button" title="ELIMINAR" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#eliminarPago{!! $formasPago->id !!}" {!! (count($formasPago->ventas) > 0)? 'disabled' : '' !!} >
+                            <button type="button" title="ELIMINAR" class="btn btn-danger btn-xs" {!! ($formasPago->ventasAbiertas($formasPago->id)? 'disabled' : '') !!} data-toggle="modal" data-target="#eliminarPago{!! $formasPago->id !!}" {!! (count($formasPago->ventas) > 0)? 'disabled' : '' !!} >
                                 <i class="fa fa-trash-o"></i>
                             </button>
                             <div class="modal fade col-lg-3 col-lg-offset-9" id="eliminarPago{!! $formasPago->id !!}">

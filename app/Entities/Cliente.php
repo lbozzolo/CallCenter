@@ -10,7 +10,7 @@ class Cliente extends Entity
     use SoftDeletes;
 
     protected $table = 'clientes';
-    protected $fillable = ['nombre', 'apellido', 'nombre_completo', 'domicilio_id', 'telefono', 'celular', 'email', 'dni', 'referencia', 'observaciones', 'from_date', 'to_date', 'puntos', 'estado_id', 'created_at', 'updated_at'];
+    protected $fillable = ['nombre', 'apellido', 'nombre_completo', 'domicilio_id', 'telefono', 'celular', 'email', 'dni', 'cuit', 'cuil',  'referencia', 'observaciones', 'from_date', 'to_date', 'puntos', 'estado_id', 'created_at', 'updated_at'];
     protected $dates = ['deleted_at'];
 
     public function hasCard($tipo = null)

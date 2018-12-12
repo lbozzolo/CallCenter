@@ -15,7 +15,7 @@
 
         <div class="card card-default">
             <div class="card-heading">
-                <h2 class="card-title">Datos personales</h2>
+                <h4 class="card-title">Datos personales</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -27,6 +27,10 @@
                         <div class="form-group">
                             {!! Form::label('apellido', 'Apellido') !!}
                             {!! Form::text('apellido', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('email', 'Email') !!}
+                            {!! Form::email('email', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -43,36 +47,27 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            {!! Form::label('email', 'Email') !!}
-                            {!! Form::email('email', null, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
                             {!! Form::label('dni', 'DNI') !!}
                             {!! Form::text('dni', null, ['class' => 'form-control']) !!}
                         </div>
+                    </div>
+                    <div class="col-lg-6">
+                        {!! Form::label('cuit', 'Número de CUIT') !!}
+                        {!! Form::text('cuit', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="col-lg-6">
+                        {!! Form::label('cuil', 'Número de CUIL') !!}
+                        {!! Form::text('cuil', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="col-lg-12">
                         <div class="form-group">
                             {!! Form::label('referencia', 'Referencia') !!}
                             {!! Form::textarea('referencia', null, ['class' => 'form-control', 'rows' => '3']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('horario_contacto', 'Horario de Contacto') !!}
-                            {!! Form::textarea('horario_contacto', null, ['class' => 'form-control', 'rows' => '3']) !!}
-                        </div>
-                        <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones') !!}
                             {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '3']) !!}
                         </div>
-                    </div>
-                    <div class="form-group col-lg-12">
-                        {!! Form::label('contacto', 'Horario de contacto:') !!}
-                    </div>
-                    <div class="form-group col-xs-6">
-                        {!! Form::label('from_date', 'Desde') !!}
-                        {!! Form::time('from_date', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="form-group col-xs-6">
-                        {!! Form::label('to_date', 'Hasta') !!}
-                        {!! Form::time('to_date', null, ['class' => 'form-control']) !!}
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
@@ -95,7 +90,23 @@
 
         <div class="card panel-default">
             <div class="card-heading">
-                <span class="card-title">Domicilio</span>
+                <h4 class="card-title">Horario de contacto</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-group col-xs-6">
+                    {!! Form::label('from_date', 'Desde') !!}
+                    {!! Form::time('from_date', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group col-xs-6">
+                    {!! Form::label('to_date', 'Hasta') !!}
+                    {!! Form::time('to_date', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="card panel-default">
+            <div class="card-heading">
+                <h4 class="card-title">Domicilio</h4>
             </div>
             <div class="card-body">
                 <div class="row">

@@ -373,6 +373,22 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
+
+        Schema::table('ventas_cerradas', function(Blueprint $table) {
+            $table->foreign('venta_id')
+                ->references('id')
+                ->on('ventas')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+        });
+
+        Schema::table('ventas_cerradas_productos', function(Blueprint $table) {
+            $table->foreign('venta_cerrada_id')
+                ->references('id')
+                ->on('ventas_cerradas')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+        });
     }
     /**
      * Reverse the migrations.

@@ -62,8 +62,12 @@
                                     {!! ($cliente->dni)? $cliente->dni : '<small class="text-muted">No hay DNI espeficifado</small>' !!}
                                 </li>
                                 <li class="list-group-item">
-                                    Referencia<br>
-                                    {!! ($cliente->referencia)? $cliente->referencia : '<small class="text-muted">sin datos</small>' !!}
+                                    CUIT<br>
+                                    {!! ($cliente->cuit)? $cliente->cuit : '<small class="text-muted">sin datos</small>' !!}
+                                </li>
+                                <li class="list-group-item">
+                                    CUIL<br>
+                                    {!! ($cliente->cuil)? $cliente->cuil : '<small class="text-muted">sin datos</small>' !!}
                                 </li>
                             </ul>
                         </div>
@@ -101,6 +105,10 @@
                                             </span>
                                         @endif
                                     </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Referencia<br>
+                                    {!! ($cliente->referencia)? $cliente->referencia : '<small class="text-muted">sin datos</small>' !!}
                                 </li>
                                 <li class="list-group-item">
                                     Observaciones<br>

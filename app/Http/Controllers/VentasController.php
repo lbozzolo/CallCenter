@@ -435,16 +435,22 @@ class VentasController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $motivo = $request->motivo;
+        // Si el estado es diferente al que tenía, guardo el updateable y guardo la venta en 'cerradas'
+        if($venta->estado_id != $estado->id){
 
-        $venta->updateable()->create([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'field' => 'estado_id',
-            'former_value' => $venta->estado_id,
-            'updated_value' => $estado->id,
-            'reason' => ($motivo != '')? $motivo : null
-        ]);
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'estado_id',
+                'former_value' => $venta->estado_id,
+                'updated_value' => $estado->id,
+                'reason' => ($request->motivo != '')? $request->motivo : null
+            ]);
+
+            if($estado->slug == 'facturada')
+                $this->ventaRepo->cerrarVenta($venta->id);
+
+        }
 
         $venta->estado_id = $estado->id;
         $venta->save();

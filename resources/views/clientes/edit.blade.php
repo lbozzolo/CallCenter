@@ -24,6 +24,7 @@
                 </div>
                 <div class="card-body">
 
+
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
                         {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
@@ -48,6 +49,16 @@
                         {!! Form::label('dni', 'DNI') !!}
                         {!! Form::text('dni', null, ['class' => 'form-control']) !!}
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {!! Form::label('cuit', 'Número de CUIT') !!}
+                            {!! Form::text('cuit', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="col-lg-6">
+                            {!! Form::label('cuil', 'Número de CUIL') !!}
+                            {!! Form::text('cuil', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
                     <div class="form-group">
                         {!! Form::label('referencia', 'Referencia') !!}
                         {!! Form::textarea('referencia', null, ['class' => 'form-control', 'rows' => '4']) !!}
@@ -55,19 +66,6 @@
                     <div class="form-group">
                         {!! Form::label('observaciones', 'Observaciones') !!}
                         {!! Form::textarea('observaciones', null, ['class' => 'form-control', 'rows' => '4']) !!}
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            {!! Form::label('contacto', 'Horario de contacto:') !!}
-                        </div>
-                        <div class="form-group col-xs-6">
-                            {!! Form::label('from_date', 'Desde') !!}
-                            {!! Form::time('from_date', null, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group col-xs-6">
-                            {!! Form::label('to_date', 'Hasta') !!}
-                            {!! Form::time('to_date', null, ['class' => 'form-control']) !!}
-                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">
@@ -88,6 +86,24 @@
         </div>
 
         <div class="col-lg-6 col-md-6">
+
+            <div class="card panel-default">
+                <div class="card-heading">
+                    <h3 class="card-title">Hoarario de contacto</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            {!! Form::label('from_date', 'Desde') !!}
+                            {!! Form::time('from_date', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group col-xs-6">
+                            {!! Form::label('to_date', 'Hasta') !!}
+                            {!! Form::time('to_date', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="card panel-default">
                 <div class="card-heading">

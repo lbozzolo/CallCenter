@@ -58,6 +58,8 @@ class ClientesController extends Controller
             'celular' => ($request->celular)? $request->celular : '',
             'email' => ($request->email)? $request->email : '',
             'dni' => ($request->dni)? $request->dni : '',
+            'cuit' => ($request->cuit)? $request->cuit : null,
+            'cuil' => ($request->cuil)? $request->cuil : null,
             'referencia' => ($request->referencia)? $request->referencia : '',
             'observaciones' => ($request->observaciones)? $request->observaciones : '',
             'from_date' => $desde,

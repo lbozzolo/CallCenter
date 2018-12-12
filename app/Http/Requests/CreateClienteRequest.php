@@ -23,6 +23,8 @@ class CreateClienteRequest extends Request
                 'celular' => 'required_without:telefono|numeric',
                 'email' => 'email',
                 'dni' => 'required|numeric',
+                'cuit' => 'max:255',
+                'cuil' => 'max:255',
                 'referencia' => 'max:255',
                 'observaciones' => 'max:255',
                 'puntos' => 'numeric',
@@ -56,6 +58,9 @@ class CreateClienteRequest extends Request
 
                 'dni.required' => 'El DNI es obligatorio',
                 'dni.numeric' => 'El DNI es inválido. Debe ser un número',
+
+                'cuit.max' => 'El número de CUIT no debe exceder los 255 caracteres',
+                'cuil.max' => 'El número de CUIL no debe exceder los 255 caracteres',
 
                 'referencia.max' => 'La referencia no puede exceder los 255 caracteres',
 

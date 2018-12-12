@@ -3,10 +3,12 @@
         <ul class="list-unstyled list-inline">
             <li><h3>{!! $cliente->fullname !!}</h3></li>
             @permission('agregar.tarjeta.cliente')
-            <li><button class="nonStyledButton" style="color:cyan" id="botonNuevaTarjeta"><i class="fa fa-plus"></i> Agregar</button> </li>
+            <li><button class="nonStyledButton" style="color:cyan" id="botonNuevaTarjeta"><i class="fa fa-plus"></i> Agregar tarjeta</button> </li>
             @endpermission
         </ul>
+        @if($cliente->hasCard('credito') || $cliente->hasCard('debito'))
         <h4>Tarjetas asociadas</h4>
+        @endif
     </div>
     <div class="card-body">
 
@@ -14,6 +16,7 @@
         @include('clientes.partials.agregar-tarjeta-asociada')
         @endpermission
 
+        @if($cliente->hasCard('credito') || $cliente->hasCard('debito'))
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -28,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($cliente->hasCard('credito') || $cliente->hasCard('debito'))
+
                     @foreach($cliente->datosTarjeta as $tarjeta)
 
                         <tr id="showTarjetaAsociada{!! $tarjeta->id !!}" class="showTarjetaAsociada">

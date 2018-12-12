@@ -50,6 +50,8 @@ class ClienteRepo extends BaseRepo
         $cliente->celular = $request->celular;
         $cliente->email = $request->email;
         $cliente->dni = $request->dni;
+        $cliente->cuit = $request->cuit;
+        $cliente->cuil = $request->cuil;
         $cliente->referencia = $request->referencia;
         $cliente->observaciones = $request->observaciones;
         $cliente->from_date = $desde;
@@ -304,6 +306,8 @@ class ClienteRepo extends BaseRepo
                 'user_id' => Auth::user()->id,
                 'action' => 'create'
             ]);
+
+            return $nuevoDomicilio;
 
         }
     }

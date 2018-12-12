@@ -3,6 +3,8 @@
 use Illuminate\Database\Eloquent\SoftDeletes;
 use SmartLine\Entities\Venta;
 use SmartLine\Entities\EstadoVenta;
+use SmartLine\Entities\VentaCerrada;
+use SmartLine\Entities\VentaCerradaProducto;
 
 class VentaRepo extends BaseRepo
 {
@@ -101,6 +103,50 @@ class VentaRepo extends BaseRepo
         $venta->save();
 
         return $venta;
+    }
+
+    public function cerrarVenta($id)
+    {
+        $venta = Venta::with(['cliente', 'cliente.domicilio', 'productos'])->find($id);
+        $cliente = $venta->cliente;
+        $domicilio = $cliente->domicilio;
+        $productos = $venta->productos;
+
+        $ventaCerrada = VentaCerrada::create([
+            'venta_id' => $venta->id,
+            'user_fullname' => $venta->user->fullname,
+            'cliente_fullname' => $cliente->fullname,
+            'dni' => $cliente->dni,
+            'cuit' => $cliente->cuit,
+            'cuil' => $cliente->cuil,
+            'observaciones' => $venta->observaciones,
+            'importe' => $venta->importe_total
+        ]);
+
+        if($domicilio){
+
+            $ventaCerrada->calle = $domicilio->calle;
+            $ventaCerrada->numero = $domicilio->numero;
+            $ventaCerrada->piso = $domicilio->piso;
+            $ventaCerrada->departamento = $domicilio->departamento;
+            $ventaCerrada->codigo_postal = $domicilio->codigo_postal;
+            $ventaCerrada->entre_calles = $domicilio->entre_calles;
+            $ventaCerrada->barrio = $domicilio->barrio;
+            $ventaCerrada->localidad = $domicilio->localidad->localidad;
+            $ventaCerrada->partido = $domicilio->partido->partido;
+            $ventaCerrada->provincia = $domicilio->provincia->provincia;
+
+            $ventaCerrada->save();
+        }
+
+        foreach($productos as $producto){
+            VentaCerradaProducto::create([
+                'venta_cerrada_id' => $ventaCerrada->id,
+                'nombre' => $producto->nombre,
+                'marca' => ($producto->marca)? $producto->marca->nombre : null,
+                'institucion' => ($producto->institucion)? $producto->institucion->nombre : null
+            ]);
+        }
     }
 
 }

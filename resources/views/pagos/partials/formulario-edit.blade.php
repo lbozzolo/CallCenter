@@ -12,6 +12,14 @@
                     <span class="label label-default">{!! ($formaEdit->interes)? $formaEdit->interes : $formaEdit->descuento !!}% de {!! ($formaEdit->interes)? 'interés' : 'descuento' !!}</span>
                     @endif
                 </li>
+                @if($formaEdit->ventasAbiertas($formaEdit->id) > 0)
+                <li>
+                    <p style="padding: 5px 10px; margin-top: 15px" class="bg-danger">
+                        Esta Forma de Pago está siendo utilizada actualmente en {!! $formaEdit->ventasAbiertas($formaEdit->id) !!} ventas que aún no han sido cerradas.
+                        Tenga en cuenta que si la edita MODIFICARÁ LOS VALORES de dichas ventas.
+                    </p>
+                </li>
+                @endif
             </ul>
 
         <div class="panel-body">
