@@ -78,8 +78,8 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
-        $tarjetas = \SmartLine\Entities\MarcaTarjeta::where('tipo', 'credito')->get();
-        dd($tarjetas);
+        $bancos = config('sistema.bancos.principales');
+        dd($bancos);
 
     
     }
