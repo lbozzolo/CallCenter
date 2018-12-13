@@ -1,5 +1,5 @@
 
-<ul class="list-group">
+<ul class="list-group listado">
     @if(isset($categoria))
         <li class="list-group-item text-center">
             <a href="{{ route('subcategorias.index') }}"  class="btn btn-sm btn-default">Agregar nueva subcategoría</a>

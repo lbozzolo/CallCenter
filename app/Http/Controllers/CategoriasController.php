@@ -22,7 +22,6 @@ class CategoriasController extends Controller
 
     public function indexSubcategorias()
     {
-        //$subcategorias = Categoria::whereNotNull('parent_id')->get()->sortBy('nombre');
         $subcategorias = Categoria::has('parent')->get()->sortBy('nombre');
         $parents = Categoria::whereNull('parent_id')->get()->lists('nombre', 'id');
         return view('categorias.subcategorias', compact('subcategorias', 'parents'));

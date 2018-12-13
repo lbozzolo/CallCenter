@@ -12,12 +12,6 @@
 <link href="{{ asset('css/rowReorder.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-
-{{--Fonts--}}
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
-
 {{-- ===================== Template ===================== --}}
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- ================= Favicon ================== -->
@@ -32,15 +26,15 @@
 <!-- Standard iPhone Touch Icon-->
 <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 <!-- Styles -->
-<link href="{{ asset('template/css/lib/chartist/chartist.min.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('template/css/lib/chartist/chartist.min.css') }}" rel="stylesheet">--}}
 <link href="{{ asset('template/css/lib/font-awesome.min.css') }}" rel="stylesheet">
 <link href="{{ asset('template/css/lib/themify-icons.css') }}" rel="stylesheet">
-<link href="{{ asset('template/css/lib/owl.carousel.min.css') }}" rel="stylesheet" />
+{{--<link href="{{ asset('template/css/lib/owl.carousel.min.css') }}" rel="stylesheet" />--}}
 <link href="{{ asset('template/css/lib/owl.theme.default.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('template/css/lib/weather-icons.css') }}" rel="stylesheet" />
 <link href="{{ asset('template/css/lib/menubar/sidebar.css') }}" rel="stylesheet">
 {{--<link href="{{ asset('template/css/lib/bootstrap.min.css') }}" rel="stylesheet">--}}
-<link href="{{ asset('template/css/lib/unix.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('template/css/lib/unix.css') }}" rel="stylesheet">--}}
 <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('css/styles-template.css') }}" rel="stylesheet" type="text/css">
 

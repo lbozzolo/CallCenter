@@ -4,7 +4,7 @@
 @section('login')
 
 
-    <div class="container-fluid" style="background: url({{ asset('/img/fondologin.jpg') }}); background-size: cover;height:100vh;">
+    <div class="container-fluid" style="background: url({{ asset('/img/fondologin.png') }}); background-size: cover;height:100vh;">
 
         <div class="unix-login">
             <div class="container">
