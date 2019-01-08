@@ -10,7 +10,7 @@ class Asignacion extends Entity
     use SoftDeletes;
 
     protected $table = 'asignaciones';
-    protected $fillable = ['supervisor_id', 'operador_id', 'cliente_id'];
+    protected $fillable = ['supervisor_id', 'operador_id', 'cliente_id', 'motivo_id', 'observaciones'];
     protected $dates = ['deleted_at'];
 
     // Relationships

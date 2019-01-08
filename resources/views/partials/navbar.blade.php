@@ -94,7 +94,7 @@
                     @endpermission
                 @endrole
 
-                @role('superadmin|admin|supervisor')
+                @role('superadmin|admin')
                     @permission('listado.asignacion')
                     <li><a href="{{ route('asignaciones.index') }}"><i class="ti-signal"></i> Asignación de Tareas </a></li>
                     @endpermission
@@ -142,7 +142,6 @@
                 @endpermission
 
                 @permission('listado.producto')
-
                     <li>
                         <a class="sidebar-sub-toggle" href="{{ route('productos.index') }}" style="{{ (Request::is('productos'.'*') ? 'color: white' : '') }}"><i class="ti-shopping-cart"></i> Productos <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                         <ul>

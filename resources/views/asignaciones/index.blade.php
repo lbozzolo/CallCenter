@@ -15,7 +15,7 @@
             <li class="active"><a href="#tab_1" data-toggle="tab">Asignar</a></li>
             @endpermission
             @permission('listado.asignacion')
-            <li><a href="#tab_2" data-toggle="tab"><span class="text-danger">Reasignaciones</span></a></li>
+            <li><a href="#tab_2" data-toggle="tab"><span class="text-danger">Reasignaciones ({!! count($reasignaciones) !!})</span></a></li>
             <li><a href="#tab_3" data-toggle="tab">Asignaciones actuales</a></li>
             <li><a href="#tab_4" data-toggle="tab">Asignaciones históricas</a></li>
             @endpermission

@@ -17,6 +17,7 @@
                     <th>Reasignada a...</th>
                     <th>Dato</th>
                     <th>Motivo</th>
+                    <th>Observaciones</th>
                     <th class="text-right">Seleccionar</th>
                 </tr>
                 </thead>
@@ -32,6 +33,7 @@
                         <td>
                             <span class="label label-default">{!! $asignacion->motivo->motivo !!}</span>
                         </td>
+                        <td>{!! ($asignacion->observaciones)? $asignacion->observaciones : '-' !!}</td>
                         <td>
 
                             @if(isset($datosModificar))

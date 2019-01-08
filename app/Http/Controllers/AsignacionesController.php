@@ -141,11 +141,19 @@ class AsignacionesController extends Controller
         if ($validator->fails())
             return redirect()->back()->withErrors('No se pudo reasignar. El motivo de la reasignación es obligatorio');
 
+        //dd($request->input());
+
         $asignacion = Asignacion::find($id);
         $asignacion->operador_id = $asignacion->supervisor_id;
         $asignacion->supervisor_id = Auth::user()->id;
         $asignacion->motivo_id = $request->motivo_id;
+        $asignacion->observaciones = $request->observaciones;
         $asignacion->save();
+
+        $asignacion->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'reasignar'
+        ]);
 
         return redirect()->back()->with('ok', 'Dato reasignado con éxito');
     }
