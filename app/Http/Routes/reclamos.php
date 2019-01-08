@@ -1,6 +1,6 @@
 <?php
 
-Route::get('reclamos', [
+Route::get('reclamos/{estado?}', [
     'as' => 'reclamos.index',
     'uses' => 'ReclamosController@index',
     'middleware' => 'permission:listado.reclamo'

@@ -6,6 +6,11 @@ Route::get('asignaciones/{datosModificar?}', [
     'middleware' => 'permission:listado.asignacion'
 ]);
 
+Route::post('asignaciones/seleccion-supervisor', [
+    'as' => 'asignaciones.seleccion.supervisor',
+    'uses' => 'AsignacionesController@seleccionSupervisor',
+    //'middleware' => 'permission:crear.asignacion'
+]);
 
 Route::post('asignaciones/seleccion-operador', [
     'as' => 'asignaciones.seleccion.operador',
@@ -39,7 +44,14 @@ Route::get('mis-tareas-anteriores', [
 
 Route::get('asignaciones/{id}/tomar', [
     'as' => 'asignaciones.tomar',
-    'uses' => 'AsignacionesController@tomar',
+    'uses' => 'AsignacionesController@tomarAsignacion',
     'middleware' => 'permission:crear.venta'
 ]);
+
+Route::post('asignaciones/{id}/reasignar', [
+    'as' => 'asignaciones.reasignar',
+    'uses' => 'AsignacionesController@reasignar',
+    //'middleware' => 'permission:crear.venta'
+]);
+
 

@@ -11,7 +11,7 @@
         </div>
         <div class="table-responsive" id="div-table-clientes" style="display: none;">
 
-            {!! Form::open(['url' => route('asignaciones.seleccion.operador'), 'method' => 'post']) !!}
+            {!! Form::open(['url' => route('asignaciones.seleccion.supervisor'), 'method' => 'post']) !!}
 
             <button type="submit" class="btn btn-primary pull-right" style="margin-bottom: 5px">Aceptar datos seleccionados</button>
             <table class="table table-vertical dataTable" id="table-clientes">
@@ -21,7 +21,7 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>DNI</th>
-                    <th>Tipo</th>
+                    <th>Asignado por...</th>
                     <th>Asignado a...</th>
                     <th>Última acción</th>
                     <th class="text-center">Reclamos</th>
@@ -38,23 +38,23 @@
                     <tr>
                     @endif
                         <td>{!! $cliente->id !!}</td>
-                        <td>{!! $cliente->full_name !!}</td>
-                        <td>{!! ($cliente->dni)? $cliente->dni : "<span class='label label-danger'>sin dni</span><i class='fa fa-exclamation-circle'></i>" !!}</td>
                         <td>
-                            @if($cliente->hasVentas())
-                                <label class="label label-success">activo</label>
-                            @else
-                                <label class="label label-warning">pendiente</label>
-                            @endif
+                            {!! $cliente->full_name !!}
                         </td>
+                        <td>{!! ($cliente->dni)? $cliente->dni : "<span class='label label-danger'>sin dni</span><i class='fa fa-exclamation-circle'></i>" !!}</td>
+                        <td>{!! ($cliente->asignacion_actual)? $cliente->asignacion_actual->supervisor->fullname : '<small class="text-muted">sin asignar</small>' !!}</td>
                         <td>{!! ($cliente->asignacion_actual)? $cliente->asignacion_actual->operador->fullname : '<small class="text-muted">sin asignar</small>' !!}</td>
                         <td>{!! ($cliente->ultima_accion)? $cliente->ultima_accion : '--' !!}</td>
                         <td class="text-center">{!! count($cliente->reclamos) !!}</td>
                         <td>
-                            @if(isset($datosModificar))
-                                {!! Form::checkbox('clientes[]', $cliente->id,  (in_array($cliente->id, $datosModificar))? true : false, ['style' => 'font-size: 2em']) !!}
+                            @if($cliente->asignacionActual() && $cliente->asignacionActual()->motivo_id != null)
+                                <em style="color: darkred">a reasignar</em>
                             @else
-                                {!! Form::checkbox('clientes[]', $cliente->id,  false, ['style' => 'font-size: 2em']) !!}
+                                @if(isset($datosModificar))
+                                    {!! Form::checkbox('clientes[]', $cliente->id,  (in_array($cliente->id, $datosModificar))? true : false, ['style' => 'font-size: 2em']) !!}
+                                @else
+                                    {!! Form::checkbox('clientes[]', $cliente->id,  false, ['style' => 'font-size: 2em']) !!}
+                                @endif
                             @endif
                         </td>
                     </tr>

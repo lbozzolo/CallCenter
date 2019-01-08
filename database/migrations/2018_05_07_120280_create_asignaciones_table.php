@@ -20,6 +20,8 @@ class CreateAsignacionesTable extends Migration
             $table->integer('supervisor_id')->unsigned();
             $table->integer('operador_id')->unsigned();
             $table->integer('cliente_id')->unsigned();
+            $table->integer('motivo_id')->unsigned()->nullable();
+            $table->string('observaciones')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
@@ -28,6 +30,7 @@ class CreateAsignacionesTable extends Migration
             $table->index('supervisor_id');
             $table->index('operador_id');
             $table->index('cliente_id');
+            $table->index('motivo_id');
         });
     }
 

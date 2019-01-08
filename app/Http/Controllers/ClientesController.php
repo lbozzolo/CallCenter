@@ -261,13 +261,13 @@ class ClientesController extends Controller
     public function agregarTarjeta(CreateDatosTarjetaRequest $request, $id)
     {
         $cliente = Cliente::find($id);
-        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+
+        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', '01/'.$request->fecha_expiracion)->toDateTimeString() : null;
 
         $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
 
         if(!$validateCreditCard)
             return redirect()->back()->withErrors('Formato de Tarjeta incorrecto');
-
 
         $datosTarjeta = $cliente->datosTarjeta()->create([
             'marca_id' => $request->marca_id,

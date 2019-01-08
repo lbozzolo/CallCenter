@@ -17,7 +17,7 @@ class DatoTarjeta extends Entity
         $tarjeta = $this->numero_tarjeta;
         $encrypted_card_number = substr($tarjeta, 0, 4) . str_repeat('X', strlen($tarjeta) - 8) . substr($tarjeta, -4);
 
-        if(!$user->canDo('ver.datos.de.tarjeta'))
+        if(!$user->canDo('visualizar.numero.tarjeta'))
             return $encrypted_card_number;
 
         return $tarjeta;
@@ -28,7 +28,7 @@ class DatoTarjeta extends Entity
         $user = Auth::user();
         $codigoSeguridad = $this->codigo_seguridad;
 
-        if(!$user->canDo('ver.datos.de.tarjeta'))
+        if(!$user->canDo('visualizar.numero.tarjeta'))
             return 'XXX';
 
         return $codigoSeguridad;
@@ -36,7 +36,7 @@ class DatoTarjeta extends Entity
 
     public function getExpirationDateAttribute()
     {
-        return date("d/m/Y", strtotime($this->fecha_expiracion));
+        return date("m/Y", strtotime($this->fecha_expiracion));
     }
 
     // Relationships

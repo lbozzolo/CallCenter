@@ -305,4 +305,15 @@ return [
         ],
     ],
 
+    'datoTarjeta' => [
+        [
+            'name' => 'Visualizar número de tarjeta',
+            'slug' => 'visualizar.numero.tarjeta',
+            'description' => 'Visualizar número de tarjeta',
+            'model' => 'datoTarjeta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+    ],
+
 ];

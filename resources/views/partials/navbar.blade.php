@@ -7,7 +7,9 @@
                 @if(Auth::check() && Auth::user()->isEnabled())
 
                 @role('superadmin|admin|supervisor|operador.in|operador.out|atencion.al.cliente')
+                    @permission('listado.cliente|listado.venta|listado.reclamo')
                 <li class="label">Menu</li>
+                    @endpermission
                 @endrole
 
 
@@ -87,7 +89,9 @@
                 @endpermission
 
                 @role('superadmin|admin|supervisor|facturacion|auditor|logistica|atencion.al.cliente')
+                    @permission('listado.asigancion|crear.noticia|listado.updateable|listado.facturacion.venta|listado.auditoria.venta|listado.logistica.venta|listado.postventa.venta')
                 <li class="label">Gestion</li>
+                    @endpermission
                 @endrole
 
                 @role('superadmin|admin|supervisor')
@@ -133,8 +137,11 @@
                 @endrole
 
 
-                @permission('listado.producto')
+                @permission('listado.producto|listado.categoria|listado.marca|listado.institucion|listado.forma.de.pago')
                 <li class="label">Seteos</li>
+                @endpermission
+
+                @permission('listado.producto')
 
                     <li>
                         <a class="sidebar-sub-toggle" href="{{ route('productos.index') }}" style="{{ (Request::is('productos'.'*') ? 'color: white' : '') }}"><i class="ti-shopping-cart"></i> Productos <span class="sidebar-collapse-icon ti-angle-down"></span></a>

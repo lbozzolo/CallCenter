@@ -26,10 +26,13 @@ class ReclamosController extends Controller
         $this->clienteRepo = $clienteRepo;
     }
 
-    public function index()
+    public function index($estado = null)
     {
-        $reclamos = Reclamo::with('estado', 'venta', 'venta.cliente')->get();
-         return view('reclamos.index', compact('reclamos'));
+        $estadoReclamo = ($estado)? EstadoReclamo::where('slug', $estado)->first() : EstadoReclamo::where('slug', 'abierto')->first();
+
+        $data['reclamos'] = Reclamo::with('estado', 'venta', 'venta.cliente')->where('estado_id', $estadoReclamo->id)->get();
+
+        return view('reclamos.index')->with($data);
     }
 
     /**

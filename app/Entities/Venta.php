@@ -70,6 +70,12 @@ class Venta extends Entity
         return number_format($this->iva(), 2, ',', '.');
     }
 
+    public function getReclamosAbiertosAttribute()
+    {
+        $reclamoAbierto = EstadoReclamo::where('slug', 'abierto')->first();
+        return $this->reclamos->where('estado_id', $reclamoAbierto->id)->count();
+    }
+
     // Mutators
 
     public function getSumaProductosIVAAttribute()

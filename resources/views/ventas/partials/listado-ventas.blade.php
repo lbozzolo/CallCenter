@@ -46,7 +46,7 @@
                 <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '-' !!}</td>
                 <td class="text-center">
                 @permission('ver.reclamos.venta')
-                    <a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color:cyan">{!! ($venta->reclamos)? $venta->reclamos->count() : '0' !!}</a>
+                    <a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color:cyan">{!! ($venta->reclamos)? $venta->reclamos_abiertos : '0' !!}</a>
                 @endpermission
                 </td>
                 <td>{!! $venta->fecha_creado !!}</td>

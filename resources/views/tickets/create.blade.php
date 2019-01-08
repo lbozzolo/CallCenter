@@ -56,7 +56,7 @@
                             <li class="list-group-item">
                                 <div class="radio">
                                     <label>
-                                        {!! Form::radio('level_id', '1', false) !!}
+                                        {!! Form::radio('level_id', '2', false) !!}
                                         <span class="text-warning">Medio</span>
                                     </label>
                                 </div>
@@ -64,7 +64,7 @@
                             <li class="list-group-item">
                                 <div class="radio">
                                     <label>
-                                        {!! Form::radio('level_id', '1', false) !!}
+                                        {!! Form::radio('level_id', '3', false) !!}
                                         <span class="text-danger">Alto</span>
                                     </label>
                                 </div>

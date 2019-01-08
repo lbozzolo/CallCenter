@@ -342,6 +342,11 @@ class CreateForeignKeys extends Migration
                 ->on('clientes')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
+            $table->foreign('motivo_id')
+                ->references('id')
+                ->on('motivos_reasignaciones')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
         });
         Schema::table('tickets', function(Blueprint $table) {
             $table->foreign('user_id')

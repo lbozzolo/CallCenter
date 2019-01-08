@@ -503,6 +503,7 @@ class VentasController extends Controller
         $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
         $tarjetaYcuotas = null;
 
+        //dd($request->importe);
         // Chequeo que exista el pago en las cuotas seleccionadas con la tarjeta seleccionada
         if($metodoPago->isCardMethod() && $datosTarjeta){
             $formasPago = $datosTarjeta->marca->formasPago->contains(function ($key, $value) use ($request) {

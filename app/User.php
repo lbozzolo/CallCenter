@@ -61,16 +61,14 @@ class User extends Entity implements AuthenticatableContract,
         }
     }
 
-    public function getAsignacionesActualesAttribute()
+    public function misAsignacionesActuales()
     {
         $today = Carbon::now()->toDateString();
 
-        $asignacion = Asignacion::where('operador_id', $this->id)
+        return Asignacion::where('operador_id', $this->id)
             ->whereDate('created_at', 'like', $today)
             ->orderBy('id', 'desc')
             ->get();
-
-        return $asignacion;
     }
 
     public function getTotalAsignacionesActualesAttribute()

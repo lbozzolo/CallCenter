@@ -278,7 +278,9 @@
                                 <td align="center" valign="top">
                                   <table width="210" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                      <td height="45" align="center" valign="middle" style="font-family:'Open Sans', Arial, sans-serif; font-size:17px;color:#feae39; font-weight:bold; text-transform:uppercase;"><a href="{{ route('login') }}" target="_blank" style="text-decoration:none; color:#feae39; line-height:45px; display:block;">Ingrese aqui</a></td>
+                                      <td height="45" align="center" valign="middle" style="font-family:'Open Sans', Arial, sans-serif; font-size:17px;color:#feae39; font-weight:bold; text-transform:uppercase;">
+                                        <a href="{{ route('login') }}" target="_blank" style="text-decoration:none; color:#feae39; line-height:45px; display:block;">Ingrese aqui</a>
+                                      </td>
                                     </tr>
 
                                   </table>

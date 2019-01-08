@@ -49,7 +49,7 @@
                     @empty
 
                         <tr>
-                            <p><span class="text-warning"> Todavía no le han sido asignadas tareas.</span></p>
+                            <p><span class="text-warning"> No hay datos para mostrar.</span></p>
                         </tr>
 
                     @endforelse

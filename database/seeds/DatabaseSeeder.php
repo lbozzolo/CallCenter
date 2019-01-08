@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LocalidadesPartidosProvinciasSeeder::class);
         $this->call(TicketsLevelsTableSeeder::class);
         $this->call(EstadosTicketsSeeder::class);
+        $this->call(MotivosReasignacionesSeeder::class);
 
         Model::reguard();
     }

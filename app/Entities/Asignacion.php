@@ -4,8 +4,6 @@ namespace SmartLine\Entities;
 
 use SmartLine\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use SmartLine\Entities\Cliente;
-use Carbon\Carbon;
 
 class Asignacion extends Entity
 {
@@ -30,6 +28,11 @@ class Asignacion extends Entity
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
+    }
+
+    public function motivo()
+    {
+        return $this->belongsTo(MotivoReasignacion::class);
     }
 
     public function updateable()

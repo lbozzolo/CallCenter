@@ -148,7 +148,9 @@
         $( window ).load(function() {
 
             $('.datepicker').datepicker({
-                format: 'd/mm/yyyy'
+                format: "mm/yyyy",
+                viewMode: "months",
+                minViewMode: "months"
             });
 
             $( '#provincia' ).change(function( event ) {

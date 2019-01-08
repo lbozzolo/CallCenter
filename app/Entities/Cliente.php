@@ -27,7 +27,8 @@ class Cliente extends Entity
 
     public function getFullNameAttribute()
     {
-        return $this->nombre.' '.$this->apellido;
+        $fullname = (!$this->nombre || !$this->apellido && $this->nombre_completo)? $this->nombre_completo : $this->nombre.' '.$this->apellido;
+        return $fullname;
     }
 
     public function getReclamosAttribute()
@@ -79,6 +80,18 @@ class Cliente extends Entity
         $operador = ($asignacion)? $asignacion->operador->fullname : '--';
 
         return $operador;
+    }
+
+    public function asignacionActual()
+    {
+        $today = Carbon::now()->toDateString();
+
+        $asignacion = Asignacion::where('cliente_id', $this->id)
+            ->whereDate('created_at', 'like', $today)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        return $asignacion;
     }
 
     public function getAsignacionActualAttribute()

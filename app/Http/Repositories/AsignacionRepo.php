@@ -26,7 +26,15 @@ class AsignacionRepo extends BaseRepo
             ->get();
     }
 
-    public function arrayToEloquent($clientes = [])
+    public function reasignaciones()
+    {
+        return Asignacion::whereDate('created_at', 'like', $this->today)
+            ->has('motivo')
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
+    public function arrayToCollection($clientes = [])
     {
         $datos = collect();
         foreach($clientes as $key => $value){

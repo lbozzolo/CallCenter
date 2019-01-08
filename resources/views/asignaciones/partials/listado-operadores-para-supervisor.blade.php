@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a href="{!! route('asignaciones.index') !!}" class="btn btn-sm btn-default">Cancelar asignación</a>
+        <a href="{!! route('asignaciones.mis.tareas') !!}" class="btn btn-sm btn-default">Cancelar asignación</a>
     </div>
     <div class="card-body">
 
@@ -123,12 +123,12 @@
                     <div class="card-header">
 
 
-                        {!! Form::open(['url' => route('asignaciones.index'), 'method' => 'get']) !!}
+                        {!! Form::open(['url' => route('asignaciones.mis.tareas'), 'method' => 'get']) !!}
                         @foreach($datosModificar as $value)
                             {!! Form::hidden('datosModificar[]', $value) !!}
                         @endforeach
 
-                            <button type="submit" class="btn btn-sm btn-warning pull-right">modificar</button>
+                        <button type="submit" class="btn btn-sm btn-warning pull-right">modificar</button>
 
                         {!! Form::close() !!}
 

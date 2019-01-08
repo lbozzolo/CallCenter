@@ -56,11 +56,26 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6 col-md-12">
+            <h3>Reclamos abiertos</h3>
             <ul>
             @foreach($venta->reclamos as $reclamo)
 
+                @if($reclamo->estado_id == 1)
                 <li>@include('ventas.partials.reclamo')</li>
+                @endif
+
+            @endforeach
+            </ul>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <h3>Reclamos cerrados</h3>
+            <ul>
+            @foreach($venta->reclamos as $reclamo)
+
+                @if($reclamo->estado_id == 2)
+                    <li>@include('ventas.partials.reclamo')</li>
+                @endif
 
             @endforeach
             </ul>

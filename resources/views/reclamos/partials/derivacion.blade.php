@@ -17,13 +17,7 @@
 
             <tr>
                 <td>{!! $user->id !!}</td>
-                <td>
-                    @permission('ver.usuario')
-                    <a href="{{ route('users.profile', $user->id) }}">{!! $user->full_name !!}</a>
-                    @elsepermission
-                    {!! $user->full_name !!}
-                    @endpermission
-                </td>
+                <td>{!! $user->full_name !!}</td>
                 <td class="text-center">
                     @include('users.partials.labels-roles')
                 </td>

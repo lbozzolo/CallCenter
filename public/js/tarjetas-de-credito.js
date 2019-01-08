@@ -1,6 +1,8 @@
 $('.select2').select2();
 $('.datepicker').datepicker({
-    format: 'd/mm/yyyy'
+    format: "mm/yyyy",
+    viewMode: "months",
+    minViewMode: "months"
 });
 
 if($('#metodoPago option:selected').html() === 'Tarjeta de crédito'){

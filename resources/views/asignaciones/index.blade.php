@@ -15,8 +15,9 @@
             <li class="active"><a href="#tab_1" data-toggle="tab">Asignar</a></li>
             @endpermission
             @permission('listado.asignacion')
-            <li><a href="#tab_2" data-toggle="tab">Asignaciones actuales</a></li>
-            <li><a href="#tab_3" data-toggle="tab">Asignaciones históricas</a></li>
+            <li><a href="#tab_2" data-toggle="tab"><span class="text-danger">Reasignaciones</span></a></li>
+            <li><a href="#tab_3" data-toggle="tab">Asignaciones actuales</a></li>
+            <li><a href="#tab_4" data-toggle="tab">Asignaciones históricas</a></li>
             @endpermission
         </ul>
         <div class="tab-content">
@@ -38,10 +39,15 @@
             @permission('listado.asignacion')
             <div class="tab-pane card" id="tab_2" style="margin-top: 0px">
 
-                @include('asignaciones.partials.listado-asignaciones-actuales')
+                @include('asignaciones.partials.listado-reasignaciones')
 
             </div>
             <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
+
+                @include('asignaciones.partials.listado-asignaciones-actuales')
+
+            </div>
+            <div class="tab-pane card" id="tab_4" style="margin-top: 0px">
 
                 @include('asignaciones.partials.listado-historico')
 
