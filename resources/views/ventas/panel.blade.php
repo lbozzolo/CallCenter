@@ -20,6 +20,9 @@
 
 
         @include('ventas.partials.navbar-panel')
+        @include('ventas.partials.panel-venta')
+
+
 
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -90,6 +93,10 @@
     <script src="{{ asset('js/agregar-metodo-pago.js') }}"></script>
 
     <script>
+
+        $('.select2').select2({
+            multiple: true
+        });
 
         $(document).ready(function() {
             $('#table-productos').DataTable({

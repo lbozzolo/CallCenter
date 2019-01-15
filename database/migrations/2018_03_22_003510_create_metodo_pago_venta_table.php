@@ -21,6 +21,7 @@ class CreateMetodoPagoVentaTable extends Migration
             $table->integer('metodopago_id')->unsigned()->nullable();
             $table->integer('datostarjeta_id')->unsigned()->nullable();
             $table->integer('formadepago_id')->unsigned()->nullable();
+            $table->integer('numero_de_cuotas')->nullable();
             $table->string('importe');
 
             $table->index('id');

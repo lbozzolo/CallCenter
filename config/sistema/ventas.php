@@ -2,6 +2,15 @@
 
 return [
 
+    'gastosEnvio' => 220,
+
+    'intereses' => [
+        '1' => 0,
+        '3' => 5,
+        '6' => 8,
+        '9' => 10
+    ],
+
     'estados' => [
         'iniciada' => 'iniciadas',
         'cancelada' => 'cancelada',

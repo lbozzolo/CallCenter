@@ -13,6 +13,46 @@ class Venta extends Entity
     protected $fillable = ['user_id', 'cliente_id', 'producto_id', 'estado_id', 'metodo_pago_id', 'forma_pago_id', 'observaciones', 'etapa_id', 'promocion_id', 'created_at', 'updated_at'];
     protected $dates = ['deleted_at'];
 
+    // Nuevas funciones
+
+    protected function total($numero_cuotas = 1)
+    {
+        return $this->subtotalProducts($numero_cuotas) + $this->gastosEnvio($numero_cuotas) - $this->ajuste;
+        //return $this->sumaTotalProductos() + $this->gastosEnvio($numero_cuotas) - $this->ajuste;
+    }
+
+    public function totalPorCuotas($numero_cuotas = 1)
+    {
+        return number_format($this->total($numero_cuotas), 2, ',', '.');
+    }
+
+    protected function subtotalProducts($cuotas)
+    {
+        $interes = $this->sumaSubtotalProductos() * config('sistema.ventas.intereses.'.$cuotas) / 100;
+        return $this->sumaSubtotalProductos() + $interes;
+    }
+
+    public function subtotalProductos($cuotas)
+    {
+        return number_format($this->subtotalProducts($cuotas), 2, ',', '.');
+    }
+
+    protected function gastosEnvio($numero_cuotas)
+    {
+        $gastosEnvio = config('sistema.ventas.gastosEnvio');
+        $interes = config('sistema.ventas.intereses.'.$numero_cuotas);
+        $porcentaje = $interes * $gastosEnvio / 100;
+        return $gastosEnvio + $porcentaje;
+    }
+
+    public function gastosEnvioMasInteres($numero_cuotas = 1)
+    {
+        return number_format($this->gastosEnvio($numero_cuotas), 2, ',', '.');
+        //return $gastosEnvio + $porcentaje;
+    }
+
+
+    // Viejas funciones
 
     protected function subtotal()
     {
@@ -47,7 +87,8 @@ class Venta extends Entity
 
     protected function sumaTotalProductos()
     {
-        return $this->sumaSubtotalProductos() + $this->sumaProductosIVA();
+        //return $this->sumaSubtotalProductos() + $this->sumaProductosIVA();
+        return $this->sumaSubtotalProductos();
     }
 
     protected function diferencia()
@@ -60,10 +101,10 @@ class Venta extends Entity
         return ($this->sumaTotalProductos() > $this->total())? $this->sumaTotalProductos() - $this->total() : $this->total() - $this->sumaTotalProductos();
     }
 
-    public function total()
-    {
-        return $this->subtotal() - $this->ajuste;
-    }
+//    public function total()
+//    {
+//        return $this->subtotal() - $this->ajuste;
+//    }
 
     public function getIVAAttribute()
     {

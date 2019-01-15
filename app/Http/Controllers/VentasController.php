@@ -4,6 +4,7 @@ namespace SmartLine\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
@@ -12,6 +13,7 @@ use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\EstadoCliente;
+use SmartLine\Entities\ProductoVenta;
 use SmartLine\Entities\Provincia;
 use SmartLine\Entities\Partido;
 use SmartLine\Entities\Localidad;
@@ -119,6 +121,11 @@ class VentasController extends Controller
         $data['localidades'] = Localidad::lists('localidad', 'id', 'codProvincia');
         $data['productos'] = Producto::where('estado_id', $productoActivo->id)->get();
 
+        $data['productosVenta'] = $data['venta']->productos->groupBy('id');
+        foreach($data['productosVenta'] as $item){
+
+        }
+
         $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
@@ -137,21 +144,52 @@ class VentasController extends Controller
             }
         }
 
+        $data['products'] = Producto::lists('nombre', 'id');
+        //dd($data['productosVenta']);
+
         return view('ventas.panel')->with($data);
     }
 
     public function agregarProducto(Request $request)
     {
-        $producto = Producto::find($request->producto_id);
-        $venta = Venta::find($request->venta_id);
-        $venta->productos()->attach($producto);
+        //dd($request->all());
+//        if(!$request->cantidad)
+//            return redirect()->back()->withErrors('Ingrese la cantidad de productos');
 
-        $venta->updateable()->create([
-            'user_id' => Auth::user()->id,
-            'action' => 'add',
-            'related_model_id' => $producto->id,
-            'related_model_type' => 'producto'
-        ]);
+        $venta = Venta::find($request->venta_id);
+
+        if(is_array($request->producto_id)){
+
+            foreach($request->producto_id as $key => $value){
+
+                $producto = Producto::find($value);
+
+                for($i = 1; $i <= $request->cantidad; $i++){
+                    $venta->productos()->attach($producto);
+                    $venta->updateable()->create([
+                        'user_id' => Auth::user()->id,
+                        'action' => 'add',
+                        'related_model_id' => $producto->id,
+                        'related_model_type' => 'producto'
+                    ]);
+                }
+            }
+
+        } else {
+
+            $producto = Producto::find($request->producto_id);
+
+            for($i = 1; $i <= $request->cantidad; $i++){
+                $venta->productos()->attach($producto);
+                $venta->updateable()->create([
+                    'user_id' => Auth::user()->id,
+                    'action' => 'add',
+                    'related_model_id' => $producto->id,
+                    'related_model_type' => 'producto'
+                ]);
+            }
+
+        }
 
         return redirect()->back()->with('Producto agregado con éxito');
     }
@@ -159,6 +197,24 @@ class VentasController extends Controller
     public function quitarProducto(Request $request)
     {
         $venta = Venta::find($request->venta_id);
+
+        $producto = ProductoVenta::where('venta_id', $venta->id)->where('producto_id', $request->producto_id)->first();
+        $producto->delete();
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete',
+            'related_model_id' => $request->producto_id,
+            'related_model_type' => 'producto',
+        ]);
+
+        return redirect()->back()->with('Producto quitado de la venta con éxito');
+    }
+
+    public function quitarProductos(Request $request)
+    {
+        $venta = Venta::find($request->venta_id);
+
         $producto = Producto::find($request->producto_id);
         $venta->productos()->detach($producto);
 
@@ -169,7 +225,13 @@ class VentasController extends Controller
             'related_model_type' => 'producto',
         ]);
 
-        return redirect()->back()->with('Producto quitado de la venta con éxita');
+        return redirect()->back()->with('Producto quitado de la venta con éxito');
+    }
+
+    public function seleccionarPlanCuotas(Request $request)
+    {
+        $venta = Venta::find($request->venta_id);
+        
     }
 
     public function numeroGuia(Request $request, $id)

@@ -85,6 +85,18 @@ Route::delete('ventas/quitar-producto', [
     'middleware' => 'permission:quitar.producto.venta'
 ]);
 
+Route::delete('ventas/quitar-productos', [
+    'as' => 'ventas.quitar.productos',
+    'uses' => 'VentasController@quitarProductos',
+    'middleware' => 'permission:quitar.producto.venta'
+]);
+
+Route::post('ventas/seleccionar-plan-de-pago', [
+    'as' => 'ventas.seleccionar.plan.cuotas',
+    'uses' => 'VentasController@seleccionarPlanCuotas',
+    'middleware' => 'permission:crear.venta'
+]);
+
 Route::put('ventas/{id}/editar-modos', [
     'as' => 'ventas.editar.modos',
     'uses' => 'VentasController@editarModos',

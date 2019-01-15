@@ -16,6 +16,27 @@ class Producto extends Entity
     protected $fillable = ['nombre', 'descripcion', 'fecha_inicio', 'fecha_finalizacion', 'estado_id', 'unidad_medida_id', 'cantidad_medida', 'stock', 'alerta_stock', 'categoria_id', 'precio', 'marca_id', 'referencia', 'institucion_id', 'etapa_id', 'prospecto', 'created_at', 'updated_at'];
     protected $dates = ['deleted_at'];
 
+    protected function priceInterestFee($cuotas = 1)
+    {
+        $interes = $this->precio * config('sistema.ventas.intereses.'.$cuotas) / 100;
+        return $this->precio + $interes;
+    }
+
+    public function precioMasInteresCuota($numero_cuotas = 1, $cantidad_productos = 1)
+    {
+        $total = $this->priceInterestFee($numero_cuotas) * $cantidad_productos;
+        return number_format($total, 2, ',', '.');
+    }
+
+    protected function priceByFee($cuotas = 1)
+    {
+        return $this->priceInterestFee($cuotas) / $cuotas;
+    }
+
+    public function precioPorCuota($cuotas = 1)
+    {
+        return number_format($this->priceByFee($cuotas), 2, ',', '.');
+    }
 
     public function getReclamosAttribute()
     {
