@@ -82,6 +82,10 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
+        Auth::user()->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'login'
+        ]);
         return route('/');
     }
 
@@ -92,6 +96,18 @@ class AuthController extends Controller
             'password' => $request->get('password'),
             //'estado_id' => '1' //Usuario habilitado
         ];
+    }
+
+    public function getLogout()
+    {
+        Auth::user()->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'logout'
+        ]);
+
+        Auth::logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 
 
