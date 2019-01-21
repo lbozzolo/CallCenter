@@ -29,7 +29,7 @@ class CreateVentasTable extends Migration
             $table->softDeletes();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at');
 
             $table->index('id');
             $table->index('user_id');
