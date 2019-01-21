@@ -8,7 +8,7 @@
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="form-group">
                     {!! Form::label('metodo_pago', 'Método de pago') !!}
-                    {!! Form::select('metodo_pago', $metodosPago, null, ['class' => 'form-control select2b', 'id' => 'selectMetodo']) !!}
+                    {!! Form::select('metodo_pago', $metodosPago, null, ['class' => 'form-control select2b', 'placeholder' => '', 'id' => 'selectMetodo']) !!}
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" id="selectTarjetaCredito" style="display: none">
@@ -51,8 +51,10 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" id="selectCuotas" style="display:none">
                 <div class="form-group">
-                    {!! Form::label('cuotas', 'Cuotas') !!}
-                    {!! Form::select('cuotas', [1 => '1', 2=> '2', 3 => '3', 6 => '6', 12 => '12', 18 => '18', 24 => '24', 36 => '36', 48 => '48', 50 => '50'], null, ['class' => 'form-control select2b', 'id' => 'cuotas']) !!}
+
+                    {!! Form::label('cuotas', 'Plan') !!}
+                    <p class="bg-warning" style="padding: 7px 10px" id="plan-de-cuotas">{!! ($venta->plan_cuotas)? $venta->plan_cuotas.' CUOTA(S)' : 'Seleccione Plan' !!}</p>
+                    {{--{!! Form::select('cuotas', [1 => '1', 2=> '2', 3 => '3', 6 => '6', 12 => '12', 18 => '18', 24 => '24', 36 => '36', 48 => '48', 50 => '50'], null, ['class' => 'form-control select2b', 'id' => 'cuotas']) !!}--}}
                 </div>
             </div>
 

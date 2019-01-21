@@ -33,6 +33,8 @@
                         <label class="label label-success">{!! $cliente->estado->nombre !!}</label>
                     @elseif($cliente->estado->slug == 'frecuente')
                         <label class="label label-default">{!! $cliente->estado->nombre !!}</label>
+                    @elseif($cliente->estado->slug == 'deshabilitado')
+                        <label class="label label-danger">{!! $cliente->estado->nombre !!}</label>
                     @endif
                 </td>
                 <td class="text-center">

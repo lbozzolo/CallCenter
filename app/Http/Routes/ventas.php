@@ -136,7 +136,7 @@ Route::put('ventas/{id}/actualizar', [
 Route::put('ventas/{id}/cambiar-estado', [
     'as' => 'ventas.update.status',
     'uses' => 'VentasController@updateStatus',
-    'middleware' => 'permission:editar.venta'
+    'middleware' => 'permission:cambiar.estado.venta'
 ]);
 
 Route::post('ventas/{id}/agregar-metodo-de-pago', [

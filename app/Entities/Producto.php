@@ -58,6 +58,11 @@ class Producto extends Entity
         return Carbon::parse($this->fecha_finalizacion)->format('d/m/Y');
     }
 
+    public function getNombrePrecioAttribute()
+    {
+        return $this->nombre.' ($'.$this->precio.')';
+    }
+
     //Relationships
 
     public function estado()

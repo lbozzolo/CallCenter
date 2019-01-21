@@ -91,6 +91,7 @@ return [
             'created_at' => date_create(),
             'updated_at' => date_create()
         ],
+
         // Nuevos permisos
 
         [
@@ -129,6 +130,22 @@ return [
             'name' => 'Quitar método pago venta',
             'slug' => 'quitar.metodo.pago.venta',
             'description' => 'Quitar un método de pago de una venta',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Cambiar estado de venta',
+            'slug' => 'cambiar.estado.venta',
+            'description' => 'Cambiar el estado de una venta',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Editar número de guía',
+            'slug' => 'editar.numero.guia',
+            'description' => 'Editar el número de guía',
             'model' => 'venta',
             'created_at' => date_create(),
             'updated_at' => date_create()

@@ -24,10 +24,12 @@ class CreateVentasTable extends Migration
             $table->string('numero_guia');
             $table->integer('etapa_id')->unsigned()->nullable();
             $table->integer('promocion_id')->unsigned()->nullable();
+            $table->integer('plan_cuotas')->nullable();
             $table->float('ajuste');
             $table->softDeletes();
 
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->index('id');
             $table->index('user_id');

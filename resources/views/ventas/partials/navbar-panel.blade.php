@@ -9,122 +9,11 @@
                     </button>
                 </li>
                 @permission('aceptar.venta')
+                @if($venta->statusIs('iniciada'))
                 <li>
-                    <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#aceptarVenta">
-                        <i class="fa fa-check text-success"></i>
-                        Aceptar venta
-                    </button>
-                    <div class="modal fade col-lg-4 col-lg-offset-4" id="aceptarVenta">
-                        <div class="card">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Aceptar venta</h4>
-                            </div>
-
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <p class="lead">Cliente: {!! $venta->cliente->fullname !!}</p>
-                                        <p class="panel panel-barra">Productos</p>
-                                        <ul class="list-unstyled listado">
-                                            @forelse($venta->productos as $producto)
-                                                <li class="list-group-item" style="background-color: gray">{!! $producto->nombre !!}, {!! $producto->marca->nombre !!}</li>
-                                            @empty
-                                                <li class="list-group-item">No hay ningún producto cargado</li>
-                                            @endforelse
-                                        </ul>
-                                        <p class="panel panel-barra">Métodos de pago</p>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-condensed">
-                                                <tbody>
-                                                @forelse($venta->metodoPagoVenta as $metodoPago)
-                                                    <tr>
-                                                        <td>{!! $metodoPago->metodoPago->nombre !!}</td>
-                                                        <td>${!! $metodoPago->importe_mas_promocion !!}</td>
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td>No hay ningún método de pago seleccionado aún.</td>
-                                                    </tr>
-                                                @endforelse
-                                                </tbody>
-                                                <tfooter>
-                                                    <tr>
-                                                        <td>Importe total + IVA (21%)</td>
-                                                        <td>${!! $venta->importe_total !!}</td>
-                                                    </tr>
-                                                </tfooter>
-                                            </table>
-                                        </div>
-                                        <p class="panel panel-barra">Importe</p>
-                                        <ul class="list-unstyled listado">
-                                            <li class="list-group-item">
-                                                Importe productos:
-                                                <span class="pull-right">${!! $venta->suma_subtotal_productos !!}</span>
-                                            </li>
-                                            <li class="list-group-item">
-                                                IVA (21%)
-                                                <span class="pull-right">${!! $venta->suma_productos_iva !!}</span>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Total productos:
-                                                <span class="pull-right">${!! $venta->suma_total_productos !!}</span>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Total métodos de pago:
-                                                <span class="pull-right">${!! $venta->importe_total !!}</span>
-                                            </li>
-                                        </ul>
-
-
-                                    </div>
-                                </div>
-
-                            <div class="modal-footer">
-                            {!! Form::open(['url' => route('ventas.aceptar'), 'method' => 'put']) !!}
-
-                                @if($venta->diferencia_con_ajuste > 0)
-
-                                    <div class="form-group text-left">
-                                        <i class="fa fa-exclamation-triangle text-warning"></i>
-                                        <span class="lead text-danger">ATENCIÓN. La suma de los métodos de pago es inferior al importe total de la venta.</span><br>
-                                        <span>La diferencia es de ${!! $venta->diferencia_con_ajuste !!}</span>
-                                    </div>
-                                    <div class="form-group text-left">
-                                        <span class="text-warning">¿Desea aceptar esta venta de todos modos?</span>
-                                    </div>
-                                    <button type="submit" class="btn btn-warning pull-left">Aceptar de todos modos</button>
-
-                                @elseif($venta->diferencia_con_ajuste < 0)
-
-
-                                    <div class="form-group text-left">
-                                        <i class="fa fa-exclamation-triangle"></i>
-                                        <span class="lead text-danger">ATENCIÓN. La suma de los métodos de pago es superior al importe total de la venta.</span><br>
-                                        <span>La diferencia es de ${!! $venta->diferencia_con_ajuste !!}</span>
-                                    </div>
-                                    <div class="form-group text-left">
-                                        <span class="text-warning">¿Desea aceptar esta venta de todos modos?</span>
-                                    </div>
-                                    <button type="submit" class="btn btn-warning pull-left">Aceptar de todos modos</button>
-
-                                @else
-
-                                    <div class="form-group text-left">
-                                        <span class="text-warning">¿Desea aceptar esta venta?</span>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary pull-left">Aceptar</button>
-
-                                @endif
-
-                                {!! Form::hidden('venta_id', $venta->id) !!}
-                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-
-                            {!! Form::close() !!}
-                                </div>
-                        </div>
-                    </div>
+                    @include('ventas.partials.aceptar-venta')
                 </li>
+                @endif
                 @endpermission
                 @permission('cancelar.venta')
                 <li>
@@ -156,7 +45,7 @@
                 @endpermission
             @endif
             <li>
-                <span class="text-primary" style="font-size: 1.5em">${!! $venta->suma_total_productos !!}</span>
+                <span class="text-primary" style="font-size: 1.5em">${!! $venta->total() !!}</span>
             </li>
         </ul>
     </div>

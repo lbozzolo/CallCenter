@@ -24,6 +24,7 @@ use SmartLine\Entities\Promocion;
 use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\VentaRepo;
 use SmartLine\Http\Repositories\MarcaTarjetaRepo;
+use SmartLine\Http\Repositories\ClienteRepo;
 use SmartLine\Entities\Banco;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use Illuminate\Support\Facades\Validator;
@@ -33,11 +34,13 @@ class VentasController extends Controller
 {
     protected $ventaRepo;
     protected $marcaTarjetaRepo;
+    protected $clienteRepo;
 
-    public function __construct(VentaRepo $ventaRepo, MarcaTarjetaRepo $marcaTarjetaRepo)
+    public function __construct(VentaRepo $ventaRepo, MarcaTarjetaRepo $marcaTarjetaRepo, ClienteRepo $clienteRepo)
     {
         $this->ventaRepo = $ventaRepo;
         $this->marcaTarjetaRepo = $marcaTarjetaRepo;
+        $this->clienteRepo = $clienteRepo;
     }
 
     /**
@@ -62,7 +65,8 @@ class VentasController extends Controller
 
     public function seleccionCliente()
     {
-        $clientes = Cliente::with('estado')->get();
+        $deshabilitado = EstadoCliente::where('slug', 'deshabilitado')->first();
+        $clientes = Cliente::with('estado')->where('estado_id', '!=', $deshabilitado->id)->get();
         $ventas = $this->ventaRepo->getVentasByEstado(null);
         $total = $this->ventaRepo->totalesVentasByEstado();
         $tags = EstadoVenta::lists('nombre', 'slug');
@@ -70,19 +74,22 @@ class VentasController extends Controller
     }
 
 
-    public function seleccionProducto($idCliente)
-    {
-        $cliente = Cliente::find($idCliente);
-
-        if(!$cliente->dni)
-            return redirect()->back()->withErrors('No se puede seleccionar el cliente: '. strtoupper($cliente->fullname).', porque no tiene DNI');
-
-        $total = $this->ventaRepo->totalesVentasByEstado();
-        $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
-        $tags = EstadoVenta::lists('nombre', 'slug');
-
-        return view('ventas.seleccion-producto', compact('productos', 'total', 'cliente', 'tags'));
-    }
+//    public function seleccionProducto($idCliente)
+//    {
+//        $cliente = Cliente::find($idCliente);
+//
+//        if($cliente->isDisabled())
+//            return redirect()->back()->withErrors('No se puede iniciar la venta. El cliente seleccionado se encuentra deshabilitado.');
+//
+//        if(!$cliente->dni)
+//            return redirect()->back()->withErrors('No se puede seleccionar el cliente: '. strtoupper($cliente->fullname).', porque no tiene DNI');
+//
+//        $total = $this->ventaRepo->totalesVentasByEstado();
+//        $productos = Producto::where('estado_id', EstadoProducto::where('slug', 'activo')->first()->id)->get();
+//        $tags = EstadoVenta::lists('nombre', 'slug');
+//
+//        return view('ventas.seleccion-producto', compact('productos', 'total', 'cliente', 'tags'));
+//    }
 
     /**
     * Show the form for creating a new resource.
@@ -93,6 +100,12 @@ class VentasController extends Controller
     {
         $iniciada = EstadoVenta::where('slug', 'iniciada')->first();
         $cliente = Cliente::find($id);
+
+        if($cliente->isDisabled())
+            return redirect()->back()->withErrors('No se puede iniciar la venta. El cliente seleccionado se encuentra deshabilitado.');
+
+        if(!$cliente->dni)
+            return redirect()->back()->withErrors('No se puede seleccionar el cliente: '. strtoupper($cliente->fullname).', porque no tiene DNI');
 
         $venta = Venta::create([
             'user_id' => Auth::user()->id,
@@ -122,13 +135,11 @@ class VentasController extends Controller
         $data['productos'] = Producto::where('estado_id', $productoActivo->id)->get();
 
         $data['productosVenta'] = $data['venta']->productos->groupBy('id');
-        foreach($data['productosVenta'] as $item){
-
-        }
 
         $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
         $data['bancos'] = Banco::lists('nombre', 'id');
-        $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
+        //$data['metodosPago'] = MetodoPago::lists('nombre', 'id');
+        $data['metodosPago'] = MetodoPago::whereIn('slug', ['credito', 'debito', 'transferencia'])->lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['tarjetas'] = ($data['venta']->cliente->datosTarjeta)? $data['venta']->cliente->datosTarjeta : null;
@@ -144,34 +155,31 @@ class VentasController extends Controller
             }
         }
 
-        $data['products'] = Producto::lists('nombre', 'id');
-        //dd($data['productosVenta']);
+        $data['products'] = Producto::all()->lists('nombre_precio', 'id');
 
         return view('ventas.panel')->with($data);
     }
 
     public function agregarProducto(Request $request)
     {
-        //dd($request->all());
-//        if(!$request->cantidad)
-//            return redirect()->back()->withErrors('Ingrese la cantidad de productos');
-
         $venta = Venta::find($request->venta_id);
 
         if(is_array($request->producto_id)){
 
             foreach($request->producto_id as $key => $value){
 
-                $producto = Producto::find($value);
+                if($value){
+                    $producto = Producto::find($value);
 
-                for($i = 1; $i <= $request->cantidad; $i++){
-                    $venta->productos()->attach($producto);
-                    $venta->updateable()->create([
-                        'user_id' => Auth::user()->id,
-                        'action' => 'add',
-                        'related_model_id' => $producto->id,
-                        'related_model_type' => 'producto'
-                    ]);
+                    for($i = 1; $i <= $request->cantidad; $i++){
+                        $venta->productos()->attach($producto);
+                        $venta->updateable()->create([
+                            'user_id' => Auth::user()->id,
+                            'action' => 'add',
+                            'related_model_id' => $producto->id,
+                            'related_model_type' => 'producto'
+                        ]);
+                    }
                 }
             }
 
@@ -231,7 +239,12 @@ class VentasController extends Controller
     public function seleccionarPlanCuotas(Request $request)
     {
         $venta = Venta::find($request->venta_id);
-        
+        $venta->plan_cuotas = ($venta->plan_cuotas != $request->numero_de_cuotas)? $request->numero_de_cuotas : null;
+        $venta->save();
+
+        $this->ventaRepo->quitarAjuste($venta->id);
+
+        return redirect()->back();
     }
 
     public function numeroGuia(Request $request, $id)
@@ -314,6 +327,10 @@ class VentasController extends Controller
     public function aceptar(Request $request)
     {
         $venta = Venta::find($request->venta_id);
+
+        if(!$venta->plan_cuotas)
+            return redirect()->back()->withErrors('No se puede aceptar la venta. Debe seleccionar al menos un plan de cuotas');
+
         $auditable = EstadoVenta::where('slug', 'auditable')->first();
 
         $venta->updateable()->create([
@@ -358,14 +375,20 @@ class VentasController extends Controller
     public function show($id)
     {
         $data['venta'] = Venta::find($id);
-        $data['marcas'] = MarcaTarjeta::all();
+        $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
         $data['bancos'] = Banco::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['tarjetas'] = $data['venta']->cliente->datosTarjeta;
-        $data['productos'] = Producto::all();
+        //$data['productos'] = Producto::all();
+        $data['products'] = Producto::all()->lists('nombre_precio', 'id');
+        $data['productosVenta'] = $data['venta']->productos->groupBy('id');
+        $data['provincias'] = Provincia::lists('provincia', 'id');
+        $data['partidos'] = Partido::lists('partido', 'id', 'codProvincia');
+        $data['localidades'] = Localidad::lists('localidad', 'id', 'codProvincia');
+
 
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
         //$data['tags'] = EstadoVenta::lists('nombre', 'slug');
@@ -482,6 +505,8 @@ class VentasController extends Controller
     {
         $venta = Venta::find($id);
         $estado = EstadoVenta::find($request->estado_id);
+
+
         $estadoAnterior = $venta->estado->slug;
 
         // Redirecciono atrás si el cliente no tiene un barrio en sus datos personales
@@ -517,44 +542,21 @@ class VentasController extends Controller
         $venta->estado_id = $estado->id;
         $venta->save();
 
+        if($venta->statusIs('desconocimiento'))
+            $this->clienteRepo->disable($venta->cliente->id, 'Desconocimiento de venta');
+
         return redirect()->back()->with('El Estado de la venta ha sido actualizado');
     }
 
     public function ajustar(Request $request, $id)
     {
-        $venta = Venta::find($id);
-        $nuevoAjuste = $venta->total() - $request->ajuste;
-
-        $venta->updateable()->create([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'field' => 'ajuste',
-            'former_value' => $venta->ajuste,
-            'updated_value' => $nuevoAjuste
-        ]);
-
-        $venta->ajuste = $nuevoAjuste;
-        $venta->save();
-
+        $this->ventaRepo->ajustar($id, $request->ajuste);
         return redirect()->back()->with('ok', 'Importe de Venta ajustado con éxito');
     }
 
     public function quitarAjuste($id)
     {
-        $venta = Venta::find($id);
-        $nuevoAjuste = 0.00;
-
-        $venta->updateable()->create([
-            'user_id' => Auth::user()->id,
-            'action' => 'delete',
-            'field' => 'ajuste',
-            'former_value' => $venta->ajuste,
-            'updated_value' => $nuevoAjuste
-        ]);
-
-        $venta->ajuste = $nuevoAjuste;
-        $venta->save();
-
+        $this->ventaRepo->quitarAjuste($id);
         return redirect()->back()->with('ok', 'Ajuste de Venta quitado con éxito');
     }
 
@@ -563,20 +565,20 @@ class VentasController extends Controller
         $venta = Venta::find($id);
         $metodoPago = MetodoPago::find($request->metodo_pago);
         $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
+
         $tarjetaYcuotas = null;
 
-        //dd($request->importe);
         // Chequeo que exista el pago en las cuotas seleccionadas con la tarjeta seleccionada
-        if($metodoPago->isCardMethod() && $datosTarjeta){
-            $formasPago = $datosTarjeta->marca->formasPago->contains(function ($key, $value) use ($request) {
-                return $value->cuota_cantidad == $request->cuotas;
-            });
-
-            if(!$formasPago)
-                return redirect()->back()->withErrors('No hay Formas de Pago en '.$request->cuotas.' cuotas para la Tarjeta seleccionada');
-
-            $tarjetaYcuotas = FormaPago::where('marca_tarjeta_id', $datosTarjeta->marca_id)->where('cuota_cantidad', $request->cuotas)->first();
-        }
+//        if($metodoPago->isCardMethod() && $datosTarjeta){
+//            $formasPago = $datosTarjeta->marca->formasPago->contains(function ($key, $value) use ($request) {
+//                return $value->cuota_cantidad == $request->cuotas;
+//            });
+//
+//            if(!$formasPago)
+//                return redirect()->back()->withErrors('No hay Formas de Pago en '.$request->cuotas.' cuotas para la Tarjeta seleccionada');
+//
+//            $tarjetaYcuotas = FormaPago::where('marca_tarjeta_id', $datosTarjeta->marca_id)->where('cuota_cantidad', $request->cuotas)->first();
+//        }
 
         $metodoPagoVenta = MetodoPagoVenta::create([
             'venta_id' => $id,

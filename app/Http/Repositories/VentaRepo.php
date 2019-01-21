@@ -5,6 +5,7 @@ use SmartLine\Entities\Venta;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\VentaCerrada;
 use SmartLine\Entities\VentaCerradaProducto;
+use Illuminate\Support\Facades\Auth;
 
 class VentaRepo extends BaseRepo
 {
@@ -120,7 +121,7 @@ class VentaRepo extends BaseRepo
             'cuit' => $cliente->cuit,
             'cuil' => $cliente->cuil,
             'observaciones' => $venta->observaciones,
-            'importe' => $venta->importe_total
+            'importe' => $venta->totalPorCuotas($venta->plan_cuotas)
         ]);
 
         if($domicilio){
@@ -147,6 +148,44 @@ class VentaRepo extends BaseRepo
                 'institucion' => ($producto->institucion)? $producto->institucion->nombre : null
             ]);
         }
+    }
+
+    public function ajustar($id, $ajuste)
+    {
+        $venta = Venta::find($id);
+        $nuevoAjuste = $venta->total() - $ajuste;
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'ajuste',
+            'former_value' => $venta->ajuste,
+            'updated_value' => $nuevoAjuste
+        ]);
+
+        $venta->ajuste = $nuevoAjuste;
+        $venta->save();
+
+        return $venta;
+    }
+
+    public function quitarAjuste($id)
+    {
+        $venta = Venta::find($id);
+        $nuevoAjuste = 0.00;
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete',
+            'field' => 'ajuste',
+            'former_value' => $venta->ajuste,
+            'updated_value' => $nuevoAjuste
+        ]);
+
+        $venta->ajuste = $nuevoAjuste;
+        $venta->save();
+
+        return $venta;
     }
 
 }

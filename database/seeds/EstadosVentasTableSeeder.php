@@ -22,7 +22,8 @@ class EstadosVentasTableSeeder extends Seeder
             ['nombre' => 'Enviada', 'slug' => 'enviada',],
             ['nombre' => 'Entregado', 'slug' => 'entregado',],
             ['nombre' => 'No entregado', 'slug' => 'noentregado',],
-            ['nombre' => 'Devuelto', 'slug' => 'devuelto',]
+            ['nombre' => 'Devuelto', 'slug' => 'devuelto',],
+            ['nombre' => 'Desconocimiento', 'slug' => 'desconocimiento']
         ]);
     }
 }

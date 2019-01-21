@@ -26,7 +26,7 @@
                         </h3>
                     </div>
                     <div class="col-lg-3 col-md-12 text-right">
-                        <span class="text-primary" style="font-size: 2.5em">${!! $venta->importe_total !!}</span>
+                        <span class="text-primary" style="font-size: 2.5em">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
                         @if($venta->has_cuotas)
                             <div class="text-muted">
                                 {!! $venta->has_cuotas->cuota_cantidad !!} cuotas de <span class=" text-primary">${!! $venta->valor_cuota !!}</span>
@@ -61,6 +61,7 @@
                                 </li>
                                 @endpermission
                             </ul>
+                            @permission('editar.numero.guia')
                             <ul class="panel panel-barra">
                                 <li>
                                     Número de guía:
@@ -91,8 +92,8 @@
                                     </div>
                                     {!! Form::close() !!}
                                 </li>
-
                             </ul>
+                            @endpermission
                         </div>
 
                     </div>
@@ -105,7 +106,7 @@
             <div class="col-lg-6">
                 @permission('editar.venta')
                 <div class="col-12">
-                    <div class="card card-default" style="height: 382px">
+                    <div class="card card-default" >
                         <div class="card-header">
                             <ul class="list-inline">
                                 <li><h3 class="card-title">Estado de la venta</h3></li>
@@ -116,24 +117,60 @@
 
                         </div>
                         <div class="card-body">
-                            <p>Marcar esta venta como...</p>
+                            @if(Auth::user()->is('auditor'))
 
-                            {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
-                            <div class="form-group">
-                                <div class="input-group input-group">
-                                    {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2', 'id' => 'selectEstados']) !!}
-                                    <span class="input-group-btn">
+                                Esta venta se encuentra en estado
+                                <span class="h1 label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>
+
+                            <div class="panel panel-barra">
+                                <ul class="list-inline">
+                                    <li>
+                                        {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                                            {!! Form::hidden('estado_id', 4) !!}
+                                            <button type="submit" class="btn btn-primary">Autorizar</button>
+                                        {!! Form::close() !!}
+                                    </li>
+                                    <li>
+                                        {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                                            {!! Form::hidden('estado_id', 5) !!}
+                                            <button type="submit" class="btn btn-danger">Rechazar</button>
+                                        {!! Form::close() !!}
+                                    </li>
+                                </ul>
+                            </div>
+
+                            @else
+
+                                @permission('cambiar.estado.venta')
+                                <p>Marcar esta venta como...</p>
+
+                                {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                                <div class="form-group">
+                                    <div class="input-group input-group">
+                                        {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2b', 'id' => 'selectEstados']) !!}
+                                        <span class="input-group-btn">
                                         <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
                                     </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('motivo', 'Motivo') !!}
-                                {!! Form::text('motivo', null, ['id' => 'cancelacion', 'class' => 'form-control', 'placeholder' => 'De ser necesario, describa aquí el motivo del cambio de estado']) !!}
-                                <small class="text-warning">* El motivo es obligatorio sólo en el caso de cancelar la venta</small>
-                            </div>
-                            {!! Form::close() !!}
+                                <div class="form-group">
+                                    {!! Form::label('motivo', 'Motivo') !!}
+                                    {!! Form::text('motivo', null, ['id' => 'cancelacion', 'class' => 'form-control', 'placeholder' => 'De ser necesario, describa aquí el motivo del cambio de estado']) !!}
+                                    <small class="text-warning">* El motivo es obligatorio sólo en el caso de cancelar la venta</small>
+                                </div>
+                                {!! Form::close() !!}
 
+                                @elsepermission
+
+                                <p>
+                                    Esta venta se encuentra en estado
+                                    <span class="h1 label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>.
+                                    Usted no tiene los pemisos requeridos para cambiar su estado.
+                                </p>
+
+                                @endpermission
+
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -144,7 +181,7 @@
         <div class="row">
             <div class="col-lg-12">
 
-                @include('ventas.partials.panel-productos')
+                @include('ventas.partials.panel-venta')
 
             </div>
         </div>
@@ -157,6 +194,29 @@
             </div>
         </div>
 
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @permission('editar.venta')
+                <li class="active"><a href="#tab_1" data-toggle="tab">Tarjetas asociadas</a></li>
+                <li><a href="#tab_2" data-toggle="tab">Datos del cliente</a></li>
+                @endpermission
+            </ul>
+            <div class="tab-content">
+
+                <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
+
+                    @include('ventas.partials.panel-tarjetas-asociadas')
+
+                </div>
+                <div class="tab-pane card" id="tab_2" style="margin-top: 0px">
+
+                    @include('ventas.partials.panel-cliente')
+
+                </div>
+
+            </div>
+        </div>
+
     @endif
 
 
@@ -165,11 +225,17 @@
 
 @section('js')
 
+    <script src="{{ asset('js/tarjetas-de-credito.js') }}"></script>
+    <script src="{{ asset('js/provincias-partidos-localidades.js') }}"></script>
     <script src="{{ asset('js/estados-ventas.js') }}"></script>
     <script src="{{ asset('js/agregar-metodo-pago.js') }}"></script>
     <script src="{{ asset('js/edicion-metodo-pago-tarjeta-asociada.js') }}"></script>
 
     <script>
+
+        $('.select2').select2({
+            multiple: true
+        });
 
         $(document).ready(function() {
             $('#table-productos').DataTable({

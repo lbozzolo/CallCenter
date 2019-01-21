@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\ValidateCreditCard;
+use SmartLine\Entities\EstadoCliente;
 
 class ClienteRepo extends BaseRepo
 {
@@ -310,6 +311,33 @@ class ClienteRepo extends BaseRepo
             return $nuevoDomicilio;
 
         }
+    }
+
+    /**
+     * @param $id
+     * @param null $reason
+     * @return mixed
+     */
+
+    public function disable($id, $reason = null)
+    {
+        $cliente = Cliente::find($id);
+
+        $deshabilitado = EstadoCliente::where('slug', 'deshabilitado')->first();
+
+        $cliente->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'estado_id',
+            'former_value' => $cliente->estado->nombre,
+            'updated_value' => $deshabilitado->nombre,
+            'reason' => $reason
+        ]);
+
+        $cliente->estado_id = $deshabilitado->id;
+        $cliente->save();
+
+        return $cliente;
     }
 
 

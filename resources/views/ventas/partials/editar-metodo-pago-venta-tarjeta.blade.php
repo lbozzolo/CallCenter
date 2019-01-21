@@ -10,20 +10,21 @@
     {{--<td>--}}
         {{--{!! Form::text('importe', $metodoPagoVenta->importe, ['class' => 'form-control', 'id' => 'input'.$metodoPagoVenta->id]) !!}--}}
     {{--</td>--}}
-    <td class="text-center">
-        @if($metodoPagoVenta->formaPago)
-            {!! ($metodoPagoVenta->formaPago->interes != 0)? $metodoPagoVenta->formaPago->interes .' %'  : '-' !!}
-        @else
-            -
-        @endif
-    </td>
-    <td class="text-center">
-        @if($metodoPagoVenta->formaPago)
-            {!! ($metodoPagoVenta->formaPago->descuento != 0)? $metodoPagoVenta->formaPago->descuento .' %'  : '-' !!}
-        @else
-            -
-        @endif
-    </td>
+    <td class="text-center">{!! config('sistema.ventas.intereses.'.$venta->plan_cuotas) !!}%</td>
+    {{--<td class="text-center">--}}
+        {{--@if($metodoPagoVenta->formaPago)--}}
+            {{--{!! ($metodoPagoVenta->formaPago->interes != 0)? $metodoPagoVenta->formaPago->interes .' %'  : '-' !!}--}}
+        {{--@else--}}
+            {{-----}}
+        {{--@endif--}}
+    {{--</td>--}}
+    {{--<td class="text-center">--}}
+        {{--@if($metodoPagoVenta->formaPago)--}}
+            {{--{!! ($metodoPagoVenta->formaPago->descuento != 0)? $metodoPagoVenta->formaPago->descuento .' %'  : '-' !!}--}}
+        {{--@else--}}
+            {{-----}}
+        {{--@endif--}}
+    {{--</td>--}}
     {{--<td>${!! $metodoPagoVenta->IVA !!}</td>--}}
     <td class="text-center">
         {!! ($metodoPagoVenta->formaPago)? $metodoPagoVenta->formaPago->cuota_cantidad.' x ' : '-' !!}

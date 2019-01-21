@@ -15,7 +15,7 @@ class Venta extends Entity
 
     // Nuevas funciones
 
-    protected function total($numero_cuotas = 1)
+    public function total($numero_cuotas = 1)
     {
         return $this->subtotalProducts($numero_cuotas) + $this->gastosEnvio($numero_cuotas) - $this->ajuste;
         //return $this->sumaTotalProductos() + $this->gastosEnvio($numero_cuotas) - $this->ajuste;
@@ -26,7 +26,7 @@ class Venta extends Entity
         return number_format($this->total($numero_cuotas), 2, ',', '.');
     }
 
-    protected function subtotalProducts($cuotas)
+    public function subtotalProducts($cuotas)
     {
         $interes = $this->sumaSubtotalProductos() * config('sistema.ventas.intereses.'.$cuotas) / 100;
         return $this->sumaSubtotalProductos() + $interes;
@@ -49,6 +49,38 @@ class Venta extends Entity
     {
         return number_format($this->gastosEnvio($numero_cuotas), 2, ',', '.');
         //return $gastosEnvio + $porcentaje;
+    }
+
+    public function restante($numero_cuotas = 1)
+    {
+        $restante = $this->total($numero_cuotas) - $this->subtotal();
+        return number_format($restante, 2, ',', '.');
+    }
+
+    public function sumaMetodosDePago()
+    {
+        return $this->metodoPagoVenta()->sum('importe');
+    }
+
+    public function getSumaMetodosDePagoAttribute()
+    {
+        $metodosDePagoVenta = $this->metodoPagoVenta()->sum('importe');
+        return number_format($metodosDePagoVenta, 2, ',', '.');
+    }
+
+    public function diferenciaMetodosPagoSumaProductos($numero_cuotas = 1)
+    {
+        return $this->total($numero_cuotas) - $this->sumaMetodosDePago();
+    }
+
+
+    /**
+     * @param string $status
+     * @return bool
+     */
+    public function statusIs($status = '')
+    {
+        return $this->estado->slug == $status;
     }
 
 

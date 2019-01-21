@@ -106,6 +106,15 @@ class Cliente extends Entity
         return $asignacion;
     }
 
+
+    /**
+     * @return bool
+     */
+    public function isDisabled()
+    {
+        return $this->estado->slug == 'deshabilitado';
+    }
+
     //Relationships
     public function estado()
     {
