@@ -132,7 +132,7 @@
 
                 @role('superadmin|admin|supervisor|atencion.al.cliente')
                     @permission('listado.postventa.venta')
-                    <li><a href="{{ route('ventas.post.venta') }}"> <i class="ti-package"></i>Postventa</a></li>
+                    <li><a href="{{ route('ventas.postventa') }}"> <i class="ti-package"></i>Postventa</a></li>
                     @endpermission
                 @endrole
 

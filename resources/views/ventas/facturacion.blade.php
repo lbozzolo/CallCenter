@@ -2,11 +2,13 @@
 
 @section('titulo')
 
-    <h2>Facturación<span class="text-muted"> / Ventas para facturar</span></h2>
+    <h2>Facturación<span class="text-muted"> / Ventas para facturar /</span> {!! $ventas->title !!}</h2>
 
 @endsection
 
 @section('contenido')
+
+    @include('ventas.partials.navbar')
 
     <div class="card card-default">
         <div class="card-body">
@@ -23,6 +25,12 @@
 
     <script src="{{ asset('js/estados-ventas.js') }}"></script>
     <script>
+
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            todayHighLight: true
+        });
 
         $(document).ready(function() {
             $('#table-ventas').DataTable({

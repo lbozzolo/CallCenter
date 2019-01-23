@@ -24,7 +24,7 @@ class VentaRepo extends BaseRepo
         });
 
         $estadoVenta = (EstadoVenta::where('slug', $estado)->first())? EstadoVenta::where('slug', $estado)->first()->nombre : 'todas';
-        $ventas->title = (!$estado)? 'todas' : $estadoVenta;
+        $ventas->title = (!$estado)? 'todas' : $estadoVenta.'s';
 
         return $ventas;
     }
@@ -37,6 +37,7 @@ class VentaRepo extends BaseRepo
         $ventas = $ventas->merge($this->getVentasByEstado('noentregado'));
         $ventas = $ventas->merge($this->getVentasByEstado('devuelto'));
         $ventas = $ventas->merge($this->getVentasByEstado('facturada'));
+        $ventas->title = 'todas';
 
         return $ventas;
     }

@@ -4,11 +4,9 @@ namespace SmartLine\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
-use SmartLine\Entities\FormaPago;
 use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Producto;
 use SmartLine\Entities\EstadoProducto;
@@ -28,6 +26,7 @@ use SmartLine\Http\Repositories\ClienteRepo;
 use SmartLine\Entities\Banco;
 use SmartLine\Http\Requests\CreateDatosTarjetaRequest;
 use Illuminate\Support\Facades\Validator;
+use SmartLine\Http\Requests\SearchVentasByDateRequest;
 use SmartLine\User;
 
 class VentasController extends Controller
@@ -50,11 +49,30 @@ class VentasController extends Controller
      */
     public function index($estado = null)
     {
-        $ventas = $this->ventaRepo->getVentasByEstado($estado);
-        $total = $this->ventaRepo->totalesVentasByEstado();
-        $tags = EstadoVenta::lists('nombre', 'slug');
+        $data['ventas'] = $this->ventaRepo->getVentasByEstado($estado);
+        $data['total'] = $this->ventaRepo->totalesVentasByEstado();
+        $data['tags'] = EstadoVenta::lists('nombre', 'slug');
+        $data['view'] = 'ventas.index';
 
-        return view('ventas.index', compact('ventas', 'total', 'tags'));
+        return view('ventas.index')->with($data);
+    }
+
+    public function buscarEntreFechas(SearchVentasByDateRequest $request)
+    {
+        $desde = Carbon::createFromFormat('d/m/Y', $request->fecha_desde)->toDateTimeString();
+        $hasta = Carbon::createFromFormat('d/m/Y', $request->fecha_hasta)->toDateTimeString();
+        $view = ($request->view)? $request->view : 'ventas.index';
+
+        if($desde > $hasta)
+            return redirect()->back()->withErrors('La segunda fecha debe ser posterior a la primera.');
+
+        $ventas = Venta::where('created_at', '>=', $desde)
+                        ->where('created_at', '<=', $hasta)
+                        ->get();
+
+        $ventas->title = 'Desde el <span class="text-warning">'.$request->fecha_desde.'</span> hasta el <span class="text-warning">'.$request->fecha_hasta.'</span>';
+
+        return view($view, compact('ventas', 'view'));
     }
 
     public function chooseTag(Request $request)
@@ -407,8 +425,9 @@ class VentasController extends Controller
     public function auditoria()
     {
         $ventas = $this->ventaRepo->getVentasByEstado('auditable');
+        $view = 'ventas.auditoria';
 
-        return view('ventas.auditoria', compact('ventas'));
+        return view('ventas.auditoria', compact('ventas', 'view'));
     }
 
     public function postVenta()
@@ -416,22 +435,26 @@ class VentasController extends Controller
         $ventas = $this->ventaRepo->getVentasByEstado('entregado');
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('noentregado'));
         $ventas = $ventas->merge($this->ventaRepo->getVentasByEstado('devuelto'));
+        $ventas->title = 'todas';
+        $view = 'ventas.postventa';
 
-        return view('ventas.post-venta', compact('ventas'));
+        return view('ventas.postventa', compact('ventas', 'view'));
     }
 
     public function facturacion()
     {
         $ventas = $this->ventaRepo->getVentasByEstado('confirmada');
+        $view = 'ventas.facturacion';
 
-        return view('ventas.facturacion', compact('ventas'));
+        return view('ventas.facturacion', compact('ventas', 'view'));
     }
 
     public function logistica()
     {
         $ventas = $this->ventaRepo->getVentasFacturadas();
+        $view = 'ventas.logistica';
 
-        return view('ventas.logistica', compact('ventas'));
+        return view('ventas.logistica', compact('ventas', 'view'));
     }
 
     public function timeline($id)

@@ -25,7 +25,7 @@ Route::get('ventas/auditoria/ver', [
 ]);
 
 Route::get('ventas/post-venta/ver', [
-    'as' => 'ventas.post.venta',
+    'as' => 'ventas.postventa',
     'uses' => 'VentasController@postVenta',
     'middleware' => 'permission:listado.postventa.venta'
 ]);
@@ -197,4 +197,9 @@ Route::delete('ventas/{id}/eliminar', [
     'as' => 'ventas.destroy',
     'uses' => 'VentasController@destroy',
     'middleware' => 'permission:eliminar.venta'
+]);
+
+Route::post('ventas/buscar-entre-fechas', [
+    'as' => 'ventas.buscar.entre.fechas',
+    'uses' => 'VentasController@buscarEntreFechas'
 ]);

@@ -1,37 +1,24 @@
 
-<div class="row">
-    <div class="col-lg-12">
+<div class="panel panel-barra">
 
-        <ul class="nav navbar-nav">
-            <li class="card">
+    @permission('listado.venta')
 
-                @permission('listado.venta')
-                <div class="col-lg-8">
+        {!! Form::open(['url' => route('ventas.buscar.entre.fechas'), 'method' => 'post', 'class' => 'form']) !!}
+        <div class="row">
+            {!! Form::hidden('view', $view) !!}
+            <div class="form-group col-lg-2">
+                {!! Form::text('fecha_desde', null, ['class' => 'form-control small datepicker', 'placeholder' => 'Desde fecha...', 'autocomplete' => 'off']) !!}
+            </div>
+            <div class="form-group col-lg-2">
+                {!! Form::text('fecha_hasta', null, ['class' => 'form-control datepicker', 'placeholder' => 'Hasta fecha...', 'autocomplete' => 'off']) !!}
+            </div>
+            <div class="form-group col-lg-3">
+                <button type="submit" class="btn btn-primary" style="margin-top: 4px">buscar</button>
+                <a href="{{ route($view) }}" style="color: cyan; display: inline-block; padding: 0px 10px; ">ver todas</a>
+            </div>
+        </div>
+        {!! Form::close() !!}
 
-                    {!! Form::open(['url' => route('ventas.choose.tag'), 'method' => 'get']) !!}
-                    <div class="input-group input-group-sm">
-                        {!! Form::select('tag', $tags, null,['class' => 'form-control select2', 'placeholder' => 'Seleccione estado...']) !!}
-                        <span class="input-group-btn">
-                        <button type="submit" class="btn btn-info btn-flat" id="btn_search">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        </span>
-                    </div>
-                    {!! Form::close() !!}
+    @endpermission
 
-                </div>
-                <div class="col-lg-6">
-
-                    <a href="{{ route('ventas.index') }}" class="btn btn-primary btn-sm">ver todas</a>
-                    @permission('crear.venta')
-                    <a href="{{ route('ventas.seleccion.cliente') }}" class="btn btn-default btn-sm"><i class="fa fa-phone-square text-success"></i> Llamar</a>
-                    @endpermission
-
-                </div>
-                @endpermission
-
-            </li>
-        </ul>
-
-    </div>
 </div>

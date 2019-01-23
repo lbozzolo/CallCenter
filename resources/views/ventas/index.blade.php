@@ -8,6 +8,8 @@
 
 @section('contenido')
 
+    @include('ventas.partials.navbar')
+
     <div class="card card-default">
         <div class="card-body">
         @permission('listado.venta')
@@ -23,6 +25,12 @@
 
     <script src="{{ asset('js/estados-ventas.js') }}"></script>
     <script>
+
+        $('.datepicker').datepicker({
+            format: 'd/m/yyyy',
+            language: 'es',
+            todayHighLight: true
+        });
 
         $(document).ready(function() {
             $('#table-ventas').DataTable({
