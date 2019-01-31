@@ -42,7 +42,7 @@ class VentaRepo extends BaseRepo
         return $ventas;
     }
 
-    public function getFacturacion()
+    public function facturacion()
     {
         $ventas = $this->getVentasFacturadas();
         $total = 0;
@@ -52,7 +52,12 @@ class VentaRepo extends BaseRepo
         return $total;
     }
 
-    public function getFacturacionByEstado($estado)
+    public function getFacturacion()
+    {
+        return number_format($this->facturacion(), 0, ',', '.');
+    }
+
+    public function facturacionByEstado($estado)
     {
         $ventas = $this->getVentasByEstado($estado);
         $total = 0;
@@ -60,6 +65,11 @@ class VentaRepo extends BaseRepo
             $total = $total + $venta->total();
         }
         return $total;
+    }
+
+    public function getFacturacionByEstado($estado)
+    {
+        return number_format($this->facturacionByEstado($estado), 0, ',', '.');
     }
 
     public function totalesVentasByEstado()
@@ -110,6 +120,12 @@ class VentaRepo extends BaseRepo
     public function cerrarVenta($id)
     {
         $venta = Venta::with(['cliente', 'cliente.domicilio', 'productos'])->find($id);
+
+        if(count($venta->etapas)){
+            $venta->etapa_id = $venta->etapas()->first()->id;
+            $venta->save();
+        }
+
         $cliente = $venta->cliente;
         $domicilio = $cliente->domicilio;
         $productos = $venta->productos;
@@ -154,7 +170,7 @@ class VentaRepo extends BaseRepo
     public function ajustar($id, $ajuste)
     {
         $venta = Venta::find($id);
-        $nuevoAjuste = $venta->total() - $ajuste;
+        $nuevoAjuste = $venta->total($venta->plan_cuotas) - $ajuste;
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,

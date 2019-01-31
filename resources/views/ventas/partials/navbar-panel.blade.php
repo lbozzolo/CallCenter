@@ -45,7 +45,7 @@
                 @endpermission
             @endif
             <li>
-                <span class="text-primary" style="font-size: 1.5em">${!! $venta->total() !!}</span>
+                <span class="text-primary" style="font-size: 1.5em">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
             </li>
         </ul>
     </div>

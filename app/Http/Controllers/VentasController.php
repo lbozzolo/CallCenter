@@ -4,6 +4,7 @@ namespace SmartLine\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
@@ -180,7 +181,9 @@ class VentasController extends Controller
 
     public function agregarProducto(Request $request)
     {
+
         $venta = Venta::find($request->venta_id);
+        $productos_con_etapas = collect();
 
         if(is_array($request->producto_id)){
 
@@ -198,6 +201,11 @@ class VentasController extends Controller
                             'related_model_type' => 'producto'
                         ]);
                     }
+
+                    if($producto->hasEtapas())
+                        $productos_con_etapas->push($producto);
+
+
                 }
             }
 
@@ -215,9 +223,13 @@ class VentasController extends Controller
                 ]);
             }
 
-        }
+            if($producto->hasEtapas())
+                $productos_con_etapas->push($producto);
 
-        return redirect()->back()->with('Producto agregado con éxito');
+        }
+        $data['productosConEtapas'] = $productos_con_etapas;
+
+        return redirect()->back()->with($data);
     }
 
     public function quitarProducto(Request $request)
@@ -263,6 +275,11 @@ class VentasController extends Controller
         $this->ventaRepo->quitarAjuste($venta->id);
 
         return redirect()->back();
+    }
+
+    public function especificarEtapa(Request $request)
+    {
+        dd($request->all());
     }
 
     public function numeroGuia(Request $request, $id)
@@ -362,7 +379,7 @@ class VentasController extends Controller
         $venta->estado_id = $auditable->id;
         $venta->save();
 
-        return redirect()->route('ventas.panel', $venta->id)->with('La venta ha sido aceptada');
+        return redirect()->route('ventas.show', $venta->id)->with('ok', 'La venta ha sido aceptada correctamente');
     }
 
     public function retomar(Request $request)

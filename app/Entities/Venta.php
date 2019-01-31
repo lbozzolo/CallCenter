@@ -73,7 +73,6 @@ class Venta extends Entity
         return $this->total($numero_cuotas) - $this->sumaMetodosDePago();
     }
 
-
     /**
      * @param string $status
      * @return bool
@@ -128,10 +127,10 @@ class Venta extends Entity
         return $this->sumaSubtotalProductos() - $this->subtotal() / 1.21;
     }
 
-    protected function diferenciaConAjuste()
-    {
-        return ($this->sumaTotalProductos() > $this->total())? $this->sumaTotalProductos() - $this->total() : $this->total() - $this->sumaTotalProductos();
-    }
+//    protected function diferenciaConAjuste()
+//    {
+//        return ($this->sumaTotalProductos() > $this->total())? $this->sumaTotalProductos() - $this->total() : $this->total() - $this->sumaTotalProductos();
+//    }
 
 //    public function total()
 //    {
@@ -186,10 +185,10 @@ class Venta extends Entity
         return $this->diferencia();
     }
 
-    public function getDiferenciaConAjusteAttribute()
-    {
-        return $this->diferenciaConAjuste();
-    }
+//    public function getDiferenciaConAjusteAttribute()
+//    {
+//        return $this->diferenciaConAjuste();
+//    }
 
 
     // Relationships

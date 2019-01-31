@@ -78,8 +78,7 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
-        $bancos = config('sistema.bancos.principales');
-        dd($bancos);
+        dd('Prueba');
 
     
     }

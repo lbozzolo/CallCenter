@@ -38,6 +38,11 @@ class Producto extends Entity
         return number_format($this->priceByFee($cuotas), 2, ',', '.');
     }
 
+    public function hasEtapas()
+    {
+        return $this->etapas->count();
+    }
+
     public function getReclamosAttribute()
     {
         return DB::table('productos')

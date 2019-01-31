@@ -203,3 +203,8 @@ Route::post('ventas/buscar-entre-fechas', [
     'as' => 'ventas.buscar.entre.fechas',
     'uses' => 'VentasController@buscarEntreFechas'
 ]);
+
+Route::post('ventas/especificar-etapa', [
+    'as' => 'ventas.especificar.etapa',
+    'uses' => 'VentasController@especificarEtapa'
+]);

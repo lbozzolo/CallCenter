@@ -81,7 +81,7 @@
             <div class="modal-footer">
                 {!! Form::open(['url' => route('ventas.aceptar'), 'method' => 'put']) !!}
 
-                @if($venta->diferencia_con_ajuste > 0)
+                @if($venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) > 0)
 
                     <div class="form-group text-left">
                         <i class="fa fa-exclamation-triangle text-warning"></i>

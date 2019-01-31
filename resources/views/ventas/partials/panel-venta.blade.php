@@ -6,18 +6,18 @@
                 <h3>Selección de producto(s)</h3>
             </div>
             <div class="card-body">
-                {!! Form::open(['url' => route('ventas.agregar.producto'), 'method' => 'post']) !!}
-                    <div class="row">
-                        <div class="col-lg-6">
+                <div class="row">
+                    {!! Form::open(['url' => route('ventas.agregar.producto'), 'method' => 'post']) !!}
+                        <div class="col-lg-5">
                             {!! Form::hidden('venta_id', $venta->id) !!}
                             {!! Form::select('producto_id[]', $products, null, ['class' => 'form-control select2 select2b', 'placeholder' => '']) !!}
                             {!! Form::hidden('cantidad', 1, ['class' => 'form-control', 'style' => 'height: 30px']) !!}
                         </div>
-                        <div class="col-lg-1">
+                        <div class="col-lg-2">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Agregar producto(s)</button>
                         </div>
-                    </div>
-                {!! Form::close() !!}
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
 
@@ -33,6 +33,7 @@
                         <thead>
                             <tr>
                                 <th>Descripción</th>
+                                <th class="text-center">Etapa</th>
                                 <th>Cantidad</th>
                                 <th>Unidad</th>
                                 <th>Precio u.</th>
@@ -43,6 +44,7 @@
                                 <th></th>
                             </tr>
                             <tr>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -63,6 +65,13 @@
                             @foreach($group->groupBy('id') as $producto)
                                 <tr>
                                     <td>{!! $producto->first()->nombre !!}</td>
+                                    <td class="text-center">
+                                        @if($producto->first()->hasEtapas())
+                                        {!! ($venta->etapa_id)? $venta->etapa_id.'/'. $producto->first()->etapas->count() : '0/'. $producto->first()->etapas->count() !!}
+                                        @else
+                                            NO
+                                        @endif
+                                    </td>
                                     <td>
 
                                         <div class="row">
@@ -90,9 +99,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         {!! $producto->first()->cantidad_medida !!}
-
                                     </td>
                                     <td class="text-right">${!! $producto->first()->precio !!}</td>
                                     {{--Una cuota--}}
@@ -137,7 +145,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="4" class="text-right">Subtotal</td>
+                                <td colspan="5" class="text-right">Subtotal</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->suma_subtotal_productos !!}</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->suma_subtotal_productos !!}</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->subtotalProductos(3) !!}</td>
@@ -149,7 +157,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="text-right">Gastos de envío</td>
+                                <td colspan="5" class="text-right">Gastos de envío</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioMasInteres(1) !!}</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioMasInteres(1) !!}</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->gastosEnvioMasInteres(3) !!}</td>
@@ -161,7 +169,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="text-right">TOTAL</td>
+                                <td colspan="5" class="text-right">TOTAL</td>
                                 <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->totalPorCuotas(1) !!}</td>
                                 <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->totalPorCuotas(3) !!}</td>
                                 <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->totalPorCuotas(6) !!}</td>
@@ -169,7 +177,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td colspan="4"></td>
+                                <td colspan="5"></td>
                                 <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">
                                     {!! Form::open(['url' => route('ventas.seleccionar.plan.cuotas'), 'method' => 'post', 'class' => 'form']) !!}
                                         {!! Form::hidden('venta_id', $venta->id) !!}
