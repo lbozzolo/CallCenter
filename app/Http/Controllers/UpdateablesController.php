@@ -17,9 +17,17 @@ class UpdateablesController extends Controller
         $model = ($data['entidad'] != 'User')? "\SmartLine\Entities\\".$request->entidad : "\SmartLine\\".$request->entidad;
         $query = $model::has('updateable')->with('updateable')->get();
 
-        $data['results'] = $query->map(function ($item) {
-            return $item->updateable;
-        })->first();
+        $data['results'] = collect();
+
+//        $data['results'] = $query->map(function ($item) {
+//            return $item->updateable;
+//        })->first();
+
+        foreach($query as $key => $value){
+            $data['results'][$key] = $value->updateable;
+        }
+
+        $data['results'] = $data['results']->collapse();
 
         if(!$data['results'])
             return redirect()->back()->withErrors('No pudieron encontrarse los datos requeridos');

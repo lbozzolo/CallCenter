@@ -3,8 +3,8 @@
 @section('titulo')
 
     <h2>
-        Movimientos
-        <span class="text-muted"> / {!! $entidad !!}</span>
+        Movimientos /
+        <span class="text-warning">  {!! $entidad !!}</span>
     </h2>
 
 @endsection
