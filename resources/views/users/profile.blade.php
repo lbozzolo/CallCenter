@@ -132,6 +132,69 @@
 
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12">
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <div class="media">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-headphone-alt f-s-22 color-primary border-primary round-widget"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h4>{!! count($user->ventas) !!}</h4>
+                                <h5>Ventas</h5>
+                                <span>Nuevos: 45</span><br>
+                                <span>Frecuentes: 65</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <div class="media">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-money f-s-22 color-primary border-success round-widget"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h4>${!! $user->importe_total_ventas !!}</h4>
+                                <h5>Total vendido</h5>
+                                <span>Nuevos: 45</span><br>
+                                <span>Frecuentes: 65</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <div class="media">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-headphone-alt f-s-22 color-primary border-warning round-widget"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h4>7</h4>
+                                <h5>Ventas</h5>
+                                <span>Nuevos: 45</span><br>
+                                <span>Frecuentes: 65</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card">
+                        <div class="media">
+                            <div class="media-left meida media-middle">
+                                <span><i class="ti-money f-s-22 color-primary border-danger round-widget"></i></span>
+                            </div>
+                            <div class="media-body media-text-right">
+                                <h4>${!! $user->importe_total_ventas_facturadas_no_desconocidas_ni_devueltas !!}</h4>
+                                <h5>Ventas cobradas</h5>
+                                <span>Nuevos: 45</span><br>
+                                <span>Frecuentes: 65</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h3>Mis ventas</h3>
@@ -188,7 +251,7 @@
                                     </td>
                                     <td>{!! $venta->fecha_creado !!}</td>
                                     <td class="text-right">
-                                        <span class="text-primary" style="font-size: 1.1em">${!! $venta->importe_total !!}</span>
+                                        <span class="text-primary" style="font-size: 1.1em">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
                                     </td>
                                     <td class="text-center">
                                         @permission('ver.venta')

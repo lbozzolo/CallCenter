@@ -7,6 +7,7 @@ use Bican\Roles\Models\Permission;
 use SmartLine\Entities\Asignacion;
 use SmartLine\Entities\EstadoUser;
 use Illuminate\Auth\Authenticatable;
+use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Noticia;
 use SmartLine\Entities\Ticket;
 use SmartLine\Entities\Venta;
@@ -103,6 +104,46 @@ class User extends Entity implements AuthenticatableContract,
             ->whereDate('created_at', '!=', $today)
             ->orderBy('id', 'desc')
             ->get();
+    }
+
+    protected function importeTotalVentas()
+    {
+        $total = collect();
+
+        foreach ($this->ventas as $venta) {
+            $total->push( $venta->totalPorCuotas($venta->plan_cuotas));
+        }
+
+        return $total->sum();
+    }
+
+    public function getImporteTotalVentasAttribute()
+    {
+        return $this->importeTotalVentas();
+    }
+
+    protected function importeTotalVentasFacturadasNoDesconocidasNiDevueltas()
+    {
+        $total = collect();
+        $devuelta = EstadoVenta::where('slug', 'devuelto')->first();
+        $desconocida = EstadoVenta::where('slug', 'desconocimiento')->first();
+
+        $ventas = Venta::where('user_id', $this->id)
+                        ->where('estado_id', '!=', $devuelta->id)
+                        ->where('estado_id', '!=', $desconocida->id)
+                        ->get();
+
+        foreach ($ventas as $venta) {
+            $total->push( $venta->totalPorCuotas($venta->plan_cuotas));
+        }
+
+        return $total->sum();
+
+    }
+
+    public function getImporteTotalVentasFacturadasNoDesconocidasNiDevueltasAttribute()
+    {
+        return $this->importeTotalVentasFacturadasNoDesconocidasNiDevueltas();
     }
 
     public function getRolesIdsAttribute()
