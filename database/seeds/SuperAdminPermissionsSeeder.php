@@ -14,12 +14,16 @@ class SuperAdminPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        $superadmin = Role::where('slug', '=', 'superadmin')->first();
+        //$superadmin = Role::where('slug', '=', 'superadmin')->first();
+
+        $roles = Role::all();
         $permissions = Permission::all();
 
-        foreach($permissions as $permission){
-            DB::table('permission_role')->insert(['permission_id' => $permission->id, 'role_id' => $superadmin->id]);
+        foreach($roles as $role){
+            foreach($permissions as $permission){
+                DB::table('permission_role')->insert(['permission_id' => $permission->id, 'role_id' => $role->id]);
+            }
         }
-
+        
     }
 }
