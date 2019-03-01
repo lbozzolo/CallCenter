@@ -94,7 +94,7 @@
                     @endpermission
                 @endrole
 
-                @role('superadmin|admin')
+                @role('superadmin|admin|supervisor')
                     @permission('listado.asignacion')
                     <li><a href="{{ route('asignaciones.index') }}"><i class="ti-signal"></i> Asignación de Tareas </a></li>
                     @endpermission

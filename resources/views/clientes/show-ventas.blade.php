@@ -60,7 +60,7 @@
 
                     <div class="form-group">
                         <div class="input-group input-group">
-                            {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2']) !!}
+                            {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2b']) !!}
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
                             </span>
@@ -70,9 +70,7 @@
                 {!! Form::close() !!}
             </div>
             <div class="card">
-                <div class="card-heading">
-                    Editar métodos y formas de pago
-                </div>
+
                 <div class="card-body">
                     @include('ventas.partials.formulario-editar')
                 </div>

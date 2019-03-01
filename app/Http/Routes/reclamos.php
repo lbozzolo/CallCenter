@@ -6,19 +6,19 @@ Route::get('reclamos/{estado?}', [
     'middleware' => 'permission:listado.reclamo'
 ]);
 
-Route::get('reclamos/productos', [
+Route::get('reclamos/productos/listado', [
     'as' => 'reclamos.index.productos',
     'uses' => 'ReclamosController@indexProductos',
     'middleware' => 'permission:listado.reclamo'
 ]);
 
-Route::get('reclamos/clientes', [
+Route::get('reclamos/clientes/listado', [
     'as' => 'reclamos.index.clientes',
     'uses' => 'ReclamosController@indexClientes',
     'middleware' => 'permission:listado.reclamo'
 ]);
 
-Route::get('reclamos/ventas', [
+Route::get('reclamos/ventas/listado', [
     'as' => 'reclamos.index.ventas',
     'uses' => 'ReclamosController@indexVentas',
     'middleware' => 'permission:crear.reclamo'

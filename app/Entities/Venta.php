@@ -73,6 +73,15 @@ class Venta extends Entity
         return $this->total($numero_cuotas) - $this->sumaMetodosDePago();
     }
 
+    public function reclamosPorEstado($slug = null)
+    {
+        $estado = EstadoReclamo::where('slug', $slug)->first();
+
+        return Venta::whereHas('reclamos', function ($query) use ($estado) {
+            $query->where('estado_id', '=', $estado->id)->where('venta_id', '=', $this->id);
+        })->get();
+    }
+
     /**
      * @param string $status
      * @return bool

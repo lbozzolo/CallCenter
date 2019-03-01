@@ -67,6 +67,11 @@
 
             @endforeach
             </ul>
+            @if(!$venta->reclamosPorEstado('abierto')->count())
+
+                <div class="panel panel-barra text-muted">No hay ningún reclamo abierto</div>
+
+            @endif
         </div>
         <div class="col-lg-6 col-md-12">
             <h3>Reclamos cerrados</h3>
@@ -79,6 +84,11 @@
 
             @endforeach
             </ul>
+            @if(!$venta->reclamosPorEstado('cerrado')->count())
+
+                <div class="panel panel-barra text-muted">No hay ningún reclamo cerrado</div>
+
+            @endif
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a href="{!! route('asignaciones.mis.tareas') !!}" class="btn btn-sm btn-default">Cancelar asignación</a>
+        <a href="{!! URL::previous() !!}" class="btn btn-sm btn-default">Cancelar asignación</a>
     </div>
     <div class="card-body">
 
