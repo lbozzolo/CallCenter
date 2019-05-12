@@ -47,6 +47,10 @@
                                 @permission('crear.reclamo')
                                 <li><a href="{{ route('reclamos.index.ventas') }}">Iniciar Reclamo </a></li>
                                 @endpermission
+
+                                @role('operador.in|operador.out')
+                                <li><a href="{{ route('reclamos.index.operador') }}">List Reclamos</a></li>
+                                @endrole
                             </ul>
                         </li>
                     @endpermission

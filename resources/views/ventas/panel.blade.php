@@ -18,23 +18,30 @@
 
         @else
 
-        @include('ventas.partials.navbar-panel')
         @include('ventas.partials.panel-venta')
 
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 @permission('editar.cliente')
-                <li class="active"><a href="#tab_1" data-toggle="tab">Métodos de pago</a></li>
+                <li class="active"><a href="#tab_1" data-toggle="tab">Tarjetas asociadas</a></li>
                 @endpermission
-                {{--<li><a href="#tab_2" data-toggle="tab">Productos</a></li>--}}
                 @permission('editar.venta')
-                <li><a href="#tab_3" data-toggle="tab">Datos del cliente</a></li>
-                <li><a href="#tab_4" data-toggle="tab">Tarjetas asociadas</a></li>
+                <li><a href="#tab_3" data-toggle="tab">Métodos de pago</a></li>
+                <li><a href="#tab_4" data-toggle="tab">Datos del cliente</a></li>
                 @endpermission
             </ul>
             <div class="tab-content">
                 @permission('editar.cliente')
                 <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
+
+                    @include('ventas.partials.panel-tarjetas-asociadas')
+
+                </div>
+                @endpermission
+
+
+                @permission('editar.venta')
+                <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
 
                     @if(count($venta->productos) > 0)
 
@@ -50,30 +57,17 @@
 
                     @endif
 
-
-                </div>
-                @endpermission
-
-                {{--<div class="tab-pane card" id="tab_2" style="margin-top: 0px">--}}
-
-                    {{--@include('ventas.partials.panel-productos')--}}
-
-                {{--</div>--}}
-
-                @permission('editar.venta')
-                <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
-
-                    @include('ventas.partials.panel-cliente')
-
                 </div>
                 <div class="tab-pane card" id="tab_4" style="margin-top: 0px">
 
-                    @include('ventas.partials.panel-tarjetas-asociadas')
+                    @include('ventas.partials.panel-cliente')
 
                 </div>
                 @endpermission
             </div>
         </div>
+
+        @include('ventas.partials.navbar-panel')
 
 
         @endif

@@ -19,6 +19,7 @@
 
         @foreach($clientes as $cliente)
 
+            @if($cliente->reclamos && count($cliente->reclamos))
             <tr>
                 <td>{!! $cliente->id !!}</td>
                 <td>
@@ -32,16 +33,15 @@
                 <td>{!! ($cliente->dni)? $cliente->dni : '---' !!}</td>
                 <td>
                     <a href="{{ route('reclamos.clientes', $cliente->id) }}">
-                        ({!! ($cliente->reclamos)? count($cliente->reclamos) : '0' !!})
+                        ({!! count($cliente->reclamos) !!})
                     </a>
                 </td>
             </tr>
+            @endif
 
         @endforeach
 
         </tbody>
     </table>
-
-
 
 </div>

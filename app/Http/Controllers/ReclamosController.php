@@ -11,28 +11,40 @@ use SmartLine\Entities\Cliente;
 use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\ProductoRepo;
 use SmartLine\Http\Repositories\ClienteRepo;
+use SmartLine\Http\Repositories\ReclamoRepo;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use SmartLine\Http\Requests\CreateReclamoRequest;
+use SmartLine\User;
 
 class ReclamosController extends Controller
 {
     protected $productoRepo;
     protected $clienteRepo;
+    protected $reclamoRepo;
 
-    public function __construct(ProductoRepo $productoRepo, ClienteRepo $clienteRepo)
+    public function __construct(ProductoRepo $productoRepo, ClienteRepo $clienteRepo, ReclamoRepo $reclamoRepo)
     {
         $this->productoRepo = $productoRepo;
         $this->clienteRepo = $clienteRepo;
+        $this->reclamoRepo = $reclamoRepo;
     }
 
     public function index($estado = null)
     {
-        $estadoReclamo = ($estado)? EstadoReclamo::where('slug', $estado)->first() : EstadoReclamo::where('slug', 'abierto')->first();
+        if(Auth::user()->is('operador.in'))
+            return redirect()->route('reclamos.index.operador', $estado);
 
+        $estadoReclamo = ($estado)? EstadoReclamo::where('slug', $estado)->first() : EstadoReclamo::where('slug', 'abierto')->first();
         $data['reclamos'] = Reclamo::with('estado', 'venta', 'venta.cliente')->where('estado_id', $estadoReclamo->id)->get();
 
         return view('reclamos.index')->with($data);
+    }
+
+    public function indexOperador($estado = null)
+    {
+        $data['reclamos'] = $this->reclamoRepo->reclamosOperador($estado);
+        return view('reclamos.index-operador')->with($data);
     }
 
     /**
@@ -129,7 +141,15 @@ class ReclamosController extends Controller
         $reclamo = Reclamo::with('venta.cliente', 'venta.productos', 'venta.reclamos')->where('id', $id)->first();
         $reclamoFecha = ($reclamoFecha)? Reclamo::with('venta.cliente', 'venta.productos', 'venta.reclamos')->where('id', $reclamoFecha)->first() : null;
 
-        return view('reclamos.show', compact('reclamo', 'reclamoFecha'));
+        $users = User::with(['roles' => function ($query) {
+            $query->get(['roles.id', 'name', 'slug']);
+        }])->get(['id', 'nombre', 'apellido']);
+
+        $users = $users->filter(function($value){
+            return $value->is('supervisor|atencion.al.cliente|admin');
+        })->all();
+
+        return view('reclamos.show', compact('reclamo', 'reclamoFecha', 'users'));
     }
 
     public function showReclamosProductos($id = null, $reclamoFecha = null)
@@ -292,6 +312,24 @@ class ReclamosController extends Controller
             'former_value' => $reclamo->solucionado,
             'updated_value' => $valorSolucionado
         ]);
+
+        $estadoCerrado = EstadoReclamo::where('slug', 'cerrado')->first();
+
+        if($valorSolucionado == 1 && $reclamo->estado_id != $estadoCerrado->id) {
+
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'related_model_id' => $reclamo->id,
+                'related_model_type' => 'reclamo',
+                'field' => 'estado_id',
+                'former_value' => $reclamo->estado_id,
+                'updated_value' => $estadoCerrado->id
+            ]);
+
+            $reclamo->estado_id = $estadoCerrado->id;
+
+        }
 
         $reclamo->solucionado = $valorSolucionado;
         $reclamo->save();

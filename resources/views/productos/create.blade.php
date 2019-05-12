@@ -105,7 +105,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('institucion_id', 'Institución') !!}
-                        {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control select2']) !!}
+                        {!! Form::select('institucion', $instituciones, null, ['class' => 'form-control select2', 'placeholder' => '']) !!}
                         <small class="help-block">Solamente en el caso de que corresponda.</small>
                     </div>
 

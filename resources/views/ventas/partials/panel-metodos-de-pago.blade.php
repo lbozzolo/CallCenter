@@ -129,7 +129,6 @@
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
                             <td class="text-center">-</td>
-                            <td class="text-center">-</td>
                             <td class="text-right">${!! $metodoPagoVenta->importe !!}</td>
                             <td>
                                 @permission('editar.metodo.pago.venta')
@@ -221,7 +220,7 @@
                                                 {{--</li>--}}
                                                 <li class="list-group-item">
                                                     Importe actual:
-                                                    <span class="text-warning">${!! $venta->importe_total !!}</span>
+                                                    <span class="text-warning">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
                                                 </li>
                                             </ul>
 

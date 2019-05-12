@@ -15,18 +15,32 @@
         <ul>
 
             @if(Auth::user()->profile_image)
+
                 <li class="header-icon dib">
                     @permission('ver.imagen')
                     <img src="{{ route('imagenes.ver', Auth::user()->profile_image) }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px">
                     @endpermission
-                    <span class="user-avatar">{{ Auth::user()->fullname }}<i class="ti-angle-down f-s-10"></i></span>
+                    <span class="user-avatar">
+                        {{ Auth::user()->fullname }}
+                        @if(Auth::user()->total_asignaciones_actuales)
+                            <span class="pull-right label label-danger" style="border-radius: 20px; margin: 0px 5px; padding: 4px 6px">{!! Auth::user()->total_asignaciones_actuales !!}</span>
+                        @endif
+                        <i class="ti-angle-down f-s-10"></i>
+                    </span>
 
             @else
+
                 <li class="header-icon dib">
                     @permission('ver.imagen')
                     <img src="{{ route('imagenes.ver', 'x') }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px">
                     @endpermission
-                    <span class="user-avatar">{{ Auth::user()->fullname }}<i class="ti-angle-down f-s-10"></i></span>
+                    <span class="user-avatar">
+                        {{ Auth::user()->fullname }}
+                        @if(Auth::user()->total_asignaciones_actuales)
+                            <span class="pull-right label label-danger" style="border-radius: 20px; margin: 0px 5px; padding: 4px 6px">{!! Auth::user()->total_asignaciones_actuales !!}</span>
+                        @endif
+                        <i class="ti-angle-down f-s-10"></i>
+                    </span>
 
             @endif
 

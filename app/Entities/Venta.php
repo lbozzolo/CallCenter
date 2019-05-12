@@ -17,8 +17,7 @@ class Venta extends Entity
 
     public function total($numero_cuotas = 1)
     {
-        return $this->subtotalProducts($numero_cuotas) + $this->gastosEnvio($numero_cuotas) - $this->ajuste;
-        //return $this->sumaTotalProductos() + $this->gastosEnvio($numero_cuotas) - $this->ajuste;
+        return ($this->subtotalProducts($numero_cuotas) == 0) ? $this->subtotalProducts($numero_cuotas) : $this->subtotalProducts($numero_cuotas) + $this->gastosEnvio($numero_cuotas) - $this->ajuste;
     }
 
     public function totalPorCuotas($numero_cuotas = 1)

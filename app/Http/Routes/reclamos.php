@@ -24,6 +24,12 @@ Route::get('reclamos/ventas/listado', [
     'middleware' => 'permission:crear.reclamo'
 ]);
 
+Route::get('reclamos/ventas/operador/listado/{estado?}', [
+    'as' => 'reclamos.index.operador',
+    'uses' => 'ReclamosController@indexOperador',
+    'middleware' => 'permission:crear.reclamo'
+]);
+
 Route::get('reclamos/{id}/crear', [
     'as' => 'reclamos.create',
     'uses' => 'ReclamosController@create',
@@ -36,7 +42,7 @@ Route::post('reclamos/{id}/crear', [
     'middleware' => 'permission:crear.reclamo'
 ]);
 
-Route::get('reclamos/{id}/{reclamoFecha?}', [
+Route::get('reclamos-detalle/{id}/{reclamoFecha?}', [
     'as' => 'reclamos.show',
     'uses' => 'ReclamosController@show',
     'middleware' => 'permission:ver.reclamo'

@@ -11,6 +11,7 @@
 
     <div class="card">
         <div class="card-header">
+
             <div class="row">
                 <div class="col-lg-9 col-md-12">
                     <h3>
@@ -28,36 +29,37 @@
                     @endif
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card card-default">
-                <div class="card-body">
-                    <ul class="list-unstyled list-inline listado">
-                        <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
-                        <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
-                        <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
-                        <li class="list-group-item">
-                            @permission('ver.venta')
-                            <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">Ver venta</a>
-                            @endpermission
-                        </li>
-                        <li class="list-group-item">
-                            @permission('crear.reclamo')
-                            <a href="{{ route('reclamos.create', $venta->id) }}" style="color: cyan">Generar un nuevo reclamo</a>
-                            @endpermission
-                        </li>
-                    </ul>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-default" style="margin: 0px">
+                        <div class="card-body">
+                            <ul class="list-unstyled list-inline listado">
+                                <li class="list-group-item">Cliente: {!! $venta->cliente->full_name !!}</li>
+                                <li class="list-group-item">Fecha de venta: {!! $venta->fecha_creado !!}</li>
+                                <li class="list-group-item">Fecha de última acción: {!! $venta->fecha_editado !!}</li>
+                                <li class="list-group-item">
+                                    @permission('ver.venta')
+                                    <a href="{{ route('ventas.show', $venta->id) }}" style="color:cyan">Ver venta</a>
+                                    @endpermission
+                                </li>
+                                <li class="list-group-item">
+                                    @permission('crear.reclamo')
+                                    <a href="{{ route('reclamos.create', $venta->id) }}" style="color: cyan">Generar un nuevo reclamo</a>
+                                    @endpermission
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 
     <div class="row">
         <div class="col-lg-6 col-md-12">
-            <h3>Reclamos abiertos</h3>
+            <h3>Reclamos <span style="color: lightgrey">abiertos</span></h3>
             <ul>
             @foreach($venta->reclamos as $reclamo)
 
@@ -74,7 +76,7 @@
             @endif
         </div>
         <div class="col-lg-6 col-md-12">
-            <h3>Reclamos cerrados</h3>
+            <h3>Reclamos <span style="color: lightgrey">cerrados</span></h3>
             <ul>
             @foreach($venta->reclamos as $reclamo)
 

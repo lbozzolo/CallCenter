@@ -22,6 +22,7 @@ use SmartLine\Entities\MetodoPago;
 use SmartLine\Entities\Promocion;
 use SmartLine\Entities\Venta;
 use SmartLine\Http\Repositories\VentaRepo;
+use SmartLine\Http\Repositories\ProductoRepo;
 use SmartLine\Http\Repositories\MarcaTarjetaRepo;
 use SmartLine\Http\Repositories\ClienteRepo;
 use SmartLine\Entities\Banco;
@@ -35,12 +36,14 @@ class VentasController extends Controller
     protected $ventaRepo;
     protected $marcaTarjetaRepo;
     protected $clienteRepo;
+    protected $productoRepo;
 
-    public function __construct(VentaRepo $ventaRepo, MarcaTarjetaRepo $marcaTarjetaRepo, ClienteRepo $clienteRepo)
+    public function __construct(VentaRepo $ventaRepo, MarcaTarjetaRepo $marcaTarjetaRepo, ClienteRepo $clienteRepo, ProductoRepo $productoRepo)
     {
         $this->ventaRepo = $ventaRepo;
         $this->marcaTarjetaRepo = $marcaTarjetaRepo;
         $this->clienteRepo = $clienteRepo;
+        $this->productoRepo = $productoRepo;
     }
 
     /**
@@ -151,14 +154,14 @@ class VentasController extends Controller
         $data['provincias'] = Provincia::lists('provincia', 'id');
         $data['partidos'] = Partido::lists('partido', 'id', 'codProvincia');
         $data['localidades'] = Localidad::lists('localidad', 'id', 'codProvincia');
-        $data['productos'] = Producto::where('estado_id', $productoActivo->id)->get();
+        $data['productos'] = $this->productoRepo->getProductosActivos();
 
         $data['productosVenta'] = $data['venta']->productos->groupBy('id');
 
         $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
         $data['bancos'] = Banco::lists('nombre', 'id');
         //$data['metodosPago'] = MetodoPago::lists('nombre', 'id');
-        $data['metodosPago'] = MetodoPago::whereIn('slug', ['credito', 'debito', 'transferencia'])->lists('nombre', 'id');
+        $data['metodosPago'] = MetodoPago::whereIn('slug', ['credito', 'debito'])->lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['tarjetas'] = ($data['venta']->cliente->datosTarjeta)? $data['venta']->cliente->datosTarjeta : null;
@@ -175,6 +178,8 @@ class VentasController extends Controller
         }
 
         $data['products'] = Producto::all()->lists('nombre_precio', 'id');
+
+        //dd($data);
 
         return view('ventas.panel')->with($data);
     }
@@ -284,6 +289,13 @@ class VentasController extends Controller
 
     public function numeroGuia(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'numero_guia' => 'required',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
         $venta = Venta::find($id);
 
         if($request['numero_guia']){
@@ -412,13 +424,14 @@ class VentasController extends Controller
         $data['venta'] = Venta::find($id);
         $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
         $data['bancos'] = Banco::lists('nombre', 'id');
-        $data['metodosPago'] = MetodoPago::lists('nombre', 'id');
+        $data['metodosPago'] = MetodoPago::whereIn('slug', ['credito', 'debito'])->lists('nombre', 'id');
         $data['promociones'] = Promocion::lists('nombre', 'id');
         $data['estados'] = EstadoVenta::lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['tarjetas'] = $data['venta']->cliente->datosTarjeta;
         //$data['productos'] = Producto::all();
-        $data['products'] = Producto::all()->lists('nombre_precio', 'id');
+        //$data['products'] = Producto::all()->lists('nombre_precio', 'id');
+        $data['products'] = $this->productoRepo->getProductosActivos()->lists('nombre_precio', 'id');
         $data['productosVenta'] = $data['venta']->productos->groupBy('id');
         $data['provincias'] = Provincia::lists('provincia', 'id');
         $data['partidos'] = Partido::lists('partido', 'id', 'codProvincia');
@@ -602,6 +615,14 @@ class VentasController extends Controller
 
     public function agregarMetodoDePago(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'metodo_pago' => 'required',
+            'importe' => 'required',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
         $venta = Venta::find($id);
         $metodoPago = MetodoPago::find($request->metodo_pago);
         $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;

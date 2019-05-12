@@ -19,6 +19,7 @@
 
         @foreach($productos as $producto)
 
+            @if($producto->reclamos && count($producto->reclamos))
             <tr>
                 <td>{!! $producto->id !!}</td>
                 <td>
@@ -36,6 +37,7 @@
                     </a>
                 </td>
             </tr>
+            @endif
 
         @endforeach
 

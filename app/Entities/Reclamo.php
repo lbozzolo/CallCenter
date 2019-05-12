@@ -10,6 +10,18 @@ class Reclamo extends Entity
     protected $table = 'reclamos';
     protected $fillable = ['venta_id', 'titulo', 'descripcion', 'estado_id', 'solucionado', 'owner_id', 'derivador_id', 'responsable_id', 'created_at', 'updated_at'];
 
+    // Scopes
+
+    public function scopeOpen($query)
+    {
+        return $query->where('estado_id', 1);
+    }
+
+    public function scopeClose($query)
+    {
+        return $query->where('estado_id', 2);
+    }
+
     // Relationships
     public function venta()
     {

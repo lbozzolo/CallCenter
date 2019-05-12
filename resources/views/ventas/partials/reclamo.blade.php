@@ -1,8 +1,12 @@
 <div class="card">
     <div class="card-header">
         <ul class="list-inline">
-            <li><span>RECLAMO N° {!! $reclamo->id !!}</span></li>
-            <li><label class="{!! ($reclamo->estado->slug == 'abierto')? 'label label-success' : 'label label-danger' !!}">{!! $reclamo->estado->nombre !!}</label></li>
+
+            <li>
+                <label class="{!! ($reclamo->estado->slug == 'abierto')? 'label label-success' : 'label label-danger' !!}" title="RECLAMO N° {!! $reclamo->id !!}">
+                    {!! $reclamo->estado->nombre !!}
+                </label>
+            </li>
             <li>
                 @if($reclamo->solucionado == 0)
                     <i class="fa fa-exclamation-triangle text-warning"></i>
@@ -156,35 +160,37 @@
                             {!! $reclamo->responsable->full_name !!}
                         </li>
                     @endif
-                    @permission('derivar.reclamo')
-                        <li class="list-group-item">
-                            <small class="text-muted">Derivación</small><br>
-                            <button type="button" data-toggle="modal" data-target="#derivarReclamo{!! $reclamo->id !!}" class="btn btn-primary btn-xs btn-flat">Derivar este reclamo</button>
-
-                            <div class="modal fade col-lg-8 col-lg-offset-2" id="derivarReclamo{!! $reclamo->id !!}">
-                                <div class="card">
-                                    <div class="panel panel-barra">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h3>Derivar reclamo</h3>
-                                        <span class="text-warning">Seleccione un usuario para derivar este reclamo.</span>
-                                    </div>
-                                    <div class="modal-body">
-
-
-                                        @include('reclamos.partials.derivacion')
-
-                                    </div>
-                                    <div class="modal-footer">
-
-                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </li>
-                    @endpermission
                 </ul>
+                @permission('derivar.reclamo')
+                <div class="card-body">
+                    <small class="text-muted">Derivación</small><br>
+                    <button type="button" data-toggle="modal" data-target="#derivarReclamo{!! $reclamo->id !!}" class="btn btn-primary btn-xs btn-flat">
+                        Derivar este reclamo
+                    </button>
+
+                    <div class="modal fade col-lg-8 col-lg-offset-2" id="derivarReclamo{!! $reclamo->id !!}">
+                        <div class="card">
+                            <div class="panel panel-barra">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3>Derivar reclamo</h3>
+                                <span class="text-warning">Seleccione un usuario para derivar este reclamo.</span>
+                            </div>
+                            <div class="modal-body">
+
+
+                                @include('reclamos.partials.derivacion')
+
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                @endpermission
             </div>
         @endif
         @endpermission

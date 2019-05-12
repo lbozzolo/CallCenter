@@ -11,7 +11,6 @@
             <th>Id</th>
             <th>Estado</th>
             <th class="text-right">Venta</th>
-            <th>Productos</th>
             <th>Cliente</th>
             <th style="width: 300px">Descripción</th>
             <th class="text-center">solucionado</th>
@@ -38,16 +37,6 @@
                 @endpermission
                 </td>
                 <td>
-                    <ul class="">
-                        @foreach($reclamo->venta->productos as $producto)
-                            <li>
-                                {!! $producto->nombre !!}<br>
-                                <small class="text-muted">({!! ($producto->marca)? $producto->marca->nombre : '' !!})</small>
-                            </li>
-                        @endforeach
-                    </ul>
-                </td>
-                <td>
                     @permission('ver.cliente')
                     <a href="{{ route('clientes.show', $reclamo->venta->cliente->id) }}">
                         {!! $reclamo->venta->cliente->full_name !!}
@@ -72,35 +61,35 @@
                             <i class="fa fa-toggle-off"></i>
                         @endif
                     </button>
-                    <div class="modal fade" id="disableReclamo{!! $reclamo->id !!}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title"><i class="fa fa-warning "></i>
-                                        {!! ($reclamo->estado->slug == 'abierto')? 'Cerrar reclamo' : 'Abrir reclamo' !!}
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Desea {!! ($reclamo->estado->slug == 'abierto')? 'cerrar' : 'abrir' !!} el reclamo</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                    <a href="{{ route('reclamos.change.status', $reclamo->id) }}" class="btn btn-danger" title="CERRAR">Aceptar</a>
-                                </div>
+                    <div class="modal fade col-lg-3 col-lg-offset-9" id="disableReclamo{!! $reclamo->id !!}">
+                        <div class="card alert text-center">
+                            <div class="card-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"><i class="fa fa-warning "></i>
+                                    {!! ($reclamo->estado->slug == 'abierto')? 'Cerrar reclamo' : 'Abrir reclamo' !!}
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Desea {!! ($reclamo->estado->slug == 'abierto')? 'cerrar' : 'abrir' !!} el reclamo</p>
+                            </div>
+                            <div class="card-footer">
+                                {!! Form::open(['method' => 'put', 'url' => route('reclamos.change.status', $reclamo->id), 'class' => 'form']) !!}
+                                    <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-danger" title="CERRAR">Aceptar</button>
+                                {!! Form::close() !!}
                             </div>
                         </div>
                     </div>
                 @endpermission
 
                 @permission('ver.reclamo')
-                    <a href="{{ route('reclamos.show', ['id' => $reclamo->id]) }}" class="btn btn-success btn-xs" title="Info"><i class="fa fa-eye"></i> </a>
+                    <a href="{{ route('reclamos.show', ['id' => $reclamo->id, 'reclamoFecha' => null]) }}" class="btn btn-success btn-xs" title="Info"><i class="fa fa-eye"></i> </a>
                 @endpermission
 
-                @permission('editar.producto')
-                    <a href="{{ route('productos.edit', ['id' => $reclamo->id]) }}" title="Editar" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
-                @endpermission
+                {{--@permission('editar.producto')--}}
+                    {{--<a href="{{ route('productos.edit', ['id' => $reclamo->id]) }}" title="Editar" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i></a>--}}
+                {{--@endpermission--}}
 
                 @permission('eliminar.reclamo')
                     <button type="button" title="ELIMINAR" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#eliminarReclamo{!! $reclamo->id !!}" >

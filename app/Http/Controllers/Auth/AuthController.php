@@ -82,10 +82,12 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-        Auth::user()->updateable()->create([
-            'user_id' => Auth::user()->id,
-            'action' => 'login'
-        ]);
+        if(Auth::check()) {
+            Auth::user()->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'login'
+            ]);
+        }
         return route('/');
     }
 
@@ -100,10 +102,12 @@ class AuthController extends Controller
 
     public function getLogout()
     {
-        Auth::user()->updateable()->create([
-            'user_id' => Auth::user()->id,
-            'action' => 'logout'
-        ]);
+        if(Auth::check()){
+            Auth::user()->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'logout'
+            ]);
+        }
 
         Auth::logout();
 
