@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(FormaPagoTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
-        $this->call(SuperAdminPermissionsSeeder::class);
+        //$this->call(SuperAdminPermissionsSeeder::class);
+        $this->call(PermissionsRolesSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CategoriasTableSeeder::class);
         $this->call(ResultadosLlamadasTableSeeder::class);
