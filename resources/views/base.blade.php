@@ -29,7 +29,7 @@
         <div class="col-lg-12">
             <div class="footer" style="margin-bottom: 0px">
                 <p>Smartline @ 2018 - Desarrollado por <a href="http://www.verticedigital.com.ar/" target="_new" class="page-refresh">Verticedigital.com.ar</a></p>
-                <span id="date-time" style="display: none"></span>
+                {{--<span id="date-time" style="display: none"></span>--}}
             </div>
         </div>
     </div>
