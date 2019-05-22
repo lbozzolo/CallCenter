@@ -62,7 +62,7 @@
                                 @endpermission
                             </ul>
                             @permission('editar.numero.guia')
-                            <ul class="panel panel-barra">
+                            <ul class="panel panel-barra" style="margin: 0px">
                                 <li>
                                     Número de guía:
                                     {!! ($venta->numero_guia)? $venta->numero_guia : '<small class="text-muted">sin número de guía</small>' !!}
@@ -104,42 +104,33 @@
             </div>
 
             <div class="col-lg-6">
-                @permission('editar.venta')
                 <div class="col-12">
-                    <div class="card card-default" >
-                        <div class="card-header">
-                            <ul class="list-inline">
-                                <li><h3 class="card-title">Estado de la venta</h3></li>
-                                @permission('ver.timeline.venta')
-                                <li><a href="{{ route('ventas.timeline', $venta->id) }}" style="color: cyan">Ver Timeline</a></li>
-                                @endpermission
-                            </ul>
+                    <div class="card card-default">
+                        <div class="card-body text-right">
+
+                            @include('ventas.partials.acciones-con-venta')
 
                         </div>
-                        <div class="card-body">
-                            @if(Auth::user()->is('auditor'))
+                    </div>
+                </div>
+            </div>
 
-                                Esta venta se encuentra en estado
-                                <span class="h1 label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>
+            @if(Auth::user()->is('admin|superadmin'))
+            <div class="col-lg-6">
 
-                            <div class="panel panel-barra">
+                    @permission('editar.venta')
+                    <div class="col-12">
+                        <div class="card card-default" >
+                            <div class="card-header">
                                 <ul class="list-inline">
-                                    <li>
-                                        {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
-                                            {!! Form::hidden('estado_id', 4) !!}
-                                            <button type="submit" class="btn btn-primary">Autorizar</button>
-                                        {!! Form::close() !!}
-                                    </li>
-                                    <li>
-                                        {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
-                                            {!! Form::hidden('estado_id', 5) !!}
-                                            <button type="submit" class="btn btn-danger">Rechazar</button>
-                                        {!! Form::close() !!}
-                                    </li>
+                                    <li><h3 class="card-title">Estado de la venta</h3></li>
+                                    @permission('ver.timeline.venta')
+                                    <li><a href="{{ route('ventas.timeline', $venta->id) }}" style="color: cyan">Ver Timeline</a></li>
+                                    @endpermission
                                 </ul>
-                            </div>
 
-                            @else
+                            </div>
+                            <div class="card-body">
 
                                 @permission('cambiar.estado.venta')
                                 <p>Marcar esta venta como...</p>
@@ -170,12 +161,14 @@
 
                                 @endpermission
 
-                            @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-                @endpermission
+                    @endpermission
+
             </div>
+            @endif
+
         </div>
 
         <div class="row">
@@ -194,6 +187,7 @@
             </div>
         </div>
 
+        @can('alter', $venta)
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 @permission('editar.venta')
@@ -216,6 +210,7 @@
 
             </div>
         </div>
+        @endcan
 
     @endif
 

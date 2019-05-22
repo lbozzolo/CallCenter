@@ -115,6 +115,12 @@ Route::get('ventas/{id}/reclamos', [
     'middleware' => 'permission:ver.reclamos.venta'
 ]);
 
+Route::get('ventas/{id}/envio', [
+    'as' => 'ventas.envio',
+    'uses' => 'VentasController@envio',
+    'middleware' => 'permission:editar.venta'
+]);
+
 Route::get('ventas-cliente/{id}/ver', [
     'as' => 'ventas.show.cliente.ventas',
     'uses' => 'VentasController@showClienteVentas',

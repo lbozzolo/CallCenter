@@ -4,7 +4,7 @@
 
     <h2>
         Ventas<span class="text-muted"> / Panel / Operador: {!! Auth::user()->full_name !!}</span>
-        <span class="label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>
+        <span class="label estadoVentas" data-estado="{!! $venta->estado->slug !!}" title="#{!! $venta->id !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>
     </h2>
 
 @endsection
@@ -23,25 +23,16 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 @permission('editar.cliente')
-                <li class="active"><a href="#tab_1" data-toggle="tab">Tarjetas asociadas</a></li>
+                <li class="active"><a href="#tab_1" data-toggle="tab">Métodos de pago</a></li>
                 @endpermission
                 @permission('editar.venta')
-                <li><a href="#tab_3" data-toggle="tab">Métodos de pago</a></li>
+                <li><a href="#tab_3" data-toggle="tab">Tarjetas asociadas</a></li>
                 <li><a href="#tab_4" data-toggle="tab">Datos del cliente</a></li>
                 @endpermission
             </ul>
             <div class="tab-content">
                 @permission('editar.cliente')
                 <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
-
-                    @include('ventas.partials.panel-tarjetas-asociadas')
-
-                </div>
-                @endpermission
-
-
-                @permission('editar.venta')
-                <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
 
                     @if(count($venta->productos) > 0)
 
@@ -56,6 +47,16 @@
                         </div>
 
                     @endif
+
+                </div>
+                @endpermission
+
+
+                @permission('editar.venta')
+                <div class="tab-pane card" id="tab_3" style="margin-top: 0px">
+
+                    @include('ventas.partials.panel-tarjetas-asociadas')
+
 
                 </div>
                 <div class="tab-pane card" id="tab_4" style="margin-top: 0px">

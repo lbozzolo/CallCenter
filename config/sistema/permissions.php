@@ -150,6 +150,7 @@ return [
             'created_at' => date_create(),
             'updated_at' => date_create()
         ],
+
     ],
 
     'cliente' => [

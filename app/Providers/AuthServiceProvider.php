@@ -4,6 +4,7 @@ namespace SmartLine\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use SmartLine\Entities\Venta;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'SmartLine\Model' => 'SmartLine\Policies\ModelPolicy',
+        Venta::class => 'SmartLine\Policies\AlterarVentaPolicy',
     ];
 
     /**

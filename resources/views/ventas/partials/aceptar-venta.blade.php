@@ -1,9 +1,9 @@
 
-<button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#aceptarVenta">
+<button type="button" class="btn btn-success btn-outline btn-flat @if(!$venta->metodoPagoVenta->count()) disabled @endif" data-toggle="modal" data-target="#aceptarVenta">
     <i class="fa fa-check text-success"></i>
     Aceptar venta
 </button>
-<div class="modal fade col-lg-4 col-lg-offset-4" id="aceptarVenta">
+<div class="modal fade col-lg-5 col-lg-offset-4" id="aceptarVenta">
     <div class="card">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -27,15 +27,36 @@
 
 
                     <p class="lead">Cliente: {!! $venta->cliente->fullname !!}</p>
-                    <p class="panel panel-barra">Productos</p>
+                    <p class="panel panel-barra" style="margin-bottom: 0px">Productos</p>
                     <ul class="list-unstyled listado">
-                        @forelse($venta->productos as $producto)
-                            <li class="list-group-item" style="background-color: gray">{!! $producto->nombre !!}, {!! $producto->marca->nombre !!}</li>
+                        @forelse($productosVenta as $group)
+                            @foreach($group->groupBy('id') as $producto)
+                            <li class="list-group-item" style="background-color: gray">
+                                <span class="text-warning" style="border: 1px solid orange; border-radius: 15px; padding: 2px 7px">{!! $producto->count() !!} un</span>
+                                {!! $producto->first()->nombre !!}, {!! $producto->first()->marca->nombre !!}
+                                (${!! $producto->first()->precio !!})
+                                <span class="pull-right">
+                                    ${!! $producto->first()->precioMasInteresCuota($venta->plan_cuotas, $producto->count()) !!}
+                                    {{--${!! number_format($producto->first()->precio * $producto->count(), 2, ',', '.') !!}--}}
+                                </span>
+                            </li>
+                            @endforeach
                         @empty
                             <li class="list-group-item">No hay ningún producto cargado</li>
                         @endforelse
+                        <li class="list-group-item">
+                            Gastos de envío:
+                            <span class="pull-right">${!! $venta->gastosEnvioFormatted(null, $venta->envio) !!}</span>
+                        </li>
+                        <li class="list-group-item" style="border-top: 2px solid white!important;">
+                            Total:
+                            <span class="pull-right">
+                                ${!! $venta->subtotalProductosMasGastosEnvio($venta->plan_cuotas) !!}
+{{--                                ${!! number_format($venta->sumaTotalProductos($venta->plan_cuotas), 2, ',', '.') !!}--}}
+                            </span>
+                        </li>
                     </ul>
-                    <p class="panel panel-barra">Métodos de pago</p>
+                    <p class="panel panel-barra" style="margin-bottom: 0px">Métodos de pago</p>
                     <div class="table-responsive">
                         <table class="table table-bordered table-condensed">
                             <tbody>
@@ -45,7 +66,7 @@
                                         {!! $metodoPago->datosTarjeta->marca->nombre !!}
                                         ({!! $metodoPago->datosTarjeta->titular !!})
                                     </td>
-                                    <td>${!! $metodoPago->importe !!}</td>
+                                    <td>${!! $metodoPago->importe_formatted !!}</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -53,22 +74,22 @@
                                 </tr>
                             @endforelse
                             </tbody>
-                            <tfooter>
+                            <tfoot>
                                 <tr>
                                     <td>Importe total</td>
-                                    <td>${!! $venta->suma_metodos_de_pago !!}</td>
+                                    <td class="text-right">${!! $venta->suma_metodos_de_pago !!}</td>
                                 </tr>
-                            </tfooter>
+                            </tfoot>
                         </table>
                     </div>
-                    <p class="panel panel-barra">Importe</p>
+                    <p class="panel panel-barra" style="margin-bottom: 0px">Importes totales</p>
                     <ul class="list-unstyled listado">
                         <li class="list-group-item">
-                            Importe total productos:
+                            Total productos + gastos de envío - ajuste:
                             <span class="pull-right">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
                         </li>
                         <li class="list-group-item">
-                            Total métodos de pago:
+                            Total métodos de pago
                             <span class="pull-right">${!! $venta->suma_metodos_de_pago !!}</span>
                         </li>
                     </ul>
@@ -83,28 +104,29 @@
 
                 @if($venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) > 0)
 
-                    <div class="form-group text-left">
+                    <div class="form-group text-left bg-danger" style="padding: 10px">
                         <i class="fa fa-exclamation-triangle text-warning"></i>
-                        <span class="lead text-danger">ATENCIÓN. La suma de los métodos de pago es inferior al importe total de la venta.</span><br>
+                        <span>ATENCIÓN. La suma de los métodos de pago es inferior al importe total de la venta.</span><br>
                         <span>La diferencia es de ${!! $venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) !!}</span>
+                        <div class="text-warning" style="padding: 10px">¿Desea aceptar esta venta de todos modos?</div>
+                        <div>
+                            <button type="submit" class="btn btn-warning " style="margin-right: 3px">Aceptar de todos modos</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
-                    <div class="form-group text-left">
-                        <span class="text-warning">¿Desea aceptar esta venta de todos modos?</span>
-                    </div>
-                    <button type="submit" class="btn btn-warning pull-left">Aceptar de todos modos</button>
 
-                @elseif($venta->diferencia_con_ajuste < 0)
+                @elseif($venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) < 0)
 
-
-                    <div class="form-group text-left">
+                    <div class="form-group text-left bg-danger" style="padding: 10px">
                         <i class="fa fa-exclamation-triangle"></i>
-                        <span class="lead text-danger">ATENCIÓN. La suma de los métodos de pago es superior al importe total de la venta.</span><br>
-                        <span>La diferencia es de ${!! $venta->diferenciaMetodosPagoSumaProductos() !!}</span>
+                        <span>ATENCIÓN. La suma de los métodos de pago es superior al importe total de la venta.</span><br>
+                        <span>La diferencia es de ${!! $venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) !!}</span>
+                        <div class="text-warning" style="padding: 10px">¿Desea aceptar esta venta de todos modos?</div>
+                        <div>
+                            <button type="submit" class="btn btn-warning " style="margin-right: 3px">Aceptar de todos modos</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
-                    <div class="form-group text-left">
-                        <span class="text-warning">¿Desea aceptar esta venta de todos modos?</span>
-                    </div>
-                    <button type="submit" class="btn btn-warning pull-left">Aceptar de todos modos</button>
 
                 @else
 
@@ -112,11 +134,12 @@
                         <span class="text-warning">¿Desea aceptar esta venta?</span>
                     </div>
                     <button type="submit" class="btn btn-primary pull-left">Aceptar</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
 
                 @endif
 
                 {!! Form::hidden('venta_id', $venta->id) !!}
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+
 
                 {!! Form::close() !!}
             </div>

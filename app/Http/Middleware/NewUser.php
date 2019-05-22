@@ -35,9 +35,6 @@ class NewUser
      */
     public function handle($request, Closure $next)
     {
-//        if(Auth::user()->estado->slug == 'nuevo') {
-//            return view('nuevo');
-//        }
         if(Auth::user()->isNew())
             return view('nuevo');
 

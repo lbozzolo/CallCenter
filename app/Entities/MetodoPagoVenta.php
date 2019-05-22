@@ -57,6 +57,12 @@ class MetodoPagoVenta extends Entity
     // Mutators
     //--------------------------------------------------------------------------------------------------------------------------
 
+
+    public function getImporteFormattedAttribute()
+    {
+        return number_format($this->attributes['importe'], 2, ',', '.');
+    }
+
     public function getImporteTotalAttribute()
     {
         return number_format($this->importeMasPromocion(), 2, ',', '.');

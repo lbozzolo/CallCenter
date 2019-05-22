@@ -148,6 +148,30 @@
                 </div>
             </li>
         @endif
+        @if($item->action == 'update' && $item->field == 'envio')
+            <li>
+                @if($item->former_value)
+                    <div class="timeline-badge warning"><i class="fa fa-edit"></i></div>
+                @else
+                    <div class="timeline-badge success"><i class="fa fa-edit"></i></div>
+                @endif
+                <div class="timeline-panel" style="background-color: #404a6b">
+                    <div class="timeline-heading">
+                        <p class="pull-right">
+                            <i class="glyphicon glyphicon-time"></i>
+                            <small> {!! $item->fecha_creado !!}</small> -
+                            <small> {!! $item->hora_created !!} hs</small>
+                        </p>
+                        @if($item->former_value)
+                            <h4 style="color: white!important;">Se <span class="text-warning">desactivaron</span>  los gastos de envío en la venta</h4>
+                        @else
+                            <h4 style="color: white!important;">Se <span class="text-success">activaron</span> los gastos de envío en la venta</h4>
+                        @endif
+                        <span class="text-muted">por {!! $item->author->fullname !!}</span>
+                    </div>
+                </div>
+            </li>
+        @endif
         @if($item->action == 'add' && $item->related_model_type == 'reclamo')
             <li>
                 <div class="timeline-badge info"><i class="fa fa-plus"></i></div>

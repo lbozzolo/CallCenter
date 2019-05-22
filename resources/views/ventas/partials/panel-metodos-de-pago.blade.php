@@ -1,3 +1,4 @@
+@can('alter', $venta)
 <div class="card">
     <div class="card-header">
         <ul class="list-unstyled list-inline">
@@ -5,13 +6,6 @@
             @permission('agregar.metodo.pago.venta')
             <li><button class="nonStyledButton" style="color:cyan" id="botonNuevoMetodo"><i class="fa fa-plus"></i> Agregar</button> </li>
             @endpermission
-            {{--<li class="pull-right">--}}
-                {{--@if($venta->diferencia < 0)--}}
-                    {{--excede monto de venta por<span class="text-danger" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos"> $ {!! $venta->diferencia !!}</span>--}}
-                {{--@else--}}
-                    {{--resta abonar<span class="text-success" style="font-size: 1.2em; cursor: default" title="Diferencia con la suma total de productos"> $ {!! $venta->diferencia !!}</span>--}}
-                {{--@endif--}}
-            {{--</li>--}}
         </ul>
     </div>
     <div class="card-body">
@@ -34,7 +28,6 @@
                         <th>Titular</th>
                         <th>Fecha expiración</th>
                         <th>Interés</th>
-                        {{--<th>Descuento</th>--}}
                         <th>Cuotas</th>
                         <th style="width: 180px" class="text-center">Total</th>
                         <th style="width: 100px">Opciones</th>
@@ -55,20 +48,6 @@
                             <td>{!! $metodoPagoVenta->datosTarjeta->titular !!}</td>
                             <td>{!! $metodoPagoVenta->datosTarjeta->expiration_date !!}</td>
                             <td class="text-center">{!! config('sistema.ventas.intereses.'.$venta->plan_cuotas) !!}%</td>
-                            {{--<td class="text-center">--}}
-                                {{--@if($metodoPagoVenta->formaPago)--}}
-                                {{--{!! ($metodoPagoVenta->formaPago->interes != 0)? $metodoPagoVenta->formaPago->interes .' %'  : '-' !!}--}}
-                                {{--@else--}}
-                                    {{-----}}
-                                {{--@endif--}}
-                            {{--</td>--}}
-                            {{--<td class="text-center">--}}
-                                {{--@if($metodoPagoVenta->formaPago)--}}
-                                {{--{!! ($metodoPagoVenta->formaPago->descuento != 0)? $metodoPagoVenta->formaPago->descuento .' %'  : '-' !!}--}}
-                                {{--@else--}}
-                                    {{-----}}
-                                {{--@endif--}}
-                            {{--</td>--}}
                             <td class="text-center">
                                 {!! ($metodoPagoVenta->formaPago)? $metodoPagoVenta->formaPago->cuota_cantidad.' x ' : $venta->plan_cuotas !!}
                                 {!! ($metodoPagoVenta->formaPago)? '$'.$metodoPagoVenta->valor_cuota : '' !!}
@@ -183,7 +162,7 @@
                 <tfooter>
 
                     <tr>
-                        <td colspan="9" >Diferencia</td>
+                        <td colspan="9" >Diferencia con el total de productos seleccionados</td>
                         <td class="text-right">${!! $venta->restante($venta->plan_cuotas) !!}</td>
                         <td></td>
                     </tr>
@@ -194,7 +173,6 @@
                             <span class="text-muted">AJUSTE ACTUAL: $ {!! $venta->ajuste !!}</span>
 
                         </td>
-                        {{--<td class="text-right lead">${!! $venta->importe_total !!}</td>--}}
                         <td class="text-right lead">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</td>
                         <td>
 
@@ -214,10 +192,6 @@
                                         <div class="card-body">
 
                                             <ul class="listado">
-                                                {{--<li class="list-group-item">--}}
-                                                    {{--Importe a alcanzar:--}}
-                                                    {{--<span class="text-warning">${!! $venta->suma_total_productos !!}</span>--}}
-                                                {{--</li>--}}
                                                 <li class="list-group-item">
                                                     Importe actual:
                                                     <span class="text-warning">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
@@ -249,7 +223,7 @@
                                 @permission('quitar.ajuste.venta')
                                 <button type="button" title="Quitar ajuste" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#quitarAjuste{!! $venta->id !!}">quitar ajuste</button><br>
 
-                                <div class="modal fade col-lg-3 col-lg-offset-4 text-left" id="quitarAjuste{!! $venta->id !!}">
+                                <div class="modal fade col-lg-3 col-lg-offset-9 text-left" id="quitarAjuste{!! $venta->id !!}">
                                     <div class="card">
                                         <div class="card-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -286,3 +260,4 @@
 
     </div>
 </div>
+@endcan

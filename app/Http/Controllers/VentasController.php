@@ -188,6 +188,10 @@ class VentasController extends Controller
     {
 
         $venta = Venta::find($request->venta_id);
+
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $productos_con_etapas = collect();
 
         if(is_array($request->producto_id)){
@@ -241,6 +245,9 @@ class VentasController extends Controller
     {
         $venta = Venta::find($request->venta_id);
 
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $producto = ProductoVenta::where('venta_id', $venta->id)->where('producto_id', $request->producto_id)->first();
         $producto->delete();
 
@@ -257,6 +264,9 @@ class VentasController extends Controller
     public function quitarProductos(Request $request)
     {
         $venta = Venta::find($request->venta_id);
+
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
 
         $producto = Producto::find($request->producto_id);
         $venta->productos()->detach($producto);
@@ -374,6 +384,9 @@ class VentasController extends Controller
     public function aceptar(Request $request)
     {
         $venta = Venta::find($request->venta_id);
+
+        if(!$venta->metodoPagoVenta->count())
+            return redirect()->back()->withErrors('No se puede aceptar la venta. No tiene ingresado ningún método de pago');
 
         if(!$venta->plan_cuotas)
             return redirect()->back()->withErrors('No se puede aceptar la venta. Debe seleccionar al menos un plan de cuotas');
@@ -534,6 +547,10 @@ class VentasController extends Controller
     public function edit($id)
     {
         $venta = Venta::find($id);
+
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $producto = $venta->producto;
         $etapas = $producto->etapas->lists('nombre', 'id');
         $metodosPago = MetodoPago::lists('nombre', 'id');
@@ -550,6 +567,9 @@ class VentasController extends Controller
      */
     public function update(CreateDatosTarjetaRequest $request, $id)
     {
+        if(!Auth::user()->can('alter', Venta::find($id)))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $this->ventaRepo->updateVenta($id, $request);
         return redirect()->back()->with('ok', 'Venta editada con éxito');
     }
@@ -557,8 +577,11 @@ class VentasController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $venta = Venta::find($id);
-        $estado = EstadoVenta::find($request->estado_id);
 
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
+        $estado = EstadoVenta::find($request->estado_id);
 
         $estadoAnterior = $venta->estado->slug;
 
@@ -603,27 +626,37 @@ class VentasController extends Controller
 
     public function ajustar(Request $request, $id)
     {
+        if(!Auth::user()->can('alter', Venta::find($id)))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $this->ventaRepo->ajustar($id, $request->ajuste);
         return redirect()->back()->with('ok', 'Importe de Venta ajustado con éxito');
     }
 
     public function quitarAjuste($id)
     {
+        if(!Auth::user()->can('alter', Venta::find($id)))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $this->ventaRepo->quitarAjuste($id);
         return redirect()->back()->with('ok', 'Ajuste de Venta quitado con éxito');
     }
 
     public function agregarMetodoDePago(Request $request, $id)
     {
+        $venta = Venta::find($id);
+
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $validator = Validator::make($request->all(), [
             'metodo_pago' => 'required',
-            'importe' => 'required',
+            'importe' => 'required|integer|min:1',
         ]);
 
         if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
 
-        $venta = Venta::find($id);
         $metodoPago = MetodoPago::find($request->metodo_pago);
         $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
 
@@ -678,6 +711,9 @@ class VentasController extends Controller
         $metodoPagoVenta = MetodoPagoVenta::find($id);
         $venta = $metodoPagoVenta->venta;
 
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
+
         $metodoPagoVenta->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'delete',
@@ -696,6 +732,24 @@ class VentasController extends Controller
 
         return redirect()->back()->with('ok', 'Método de Pago eliminado con éxito');
     }
+
+    public function envio($id)
+    {
+        $venta = Venta::find($id);
+        $oldValue = $venta->envio;
+        $venta->envio = ($venta->envio)? null : 1;
+        $venta->save();
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'envio',
+            'former_value' => $oldValue,
+            'updated_value' => $venta->envio
+        ]);
+
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -711,6 +765,9 @@ class VentasController extends Controller
     {
         $metodoPagoVenta = MetodoPagoVenta::find($id);
         $venta = $metodoPagoVenta->venta;
+
+        if(!Auth::user()->can('alter', $venta))
+            return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
 
         if($request['importe'] && $request['importe'] != $metodoPagoVenta->importe) {
             $metodoPagoVenta->updateable()->create([

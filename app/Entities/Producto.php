@@ -28,14 +28,16 @@ class Producto extends Entity
         return number_format($total, 2, ',', '.');
     }
 
-    protected function priceByFee($cuotas = 1)
+    protected function priceByFee($cuotas = 1, $cantidad = 1)
     {
-        return $this->priceInterestFee($cuotas) / $cuotas;
+        $totalPrice = $this->priceInterestFee($cuotas) * $cantidad;
+
+        return $totalPrice / $cuotas;
     }
 
-    public function precioPorCuota($cuotas = 1)
+    public function precioPorCuota($cuotas = 1, $cantidad = 1)
     {
-        return number_format($this->priceByFee($cuotas), 2, ',', '.');
+        return number_format($this->priceByFee($cuotas, $cantidad), 2, ',', '.');
     }
 
     public function hasEtapas()

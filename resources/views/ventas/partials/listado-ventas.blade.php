@@ -51,7 +51,7 @@
                 </td>
                 <td>{!! $venta->fecha_creado !!}</td>
                 <td class="text-right">
-                    <span class="text-primary" style="font-size: 1.1em">${!! $venta->importe_total !!}</span>
+                    <span class="text-primary" style="font-size: 1.1em">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
                 </td>
                 <td class="text-center">
                 @permission('ver.venta')

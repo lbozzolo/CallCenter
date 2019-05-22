@@ -1,3 +1,4 @@
+@can('alter', $venta)
 <div class="row">
     <div class="col-lg-12">
 
@@ -62,6 +63,7 @@
                         </thead>
                         <tbody>
                         @foreach($productosVenta as $group)
+
                             @foreach($group->groupBy('id') as $producto)
                                 <tr>
                                     <td>{!! $producto->first()->nombre !!}</td>
@@ -105,16 +107,16 @@
                                     <td class="text-right">${!! $producto->first()->precio !!}</td>
                                     {{--Una cuota--}}
                                     <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $producto->first()->precioMasInteresCuota(1, $producto->count()) !!}</td>
-                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $producto->first()->precioPorCuota() !!}</td>
+                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $producto->first()->precioPorCuota(1, $producto->count()) !!}</td>
                                     {{--Tres cuotas--}}
                                     <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $producto->first()->precioMasInteresCuota(3, $producto->count()) !!}</td>
-                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $producto->first()->precioPorCuota(3) !!}</td>
+                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $producto->first()->precioPorCuota(3, $producto->count()) !!}</td>
                                     {{--Seis cuotas--}}
                                     <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $producto->first()->precioMasInteresCuota(6, $producto->count()) !!}</td>
-                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $producto->first()->precioPorCuota(6) !!}</td>
+                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $producto->first()->precioPorCuota(6, $producto->count()) !!}</td>
                                     {{--Nueve cuotas--}}
                                     <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $producto->first()->precioMasInteresCuota(9, $producto->count()) !!}</td>
-                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $producto->first()->precioPorCuota(9) !!}</td>
+                                    <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $producto->first()->precioPorCuota(9, $producto->count()) !!}</td>
                                     <td>
                                         @permission('quitar.producto.venta')
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#quitarProducto{{ $producto->first()->id }}" title="Quitar Producto"><i class="fa fa-close"></i> </button>
@@ -146,30 +148,36 @@
                         <tfoot>
                             <tr>
                                 <td colspan="5" class="text-right">Subtotal</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->suma_subtotal_productos !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->suma_subtotal_productos !!}</td>
+                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->subtotalProductos(1) !!}</td>
+                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->subtotalProductosPorCuota(1) !!}</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->subtotalProductos(3) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->subtotalProductos(3) !!}</td>
+                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->subtotalProductosPorCuota(3) !!}</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->subtotalProductos(6) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->subtotalProductos(6) !!}</td>
+                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->subtotalProductosPorCuota(6) !!}</td>
                                 <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->subtotalProductos(9) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->subtotalProductos(9) !!}</td>
+                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->subtotalProductosPorCuota(9) !!}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="text-right">Gastos de envío</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioMasInteres(1) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioMasInteres(1) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->gastosEnvioMasInteres(3) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->gastosEnvioMasInteres(3) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioMasInteres(6) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioMasInteres(6) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->gastosEnvioMasInteres(9) !!}</td>
-                                <td class="text-right" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->gastosEnvioMasInteres(9) !!}</td>
-                                <td></td>
+                                <td colspan="5" class="text-right">
+                                    <span class="@if(!$venta->envio) text-muted @else @endif">Gastos de envío</span>
+                                </td>
+                                <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioFormatted(null, $venta->envio) !!}</td>
+                                <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->gastosEnvioFormatted(null, $venta->envio) !!}</td>
+                                <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->gastosEnvioFormatted(null, $venta->envio) !!}</td>
+                                <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 9)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->gastosEnvioFormatted(null, $venta->envio) !!}</td>
+                                <td class="text-right">
+                                    <a href="{!! route('ventas.envio', $venta->id) !!}"
+                                       style="display: inline-block"
+                                       type="button"
+                                       class="btn btn-sm @if($venta->envio) btn-danger @else btn-success @endif"
+                                       title="Quitar Envío">
+                                        <i class="fa @if($venta->envio != null) fa-close @else fa-plus @endif"></i>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="text-right">TOTAL</td>
+                                <td colspan="5" class="text-right">TOTAL (con ajuste)</td>
                                 <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 1)? 'dodgerblue' : 'gray' !!}">${!! $venta->totalPorCuotas(1) !!}</td>
                                 <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 3)? 'dodgerblue' : 'dimgray' !!}">${!! $venta->totalPorCuotas(3) !!}</td>
                                 <td colspan="2" class="text-center" style="background-color: {!! ($venta->plan_cuotas == 6)? 'dodgerblue' : 'gray' !!}">${!! $venta->totalPorCuotas(6) !!}</td>
@@ -234,3 +242,4 @@
 
     </div>
 </div>
+@endcan

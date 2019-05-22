@@ -3,10 +3,7 @@
         <ul class="list-inline panel panel-barra">
             @if($venta->estado->slug != 'cancelada')
                 <li>
-                    <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#cierreVenta">
-                        <i class="fa fa-legal"></i>
-                        Legales
-                    </button>
+                    <button type="button" class="btn btn-warning btn-outline btn-flat" data-toggle="modal" data-target="#cierreVenta">LEGALES</button>
                 </li>
                 @permission('aceptar.venta')
                 @if($venta->statusIs('iniciada'))
@@ -17,7 +14,7 @@
                 @endpermission
                 @permission('cancelar.venta')
                 <li>
-                    <button type="button" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#cancelarVenta">
+                    <button type="button" class="btn btn-danger btn-outline btn-flat" data-toggle="modal" data-target="#cancelarVenta">
                         <i class="fa fa-ban"></i>
                         Cancelar venta
                     </button>

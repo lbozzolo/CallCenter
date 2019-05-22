@@ -6,7 +6,9 @@
             <li><button class="nonStyledButton" style="color:cyan" id="botonNuevaTarjeta"><i class="fa fa-plus"></i> Agregar</button> </li>
             @endpermission
         </ul>
+        @if($venta->cliente->hasCard('credito') || $venta->cliente->hasCard('debito'))
         <h4>Tarjetas asociadas</h4>
+        @endif
     </div>
     <div class="card-body">
 
@@ -14,6 +16,7 @@
         @include('ventas.partials.agregar-tarjeta-asociada')
         @endpermission
 
+        @if($venta->cliente->hasCard('credito') || $venta->cliente->hasCard('debito'))
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -28,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($venta->cliente->hasCard('credito') || $venta->cliente->hasCard('debito'))
+
                     @foreach($venta->cliente->datosTarjeta as $tarjeta)
 
                         <tr id="showTarjetaAsociada{!! $tarjeta->id !!}" class="showTarjetaAsociada">
@@ -77,12 +80,13 @@
                         @endpermission
 
                     @endforeach
-                @else
-                    <span class="text-muted">No hay ninguna tarjeta asociada a este cliente</span><br>
-                @endif
+
                 </tbody>
             </table>
         </div>
+        @else
+            <span class="text-muted">No hay ninguna tarjeta asociada a este cliente</span><br>
+        @endif
 
     </div>
 </div>
