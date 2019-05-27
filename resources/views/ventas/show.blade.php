@@ -24,6 +24,45 @@
                             Venta #{!! $venta->id !!}
                             <small class="text-muted"> / operador: {!! $venta->user->full_name !!}</small>
                         </h3>
+                        @if($venta->statusIs('iniciada'))
+
+                            @permission('cancelar.venta')
+                            <div style="margin-top: 15px">
+                                <button type="button" class="btn btn-danger btn-outline btn-flat" data-toggle="modal" data-target="#cancelarVenta">
+                                    <i class="fa fa-ban"></i>
+                                    Cancelar venta
+                                </button>
+                                <div class="modal fade col-lg-3 col-lg-offset-4" id="cancelarVenta">
+                                    <div class="card">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Cancelar venta</h4>
+                                        </div>
+                                        {!! Form::open(['url' => route('ventas.cancelar'), 'method' => 'put']) !!}
+                                        <div class="modal-body">
+                                            <p>¿Desea cancelar esta venta?</p>
+                                            {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de la cancelación']) !!}
+                                            <small class="text-warning">* El motivo es obligatorio</small>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {!! Form::hidden('venta_id', $venta->id) !!}
+                                            <button type="submit" class="btn btn-danger pull-left">Cancelar venta</button>
+                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                                @permission('aceptar.venta')
+
+                                @include('ventas.partials.aceptar-venta')
+
+                                @endpermission
+                            </div>
+                            @endpermission
+
+
+
+                        @endif
                     </div>
                     <div class="col-lg-3 col-md-12 text-right">
                         <span class="text-primary" style="font-size: 2.5em">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
@@ -103,6 +142,7 @@
 
             </div>
 
+            @if($venta->totalPorCuotas($venta->plan_cuotas) > 0)
             <div class="col-lg-6">
                 <div class="col-12">
                     <div class="card card-default">
@@ -114,6 +154,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             @if(Auth::user()->is('admin|superadmin'))
             <div class="col-lg-6">
@@ -179,13 +220,15 @@
             </div>
         </div>
 
-        <div class="row">
+        @if($venta->productos->count())
+        <div class="row" style="margin-bottom: 10px">
             <div class="col-lg-12">
 
                 @include('ventas.partials.panel-metodos-de-pago')
 
             </div>
         </div>
+        @endif
 
         @can('alter', $venta)
         <div class="nav-tabs-custom">

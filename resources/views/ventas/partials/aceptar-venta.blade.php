@@ -5,18 +5,34 @@
 </button>
 <div class="modal fade col-lg-5 col-lg-offset-4" id="aceptarVenta">
     <div class="card">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Aceptar venta</h4>
-        </div>
 
-        @if(!$venta->plan_cuotas)
+        @if(!$venta->plan_cuotas || $venta->totalPorCuotas($venta->plan_cuotas) <= 0 || $venta->metodoPagoVenta->count() == 0 || count($productosVenta) == 0)
 
             <div class="card">
                 <div class="card-body">
-                    <i class="fa fa-exclamation-triangle text-danger"></i>
-                    <span class="text-warning lead">ATENCION. No se puede aceptar la venta. Debe seleccionar al menos un plan de cuotas.</span>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Entendido</button>
+                    <div class="panel panel-body">
+                        <i class="fa fa-exclamation-triangle text-danger"></i>
+                        <span class="text-warning lead">ATENCION. No se puede aceptar la venta.</span>
+                    </div>
+
+                    <p class="lead">¿Por qué?</p>
+                    <ul>
+                        @if(!$venta->plan_cuotas)
+                            <li>- No ha seleccionado un plan de cuotas aún.</li>
+                        @endif
+                        @if($venta->totalPorCuotas($venta->plan_cuotas) <= 0)
+                            <li>- El importe de la venta es igual a cero.</li>
+                        @endif
+                        @if($venta->metodoPagoVenta->count() == 0)
+                            <li>- No hay ningún método de pago seleccionado</li>
+                        @endif
+                        @if(count($productosVenta) == 0)
+                            <li>- No hay productos cargados.</li>
+                        @endif
+                    </ul>
+                </div>
+                <div class="card ">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Entendido <i class="fa fa-thumbs-up"></i></button>
                 </div>
             </div>
 
@@ -85,7 +101,8 @@
                     <p class="panel panel-barra" style="margin-bottom: 0px">Importes totales</p>
                     <ul class="list-unstyled listado">
                         <li class="list-group-item">
-                            Total productos + gastos de envío - ajuste:
+                            Total productos + gastos de envío
+                            @if($venta->ajuste) ( + AJUSTE = <span class="text-warning">${!! $venta->ajuste !!}</span> )  @endif
                             <span class="pull-right">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
                         </li>
                         <li class="list-group-item">

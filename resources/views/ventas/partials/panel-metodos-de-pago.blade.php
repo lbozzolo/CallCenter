@@ -173,7 +173,8 @@
                             <span class="text-muted">AJUSTE ACTUAL: $ {!! $venta->ajuste !!}</span>
 
                         </td>
-                        <td class="text-right lead">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</td>
+                        {{--<td class="text-right lead">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</td>--}}
+                        <td class="text-right lead">${!! $venta->sumaMetodosDePago() !!}</td>
                         <td>
 
                             @if($venta->ajuste == 0.00)

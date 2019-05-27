@@ -22,6 +22,13 @@ class Venta extends Entity
         return $total + $envio;
     }
 
+    public function totalSinAjuste($numero_cuotas = 1)
+    {
+        $envio = ($this->envio)? config('sistema.ventas.gastosEnvio') : 0;
+        $total = ($this->subtotalProducts($numero_cuotas) == 0) ? $this->subtotalProducts($numero_cuotas) : $this->subtotalProducts($numero_cuotas);
+        return $total + $envio;
+    }
+
     public function totalPorCuotas($numero_cuotas = 1)
     {
         return number_format($this->total($numero_cuotas), 2, ',', '.');
@@ -40,7 +47,7 @@ class Venta extends Entity
 
     public function subtotalProductosMasGastosEnvio($cuotas)
     {
-        $result = ($this->envio)? $this->subtotalProducts($cuotas) + config('sistema.ventas.gastosEnvio') : $this->total($cuotas);
+        $result = ($this->envio)? $this->subtotalProducts($cuotas) + config('sistema.ventas.gastosEnvio') : $this->totalSinAjuste($cuotas);
         return number_format($result, 2, ',', '.');
     }
 

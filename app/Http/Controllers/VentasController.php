@@ -649,6 +649,9 @@ class VentasController extends Controller
         if(!Auth::user()->can('alter', $venta))
             return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
 
+        if(!$venta->productos->count())
+            return redirect()->back()->withErrors('No puede agregar un método de pago si no ha ingresado ningún producto a la venta aún.')->withInput();
+
         $validator = Validator::make($request->all(), [
             'metodo_pago' => 'required',
             'importe' => 'required|integer|min:1',
@@ -677,7 +680,7 @@ class VentasController extends Controller
         $metodoPagoVenta = MetodoPagoVenta::create([
             'venta_id' => $id,
             'metodopago_id' => $request->metodo_pago,
-            'datostarjeta_id' => ($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito')? $request->datos_tarjeta_id : null,
+            'datostarjeta_id' => ($metodoPago->isCardMethod())? $request->datos_tarjeta_id : null,
             'formadepago_id' => ($tarjetaYcuotas)? $tarjetaYcuotas->id : null,
             'importe' => $request->importe
         ]);
