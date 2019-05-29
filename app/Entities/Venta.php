@@ -111,6 +111,16 @@ class Venta extends Entity
         return $this->estado->slug == $status;
     }
 
+    public function closed()
+    {
+        return VentaCerrada::where('venta_id', '=', $this->id)->first();
+    }
+
+    public function isClosed()
+    {
+        return ($this->closed())? true : false;
+    }
+
     // Viejas funciones
 
     protected function subtotal()

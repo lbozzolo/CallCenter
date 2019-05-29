@@ -305,6 +305,14 @@ class ClientesController extends Controller
     public function eliminarTarjeta(Request $request, $id)
     {
         $datoTarjeta = DatoTarjeta::find($id);
+        $ventas = $datoTarjeta->cliente->ventas;
+
+        $cerradas = $ventas->filter(function ($venta) {
+            return $venta->isClosed();
+        });
+
+        if($cerradas)
+            return redirect()->back()->withErrors('No se puede eliminar la tarjeta ya que se encuentra asociada a ventas que aún no han sido cerradas. Para considerar cerrada una venta, la misma debe estar facturada.');
 
         $datoTarjeta->updateable()->create([
             'user_id' => Auth::user()->id,

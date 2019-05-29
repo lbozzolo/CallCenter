@@ -391,8 +391,8 @@ class CreateForeignKeys extends Migration
             $table->foreign('venta_cerrada_id')
                 ->references('id')
                 ->on('ventas_cerradas')
-                ->onUpdate('NO ACTION')
-                ->onDelete('NO ACTION');
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
         });
     }
     /**

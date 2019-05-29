@@ -26,7 +26,7 @@
 
     @else
 
-        <div class="card">
+        <div class="card" style="{!! ($venta->cobrada)? 'border-top: 1px solid #1de9b6' : 'border-top: 3px solid orangered;' !!}">
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
@@ -172,8 +172,8 @@
                                     @else
 
                                         <div style="margin-bottom: 5px">
-                                            <span class="text-warning">Venta COBRADA</span> -
-                                            <span class=" ">Nº de TRANSACCIÓN: {!! $venta->numero_transaccion !!}</span>
+                                            <span class="text-success">Venta COBRADA</span> -
+                                            <span class="text-warning">Nº de TRANSACCIÓN: {!! $venta->numero_transaccion !!}</span>
                                         </div>
 
                                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deshacerCobrada">Marcar como NO COBRADA</button>
