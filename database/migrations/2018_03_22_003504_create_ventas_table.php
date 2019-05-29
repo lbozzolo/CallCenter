@@ -27,6 +27,8 @@ class CreateVentasTable extends Migration
             $table->integer('plan_cuotas')->nullable();
             $table->float('ajuste');
             $table->tinyInteger('cobrada')->default(0);
+            $table->string('numero_transaccion')->nullable();
+            $table->string('motivo')->nullable();
             $table->softDeletes();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

@@ -172,6 +172,35 @@
                 </div>
             </li>
         @endif
+            @if($item->action == 'update' && $item->field == 'cobrada')
+                <li>
+                    @if($item->updated_value == false)
+                        <div class="timeline-badge danger"><i class="fa fa-exclamation-triangle"></i></div>
+                    @else
+                        <div class="timeline-badge success"><i class="fa fa-check"></i></div>
+                    @endif
+                    <div class="timeline-panel" style="background-color: #404a6b">
+                        <div class="timeline-heading">
+                            <p class="pull-right">
+                                <i class="glyphicon glyphicon-time"></i>
+                                <small> {!! $item->fecha_creado !!}</small> -
+                                <small> {!! $item->hora_created !!} hs</small>
+                            </p>
+                            @if($item->updated_value == false)
+                                <h4 style="color: white!important;">Se marcó la venta como <span class="text-danger">NO COBRADA</span></h4>
+                                <span class="text-muted">por {!! $item->author->fullname !!}</span>
+                            @else
+                                <h4 style="color: white!important;">Se marcó la venta como <span class="text-success">COBRADA</span></h4>
+                                <span class="text-muted">por {!! $item->author->fullname !!}</span>
+                                <ul class="list-inline listado-timeline">
+                                    <li>Nº de transacción: #{!! $item->reason !!}</li>
+                                </ul>
+                            @endif
+
+                        </div>
+                    </div>
+                </li>
+            @endif
         @if($item->action == 'add' && $item->related_model_type == 'reclamo')
             <li>
                 <div class="timeline-badge info"><i class="fa fa-plus"></i></div>

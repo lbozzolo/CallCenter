@@ -1,8 +1,8 @@
 <div class="header">
     <div class="pull-left">
         <div class="logo" style="padding: 5px 10px; margin:  10px">
-            <a href="#">
-                <img src="{{ asset('img/logo_sis.png') }}" alt="Smartline"  height="30px">
+            <a href="{!! route('/') !!}">
+                <img src="{{ asset('img/logo-crm.png') }}" alt="Smartline"  height="38px">
             </a>
         </div>
         <div class="hamburger sidebar-toggle">

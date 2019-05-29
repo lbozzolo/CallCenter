@@ -181,6 +181,12 @@ Route::post('ventas/{id}/numero-guia', [
     'middleware' => 'permission:editar.venta'
 ]);
 
+Route::put('ventas/{id}/cobrar', [
+    'as' => 'ventas.cambiar.cobrada',
+    'uses' => 'VentasController@cobrar',
+    'middleware' => 'permission:editar.venta'
+]);
+
 Route::put('ventas/cancelar-venta', [
     'as' => 'ventas.cancelar',
     'uses' => 'VentasController@cancelar',

@@ -324,6 +324,40 @@ class VentasController extends Controller
         return redirect()->back()->with('ok', 'Número de Guía guardado con éxito');
     }
 
+    public function cobrar(Request $request, $id)
+    {
+        $venta = Venta::find($id);
+        $old = $venta->cobrada;
+
+        $validator = Validator::make($request->all(), [
+            'numero_transaccion' => ($venta->cobrada)? '' : 'required|max:50',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        if(!$venta->cobrada){
+            $venta->cobrada = true;
+            $venta->numero_transaccion = $request->numero_transaccion;
+        } else {
+            $venta->cobrada = false;
+            $venta->numero_transaccion = null;
+        }
+
+        $venta->save();
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'cobrada',
+            'former_value' => $old,
+            'updated_value' => $venta->cobrada,
+            'reason' => $venta->numero_transaccion
+        ]);
+
+        return redirect()->back();
+    }
+
     public function editarModos(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -582,18 +616,17 @@ class VentasController extends Controller
             return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
 
         $estado = EstadoVenta::find($request->estado_id);
-
         $estadoAnterior = $venta->estado->slug;
+
 
         // Redirecciono atrás si el cliente no tiene un barrio en sus datos personales
         if($estadoAnterior == 'iniciada' && (!$venta->cliente->domicilio || !$venta->cliente->domicilio->barrio))
             return redirect()->back()->withErrors('No se puede realizar la operación. El Cliente no tiene ingresado un barrio en sus datos personales.');
 
-        if($estado->slug == 'cancelada'){
-            $validator = Validator::make($request->all(), [
-                'motivo' => 'required|max:255',
-            ]);
+        // Requiero 'motivo' si la venta está siendo marcada como cancelada o rechazada
+        if($estado->isInArray(['cancelada', 'rechazada'])){
 
+            $validator = Validator::make($request->all(), ['motivo' => 'required|max:255',]);
             if ($validator->fails())
                 return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -613,13 +646,15 @@ class VentasController extends Controller
             if($estado->slug == 'facturada')
                 $this->ventaRepo->cerrarVenta($venta->id);
 
+            $venta->motivo = ($estado->isInArray(['cancelada', 'rechazada', 'noentregado', 'devuelto']))? $request->motivo : null;
+
         }
 
         $venta->estado_id = $estado->id;
         $venta->save();
 
-        if($venta->statusIs('desconocimiento'))
-            $this->clienteRepo->disable($venta->cliente->id, 'Desconocimiento de venta');
+//        if($venta->statusIs('desconocimiento'))
+//            $this->clienteRepo->disable($venta->cliente->id, 'Desconocimiento de venta');
 
         return redirect()->back()->with('El Estado de la venta ha sido actualizado');
     }

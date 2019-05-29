@@ -18,23 +18,25 @@
                         <i class="fa fa-ban"></i>
                         Cancelar venta
                     </button>
-                    <div class="modal fade col-lg-3 col-lg-offset-4" id="cancelarVenta">
+                    <div class="modal fade col-lg-3 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="cancelarVenta">
                         <div class="card">
-                            <div class="modal-header">
+
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">Cancelar venta</h4>
-                            </div>
+
                             {!! Form::open(['url' => route('ventas.cancelar'), 'method' => 'put']) !!}
-                            <div class="modal-body">
+                            <div class="form-group">
                                 <p>¿Desea cancelar esta venta?</p>
                                 {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de la cancelación']) !!}
                                 <small class="text-warning">* El motivo es obligatorio</small>
                             </div>
-                            <div class="modal-footer">
+
+                            <div class="form-group">
                                 {!! Form::hidden('venta_id', $venta->id) !!}
-                                <button type="submit" class="btn btn-danger pull-left">Cancelar venta</button>
-                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-danger ">Cancelar venta</button>
+                                <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
                             </div>
+
                             {!! Form::close() !!}
                         </div>
                     </div>

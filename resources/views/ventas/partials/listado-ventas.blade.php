@@ -13,10 +13,10 @@
             <th>Operador</th>
             <th>Cliente</th>
             <th>Productos</th>
-            <th>Etapa</th>
             <th>Reclamos</th>
             <th>Fecha</th>
             <th>Total</th>
+            <th>Cobrada</th>
             <th>Opciones</th>
         </tr>
         </thead>
@@ -43,7 +43,6 @@
                     @endif
                 @endpermission
                 </td>
-                <td class="text-center">{!! ($venta->etapa)? $venta->etapa->nombre : '-' !!}</td>
                 <td class="text-center">
                 @permission('ver.reclamos.venta')
                     <a href="{!! route('ventas.reclamos', $venta->id) !!}" style="color:cyan">{!! ($venta->reclamos)? $venta->reclamos_abiertos : '0' !!}</a>
@@ -52,6 +51,14 @@
                 <td>{!! $venta->fecha_creado !!}</td>
                 <td class="text-right">
                     <span class="text-primary" style="font-size: 1.1em">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>
+
+                </td>
+                <td class="text-center">
+                    @if(!$venta->cobrada)
+                        <span class="text-warning" title="Venta pendiente de cobro"><i class="fa fa-exclamation-triangle"></i> </span>
+                    @else
+                        <span class="text-success" title="Venta cobrada"><i class="fa fa-check"></i> </span>
+                    @endif
                 </td>
                 <td class="text-center">
                 @permission('ver.venta')

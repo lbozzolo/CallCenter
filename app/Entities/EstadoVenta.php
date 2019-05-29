@@ -12,6 +12,15 @@ class EstadoVenta extends Entity
         return config('sistema.ventas.estados.'.$this->slug);
     }
 
+    public function isInArray($array = [])
+    {
+        foreach($array as $item){
+            if($this->slug == $item)
+                return true;
+        }
+        return false;
+    }
+
     public function getName($id)
     {
         return $this->find($id)->nombre;
