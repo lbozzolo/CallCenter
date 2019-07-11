@@ -429,18 +429,12 @@ class VentasController extends Controller
     public function aceptar(Request $request)
     {
         $venta = Venta::find($request->venta_id);
+        $messageError = $this->ventaRepo->checkIfValid($venta);
 
-        if(!$venta->metodoPagoVenta->count())
-            return redirect()->back()->withErrors('No se puede aceptar la venta. No tiene ingresado ningún método de pago');
-
-        if(!$venta->plan_cuotas)
-            return redirect()->back()->withErrors('No se puede aceptar la venta. Debe seleccionar al menos un plan de cuotas');
+        if($messageError)
+            return redirect()->back()->withErrors($messageError);
 
         $auditable = EstadoVenta::where('slug', 'auditable')->first();
-
-        // Redirecciono atrás si la tarjeta está vencida
-        if($this->ventaRepo->hasExpiredCardInMethod($venta->metodoPagoVenta))
-            return redirect()->back()->withErrors('No se puede aceptar la venta porque la tarjeta ingresada está vencida');
 
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,

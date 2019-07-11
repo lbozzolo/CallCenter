@@ -225,4 +225,21 @@ class VentaRepo extends BaseRepo
         return false;
     }
 
+    public function checkIfValid($venta)
+    {
+        $message = null;
+
+        if(!$venta->metodoPagoVenta->count())
+            $message = 'No se puede aceptar la venta. No tiene ingresado ningún método de pago';
+
+        if(!$venta->plan_cuotas)
+            $message = 'No se puede aceptar la venta. Debe seleccionar al menos un plan de cuotas';
+
+        if($this->hasExpiredCardInMethod($venta->metodoPagoVenta))
+            $message = 'No se puede aceptar la venta porque la tarjeta ingresada está vencida';
+
+        return $message;
+
+    }
+
 }
