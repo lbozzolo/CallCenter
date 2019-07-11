@@ -263,7 +263,6 @@ class ClientesController extends Controller
         $cliente = Cliente::find($id);
 
         $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', '01/'.$request->fecha_expiracion)->toDateTimeString() : null;
-
         $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
 
         if(!$validateCreditCard)

@@ -1,6 +1,6 @@
 <base href="{{ asset('') }}">
 <meta charset="UTF-8">
-<title>SmartLine</title>
+<title>Coefix-CRM</title>
 
 @yield('header')
 

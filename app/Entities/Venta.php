@@ -121,6 +121,11 @@ class Venta extends Entity
         return ($this->closed())? true : false;
     }
 
+    public function canAccept()
+    {
+        return $this->plan_cuotas && $this->totalPorCuotas($this->plan_cuotas) > 0 && $this->metodoPagoVenta->count() && $this->productos->groupBy('id')->count() && $this->cobrada;
+    }
+
     // Viejas funciones
 
     protected function subtotal()
@@ -255,5 +260,10 @@ class Venta extends Entity
     public function updateable()
     {
         return $this->morphMany('\SmartLine\Entities\Updateable', 'updateable');
+    }
+
+    public function ventaCerrada()
+    {
+        return $this->hasMany(VentaCerrada::class);
     }
 }

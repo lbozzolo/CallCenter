@@ -32,7 +32,7 @@ class ReclamosController extends Controller
 
     public function index($estado = null)
     {
-        if(Auth::user()->is('operador.in'))
+        if(Auth::user()->is(['operador.in', 'operador.out']))
             return redirect()->route('reclamos.index.operador', $estado);
 
         $estadoReclamo = ($estado)? EstadoReclamo::where('slug', $estado)->first() : EstadoReclamo::where('slug', 'abierto')->first();

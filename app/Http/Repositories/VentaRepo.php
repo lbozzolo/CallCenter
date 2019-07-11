@@ -186,23 +186,43 @@ class VentaRepo extends BaseRepo
         return $venta;
     }
 
-    public function quitarAjuste($id)
+    public function quitarAjuste($id, $active = true)
     {
         $venta = Venta::find($id);
         $nuevoAjuste = 0.00;
 
-        $venta->updateable()->create([
-            'user_id' => Auth::user()->id,
-            'action' => 'delete',
-            'field' => 'ajuste',
-            'former_value' => $venta->ajuste,
-            'updated_value' => $nuevoAjuste
-        ]);
+        if($active){
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'delete',
+                'field' => 'ajuste',
+                'former_value' => $venta->ajuste,
+                'updated_value' => $nuevoAjuste
+            ]);
+        }
 
         $venta->ajuste = $nuevoAjuste;
         $venta->save();
 
         return $venta;
+    }
+
+    public function isInvoicedSale($oldEstado, $newEstado)
+    {
+        return $oldEstado->isInArray(['facturada', 'enviada', 'entregado', 'noentregado', 'devuelto', 'desconocimiento']) && !$newEstado->isInArray(['enviada', 'entregado', 'noentregado', 'devuelto', 'desconocimiento']);
+    }
+
+    public function hasExpiredCardInMethod($metodos)
+    {
+        foreach($metodos as $metodo){
+            if($metodo->datostarjeta_id){
+                if($metodo->datosTarjeta->isExpired()){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }

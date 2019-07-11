@@ -68,6 +68,12 @@
             </div>
         </div>
 
+        <div class="card panel panel-barra">
+
+            @include('ventas.partials.cobrar-venta')
+
+        </div>
+
         @include('ventas.partials.navbar-panel')
 
 

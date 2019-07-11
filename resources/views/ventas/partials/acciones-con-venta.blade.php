@@ -96,6 +96,68 @@
         </div>
     </div>
 
+    <div style="display: inline-block;">
+        <button type="button" class="btn btn-danger btn-outline" data-toggle="modal" data-target="#marcarComoAuditable">
+            <label class="label estadoVentas" data-estado="auditable">AUDITABLE</label>
+        </button>
+        <div class="modal fade col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="marcarComoAuditable">
+            <div class="card text-left">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Marcar venta como auditable</h4>
+
+                <div class="card card-body">
+                    {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                    <div class="form-group">
+                        <p>¿Desea marcar esta venta como AUDITABLE?</p>
+                        {!! Form::hidden('estado_id', 3) !!}
+                        {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo.']) !!}
+                        <small class="text-warning">* El motivo es obligatorio</small>
+                    </div>
+                    <div class="form-group">
+                        {!! Form::hidden('venta_id', $venta->id) !!}
+                        <button type="submit" class="btn btn-primary ">Aceptar</button>
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="display: inline-block;">
+        <button type="button" class="btn btn-danger btn-outline" data-toggle="modal" data-target="#marcarComoCancelada">
+            <label class="label estadoVentas" data-estado="cancelada">CANCELADA</label>
+        </button>
+        <div class="modal fade col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="marcarComoCancelada">
+            <div class="card text-left">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cancelar venta</h4>
+
+                <div class="card card-body">
+                    {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                    <div class="form-group">
+                        <p>¿Desea cancelar esta venta?</p>
+                        {!! Form::hidden('estado_id', 2) !!}
+                        {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de cancelación.']) !!}
+                        <small class="text-warning">* El motivo es obligatorio</small>
+                    </div>
+                    <div class="form-group">
+                        {!! Form::hidden('venta_id', $venta->id) !!}
+                        <button type="submit" class="btn btn-primary ">Aceptar</button>
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @endif
 
 @if(Auth::user()->is('logistica|superadmin') && $venta->statusIs('facturada'))

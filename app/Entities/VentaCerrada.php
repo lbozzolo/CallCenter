@@ -12,5 +12,10 @@ class VentaCerrada extends Entity
         return $this->hasMany(VentaCerradaProducto::class, 'venta_cerrada_id');
     }
 
+    public function venta()
+    {
+        return $this->belongsTo(Venta::class);
+    }
+
 
 }

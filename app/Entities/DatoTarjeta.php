@@ -1,6 +1,7 @@
 <?php
 
 namespace SmartLine\Entities;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class DatoTarjeta extends Entity
@@ -32,6 +33,13 @@ class DatoTarjeta extends Entity
             return 'XXX';
 
         return $codigoSeguridad;
+    }
+
+    public function isExpired()
+    {
+        $fecha_expiracion = Carbon::parse($this->fecha_expiracion)->format('m/Y');
+        $today = Carbon::today()->format('m/Y');
+        return $fecha_expiracion <= $today;
     }
 
     public function getExpirationDateAttribute()

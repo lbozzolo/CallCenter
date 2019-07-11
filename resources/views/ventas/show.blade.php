@@ -26,7 +26,7 @@
 
     @else
 
-        <div class="card" style="{!! ($venta->cobrada)? 'border-top: 1px solid #1de9b6' : 'border-top: 3px solid orangered;' !!}">
+        <div class="card" style="{!! ($venta->cobrada)? 'border-top: 1px solid #1de9b6' : 'border-top: 1px solid orangered;' !!}">
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
@@ -38,7 +38,8 @@
                         @if($venta->motivo)
                             Motivo: <span class="text-danger"> {!! $venta->motivo !!}</span>
                         @endif
-                        @if($venta->statusIs('iniciada'))
+                        {{--@if($venta->statusIs('iniciada') || $venta->statusIs('rechazada'))--}}
+                        @if($venta->estado->isInArray(['iniciada','rechazada']))
 
                             @permission('cancelar.venta')
                             <div style="margin-top: 15px">
@@ -46,24 +47,30 @@
                                     <i class="fa fa-ban"></i>
                                     Cancelar venta
                                 </button>
-                                <div class="modal fade col-lg-3 col-lg-offset-4" id="cancelarVenta">
-                                    <div class="card">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title">Cancelar venta</h4>
+                                <div class="modal fade col-lg-6 col-lg-offset-3" id="cancelarVenta">
+                                    <div class="card card-body">
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Cancelar venta</h4>
+
+                                        <div class="card card-body">
+                                            {!! Form::open(['url' => route('ventas.cancelar'), 'method' => 'put']) !!}
+
+                                            <div class="form-group">
+                                                <p>¿Desea cancelar esta venta?</p>
+                                                {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de la cancelación']) !!}
+                                                <small class="text-warning">* El motivo es obligatorio</small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                {!! Form::hidden('venta_id', $venta->id) !!}
+                                                <button type="submit" class="btn btn-danger ">Cancelar venta</button>
+                                                <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+                                            </div>
+
+                                            {!! Form::close() !!}
                                         </div>
-                                        {!! Form::open(['url' => route('ventas.cancelar'), 'method' => 'put']) !!}
-                                        <div class="modal-body">
-                                            <p>¿Desea cancelar esta venta?</p>
-                                            {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de la cancelación']) !!}
-                                            <small class="text-warning">* El motivo es obligatorio</small>
-                                        </div>
-                                        <div class="modal-footer">
-                                            {!! Form::hidden('venta_id', $venta->id) !!}
-                                            <button type="submit" class="btn btn-danger pull-left">Cancelar venta</button>
-                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                        {!! Form::close() !!}
+
                                     </div>
                                 </div>
                                 @permission('aceptar.venta')
@@ -103,16 +110,7 @@
                 <div class="col-12">
                     <div class="card card-default" style="min-height: 310px">
                         <div class="card-header">
-                            <ul class="list-inline">
-                                <li>
-                                    <h3 class="card-title">Información general</h3>
-                                </li>
-                                <li class="pull-right">
-                                    {{--@if($venta->totalPorCuotas($venta->plan_cuotas) > 0)--}}
-                                        {{--@include('ventas.partials.acciones-con-venta')--}}
-                                    {{--@endif--}}
-                                </li>
-                            </ul>
+                            <h3 class="card-title">Información general</h3>
                         </div>
                         <div class="card-body">
                             <ul class="list-unstyled listado">
@@ -121,7 +119,9 @@
                                 <li class="list-group-items">
                                     <div class="panel-body text-center">
                                         @if($venta->totalPorCuotas($venta->plan_cuotas) > 0)
+
                                             @include('ventas.partials.acciones-con-venta')
+
                                         @endif
                                     </div>
                                 </li>
@@ -141,65 +141,7 @@
                                 @permission('editar.venta')
                                 <li class="list-group-item panel panel-barra">
 
-                                    @if(!$venta->cobrada)
-
-                                        <div class="text-warning">Esta venta está pendiente de cobro</div>
-                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#marcarComoCobrada">Marcar como COBRADA</button>
-                                        <div class="modal fade col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="marcarComoCobrada">
-                                            <div class="card text-left">
-
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title">Marcar esta venta como Cobrada</h4>
-
-                                                <div class="card card-body">
-                                                    {!! Form::open(['url' => route('ventas.cambiar.cobrada', $venta->id), 'method' => 'put']) !!}
-                                                    <div class="form-group">
-                                                        <p>¿Desea marcar esta venta como COBRADA?</p>
-                                                        {!! Form::text('numero_transaccion', ($venta->numero_transaccion)? $venta->numero_transaccion :null, ['style' => 'width: 100%; border: 1px solid #262c3f; padding: 5px 10px', 'placeholder' => 'Ingrese el número de transacción']) !!}
-                                                        <span class="text-danger">* campo obligatorio</span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary ">Aceptar</button>
-                                                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
-                                                    </div>
-
-                                                    {!! Form::close() !!}
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    @else
-
-                                        <div style="margin-bottom: 5px">
-                                            <span class="text-success">Venta COBRADA</span> -
-                                            <span class="text-warning">Nº de TRANSACCIÓN: {!! $venta->numero_transaccion !!}</span>
-                                        </div>
-
-                                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deshacerCobrada">Marcar como NO COBRADA</button>
-                                        <div class="modal fade col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="deshacerCobrada">
-                                            <div class="card text-left">
-
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title">Marcar esta venta como NO Cobrada</h4>
-
-                                                <div class="card card-body">
-                                                    {!! Form::open(['url' => route('ventas.cambiar.cobrada', $venta->id), 'method' => 'put']) !!}
-                                                    <div class="form-group">
-                                                        <p>¿Desea marcar esta venta como NO COBRADA?</p>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary ">Aceptar</button>
-                                                        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
-                                                    </div>
-
-                                                    {!! Form::close() !!}
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    @endif
+                                    @include('ventas.partials.cobrar-venta')
 
                                 </li>
                                 @endpermission
@@ -238,50 +180,52 @@
                             {{--</ul>--}}
                             {{--@endpermission--}}
 
-                            @if(Auth::user()->is('admin|superadmin'))
-                                <div class="col-lg-12 panel panel-barra">
 
-                                    @permission('editar.venta')
-
-                                        <div class="panel panel-barra">
-                                            @permission('cambiar.estado.venta')
-                                            <p>Marcar esta venta como...</p>
-
-                                            {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
-                                            <div class="form-group">
-                                                <div class="input-group input-group">
-                                                    {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2b', 'id' => 'selectEstados']) !!}
-                                                    <span class="input-group-btn">
-                                                        <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                {!! Form::text('motivo', null, ['id' => 'cancelacion', 'class' => 'form-control', 'placeholder' => 'De ser necesario, describa aquí el motivo del cambio de estado']) !!}
-                                            </div>
-                                            {!! Form::close() !!}
-
-                                            @elsepermission
-
-                                            <p>
-                                                Esta venta se encuentra en estado
-                                                <span class="h1 label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>.
-                                                Usted no tiene los pemisos requeridos para cambiar su estado.
-                                            </p>
-
-                                            @endpermission
-                                        </div>
-
-                                    @endpermission
-
-                                </div>
-                            @endif
 
                         </div>
 
                     </div>
 
                 </div>
+
+                @if(Auth::user()->is('admin|superadmin'))
+                    <div class="col-lg-12 panel panel-barra" style="margin-top: 8px">
+
+                        @permission('editar.venta')
+
+                        <div class="panel panel-barra">
+                            @permission('cambiar.estado.venta')
+                            <p>Marcar esta venta como...</p>
+
+                            {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
+                            <div class="form-group">
+                                <div class="input-group input-group">
+                                    {!! Form::select('estado_id', $estados, $venta->estado_id, ['class' => 'form-control select2b', 'id' => 'selectEstados']) !!}
+                                    <span class="input-group-btn">
+                                                        <button type="submit" class="btn btn-primary btn-flag">Aplicar</button>
+                                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::text('motivo', null, ['id' => 'cancelacion', 'class' => 'form-control', 'placeholder' => 'De ser necesario, describa aquí el motivo del cambio de estado']) !!}
+                            </div>
+                            {!! Form::close() !!}
+
+                            @elsepermission
+
+                            <p>
+                                Esta venta se encuentra en estado
+                                <span class="h1 label estadoVentas" data-estado="{!! $venta->estado->slug !!}">{!! ($venta->estado)? $venta->estado->nombre : '' !!}</span>.
+                                Usted no tiene los pemisos requeridos para cambiar su estado.
+                            </p>
+
+                            @endpermission
+                        </div>
+
+                        @endpermission
+
+                    </div>
+                @endif
 
 
             </div>

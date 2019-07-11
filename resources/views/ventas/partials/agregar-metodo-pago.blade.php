@@ -46,7 +46,7 @@
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                 <div class="form-group">
                     {!! Form::label('importe', 'Importe') !!}
-                    {!! Form::text('importe', null, ['min' => 1, 'class' => 'form-control', 'id' => 'inputImporte']) !!}
+                    {!! Form::text('importe', null, ['min' => 1, 'class' => 'form-control', 'id' => 'inputImporte', 'autocomplete' => 'off']) !!}
                 </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" id="selectCuotas" style="display:none">

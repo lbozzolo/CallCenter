@@ -6,7 +6,8 @@
 <div class="modal fade col-lg-5 col-lg-offset-4" id="aceptarVenta">
     <div class="card">
 
-        @if(!$venta->plan_cuotas || $venta->totalPorCuotas($venta->plan_cuotas) <= 0 || $venta->metodoPagoVenta->count() == 0 || count($productosVenta) == 0)
+{{--        @if(!$venta->plan_cuotas || $venta->totalPorCuotas($venta->plan_cuotas) <= 0 || $venta->metodoPagoVenta->count() == 0 || count($productosVenta) == 0 || !$venta->cobrada)--}}
+        @if(!$venta->canAccept())
 
             <div class="card">
                 <div class="card-body">
@@ -24,10 +25,13 @@
                             <li>- El importe de la venta es igual a cero.</li>
                         @endif
                         @if($venta->metodoPagoVenta->count() == 0)
-                            <li>- No hay ningún método de pago seleccionado</li>
+                            <li>- No hay ningún método de pago seleccionado.</li>
                         @endif
                         @if(count($productosVenta) == 0)
                             <li>- No hay productos cargados.</li>
+                        @endif
+                        @if(!$venta->cobrada)
+                            <li>- La venta no ha sido marcada como cobrada.</li>
                         @endif
                     </ul>
                 </div>
@@ -119,25 +123,14 @@
             <div class="modal-footer">
                 {!! Form::open(['url' => route('ventas.aceptar'), 'method' => 'put']) !!}
 
-                @if($venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) > 0)
+                @if($venta->statusIs('rechazada'))
 
                     <div class="form-group text-left bg-danger" style="padding: 10px">
                         <i class="fa fa-exclamation-triangle text-warning"></i>
-                        <span>ATENCIÓN. La suma de los métodos de pago es inferior al importe total de la venta.</span><br>
-                        <span>La diferencia es de ${!! $venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) !!}</span>
-                        <div class="text-warning" style="padding: 10px">¿Desea aceptar esta venta de todos modos?</div>
-                        <div>
-                            <button type="submit" class="btn btn-warning " style="margin-right: 3px">Aceptar de todos modos</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div>
-
-                @elseif($venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) < 0)
-
-                    <div class="form-group text-left bg-danger" style="padding: 10px">
-                        <i class="fa fa-exclamation-triangle"></i>
-                        <span>ATENCIÓN. La suma de los métodos de pago es superior al importe total de la venta.</span><br>
-                        <span>La diferencia es de ${!! $venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) !!}</span>
+                        <span>ATENCIÓN. Esta venta fue rechazada por auditoría.</span><br>
+                        @if($venta->motivo)
+                            <span>Motivo: {!! $venta->motivo !!}</span>
+                        @endif
                         <div class="text-warning" style="padding: 10px">¿Desea aceptar esta venta de todos modos?</div>
                         <div>
                             <button type="submit" class="btn btn-warning " style="margin-right: 3px">Aceptar de todos modos</button>
@@ -147,13 +140,44 @@
 
                 @else
 
-                    <div class="form-group text-left">
-                        <span class="text-warning">¿Desea aceptar esta venta?</span>
-                    </div>
-                    <button type="submit" class="btn btn-primary pull-left">Aceptar</button>
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                    @if($venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) > 0)
+
+                        <div class="form-group text-left bg-danger" style="padding: 10px">
+                            <i class="fa fa-exclamation-triangle text-warning"></i>
+                            <span>ATENCIÓN. La suma de los métodos de pago es inferior al importe total de la venta.</span><br>
+                            <span>La diferencia es de ${!! $venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) !!}</span>
+                            <div class="text-warning" style="padding: 10px">¿Desea aceptar esta venta de todos modos?</div>
+                            <div>
+                                <button type="submit" class="btn btn-warning " style="margin-right: 3px">Aceptar de todos modos</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+
+                    @elseif($venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) < 0)
+
+                        <div class="form-group text-left bg-danger" style="padding: 10px">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            <span>ATENCIÓN. La suma de los métodos de pago es superior al importe total de la venta.</span><br>
+                            <span>La diferencia es de ${!! $venta->diferenciaMetodosPagoSumaProductos($venta->plan_cuotas) !!}</span>
+                            <div class="text-warning" style="padding: 10px">¿Desea aceptar esta venta de todos modos?</div>
+                            <div>
+                                <button type="submit" class="btn btn-warning " style="margin-right: 3px">Aceptar de todos modos</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+
+                    @else
+
+                        <div class="form-group text-left">
+                            <span class="text-warning">¿Desea aceptar esta venta?</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-left">Aceptar</button>
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+
+                    @endif
 
                 @endif
+
 
                 {!! Form::hidden('venta_id', $venta->id) !!}
 

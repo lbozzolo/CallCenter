@@ -68,9 +68,10 @@ class ClienteRepo extends BaseRepo
     public function updateTarjeta($id, $request)
     {
         $tarjeta = DatoTarjeta::find($id);
-        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion)->toDateTimeString() : null;
+        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', '01/'.$request->fecha_expiracion)->toDateTimeString() : null;
+
         $firstDate = new Carbon($tarjeta->fecha_expiracion);
-        $secondDate = Carbon::createFromFormat('d/m/Y', $request->fecha_expiracion);
+        $secondDate = Carbon::createFromFormat('d/m/Y', '01/'.$request->fecha_expiracion);
         $firstDate->setTime(12, 0, 0);
         $secondDate->setTime(12, 0, 0);
 

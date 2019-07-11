@@ -284,10 +284,21 @@ class VentasController extends Controller
     public function seleccionarPlanCuotas(Request $request)
     {
         $venta = Venta::find($request->venta_id);
+        $old = $venta->plan_cuotas;
         $venta->plan_cuotas = ($venta->plan_cuotas != $request->numero_de_cuotas)? $request->numero_de_cuotas : null;
         $venta->save();
 
-        $this->ventaRepo->quitarAjuste($venta->id);
+        $this->ventaRepo->quitarAjuste($venta->id, false);
+
+        if($old != $request->numero_de_cuotas){
+            $venta->updateable()->create([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'field' => 'plan_cuotas',
+                'former_value' => $old,
+                'updated_value' => $venta->plan_cuotas
+            ]);
+        }
 
         return redirect()->back();
     }
@@ -427,6 +438,10 @@ class VentasController extends Controller
 
         $auditable = EstadoVenta::where('slug', 'auditable')->first();
 
+        // Redirecciono atrás si la tarjeta está vencida
+        if($this->ventaRepo->hasExpiredCardInMethod($venta->metodoPagoVenta))
+            return redirect()->back()->withErrors('No se puede aceptar la venta porque la tarjeta ingresada está vencida');
+
         $venta->updateable()->create([
             'user_id' => Auth::user()->id,
             'action' => 'update',
@@ -435,6 +450,7 @@ class VentasController extends Controller
             'updated_value' => $auditable->id,
         ]);
 
+        $venta->motivo = ($request->motivo)? $request->motivo : null;
         $venta->estado_id = $auditable->id;
         $venta->save();
 
@@ -589,6 +605,7 @@ class VentasController extends Controller
         $etapas = $producto->etapas->lists('nombre', 'id');
         $metodosPago = MetodoPago::lists('nombre', 'id');
         $promociones = Promocion::lists('nombre', 'id');
+
         return view('ventas.edit', compact('venta', 'metodosPago', 'etapas', 'promociones'));
     }
 
@@ -616,19 +633,23 @@ class VentasController extends Controller
             return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
 
         $estado = EstadoVenta::find($request->estado_id);
-        $estadoAnterior = $venta->estado->slug;
 
+        // No permito cambiar de estado si la venta ya fue facturada
+        if($this->ventaRepo->isInvoicedSale($venta->estado, $estado))
+            return redirect()->back()->withErrors('No se puede cambiar el estado de la venta a "'.$estado->nombre.'"" porque la misma ya se encuentra facturada');
 
         // Redirecciono atrás si el cliente no tiene un barrio en sus datos personales
-        if($estadoAnterior == 'iniciada' && (!$venta->cliente->domicilio || !$venta->cliente->domicilio->barrio))
+        if($venta->estado->slug == 'iniciada' && (!$venta->cliente->domicilio || !$venta->cliente->domicilio->barrio))
             return redirect()->back()->withErrors('No se puede realizar la operación. El Cliente no tiene ingresado un barrio en sus datos personales.');
 
         // Requiero 'motivo' si la venta está siendo marcada como cancelada o rechazada
         if($estado->isInArray(['cancelada', 'rechazada'])){
 
             $validator = Validator::make($request->all(), ['motivo' => 'required|max:255',]);
+
             if ($validator->fails())
                 return redirect()->back()->withErrors($validator)->withInput();
+
         }
 
         // Si el estado es diferente al que tenía, guardo el updateable y guardo la venta en 'cerradas'
@@ -646,6 +667,7 @@ class VentasController extends Controller
             if($estado->slug == 'facturada')
                 $this->ventaRepo->cerrarVenta($venta->id);
 
+            // EL motivo debe ser siempre referido al cambio de estado de la venta. Es un aporte extra de información
             $venta->motivo = ($estado->isInArray(['cancelada', 'rechazada', 'noentregado', 'devuelto']))? $request->motivo : null;
 
         }
@@ -697,6 +719,9 @@ class VentasController extends Controller
 
         $metodoPago = MetodoPago::find($request->metodo_pago);
         $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
+
+        if($datosTarjeta && $datosTarjeta->isExpired())
+            return redirect()->back()->withErrors('La tarjeta ingresada se encuentra vencida');
 
         $tarjetaYcuotas = null;
 
