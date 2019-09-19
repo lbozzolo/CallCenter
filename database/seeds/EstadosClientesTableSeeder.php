@@ -21,6 +21,10 @@ class EstadosClientesTableSeeder extends Seeder
                 'slug' => 'frecuente',
             ],
             [
+                'nombre' => 'Habilitado',
+                'slug' => 'habilitado',
+            ],
+            [
                 'nombre' => 'Deshabilitado',
                 'slug' => 'deshabilitado',
             ],

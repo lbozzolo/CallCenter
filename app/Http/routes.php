@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth', 'new.user']], function () {
     require(__DIR__ . '/Routes/asignaciones.php');
     require(__DIR__ . '/Routes/updateables.php');
     require(__DIR__ . '/Routes/tickets.php');
+    require(__DIR__ . '/Routes/alumnos.php');
 
     //Ruta para ejecutar pruebas
     Route::get('/test', ['as' => 'test', 'uses' => 'DashboardController@test']);

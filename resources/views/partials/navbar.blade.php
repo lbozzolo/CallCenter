@@ -79,6 +79,14 @@
                     @endpermission
                 @endrole
 
+                @permission('ver.venta')
+                <li>
+                    <a href="{{ route('alumnos.index') }}">
+                        <span class="text-success"><i class="ti-book"></i> COEFIX</span>
+                    </a>
+                </li>
+                @endpermission
+
 
                 @permission('ver.noticia')
                 <li class="label">Informacion</li>

@@ -45,6 +45,14 @@ class Producto extends Entity
         return $this->etapas->count();
     }
 
+    public function isCurso()
+    {
+        foreach ($this->categorias as $categoria) {
+            if ($categoria->slug == 'cursos')
+                return true;
+        }
+    }
+
     public function getReclamosAttribute()
     {
         return DB::table('productos')
@@ -105,6 +113,16 @@ class Producto extends Entity
     public function etapas()
     {
         return $this->hasMany(Etapa::class);
+    }
+
+    public function clientes()
+    {
+        return $this->belongsToMany(Cliente::class, 'cliente_producto');
+    }
+
+    public function activaciones()
+    {
+        return $this->hasMany(Activacion::class);
     }
 
     public function images()

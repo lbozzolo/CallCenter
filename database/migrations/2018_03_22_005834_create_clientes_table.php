@@ -22,6 +22,7 @@ class CreateClientesTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('celular')->nullable();
             $table->string('email')->nullable();
+            $table->string('username')->nullable();
             $table->string('dni')->nullable();
             $table->string('cuit')->nullable();
             $table->string('cuil')->nullable();
@@ -32,6 +33,7 @@ class CreateClientesTable extends Migration
             $table->time('to_date')->nullable();
             $table->integer('puntos')->nullable();
             $table->integer('estado_id')->unsigned();
+            $table->tinyInteger('notificado')->default(0);
             $table->softDeletes();
 
             $table->timestamps();

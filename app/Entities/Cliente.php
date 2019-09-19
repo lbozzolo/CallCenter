@@ -10,7 +10,7 @@ class Cliente extends Entity
     use SoftDeletes;
 
     protected $table = 'clientes';
-    protected $fillable = ['nombre', 'apellido', 'nombre_completo', 'domicilio_id', 'telefono', 'celular', 'email', 'dni', 'cuit', 'cuil',  'referencia', 'observaciones', 'from_date', 'to_date', 'puntos', 'estado_id', 'created_at', 'updated_at'];
+    protected $fillable = ['nombre', 'apellido', 'nombre_completo', 'domicilio_id', 'telefono', 'celular', 'email', 'username', 'dni', 'cuit', 'cuil',  'referencia', 'observaciones', 'from_date', 'to_date', 'puntos', 'estado_id', 'notificado', 'created_at', 'updated_at'];
     protected $dates = ['deleted_at'];
 
     public function hasCard($tipo = null)
@@ -44,7 +44,8 @@ class Cliente extends Entity
         $numero = ($this->domicilio && $this->domicilio->numero)? $this->domicilio->numero.' ' : '';
         $piso = ($this->domicilio && $this->domicilio->piso)? $this->domicilio->piso.'° ' : '';
         $departamento = ($this->domicilio && $this->domicilio->departamento)? $this->domicilio->departamento : '';
-        $domicilio = $calle.$numero.$piso.$departamento;
+
+        $domicilio = $calle.$numero.$piso.strtoupper($departamento);
         return $domicilio;
     }
 
@@ -106,6 +107,30 @@ class Cliente extends Entity
         return $asignacion;
     }
 
+    // Scopes
+
+    public function scopeCursos($query, $id)
+    {
+        $cursos = collect();
+        $cliente = $query->find($id);
+
+        foreach($cliente->ventas as $venta) {
+            foreach ($venta->productos as $producto) {
+                foreach ($producto->categorias as $categoria) {
+                    if ($categoria->slug == 'cursos')
+                        $cursos->push($producto);
+                }
+            }
+        }
+
+        return $cursos;
+    }
+
+    public function scopeCursosActivos($query)
+    {
+        $cliente = $query->find($this->id);
+        return $cliente->activaciones->where('estado', 1);
+    }
 
     /**
      * @return bool
@@ -116,6 +141,7 @@ class Cliente extends Entity
     }
 
     //Relationships
+
     public function estado()
     {
         return $this->belongsTo(EstadoCliente::class);
@@ -149,6 +175,11 @@ class Cliente extends Entity
     public function asignaciones()
     {
         return $this->hasMany(Asignacion::class);
+    }
+
+    public function activaciones()
+    {
+        return $this->hasMany(Activacion::class);
     }
 
     public function updateable()

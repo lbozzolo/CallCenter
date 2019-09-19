@@ -5,6 +5,7 @@ namespace SmartLine\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use SmartLine\Entities\Activacion;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
@@ -202,6 +203,7 @@ class VentasController extends Controller
                     $producto = Producto::find($value);
 
                     for($i = 1; $i <= $request->cantidad; $i++){
+
                         $venta->productos()->attach($producto);
                         $venta->updateable()->create([
                             'user_id' => Auth::user()->id,
@@ -209,6 +211,15 @@ class VentasController extends Controller
                             'related_model_id' => $producto->id,
                             'related_model_type' => 'producto'
                         ]);
+
+                        if ($producto->isCurso()) {
+                            Activacion::create([
+                                'cliente_id' => $venta->cliente_id,
+                                'producto_id' => $producto->id,
+                                'estado' => 0
+                            ]);
+                        }
+
                     }
 
                     if($producto->hasEtapas())
@@ -223,6 +234,7 @@ class VentasController extends Controller
             $producto = Producto::find($request->producto_id);
 
             for($i = 1; $i <= $request->cantidad; $i++){
+
                 $venta->productos()->attach($producto);
                 $venta->updateable()->create([
                     'user_id' => Auth::user()->id,
@@ -230,6 +242,15 @@ class VentasController extends Controller
                     'related_model_id' => $producto->id,
                     'related_model_type' => 'producto'
                 ]);
+
+                if ($producto->isCurso()) {
+                    Activacion::create([
+                        'cliente_id' => $venta->cliente_id,
+                        'producto_id' => $producto->id,
+                        'estado' => 0
+                    ]);
+                }
+
             }
 
             if($producto->hasEtapas())

@@ -19,20 +19,25 @@ class FakerClientesSeeder extends Seeder
 
     private function createFakerClientes($cantidad)
     {
-        $faker = Faker::create();
+        $faker = Faker::create('es_AR');
 
         for ($i = 0; $i <= $cantidad; $i++) {
             $fecha = $faker->dateTime;
+            $name = $faker->name;
+            $lastname = $faker->lastName;
+            $username = str_slug(strtolower($name[0].$lastname));
+
             Cliente::create([
-                'nombre' => $faker->name,
-                'apellido' => $faker->lastName,
+                'nombre' => $name,
+                'apellido' => $lastname,
                 'telefono' => $faker->phoneNumber,
                 'celular' => $faker->phoneNumber,
                 'email' => $faker->email,
+                'username' => $username,
                 'dni' => rand(20000000, 60000000),
                 'referencia' => $faker->text,
                 'observaciones' => $faker->text,
-                'estado_id' => rand(1, 2),
+                'estado_id' => rand(1, 4),
                 'puntos' => rand(0,9000),
                 'created_at' => $fecha,
                 'updated_at' => $fecha

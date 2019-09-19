@@ -20,6 +20,7 @@ class FakerMarcasSeeder extends Seeder
             ['nombre' => 'Chevrolet', 'descripcion' => '',],
             ['nombre' => 'Chrysler', 'descripcion' => '',],
             ['nombre' => 'Citroën', 'descripcion' => '',],
+            ['nombre' => 'Coefix', 'descripcion' => '',],
             ['nombre' => 'DFSK', 'descripcion' => '',],
             ['nombre' => 'Daewoo', 'descripcion' => '',],
             ['nombre' => 'DS', 'descripcion' => '',],

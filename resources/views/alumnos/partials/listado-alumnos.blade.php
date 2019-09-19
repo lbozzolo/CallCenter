@@ -39,20 +39,20 @@
                     @endif
                 </td>
                 <td class="text-center">
-                @permission('ver.compras.cliente')
+                    @permission('ver.compras.cliente')
                     <a href="{{ route('clientes.compras', $cliente->id) }}">
                         {!! $cliente->ventas->count() !!}
                     </a>
-                @elsepermission
+                    @elsepermission
                     {!! $cliente->ventas->count() !!}
-                @endpermission
+                    @endpermission
                 </td>
                 <td class="text-center">
-                @permission('ver.llamadas.cliente')
+                    @permission('ver.llamadas.cliente')
                     <a href="{{ route('clientes.llamadas', $cliente->id) }}">{!! count($cliente->llamadas) !!}</a>
-                @elsepermission
+                    @elsepermission
                     {!! count($cliente->llamadas) !!}
-                @endpermission
+                    @endpermission
                 </td>
                 <td class="text-center">
                     @permission('ver.reclamos.cliente')
@@ -63,15 +63,15 @@
                 </td>
                 <td>{!! $cliente->fecha_creado !!}</td>
                 <td class="text-center">
-                @permission('ver.cliente')
-                    <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-default btn-xs">detalles</a>
-                @elsepermission
+                    @permission('ver.cliente')
+                    <a href="{{ route('alumnos.cursos', $cliente->id) }}" class="btn btn-primary btn-xs" title="Cursos comprados"><i class="fa fa-book"></i> </a>
+                    @elsepermission
                     <button class="btn btn-default btn-xs" disabled>detalles</button>
-                @endpermission
+                    @endpermission
 
-                @permission('ver.updateable')
+                    @permission('ver.updateable')
                     <a href="{{ route('updateables.entidad.show', ['entity' => $cliente->getClass(), 'id' => $cliente->id]) }}" class="btn btn-updateable btn-xs" title="movimientos"><i class="fa fa-info-circle"></i> </a>
-                @endpermission
+                    @endpermission
                 </td>
             </tr>
 

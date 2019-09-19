@@ -12,6 +12,7 @@ use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Partido;
 use SmartLine\Entities\Provincia;
 use SmartLine\Entities\Localidad;
+use SmartLine\Entities\Venta;
 use SmartLine\Http\Requests\CreateClienteRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -57,6 +58,7 @@ class ClientesController extends Controller
             'telefono' => ($request->telefono)? $request->telefono : '',
             'celular' => ($request->celular)? $request->celular : '',
             'email' => ($request->email)? $request->email : '',
+            'username' => str_slug(strtolower($request->nombre[0].$request->apellido)),
             'dni' => ($request->dni)? $request->dni : '',
             'cuit' => ($request->cuit)? $request->cuit : null,
             'cuil' => ($request->cuil)? $request->cuil : null,

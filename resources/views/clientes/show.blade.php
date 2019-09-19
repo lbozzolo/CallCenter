@@ -25,9 +25,13 @@
                         </li>
                         <li>
                             @if($cliente->estado->slug == 'nuevo')
-                                <span class="label label-warning">{!! $cliente->estado->nombre !!}</span>
-                            @else
-                                <span class="label label-default pull-right" style="background-color: rgb(8, 142, 83);">{!! $cliente->estado->nombre !!}</span>
+                                <label class="label label-warning">{!! $cliente->estado->nombre !!}</label>
+                            @elseif($cliente->estado->slug == 'frecuente')
+                                <label class="label label-primary">{!! $cliente->estado->nombre !!}</label>
+                            @elseif($cliente->estado->slug == 'habilitado')
+                                <label class="label label-default" style="background-color: rgb(8, 142, 83);">{!! $cliente->estado->nombre !!}</label>
+                            @elseif($cliente->estado->slug == 'deshabilitado')
+                                <label class="label label-danger" >{!! $cliente->estado->nombre !!}</label>
                             @endif
                         </li>
                         @if(!$cliente->dni)
@@ -93,7 +97,7 @@
                                     <div>
                                         {!! $cliente->address !!}
                                         @if($cliente->domicilio && $cliente->domicilio->codigo_postal)
-                                            - (CP {!! $cliente->domicilio->codigo_postal !!})
+                                            (CP {!! $cliente->domicilio->codigo_postal !!})
                                         @endif
                                     </div>
                                     <div>

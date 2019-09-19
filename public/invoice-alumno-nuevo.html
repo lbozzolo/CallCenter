@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Webstrot Admin : Invoice</title>
+
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Styles -->
+    <!--<link href="assets/css/lib/font-awesome.min.css" rel="stylesheet">-->
+    <!--<link href="assets/css/lib/themify-icons.css" rel="stylesheet">-->
+    <!--<link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="assets/css/lib/unix.css" rel="stylesheet">-->
+    <!--<link href="assets/css/style.css" rel="stylesheet">-->
+
+    <style type="text/css">
+
+        .bg-primary {
+            background-color: #1F2037;
+            font-family: sans-serif;
+        }
+
+        .unix-invoice {
+            background-color: #333B54;
+            padding: 20px 40px;
+            width: 50%;
+            margin: 30px auto;
+            border-radius: 5px;
+            /*margin: 2% 18%;*/
+        }
+        #invoice {
+            width: 100%;
+            /*border: 1px solid red;*/
+            display: inline-block;
+        }
+        #invoice-top {
+            /*width: 45%;*/
+            /*display: inline-block;*/
+            /*border: 1px solid green;*/
+            padding: 10px 20px;
+        }
+        #invoice-mid {
+            /*width: 45%;*/
+            /*display: inline-block;*/
+            background-color: #262c3f;
+            /*border: 1px solid orange;*/
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        #invoice-bot {
+            /*width: 45%;*/
+            /*display: inline-block;*/
+            /*border: 1px solid lime;*/
+            padding: 10px 20px;
+        }
+        .invoice-info span{
+            /*border: 1px solid red;*/
+            color: white;
+        }
+        .title p {
+            color: grey;
+        }
+
+        h2 {
+            color: white;
+            font-weight: 100;
+        }
+        ul {
+            color: white;
+        }
+        .username {
+            color: orange;
+            font-size: 1.5em;
+        }
+        #project {
+            display: inline-block;
+        }
+        #invoice-table ul{
+            list-style: none;
+            margin-left: -40px;
+        }
+        #invoice-table ul li{
+            padding: 10px 20px;
+            background-color: #404a6b;
+            border: 1px solid #2D4558
+        }
+        .legal {
+            color: lightgray;
+        }
+        .btn {
+            background-color: #1da1f2;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body class="bg-primary">
+
+    <div class="unix-invoice">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="invoice" class="effect2 m-t-120">
+
+                        <div id="invoice-top">
+
+                            <div class="invoice-logo"></div>
+                            <div class="invoice-info">
+                                <img src="http://200.61.136.134/~crmcoefix/public/img/logo.png" style="width: 50%; margin: 0px auto"><br>
+                                <span>info@coefix.com - </span>
+                                <span>Teléfono: 011-2275-7035</span>
+                                <span style="color: grey"> -  4 de septiembre de 2019</span>
+                            </div>
+
+                        </div>
+
+                        <p style="color: white">
+                            ¡Bienvenido a la plataforma educativa COEFIX!
+                            Tenemos el agrado de informarte que ya formás parte de nuestra comunidad de enseñanza.
+                            ¡Ya mismo podés acceder y comenzar a aprender!
+                        </p>
+
+                        <div id="invoice-mid">
+
+                            <div id="project">
+                                <h2>Información de Usuario</h2>
+                                <ul>
+                                    <li>
+                                        <span>Nombre:</span>
+                                        <span class="username">Carlos Monzón</span>
+                                    </li>
+                                    <li>
+                                        <span>Usuario:</span>
+                                        <span class="username">cmonzon</span>
+                                    </li>
+                                    <li>
+                                        <span>Contraseña:</span>
+                                        <span class="username">#Coefix123</span>
+                                    </li>
+                                </ul>
+                                <small style="color: gray">Recuerde cambiar la contraseña una vez iniciada sesión.</small>
+                            </div>
+
+                        </div>
+                        <!--End Invoice Mid-->
+
+                        <div id="invoice-bot">
+
+                            <div id="invoice-table">
+                                <h2>Cursos Activos en su Plataforma</h2>
+                                <div class="table-responsive">
+                                    <ul>
+                                        <li>Administración de PYMES</li>
+                                        <li>Uñas gelificadas</li>
+                                        <li>Instalación de cámaras de seguridad</li>
+                                        <li>Marketing Digital I</li>
+                                        <li>Marketing Digital II</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--End Table-->
+
+                           
+                                <a href="https://www.coefix.com/login/index.php">
+                                <button class="btn" type="button">
+                                    <i class="ti-thumb-up"></i>Acceder a la Plataforma
+                                </button>
+                                </a>
+                            
+
+
+                            <div id="legalcopy">
+                                <p class="legal">
+                                    <strong>¡Gracias por confiar en Coefix!</strong> 
+                                    Nos aseguraremos de brindarte la mejor atención para que tu experiencia sea de tu agrado.
+                                </p>
+                            </div>
+
+                        </div>
+                        <!--End InvoiceBot-->
+                    </div>
+                    <!--End Invoice-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

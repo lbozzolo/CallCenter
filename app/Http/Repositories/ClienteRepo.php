@@ -50,6 +50,7 @@ class ClienteRepo extends BaseRepo
         $cliente->telefono = $request->telefono;
         $cliente->celular = $request->celular;
         $cliente->email = $request->email;
+        $cliente->username = str_slug(strtolower($request->nombre[0].$request->apellido));
         $cliente->dni = $request->dni;
         $cliente->cuit = $request->cuit;
         $cliente->cuil = $request->cuil;

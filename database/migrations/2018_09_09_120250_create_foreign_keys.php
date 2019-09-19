@@ -241,8 +241,8 @@ class CreateForeignKeys extends Migration
             $table->foreign('cliente_id')
                 ->references('id')
                 ->on('clientes')
-                ->onUpdate('NO ACTION')
-                ->onDelete('NO ACTION');
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
             $table->foreign('partido_id')
                 ->references('id')
                 ->on('tbl_partidos')
@@ -391,6 +391,19 @@ class CreateForeignKeys extends Migration
             $table->foreign('venta_cerrada_id')
                 ->references('id')
                 ->on('ventas_cerradas')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+        });
+
+        Schema::table('activaciones', function(Blueprint $table) {
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('producto_id')
+                ->references('id')
+                ->on('productos')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });

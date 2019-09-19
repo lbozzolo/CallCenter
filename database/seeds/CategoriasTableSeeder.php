@@ -16,6 +16,7 @@ class CategoriasTableSeeder extends Seeder
             ['nombre' => 'Cuidado Personal', 'slug' => 'cuidado.personal',],
             ['nombre' => 'Salud', 'slug' => 'salud',],
             ['nombre' => 'Cocina', 'slug' => 'cocina',],
+            ['nombre' => 'Cursos', 'slug' => 'cursos',],
             ['nombre' => 'Sexual', 'slug' => 'sexual',],
             ['nombre' => 'Electrónica', 'slug' => 'electronica',],
             ['nombre' => 'Promociones', 'slug' => 'promociones',],
