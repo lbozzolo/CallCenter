@@ -61,12 +61,17 @@ class AlumnosController extends Controller
             $data['subject'] = 'Nuevos cursos habilitados en COEFIX';
         }
 
-        Mail::send('emails.alta-coefix', ['data' => $data], function($message) use ($data){
+        Mail::queue('emails.alta-coefix', ['data' => $data], function ($message) use ($data){
             $message->to('lucas@verticedigital.com.ar');
-            //$message->to($data['alumno']->email);
             $message->subject($data['subject']);
             $message->from('administracion@crm.coefix.com');
         });
+//        Mail::send('emails.alta-coefix', ['data' => $data], function($message) use ($data){
+//            $message->to('lucas@verticedigital.com.ar');
+//            //$message->to($data['alumno']->email);
+//            $message->subject($data['subject']);
+//            $message->from('administracion@crm.coefix.com');
+//        });
 
         return redirect()->back()->with('ok', 'Alumno notificado con éxito');
     }
