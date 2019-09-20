@@ -248,7 +248,7 @@
                         <div id="legalcopy">
                             <p class="legal">
                                 <strong>¡Gracias por confiar en Coefix!</strong> 
-                                Nos aseguraremos de brindarte la mejor atención para que tu experiencia sea de tu agrado.
+                                Nos aseguraremos de brindarle la mejor atención para que su experiencia sea de su agrado.
                             </p>
                         </div>
 
