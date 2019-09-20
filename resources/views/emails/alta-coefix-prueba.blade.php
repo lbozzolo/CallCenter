@@ -156,12 +156,12 @@
                             <img src="http://200.61.136.134/~crmcoefix/public/img/logo.png" style="width: 50%; margin: 0px auto"><br>
                             <span>info@coefix.com - </span>
                             <span>Teléfono: 011-2275-7035</span>
-                            <span style="color: grey"> -  {!! $data['fecha'] !!}</span>
+                            <span style="color: grey"> -  {!! $fecha !!}</span>
                         </div>
 
                     </div>
 
-                    @if($data['alumno']->notificado)
+                    @if($alumno->notificado)
                         <p class="bienvenida">
                             ¡Bienvenido/a a la plataforma educativa COEFIX!
                             Tenemos el agrado de informarle que ya forma parte de nuestra comunidad de enseñanza.
@@ -175,11 +175,11 @@
                                 <ul>
                                     <li>
                                         <span>Nombre:</span><br>
-                                        <span class="username">{!! ($data['alumno']->fullname)? $data['alumno']->fullname : '' !!}</span>
+                                        <span class="username">{!! ($alumno->fullname)? $alumno->fullname : '' !!}</span>
                                     </li>
                                     <li>
                                         <span>Usuario:</span><br>
-                                        <span class="username">{!! ($data['alumno']->username)? $data['alumno']->username : '' !!}</span>
+                                        <span class="username">{!! ($alumno->username)? $alumno->username : '' !!}</span>
                                     </li>
                                     <li>
                                         <span>Contraseña:</span><br>
@@ -204,7 +204,7 @@
                                 <ul>
                                     <li>
                                         <span>Nombre:</span>
-                                        <span class="username">{!! ($data['alumno']->fullname)? $data['alumno']->fullname : '' !!}</span>
+                                        <span class="username">{!! ($alumno->fullname)? $alumno->fullname : '' !!}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -219,7 +219,7 @@
                             <h2>Cursos Activos en su Plataforma</h2>
                             <div class="table-responsive">
                                 <ul>
-                                    @foreach($data['alumno']->cursosActivos() as $activacion)
+                                    @foreach($alumno->cursosActivos() as $activacion)
                                         @if(!$activacion->notificado)
                                             <li>
                                                 <span class="nuevo">nuevo</span>
