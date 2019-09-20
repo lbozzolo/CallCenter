@@ -164,7 +164,7 @@
                             <h4>Notificar alumnno</h4>
 
 {{--                            @if(!$cliente->cursosActivos($cliente->id)->count())--}}
-                            @if($cliente->notificado)
+                            @if(!$cliente->notificado)
                                 <div class="panel panel-barra">
                                     <p>Se enviará un email a <span class="text-primary">{!! $cliente->fullname !!}</span>  notificando la activación a la siguiente casilla:</p>
                                     <div class="lead text-warning">{!! $cliente->email !!}</div>
@@ -192,7 +192,7 @@
                             </ul>
                         </div>
                         <div class="card card-footer">
-                            <a href="{!! route('alumnos.habilitar.deshabilitar.alumno', $cliente->id) !!}" class="btn btn-primary">Notificar</a>
+                            <a href="{!! route('alumnos.notificar', $cliente->id) !!}" class="btn btn-primary">Notificar</a>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>

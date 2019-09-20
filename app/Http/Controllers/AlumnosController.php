@@ -48,34 +48,26 @@ class AlumnosController extends Controller
         return redirect()->back()->with('ok', 'Username modificado con éxito');
     }
 
-    public function habilitarDeshabilitarAlumno($id)
+    public function notificar($id)
     {
         $data['alumno'] = Cliente::find($id);
         $data['fecha'] = Carbon::today()->format('d/m/Y');
 
-
-
-        $data['subject'] = ($data['alumno']->notificado)? 'Activación en la plataforma COEFIX' : 'Nuevos cursos habilitados en COEFIX';
-
-
-        //dd($data['fecha']);
-
-        //dd($alumno->activaciones);
-
-        //dd($data['alumno']->cursosActivos()->first()->producto);
+        if (!$data['alumno']->notificado) {
+            $data['alumno']->notificado = 1;
+            $data['alumno']->save();
+            $data['subject'] = 'Activación en la plataforma COEFIX';
+        } else {
+            $data['subject'] = 'Nuevos cursos habilitados en COEFIX';
+        }
 
         Mail::send('emails.alta-coefix', ['data' => $data], function($message) use ($data){
-            $message->to($data['alumno']->email);
+            $message->to('lucas@verticedigital.com.ar');
+            //$message->to($data['alumno']->email);
             $message->subject($data['subject']);
-            $message->from('mail@mail.com');
+            $message->from('administracion@crm.coefix.com');
         });
 
-
-
-        //$mensaje = ($alumno->estado_id == $habilitado->id)? 'Se ha habilitado con éxito a '.$alumno->fullname.' en los cursos solicitados' : 'Se ha deshabilitado con éxito a '.$alumno->fullname.' en los cursos solicitados';
-
-        //return redirect()->back()->with('ok', $mensaje);
-        //return view('emails.alta-coefix')->with($data);
         return redirect()->back()->with('ok', 'Alumno notificado con éxito');
     }
 
