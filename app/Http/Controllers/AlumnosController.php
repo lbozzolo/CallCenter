@@ -2,11 +2,10 @@
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use SmartLine\Entities\Activacion;
 use SmartLine\Entities\Cliente;
-use SmartLine\Entities\EstadoCliente;
-use SmartLine\Entities\Producto;
 use SmartLine\Http\Repositories\ClienteRepo;
 
 class AlumnosController extends Controller
@@ -54,24 +53,31 @@ class AlumnosController extends Controller
         $data['fecha'] = Carbon::today()->format('d/m/Y');
 
         if (!$data['alumno']->notificado) {
+
             $data['alumno']->notificado = 1;
             $data['alumno']->save();
             $data['subject'] = 'Activación en la plataforma COEFIX';
+
         } else {
+
             $data['subject'] = 'Nuevos cursos habilitados en COEFIX';
+
         }
 
         Mail::queue('emails.alta-coefix', ['data' => $data], function ($message) use ($data){
-            $message->to('test-lnwbv@mail-tester.com');
+            $message->to('test-5y80a@mail-tester.com');
             $message->subject($data['subject']);
             $message->from('administracion@crm.coefix.com');
         });
-//        Mail::send('emails.alta-coefix', ['data' => $data], function($message) use ($data){
-//            $message->to('lucas@verticedigital.com.ar');
-//            //$message->to($data['alumno']->email);
-//            $message->subject($data['subject']);
-//            $message->from('administracion@crm.coefix.com');
-//        });
+
+        // Updateables
+
+        if (!$data['alumno']->notificado) {
+            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCoefix']);
+            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCourses']);
+        } else {
+            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCourses']);
+        }
 
         return redirect()->back()->with('ok', 'Alumno notificado con éxito');
     }
@@ -79,9 +85,17 @@ class AlumnosController extends Controller
     public function habilitarDeshabilitarCurso($id)
     {
         $activacion = Activacion::find($id);
+        $cliente = $activacion->cliente;
 
         $activacion->estado = ($activacion->estado == 0)? 1 : 0;
         $activacion->save();
+
+        $cliente->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => ($activacion->estado == 0)? 'lock' : 'activate',
+            'related_model_id' => $activacion->producto->id,
+            'related_model_type' => 'producto'
+        ]);
 
         //$mensaje = ($activacion->estado == 1)? 'Se ha habilitado con éxito a '.$activacion->cliente->fullname.' en los cursos solicitados' : 'Se ha deshabilitado con éxito a '.$activacion->cliente->fullname.' en los cursos solicitados';
         //return redirect()->back()->with('ok', $mensaje);
