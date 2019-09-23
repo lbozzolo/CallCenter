@@ -153,7 +153,7 @@
 
                         <div class="invoice-logo"></div>
                         <div class="invoice-info">
-                            <img src="http://200.61.136.134/~crmcoefix/public/img/logo.png" style="width: 50%; margin: 0px auto"><br>
+                            <img src="http://200.61.136.134/~crmcoefix/public/img/logo.png" alt="Logo de COEFIX" style="width: 50%; margin: 0px auto"><br>
                             <span>info@coefix.com - </span>
                             <span>Teléfono: 011-2275-7035</span>
                             <span style="color: grey"> -  {!! $data['fecha'] !!}</span>
@@ -165,6 +165,7 @@
                         <p class="bienvenida">
                             ¡Bienvenido/a a la plataforma educativa COEFIX!
                             Tenemos el agrado de informarle que ya forma parte de nuestra comunidad de enseñanza.
+                            Su usuario ha sido dado de alta en el sistema  y está habilitado para operar.
                             ¡Ya mismo puede acceder y comenzar a aprender!
                         </p>
 
@@ -172,6 +173,7 @@
 
                             <div id="project">
                                 <h2>Información de Usuario</h2>
+                                <p>Para ingresar a la plataforma utilice las siguientes credenciales</p>
                                 <ul>
                                     <li>
                                         <span>Nombre:</span><br>
@@ -186,7 +188,7 @@
                                         <span class="username">#Coefix123</span>
                                     </li>
                                 </ul>
-                                <small style="color: gray">Recuerde cambiar la contraseña una vez iniciada sesión.</small>
+                                <small style="color: gray">Recuerde cambiar la contraseña una vez iniciada sesión para mayor seguridad.</small>
                             </div>
 
                         </div>
@@ -194,7 +196,10 @@
                     @else
 
                         <p style="color: white">
-                            ¡Bienvenido/a a la plataforma educativa COEFIX! Ha sido habilitado a nuevos cursos. ¡Ya mismo puede acceder y comenzar a aprender!
+                            ¡Bienvenido/a a la plataforma educativa COEFIX!
+                            Queríamos notificarle que han sido habilitados nuevos cursos para su usuario.
+                            Podrá iniciar sesión y comenzar a explorarlos.
+                            ¡Ya mismo puede acceder!
                         </p>
 
                         <div id="invoice-mid">
@@ -217,6 +222,7 @@
 
                         <div id="invoice-table">
                             <h2>Cursos Activos en su Plataforma</h2>
+                            <p>Los siguientes son los nuevos cursos que han sido activados en su cuenta. Ya se encuentra habilitado para operar.</p>
                             <div class="table-responsive">
                                 <ul>
                                     @foreach($data['alumno']->cursosActivos() as $activacion)
@@ -236,14 +242,11 @@
                         </div>
                         <!--End Table-->
 
-
                         <a href="https://www.coefix.com/login/index.php">
                             <button class="btn" type="button">
                                 <i class="ti-thumb-up"></i>Acceder a la Plataforma
                             </button>
                         </a>
-
-
 
                         <div id="legalcopy">
                             <p class="legal">
@@ -251,6 +254,16 @@
                                 Nos aseguraremos de brindarle la mejor atención para que su experiencia sea de su agrado.
                             </p>
                         </div>
+
+                        <small>
+                            Este email ha sido enviado a tu casilla de correo.
+                            Si no deseas recibir más novedades puedes desuscribirte cliqueando en el siguiente enlace
+                            <a href="http://200.61.136.134/~crmcoefix/public/desuscripcion.html" style="color: dodgerblue">Desuscribirme</a>
+                            El titular podrá en cualquier momento solicitar el retiro o bloqueo de su nombre de los bancos de datos a los que se refiere
+                            el presente artículo. En toda comunicación con fines de publicidad que se realice por correo, teléfono, correo electrónico,
+                            Internet u otro medio a distancia a conocer, se deberá indicar, en forma expresa y destacada, la posibilidad del titular
+                            del dato de solicitar el retiro o bloqueo, total o parcial, de su nombre de la base de datos.
+                        </small>
 
                     </div>
                     <!--End InvoiceBot-->
