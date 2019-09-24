@@ -22,7 +22,17 @@
 
     <style type="text/css">
 
+        .info {
+            font-size: 1.5em;
+        }
+
         .bienvenida {
+            color: white;
+            font-size: 1.5em;
+            font-weight: 100;
+        }
+
+        .texto-blanco {
             color: white;
         }
 
@@ -107,6 +117,10 @@
 
         @media (max-width: 360px){
 
+            .info {
+                font-size: 1em;
+            }
+
             h2 {
                 font-size: 1.2em;
             }
@@ -135,6 +149,10 @@
                 font-size: 0.9em;
             }
 
+            .texto-blanco {
+                font-size: 0.9em;
+            }
+
         }
 
     </style>
@@ -154,9 +172,9 @@
                         <div class="invoice-logo"></div>
                         <div class="invoice-info">
                             <img src="http://200.61.136.134/~crmcoefix/public/img/logo.png" alt="Logo de COEFIX" style="width: 50%; margin: 0px auto"><br>
-                            <span>info@coefix.com - </span>
-                            <span>Teléfono: 011-2275-7035</span>
-                            <span style="color: grey"> -  {!! $data['fecha'] !!}</span>
+                            <span class="info">info@coefix.com - </span>
+                            <span class="info">Teléfono: 011-2275-7035</span>
+                            <span class="info" style="color: grey"> -  {!! $data['fecha'] !!}</span>
                         </div>
 
                     </div>
@@ -173,7 +191,7 @@
 
                             <div id="project">
                                 <h2>Información de Usuario</h2>
-                                <p class="bienvenida">Para ingresar a la plataforma utilice las siguientes credenciales</p>
+                                <p class="texto-blanco">Para ingresar a la plataforma utilice las siguientes credenciales</p>
                                 <ul>
                                     <li>
                                         <span>Nombre:</span><br>
@@ -221,7 +239,7 @@
                         @if($data['alumno']->cursosActivos()->count())
                         <div id="invoice-table">
                             <h2>Cursos Activos en su Plataforma</h2>
-                            <p class="bienvenida">Los siguientes son los nuevos cursos que han sido activados en su cuenta. Ya se encuentra habilitado para operar.</p>
+                            <p class="texto-blanco">Los siguientes son los nuevos cursos que han sido activados en su cuenta. Ya se encuentra habilitado para operar.</p>
                             <div class="table-responsive">
                                 <ul>
                                     @foreach($data['alumno']->cursosActivos() as $activacion)
@@ -248,7 +266,7 @@
                             </button>
                         </a>
 
-                        <p class="bienvenida">
+                        <p class="texto-blanco">
                             Ante cualquier duda o inconveniente podrá comunicarse con nosotros a info@coefix.com o bien telefónicamente
                             al 011-2275-7035 que un asesor responderá todas sus inquietudes y le brindará el asesoramiento correspondiente.
                         </p>
@@ -257,10 +275,10 @@
                         </p>
                         <div>
                             <a href="https://play.google.com/store/apps/details?id=com.moodle.moodlemobile">
-                                <img src="http://200.61.136.134/~crmcoefix/public/img/google-play.png">
+                                <img src="http://200.61.136.134/~crmcoefix/public/img/google-play.png" alt="Logo de Google Play">
                             </a>
                             <a href="https://apps.apple.com/app/moodle-mobile/id633359593">
-                                <img src="http://200.61.136.134/~crmcoefix/public/img/appstore.png">
+                                <img src="http://200.61.136.134/~crmcoefix/public/img/appstore.png" alt="Logo de AppStore">
                             </a>
                         </div>
 
