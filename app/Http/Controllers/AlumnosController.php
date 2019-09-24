@@ -68,6 +68,7 @@ class AlumnosController extends Controller
             $message->to('test-4x0sg@mail-tester.com');
             $message->subject($data['subject']);
             $message->from('administracion@crm.coefix.com');
+            $message->setContentType('text/plain; charset=UTF-8');
         });
 
         // Updateables
