@@ -161,7 +161,7 @@
 
                     </div>
 
-                    @if($data['alumno']->notificado)
+                    @if(!$data['alumno']->notificado)
                         <p class="bienvenida">
                             ¡Bienvenido/a a la plataforma educativa COEFIX!
                             Tenemos el agrado de informarle que ya forma parte de nuestra comunidad de enseñanza.
@@ -173,7 +173,7 @@
 
                             <div id="project">
                                 <h2>Información de Usuario</h2>
-                                <p>Para ingresar a la plataforma utilice las siguientes credenciales</p>
+                                <p class="bienvenida">Para ingresar a la plataforma utilice las siguientes credenciales</p>
                                 <ul>
                                     <li>
                                         <span>Nombre:</span><br>
@@ -196,10 +196,8 @@
                     @else
 
                         <p style="color: white">
-                            ¡Bienvenido/a a la plataforma educativa COEFIX!
-                            Queríamos notificarle que han sido habilitados nuevos cursos para su usuario.
-                            Podrá iniciar sesión y comenzar a explorarlos.
-                            ¡Ya mismo puede acceder!
+                            ¡Bienvenido/a a la plataforma educativa COEFIX! Han sido habilitados nuevos cursos para su usuario.
+                            Podrá iniciar sesión y comenzar a explorar. ¡Ya mismo puede acceder!
                         </p>
 
                         <div id="invoice-mid">
@@ -220,9 +218,10 @@
 
                     <div id="invoice-bot">
 
+                        @if($data['alumno']->cursosActivos()->count())
                         <div id="invoice-table">
                             <h2>Cursos Activos en su Plataforma</h2>
-                            <p>Los siguientes son los nuevos cursos que han sido activados en su cuenta. Ya se encuentra habilitado para operar.</p>
+                            <p class="bienvenida">Los siguientes son los nuevos cursos que han sido activados en su cuenta. Ya se encuentra habilitado para operar.</p>
                             <div class="table-responsive">
                                 <ul>
                                     @foreach($data['alumno']->cursosActivos() as $activacion)
@@ -240,6 +239,7 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
                         <!--End Table-->
 
                         <a href="https://www.coefix.com/login/index.php">
@@ -247,6 +247,22 @@
                                 <i class="ti-thumb-up"></i>Acceder a la Plataforma
                             </button>
                         </a>
+
+                        <p class="bienvenida">
+                            Ante cualquier duda o inconveniente podrá comunicarse con nosotros a info@coefix.com o bien telefónicamente
+                            al 011-2275-7035 que un asesor responderá todas sus inquietudes y le brindará el asesoramiento correspondiente.
+                        </p>
+                        <p class="username">
+                            También podrá operar sus cursos desde su celular descargando la aplicación segun su equipo móvil:
+                        </p>
+                        <div>
+                            <a href="https://play.google.com/store/apps/details?id=com.moodle.moodlemobile">
+                                <img src="http://200.61.136.134/~crmcoefix/public/img/google-play.png">
+                            </a>
+                            <a href="https://apps.apple.com/app/moodle-mobile/id633359593">
+                                <img src="http://200.61.136.134/~crmcoefix/public/img/appstore.png">
+                            </a>
+                        </div>
 
                         <div id="legalcopy">
                             <p class="legal">
@@ -257,7 +273,7 @@
 
                         <small>
                             Este email ha sido enviado a tu casilla de correo.
-                            Si no deseas recibir más novedades puedes desuscribirte cliqueando en el siguiente enlace
+                            Si no desea recibir más novedades puede desuscribirte cliqueando en el siguiente enlace
                             <a href="http://200.61.136.134/~crmcoefix/public/desuscripcion.html" style="color: dodgerblue">Desuscribirme</a>
                             El titular podrá en cualquier momento solicitar el retiro o bloqueo de su nombre de los bancos de datos a los que se refiere
                             el presente artículo. En toda comunicación con fines de publicidad que se realice por correo, teléfono, correo electrónico,
