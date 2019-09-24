@@ -65,7 +65,7 @@ class AlumnosController extends Controller
         }
 
         Mail::queue('emails.alta-coefix', ['data' => $data], function ($message) use ($data){
-            $message->to('test-yy50b@mail-tester.com');
+            $message->to('test-v9dru@mail-tester.com');
             $message->subject($data['subject']);
             $message->from('administracion@crm.coefix.com');
         });
