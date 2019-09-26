@@ -45,7 +45,7 @@ input, .select2{
 @section('contenido')
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card alert">
                 <div class="card-header pr">
                     <h2 class="panel-title">Crear nuevo usuario</h2>
@@ -53,29 +53,52 @@ input, .select2{
                 <div class="panel-body">
                     {!! Form::open(['method' => 'post', 'url' => route('users.store'), 'class' =>'form']) !!}
 
-                    <div class="form-group">
-                        {!! Form::label('roles', 'Roles:') !!}
-                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control multiple select2']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('nombre', 'Nombre') !!}
-                        {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('apellido', 'Apellido') !!}
-                        {!! Form::text('apellido', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('email', 'Email') !!}
-                        {!! Form::email('email', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('telefono', 'Teléfono') !!}
-                        {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('dni', 'DNI') !!}
-                        {!! Form::text('dni', null, ['class' => 'form-control']) !!}
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {!! Form::label('roles', 'Roles:') !!}
+                                {!! Form::select('roles[]', $roles, null, ['class' => 'form-control multiple select2']) !!}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {!! Form::label('sucursales', 'Sucursales') !!}
+                                {!! Form::select('sucursales[]', $sucursales, null, ['class' => 'form-control multiple select2']) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {!! Form::label('nombre', 'Nombre') !!}
+                                {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {!! Form::label('apellido', 'Apellido') !!}
+                                {!! Form::text('apellido', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {!! Form::label('email', 'Email') !!}
+                                {!! Form::email('email', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                {!! Form::label('telefono', 'Teléfono') !!}
+                                {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                {!! Form::label('dni', 'DNI') !!}
+                                {!! Form::text('dni', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary">Crear usuario</button>

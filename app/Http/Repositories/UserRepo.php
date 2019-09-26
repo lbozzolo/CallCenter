@@ -148,6 +148,9 @@ class UserRepo extends BaseRepo
         if($request['roles'])
             $user->roles()->sync($request->roles);
 
+        if($request['sucursales'])
+            $user->sucursales()->sync($request->sucursales);
+
         $user->save();
 
         return $user;

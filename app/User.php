@@ -9,6 +9,7 @@ use SmartLine\Entities\EstadoUser;
 use Illuminate\Auth\Authenticatable;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\Noticia;
+use SmartLine\Entities\Sucursal;
 use SmartLine\Entities\Ticket;
 use SmartLine\Entities\Venta;
 use SmartLine\Entities\Entity;
@@ -149,6 +150,11 @@ class User extends Entity implements AuthenticatableContract,
         return $this->roles()->get()->lists('id')->toArray();
     }
 
+    public function getSucursalesIdsAttribute()
+    {
+        return $this->sucursales()->get()->lists('id')->toArray();
+    }
+
     public function IsEnabled()
     {
         return ($this->estado->slug == 'habilitado');
@@ -210,6 +216,11 @@ class User extends Entity implements AuthenticatableContract,
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function sucursales()
+    {
+        return $this->belongsToMany(Sucursal::class, 'sucursales_users');
     }
 
     public function updateable()

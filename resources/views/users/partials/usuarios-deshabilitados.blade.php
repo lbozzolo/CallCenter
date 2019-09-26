@@ -11,9 +11,9 @@
             <th>Nombre</th>
             <th class="text-center">Roles</th>
             <th>Email</th>
-            <th>Teléfono</th>
-            <th>DNI</th>
-            <th>Estado</th>
+            {{--<th>Teléfono</th>--}}
+            {{--<th>DNI</th>--}}
+            <th>Sucursales</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -26,9 +26,17 @@
                 <td>{!! $user->full_name !!}</td>
                 <td class="text-center">@include('users.partials.labels-roles')</td>
                 <td>{!! $user->email !!}</td>
-                <td>{!! $user->telefono !!}</td>
-                <td>{!! $user->dni !!}</td>
-                <td>{!! $user->estado->nombre !!}</td>
+                <td>
+                    <ul>
+                        @forelse($user->sucursales as $sucursal)
+                            <li><span class="label label-default">{!! $sucursal->nombre !!}</span></li>
+                        @empty
+                            <small class="text-muted">Ninguna</small>
+                        @endforelse
+                    </ul>
+                </td>
+                {{--<td>{!! $user->telefono !!}</td>--}}
+                {{--<td>{!! $user->dni !!}</td>--}}
                 <td class="text-center">
 
                 @permission('cambiar.estado.usuario')

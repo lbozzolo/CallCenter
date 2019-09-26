@@ -34,16 +34,15 @@
 
                     <thead>
                         <tr>
+                            <th>Fecha y hora</th>
                             <th>Actor</th>
+                            <th>Acción</th>
                             <th class="text-center">Identificador</th>
                             <th>Modelo</th>
-                            <th>Acción</th>
                             <th>Campo</th>
                             <th>Valor anterior</th>
                             <th>Valor actualizado</th>
                             <th class="text-center">Motivo</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,16 +50,27 @@
                     @foreach($results as $item)
 
                         <tr>
+                            <td>
+                                {!! $item->fecha_creado !!}
+                                {!! $item->hora_created !!} hs
+                            </td>
                             <td><a href="{{ route('users.profile', $item->author->id) }}" style="color: cyan">{!! $item->author->fullname !!}</a></td>
-                            <td class="text-center">{!! $item->updateable_id !!}</td>
+                            <td>
+                                <span class="label label-default">{!! $item->actionSpanish($item->action) !!}</span>
+                                @if($item->related_model_id)
+                                    {!! ucfirst($item->related_model_type) !!}
+                                    <span class="text-warning"># {!! $item->related_model_id !!}</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                {!! ucfirst($item->updateable_type) !!}
+                                <span class="text-warning"># {!! $item->updateable_id !!}</span>
+                            </td>
                             <td>{!! ($item->updateable_type)? $item->updateable_type : '-' !!}</td>
-                            <td>{!! ($item->action)? $item->action : '-' !!}</td>
                             <td>{!! ($item->field)? $item->field : '-' !!}</td>
                             <td class="text-center">{!! ($item->former_value)? $item->former_value : '-' !!}</td>
                             <td class="text-center">{!! ($item->updated_value)? $item->updated_value : '-' !!}</td>
                             <td class="text-center">{!! ($item->reason)? $item->reason : '-' !!}</td>
-                            <td>{!! $item->fecha_creado !!}</td>
-                            <td>{!! $item->hora_created !!} hs</td>
                         </tr>
 
                     @endforeach

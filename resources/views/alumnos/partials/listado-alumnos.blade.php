@@ -12,11 +12,10 @@
             <th>Nombre</th>
             <th>DNI</th>
             <th>Estado</th>
-            <th>Compras</th>
-            <th>Llamadas</th>
-            <th>Reclamos</th>
-            <th>Fecha de alta</th>
-            <th>Opciones</th>
+            <th>Cursos activos</th>
+            <th>Cursos inactivos</th>
+            <th>Notificado</th>
+            <th class="text-center">Opciones</th>
         </tr>
         </thead>
         <tbody>
@@ -39,30 +38,19 @@
                     @endif
                 </td>
                 <td class="text-center">
-                    @permission('ver.compras.cliente')
-                    <a href="{{ route('clientes.compras', $cliente->id) }}">
-                        {!! $cliente->ventas->count() !!}
-                    </a>
-                    @elsepermission
-                    {!! $cliente->ventas->count() !!}
-                    @endpermission
+                    {!! $cliente->cursosActivos()->count() !!}
                 </td>
                 <td class="text-center">
-                    @permission('ver.llamadas.cliente')
-                    <a href="{{ route('clientes.llamadas', $cliente->id) }}">{!! count($cliente->llamadas) !!}</a>
-                    @elsepermission
-                    {!! count($cliente->llamadas) !!}
-                    @endpermission
+                    {!! ($cliente->cursosInactivos()->count() > 0)? "<span class='label label-warning'>".$cliente->cursosInactivos()->count()."</span>" : $cliente->cursosInactivos()->count() !!}
                 </td>
                 <td class="text-center">
-                    @permission('ver.reclamos.cliente')
-                    <a href="{{ route('clientes.reclamos', $cliente->id) }}">{!! count($cliente->reclamos) !!}</a>
-                    @elsepermission
-                    {!! count($cliente->reclamos) !!}
-                    @endpermission
+                    @if($cliente->notificado)
+                        <i class="fa fa-check text-success"></i>
+                        @else
+                        <i class="fa fa-close text-danger"></i>
+                    @endif
                 </td>
-                <td>{!! $cliente->fecha_creado !!}</td>
-                <td class="text-center">
+                <td style="text-align: center">
                     @permission('ver.cliente')
                     <a href="{{ route('alumnos.cursos', $cliente->id) }}" class="btn btn-primary btn-xs" title="Cursos comprados"><i class="fa fa-book"></i> </a>
                     @elsepermission

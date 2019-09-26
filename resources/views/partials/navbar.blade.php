@@ -153,6 +153,8 @@
                 <li class="label">Seteos</li>
                 @endpermission
 
+                    <li><a href="{{ route('sucursales.index') }}"><i class="ti-control-shuffle"></i> Sucursales </a></li>
+
                 @permission('listado.producto')
                     <li>
                         <a class="sidebar-sub-toggle" href="{{ route('productos.index') }}" style="{{ (Request::is('productos'.'*') ? 'color: white' : '') }}"><i class="ti-shopping-cart"></i> Productos <span class="sidebar-collapse-icon ti-angle-down"></span></a>

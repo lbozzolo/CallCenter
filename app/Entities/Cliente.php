@@ -132,6 +132,12 @@ class Cliente extends Entity
         return $cliente->activaciones->where('estado', 1);
     }
 
+    public function scopeCursosInactivos($query)
+    {
+        $cliente = $query->find($this->id);
+        return $cliente->activaciones->where('estado', 0);
+    }
+
     /**
      * @return bool
      */

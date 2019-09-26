@@ -407,6 +407,19 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
+
+        Schema::table('sucursales_users', function(Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->foreign('sucursal_id')
+                ->references('id')
+                ->on('sucursales')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+        });
     }
     /**
      * Reverse the migrations.

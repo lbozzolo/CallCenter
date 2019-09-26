@@ -79,6 +79,15 @@ class DashboardController extends Controller
         if (env('APP_ENV') != 'local')
             abort(404);
 
+
+        $data['alumno'] = Cliente::find(1);
+        $data['alumno']->notificado = 0;
+
+
+        $data['fecha'] = Carbon::today()->format('d/m/Y');
+
+        return view('emails.alta-coefix')->with(['data' => $data]);
+
         $data = [];
         $roles = ['admin' => 'admin', 'operadorIn' => 'operador.in', 'operadorOut' => 'operador.out', 'auditor' => 'auditor', 'supervisor' => 'supervisor', 'logistica' => 'logistica', 'facturacion' => 'facturacion', 'atencionCliente' => 'atencion.al.cliente'];
         $permissionsFlatten = config('sistema.permission-flatten');

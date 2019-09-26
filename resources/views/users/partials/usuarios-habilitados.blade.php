@@ -14,9 +14,9 @@
                 <th>Nombre</th>
                 <th class="text-center">Roles</th>
                 <th>Email</th>
-                <th>Teléfono</th>
-                <th>DNI</th>
-                <th>Estado</th>
+                {{--<th>Teléfono</th>--}}
+                {{--<th>DNI</th>--}}
+                <th>Sucursales</th>
                 <th class="text-right">Opciones</th>
             </tr>
         </thead>
@@ -27,9 +27,9 @@
             <tr>
                 <td>
                     @if($user->profile_image)
-                        <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px">
+                        <img src="{{ route('imagenes.ver', $user->profile_image) }}" class="img-circle " style="object-fit: cover; width: 35px; height: 35px">
                     @else
-                        <img src="{{ route('imagenes.ver', 'x') }}" class="img-circle " style="object-fit: cover; width: 30px; height: 30px">
+                        <img src="{{ route('imagenes.ver', 'x') }}" class="img-circle " style="object-fit: cover; width: 35px; height: 35px">
                     @endif
                 </td>
                 <td>{!! $user->id !!}</td>
@@ -44,9 +44,17 @@
                     @include('users.partials.labels-roles')
                 </td>
                 <td>{!! $user->email !!}</td>
-                <td class="text-center">{!! ($user->telefono)? $user->telefono : '---' !!}</td>
-                <td class="text-center">{!! ($user->dni)? $user->dni : '---' !!}</td>
-                <td>{!! $user->estado->nombre !!}</td>
+                <td>
+                    <ul>
+                        @forelse($user->sucursales as $sucursal)
+                            <li><span class="label label-default">{!! $sucursal->nombre !!}</span></li>
+                        @empty
+                            <small class="text-muted">Ninguna</small>
+                        @endforelse
+                    </ul>
+                </td>
+                {{--<td class="text-center">{!! ($user->telefono)? $user->telefono : '---' !!}</td>--}}
+                {{--<td class="text-center">{!! ($user->dni)? $user->dni : '---' !!}</td>--}}
                 <td class="text-center">
 
                 @permission('cambiar.estado.usuario')

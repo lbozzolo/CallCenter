@@ -23,8 +23,11 @@
 
                     <div class="form-group">
                         {!! Form::label('roles', 'Roles:') !!}
-
-                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control select2 multiple']) !!}
+                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control select2 multiple roles']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('sucursales', 'Sucursales:') !!}
+                        {!! Form::select('sucursales[]', $sucursales, null, ['class' => 'form-control select2 multiple sucursales']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
@@ -41,7 +44,7 @@
                     <div class="form-group">
                         {!! Form::label('telefono', 'Teléfono') !!}
                         {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
-                        <small class="text-warning">El teléfono debe ser un número, sin guiones ni paréntesis, etc</small>
+                        <small class="text-warning">El teléfono debe ser un número sin caracteres especiales</small>
                     </div>
                     <div class="form-group">
                         {!! Form::label('dni', 'DNI') !!}
@@ -49,6 +52,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    <a href="{!! route('users.index') !!}" class="btn btn-default">Cancelar</a>
 
                     {!! Form::close() !!}
                 </div>
@@ -59,7 +63,30 @@
 
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('users.blanqueo.password', $user->id) }}" style="color:cyan">Blanquear contraseña</a>
+
+                    <span title="Blanquear contraseña" style="cursor: pointer; color:cyan" data-toggle="modal" data-target="#blanquear{!! $user->id !!}" >
+                        Blanquear contraseña
+                    </span>
+                    <div class="modal fade col-lg-4 col-lg-offset-8 text-left" id="blanquear{!! $user->id !!}">
+                        <div class="card">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Blanquear contraseña</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    ¿Desea blanquear la contraseña de este usuario?<br>
+                                    <em class="text-danger">{!! $user->full_name !!}</em>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{{ route('users.blanqueo.password', $user->id) }}" class="btn btn-primary">Blanquear contraseña</a>
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="card">
@@ -98,40 +125,40 @@
                                         </a>
                                         </span>
                                         <div class="modal fade col-lg-6 col-lg-offset-3" id="modalVerImage{!! $imagen->id !!}">
-                                                <div class="card">
-                                                    <div class="modal-body">
-                                                        <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="margin: 0px auto">
-                                                    </div>
-                                                    <div class="modal-footer">
+                                            <div class="card">
+                                                <div class="modal-body">
+                                                    <img src="{{ route('imagenes.ver', $imagen->path) }}" class="img-responsive" style="margin: 0px auto">
+                                                </div>
+                                                <div class="modal-footer">
 
-                                                        @if($imagen->principal == 0)
-                                                            <a href="{{ route('imagenes.principal', $imagen->id) }}" class="btn btn-primary" title="Marcar como principal">Marcar como principal</a>
-                                                        @else
-                                                            <a href="#" class="btn btn-primary" disabled title="Marcar como principal">Marcar como principal</a>
-                                                        @endif
-                                                        <button class="btn btn-danger" title="Eliminar foto" data-toggle="modal" data-target="#modalDeleteImage{!! $imagen->id !!}">Eliminar</button>
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                        <div class="modal fade text-left col-lg-3 col-md-3 col-sm-4 col-lg-offset-9 col-md-offset-9 col-sm-offset-8" id="modalDeleteImage{!! $imagen->id !!}">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span></button>
-                                                                    <h4 class="modal-title">Eliminar imagen</h4>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <p class="text-red">¿Está seguro que desea eliminar la imagen?</p>
-                                                                </div>
-                                                                <div class="card-footer">
-                                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                                                    {!! Form::open(['method' => 'DELETE', 'url' => route('imagenes.delete', $imagen->id)]) !!}
-                                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                                    {!! Form::close() !!}
-                                                                </div>
+                                                    @if($imagen->principal == 0)
+                                                        <a href="{{ route('imagenes.principal', $imagen->id) }}" class="btn btn-primary" title="Marcar como principal">Marcar como principal</a>
+                                                    @else
+                                                        <a href="#" class="btn btn-primary" disabled title="Marcar como principal">Marcar como principal</a>
+                                                    @endif
+                                                    <button class="btn btn-danger" title="Eliminar foto" data-toggle="modal" data-target="#modalDeleteImage{!! $imagen->id !!}">Eliminar</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                    <div class="modal fade text-left col-lg-3 col-md-3 col-sm-4 col-lg-offset-9 col-md-offset-9 col-sm-offset-8" id="modalDeleteImage{!! $imagen->id !!}">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title">Eliminar imagen</h4>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <p class="text-red">¿Está seguro que desea eliminar la imagen?</p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                                                                {!! Form::open(['method' => 'DELETE', 'url' => route('imagenes.delete', $imagen->id)]) !!}
+                                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                                {!! Form::close() !!}
                                                             </div>
                                                         </div>
-
                                                     </div>
+
                                                 </div>
+                                            </div>
                                         </div>
                                     </li>
                                 @endif
@@ -154,10 +181,15 @@
     <script type="text/javascript">
 
         var rolesActuales =  [<?php echo '"'.implode('","', $user->roles_ids).'"' ?>];
+        var sucursalesActuales =  [<?php echo '"'.implode('","', $user->sucursales_ids).'"' ?>];
 
-        $('.select2').select2({
+        $('.roles').select2({
             multiple: true
         }).select2('val', rolesActuales);
+
+        $('.sucursales').select2({
+            multiple: true
+        }).select2('val', sucursalesActuales);
 
     </script>
 

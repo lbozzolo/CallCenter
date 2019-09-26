@@ -1,6 +1,7 @@
 <?php namespace SmartLine\Http\Controllers;
 
 use SmartLine\Entities\EstadoUser;
+use SmartLine\Entities\Sucursal;
 use SmartLine\Http\Requests\ChangePasswordRequest;
 use SmartLine\Http\Requests\UpdateUserProfileRequest;
 use SmartLine\User;
@@ -45,8 +46,9 @@ class UsersController extends Controller
             });
         }
         $roles = $roles->lists('name', 'id');
+        $sucursales = Sucursal::active()->lists('nombre', 'id');
 
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles', 'sucursales'));
     }
 
     public function store(UpdateUserProfileRequest $request)
@@ -83,6 +85,11 @@ class UsersController extends Controller
 
         }
 
+        foreach($request->sucursales as $id){
+            $sucursal = Sucursal::find($id);
+            $user->sucursales()->save($sucursal);
+        }
+
         Mail::send('emails.new-user', ['password' => $password], function ($message) use ($email){
 
             $message->from(config('mail.from.address'), config('mail.from.name'));
@@ -91,13 +98,9 @@ class UsersController extends Controller
         });
 
         if ($user) {
-
             return redirect()->route('users.index')->with('ok', 'Usuario creado con éxito');
-
         } else {
-
             abort(400);
-
         }
     }
 
@@ -132,8 +135,9 @@ class UsersController extends Controller
             });
         }
         $roles = $roles->lists('name', 'id');
+        $sucursales = Sucursal::active()->lists('nombre', 'id');
 
-        return view('users.edit', compact('user', 'route', 'roles'));
+        return view('users.edit', compact('user', 'route', 'roles', 'sucursales'));
     }
 
     public function update(UpdateUserProfileRequest $request, $id, $route = null)

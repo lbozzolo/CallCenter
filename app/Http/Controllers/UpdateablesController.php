@@ -12,16 +12,15 @@ class UpdateablesController extends Controller
 
     public function entidad(Request $request)
     {
+        if ($request->entidad == '')
+            return redirect()->back()->withErrors('Debe seleccionar un modelo');
+
         $data['entidad'] = $request->entidad;
 
         $model = ($data['entidad'] != 'User')? "\SmartLine\Entities\\".$request->entidad : "\SmartLine\\".$request->entidad;
         $query = $model::has('updateable')->with('updateable')->get();
 
         $data['results'] = collect();
-
-//        $data['results'] = $query->map(function ($item) {
-//            return $item->updateable;
-//        })->first();
 
         foreach($query as $key => $value){
             $data['results'][$key] = $value->updateable;
@@ -40,13 +39,13 @@ class UpdateablesController extends Controller
     public function show($entity, $id)
     {
         $model = $entity::find($id);
+
         if($model->deleted_at != null){
             $data['model'] = $entity::withTrashed('updateable')->where('id', $id)->first();
         }else{
             $data['model'] = $model;
         }
 
-        //dd(substr($data['model']->getClass(), 10));
         $data['results'] = $data['model']->updateable;
 
         if(!$data['results'])
