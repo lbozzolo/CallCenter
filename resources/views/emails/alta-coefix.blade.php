@@ -172,7 +172,6 @@
                         <div class="invoice-logo"></div>
                         <div class="invoice-info">
                             <img src="http://200.61.136.134/~crmcoefix/public/img/logo.png" alt="Logo de COEFIX" style="width: 50%; margin: 0px auto"><br>
-                            <img src="https://www.coefix.com/pluginfile.php/1/theme_moove/logo/1565808971/logo.png" alt="Logo de COEFIX" style="width: 50%; margin: 0px auto"><br>
                             <span class="info">info@coefix.com - </span>
                             <span class="info">Teléfono: 011-2275-7035</span>
                             <span class="info" style="color: grey"> -  {!! $data['fecha'] !!}</span>
