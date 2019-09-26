@@ -69,7 +69,7 @@ class AlumnosController extends Controller
             $message->subject($data['subject']);
             $message->from('administracion@crm.coefix.com');
             $message->setContentType('text/html');
-            $message->setContentType('text/plain; charset=UTF-8');
+            //$message->setContentType('text/plain; charset=UTF-8');
         });
 
         // Updateables
