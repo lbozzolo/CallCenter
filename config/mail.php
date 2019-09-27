@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'info@verticedigital.com.ar', 'name' => 'SmartLine'],
+    'from' => ['address' => 'administracion@crm.coefix.com', 'name' => 'Coefix'],
 
     /*
     |--------------------------------------------------------------------------

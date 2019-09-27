@@ -52,6 +52,8 @@ class AlumnosController extends Controller
         $data['alumno'] = Cliente::find($id);
         $data['fecha'] = Carbon::today()->format('d/m/Y');
 
+        dd(config('mail.from'));
+
         if (!$data['alumno']->notificado) {
 
             $data['alumno']->notificado = 1;
@@ -67,7 +69,7 @@ class AlumnosController extends Controller
         Mail::queue('emails.alta-coefix', ['data' => $data], function ($message) use ($data){
             $message->to($data['alumno']->email);
             $message->subject($data['subject']);
-            $message->from('administracion@crm.coefix.com');
+            $message->from(config('mail.from'));
             $message->setContentType('text/html');
             //$message->setContentType('text/plain; charset=UTF-8');
         });
