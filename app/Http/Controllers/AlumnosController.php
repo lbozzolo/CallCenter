@@ -52,8 +52,6 @@ class AlumnosController extends Controller
         $data['alumno'] = Cliente::find($id);
         $data['fecha'] = Carbon::today()->format('d/m/Y');
 
-        dd(config('mail.from'));
-
         if (!$data['alumno']->notificado) {
 
             $data['alumno']->notificado = 1;
