@@ -69,7 +69,6 @@ class AlumnosController extends Controller
             $message->subject($data['subject']);
             $message->from(config('mail.from.address'), config('mail.from.name'));
             $message->setContentType('text/html');
-            //$message->setContentType('text/plain; charset=UTF-8');
         });
 
         // Updateables

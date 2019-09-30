@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('sucursales', 'Sucursales:') !!}
-                        {!! Form::select('sucursales[]', $sucursales, null, ['class' => 'form-control select2 multiple sucursales']) !!}
+                        {!! Form::select('sucursales[]', $sucursales, null, ['class' => 'form-control select2 sucursales']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('nombre', 'Nombre') !!}
@@ -188,7 +188,7 @@
         }).select2('val', rolesActuales);
 
         $('.sucursales').select2({
-            multiple: true
+            multiple: false
         }).select2('val', sucursalesActuales);
 
     </script>

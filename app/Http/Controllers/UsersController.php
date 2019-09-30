@@ -31,7 +31,6 @@ class UsersController extends Controller
     {
         $estadoNuevo = EstadoUser::where('slug', 'nuevo')->first();
         $users = User::where('estado_id', '!=', $estadoNuevo->id)->get();
-        //$users = User::with('estado')->get();
 
         return view('users.index', compact('users'));
     }

@@ -50,7 +50,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Agregar</button>
-        <a href="{{ route('clientes.index') }}" class="btn btn-default">Cancelar</a>
+        <a href="{{ route('sucursales.index') }}" class="btn btn-default">Cancelar</a>
 
     </div>
 

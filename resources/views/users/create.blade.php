@@ -64,7 +64,7 @@ input, .select2{
                         <div class="col-lg-6">
                             <div class="form-group">
                                 {!! Form::label('sucursales', 'Sucursales') !!}
-                                {!! Form::select('sucursales[]', $sucursales, null, ['class' => 'form-control multiple select2']) !!}
+                                {!! Form::select('sucursales[]', $sucursales, null, ['class' => 'form-control select2']) !!}
                             </div>
                         </div>
 
@@ -115,7 +115,7 @@ input, .select2{
     <script>
 
         $('.select2').select2({
-            multiple: true,
+            multiple: false
         });
 
     </script>
