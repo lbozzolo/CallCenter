@@ -263,9 +263,12 @@ class ClientesController extends Controller
     public function agregarTarjeta(CreateDatosTarjetaRequest $request, $id)
     {
         $cliente = Cliente::find($id);
-
-        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', '01/'.$request->fecha_expiracion)->toDateTimeString() : null;
+        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', '01/'.$request->fecha_expiracion)->startOfDay() : null;
+        $fechaExpiracionString = $fechaExpiracion->toDateTimeString();
         $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
+
+        if($fechaExpiracion <= Carbon::today())
+            return redirect()->back()->withErrors('La tarjeta ingresada está vencida')->withInput();
 
         if(!$validateCreditCard)
             return redirect()->back()->withErrors('Formato de Tarjeta incorrecto');
@@ -276,7 +279,7 @@ class ClientesController extends Controller
             'numero_tarjeta' => $request->numero_tarjeta,
             'codigo_seguridad' => $request->codigo_seguridad,
             'titular' => $request->titular,
-            'fecha_expiracion' => $fechaExpiracion,
+            'fecha_expiracion' => $fechaExpiracionString,
         ]);
 
         if(!$datosTarjeta)
@@ -293,7 +296,11 @@ class ClientesController extends Controller
 
     public function updateTarjeta(CreateDatosTarjetaRequest $request, $id)
     {
+        $fechaExpiracion = ($request->fecha_expiracion)? Carbon::createFromFormat('d/m/Y', '01/'.$request->fecha_expiracion)->startOfDay() : null;
         $validateCreditCard = $this->clienteRepo->validateCreditCard($request->numero_tarjeta);
+
+        if($fechaExpiracion <= Carbon::today())
+            return redirect()->back()->withErrors('La fecha ingresada es anterior al día de hoy')->withInput();
 
         if(!$validateCreditCard)
             return redirect()->back()->withErrors('Formato de Tarjeta incorrecto');

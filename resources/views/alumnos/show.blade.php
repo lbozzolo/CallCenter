@@ -112,7 +112,7 @@
         </div>
         <div class="col-lg-7">
             <div class="card card-body">
-                <h3>Cursos para habilitar</h3>
+                <h3>Cursos para activar</h3>
 
                 <div class="table-responsive">
                     <table class="table table-condensed">

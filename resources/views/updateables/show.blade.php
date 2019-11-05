@@ -59,8 +59,28 @@
                                     <span class="text-warning"># {!! $item->updateable_id !!}</span>
                                 </td>
                                 <td>{!! ($item->field)? $item->field : '-' !!}</td>
-                                <td class="text-center">{!! ($item->former_value)? $item->former_value : '-' !!}</td>
-                                <td class="text-center">{!! ($item->updated_value)? $item->updated_value : '-' !!}</td>
+                                <td class="text-center">
+                                    @if($item->field == 'localidad')
+                                        {!! \SmartLine\Entities\Localidad::find($item->former_value)->localidad !!}
+                                    @elseif($item->field == 'partido')
+                                        {!! \SmartLine\Entities\Partido::find($item->former_value)->partido !!}
+                                    @elseif($item->field == 'provincia')
+                                        {!! \SmartLine\Entities\Provincia::find($item->former_value)->provincia !!}
+                                    @else
+                                        {!! ($item->former_value)? $item->former_value : '-' !!}
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if($item->field == 'localidad')
+                                        {!! \SmartLine\Entities\Localidad::find($item->updated_value)->localidad !!}
+                                    @elseif($item->field == 'partido')
+                                        {!! \SmartLine\Entities\Partido::find($item->updated_value)->partido !!}
+                                    @elseif($item->field == 'provincia')
+                                        {!! \SmartLine\Entities\Provincia::find($item->updated_value)->provincia !!}
+                                    @else
+                                        {!! ($item->updated_value)? $item->updated_value : '-' !!}
+                                    @endif
+                                </td>
                                 <td class="text-center">{!! ($item->reason)? $item->reason : '-' !!}</td>
                             </tr>
 

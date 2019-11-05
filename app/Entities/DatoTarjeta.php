@@ -37,12 +37,7 @@ class DatoTarjeta extends Entity
 
     public function isExpired()
     {
-        //$fecha_expiracion = Carbon::parse($this->fecha_expiracion)->format('m/Y');
-        //$today = Carbon::today()->format('m/Y');
-        $fecha_expiracion = Carbon::parse($this->fecha_expiracion);
-        $today = Carbon::today();
-
-        return $fecha_expiracion <= $today;
+        return Carbon::parse($this->fecha_expiracion) <= Carbon::today();
     }
 
     public function getExpirationDateAttribute()

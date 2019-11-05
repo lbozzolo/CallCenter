@@ -11,10 +11,9 @@
             <th>Id</th>
             <th>Nombre</th>
             <th>DNI</th>
-            <th>Estado</th>
-            <th>Cursos activos</th>
-            <th>Cursos inactivos</th>
-            <th>Notificado</th>
+            <th class="text-center">Cursos activos</th>
+            <th class="text-center">Cursos inactivos</th>
+            <th class="text-center">Notificado</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -26,17 +25,6 @@
                 <td>{!! $cliente->id !!}</td>
                 <td>{!! $cliente->full_name !!}</td>
                 <td>{!! ($cliente->dni)? $cliente->dni : "<span class='label label-danger'>sin dni</span><i class='fa fa-exclamation-circle'></i>" !!}</td>
-                <td>
-                    @if($cliente->estado->slug == 'nuevo')
-                        <label class="label label-warning">{!! $cliente->estado->nombre !!}</label>
-                    @elseif($cliente->estado->slug == 'frecuente')
-                        <label class="label label-primary">{!! $cliente->estado->nombre !!}</label>
-                    @elseif($cliente->estado->slug == 'habilitado')
-                        <label class="label label-default" style="background-color: rgb(8, 142, 83);">{!! $cliente->estado->nombre !!}</label>
-                    @elseif($cliente->estado->slug == 'deshabilitado')
-                        <label class="label label-danger" >{!! $cliente->estado->nombre !!}</label>
-                    @endif
-                </td>
                 <td class="text-center">
                     {!! $cliente->cursosActivos()->count() !!}
                 </td>

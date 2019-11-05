@@ -121,10 +121,10 @@ class VentaRepo extends BaseRepo
     {
         $venta = Venta::with(['cliente', 'cliente.domicilio', 'productos'])->find($id);
 
-        if(count($venta->etapas)){
-            $venta->etapa_id = $venta->etapas()->first()->id;
-            $venta->save();
-        }
+//        if(count($venta->etapas)){
+//            $venta->etapa_id = $venta->etapas()->first()->id;
+//            $venta->save();
+//        }
 
         $cliente = $venta->cliente;
         $domicilio = $cliente->domicilio;
@@ -150,9 +150,9 @@ class VentaRepo extends BaseRepo
             $ventaCerrada->codigo_postal = $domicilio->codigo_postal;
             $ventaCerrada->entre_calles = $domicilio->entre_calles;
             $ventaCerrada->barrio = $domicilio->barrio;
-            $ventaCerrada->localidad = $domicilio->localidad->localidad;
-            $ventaCerrada->partido = $domicilio->partido->partido;
-            $ventaCerrada->provincia = $domicilio->provincia->provincia;
+            $ventaCerrada->localidad = ($domicilio->localidad)? $domicilio->localidad->localidad : '';
+            $ventaCerrada->partido = ($domicilio->partido)? $domicilio->partido->partido : '';
+            $ventaCerrada->provincia = ($domicilio->provincia)? $domicilio->provincia->provincia : '';
 
             $ventaCerrada->save();
         }

@@ -179,7 +179,7 @@
 
                     </div>
 
-                    @if(!$data['alumno']->notificado)
+                    @if(isset($data['nuevo']))
                         <p class="bienvenida">
                             ¡Bienvenido/a a la plataforma educativa COEFIX!
                             Tenemos el agrado de informarle que ya forma parte de nuestra comunidad de enseñanza.

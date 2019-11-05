@@ -40,7 +40,12 @@
                             <td>{!! $tarjeta->card_number !!}</td>
                             <td>{!! $tarjeta->security_number !!}</td>
                             <td>{!! $tarjeta->titular !!}</td>
-                            <td>{!! $tarjeta->expiration_date !!}</td>
+                            <td>
+                                {!! $tarjeta->expiration_date !!}
+                                @if($tarjeta->isExpired())
+                                <span class="label label-danger">tarjeta vencida</span>
+                                @endif
+                            </td>
                             <td>
                                 @permission('editar.tarjeta.cliente')
                                 <button type="button" class="btn btn-primary btn-flat botonEditarTarjetaAsociada" data-id="{!! $tarjeta->id !!}"><i class="fa fa-edit"></i></button>

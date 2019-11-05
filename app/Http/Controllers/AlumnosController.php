@@ -52,15 +52,25 @@ class AlumnosController extends Controller
         $data['alumno'] = Cliente::find($id);
         $data['fecha'] = Carbon::today()->format('d/m/Y');
 
-        if (!$data['alumno']->notificado) {
+        if ($data['alumno']->notificado == 0) {
 
             $data['alumno']->notificado = 1;
+            $data['nuevo'] = true;
             $data['alumno']->save();
             $data['subject'] = 'Activación en la plataforma COEFIX';
+
+            // Updateables
+
+            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCoefix']);
+            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCourses']);
 
         } else {
 
             $data['subject'] = 'Nuevos cursos habilitados en COEFIX';
+
+            // Updateables
+
+            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCourses']);
 
         }
 
@@ -70,15 +80,6 @@ class AlumnosController extends Controller
             $message->from(config('mail.from.address'), config('mail.from.name'));
             $message->setContentType('text/html');
         });
-
-        // Updateables
-
-        if (!$data['alumno']->notificado) {
-            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCoefix']);
-            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCourses']);
-        } else {
-            $data['alumno']->updateable()->create(['user_id' => Auth::user()->id, 'action' => 'notifyCourses']);
-        }
 
         return redirect()->back()->with('ok', 'Alumno notificado con éxito');
     }
@@ -98,8 +99,6 @@ class AlumnosController extends Controller
             'related_model_type' => 'producto'
         ]);
 
-        //$mensaje = ($activacion->estado == 1)? 'Se ha habilitado con éxito a '.$activacion->cliente->fullname.' en los cursos solicitados' : 'Se ha deshabilitado con éxito a '.$activacion->cliente->fullname.' en los cursos solicitados';
-        //return redirect()->back()->with('ok', $mensaje);
         return redirect()->back();
     }
 

@@ -18,8 +18,14 @@
                         <select name="datos_tarjeta_id" class="form-control select2b" id="selectCredito">
                             @foreach($tarjetas as $tarjeta)
                                 @if($tarjeta->marca->tipo == 'credito')
-                                    <option value="{!! $tarjeta->id !!}">{!! $tarjeta->marca->nombre !!} ( {!! $tarjeta->titular !!})</option>
+                                    <option value="{!! $tarjeta->id !!}" {!! ($tarjeta->isExpired())? 'disabled' : '' !!}>
+                                        {!! $tarjeta->marca->nombre !!} ( {!! $tarjeta->titular !!})
+                                        @if($tarjeta->isExpired())
+                                            <strong>-- TARJETA VENCIDA --</strong>
+                                        @endif
+                                    </option>
                                 @endif
+
                             @endforeach
                         </select>
                     @else

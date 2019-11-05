@@ -302,6 +302,8 @@
 
         </div>
 
+        @role('superadmin|admin')
+
         <div class="row">
             <div class="col-lg-12">
 
@@ -321,29 +323,31 @@
         @endif
 
         @can('alter', $venta)
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                @permission('editar.venta')
-                <li class="active"><a href="#tab_1" data-toggle="tab">Tarjetas asociadas</a></li>
-                <li><a href="#tab_2" data-toggle="tab">Datos del cliente</a></li>
-                @endpermission
-            </ul>
-            <div class="tab-content">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    @permission('editar.venta')
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Tarjetas asociadas</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">Datos del cliente</a></li>
+                    @endpermission
+                </ul>
+                <div class="tab-content">
 
-                <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
+                    <div class="tab-pane active card" id="tab_1" style="margin-top: 0px">
 
-                    @include('ventas.partials.panel-tarjetas-asociadas')
+                        @include('ventas.partials.panel-tarjetas-asociadas')
+
+                    </div>
+                    <div class="tab-pane card" id="tab_2" style="margin-top: 0px">
+
+                        @include('ventas.partials.panel-cliente')
+
+                    </div>
 
                 </div>
-                <div class="tab-pane card" id="tab_2" style="margin-top: 0px">
-
-                    @include('ventas.partials.panel-cliente')
-
-                </div>
-
             </div>
-        </div>
         @endcan
+
+        @endrole
 
     @endif
 

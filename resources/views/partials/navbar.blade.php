@@ -79,13 +79,13 @@
                     @endpermission
                 @endrole
 
-                @permission('ver.venta')
+                @role('superadmin|admin|supervisor')
                 <li>
                     <a href="{{ route('alumnos.index') }}">
                         <span class="text-success"><i class="ti-book"></i> COEFIX</span>
                     </a>
                 </li>
-                @endpermission
+                @endrole
 
 
                 @permission('ver.noticia')
