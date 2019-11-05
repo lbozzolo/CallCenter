@@ -37,7 +37,7 @@
         }
 
         .bg-primary {
-            background-color: #1F2037;
+            background-color: white;
             font-family: sans-serif;
         }
 
