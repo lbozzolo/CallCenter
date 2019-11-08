@@ -4,14 +4,12 @@ namespace SmartLine\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 use SmartLine\Entities\Activacion;
 use SmartLine\Entities\Cliente;
 use SmartLine\Entities\DatoTarjeta;
 use SmartLine\Entities\EstadoVenta;
 use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Producto;
-use SmartLine\Entities\EstadoProducto;
 use SmartLine\Entities\EstadoCliente;
 use SmartLine\Entities\ProductoVenta;
 use SmartLine\Entities\Provincia;
@@ -146,22 +144,18 @@ class VentasController extends Controller
 
     public function panel($idVenta)
     {
-        $productoActivo = EstadoProducto::where('slug', 'activo')->first();
         $data['venta'] = Venta::with('productos.marca', 'productos.institucion', 'productos.etapas', 'cliente', 'cliente.datosTarjeta', 'cliente.datosTarjeta.marca', 'cliente.domicilio.localidad', 'cliente.domicilio.partido', 'cliente.domicilio.provincia')->where('id', $idVenta)->first();
         $data['total'] = $this->ventaRepo->totalesVentasByEstado();
-        //$data['tags'] = EstadoVenta::lists('nombre', 'slug');
 
         $data['estados'] = EstadoCliente::lists('nombre', 'id');
         $data['provincias'] = Provincia::lists('provincia', 'id');
         $data['partidos'] = Partido::lists('partido', 'id', 'codProvincia');
         $data['localidades'] = Localidad::lists('localidad', 'id', 'codProvincia');
         $data['productos'] = $this->productoRepo->getProductosActivos();
-
         $data['productosVenta'] = $data['venta']->productos->groupBy('id');
 
         $data['marcas'] = MarcaTarjeta::lists('nombre', 'id');
         $data['bancos'] = Banco::lists('nombre', 'id');
-        //$data['metodosPago'] = MetodoPago::lists('nombre', 'id');
         $data['metodosPago'] = MetodoPago::whereIn('slug', ['credito', 'debito'])->lists('nombre', 'id');
         $data['cuotas'] = config('sistema.ventas.cuotas');
         $data['promociones'] = Promocion::lists('nombre', 'id');
@@ -178,9 +172,7 @@ class VentasController extends Controller
             }
         }
 
-        $data['products'] = Producto::all()->lists('nombre_precio', 'id');
-
-        //dd($data);
+        $data['products'] = $data['productos']->lists('nombre_precio', 'id');
 
         return view('ventas.panel')->with($data);
     }
@@ -444,7 +436,36 @@ class VentasController extends Controller
         $venta->estado_id = $cancelado->id;
         $venta->save();
 
-        return redirect()->route('ventas.panel', $venta->id)->with('La Venta ha sido cancelada');
+        return redirect()->route('ventas.panel', $venta->id)->with('ok', 'La Venta ha sido cancelada');
+    }
+
+    public function programar(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'motivo' => 'required|max:255',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        $venta = Venta::find($request->venta_id);
+        $programada = EstadoVenta::where('slug', 'programada')->first();
+        $motivo = $request->motivo;
+
+        $venta->updateable()->create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update',
+            'field' => 'estado_id',
+            'former_value' => $venta->estado_id,
+            'updated_value' => $programada->id,
+            'reason' => $motivo
+        ]);
+
+        $venta->estado_id = $programada->id;
+        $venta->motivo = $motivo;
+        $venta->save();
+
+        return redirect()->route('ventas.panel', $venta->id)->with('ok', 'La Venta ha sido programada. Motivo: '.$motivo);
     }
 
     public function aceptar(Request $request)
@@ -718,6 +739,7 @@ class VentasController extends Controller
     {
         $venta = Venta::find($id);
 
+
         if(!Auth::user()->can('alter', $venta))
             return redirect()->back()->withErrors('Usted no está autorizado a editar esta venta');
 
@@ -733,6 +755,18 @@ class VentasController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
 
         $metodoPago = MetodoPago::find($request->metodo_pago);
+
+        if($metodoPago->slug == 'credito' || $metodoPago->slug == 'debito'){
+            $validator2 = Validator::make($request->all(), [
+                'metodo_pago' => 'required',
+                'datos_tarjeta_id' => 'required',
+                'importe' => 'required|integer|min:1',
+            ]);
+
+            if ($validator2->fails())
+                return redirect()->back()->withErrors($validator2)->withInput();
+        }
+
         $datosTarjeta = ($request->datos_tarjeta_id)? DatoTarjeta::with('marca.formasPago')->where('id', $request->datos_tarjeta_id)->first() : null;
 
         if($datosTarjeta && $datosTarjeta->isExpired())

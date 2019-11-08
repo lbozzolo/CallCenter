@@ -20,6 +20,14 @@ return [
             'updated_at' => date_create()
         ],
         [
+            'name' => 'Programar venta',
+            'slug' => 'programar.venta',
+            'description' => 'Programar una venta',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
             'name' => 'Retomar venta',
             'slug' => 'retomar.venta',
             'description' => 'Retomar una venta',
@@ -150,6 +158,22 @@ return [
             'created_at' => date_create(),
             'updated_at' => date_create()
         ],
+        [
+            'name' => 'Marcar venta como cobrada',
+            'slug' => 'marcar.venta.como.cobrada',
+            'description' => 'Marcar venta como cobrada',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Marcar venta como no cobrada',
+            'slug' => 'marcar.venta.como.no.cobrada',
+            'description' => 'Marcar venta como no cobrada',
+            'model' => 'venta',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
 
     ],
 
@@ -268,6 +292,14 @@ return [
             'name' => 'Cambiar contraseña del usuario',
             'slug' => 'cambiar.password.perfil',
             'description' => 'Cambiar la contraseña del usuario',
+            'model' => 'user',
+            'created_at' => date_create(),
+            'updated_at' => date_create()
+        ],
+        [
+            'name' => 'Blanquear password de usuario',
+            'slug' => 'blanquear.password.usuario',
+            'description' => 'Blanquear la contraseña de un usuario',
             'model' => 'user',
             'created_at' => date_create(),
             'updated_at' => date_create()

@@ -22,9 +22,11 @@ class AlumnosController extends Controller
     {
         $clientes = Cliente::has('ventas')->get()->filter(function ($cliente) {
             foreach ($cliente->ventas as $venta) {
-                foreach ($venta->productos as $producto) {
-                    if($producto->isCurso())
-                        return $cliente;
+                if($venta->statusIs('confirmada')){
+                    foreach ($venta->productos as $producto) {
+                        if($producto->isCurso())
+                            return $cliente;
+                    }
                 }
             }
         });

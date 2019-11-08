@@ -49,7 +49,7 @@
                                 @endpermission
 
                                 @role('operador.in|operador.out')
-                                <li><a href="{{ route('reclamos.index.operador') }}">List Reclamos</a></li>
+                                <li><a href="{{ route('reclamos.index.operador') }}">Listar Reclamos</a></li>
                                 @endrole
                             </ul>
                         </li>
@@ -82,7 +82,7 @@
                 @role('superadmin|admin|supervisor')
                 <li>
                     <a href="{{ route('alumnos.index') }}">
-                        <span class="text-success"><i class="ti-book"></i> COEFIX</span>
+                        <span class="text-success"><i class="ti-book"></i> Cursos</span>
                     </a>
                 </li>
                 @endrole

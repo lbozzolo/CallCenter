@@ -1,5 +1,6 @@
 var hexArray = [];
 hexArray['iniciada'] = '#013734';
+hexArray['programada'] = '#037AF9';
 hexArray['cancelada'] = '#D13634';
 hexArray['auditada'] = '#729C94';
 hexArray['confirmada'] = '#0EBFBB';
@@ -15,6 +16,9 @@ $(".estadoVentas").each(function (index){
     switch($(this).attr('data-estado')) {
         case 'iniciada':
             $(this).css("background-color",hexArray['iniciada']);
+            break;
+        case 'programada':
+            $(this).css("background-color",hexArray['programada']);
             break;
         case 'cancelada':
             $(this).css("background-color", hexArray['cancelada']);

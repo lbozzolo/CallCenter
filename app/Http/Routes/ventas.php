@@ -184,13 +184,19 @@ Route::post('ventas/{id}/numero-guia', [
 Route::put('ventas/{id}/cobrar', [
     'as' => 'ventas.cambiar.cobrada',
     'uses' => 'VentasController@cobrar',
-    'middleware' => 'permission:editar.venta'
+    'middleware' => 'permission:marcar.venta.como.cobrada'
 ]);
 
 Route::put('ventas/cancelar-venta', [
     'as' => 'ventas.cancelar',
     'uses' => 'VentasController@cancelar',
     'middleware' => 'permission:cancelar.venta'
+]);
+
+Route::put('ventas/programar-venta', [
+    'as' => 'ventas.programar',
+    'uses' => 'VentasController@programar',
+    'middleware' => 'permission:programar.venta'
 ]);
 
 Route::put('ventas/aceptar-venta', [

@@ -43,6 +43,7 @@ class Updateable extends Entity
 
 
     //Relationships
+
     public function updateable()
     {
         return $this->morphTo();

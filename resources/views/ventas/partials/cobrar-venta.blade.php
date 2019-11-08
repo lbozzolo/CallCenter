@@ -1,6 +1,8 @@
 @if(!$venta->cobrada)
 
     <div class="text-danger">Esta venta está pendiente de cobro</div>
+
+    @permission('marcar.venta.como.cobrada')
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#marcarComoCobrada">Marcar como COBRADA</button>
     <div class="modal fade col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="marcarComoCobrada">
         <div class="card text-left">
@@ -25,6 +27,7 @@
 
         </div>
     </div>
+    @endpermission
 
 @else
 
@@ -33,6 +36,7 @@
         <span class="text-warning">Nº de TRANSACCIÓN: {!! $venta->numero_transaccion !!}</span>
     </div>
 
+    @permission('marcar.venta.como.cobrada')
     <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deshacerCobrada">Marcar como NO COBRADA</button>
     <div class="modal fade col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="deshacerCobrada">
         <div class="card text-left">
@@ -55,5 +59,6 @@
 
         </div>
     </div>
+    @endpermission
 
 @endif

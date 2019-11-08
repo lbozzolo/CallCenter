@@ -3,16 +3,48 @@
         <ul class="list-inline panel panel-barra">
             @if($venta->estado->slug != 'cancelada')
                 <li>
-                    <button type="button" class="btn btn-warning btn-outline btn-flat" data-toggle="modal" data-target="#cierreVenta">LEGALES</button>
+                    <button type="button" class="btn btn-info btn-outline btn-flat" data-toggle="modal" data-target="#cierreVenta">LEGALES</button>
                 </li>
                 @permission('aceptar.venta')
-                @if($venta->statusIs('iniciada'))
+                @if($venta->statusIs('iniciada') || $venta->statusIs('programada'))
                 <li>
                     @include('ventas.partials.aceptar-venta')
                 </li>
                 @endif
                 @endpermission
-                @permission('cancelar.venta')
+                @permission('programar.venta')
+                @if(!$venta->statusIs('programada'))
+                <li>
+                    <button type="button" class="btn btn-warning btn-outline btn-flat" data-toggle="modal" data-target="#programarVenta">
+                        <i class="fa fa-clock-o"></i>
+                        Programar venta
+                    </button>
+                    <div class="modal fade col-lg-5 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="programarVenta">
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Programar venta</h4>
+
+                                {!! Form::open(['url' => route('ventas.programar'), 'method' => 'put']) !!}
+                                <div class="form-group">
+                                    <p>¿Desea programar esta venta?</p>
+                                    {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de la cancelación']) !!}
+                                    <small class="text-warning">* El motivo es obligatorio</small>
+                                </div>
+
+                                <div class="form-group">
+                                    {!! Form::hidden('venta_id', $venta->id) !!}
+                                    <button type="submit" class="btn btn-warning ">Programar venta</button>
+                                    <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+                                </div>
+
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                @endif
+                @endpermission
                 <li>
                     <button type="button" class="btn btn-danger btn-outline btn-flat" data-toggle="modal" data-target="#cancelarVenta">
                         <i class="fa fa-ban"></i>
@@ -21,8 +53,8 @@
                     <div class="modal fade col-lg-3 col-lg-offset-4 col-sm-6 col-sm-offset-3" id="cancelarVenta">
                         <div class="card">
 
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Cancelar venta</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Cancelar venta</h4>
 
                             {!! Form::open(['url' => route('ventas.cancelar'), 'method' => 'put']) !!}
                             <div class="form-group">
@@ -41,7 +73,6 @@
                         </div>
                     </div>
                 </li>
-                @endpermission
             @endif
             {{--<li>--}}
                 {{--<span class="text-primary" style="font-size: 1.5em">${!! $venta->totalPorCuotas($venta->plan_cuotas) !!}</span>--}}

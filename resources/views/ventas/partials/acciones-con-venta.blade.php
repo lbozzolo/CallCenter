@@ -15,7 +15,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea confirmar esta venta?</p>
-                        {!! Form::hidden('estado_id', 4) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'confirmada')->first()->id) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::hidden('venta_id', $venta->id) !!}
@@ -44,7 +44,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea rechazar esta venta?</p>
-                        {!! Form::hidden('estado_id', 5) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'rechazada')->first()->id) !!}
                         {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de rechazo']) !!}
                         <small class="text-warning">* El motivo es obligatorio</small>
                     </div>
@@ -81,7 +81,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea marcar esta venta como FACTURADA?</p>
-                        {!! Form::hidden('estado_id', 7) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'facturada')->first()->id) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::hidden('venta_id', $venta->id) !!}
@@ -110,7 +110,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea marcar esta venta como AUDITABLE?</p>
-                        {!! Form::hidden('estado_id', 3) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'auditable')->first()->id) !!}
                         {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo.']) !!}
                         <small class="text-warning">* El motivo es obligatorio</small>
                     </div>
@@ -141,7 +141,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea cancelar esta venta?</p>
-                        {!! Form::hidden('estado_id', 2) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'cancelada')->first()->id) !!}
                         {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo de cancelación.']) !!}
                         <small class="text-warning">* El motivo es obligatorio</small>
                     </div>
@@ -177,7 +177,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea marcar esta venta como ENVIADA?</p>
-                        {!! Form::hidden('estado_id', 8) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'enviada')->first()->id) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::hidden('venta_id', $venta->id) !!}
@@ -212,7 +212,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea marcar esta venta como ENTREGADA?</p>
-                        {!! Form::hidden('estado_id', 9) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'entregado')->first()->id) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::hidden('venta_id', $venta->id) !!}
@@ -241,7 +241,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea marcar esta venta como NO ENTREGADA?</p>
-                        {!! Form::hidden('estado_id', 10) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'noentregado')->first()->id) !!}
                         {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo por el cual no se entregó']) !!}
                     </div>
                     <div class="form-group">
@@ -271,7 +271,7 @@
                     {!! Form::open(['method' => 'put', 'url' => route('ventas.update.status', $venta->id)]) !!}
                     <div class="form-group">
                         <p>¿Desea marcar esta venta como DEVUELTA?</p>
-                        {!! Form::hidden('estado_id', 11) !!}
+                        {!! Form::hidden('estado_id', \SmartLine\Entities\EstadoVenta::where('slug', 'devuelto')->first()->id) !!}
                         {!! Form::text('motivo', null, ['class' => 'form-control', 'placeholder' => 'Describa aquí el motivo por el cual fue devuelta']) !!}
                     </div>
                     <div class="form-group">

@@ -16,7 +16,7 @@ class FakerProductosSeeder extends Seeder
      */
     public function run()
     {
-        $this->createFakerProductos(25);
+        //$this->createFakerProductos(25);
         $this->createFakerCursos();
     }
 

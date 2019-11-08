@@ -145,7 +145,10 @@ class ClientesController extends Controller
         $cliente = Cliente::find($id);
         $estadosVentas = EstadoVenta::lists('nombre', 'id');
 
-        return view('clientes.compras', compact('cliente', 'estadosVentas'));
+        $compras = $cliente->ventas;
+        $compras->title = 'todas';
+
+        return view('clientes.compras', compact('cliente', 'compras','estadosVentas'));
     }
 
     public function comprasFiltrar(Request $request, $id)

@@ -16,7 +16,80 @@
 
             @include('ventas.partials.venta-cancelada')
 
+        @elseif($venta->statusIs('programada'))
+
+            <div class="card panel panel-barra">
+
+                <ul class="listado">
+                    <li class="list-group-item text-warning">
+                        Esta venta fue programada por
+                        {!!
+                            \SmartLine\Entities\Updateable::where('updateable_type', 'venta')
+                            ->where('updateable_id', $venta->id)
+                            ->where('field', 'estado_id')
+                            ->where('updated_value', '2')
+                            ->orderBy('created_at', 'desc')
+                            ->first()->author->fullname
+                         !!}
+                    </li>
+                    <li class="list-group-item">
+                        Motivo:
+                        {!!
+                            \SmartLine\Entities\Updateable::where('updateable_type', 'venta')
+                            ->where('updateable_type', 'venta')
+                            ->where('updateable_id', $venta->id)
+                            ->where('field', 'estado_id')
+                            ->where('updated_value', '2')
+                            ->orderBy('created_at', 'desc')
+                            ->first()->reason
+                        !!}
+                    </li>
+                    <li class="list-group-item">
+                        {!!
+                            \SmartLine\Entities\Updateable::where('updateable_type', 'venta')
+                            ->where('updateable_id', $venta->id)
+                            ->where('field', 'estado_id')
+                            ->where('updated_value', '2')
+                            ->orderBy('created_at', 'desc')
+                            ->first()->fecha_creado
+                         !!} a las
+                        {!!
+                            \SmartLine\Entities\Updateable::where('updateable_type', 'venta')
+                            ->where('updateable_id', $venta->id)
+                            ->where('field', 'estado_id')
+                            ->where('updated_value', '2')
+                            ->orderBy('created_at', 'desc')
+                            ->first()->hora_created
+                         !!} hs
+                    </li>
+                    @permission('retomar.venta')
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#retomarVenta"><i class="fa fa-rotate-right"></i> Retomar</button>
+                        <div class="modal fade col-lg-3 col-lg-offset-4" id="retomarVenta">
+                            <div class="card">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Retomar venta</h4>
+
+                                {!! Form::open(['url' => route('ventas.retomar'), 'method' => 'put']) !!}
+
+                                    <p>¿Desea retomar esta venta?</p>
+
+                                    {!! Form::hidden('venta_id', $venta->id) !!}
+                                    <button type="submit" class="btn btn-primary ">Retomar venta</button>
+                                    <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
+
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </li>
+                    @endpermission
+                </ul>
+
+            </div>
+
         @else
+
+
 
         @include('ventas.partials.panel-venta')
 

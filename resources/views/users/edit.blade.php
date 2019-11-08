@@ -61,6 +61,7 @@
 
         <div class="col-lg-6 col-md-6">
 
+            @permission('blanquear.password.usuario')
             <div class="card">
                 <div class="card-body">
 
@@ -89,6 +90,8 @@
 
                 </div>
             </div>
+            @endpermission
+
             <div class="card">
 
                 <div class="card-body">

@@ -18,24 +18,30 @@
             <div class="col-lg-12 col-md-6">
 
                 <div class="card">
-                    <p>Filtrar por estado</p>
-                    {!! Form::open(['method' => 'get', 'url' => route('clientes.compras.filtrar', $cliente->id), 'class' => 'form']) !!}
-                        <div class="form-group">
-                            <div class="input-group input-group">
-                                <select name="estado" class="form-control select2">
-                                    <option>todas</option>
-                                    @foreach($estadosVentas as $key => $value)
-                                        @if($cliente->ventas->where('estado_id', $key)->count() > 0)
-                                            <option value="{!! $key !!}">{!! $value !!}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-primary btn-flag">filtrar</button>
-                                </span>
+                    <div class="row">
+                        <div class="col-lg-4">
+
+                            <p>Filtrar por estado</p>
+                            {!! Form::open(['method' => 'get', 'url' => route('clientes.compras.filtrar', $cliente->id), 'class' => 'form']) !!}
+                            <div class="form-group">
+                                <div class="input-group input-group">
+                                    <select name="estado" class="form-control select2">
+                                        <option>todas</option>
+                                        @foreach($estadosVentas as $key => $value)
+                                            @if($cliente->ventas->where('estado_id', $key)->count() > 0)
+                                                <option value="{!! $key !!}">{!! $value !!}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary btn-flag">filtrar</button>
+                            </span>
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
+
                         </div>
                     </div>
-                    {!! Form::close() !!}
                 </div>
 
             </div>
@@ -82,13 +88,15 @@
                                             <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
                                         @endforeach
                                     @endforeach
-                                    {{--@foreach($venta->producto->categorias as $categoria)
-                                        <label class="label label-default" style="background-color: white; color: dimgray; border: 1px solid dimgray">{!! $categoria->nombre !!}</label>
-                                    @endforeach--}}
                                 </td>
                                 <td>{!! $venta->user->full_name !!}</td>
                                 <td>{!! $venta->fecha_creado !!}</td>
-                                <td class="text-center"><a href="{{ route('ventas.show.cliente.ventas', $venta->id) }}" class="btn btn-default btn-xs">detalles </a></td>
+                                <td class="text-center">
+                                    <a href="{{ route('ventas.show.cliente.ventas', $venta->id) }}" class="btn btn-default btn-xs">detalles </a>
+                                    @permission('ver.venta')
+                                    <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-info btn-xs">editar venta </a>
+                                    @endpermission
+                                </td>
                             </tr>
 
                         @empty

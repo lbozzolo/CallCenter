@@ -22,19 +22,17 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#retomarVenta"><i class="fa fa-rotate-right"></i> Retomar</button>
                 <div class="modal fade col-lg-3 col-lg-offset-4" id="retomarVenta">
                     <div class="card">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Retomar venta</h4>
-                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Retomar venta</h4>
+
                         {!! Form::open(['url' => route('ventas.retomar'), 'method' => 'put']) !!}
-                        <div class="modal-body">
+
                             <p>¿Desea retomar esta venta?</p>
-                        </div>
-                        <div class="modal-footer">
+
                             {!! Form::hidden('venta_id', $venta->id) !!}
-                            <button type="submit" class="btn btn-primary pull-left">Retomar venta</button>
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        </div>
+                            <button type="submit" class="btn btn-primary">Retomar venta</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
                         {!! Form::close() !!}
                     </div>
                 </div>
