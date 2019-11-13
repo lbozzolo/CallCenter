@@ -63,6 +63,8 @@
                          !!} hs
                     </li>
                     @permission('retomar.venta')
+
+                    @if($venta->belongsToUser(\Illuminate\Support\Facades\Auth::user()->id))
                     <li class="list-group-item">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#retomarVenta"><i class="fa fa-rotate-right"></i> Retomar</button>
                         <div class="modal fade col-lg-3 col-lg-offset-4" id="retomarVenta">
@@ -82,6 +84,7 @@
                             </div>
                         </div>
                     </li>
+                    @endif
                     @endpermission
                 </ul>
 

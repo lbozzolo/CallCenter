@@ -507,6 +507,7 @@ class VentasController extends Controller
         ]);
 
         $venta->estado_id = $iniciada->id;
+        $venta->motivo = null;
         $venta->save();
 
         return redirect()->back()->with('ok', 'La venta ha sido retomada');

@@ -46,6 +46,10 @@
                 <div class="card-body">
 
 
+                    <p class="bg-warning text-center" style="color: black; padding: 5px 10px">
+                        Nº de transacción:
+                        <span class="lead">{!! ($venta->numero_transaccion)? $venta->numero_transaccion : 'No hay número de transacción' !!}</span>
+                    </p>
                     <p class="lead">Cliente: {!! $venta->cliente->fullname !!}</p>
                     <p class="panel panel-barra" style="margin-bottom: 0px">Productos</p>
                     <ul class="list-unstyled listado">

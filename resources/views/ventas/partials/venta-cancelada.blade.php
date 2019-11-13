@@ -17,6 +17,8 @@
             <li class="list-group-item"><strong>Cancelación:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->fecha_creado !!}</li>
             <li class="list-group-item"><strong>Motivo:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->reason !!}</li>
             <li class="list-group-item"><strong>Cancelada por:</strong> {!! $venta->updateable->where('field', 'estado_id')->last()->author->fullname !!}</li>
+
+           @if($venta->belongsToUser($venta->user_id))
             @permission('retomar.venta')
             <li class="list-group-item">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#retomarVenta"><i class="fa fa-rotate-right"></i> Retomar</button>
@@ -38,6 +40,8 @@
                 </div>
             </li>
             @endpermission
+           @endif
+
         </ul>
     </div>
 </div>

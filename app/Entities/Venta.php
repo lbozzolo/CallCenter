@@ -2,6 +2,8 @@
 
 namespace SmartLine\Entities;
 
+use Bican\Roles\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use SmartLine\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -177,6 +179,17 @@ class Venta extends Entity
     {
         $reclamoAbierto = EstadoReclamo::where('slug', 'abierto')->first();
         return $this->reclamos->where('estado_id', $reclamoAbierto->id)->count();
+    }
+
+    public function belongsToUser($id)
+    {
+        $user = User::find($id);
+        $superadmin = Role::where('slug', 'superadmin')->first();
+
+        if(Auth::user()->id == $id || in_array($superadmin->id, $user->roles_ids))
+            return true;
+
+        return false;
     }
 
     // Mutators

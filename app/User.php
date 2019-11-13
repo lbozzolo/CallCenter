@@ -63,6 +63,11 @@ class User extends Entity implements AuthenticatableContract,
         }
     }
 
+    public function getVentasDelMesAttribute()
+    {
+        return $this->ventas()->where('created_at', '>=', Carbon::now()->firstOfMonth())->get()->count();
+    }
+
     public function misAsignacionesActuales()
     {
         $today = Carbon::now()->toDateString();
@@ -140,9 +145,34 @@ class User extends Entity implements AuthenticatableContract,
 
     }
 
+    protected function importeTotalVentasFacturadasNoDesconocidasNiDevueltasDelMes()
+    {
+        $total = collect();
+        $devuelta = EstadoVenta::where('slug', 'devuelto')->first();
+        $desconocida = EstadoVenta::where('slug', 'desconocimiento')->first();
+
+        $ventas = Venta::where('user_id', $this->id)
+            ->where('estado_id', '!=', $devuelta->id)
+            ->where('estado_id', '!=', $desconocida->id)
+            ->where('created_at', '>=', Carbon::now()->firstOfMonth())
+            ->get();
+
+        foreach ($ventas as $venta) {
+            $total->push( $venta->totalPorCuotas($venta->plan_cuotas));
+        }
+
+        return $total->sum();
+
+    }
+
     public function getImporteTotalVentasFacturadasNoDesconocidasNiDevueltasAttribute()
     {
         return $this->importeTotalVentasFacturadasNoDesconocidasNiDevueltas();
+    }
+
+    public function getImporteTotalVentasFacturadasNoDesconocidasNiDevueltasDelMesAttribute()
+    {
+        return $this->importeTotalVentasFacturadasNoDesconocidasNiDevueltasDelMes();
     }
 
     public function getRolesIdsAttribute()
