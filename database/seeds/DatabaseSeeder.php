@@ -26,8 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FormaPagoTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
-        $this->call(SuperAdminPermissionsSeeder::class);
-        $this->call(PermissionsRolesSeeder::class);
+        //$this->call(SuperAdminPermissionsSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CategoriasTableSeeder::class);
         $this->call(ResultadosLlamadasTableSeeder::class);
@@ -36,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TicketsLevelsTableSeeder::class);
         $this->call(EstadosTicketsSeeder::class);
         $this->call(MotivosReasignacionesSeeder::class);
+        $this->call(PermissionsRolesSeeder::class);
 
         Model::reguard();
     }
