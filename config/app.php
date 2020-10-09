@@ -148,6 +148,8 @@ return [
         Bican\Roles\RolesServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        SmartLine\Providers\EntrustCustomServiceProvider::class,
+
     ],
 
     /*

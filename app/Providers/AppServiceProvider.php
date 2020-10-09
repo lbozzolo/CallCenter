@@ -19,7 +19,6 @@ use SmartLine\Entities\MetodoPagoVenta;
 use SmartLine\Entities\Noticia;
 use SmartLine\Entities\Reclamo;
 use SmartLine\Entities\Ticket;
-use Illuminate\Support\Facades\Blade as Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,13 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('permission', function($expression) {
-            return "<?php if (Auth::user()->canDo({$expression})) : ?>";
-        });
-
-        Blade::directive('endpermission', function($expression) {
-            return "<?php endif; ?>";
-        });
+        //
     }
 
     /**
