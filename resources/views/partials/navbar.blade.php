@@ -101,7 +101,7 @@
                 @endpermission
 
                 @role('superadmin|admin|supervisor|facturacion|auditor|logistica|atencion.al.cliente')
-                    @permission('listado.asigancion|crear.noticia|listado.updateable|listado.facturacion.venta|listado.auditoria.venta|listado.logistica.venta|listado.postventa.venta')
+                    @permission('listado.asignacion|crear.noticia|listado.updateable|listado.facturacion.venta|listado.auditoria.venta|listado.logistica.venta|listado.postventa.venta')
                 <li class="label">Gestion</li>
                     @endpermission
                 @endrole

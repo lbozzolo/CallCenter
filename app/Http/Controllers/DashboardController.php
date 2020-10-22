@@ -80,8 +80,18 @@ class DashboardController extends Controller
             abort(404);
 
 
-        $data['alumno'] = Cliente::find(1);
-        $data['alumno']->notificado = 0;
+//        $data['alumno'] = Cliente::find(1);
+//        $data['alumno']->notificado = 0;
+
+
+        $perm = Permission::select(['permissions.*', 'permission_role.created_at as pivot_created_at', 'permission_role.updated_at as pivot_updated_at'])
+            ->join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
+            ->join('roles', 'roles.id', '=', 'permission_role.role_id')
+            ->whereIn('roles.id', $this->getRoles()->lists('id')->toArray())
+            ->orWhere('roles.level', '<', $this->level())
+            ->groupBy(['permissions.id', 'pivot_created_at', 'pivot_updated_at']);
+
+        dd($perm);
 
 
         $data['fecha'] = Carbon::today()->format('d/m/Y');
