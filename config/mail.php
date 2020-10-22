@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'administracion@crm.coefix.com', 'name' => 'Coefix'],
+    'from' => ['address' => env('MAIL_FROM_ADDRESS', 'administracion@crm.coefix.com'), 'name' => 'Coefix'],
 
     /*
     |--------------------------------------------------------------------------
