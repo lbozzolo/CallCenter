@@ -84,9 +84,11 @@ class UsersController extends Controller
 
         }
 
-        foreach($request->sucursales as $id){
-            $sucursal = Sucursal::find($id);
-            $user->sucursales()->save($sucursal);
+        if(isset($request->sucursales)){
+            foreach($request->sucursales as $id){
+                $sucursal = Sucursal::find($id);
+                $user->sucursales()->save($sucursal);
+            }
         }
 
         Mail::send('emails.new-user', ['password' => $password], function ($message) use ($email){
@@ -96,11 +98,7 @@ class UsersController extends Controller
 
         });
 
-        if ($user) {
-            return redirect()->route('users.index')->with('ok', 'Usuario creado con éxito');
-        } else {
-            abort(400);
-        }
+        return redirect()->route('users.index')->with('ok', 'Usuario creado con éxito');
     }
 
     public function indexDisable()
