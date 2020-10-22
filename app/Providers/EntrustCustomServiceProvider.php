@@ -19,7 +19,7 @@ class EntrustCustomServiceProvider extends ServiceProvider
         });
 
         Blade::directive('elsepermission', function($expression) {
-            return "<?php else; ?>";
+            return "<?php elseif (Auth::check() && !Auth::user()->canDo({$expression})) : ?>";
         });
 
         Blade::directive('endpermission', function($expression) {
