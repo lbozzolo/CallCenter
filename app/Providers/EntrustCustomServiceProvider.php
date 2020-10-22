@@ -15,7 +15,7 @@ class EntrustCustomServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('permission', function($expression) {
-            return "<?php if (Auth::user()->canDo({$expression})) : ?>";
+            return "<?php if (Auth::check() && Auth::user()->canDo({$expression})) : ?>";
         });
 
         Blade::directive('endpermission', function($expression) {
